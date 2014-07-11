@@ -16,9 +16,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    //self.dashBoardViewController=[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
-    //self.navigationcontroller=[[UINavigationController alloc]initWithRootViewController:self.dashBoardViewController];
-    //self.window.rootViewController=self.navigationcontroller;
+    
     self.spiltViewController = [[UISplitViewController alloc] init];
     GISDashBoardViewController *detailViewController = [[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
     GISDashBoardListViewController *masterViewController = [[GISDashBoardListViewController alloc]initWithNibName:@"GISDashBoardListViewController" bundle:nil];
@@ -60,7 +58,7 @@
 
 - (BOOL)splitViewController: (UISplitViewController*)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
 {
-    return NO;
+    return YES;
 }
 
 @end
