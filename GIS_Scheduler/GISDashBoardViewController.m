@@ -141,7 +141,6 @@
     [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
 }
 
-
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
