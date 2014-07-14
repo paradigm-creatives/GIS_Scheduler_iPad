@@ -97,11 +97,23 @@
     approvedRequest_Label.textColor=UIColorFromRGB(0x333333);
     incompleteRequest_Label.textColor=UIColorFromRGB(0x333333);
     
+    //[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x00457c)];
+    self.navigationBar.frame=CGRectMake(0,0,self.navigationBar.frame.size.width,64);
+    [self.navigation_item setTitle:@"123456"];
+    [self.navigationBar setFrame:CGRectMake(0, 0, 320, 64)];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xe8d4a2),NSFontAttributeName :[GISFonts larger]}];
+    self.view.backgroundColor=UIColorFromRGB(0xf8f8f8);
+    
+    self.view.backgroundColor=[UIColor whiteColor];
 }
+
+
 - (BOOL)splitViewController: (UISplitViewController*)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
 {
     return self.isMasterHide;
 }
+
+
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
     datListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
@@ -118,7 +130,7 @@
     }
     else
     {
-        datListView.hidden=YES;
+        dashBoard_UIView.hidden=YES;
 
     }
     
@@ -169,14 +181,17 @@
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardCell" owner:self options:nil] objectAtIndex:0];
     }
     cell.accountName_Label.text=@"10008";
-    cell.requestID_Label.text=@"";
-    cell.eventType_Label.text=@"";
-    cell.otherServices_Label.text=@"";
-    cell.earliestDate_Label.text=@"";
-    cell.approvalDate_Label.text=@"";
-    cell.approvedBy_Label.text=@"";
-    cell.status_Label.text=@"";
-    cell.scheduler_Label.text=@"";
+    cell.requestID_Label.text=@"14-8564";
+    cell.eventType_Label.text=@"VRI";
+    cell.otherServices_Label.text=@"Captioning";
+    cell.earliestDate_Label.text=@"11/07/2014";
+    cell.approvalDate_Label.text=@"11/07/2014";
+    cell.approvedBy_Label.text=@"Admin";
+    
+    cell.scheduler_Label.text=@"David";
+    if (indexPath.row%2==0) {
+        cell.status_Label.backgroundColor=[UIColor yellowColor];
+    }
     
     return cell;
 }
