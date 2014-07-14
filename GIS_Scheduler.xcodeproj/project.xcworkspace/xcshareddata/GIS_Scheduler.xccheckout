@@ -5,18 +5,28 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>6EFE1E22-E0C7-47F0-B9AA-38532E0214FD</string>
+=======
+	<string>DD908750-B06A-42D1-B728-CD27BFC03083</string>
+>>>>>>> babul/gisdevelopment
 	<key>IDESourceControlProjectName</key>
 	<string>GIS_Scheduler</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>54756D4F-2EA2-4218-BDE8-BAA6D1CE3970</key>
 		<string>https://github.com/ananddusi/GIS_Scheduler_iPad.git</string>
+=======
+		<key>2B2BBD2C-648F-48D5-8421-12D52853D28D</key>
+		<string>https://github.com/babulraok/GIS_Scheduler_iPad.git</string>
+>>>>>>> babul/gisdevelopment
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>GIS_Scheduler.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>54756D4F-2EA2-4218-BDE8-BAA6D1CE3970</key>
 		<string>../..</string>
 	</dict>
@@ -26,13 +36,28 @@
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
 	<string>54756D4F-2EA2-4218-BDE8-BAA6D1CE3970</string>
+=======
+		<key>2B2BBD2C-648F-48D5-8421-12D52853D28D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/babulraok/GIS_Scheduler_iPad.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2B2BBD2C-648F-48D5-8421-12D52853D28D</string>
+>>>>>>> babul/gisdevelopment
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+<<<<<<< HEAD
 			<string>54756D4F-2EA2-4218-BDE8-BAA6D1CE3970</string>
+=======
+			<string>2B2BBD2C-648F-48D5-8421-12D52853D28D</string>
+>>>>>>> babul/gisdevelopment
 			<key>IDESourceControlWCCName</key>
 			<string>GIS_Scheduler_iPad</string>
 		</dict>
