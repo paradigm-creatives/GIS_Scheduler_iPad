@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA2310431973D9DB006D5583 /* choose_request_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2310411973D9DB006D5583 /* choose_request_bg.png */; };
+		BA2310441973D9DB006D5583 /* choose_request_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2310421973D9DB006D5583 /* choose_request_bg@2x.png */; };
+		BA2310471973E2A3006D5583 /* text_field_bg_with_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2310451973E2A3006D5583 /* text_field_bg_with_btn.png */; };
+		BA2310481973E2A3006D5583 /* text_field_bg_with_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2310461973E2A3006D5583 /* text_field_bg_with_btn@2x.png */; };
+		BA23104B197407B0006D5583 /* text_field_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BA231049197407B0006D5583 /* text_field_bg.png */; };
+		BA23104C197407B0006D5583 /* text_field_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA23104A197407B0006D5583 /* text_field_bg@2x.png */; };
+		BA23104F197409C1006D5583 /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = BA23104D197409C1006D5583 /* dropdown.png */; };
+		BA231050197409C1006D5583 /* dropdown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA23104E197409C1006D5583 /* dropdown@2x.png */; };
 		BA25FAEB196FAE7900C22F37 /* incomplete_request.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE7196FAE7900C22F37 /* incomplete_request.png */; };
 		BA25FAEC196FAE7900C22F37 /* incomplete_request@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE8196FAE7900C22F37 /* incomplete_request@2x.png */; };
 		BA25FAED196FAE7900C22F37 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE9196FAE7900C22F37 /* slider.png */; };
@@ -139,6 +147,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA2310411973D9DB006D5583 /* choose_request_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_request_bg.png; sourceTree = "<group>"; };
+		BA2310421973D9DB006D5583 /* choose_request_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_request_bg@2x.png"; sourceTree = "<group>"; };
+		BA2310451973E2A3006D5583 /* text_field_bg_with_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_field_bg_with_btn.png; sourceTree = "<group>"; };
+		BA2310461973E2A3006D5583 /* text_field_bg_with_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_field_bg_with_btn@2x.png"; sourceTree = "<group>"; };
+		BA231049197407B0006D5583 /* text_field_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_field_bg.png; sourceTree = "<group>"; };
+		BA23104A197407B0006D5583 /* text_field_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_field_bg@2x.png"; sourceTree = "<group>"; };
+		BA23104D197409C1006D5583 /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
+		BA23104E197409C1006D5583 /* dropdown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropdown@2x.png"; sourceTree = "<group>"; };
 		BA25FAE7196FAE7900C22F37 /* incomplete_request.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incomplete_request.png; path = ../incomplete_request.png; sourceTree = "<group>"; };
 		BA25FAE8196FAE7900C22F37 /* incomplete_request@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incomplete_request@2x.png"; path = "../incomplete_request@2x.png"; sourceTree = "<group>"; };
 		BA25FAE9196FAE7900C22F37 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider.png; path = ../slider.png; sourceTree = "<group>"; };
@@ -296,6 +312,14 @@
 		BA25FAF3196FC47C00C22F37 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BA2310411973D9DB006D5583 /* choose_request_bg.png */,
+				BA2310421973D9DB006D5583 /* choose_request_bg@2x.png */,
+				BA23104D197409C1006D5583 /* dropdown.png */,
+				BA23104E197409C1006D5583 /* dropdown@2x.png */,
+				BA231049197407B0006D5583 /* text_field_bg.png */,
+				BA23104A197407B0006D5583 /* text_field_bg@2x.png */,
+				BA2310451973E2A3006D5583 /* text_field_bg_with_btn.png */,
+				BA2310461973E2A3006D5583 /* text_field_bg_with_btn@2x.png */,
 				BA25FAF4196FC4AA00C22F37 /* add.png */,
 				BA25FAF5196FC4AA00C22F37 /* add@2x.png */,
 				BA25FAF6196FC4AA00C22F37 /* arrow.png */,
@@ -579,6 +603,7 @@
 				BA25FAEE196FAE7900C22F37 /* slider@2x.png in Resources */,
 				BA25FBA2196FC4AB00C22F37 /* attendees@2x.png in Resources */,
 				BA25FB8F196FC4AB00C22F37 /* scheduling_pressed@2x.png in Resources */,
+				BA2310441973D9DB006D5583 /* choose_request_bg@2x.png in Resources */,
 				BA25FB6E196FC4AB00C22F37 /* edit_pressed@2x.png in Resources */,
 				BA25FB73196FC4AB00C22F37 /* event_details.png in Resources */,
 				BA25FB5E196FC4AB00C22F37 /* comments_pressed.png in Resources */,
@@ -591,6 +616,7 @@
 				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
 				BA25FB77196FC4AB00C22F37 /* find_requests_jobs@2x.png in Resources */,
 				BA25FB59196FC4AB00C22F37 /* check_pressed@2x.png in Resources */,
+				BA23104C197407B0006D5583 /* text_field_bg@2x.png in Resources */,
 				BA25FBA9196FC4AB00C22F37 /* summary@2x.png in Resources */,
 				BA25FB7F196FC4AB00C22F37 /* location.png in Resources */,
 				BA25FB8A196FC4AB00C22F37 /* requests_jobs.png in Resources */,
@@ -608,6 +634,7 @@
 				BA25FB89196FC4AB00C22F37 /* requests_Jobs_pressed@2x in Resources */,
 				BA25FB6D196FC4AB00C22F37 /* edit_pressed.png in Resources */,
 				BA25FB94196FC4AB00C22F37 /* service_provider_hollow.png in Resources */,
+				BA2310471973E2A3006D5583 /* text_field_bg_with_btn.png in Resources */,
 				BA25FBA0196FC4AB00C22F37 /* view.png in Resources */,
 				BA25FB9E196FC4AB00C22F37 /* view_pressed.png in Resources */,
 				BA25FB56196FC4AB00C22F37 /* calender.png in Resources */,
@@ -615,6 +642,7 @@
 				BA25FB5F196FC4AB00C22F37 /* comments_pressed@2x.png in Resources */,
 				BA25FB60196FC4AB00C22F37 /* comments.png in Resources */,
 				BA25FAF1196FC3FA00C22F37 /* dashboard.png in Resources */,
+				BA2310431973D9DB006D5583 /* choose_request_bg.png in Resources */,
 				BACD9FE2196D0F0B004F8720 /* GISDashBoardListViewController.xib in Resources */,
 				BA25FBB0196FC9F100C22F37 /* GISDashBoardCell.xib in Resources */,
 				BA25FB9F196FC4AB00C22F37 /* view_pressed@2x.png in Resources */,
@@ -623,12 +651,14 @@
 				BA25FB9D196FC4AB00C22F37 /* trash@2x.png in Resources */,
 				BA25FB51196FC4AB00C22F37 /* arrow.png in Resources */,
 				BA25FB8B196FC4AB00C22F37 /* requests_Jobs@2x in Resources */,
+				BA23104B197407B0006D5583 /* text_field_bg.png in Resources */,
 				BA25FB4F196FC4AB00C22F37 /* add.png in Resources */,
 				BA25FB6B196FC4AB00C22F37 /* delete.png in Resources */,
 				BA25FB7C196FC4AB00C22F37 /* job_details.png in Resources */,
 				BA25FB6C196FC4AB00C22F37 /* delete@2x.png in Resources */,
 				BA25FB71196FC4AB00C22F37 /* event_details_pressed.png in Resources */,
 				BA25FB8C196FC4AB00C22F37 /* save.png in Resources */,
+				BA23104F197409C1006D5583 /* dropdown.png in Resources */,
 				BA25FB9C196FC4AB00C22F37 /* summary.png in Resources */,
 				BA25FB67196FC4AB00C22F37 /* dates_and_times_pressed@2x.png in Resources */,
 				BA25FB58196FC4AB00C22F37 /* check_pressed.png in Resources */,
@@ -658,11 +688,13 @@
 				BACD9FDD196D0908004F8720 /* GISDashBoardViewController.xib in Resources */,
 				BA25FB9A196FC4AB00C22F37 /* summary_pressed.png in Resources */,
 				BA25FB98196FC4AB00C22F37 /* summary_edit.png in Resources */,
+				BA231050197409C1006D5583 /* dropdown@2x.png in Resources */,
 				BA25FB8D196FC4AB00C22F37 /* save@2x.png in Resources */,
 				BA25FBA8196FC4AB00C22F37 /* location@2x.png in Resources */,
 				BA25FB96196FC4AB00C22F37 /* service_providers.png in Resources */,
 				BA7D5B77196EA8E80021591A /* MyriadPro-Semibold.otf in Resources */,
 				BA25FB74196FC4AB00C22F37 /* find_requests_jobs_pressed.png in Resources */,
+				BA2310481973E2A3006D5583 /* text_field_bg_with_btn@2x.png in Resources */,
 				BA25FB99196FC4AB00C22F37 /* summary_edit@2x.png in Resources */,
 				BA25FBA5196FC4AB00C22F37 /* dates_and_times@2x.png in Resources */,
 				BA25FBA6196FC4AB00C22F37 /* event_details@2x.png in Resources */,

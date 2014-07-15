@@ -44,9 +44,7 @@
     [datListView addGestureRecognizer:leftRecognizer];
     
     self.isMasterHide= YES;
-    
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -57,7 +55,6 @@
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xffffff) ,NSFontAttributeName : [GISFonts normal]} forState:UIControlStateHighlighted];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x00457c) ,NSFontAttributeName : [GISFonts normal]} forState:UIControlStateNormal];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : [GISFonts normal]} forState:UIControlStateSelected];
-    
 
     accountName_Label.font=[GISFonts normal];
     requestID_Label.font=[GISFonts normal];
@@ -77,7 +74,7 @@
     waitingForApproval_Label.font=[GISFonts small];
     approvedRequest_Label.font=[GISFonts small];
     incompleteRequest_Label.font=[GISFonts small];
-    
+
     accountName_Label.textColor=UIColorFromRGB(0x00457c);
     requestID_Label.textColor=UIColorFromRGB(0x00457c);
     eventType_Label.textColor=UIColorFromRGB(0x00457c);
@@ -112,7 +109,6 @@
 {
     return self.isMasterHide;
 }
-
 
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
@@ -166,12 +162,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
+{   
     return 20;
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -191,7 +184,6 @@
     if (indexPath.row%2==0) {
         cell.status_Label.backgroundColor=[UIColor yellowColor];
     }
-    
     return cell;
 }
 
