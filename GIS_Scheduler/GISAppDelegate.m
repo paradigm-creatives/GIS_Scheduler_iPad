@@ -9,6 +9,12 @@
 #import "GISAppDelegate.h"
 #import "GISDashBoardViewController.h"
 #import "GISDashBoardListViewController.h"
+#import "GISLoginViewController.h"
+#import "GISConstants.h"
+#import "GISFonts.h"
+
+#import "GISAttendeesViewController.h"
+
 @implementation GISAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,12 +24,23 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];
-    GISDashBoardViewController *detailViewController = [[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
+    
+    //GISDashBoardViewController *detailViewController = [[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
     GISDashBoardListViewController *masterViewController = [[GISDashBoardListViewController alloc]initWithNibName:@"GISDashBoardListViewController" bundle:nil];
+    GISAttendeesViewController *detailViewController = [[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
+    
+    UINavigationController *masterView=[[UINavigationController alloc]initWithRootViewController:masterViewController];
+    UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+    
+    GISLoginViewController *loginViewController = [[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
     
     self.spiltViewController.delegate = self;
-    self.spiltViewController.viewControllers = [NSArray arrayWithObjects:masterViewController,detailViewController,nil];
-    [self.window setRootViewController:self.spiltViewController];
+    self.spiltViewController.viewControllers = [NSArray arrayWithObjects:masterView,detailView,nil];
+    [self.window setRootViewController:loginViewController];
+    
+    [self.navigationcontroller.navigationBar setTranslucent:NO];
+    
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
     
     [self.window makeKeyAndVisible];
     return YES;
