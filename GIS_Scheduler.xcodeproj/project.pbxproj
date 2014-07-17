@@ -350,6 +350,7 @@
 				BA25FAEF196FC3FA00C22F37 /* dashboard.png */,
 				BA25FAF0196FC3FA00C22F37 /* dashboard@2x.png */,
 				8A232E1D1973AB8900E2BEDF /* GISConstants.h */,
+				8A232E1D1973AB8900E2BEDF /* GISConstants.h */,
 			);
 			path = GIS_Constants;
 			sourceTree = "<group>";
@@ -696,6 +697,13 @@
 				BA25FAEB196FAE7900C22F37 /* incomplete_request.png in Resources */,
 				BA25FAF1196FC3FA00C22F37 /* dashboard.png in Resources */,
 				BA25FAEC196FAE7900C22F37 /* incomplete_request@2x.png in Resources */,
+				BA25FAEE196FAE7900C22F37 /* slider@2x.png in Resources */,
+				BA25FAED196FAE7900C22F37 /* slider.png in Resources */,
+				BA25FAF2196FC3FA00C22F37 /* dashboard@2x.png in Resources */,
+				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
+				BA25FAEB196FAE7900C22F37 /* incomplete_request.png in Resources */,
+				BA25FAF1196FC3FA00C22F37 /* dashboard.png in Resources */,
+				BA25FAEC196FAE7900C22F37 /* incomplete_request@2x.png in Resources */,
 				8A232E941973ABE100E2BEDF /* dates_and_times_pressed@2x.png in Resources */,
 				8A232E851973ABE100E2BEDF /* check.png in Resources */,
 				8A232EAB1973ABE100E2BEDF /* job_details.png in Resources */,
@@ -710,6 +718,8 @@
 				8A232EB71973ABE100E2BEDF /* logout.png in Resources */,
 				8A232EC61973ABE100E2BEDF /* service_provider_hollow@2x.png in Resources */,
 				BA694A441974FA2200AC8CCC /* GISAttendeesCell.xib in Resources */,
+				8A232EB71973ABE100E2BEDF /* logout.png in Resources */,
+				8A232EC61973ABE100E2BEDF /* service_provider_hollow@2x.png in Resources */,
 				8A232ECA1973ABE100E2BEDF /* summary_edit@2x.png in Resources */,
 				8A232EC21973ABE100E2BEDF /* scheduling@2x.png in Resources */,
 				8A232EC51973ABE100E2BEDF /* service_provider_hollow.png in Resources */,
@@ -732,6 +742,7 @@
 				BA694A5419753CFF00AC8CCC /* unchecked.png in Resources */,
 				8A232E841973ABE100E2BEDF /* check_pressed@2x.png in Resources */,
 				BA694A411974F3BD00AC8CCC /* dropdown.png in Resources */,
+				8A232E841973ABE100E2BEDF /* check_pressed@2x.png in Resources */,
 				8A232EA31973ABE100E2BEDF /* find_requests_jobs_pressed.png in Resources */,
 				8A232ED21973ABE100E2BEDF /* view.png in Resources */,
 				8A232ED01973ABE100E2BEDF /* view_pressed.png in Resources */,
