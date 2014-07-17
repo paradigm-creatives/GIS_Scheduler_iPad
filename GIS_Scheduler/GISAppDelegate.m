@@ -38,6 +38,8 @@
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
     
+    //[[UITabBar appearance] setBarTintColor:[UIColor redColor]];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
