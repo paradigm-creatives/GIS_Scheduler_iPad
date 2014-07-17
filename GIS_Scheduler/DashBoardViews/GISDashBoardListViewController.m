@@ -9,6 +9,7 @@
 #import "GISDashBoardListViewController.h"
 #import "GISConstants.h"
 #import "GISFonts.h"
+#import "GISDashBoardViewController.h"
 
 @interface GISDashBoardListViewController ()
 
@@ -43,6 +44,8 @@
     
     hideClicked = NO;
     sectionhideClicked  = NO;
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -184,6 +187,22 @@
         return 50;
     
     return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
+    
+    for(UIViewController *viewcontroller in navController.viewControllers)
+    {
+        if([viewcontroller isKindOfClass:[GISDashBoardViewController class]])
+        {
+            GISDashBoardViewController *dashBoardViewController=(GISDashBoardViewController *)viewcontroller;
+            [dashBoardViewController pushToViewController];
+        }
+    }
+    
 }
 
 -(IBAction)hideRows:(id)sender{

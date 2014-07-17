@@ -38,8 +38,11 @@
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
     
-    //[[UITabBar appearance] setBarTintColor:[UIColor redColor]];
-    
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
+      [GISFonts larger], NSFontAttributeName,nil]];
+        
     [self.window makeKeyAndVisible];
     return YES;
 }

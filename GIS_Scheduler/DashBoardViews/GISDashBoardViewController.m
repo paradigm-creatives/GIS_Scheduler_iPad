@@ -51,6 +51,8 @@
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],NSFontAttributeName:[GISFonts large]}];
     
+    
+    
 }
 
 

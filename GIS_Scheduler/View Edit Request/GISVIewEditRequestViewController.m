@@ -9,6 +9,7 @@
 #import "GISVIewEditRequestViewController.h"
 #import "GISConstants.h"
 #import "GISEventDetailsViewController.h"
+#import "GISFonts.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -34,6 +35,26 @@
     _viewControllers=[NSArray arrayWithObjects: eventDetailsView, nil];
     _currentController= eventDetailsView;
     [_mainView addSubview:_currentController.view];
+    
+    [self setItemFont:_contactItem];
+    [self setItemFont:_eventDetailsItem];
+    [self setItemFont:_attendeesItem];
+    [self setItemFont:_locationdetaislItem];
+    [self setItemFont:_datesItem];
+    [self setItemFont:_jobdetailsItem];
+    [self setItemFont:_summarYItem];
+    [self setItemFont:_commentsItem];
+    
+    self.navigationItem.title = @"View/Edit Service Request";
+    
+}
+
+-(void)setItemFont:(UITabBarItem *)tabbarItem{
+    
+    [tabbarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
+                                          [GISFonts tiny], NSFontAttributeName, nil]
+                                forState:UIControlStateNormal];//[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
     
 }
 
