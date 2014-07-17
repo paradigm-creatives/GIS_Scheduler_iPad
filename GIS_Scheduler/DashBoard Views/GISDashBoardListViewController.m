@@ -31,9 +31,7 @@
 	// Do any additional setup after loading the view.
 
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    _dashBoard_ListTableView.backgroundView = nil;
-    [_dashBoard_ListTableView setBackgroundColor:UIColorFromRGB(0x00457c)];
-
+ 
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
     
     
@@ -47,7 +45,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    if(hideClicked || sectionhideClicked)
+        return 13;
+    
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -168,6 +169,9 @@
         UIImageView *labelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 110, 50)];
         labelImageView.image = [UIImage imageNamed:@"logo.png"] ;
         [headerView addSubview:labelImageView];
+    }else{
+        
+        [headerView setBackgroundColor:UIColorFromRGB(0x00457c)];
     }
     
     return headerView;
@@ -218,6 +222,7 @@
     }
     [_dashBoard_ListTableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -27,6 +27,4 @@
 +(void)moveemailView:(BOOL)ismove viewHeight:(int)viewUpHeight view:(UIView *)currentView;
 +(NSString *)returningstring:(id)string;
 
-+(BOOL)dateComparision:(NSString *)startTime:(NSString *)endTime:(BOOL)isStartTimeComaprsion;
-+(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime;
 @end

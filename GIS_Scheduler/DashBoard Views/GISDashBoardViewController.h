@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
+
 @interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UIView *datListView;
@@ -46,5 +47,5 @@
 @property(nonatomic,strong)IBOutlet UINavigationItem *navigation_item;
 @property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
-
+-(void)pushToViewController;
 @end

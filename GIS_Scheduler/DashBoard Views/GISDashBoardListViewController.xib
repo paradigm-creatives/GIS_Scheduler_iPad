@@ -15,12 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="1019"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bWU-Cf-ZH1">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bWU-Cf-ZH1">
                     <rect key="frame" x="0.0" y="0.0" width="344" height="1019"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="sectionIndexTrackingBackgroundColor" red="0.084257274509999994" green="0.35492285820000002" blue="0.57565369899999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="FIa-k5-wlZ"/>
                         <outlet property="delegate" destination="-1" id="Wkh-5b-g76"/>

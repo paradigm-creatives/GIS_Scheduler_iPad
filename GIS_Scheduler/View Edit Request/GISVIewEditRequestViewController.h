@@ -14,5 +14,14 @@
 @property (nonatomic, retain) UIViewController *currentController;
 
 @property (nonatomic, retain) IBOutlet UIView *mainView;
+@property (nonatomic, retain) IBOutlet UITabBar *mainTabbar;
+@property (nonatomic, retain) IBOutlet UITabBarItem *contactItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *eventDetailsItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *attendeesItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *locationdetaislItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *datesItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *jobdetailsItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *summarYItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *commentsItem;
 
 @end

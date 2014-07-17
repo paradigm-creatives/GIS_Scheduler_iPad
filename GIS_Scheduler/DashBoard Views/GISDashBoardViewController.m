@@ -10,6 +10,7 @@
 #import "GISFonts.h"
 #import "GISConstants.h"
 #import "GISDashBoardCell.h"
+#import "GISVIewEditRequestViewController.h"
 @interface GISDashBoardViewController ()
 
 @end
@@ -193,6 +194,13 @@
     return 35;
 }
 
+-(void)pushToViewController{
+    [self.navigationController popViewControllerAnimated:NO];
+    GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+    [self.navigationController pushViewController:viewEditView animated:NO];
+    
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -32,7 +32,7 @@
     }
     else{
         
-        doneButton.segmentedControlStyle = UISegmentedControlStyleBar;
+        //doneButton.segmentedControlStyle = UISegmentedControlStyleBar;
         doneButton.tintColor = [UIColor blackColor];
     }
     doneButton.tag=[sender tag];
@@ -56,7 +56,7 @@
         doneButton.tintColor = [UIColor colorWithRed:49.0 / 256.0 green:148.0 / 256.0 blue:208.0 / 256.0 alpha:1];
     }
     else{
-        cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
+        //cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
         cancelButton.tintColor = [UIColor blackColor];
     }
     cancelButton.tag=[sender tag];
@@ -135,47 +135,6 @@
             return string;
         }
     }
-    
-}
-
-
-+(BOOL)dateComparision:(NSString *)startTime:(NSString *)endTime:(BOOL)isStartTimeComaprsion
-{
-    if (isStartTimeComaprsion) {
-        if ([endTime compare:startTime] == NSOrderedDescending || [endTime compare:startTime]==NSOrderedSame)
-        {
-            NSLog(@" Good");
-            return YES;
-        }
-        return NO;
-    }
-    
-    if ([startTime compare:endTime] == NSOrderedAscending || [startTime compare:endTime]==NSOrderedSame)
-    {
-        NSLog(@" Good");
-        return YES;
-    }
-    return NO;
-}
-
-+(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime
-{
-    NSDateFormatter *timeformatter=[[NSDateFormatter alloc]init];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-    [timeformatter setLocale:locale];
-    [timeformatter setDateFormat:@"hh:mm a"];
-    
-    NSDate *date1=[timeformatter dateFromString:startTime];
-    NSDate *date2=[timeformatter dateFromString:endTime];
-    NSLog(@"%ff is the time difference",[date2 timeIntervalSinceDate:date1]);
-    if([date2 timeIntervalSinceDate:date1]>0)
-    {
-        return YES;
-        NSLog(@" Good");
-    }
-
-        NSLog(@" BAD");
-        return NO;
     
 }
 

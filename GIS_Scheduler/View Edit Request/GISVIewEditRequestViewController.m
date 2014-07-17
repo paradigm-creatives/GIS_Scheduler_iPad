@@ -9,10 +9,15 @@
 #import "GISVIewEditRequestViewController.h"
 #import "GISConstants.h"
 #import "GISEventDetailsViewController.h"
+
 #import "GISContactsAndBillingViewController.h"
 #import "GISAttendeesViewController.h"
 #import "GISDatesAndTimesViewController.h"
+
+
 #import "GISFonts.h"
+
+
 @interface GISVIewEditRequestViewController ()
 
 @end
@@ -45,6 +50,7 @@
     
     GISEventDetailsViewController *eventDetailsView=[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
     
+
     GISAttendeesViewController *attendeesView=[[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
     GISDatesAndTimesViewController *datesAndTimesView=[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
@@ -54,6 +60,28 @@
     
     [_mainView addSubview:_currentController.view];
     [[UINavigationBar appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[GISFonts large],NSFontAttributeName,UIColorFromRGB(0x00457c),NSForegroundColorAttributeName, nil]];
+
+    [self setItemFont:_contactItem];
+    [self setItemFont:_eventDetailsItem];
+    [self setItemFont:_attendeesItem];
+    [self setItemFont:_locationdetaislItem];
+    [self setItemFont:_datesItem];
+    [self setItemFont:_jobdetailsItem];
+    [self setItemFont:_summarYItem];
+    [self setItemFont:_commentsItem];
+    
+    self.navigationItem.title = @"View/Edit Service Request";
+    
+}
+
+-(void)setItemFont:(UITabBarItem *)tabbarItem{
+    
+    [tabbarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
+                                          [GISFonts tiny], NSFontAttributeName, nil]
+                                forState:UIControlStateNormal];//[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
+    
+
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {

@@ -8,6 +8,7 @@
 
 #import "GISEventDetailsViewController.h"
 #import "GISEventDetailsCell.h"
+#import  "GISPreparationMaterialCell.h"
 
 @interface GISEventDetailsViewController ()
 
@@ -30,11 +31,12 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.backBarButtonItem=nil;
+    [_eventDetaislTabelView setContentSize:CGSizeMake(1024, 768)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -44,20 +46,48 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GISEventDetailsCell *eventCell;
-    eventCell=(GISEventDetailsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    if(indexPath.section == 0){
+        
+        eventCell=(GISEventDetailsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return eventCell.frame.size.height;
+    }
+    if(indexPath.section == 1){
+        
+      GISPreparationMaterialCell * preparationMaterialCell=(GISPreparationMaterialCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return preparationMaterialCell.frame.size.height;
+
+    }
     
     return eventCell.frame.size.height;
-    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GISEventDetailsCell *cell=(GISEventDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(cell==nil)
-    {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"GISEventDetailsCell" owner:self options:nil]objectAtIndex:0];
+    GISEventDetailsCell *cell;
+    if(indexPath.section == 0){
+        cell=(GISEventDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if(cell==nil)
+        {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISEventDetailsCell" owner:self options:nil]objectAtIndex:0];
+        }
     }
+    
+    if(indexPath.section == 1){
+       GISPreparationMaterialCell *cell=(GISPreparationMaterialCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        if(cell==nil)
+        {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISPreparationMaterialCell" owner:self options:nil]objectAtIndex:0];
+        }
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
+        
+        return cell;
+    }
+    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
     
     return cell;
 }

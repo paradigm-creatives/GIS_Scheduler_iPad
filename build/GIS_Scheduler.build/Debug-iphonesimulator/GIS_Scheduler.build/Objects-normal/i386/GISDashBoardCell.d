@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoardViews/GISDashBoardCell.m \
-  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoardViews/GISDashBoardCell.h
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoard\ Views/GISDashBoardCell.m \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoard\ Views/GISDashBoardCell.h
