@@ -988,7 +988,7 @@
     </objects>
     <resources>
         <image name="attendees.png" width="28" height="23"/>
-        <image name="choose_request_bg.png" width="75" height="715"/>
+        <image name="choose_request_bg.png" width="135" height="20"/>
         <image name="comments.png" width="28" height="22"/>
         <image name="contact_and_billing.png" width="21" height="22"/>
         <image name="dashbaord_pressed.png" width="25" height="25"/>

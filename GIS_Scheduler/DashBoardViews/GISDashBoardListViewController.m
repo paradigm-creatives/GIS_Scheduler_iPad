@@ -9,7 +9,7 @@
 #import "GISDashBoardListViewController.h"
 #import "GISConstants.h"
 #import "GISFonts.h"
-
+#import "GISDashBoardViewController.h"
 @interface GISDashBoardListViewController ()
 
 @end
@@ -30,7 +30,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     _dashBoard_ListTableView.backgroundView = nil;
     [_dashBoard_ListTableView setBackgroundColor:UIColorFromRGB(0x00457c)];
 
@@ -115,7 +115,7 @@
             cellLabel.text = @"View/Edit Schedule";
     }
 
-    
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -186,6 +186,22 @@
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
+    
+    for(UIViewController *viewcontroller in navController.viewControllers)
+    {
+        if([viewcontroller isKindOfClass:[GISDashBoardViewController class]])
+        {
+            GISDashBoardViewController *dashBoardViewController=(GISDashBoardViewController *)viewcontroller;
+            [dashBoardViewController pushToViewController];
+        }
+    }
+    
+}
+
 -(IBAction)hideRows:(id)sender{
     
     if([sender tag] == 1){
@@ -202,7 +218,6 @@
     }
     [_dashBoard_ListTableView reloadData];
 }
-
 
 - (void)didReceiveMemoryWarning
 {

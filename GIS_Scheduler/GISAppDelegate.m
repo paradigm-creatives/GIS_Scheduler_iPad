@@ -25,12 +25,12 @@
     
     self.spiltViewController = [[UISplitViewController alloc] init];
     
-    //GISDashBoardViewController *detailViewController = [[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
+    self.detailViewController = (GISDashBoardViewController *)[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
     GISDashBoardListViewController *masterViewController = [[GISDashBoardListViewController alloc]initWithNibName:@"GISDashBoardListViewController" bundle:nil];
-    GISAttendeesViewController *detailViewController = [[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
+    //GISAttendeesViewController *detailViewController = [[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
     UINavigationController *masterView=[[UINavigationController alloc]initWithRootViewController:masterViewController];
-    UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+    UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:self.detailViewController];
     
     GISLoginViewController *loginViewController = [[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
     
@@ -40,7 +40,10 @@
     
     [self.navigationcontroller.navigationBar setTranslucent:NO];
     
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
+    //[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:247.0f/255.0f green:247.0f/255.0f blue:247.0f/255.0f alpha:1.0f]];
+    
+    //[[UITabBar appearance] setBarTintColor:[UIColor redColor]];
     
     [self.window makeKeyAndVisible];
     return YES;

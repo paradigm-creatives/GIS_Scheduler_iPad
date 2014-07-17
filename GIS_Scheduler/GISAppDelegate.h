@@ -17,4 +17,6 @@
 
 @property (strong, nonatomic) UINavigationController *navigationcontroller;
 
+@property(nonatomic,strong)id detailViewController;
+
 @end

@@ -10,6 +10,8 @@
 #import "GISFonts.h"
 #import "GISConstants.h"
 #import "GISDashBoardCell.h"
+#import "GISVIewEditRequestViewController.h"
+
 @interface GISDashBoardViewController ()
 
 @end
@@ -203,6 +205,14 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 35;
+}
+
+-(void)pushToViewController{
+    [self.navigationController popViewControllerAnimated:NO];
+    GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+    [self.navigationController pushViewController:viewEditView animated:NO];
+
+    
 }
 
 

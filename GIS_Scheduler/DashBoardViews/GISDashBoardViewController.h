@@ -47,4 +47,6 @@
 @property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
 
+-(void)pushToViewController;
+
 @end

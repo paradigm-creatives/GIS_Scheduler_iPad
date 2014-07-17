@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISAppDelegate.h"
 
 @interface GISDashBoardListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     int rowCount;
     BOOL hideClicked;
     BOOL sectionhideClicked;
+    GISAppDelegate *appDelegate;
 }
 
 @property (nonatomic,retain)  IBOutlet UITableView *dashBoard_ListTableView;

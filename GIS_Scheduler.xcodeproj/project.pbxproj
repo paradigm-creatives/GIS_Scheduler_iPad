@@ -104,7 +104,6 @@
 		8A232ED31973ABE100E2BEDF /* view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A232E781973ABE100E2BEDF /* view@2x.png */; };
 		8A232EDE1973AC5B00E2BEDF /* GISDashBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A232ED61973AC5B00E2BEDF /* GISDashBoardCell.m */; };
 		8A232EDF1973AC5B00E2BEDF /* GISDashBoardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A232ED71973AC5B00E2BEDF /* GISDashBoardCell.xib */; };
-		8A232EE01973AC5B00E2BEDF /* GISDashBoardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A232ED91973AC5B00E2BEDF /* GISDashBoardListViewController.m */; };
 		8A232EE11973AC5B00E2BEDF /* GISDashBoardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EDA1973AC5B00E2BEDF /* GISDashBoardListViewController.xib */; };
 		8A232EE21973AC5B00E2BEDF /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A232EDC1973AC5B00E2BEDF /* GISDashBoardViewController.m */; };
 		8A232EE31973AC5B00E2BEDF /* GISDashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EDD1973AC5B00E2BEDF /* GISDashBoardViewController.xib */; };
@@ -114,12 +113,32 @@
 		8A232EED1973AE4700E2BEDF /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EEB1973AE4700E2BEDF /* logo@2x.png */; };
 		8A232EF01973EBAB00E2BEDF /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EEE1973EBAB00E2BEDF /* dashboard.png */; };
 		8A232EF11973EBAB00E2BEDF /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EEF1973EBAB00E2BEDF /* dashboard@2x.png */; };
+
 		BA25FAEB196FAE7900C22F37 /* incomplete_request.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE7196FAE7900C22F37 /* incomplete_request.png */; };
 		BA25FAEC196FAE7900C22F37 /* incomplete_request@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE8196FAE7900C22F37 /* incomplete_request@2x.png */; };
 		BA25FAED196FAE7900C22F37 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAE9196FAE7900C22F37 /* slider.png */; };
 		BA25FAEE196FAE7900C22F37 /* slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAEA196FAE7900C22F37 /* slider@2x.png */; };
 		BA25FAF1196FC3FA00C22F37 /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAEF196FC3FA00C22F37 /* dashboard.png */; };
 		BA25FAF2196FC3FA00C22F37 /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA25FAF0196FC3FA00C22F37 /* dashboard@2x.png */; };
+
+		8A5E2E271974F9F000BE3C04 /* GISVIewEditRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */; };
+		8A5E2E281974F9F000BE3C04 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E261974F9F000BE3C04 /* GISVIewEditRequestViewController.xib */; };
+		8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2B19753B5D00BE3C04 /* GISEventDetailsViewController.m */; };
+		8A5E2E2E19753B5D00BE3C04 /* GISEventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2C19753B5D00BE3C04 /* GISEventDetailsViewController.xib */; };
+		8A5E2E3219753C2200BE3C04 /* GISEventDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3119753C2200BE3C04 /* GISEventDetailsCell.m */; };
+		8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */; };
+		8A5E2E3B1975425D00BE3C04 /* radio_button_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E351975425D00BE3C04 /* radio_button_empty.png */; };
+		8A5E2E3C1975425D00BE3C04 /* radio_button_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E361975425D00BE3C04 /* radio_button_filled.png */; };
+		8A5E2E3D1975425D00BE3C04 /* radio_button_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E371975425D00BE3C04 /* radio_button_filled@2x.png */; };
+		8A5E2E3E1975425D00BE3C04 /* radio_button_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E381975425D00BE3C04 /* radio_button_empty@2x.png */; };
+		8A5E2E3F1975425D00BE3C04 /* choose_request_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E391975425D00BE3C04 /* choose_request_bg.png */; };
+		8A5E2E401975425D00BE3C04 /* choose_request_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3A1975425D00BE3C04 /* choose_request_bg@2x.png */; };
+		8A9B25AA197676CE002F1AC0 /* GISUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25A5197676CE002F1AC0 /* GISUtility.m */; };
+		8A9B25AB197676CE002F1AC0 /* GISNetworkUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25A8197676CE002F1AC0 /* GISNetworkUtility.m */; };
+		8A9B25AE19767701002F1AC0 /* GISBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25AC19767701002F1AC0 /* GISBaseViewController.m */; };
+		8A9B25B21976796F002F1AC0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25B11976796F002F1AC0 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8A9B25BC1976B1DA002F1AC0 /* GISDashBoardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25BB1976B1DA002F1AC0 /* GISDashBoardListViewController.m */; };
+
 		BA3AF210196BBAF7006A1E3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF20F196BBAF7006A1E3B /* Foundation.framework */; };
 		BA3AF212196BBAF7006A1E3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF211196BBAF7006A1E3B /* CoreGraphics.framework */; };
 		BA3AF214196BBAF7006A1E3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF213196BBAF7006A1E3B /* UIKit.framework */; };
@@ -261,7 +280,6 @@
 		8A232ED61973AC5B00E2BEDF /* GISDashBoardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDashBoardCell.m; sourceTree = "<group>"; };
 		8A232ED71973AC5B00E2BEDF /* GISDashBoardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDashBoardCell.xib; sourceTree = "<group>"; };
 		8A232ED81973AC5B00E2BEDF /* GISDashBoardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDashBoardListViewController.h; sourceTree = "<group>"; };
-		8A232ED91973AC5B00E2BEDF /* GISDashBoardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDashBoardListViewController.m; sourceTree = "<group>"; };
 		8A232EDA1973AC5B00E2BEDF /* GISDashBoardListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDashBoardListViewController.xib; sourceTree = "<group>"; };
 		8A232EDB1973AC5B00E2BEDF /* GISDashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDashBoardViewController.h; sourceTree = "<group>"; };
 		8A232EDC1973AC5B00E2BEDF /* GISDashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDashBoardViewController.m; sourceTree = "<group>"; };
@@ -273,12 +291,41 @@
 		8A232EEB1973AE4700E2BEDF /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		8A232EEE1973EBAB00E2BEDF /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		8A232EEF1973EBAB00E2BEDF /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard@2x.png"; sourceTree = "<group>"; };
+
 		BA25FAE7196FAE7900C22F37 /* incomplete_request.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incomplete_request.png; path = ../incomplete_request.png; sourceTree = "<group>"; };
 		BA25FAE8196FAE7900C22F37 /* incomplete_request@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incomplete_request@2x.png"; path = "../incomplete_request@2x.png"; sourceTree = "<group>"; };
 		BA25FAE9196FAE7900C22F37 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider.png; path = ../slider.png; sourceTree = "<group>"; };
 		BA25FAEA196FAE7900C22F37 /* slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slider@2x.png"; path = "../slider@2x.png"; sourceTree = "<group>"; };
 		BA25FAEF196FC3FA00C22F37 /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dashboard.png; path = ../dashboard.png; sourceTree = "<group>"; };
 		BA25FAF0196FC3FA00C22F37 /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dashboard@2x.png"; path = "../dashboard@2x.png"; sourceTree = "<group>"; };
+
+		8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISVIewEditRequestViewController.h; sourceTree = "<group>"; };
+		8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISVIewEditRequestViewController.m; sourceTree = "<group>"; };
+		8A5E2E261974F9F000BE3C04 /* GISVIewEditRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISVIewEditRequestViewController.xib; sourceTree = "<group>"; };
+		8A5E2E2A19753B5D00BE3C04 /* GISEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISEventDetailsViewController.h; sourceTree = "<group>"; };
+		8A5E2E2B19753B5D00BE3C04 /* GISEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISEventDetailsViewController.m; sourceTree = "<group>"; };
+		8A5E2E2C19753B5D00BE3C04 /* GISEventDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISEventDetailsViewController.xib; sourceTree = "<group>"; };
+		8A5E2E3019753C2200BE3C04 /* GISEventDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISEventDetailsCell.h; sourceTree = "<group>"; };
+		8A5E2E3119753C2200BE3C04 /* GISEventDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISEventDetailsCell.m; sourceTree = "<group>"; };
+		8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISEventDetailsCell.xib; sourceTree = "<group>"; };
+		8A5E2E351975425D00BE3C04 /* radio_button_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_button_empty.png; sourceTree = "<group>"; };
+		8A5E2E361975425D00BE3C04 /* radio_button_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_button_filled.png; sourceTree = "<group>"; };
+		8A5E2E371975425D00BE3C04 /* radio_button_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_button_filled@2x.png"; sourceTree = "<group>"; };
+		8A5E2E381975425D00BE3C04 /* radio_button_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_button_empty@2x.png"; sourceTree = "<group>"; };
+		8A5E2E391975425D00BE3C04 /* choose_request_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_request_bg.png; sourceTree = "<group>"; };
+		8A5E2E3A1975425D00BE3C04 /* choose_request_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose_request_bg@2x.png"; sourceTree = "<group>"; };
+		8A9B25A4197676CE002F1AC0 /* GISUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISUtility.h; sourceTree = "<group>"; };
+		8A9B25A5197676CE002F1AC0 /* GISUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISUtility.m; sourceTree = "<group>"; };
+		8A9B25A6197676CE002F1AC0 /* GISDatabaseConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDatabaseConstants.h; sourceTree = "<group>"; };
+		8A9B25A7197676CE002F1AC0 /* GISNetworkUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISNetworkUtility.h; sourceTree = "<group>"; };
+		8A9B25A8197676CE002F1AC0 /* GISNetworkUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISNetworkUtility.m; sourceTree = "<group>"; };
+		8A9B25A9197676CE002F1AC0 /* GISDatabaseMnager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDatabaseMnager.h; sourceTree = "<group>"; };
+		8A9B25AC19767701002F1AC0 /* GISBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISBaseViewController.m; sourceTree = "<group>"; };
+		8A9B25AD19767701002F1AC0 /* GISBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISBaseViewController.h; sourceTree = "<group>"; };
+		8A9B25B01976796F002F1AC0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		8A9B25B11976796F002F1AC0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		8A9B25BB1976B1DA002F1AC0 /* GISDashBoardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDashBoardListViewController.m; sourceTree = "<group>"; };
+
 		BA3AF20C196BBAF7006A1E3B /* GIS_Scheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIS_Scheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3AF20F196BBAF7006A1E3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA3AF211196BBAF7006A1E3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -362,7 +409,7 @@
 				8A232ED61973AC5B00E2BEDF /* GISDashBoardCell.m */,
 				8A232ED71973AC5B00E2BEDF /* GISDashBoardCell.xib */,
 				8A232ED81973AC5B00E2BEDF /* GISDashBoardListViewController.h */,
-				8A232ED91973AC5B00E2BEDF /* GISDashBoardListViewController.m */,
+				8A9B25BB1976B1DA002F1AC0 /* GISDashBoardListViewController.m */,
 				8A232EDA1973AC5B00E2BEDF /* GISDashBoardListViewController.xib */,
 				8A232EDB1973AC5B00E2BEDF /* GISDashBoardViewController.h */,
 				8A232EDC1973AC5B00E2BEDF /* GISDashBoardViewController.m */,
@@ -381,15 +428,79 @@
 			path = "GIS Login";
 			sourceTree = "<group>";
 		};
+		8A5E2E231974F9CE00BE3C04 /* View Edit Request */ = {
+			isa = PBXGroup;
+			children = (
+				8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */,
+				8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */,
+				8A5E2E261974F9F000BE3C04 /* GISVIewEditRequestViewController.xib */,
+			);
+			path = "View Edit Request";
+			sourceTree = "<group>";
+		};
+		8A5E2E2919753B3B00BE3C04 /* Event Details */ = {
+			isa = PBXGroup;
+			children = (
+				8A5E2E2F19753BFC00BE3C04 /* EventDetail Cell */,
+				8A5E2E2A19753B5D00BE3C04 /* GISEventDetailsViewController.h */,
+				8A5E2E2B19753B5D00BE3C04 /* GISEventDetailsViewController.m */,
+				8A5E2E2C19753B5D00BE3C04 /* GISEventDetailsViewController.xib */,
+			);
+			path = "Event Details";
+			sourceTree = "<group>";
+		};
+		8A5E2E2F19753BFC00BE3C04 /* EventDetail Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8A5E2E3019753C2200BE3C04 /* GISEventDetailsCell.h */,
+				8A5E2E3119753C2200BE3C04 /* GISEventDetailsCell.m */,
+				8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */,
+			);
+			path = "EventDetail Cell";
+			sourceTree = "<group>";
+		};
+		8A9B25A3197676C1002F1AC0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				8A9B25AC19767701002F1AC0 /* GISBaseViewController.m */,
+				8A9B25AD19767701002F1AC0 /* GISBaseViewController.h */,
+				8A9B25A4197676CE002F1AC0 /* GISUtility.h */,
+				8A9B25A5197676CE002F1AC0 /* GISUtility.m */,
+				8A9B25A6197676CE002F1AC0 /* GISDatabaseConstants.h */,
+				8A9B25A7197676CE002F1AC0 /* GISNetworkUtility.h */,
+				8A9B25A8197676CE002F1AC0 /* GISNetworkUtility.m */,
+				8A9B25A9197676CE002F1AC0 /* GISDatabaseMnager.h */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		8A9B25AF1976796F002F1AC0 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				8A9B25B01976796F002F1AC0 /* Reachability.h */,
+				8A9B25B11976796F002F1AC0 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		BA25FAF3196FC47C00C22F37 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+
 				BA694A5619753D0900AC8CCC /* checked.png */,
 				BA694A5719753D0900AC8CCC /* checked@2x.png */,
 				BA694A5219753CFF00AC8CCC /* unchecked.png */,
 				BA694A5319753CFF00AC8CCC /* unchecked@2x.png */,
 				BA694A3F1974F3BD00AC8CCC /* dropdown.png */,
 				BA694A401974F3BD00AC8CCC /* dropdown@2x.png */,
+
+				8A5E2E351975425D00BE3C04 /* radio_button_empty.png */,
+				8A5E2E361975425D00BE3C04 /* radio_button_filled.png */,
+				8A5E2E371975425D00BE3C04 /* radio_button_filled@2x.png */,
+				8A5E2E381975425D00BE3C04 /* radio_button_empty@2x.png */,
+				8A5E2E391975425D00BE3C04 /* choose_request_bg.png */,
+				8A5E2E3A1975425D00BE3C04 /* choose_request_bg@2x.png */,
+
 				8A232E1E1973ABE100E2BEDF /* add.png */,
 				8A232E1F1973ABE100E2BEDF /* add@2x.png */,
 				8A232EEE1973EBAB00E2BEDF /* dashboard.png */,
@@ -534,8 +645,15 @@
 		BA3AF215196BBAF7006A1E3B /* GIS_Scheduler */ = {
 			isa = PBXGroup;
 			children = (
+
 				BA3AF21E196BBAF7006A1E3B /* GISAppDelegate.h */,
 				BA3AF21F196BBAF7006A1E3B /* GISAppDelegate.m */,
+
+				8A9B25AF1976796F002F1AC0 /* Reachability */,
+				8A9B25A3197676C1002F1AC0 /* Utility */,
+				8A5E2E2919753B3B00BE3C04 /* Event Details */,
+				8A5E2E231974F9CE00BE3C04 /* View Edit Request */,
+
 				8A232EE41973ACC100E2BEDF /* GIS Login */,
 				8A232ED41973AC5B00E2BEDF /* DashBoardViews */,
 				BA694A4619751F6B00AC8CCC /* Contacts and Billing */,
@@ -706,6 +824,7 @@
 				BA25FAEC196FAE7900C22F37 /* incomplete_request@2x.png in Resources */,
 				8A232E941973ABE100E2BEDF /* dates_and_times_pressed@2x.png in Resources */,
 				8A232E851973ABE100E2BEDF /* check.png in Resources */,
+				8A5E2E3D1975425D00BE3C04 /* radio_button_filled@2x.png in Resources */,
 				8A232EAB1973ABE100E2BEDF /* job_details.png in Resources */,
 				8A232E8E1973ABE100E2BEDF /* contact_and_billing_pressed@2x.png in Resources */,
 				8A232EB91973ABE100E2BEDF /* requests_jobs_pressed.png in Resources */,
@@ -728,12 +847,15 @@
 				8A232EAA1973ABE100E2BEDF /* job_details_pressed@2x.png in Resources */,
 				8A232EAC1973ABE100E2BEDF /* job_details@2x.png in Resources */,
 				8A232E8F1973ABE100E2BEDF /* contact_and_billing.png in Resources */,
+				8A5E2E2E19753B5D00BE3C04 /* GISEventDetailsViewController.xib in Resources */,
 				8A232EBE1973ABE100E2BEDF /* save@2x.png in Resources */,
 				8A232E9B1973ABE100E2BEDF /* edit_pressed.png in Resources */,
 				8A232E8D1973ABE100E2BEDF /* contact_and_billing_pressed.png in Resources */,
+				8A5E2E3E1975425D00BE3C04 /* radio_button_empty@2x.png in Resources */,
 				8A232EAD1973ABE100E2BEDF /* location_pressed.png in Resources */,
 				8A232E191973AB4400E2BEDF /* MyriadPro-Bold.otf in Resources */,
 				8A232EA71973ABE100E2BEDF /* info.png in Resources */,
+				8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */,
 				8A232E931973ABE100E2BEDF /* dates_and_times_pressed.png in Resources */,
 				8A232E971973ABE100E2BEDF /* delete_pressed.png in Resources */,
 				8A232E7D1973ABE100E2BEDF /* attendees_pressed.png in Resources */,
@@ -748,7 +870,10 @@
 				8A232ED01973ABE100E2BEDF /* view_pressed.png in Resources */,
 				8A232E1B1973AB4400E2BEDF /* MyriadPro-Semibold.otf in Resources */,
 				8A232E921973ABE100E2BEDF /* dashboard_pressed@2x.png in Resources */,
+				8A5E2E3F1975425D00BE3C04 /* choose_request_bg.png in Resources */,
 				8A232EC81973ABE100E2BEDF /* service_providers@2x.png in Resources */,
+				8A5E2E3C1975425D00BE3C04 /* radio_button_filled.png in Resources */,
+				8A5E2E401975425D00BE3C04 /* choose_request_bg@2x.png in Resources */,
 				8A232EBF1973ABE100E2BEDF /* scheduling_pressed.png in Resources */,
 				8A232EB01973ABE100E2BEDF /* location@2x.png in Resources */,
 				8A232ECD1973ABE100E2BEDF /* summary.png in Resources */,
@@ -767,6 +892,7 @@
 				8A232E9C1973ABE100E2BEDF /* edit_pressed@2x.png in Resources */,
 				8A232EB81973ABE100E2BEDF /* logout@2x.png in Resources */,
 				8A232EC01973ABE100E2BEDF /* scheduling_pressed@2x.png in Resources */,
+				8A5E2E3B1975425D00BE3C04 /* radio_button_empty.png in Resources */,
 				8A232E8C1973ABE100E2BEDF /* comments@2x.png in Resources */,
 				8A232E951973ABE100E2BEDF /* dates_and_times.png in Resources */,
 				8A232E861973ABE100E2BEDF /* check@2x.png in Resources */,
@@ -780,6 +906,7 @@
 				8A232E7A1973ABE100E2BEDF /* add@2x.png in Resources */,
 				8A232EC71973ABE100E2BEDF /* service_providers.png in Resources */,
 				8A232E7B1973ABE100E2BEDF /* arrow.png in Resources */,
+				8A5E2E281974F9F000BE3C04 /* GISVIewEditRequestViewController.xib in Resources */,
 				8A232EF01973EBAB00E2BEDF /* dashboard.png in Resources */,
 				8A232E7F1973ABE100E2BEDF /* attendees.png in Resources */,
 				8A232ED31973ABE100E2BEDF /* view@2x.png in Resources */,
@@ -838,17 +965,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A9B25BC1976B1DA002F1AC0 /* GISDashBoardListViewController.m in Sources */,
 				8A232EE81973ACD700E2BEDF /* GISLoginViewController.m in Sources */,
 				8A232EDE1973AC5B00E2BEDF /* GISDashBoardCell.m in Sources */,
+				8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */,
 				BA3AF220196BBAF7006A1E3B /* GISAppDelegate.m in Sources */,
+
 				BA694A3C1974F1D900AC8CCC /* GISAttendeesTopCell.m in Sources */,
 				8A232EE01973AC5B00E2BEDF /* GISDashBoardListViewController.m in Sources */,
+
+
 				8A232E181973AB4400E2BEDF /* GISFonts.m in Sources */,
+				8A5E2E271974F9F000BE3C04 /* GISVIewEditRequestViewController.m in Sources */,
+				8A9B25AE19767701002F1AC0 /* GISBaseViewController.m in Sources */,
+				8A9B25AA197676CE002F1AC0 /* GISUtility.m in Sources */,
+				8A5E2E3219753C2200BE3C04 /* GISEventDetailsCell.m in Sources */,
+				8A9B25B21976796F002F1AC0 /* Reachability.m in Sources */,
 				BA3AF21C196BBAF7006A1E3B /* main.m in Sources */,
 				BA694A371974EFB100AC8CCC /* GISAttendeesViewController.m in Sources */,
 				8A232EE21973AC5B00E2BEDF /* GISDashBoardViewController.m in Sources */,
+
 				BA694A4A1975306000AC8CCC /* GISContactsAndBillingViewController.m in Sources */,
 				BA694A501975389D00AC8CCC /* GISDatesAndTimesViewController.m in Sources */,
+
+				8A9B25AB197676CE002F1AC0 /* GISNetworkUtility.m in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
