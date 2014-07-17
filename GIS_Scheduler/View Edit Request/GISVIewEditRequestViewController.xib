@@ -15,6 +15,8 @@
                 <outlet property="locationdetaislItem" destination="hiv-TS-EzL" id="3u1-Do-bxb"/>
                 <outlet property="mainTabbar" destination="IDR-Wx-fme" id="a8W-WP-fQk"/>
                 <outlet property="mainView" destination="IsO-FR-6Zo" id="dHx-5j-8u7"/>
+                <outlet property="requestID_Answer_Label" destination="A5g-Z0-a5S" id="EE2-dz-bsn"/>
+                <outlet property="requestID_Label" destination="fhV-Nf-Y5d" id="Ll6-0m-Gr3"/>
                 <outlet property="summarYItem" destination="eOQ-r2-XVz" id="5lU-Nh-mqd"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -28,8 +30,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request ID :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhV-Nf-Y5d">
-                            <rect key="frame" x="162" y="94" width="103" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request ID :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhV-Nf-Y5d">
+                            <rect key="frame" x="144" y="94" width="96" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -43,6 +45,13 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A5g-Z0-a5S">
+                            <rect key="frame" x="257" y="94" width="96" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZZx-Tq-kfx">
                             <rect key="frame" x="391" y="96" width="20" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

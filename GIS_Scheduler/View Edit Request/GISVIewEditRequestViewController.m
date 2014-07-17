@@ -43,8 +43,8 @@
     [[UITabBarItem appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:[GISFonts small], NSFontAttributeName,  UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:[GISFonts small], NSFontAttributeName,  [UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
+//    [[UITabBarItem appearance] setTitleTextAttributes:
+//     [NSDictionary dictionaryWithObjectsAndKeys:[GISFonts small], NSFontAttributeName,  [UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateHighlighted];
     
     GISContactsAndBillingViewController *contactsBillingView=[[GISContactsAndBillingViewController alloc]initWithNibName:@"GISContactsAndBillingViewController" bundle:nil];
     
@@ -71,6 +71,12 @@
     [self setItemFont:_commentsItem];
     
     self.navigationItem.title = @"View/Edit Service Request";
+    
+    self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
+    self.requestID_Label.font=[GISFonts normal];
+    
+    self.requestID_Answer_Label.textColor=UIColorFromRGB(0x666666);
+    self.requestID_Answer_Label.font=[GISFonts small];
     
 }
 

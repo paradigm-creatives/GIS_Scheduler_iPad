@@ -10,6 +10,9 @@
 
 @interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate>
 
+@property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
+@property (nonatomic, strong) IBOutlet UILabel *requestID_Answer_Label;
+
 @property (nonatomic, retain) NSArray *viewControllers;
 @property (nonatomic, retain) UIViewController *currentController;
 

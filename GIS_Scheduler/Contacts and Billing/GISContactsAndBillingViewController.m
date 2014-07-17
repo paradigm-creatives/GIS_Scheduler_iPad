@@ -78,9 +78,11 @@
     buhZip_Label.textColor=UIColorFromRGB(0x666666);
     buhZip_Answer_Label.textColor=UIColorFromRGB(0x666666);
     
-    [nextButton setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     
-    
+    nextButton.backgroundColor=UIColorFromRGB(0x00457c);
+    [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+    nextButton.titleLabel.font=[GISFonts larger];
+    [nextButton.layer setCornerRadius:3.0f];
     /////
     requestorDetails_Label.font=[GISFonts large];
     
@@ -131,6 +133,14 @@
     buhZip_Label.font=[GISFonts normal];
     buhZip_Answer_Label.font=[GISFonts small];
     
+    
+    [buhAddress1_TextView.layer setBorderWidth:0.2];
+    [buhAddress1_TextView.layer setBorderColor:[[UIColor grayColor] CGColor]];
+    [buhAddress1_TextView.layer setCornerRadius:5.0f];
+    
+    [buhAddress2_textView.layer setBorderWidth:0.2];
+    [buhAddress2_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
+    [buhAddress2_textView.layer setCornerRadius:5.0f];
 
 }
 
