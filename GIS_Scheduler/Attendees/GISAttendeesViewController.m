@@ -8,6 +8,9 @@
 
 #import "GISAttendeesViewController.h"
 #import "GISAttendeesTopCell.h"
+#import "GISConstants.h"
+#import "GISFonts.h"
+
 @interface GISAttendeesViewController ()
 
 @end
@@ -38,7 +41,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -46,7 +49,10 @@
     if (section==0) {
         return 1;
     }
-    return 3;
+    else if (section==1) {
+        return 3;
+    }
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,6 +63,60 @@
     }
     
     return 158;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 2)
+        return 100;
+    return 0;
+}
+
+
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView* headerView;
+    if (section == 2)
+    {
+        headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+        UIButton *addButton = [[UIButton alloc] init];
+        addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [addButton addTarget:self
+                      action:@selector(createAttendee:)
+            forControlEvents:UIControlEventTouchUpInside];
+        addButton.frame = CGRectMake(headerView.frame.size.width/2-50, 10.0, 20.0, 20.0);
+        [headerView addSubview:addButton];
+        
+        UILabel* headerLabel = [[UILabel alloc] init];
+        headerLabel.frame = CGRectMake(headerView.frame.size.width/2-20, addButton.frame.size.height/2+5, 80, 10);
+        headerLabel.textColor = UIColorFromRGB(0x00457c);
+        headerLabel.font = [UIFont boldSystemFontOfSize:12];
+        headerLabel.text=NSLocalizedStringFromTable(@"add attendee", TABLE, nil);
+        [headerLabel setTextAlignment:NSTextAlignmentCenter];
+        [headerView addSubview:headerLabel];
+        
+        UIButton *nextButton = [[UIButton alloc] init];
+        nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [nextButton addTarget:self
+                       action:@selector(nextButtonPressed:)
+             forControlEvents:UIControlEventTouchUpInside];
+        nextButton.frame = CGRectMake(headerView.frame.size.width/2-35, 40.0, 80.0, 30.0);
+        
+        [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
+        nextButton.backgroundColor=UIColorFromRGB(0x00457c);
+        [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+        nextButton.titleLabel.font=[GISFonts larger];
+        [nextButton.layer setCornerRadius:3.0f];
+        [[nextButton layer] setMasksToBounds:YES];
+        [headerView addSubview:nextButton];
+        
+    }
+    else
+    {
+        headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+    }
+    return headerView;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

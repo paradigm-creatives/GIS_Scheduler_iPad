@@ -54,7 +54,7 @@
     GISAttendeesViewController *attendeesView=[[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
     GISDatesAndTimesViewController *datesAndTimesView=[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
-    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,datesAndTimesView, nil];
+    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,datesAndTimesView,datesAndTimesView, nil];
     
     _currentController= contactsBillingView;
     
