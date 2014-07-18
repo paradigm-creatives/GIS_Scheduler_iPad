@@ -45,6 +45,8 @@
     [datListView addGestureRecognizer:leftRecognizer];
     
     self.isMasterHide= YES;
+    
+    self.title=@"DashBoard";
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -94,15 +96,7 @@
     waitingForApproval_Label.textColor=UIColorFromRGB(0x333333);
     approvedRequest_Label.textColor=UIColorFromRGB(0x333333);
     incompleteRequest_Label.textColor=UIColorFromRGB(0x333333);
-    
-    //[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x00457c)];
-    self.navigationBar.frame=CGRectMake(0,0,self.navigationBar.frame.size.width,64);
-    [self.navigation_item setTitle:@"123456"];
-    [self.navigationBar setFrame:CGRectMake(0, 0, 320, 64)];
-    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0xe8d4a2),NSFontAttributeName :[GISFonts larger]}];
-    self.view.backgroundColor=UIColorFromRGB(0xf8f8f8);
-    
-    self.view.backgroundColor=[UIColor whiteColor];
+
 }
 
 
