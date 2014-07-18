@@ -38,20 +38,23 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <items>
-                                <tabBarItem title="Contact &amp; Billing" image="contact_and_billing.png" id="vC9-iw-Nlc"/>
+                                <tabBarItem tag="1" title="Contact &amp; Billing" image="contact_and_billing.png" id="vC9-iw-Nlc"/>
                                 <tabBarItem title="Event Details" image="event_details.png" id="e7e-VT-ARa"/>
-                                <tabBarItem title="Attendees" image="attendees.png" id="tIJ-Sg-zet" userLabel="Tab Bar Item - Favorites"/>
-                                <tabBarItem title="Location Details" image="location.png" id="hiv-TS-EzL"/>
-                                <tabBarItem title="Dates &amp; Times" image="dates_and_times.png" id="NW9-Dz-83d"/>
-                                <tabBarItem title="Job Details" image="job_details.png" id="xJ6-Qi-GBD"/>
-                                <tabBarItem title="Summary" image="summary.png" id="eOQ-r2-XVz"/>
-                                <tabBarItem title="Comments" image="comments.png" id="ofu-Uk-8bn"/>
+                                <tabBarItem tag="3" title="Attendees" image="attendees_unPressed.png" id="tIJ-Sg-zet" userLabel="Tab Bar Item - Favorites"/>
+                                <tabBarItem tag="1" title="Location Details" image="location.png" id="hiv-TS-EzL"/>
+                                <tabBarItem tag="4" title="Dates &amp; Times" image="dates_and_times.png" id="NW9-Dz-83d"/>
+                                <tabBarItem tag="5" title="Job Details" image="job_details.png" id="xJ6-Qi-GBD"/>
+                                <tabBarItem tag="6" title="Summary" image="summary_unPressed.png" id="eOQ-r2-XVz"/>
+                                <tabBarItem tag="7" title="Comments" image="comments_unPressed.png" id="ofu-Uk-8bn"/>
                             </items>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">
                                     <color key="value" red="0.0" green="0.27058823529411763" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="YrV-ni-vKo"/>
+                            </connections>
                         </tabBar>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -63,13 +66,13 @@
         </view>
     </objects>
     <resources>
-        <image name="attendees.png" width="28" height="23"/>
-        <image name="comments.png" width="28" height="22"/>
+        <image name="attendees_unPressed.png" width="28" height="23"/>
+        <image name="comments_unPressed.png" width="28" height="22"/>
         <image name="contact_and_billing.png" width="21" height="22"/>
         <image name="dates_and_times.png" width="20" height="22"/>
         <image name="event_details.png" width="21" height="21"/>
         <image name="job_details.png" width="27" height="22"/>
         <image name="location.png" width="15" height="22"/>
-        <image name="summary.png" width="26" height="22"/>
+        <image name="summary_unPressed.png" width="26" height="22"/>
     </resources>
 </document>

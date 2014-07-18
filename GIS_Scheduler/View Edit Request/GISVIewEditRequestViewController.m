@@ -10,6 +10,7 @@
 #import "GISConstants.h"
 #import "GISEventDetailsViewController.h"
 #import "GISFonts.h"
+#import "GISLocationDetailsViewController.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -32,7 +33,8 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
     GISEventDetailsViewController *eventDetailsView=[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
-    _viewControllers=[NSArray arrayWithObjects: eventDetailsView, nil];
+    GISLocationDetailsViewController *locationDetailsView=[[GISLocationDetailsViewController alloc]initWithNibName:@"GISLocationDetailsViewController" bundle:nil];
+    _viewControllers=[NSArray arrayWithObjects: eventDetailsView,locationDetailsView, nil];
     _currentController= eventDetailsView;
     [_mainView addSubview:_currentController.view];
     
@@ -44,6 +46,16 @@
     [self setItemFont:_jobdetailsItem];
     [self setItemFont:_summarYItem];
     [self setItemFont:_commentsItem];
+    
+//    _commentsItem.selectedImage = [[UIImage imageNamed:@"comments.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _eventDetailsItem.selectedImage = [[UIImage imageNamed:@"eventdetails.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _attendeesItem.selectedImage = [[UIImage imageNamed:@"attendees.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _locationdetaislItem.selectedImage = [[UIImage imageNamed:@"Locationdetails.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _datesItem.selectedImage = [[UIImage imageNamed:@"date&times.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _jobdetailsItem.selectedImage = [[UIImage imageNamed:@"jobdetails.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _summarYItem.selectedImage = [[UIImage imageNamed:@"summary.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    _commentsItem.selectedImage = [[UIImage imageNamed:@"comments.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
     
     self.navigationItem.title = @"View/Edit Service Request";
     
@@ -61,10 +73,9 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
     UIViewController *selectedTabView=nil;
-    if (_currentController == [_viewControllers objectAtIndex:0]) {
         
-        selectedTabView= [_viewControllers objectAtIndex:0];
-    }
+    selectedTabView= [_viewControllers objectAtIndex:item.tag];
+    
     
     switch (item.tag) {
         case 0:
@@ -77,6 +88,18 @@
             [_mainView addSubview:selectedTabView.view];
             [self.view bringSubviewToFront:_mainView];
             break;
+            
+        case 1:
+            [_currentController.view removeFromSuperview];
+            _currentController=selectedTabView;
+            for (UIView *subView in _mainView.subviews)
+            {
+                [subView removeFromSuperview];
+            }
+            [_mainView addSubview:selectedTabView.view];
+            [self.view bringSubviewToFront:_mainView];
+            break;
+
             
         default:
             break;
