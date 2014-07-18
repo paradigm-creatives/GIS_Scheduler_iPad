@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
 
+@class GISDashBoardViewController;
+
 @interface GISDashBoardListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     int rowCount;

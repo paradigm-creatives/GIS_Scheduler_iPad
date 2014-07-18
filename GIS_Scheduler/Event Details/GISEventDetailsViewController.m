@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.backBarButtonItem=nil;
-    [_eventDetaislTabelView setContentSize:CGSizeMake(1024, 768)];
+    [_eventDetaislTabelView setContentSize:CGSizeMake(1024, 880)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

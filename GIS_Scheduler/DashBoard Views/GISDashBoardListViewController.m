@@ -31,9 +31,6 @@
 	// Do any additional setup after loading the view.
 
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
- 
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xeef7fa)];
-    
     
     if ([_dashBoard_ListTableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [_dashBoard_ListTableView setSeparatorInset:UIEdgeInsetsZero];

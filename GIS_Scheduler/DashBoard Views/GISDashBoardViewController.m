@@ -11,7 +11,6 @@
 #import "GISConstants.h"
 #import "GISDashBoardCell.h"
 #import "GISVIewEditRequestViewController.h"
-
 @interface GISDashBoardViewController ()
 
 @end
@@ -39,8 +38,6 @@
     //add the your gestureRecognizer , where to detect the touch..
     [datListView addGestureRecognizer:rightRecognizer];
     
-    self.navigationItem.title = @"Dashboard";
-    
     UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
     leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [leftRecognizer setNumberOfTouchesRequired:1];
@@ -49,8 +46,8 @@
     
     self.isMasterHide= YES;
     
+    self.title=@"DashBoard";
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -61,7 +58,6 @@
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xffffff) ,NSFontAttributeName : [GISFonts normal]} forState:UIControlStateHighlighted];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x00457c) ,NSFontAttributeName : [GISFonts normal]} forState:UIControlStateNormal];
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : [GISFonts normal]} forState:UIControlStateSelected];
-    
 
     accountName_Label.font=[GISFonts normal];
     requestID_Label.font=[GISFonts normal];
@@ -81,7 +77,7 @@
     waitingForApproval_Label.font=[GISFonts small];
     approvedRequest_Label.font=[GISFonts small];
     incompleteRequest_Label.font=[GISFonts small];
-    
+
     accountName_Label.textColor=UIColorFromRGB(0x00457c);
     requestID_Label.textColor=UIColorFromRGB(0x00457c);
     eventType_Label.textColor=UIColorFromRGB(0x00457c);
@@ -100,8 +96,7 @@
     waitingForApproval_Label.textColor=UIColorFromRGB(0x333333);
     approvedRequest_Label.textColor=UIColorFromRGB(0x333333);
     incompleteRequest_Label.textColor=UIColorFromRGB(0x333333);
-    
-    //[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x00457c)];
+
 }
 
 
@@ -109,7 +104,6 @@
 {
     return self.isMasterHide;
 }
-
 
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
@@ -163,12 +157,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
+{   
     return 20;
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -188,7 +179,6 @@
     if (indexPath.row%2==0) {
         cell.status_Label.backgroundColor=[UIColor yellowColor];
     }
-    
     return cell;
 }
 
@@ -202,10 +192,9 @@
     [self.navigationController popViewControllerAnimated:NO];
     GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
     [self.navigationController pushViewController:viewEditView animated:NO];
-
+    
     
 }
-
 
 - (void)didReceiveMemoryWarning
 {
