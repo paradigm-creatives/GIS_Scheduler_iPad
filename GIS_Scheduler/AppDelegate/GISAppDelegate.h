@@ -19,4 +19,6 @@
 
 @property(nonatomic,strong)id detailViewController;
 
+@property (readwrite, nonatomic) BOOL isLogout;
+
 @end

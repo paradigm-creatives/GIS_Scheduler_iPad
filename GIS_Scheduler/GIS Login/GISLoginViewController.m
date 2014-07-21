@@ -10,7 +10,9 @@
 #import "GISConstants.h"
 #import "GISFonts.h"
 #import "GISAppDelegate.h"
-
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISJSONProperties.h"
 @interface GISLoginViewController ()
 
 @end
@@ -89,9 +91,35 @@
 
 -(IBAction)signInClicked:(id)sender{
     
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:@"kbabulenjoy@gmail.com" forKey:@"email"];
+    [paramsDict setObject:@"babul" forKey:@"password"];
+    [[GISServerManager sharedManager] logininForTarget:self withParams:paramsDict finishAction:@selector(successmethod_login:) failAction:@selector(failuremethod_login:)];
+    
     [self.view.window setRootViewController:appDelegate.spiltViewController];
 }
 
+-(void)successmethod_login:(GISJsonRequest *)response
+{
+        NSLog(@"Success---%@",response.responseJson);
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"400"]) {
+//                [self removeLoadingView];
+//                [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Get User Login request fail"] ofType:PC_LOG_INFO];
+                UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Valid Username and Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                [email_alert show];
+                return;
+            }
+        }
+}
+-(void)failuremethod_login:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
