@@ -77,46 +77,46 @@
     cell.backgroundColor = UIColorFromRGB(0x00457c);
     
     UIImageView *cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(8,8, 25, 25)];
-    UILabel *cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(42,11, 250, 25)];
-    cellLabel.textColor = [UIColor whiteColor];
-    [cellLabel setFont:[GISFonts large]];
+    _cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(42,11, 250, 25)];
+    _cellLabel.textColor = UIColorFromRGB(0xefefef);
+    _cellLabel.tag = indexPath.row+1;
+    [_cellLabel setFont:[GISFonts large]];
     
     [cell addSubview:cellImageView];
-    [cell addSubview:cellLabel];
+    [cell addSubview:_cellLabel];
     
     if(indexPath.section == 0){
-        cellLabel.text = @"Dashboard";
+        _cellLabel.text = @"Dashboard";
         cellImageView.image = [UIImage imageNamed:@"dashboard.png"];
     }else if(indexPath.section == 3){
-        cellLabel.text = @"Find Requests/Jobs";
+        _cellLabel.text = @"Find Requests/Jobs";
         cellImageView.image = [UIImage imageNamed:@"find_requests_jobs.png"];
     }else if(indexPath.section == 4){
-        cellLabel.text = @"Logout";
+        _cellLabel.text = @"Logout";
         cellImageView.image = [UIImage imageNamed:@"logout.png"];
     }else if(indexPath.section == 1){
         
-        cellLabel.frame = CGRectMake(55,11, 250, 25);
+        _cellLabel.frame = CGRectMake(55,11, 250, 25);
         
         if(indexPath.row == 0)
-            cellLabel.text = @"Add Service Request";
+            _cellLabel.text = @"Add Service Request";
         if(indexPath.row == 1)
-            cellLabel.text = @"View/Edit Service Request";
+            _cellLabel.text = @"View/Edit Service Request";
         if(indexPath.row == 2)
-            cellLabel.text = @"Service Provider Requested Jobs";
+            _cellLabel.text = @"Service Provider Requested Jobs";
     }else if(indexPath.section == 2){
         
-        cellLabel.frame = CGRectMake(55,11, 250, 25);
+        _cellLabel.frame = CGRectMake(55,11, 250, 25);
         
         if(indexPath.row == 0)
-            cellLabel.text = @"Job Assignment";
+            _cellLabel.text = @"Job Assignment";
         if(indexPath.row == 1)
-            cellLabel.text = @"View/Edit Schedule";
+            _cellLabel.text = @"View/Edit Schedule";
     }
 
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,7 +134,7 @@
     UILabel* headerLabel = [[UILabel alloc] init];
     headerLabel.frame = CGRectMake(42, 16, 320, 20);
     headerLabel.backgroundColor = [UIColor clearColor];
-    headerLabel.textColor = UIColorFromRGB(0x00457c);
+    headerLabel.textColor = UIColorFromRGB(0xefefef);
     headerLabel.font = [GISFonts large];
     [headerLabel setTextAlignment:NSTextAlignmentLeft];
     headerLabel.textColor = [UIColor whiteColor];
@@ -152,6 +152,7 @@
         [headerView addSubview:headerLabel];
         [headerView addSubview:headerImageView];
         headerLabel.text = @"Requests/Jobs";
+        headerLabel.textColor = UIColorFromRGB(0xe8d3a4);
         headerImageView.image = [UIImage imageNamed:@"requests_jobs.png"];
         
     }else  if(section == 2){
@@ -187,8 +188,33 @@
     return 0;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSIndexPath *currentSelectedIndexPath = [tableView indexPathForSelectedRow];
+    if (currentSelectedIndexPath != nil)
+    {
+        [[tableView cellForRowAtIndexPath:currentSelectedIndexPath] setBackgroundColor:UIColorFromRGB(0x00457c)];
+    }
+    
+    return indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+    [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = UIColorFromRGB(0x00508f);
+    
+    UILabel *label = (UILabel *)[cell viewWithTag:indexPath.row+1];
+    if(label != nil)
+        label.textColor = UIColorFromRGB(0xe8d3a4);
+    
+    if(indexPath.section == 3){
+        cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
+    }else if(indexPath.section == 4){
+        cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
+    }
     
     UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
     
@@ -202,6 +228,7 @@
     }
     
 }
+
 
 -(IBAction)hideRows:(id)sender{
     

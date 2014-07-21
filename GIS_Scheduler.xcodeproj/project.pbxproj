@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A232EE81973ACD700E2BEDF /* GISLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A232EE61973ACD700E2BEDF /* GISLoginViewController.m */; };
 		8A232EE91973ACD700E2BEDF /* GISLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A232EE71973ACD700E2BEDF /* GISLoginViewController.xib */; };
+		8A3B1DFD197CF07F00963E8C /*  custom.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A3B1DFC197CF07F00963E8C /*  custom.strings */; };
 		8A5052B519779CFD007288F5 /* GISPreparationMaterialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052B419779CFD007288F5 /* GISPreparationMaterialCell.m */; };
 		8A5052B719779D2A007288F5 /* GISPreparationMaterialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5052B619779D2A007288F5 /* GISPreparationMaterialCell.xib */; };
 		8A5052C61977D76F007288F5 /* GISDashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5052C21977D76F007288F5 /* GISDashBoardViewController.xib */; };
@@ -67,7 +68,6 @@
 		BA3AF22B196BBAF7006A1E3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF213196BBAF7006A1E3B /* UIKit.framework */; };
 		BA3AF233196BBAF8006A1E3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA3AF231196BBAF8006A1E3B /* InfoPlist.strings */; };
 		BA3AF235196BBAF8006A1E3B /* GIS_SchedulerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AF234196BBAF8006A1E3B /* GIS_SchedulerTests.m */; };
-		BA4224411978ED4100A4E283 /* custom.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA4224401978ED4100A4E283 /* custom.strings */; };
 		BA4224441978FED900A4E283 /* GISDatesTimesDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4224431978FED900A4E283 /* GISDatesTimesDetailCell.m */; };
 		BA4224461978FEE900A4E283 /* GISDatesTimesDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4224451978FEE900A4E283 /* GISDatesTimesDetailCell.xib */; };
 		BA59EC411977EC530083864D /* GISDashBoardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA59EC3F1977EC530083864D /* GISDashBoardListViewController.m */; };
@@ -216,6 +216,7 @@
 		8A232EE51973ACD700E2BEDF /* GISLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISLoginViewController.h; sourceTree = "<group>"; };
 		8A232EE61973ACD700E2BEDF /* GISLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISLoginViewController.m; sourceTree = "<group>"; };
 		8A232EE71973ACD700E2BEDF /* GISLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISLoginViewController.xib; sourceTree = "<group>"; };
+		8A3B1DFC197CF07F00963E8C /*  custom.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = " custom.strings"; path = "../../../../../Documents/ custom.strings"; sourceTree = "<group>"; };
 		8A5052B319779CFD007288F5 /* GISPreparationMaterialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISPreparationMaterialCell.h; sourceTree = "<group>"; };
 		8A5052B419779CFD007288F5 /* GISPreparationMaterialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISPreparationMaterialCell.m; sourceTree = "<group>"; };
 		8A5052B619779D2A007288F5 /* GISPreparationMaterialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPreparationMaterialCell.xib; sourceTree = "<group>"; };
@@ -296,7 +297,6 @@
 		BA3AF230196BBAF8006A1E3B /* GIS_SchedulerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GIS_SchedulerTests-Info.plist"; sourceTree = "<group>"; };
 		BA3AF232196BBAF8006A1E3B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA3AF234196BBAF8006A1E3B /* GIS_SchedulerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GIS_SchedulerTests.m; sourceTree = "<group>"; };
-		BA4224401978ED4100A4E283 /* custom.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = custom.strings; sourceTree = "<group>"; };
 		BA4224421978FED900A4E283 /* GISDatesTimesDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDatesTimesDetailCell.h; sourceTree = "<group>"; };
 		BA4224431978FED900A4E283 /* GISDatesTimesDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDatesTimesDetailCell.m; sourceTree = "<group>"; };
 		BA4224451978FEE900A4E283 /* GISDatesTimesDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDatesTimesDetailCell.xib; sourceTree = "<group>"; };
@@ -638,13 +638,10 @@
 		BA3AF215196BBAF7006A1E3B /* GIS_Scheduler */ = {
 			isa = PBXGroup;
 			children = (
-
 				BA42243F1978ED4100A4E283 /* Localization Strings */,
-
 				8A8DA6FB197924FC00EE8EFE /* Comments */,
 				8A5052D61977E418007288F5 /* Location Details */,
 				8A5052CC1977DB91007288F5 /* Fonts */,
-
 				BA9E6A5E1977E88400609E69 /* AppDelegate */,
 				8A232EE41973ACC100E2BEDF /* GIS Login */,
 				8A5052BC1977D76F007288F5 /* DashBoard Views */,
@@ -696,7 +693,7 @@
 		BA42243F1978ED4100A4E283 /* Localization Strings */ = {
 			isa = PBXGroup;
 			children = (
-				BA4224401978ED4100A4E283 /* custom.strings */,
+				8A3B1DFC197CF07F00963E8C /*  custom.strings */,
 			);
 			path = "Localization Strings";
 			sourceTree = "<group>";
@@ -1090,7 +1087,6 @@
 				BA9E6B0B1977E88400609E69 /* dashboard@2x.png in Resources */,
 				8A5E2E281974F9F000BE3C04 /* GISVIewEditRequestViewController.xib in Resources */,
 				BA9E6B641977E88400609E69 /* view_pressed.png in Resources */,
-				BA4224411978ED4100A4E283 /* custom.strings in Resources */,
 				BA9E6B381977E88400609E69 /* login_username@2x.png in Resources */,
 				BA9E6B581977E88400609E69 /* summary_edit@2x.png in Resources */,
 				BA9E6B5B1977E88400609E69 /* text_field_bg.png in Resources */,
@@ -1100,6 +1096,7 @@
 				BA9E6AFB1977E88400609E69 /* checked.png in Resources */,
 				BA9E6B421977E88400609E69 /* radio_button_filled@2x.png in Resources */,
 				8A8DA6E11979026600EE8EFE /* comments_unPressed@2x.png in Resources */,
+				8A3B1DFD197CF07F00963E8C /*  custom.strings in Resources */,
 				BA9E6AF91977E88400609E69 /* check_pressed.png in Resources */,
 				8A8DA6EB1979026600EE8EFE /* Locationdetails@2x.png in Resources */,
 				BA9E6B521977E88400609E69 /* service_providers@2x.png in Resources */,
