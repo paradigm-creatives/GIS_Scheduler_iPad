@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/GIS Login/GISLoginViewController.m"
-            timestampString = "427634349.266065"
+            timestampString = "427639987.585694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "-successmethod_login:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/GIS Login/GISLoginViewController.m"
-            timestampString = "427634562.697158"
+            timestampString = "427641447.896853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "-successmethod_dropDown:"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-signInClicked:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

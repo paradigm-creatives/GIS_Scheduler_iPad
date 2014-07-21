@@ -10,6 +10,12 @@
 #import "GISConstants.h"
 #import "GISFonts.h"
 #import "GISDashBoardViewController.h"
+#import "GISDatabaseManager.h"
+#import "GISLoginViewController.h"
+
+
+#define LOGOUT_TAG 1632
+
 @interface GISDashBoardListViewController ()
 
 @end
@@ -214,6 +220,13 @@
         cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
     }else if(indexPath.section == 4){
         cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
+        
+        UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:@"Logout:" message:@"Are you sure want to logout ?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        alertVIew.tag = LOGOUT_TAG;
+        alertVIew.delegate = self;
+        [alertVIew show];
+
+        
     }
     
     UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
@@ -227,6 +240,19 @@
         }
     }
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if(alertView.tag == LOGOUT_TAG && buttonIndex == 1)
+    {
+        appDelegate.isLogout = YES;
+        [[GISDatabaseManager sharedDataManager] reloadTheDatabaseFile];
+        GISLoginViewController *loginView_controller=[[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
+         appDelegate.window.rootViewController=loginView_controller;
+        [appDelegate.window makeKeyAndVisible];
+    }
 }
 
 

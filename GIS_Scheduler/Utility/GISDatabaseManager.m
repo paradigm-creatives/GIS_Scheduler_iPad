@@ -87,7 +87,7 @@ NSString* documentDirectory() {
         NSArray *files = [fileManager contentsOfDirectoryAtPath:gallaudetPath error:nil];
         for (NSString *file in files)
         {
-            if([file isEqualToString:@"GISDatabase.db"])
+            if([file isEqualToString:@"GISSchedulerDatabase.db"])
             {
                 // NSString *fullPath = [lcidPath stringByAppendingPathComponent:file];
                 if(appDelegate.isLogout){

@@ -47,6 +47,8 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
       [GISFonts larger], NSFontAttributeName,nil]];
+    
+    self.isLogout = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

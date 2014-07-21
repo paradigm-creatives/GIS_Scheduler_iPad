@@ -20,6 +20,7 @@
 #import "GISStoreManager.h"
 #import "GISDatabaseManager.h"
 #import "GISDatabaseConstants.h"
+#import "GISNetworkUtility.h"
 
 
 @interface GISLoginViewController ()
@@ -102,12 +103,50 @@
 
 -(IBAction)signInClicked:(id)sender{
     
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    if ([[GISNetworkUtility sharedManager] checkNetworkAvailability])
+    {
+        userName_String=_userName_textfield.text;
+        password_String=_password_textfield.text;
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        if(appDelegate.isLogout){
+            [[GISDatabaseManager sharedDataManager] reloadTheDatabaseFile];
+            appDelegate.isLogout = NO;
+        }
+        
+        NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailReg];
+        if (userName_String.length<1 || password_String.length<1)
+        {
+            [self removeLoadingView];
+            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Username and Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [email_alert show];
+            return;
+        }
+        else if ([emailTest evaluateWithObject:userName_String] != YES)
+        {
+            [self removeLoadingView];
+            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Valid Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [email_alert show];
+            return;
+        }
+        else
+        {
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:userName_String forKey:@"email"];
+            [paramsDict setObject:password_String forKey:@"password"];
+            [[GISServerManager sharedManager] logininForTarget:self withParams:paramsDict finishAction:@selector(successmethod_login:) failAction:@selector(failuremethod_login:)];
+        }
+    }else{
+        [self loginFailedWithNetworkError];
+    }
+}
+
+-(void)loginFailedWithNetworkError
+{
+    //    [self showAlertWithTitle:@"Cellular Data is Turned Off" andMessage:@"Turn on cellular data or use Wi-Fi to access data."];
     
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:@"kbabulenjoy@gmail.com" forKey:@"email"];
-    [paramsDict setObject:@"babul" forKey:@"password"];
-    [[GISServerManager sharedManager] logininForTarget:self withParams:paramsDict finishAction:@selector(successmethod_login:) failAction:@selector(failuremethod_login:)];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"network_connection",TABLE, nil)];
 }
 
 -(void)successmethod_login:(GISJsonRequest *)response
