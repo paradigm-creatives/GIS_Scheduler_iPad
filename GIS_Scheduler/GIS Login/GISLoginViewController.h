@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
+#import "GISStore.h"
+#import "GISDropDownStore.h"
 
-@interface GISLoginViewController : UIViewController
+@interface GISLoginViewController : UIViewController<UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
+    
+    NSString *userName_String;
+    NSString *password_String;
+    int viewUpHeight;
+    
+    GISStore *gisStore;
+    GISDropDownStore *dropDownStore;
 }
 
 @property (nonatomic,strong) IBOutlet UITextField *userName_textfield;

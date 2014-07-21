@@ -97,23 +97,46 @@
 
 +(void)moveemailView:(BOOL)ismove viewHeight:(int)viewUpHeight view:(UIView *)currentView
 {
-    CGRect frame=currentView.frame;
+    
     if(ismove)
     {
-        frame.origin.y-=viewUpHeight;
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:1.0];
+        
+        CGRect frame=currentView.frame;
+        frame.origin.x=viewUpHeight;
+        currentView.frame=frame;
+        [UIView commitAnimations];
     }
     else
     {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:0.2];
+        CGRect frame=currentView.frame;
+        frame.origin.x=0;
+        currentView.frame=frame;
         
-        frame.origin.y =viewUpHeight;
+        [UIView commitAnimations];
     }
-    [UIView animateWithDuration:0.3f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [currentView setFrame:frame];
-                     }
-                     completion:nil];
+//    CGRect frame=currentView.frame;
+//    if(ismove)
+//    {
+//        frame.origin.x-=viewUpHeight;
+//    }
+//    else
+//    {
+//        
+//        frame.origin.x+=viewUpHeight;
+//    }
+//    [UIView animateWithDuration:0.3f
+//                          delay:0.0f
+//                        options:UIViewAnimationOptionCurveEaseIn
+//                     animations:^{
+//                         [currentView setFrame:frame];
+//                     }
+//                     completion:nil];
 }
 
 +(NSString *)returningstring:(id)string
