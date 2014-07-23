@@ -52,15 +52,15 @@
     _signINButton.layer.cornerRadius = 5.0f;
     _signINButton.clipsToBounds = YES;
     
-    [_signINButton setTitle:@"Login" forState:UIControlStateNormal];
+    [_signINButton setTitle:NSLocalizedStringFromTable(@"login", TABLE, nil) forState:UIControlStateNormal];
     [_signINButton setTitleColor:UIColorFromRGB(0x00457c) forState:UIControlStateNormal];
     [_signINButton.titleLabel setFont:[GISFonts large]];
     
     [self addRightView:_userName_textfield];
     [self addRightView:_password_textfield];
     
-    [_userName_textfield setPlaceholder:@"User Name"];
-    [_password_textfield setPlaceholder:@"Password"];
+    [_userName_textfield setPlaceholder:NSLocalizedStringFromTable(@"user_name", TABLE, nil)];
+    [_password_textfield setPlaceholder:NSLocalizedStringFromTable(@"password", TABLE, nil)];
     
     [_userName_textfield setValue:[GISFonts large] forKeyPath:@"_placeholderLabel.font"];
     [_password_textfield setValue:[GISFonts large] forKeyPath:@"_placeholderLabel.font"];
@@ -71,6 +71,9 @@
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     viewUpHeight = 155;
+    
+    _userName_textfield.text=@"swamy.pilla@gmail.com";
+    _password_textfield.text=@"admin";
     
 }
 
@@ -119,14 +122,14 @@
         if (userName_String.length<1 || password_String.length<1)
         {
             [self removeLoadingView];
-            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Username and Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis_title", TABLE, nil) message:NSLocalizedStringFromTable(@"enter_username_password", TABLE, nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
             [email_alert show];
             return;
         }
         else if ([emailTest evaluateWithObject:userName_String] != YES)
         {
             [self removeLoadingView];
-            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Valid Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis_title", TABLE, nil) message:NSLocalizedStringFromTable(@"enter_validEmail", TABLE, nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
             [email_alert show];
             return;
         }
@@ -207,8 +210,8 @@
             }
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"400"]) {
                 [self removeLoadingView];
-                [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Get User Login request fail"] ofType:PC_LOG_INFO];
-                UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:@"GIS" message:@"Please Enter Valid Username and Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)] ofType:PC_LOG_INFO];
+                UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis_title", TABLE, nil)  message:NSLocalizedStringFromTable(@"enter_valid_username_password", TABLE, nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"alert_ok", TABLE, nil) otherButtonTitles:Nil, nil];
                 [email_alert show];
                 return;
             }

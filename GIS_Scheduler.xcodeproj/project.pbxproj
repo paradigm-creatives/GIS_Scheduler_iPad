@@ -85,6 +85,7 @@
 		8A90D46D197D0901002D4C8A /* PCLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2F197CF54500963E8C /* PCLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A9B25AA197676CE002F1AC0 /* GISUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25A5197676CE002F1AC0 /* GISUtility.m */; };
 		8A9B25AE19767701002F1AC0 /* GISBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B25AC19767701002F1AC0 /* GISBaseViewController.m */; };
+		8AE9B41A197E6308004D9157 /* dashboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE9B419197E6308004D9157 /* dashboard_pressed.png */; };
 		BA34A654197CE02D00A7083C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34A653197CE02D00A7083C /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BA34A65E197CE27F00A7083C /* GISJsonRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34A657197CE27F00A7083C /* GISJsonRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BA34A65F197CE27F00A7083C /* GISRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34A659197CE27F00A7083C /* GISRequest.m */; };
@@ -145,7 +146,6 @@
 		BA9E6B061977E88400609E69 /* contact_and_billing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A831977E88400609E69 /* contact_and_billing@2x.png */; };
 		BA9E6B071977E88400609E69 /* contact_and_billing_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A841977E88400609E69 /* contact_and_billing_pressed.png */; };
 		BA9E6B081977E88400609E69 /* contact_and_billing_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A851977E88400609E69 /* contact_and_billing_pressed@2x.png */; };
-		BA9E6B091977E88400609E69 /* dashbaord_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A861977E88400609E69 /* dashbaord_pressed.png */; };
 		BA9E6B0A1977E88400609E69 /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A871977E88400609E69 /* dashboard.png */; };
 		BA9E6B0B1977E88400609E69 /* dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A881977E88400609E69 /* dashboard@2x.png */; };
 		BA9E6B0C1977E88400609E69 /* dashboard_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6A891977E88400609E69 /* dashboard_pressed@2x.png */; };
@@ -377,6 +377,7 @@
 		8A9B25A6197676CE002F1AC0 /* GISDatabaseConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDatabaseConstants.h; sourceTree = "<group>"; };
 		8A9B25AC19767701002F1AC0 /* GISBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISBaseViewController.m; sourceTree = "<group>"; };
 		8A9B25AD19767701002F1AC0 /* GISBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISBaseViewController.h; sourceTree = "<group>"; };
+		8AE9B419197E6308004D9157 /* dashboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard_pressed.png; sourceTree = "<group>"; };
 		BA34A652197CE02D00A7083C /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		BA34A653197CE02D00A7083C /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		BA34A656197CE27F00A7083C /* GISJsonRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJsonRequest.h; sourceTree = "<group>"; };
@@ -452,7 +453,6 @@
 		BA9E6A831977E88400609E69 /* contact_and_billing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contact_and_billing@2x.png"; sourceTree = "<group>"; };
 		BA9E6A841977E88400609E69 /* contact_and_billing_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact_and_billing_pressed.png; sourceTree = "<group>"; };
 		BA9E6A851977E88400609E69 /* contact_and_billing_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contact_and_billing_pressed@2x.png"; sourceTree = "<group>"; };
-		BA9E6A861977E88400609E69 /* dashbaord_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashbaord_pressed.png; sourceTree = "<group>"; };
 		BA9E6A871977E88400609E69 /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		BA9E6A881977E88400609E69 /* dashboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard@2x.png"; sourceTree = "<group>"; };
 		BA9E6A891977E88400609E69 /* dashboard_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dashboard_pressed@2x.png"; sourceTree = "<group>"; };
@@ -981,6 +981,7 @@
 		BA9E6A691977E88400609E69 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8AE9B419197E6308004D9157 /* dashboard_pressed.png */,
 				8A8DA6EE1979062200EE8EFE /* selected@2x.png */,
 				8A8DA6EF1979062200EE8EFE /* selected.png */,
 				8A8DA6CE1979026600EE8EFE /* attendees_unPressed.png */,
@@ -1027,7 +1028,6 @@
 				BA9E6A831977E88400609E69 /* contact_and_billing@2x.png */,
 				BA9E6A841977E88400609E69 /* contact_and_billing_pressed.png */,
 				BA9E6A851977E88400609E69 /* contact_and_billing_pressed@2x.png */,
-				BA9E6A861977E88400609E69 /* dashbaord_pressed.png */,
 				BA9E6A871977E88400609E69 /* dashboard.png */,
 				BA9E6A881977E88400609E69 /* dashboard@2x.png */,
 				BA9E6A891977E88400609E69 /* dashboard_pressed@2x.png */,
@@ -1333,7 +1333,6 @@
 				BA9E6AF41977E88400609E69 /* attendees_pressed@2x.png in Resources */,
 				BA9E6B491977E88400609E69 /* scheduling.png in Resources */,
 				BA694A4B1975306000AC8CCC /* GISContactsAndBillingViewController.xib in Resources */,
-				BA9E6B091977E88400609E69 /* dashbaord_pressed.png in Resources */,
 				8A8DA6E51979026600EE8EFE /* date&times@2x.png in Resources */,
 				BA9E6B061977E88400609E69 /* contact_and_billing@2x.png in Resources */,
 				BA9E6B321977E88400609E69 /* location@2x.png in Resources */,
@@ -1388,6 +1387,7 @@
 				8A8DA6E21979026600EE8EFE /* contact&billing.png in Resources */,
 				BA9E6B271977E88400609E69 /* find_requests_jobs_pressed.png in Resources */,
 				BA9E6B0C1977E88400609E69 /* dashboard_pressed@2x.png in Resources */,
+				8AE9B41A197E6308004D9157 /* dashboard_pressed.png in Resources */,
 				BA9E6B461977E88400609E69 /* requests_Jobs_pressed@2x in Resources */,
 				BA9E6B611977E88400609E69 /* unchecked@2x.png in Resources */,
 				BA9E6B1F1977E88400609E69 /* edit_pressed.png in Resources */,

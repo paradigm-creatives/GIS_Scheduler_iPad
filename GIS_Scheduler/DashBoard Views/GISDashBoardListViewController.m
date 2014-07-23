@@ -82,24 +82,26 @@
     
     cell.backgroundColor = UIColorFromRGB(0x00457c);
     
-    UIImageView *cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(8,8, 25, 25)];
+    UIButton *cellButtonImage = [UIButton buttonWithType:UIButtonTypeCustom];
+    cellButtonImage.frame = CGRectMake(8,8, 25, 25);
     _cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(42,11, 250, 25)];
     _cellLabel.textColor = UIColorFromRGB(0xefefef);
     _cellLabel.tag = indexPath.row+1;
     [_cellLabel setFont:[GISFonts large]];
+    [cellButtonImage setTag:indexPath.row+2];
     
-    [cell addSubview:cellImageView];
+    [cell addSubview:cellButtonImage];
     [cell addSubview:_cellLabel];
     
     if(indexPath.section == 0){
         _cellLabel.text = @"Dashboard";
-        cellImageView.image = [UIImage imageNamed:@"dashboard.png"];
+        [cellButtonImage setBackgroundImage:[UIImage imageNamed:@"dashboard.png"] forState:UIControlStateNormal];
     }else if(indexPath.section == 3){
         _cellLabel.text = @"Find Requests/Jobs";
-        cellImageView.image = [UIImage imageNamed:@"find_requests_jobs.png"];
+        [cellButtonImage setBackgroundImage:[UIImage imageNamed:@"find_requests_jobs.png"] forState:UIControlStateNormal];
     }else if(indexPath.section == 4){
         _cellLabel.text = @"Logout";
-        cellImageView.image = [UIImage imageNamed:@"logout.png"];
+        [cellButtonImage setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
     }else if(indexPath.section == 1){
         
         _cellLabel.frame = CGRectMake(55,11, 250, 25);
@@ -151,23 +153,25 @@
     [headerButton addTarget:self action:@selector(hideRows:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:headerButton];
     
-    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 12, 25, 25)];
+    UIButton *headerCellButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    headerCellButton.frame = CGRectMake(8,8, 25, 25);
+    [headerCellButton setTag:section];
     
     if(section == 1){
         
         [headerView addSubview:headerLabel];
-        [headerView addSubview:headerImageView];
+        [headerView addSubview:headerCellButton];
         headerLabel.text = @"Requests/Jobs";
         headerLabel.textColor = UIColorFromRGB(0xe8d3a4);
-        headerImageView.image = [UIImage imageNamed:@"requests_jobs.png"];
+        [headerCellButton setBackgroundImage:[UIImage imageNamed:@"requests_jobs.png"] forState:UIControlStateNormal] ;
         
     }else  if(section == 2){
         
         [headerView addSubview:headerLabel];
-        [headerView addSubview:headerImageView];
+        [headerView addSubview:headerCellButton];
         
         headerLabel.text = @"Scheduling";
-        headerImageView.image = [UIImage imageNamed:@"scheduling.png"];
+        [headerCellButton setBackgroundImage: [UIImage imageNamed:@"scheduling.png"] forState:UIControlStateNormal];
     }else if(section == 0){
         
         UIImageView *labelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 110, 50)];
@@ -216,6 +220,17 @@
     if(label != nil)
         label.textColor = UIColorFromRGB(0xe8d3a4);
     
+    UIButton *cellBtn = (UIButton *)[cell viewWithTag:indexPath.row+2];
+    if(cellBtn != nil){
+        if(indexPath.section == 0){
+            [cellBtn setBackgroundImage:[UIImage imageNamed:@"dashboard_pressed.png"] forState:UIControlStateNormal];
+        }else if(indexPath.section == 3){
+            [cellBtn setBackgroundImage:[UIImage imageNamed:@"find_requests_jobs_pressed.png"] forState:UIControlStateNormal];
+        }else if(indexPath.section == 4){
+            [cellBtn setBackgroundImage:[UIImage imageNamed:@"logout_pressed.png"] forState:UIControlStateNormal];
+        }
+    }
+    
     if(indexPath.section == 3){
         cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
     }else if(indexPath.section == 4){
@@ -239,7 +254,6 @@
             [dashBoardViewController pushToViewController];
         }
     }
-    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -258,17 +272,26 @@
 
 -(IBAction)hideRows:(id)sender{
     
+    UIButton *button = (UIButton*)sender;
+    
     if([sender tag] == 1){
         if(!hideClicked)
             hideClicked = YES;
         else
             hideClicked = NO;
+        
+    
+        [button setBackgroundImage:[UIImage imageNamed:@"requests_jobs_pressed.png"] forState:UIControlStateNormal];
+        
     }
     if([sender tag] == 2){
         if(!sectionhideClicked)
             sectionhideClicked = YES;
         else
             sectionhideClicked = NO;
+        
+        [button setBackgroundImage:[UIImage imageNamed:@"scheduling_pressed.png"] forState:UIControlStateNormal];
+       
     }
     [_dashBoard_ListTableView reloadData];
 }

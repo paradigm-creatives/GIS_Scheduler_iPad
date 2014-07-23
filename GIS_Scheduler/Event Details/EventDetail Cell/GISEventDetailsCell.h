@@ -10,4 +10,23 @@
 
 @interface GISEventDetailsCell : UITableViewCell
 
+@property(nonatomic,strong)IBOutlet UILabel *eventName_label;
+@property(nonatomic,strong)IBOutlet UILabel *eventType_label;
+@property(nonatomic,strong)IBOutlet UILabel *openTOpublic_label;
+@property(nonatomic,strong)IBOutlet UILabel *dresscode_label;
+@property(nonatomic,strong)IBOutlet UILabel *record_broadcast_label;
+@property(nonatomic,strong)IBOutlet UILabel *ongoing_label;
+@property(nonatomic,strong)IBOutlet UILabel *course_label;
+@property(nonatomic,strong)IBOutlet UILabel *othertechnologies_label;
+@property(nonatomic,strong)IBOutlet UILabel *fmsystem_label;
+@property(nonatomic,strong)IBOutlet UILabel *microPhone_label;
+@property(nonatomic,strong)IBOutlet UILabel *phoneConference_label;
+@property(nonatomic,strong)IBOutlet UILabel *webinar_label;
+@property(nonatomic,strong)IBOutlet UILabel *open_topublicyes_label;
+@property(nonatomic,strong)IBOutlet UILabel *open_topublicno_label;
+@property(nonatomic,strong)IBOutlet UILabel *recordedyes_label;
+@property(nonatomic,strong)IBOutlet UILabel *recordedno_label;
+@property(nonatomic,strong)IBOutlet UILabel *onGoingyes_label;
+@property(nonatomic,strong)IBOutlet UILabel *onGoingno_label;
+
 @end
