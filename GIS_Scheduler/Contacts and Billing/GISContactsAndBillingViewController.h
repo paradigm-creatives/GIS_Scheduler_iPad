@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GISContactsAndBillingViewController : UIViewController
+@interface GISContactsAndBillingViewController : UIViewController<UIPopoverControllerDelegate>
 {
 //    IBOutlet UILabel *_Label;
 //    IBOutlet UILabel *_Answer_Label;
@@ -63,5 +63,7 @@
     IBOutlet UILabel *buhZip_Answer_Label;
     
     IBOutlet UIButton *nextButton;
+    UIPopoverController *popover;
 }
+- (IBAction)chooseRequestDropDown:(id)sender;
 @end

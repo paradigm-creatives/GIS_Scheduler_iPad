@@ -59,7 +59,6 @@
     [_password_textfield setValue:UIColorFromRGB(0x999999) forKeyPath:@"_placeholderLabel.textColor"];
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
 }
 
 -(void)addRightView:(UITextField *) textField{
@@ -115,6 +114,7 @@
             }
         }
 }
+
 -(void)failuremethod_login:(GISJsonRequest *)response
 {
     NSLog(@"Failure");

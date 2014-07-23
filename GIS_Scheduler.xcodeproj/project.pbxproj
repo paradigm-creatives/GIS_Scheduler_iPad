@@ -216,6 +216,8 @@
 		BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */; };
 		BADFD9C8197CEFD8003033FD /* GISLoginDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9C7197CEFD8003033FD /* GISLoginDetailsObject.m */; };
 		BADFD9CB197CF003003033FD /* GISStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9CA197CF003003033FD /* GISStore.m */; };
+		BADFD9CF197CF81C003033FD /* GISPopOverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9CD197CF81C003033FD /* GISPopOverTableViewController.m */; };
+		BADFD9D0197CF81C003033FD /* GISPopOverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADFD9CE197CF81C003033FD /* GISPopOverTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,6 +488,9 @@
 		BADFD9C7197CEFD8003033FD /* GISLoginDetailsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISLoginDetailsObject.m; sourceTree = "<group>"; };
 		BADFD9C9197CF003003033FD /* GISStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISStore.h; sourceTree = "<group>"; };
 		BADFD9CA197CF003003033FD /* GISStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISStore.m; sourceTree = "<group>"; };
+		BADFD9CC197CF81C003033FD /* GISPopOverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISPopOverTableViewController.h; sourceTree = "<group>"; };
+		BADFD9CD197CF81C003033FD /* GISPopOverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISPopOverTableViewController.m; sourceTree = "<group>"; };
+		BADFD9CE197CF81C003033FD /* GISPopOverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPopOverTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +742,9 @@
 		BA3AF215196BBAF7006A1E3B /* GIS_Scheduler */ = {
 			isa = PBXGroup;
 			children = (
+				BADFD9CC197CF81C003033FD /* GISPopOverTableViewController.h */,
+				BADFD9CD197CF81C003033FD /* GISPopOverTableViewController.m */,
+				BADFD9CE197CF81C003033FD /* GISPopOverTableViewController.xib */,
 				BADFD999197CE7D8003033FD /* Objects */,
 				BADFD980197CE5CB003033FD /* GIS Store */,
 				BA34A655197CE27F00A7083C /* Network */,
@@ -1101,6 +1109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9E6B2A1977E88400609E69 /* incomplete_request@2x.png in Resources */,
+				BADFD9D0197CF81C003033FD /* GISPopOverTableViewController.xib in Resources */,
 				BA9E6B501977E88400609E69 /* service_provider_hollow@2x.png in Resources */,
 				BA9E6B141977E88400609E69 /* dates_and_times@2x.png in Resources */,
 				BA9E6B471977E88400609E69 /* save.png in Resources */,
@@ -1298,6 +1307,7 @@
 				BA34A65E197CE27F00A7083C /* GISJsonRequest.m in Sources */,
 				BA34A660197CE27F00A7083C /* GISRequestError.m in Sources */,
 				8A5052DA1977E447007288F5 /* GISLocationDetailsViewController.m in Sources */,
+				BADFD9CF197CF81C003033FD /* GISPopOverTableViewController.m in Sources */,
 				8A9B25AE19767701002F1AC0 /* GISBaseViewController.m in Sources */,
 				8A9B25AA197676CE002F1AC0 /* GISUtility.m in Sources */,
 				8A5E2E3219753C2200BE3C04 /* GISEventDetailsCell.m in Sources */,

@@ -9,6 +9,8 @@
 #import "GISContactsAndBillingViewController.h"
 #import "GISFonts.h"
 #import "GISConstants.h"
+#import "GISPopOverTableViewController.h"
+
 @interface GISContactsAndBillingViewController ()
 
 @end
@@ -141,7 +143,26 @@
     [buhAddress2_textView.layer setBorderWidth:0.2];
     [buhAddress2_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [buhAddress2_textView.layer setCornerRadius:5.0f];
+}
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+}
+
+- (IBAction)chooseRequestDropDown:(id)sender{
+    UIButton *button = (UIButton*)sender;
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:@"Test",@"Test 1",@"Test 2", nil];
+    tableViewController.popOverArray=array;
+
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    popover.delegate = self;
+    popover.popoverContentSize = CGSizeMake(230, 150);
+    [popover presentPopoverFromRect:CGRectMake(button.frame.size.width*2+10, button.frame.size.height / 1+50, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
