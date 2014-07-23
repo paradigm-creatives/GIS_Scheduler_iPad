@@ -57,6 +57,8 @@
     [_viewingType_label setText:NSLocalizedStringFromTable(@"viewing_type", TABLE, nil)];
     [_ofUsers_label setText:NSLocalizedStringFromTable(@"of_users", TABLE, nil)];
     [_otherServices_label setText:NSLocalizedStringFromTable(@"other_services", TABLE, nil)];
+    
+    [_nextButton setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
    
 }
 

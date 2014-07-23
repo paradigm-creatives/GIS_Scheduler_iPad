@@ -188,12 +188,18 @@
     return 35;
 }
 
--(void)pushToViewController{
+-(void)pushToViewController:(int)section rowValue:(int)row{
+    
     [self.navigationController popViewControllerAnimated:NO];
-    GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
-    [self.navigationController pushViewController:viewEditView animated:NO];
     
-    
+    if(section ==1 && row == 1){
+        GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+        [self.navigationController pushViewController:viewEditView animated:NO];
+        
+    }else if(section ==0 ){
+        GISDashBoardViewController *dashBoardView=[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
+        [self.navigationController pushViewController:dashBoardView animated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning

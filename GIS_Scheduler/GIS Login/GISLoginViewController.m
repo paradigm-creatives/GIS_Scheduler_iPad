@@ -68,6 +68,9 @@
     [_userName_textfield setValue:UIColorFromRGB(0x999999) forKeyPath:@"_placeholderLabel.textColor"];
     [_password_textfield setValue:UIColorFromRGB(0x999999) forKeyPath:@"_placeholderLabel.textColor"];
     
+    [_userName_textfield setFont:[GISFonts large]];
+    [_password_textfield setFont:[GISFonts large]];
+    
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     viewUpHeight = 155;

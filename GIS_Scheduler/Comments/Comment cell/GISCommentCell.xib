@@ -55,7 +55,10 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="accountsAdministration_label" destination="36c-ff-Fg2" id="QWG-cP-uhQ"/>
                 <outlet property="commentTextView" destination="02R-mr-xGa" id="C04-6L-C1I"/>
+                <outlet property="noComments_label" destination="enf-wI-ae3" id="O6I-fB-SKg"/>
+                <outlet property="scheduler_label" destination="8ZD-mW-XB4" id="Tyx-gZ-44c"/>
             </connections>
         </tableViewCell>
     </objects>

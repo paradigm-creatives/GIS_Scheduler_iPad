@@ -41,19 +41,19 @@
     [_unknown_label setFont:[GISFonts normal]];
     [_generalLocation_label setFont:[GISFonts normal]];
     
-    [_locationDetailsOffcampus_label setText:NSLocalizedStringFromTable(@"event_name", TABLE, nil)];
-    [_buildingName_label setText:NSLocalizedStringFromTable(@"event_type", TABLE, nil)];
-    [_roomName_label setText:NSLocalizedStringFromTable(@"on_going", TABLE, nil)];
-    [_roomNo_label setText:NSLocalizedStringFromTable(@"open_toPublic", TABLE, nil)];
-    [_other_label setText:NSLocalizedStringFromTable(@"dress_Code", TABLE, nil)];
-    [_socialProtocol_label setText:NSLocalizedStringFromTable(@"recorede_braoadcast", TABLE, nil)];
-    [_metroNearby_label setText:NSLocalizedStringFromTable(@"no", TABLE, nil)];
-    [_parking_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
-    [_garage_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
-    [_mattered_label setText:NSLocalizedStringFromTable(@"course_id", TABLE, nil)];
-    [_street_label setText:NSLocalizedStringFromTable(@"no", TABLE, nil)];
-    [_unknown_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
-    [_generalLocation_label setText:NSLocalizedStringFromTable(@"fm_system", TABLE, nil)];
+    [_locationDetailsOffcampus_label setText:NSLocalizedStringFromTable(@"locationDetails_offcampus", TABLE, nil)];
+    [_buildingName_label setText:NSLocalizedStringFromTable(@"building_name", TABLE, nil)];
+    [_roomName_label setText:NSLocalizedStringFromTable(@"room_name", TABLE, nil)];
+    [_roomNo_label setText:NSLocalizedStringFromTable(@"room_no", TABLE, nil)];
+    [_other_label setText:NSLocalizedStringFromTable(@"other", TABLE, nil)];
+    [_socialProtocol_label setText:NSLocalizedStringFromTable(@"social_protocol", TABLE, nil)];
+    [_metroNearby_label setText:NSLocalizedStringFromTable(@"metro_nearby", TABLE, nil)];
+    [_parking_label setText:NSLocalizedStringFromTable(@"parking", TABLE, nil)];
+    [_garage_label setText:NSLocalizedStringFromTable(@"garage", TABLE, nil)];
+    [_mattered_label setText:NSLocalizedStringFromTable(@"matered", TABLE, nil)];
+    [_street_label setText:NSLocalizedStringFromTable(@"street", TABLE, nil)];
+    [_unknown_label setText:NSLocalizedStringFromTable(@"unknown", TABLE, nil)];
+    [_generalLocation_label setText:NSLocalizedStringFromTable(@"general_location", TABLE, nil)];
     
 
 }

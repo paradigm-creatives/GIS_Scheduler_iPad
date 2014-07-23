@@ -27,14 +27,14 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location Name :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Che-wd-X7j">
-                        <rect key="frame" x="381" y="84" width="106" height="18"/>
+                        <rect key="frame" x="376" y="84" width="106" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" tag="559" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" background="text_field_bg.png" disabledBackground="text_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="paE-5A-hqb">
-                        <rect key="frame" x="487" y="78" width="186" height="30"/>
+                        <rect key="frame" x="500" y="78" width="186" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -54,14 +54,14 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address 2 :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z64-zW-CNT">
-                        <rect key="frame" x="365" y="141" width="106" height="18"/>
+                        <rect key="frame" x="378" y="141" width="106" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rid-v0-gel">
-                        <rect key="frame" x="488" y="141" width="185" height="104"/>
+                        <rect key="frame" x="501" y="141" width="185" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.84674228279999997" green="0.89082785909999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -81,14 +81,14 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njl-Ct-D7l">
-                        <rect key="frame" x="381" y="276" width="87" height="18"/>
+                        <rect key="frame" x="394" y="276" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" tag="559" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" background="text_field_bg.png" disabledBackground="text_field_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="lcz-NR-uKY">
-                        <rect key="frame" x="487" y="270" width="186" height="30"/>
+                        <rect key="frame" x="500" y="270" width="186" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -107,7 +107,7 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Special Protocol :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDt-aC-nDu">
-                        <rect key="frame" x="31" y="368" width="114" height="18"/>
+                        <rect key="frame" x="23" y="368" width="114" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -121,14 +121,14 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Information :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEX-Z2-1wz">
-                        <rect key="frame" x="365" y="368" width="122" height="18"/>
+                        <rect key="frame" x="360" y="368" width="122" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4r-8S-XME">
-                        <rect key="frame" x="488" y="368" width="185" height="104"/>
+                        <rect key="frame" x="501" y="368" width="185" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.84674228279999997" green="0.89082785909999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -151,7 +151,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parking :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3J-Ur-WP1">
-                        <rect key="frame" x="3" y="490" width="133" height="18"/>
+                        <rect key="frame" x="4" y="490" width="133" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,7 +199,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Vy-4Z-Aeb">
-                        <rect key="frame" x="487" y="315" width="186" height="25"/>
+                        <rect key="frame" x="500" y="315" width="186" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <state key="normal" backgroundImage="choose_request_bg.png">
@@ -207,7 +207,7 @@
                         </state>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Closest Metro :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0K-3O-1ug">
-                        <rect key="frame" x="354" y="318" width="115" height="18"/>
+                        <rect key="frame" x="367" y="318" width="115" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -234,7 +234,7 @@
                         <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location Details On Campus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icR-Rh-jX3">
-                        <rect key="frame" x="15" y="22" width="185" height="18"/>
+                        <rect key="frame" x="15" y="22" width="215" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.084257274509999994" green="0.35492285820000002" blue="0.57565369899999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -243,7 +243,22 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="address1_label" destination="ne1-16-PRW" id="cNe-5r-ury"/>
+                <outlet property="address2_label" destination="Z64-zW-CNT" id="JbO-gI-35v"/>
+                <outlet property="city_label" destination="U4Q-zK-fEd" id="ot8-3H-5tM"/>
+                <outlet property="closestmetro_label" destination="g0K-3O-1ug" id="Dzw-Y4-et5"/>
+                <outlet property="garage_label" destination="2Wv-6Y-sqB" id="z1l-kC-QlM"/>
+                <outlet property="locationDetailsOncampus_label" destination="icR-Rh-jX3" id="VjL-1O-Rzu"/>
+                <outlet property="mattered_label" destination="I3A-3C-toe" id="PB8-Zz-mT0"/>
                 <outlet property="nextButton" destination="9cw-z9-8Rg" id="Xxf-aB-FYd"/>
+                <outlet property="otherInfo_label" destination="XEX-Z2-1wz" id="UE2-ld-aQz"/>
+                <outlet property="parking_label" destination="D3J-Ur-WP1" id="xzw-Iw-8Yq"/>
+                <outlet property="specialProtocol_label" destination="qDt-aC-nDu" id="aJY-Y3-e4q"/>
+                <outlet property="state_label" destination="njl-Ct-D7l" id="4v9-xR-zWN"/>
+                <outlet property="storeLocation_label" destination="rDd-6n-kWv" id="V6g-wO-vkp"/>
+                <outlet property="street_label" destination="LTU-Ss-S8u" id="viK-gC-lui"/>
+                <outlet property="unknown_label" destination="LsO-Cl-ewJ" id="uro-5y-rB5"/>
+                <outlet property="zip_label" destination="2QF-3h-arp" id="gdS-2f-iDd"/>
             </connections>
         </tableViewCell>
     </objects>

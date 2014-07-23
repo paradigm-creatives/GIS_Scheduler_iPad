@@ -29,4 +29,16 @@
 @property(nonatomic,strong)IBOutlet UILabel *onGoingyes_label;
 @property(nonatomic,strong)IBOutlet UILabel *onGoingno_label;
 
+@property (strong, nonatomic) IBOutlet UIButton *opentoPublicbtn1;
+@property (strong, nonatomic) IBOutlet UIButton *opentoPublicbtn2;
+@property (strong, nonatomic) IBOutlet UIButton *recorded1;
+@property (strong, nonatomic) IBOutlet UIButton *recorded2;
+@property (strong, nonatomic) IBOutlet UIButton *onGoing1;
+@property (strong, nonatomic) IBOutlet UIButton *ongoing2;
+@property (strong, nonatomic) IBOutlet UIButton *fmSystembtn;
+@property (strong, nonatomic) IBOutlet UIButton *microPhonebtn;
+@property (strong, nonatomic) IBOutlet UIButton *phnConferencebtn;
+@property (strong, nonatomic) IBOutlet UIButton *webinarbtn;
+
+
 @end

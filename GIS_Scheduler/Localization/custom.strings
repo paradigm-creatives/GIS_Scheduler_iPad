@@ -65,7 +65,7 @@
 "matered" = "Matered";
 "street" = "Street";
 "unknown" = "Unknown";
-"general_location" = "General Location";
+"general_location" = "General Location :";
 "location_details_onCampus"     = "Location Details On Campus";
 "store_location" = "Store Location :";
 "location_name" = "Location Name :";
@@ -79,6 +79,24 @@
 "other_info" = "Other Information :";
 "next"  = "Next";
 
+
+////////   Comment ///////
+
+"account_administration" = "Accounts Administration";
+"no_comments" = "No Comments";
+"scheduler" = "Scheduler";
+"add_Comments" = "Add Comments";
+
+////////   tabbar ///////
+
+"contact_billing" = "Contact & Billing";
+"event_details" = "Event Details";
+"attendees" = "Attendees";
+"location_details" = "Location Details";
+"dates_times" = "Dates & Times";
+"job_details" = "Job Details";
+"summary" = "Summary";
+"comments" = "Comments";
 
 
 

@@ -16,6 +16,8 @@
     int rowCount;
     BOOL hideClicked;
     BOOL sectionhideClicked;
+    BOOL rowClicked;
+    BOOL rowsectionClicked;
     GISAppDelegate *appDelegate;
 }
 

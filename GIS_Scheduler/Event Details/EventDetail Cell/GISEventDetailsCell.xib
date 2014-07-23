@@ -280,20 +280,30 @@
                 <outlet property="dresscode_label" destination="SAa-E3-po8" id="cAU-UI-IaV"/>
                 <outlet property="eventName_label" destination="tai-vW-9Xp" id="6FN-80-dOP"/>
                 <outlet property="eventType_label" destination="VTs-vC-klX" id="lW5-5R-YjJ"/>
+                <outlet property="fmSystembtn" destination="K1G-pE-E4y" id="ykQ-5a-yyC"/>
                 <outlet property="fmsystem_label" destination="2k6-ka-srP" id="OYT-kd-VEH"/>
                 <outlet property="microPhone_label" destination="vbf-2k-4Ta" id="lbW-oy-Fgg"/>
+                <outlet property="microPhonebtn" destination="gXG-tv-nIH" id="oWM-Pf-vOv"/>
+                <outlet property="onGoing1" destination="ghi-No-8os" id="L0O-GV-a3R"/>
                 <outlet property="onGoingno_label" destination="Zbe-nu-y1R" id="5aI-u4-l5S"/>
                 <outlet property="onGoingyes_label" destination="Ucr-CM-BfI" id="Wdi-71-78k"/>
+                <outlet property="ongoing2" destination="w5e-aB-gX6" id="G4Y-lM-s2H"/>
                 <outlet property="ongoing_label" destination="1ED-ZS-bz1" id="oTK-Wa-LhX"/>
                 <outlet property="openTOpublic_label" destination="aIf-rW-4WM" id="vBv-fK-yXD"/>
                 <outlet property="open_topublicno_label" destination="7nZ-NM-SZv" id="iYy-74-WeD"/>
                 <outlet property="open_topublicyes_label" destination="Bhe-uT-bDK" id="EEW-82-wrU"/>
+                <outlet property="opentoPublicbtn1" destination="VzQ-Wm-cgk" id="eRt-CF-SkJ"/>
+                <outlet property="opentoPublicbtn2" destination="Wrc-zD-pbF" id="lL8-2m-eRy"/>
                 <outlet property="othertechnologies_label" destination="v6D-Z7-0k8" id="obN-HA-uUO"/>
+                <outlet property="phnConferencebtn" destination="2Le-BH-p1J" id="gqg-Ln-2D0"/>
                 <outlet property="phoneConference_label" destination="Qat-z6-4vM" id="vrn-R4-nZ4"/>
                 <outlet property="record_broadcast_label" destination="mCU-0b-pHl" id="dP7-zU-BAW"/>
+                <outlet property="recorded1" destination="pvV-CG-dLx" id="4Ri-4u-Mb2"/>
+                <outlet property="recorded2" destination="mrk-hd-Kbd" id="bFT-dp-Meh"/>
                 <outlet property="recordedno_label" destination="znS-FR-fmL" id="Xco-Hk-PZc"/>
                 <outlet property="recordedyes_label" destination="7Vw-uQ-dKy" id="eJN-79-ESh"/>
                 <outlet property="webinar_label" destination="bFh-R3-mu8" id="BHd-3U-tvo"/>
+                <outlet property="webinarbtn" destination="1FU-QZ-GYj" id="qLP-Td-SMF"/>
             </connections>
         </tableViewCell>
     </objects>
