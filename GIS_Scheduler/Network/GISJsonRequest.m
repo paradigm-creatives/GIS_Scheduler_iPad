@@ -16,7 +16,7 @@
 - (void)dealloc
 {
     self.responseJson = nil;
-    //[super dealloc];
+    [super dealloc];
 }
 
 - (void)finish

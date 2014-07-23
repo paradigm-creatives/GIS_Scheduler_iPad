@@ -10,7 +10,13 @@
 #import "GISFonts.h"
 #import "GISConstants.h"
 #import "GISPopOverTableViewController.h"
-
+#import "GISDatabaseManager.h"
+#import "GISJSONProperties.h"
+#import "GISServerManager.h"
+#import "GISContactsInfoStore.h"
+#import "GISJsonRequest.h"
+#import "GISStoreManager.h"
+#import "GISDatabaseConstants.h"
 @interface GISContactsAndBillingViewController ()
 
 @end
@@ -143,6 +149,45 @@
     [buhAddress2_textView.layer setBorderWidth:0.2];
     [buhAddress2_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [buhAddress2_textView.layer setCornerRadius:5.0f];
+    
+    unitOrDep_Label.text=NSLocalizedStringFromTable(@"unit_department", TABLE, nil);
+    firstName_Label.text=NSLocalizedStringFromTable(@"first_name", TABLE, nil);
+    lastName_Label.text=NSLocalizedStringFromTable(@"last_name", TABLE, nil);
+    email_Label.text=NSLocalizedStringFromTable(@"email", TABLE, nil);
+    contacts_Label.text=NSLocalizedStringFromTable(@"contacts", TABLE, nil);
+    
+    department_Label.text=NSLocalizedStringFromTable(@"department", TABLE, nil);
+    buhFirstName_Label.text=NSLocalizedStringFromTable(@"buh_first_name", TABLE, nil);
+    buhLastName_Label.text=NSLocalizedStringFromTable(@"buh_last_name", TABLE, nil);
+    buhEmail_Label.text=NSLocalizedStringFromTable(@"buh_email", TABLE, nil);
+    buhAddress1_Label.text=NSLocalizedStringFromTable(@"buh_address_one", TABLE, nil);
+    buhAddress2_Label.text=NSLocalizedStringFromTable(@"buh_address_two", TABLE, nil);
+    buhState_Label.text=NSLocalizedStringFromTable(@"buh_state", TABLE, nil);
+    buhCity_Label.text=NSLocalizedStringFromTable(@"buh_city", TABLE, nil);
+    buhZip_Label.text=NSLocalizedStringFromTable(@"buh_zip", TABLE, nil);
+    
+    requestorDetails_Label.text=NSLocalizedStringFromTable(@"requestor_Details", TABLE, nil);
+    billingDetails_Label.text=NSLocalizedStringFromTable(@"billing_details", TABLE, nil);
+    
+    [nextButton setTitle:NSLocalizedStringFromTable(@"Next", TABLE, nil) forState:UIControlStateNormal];
+    
+    [unitOrDepartment_mutArray removeAllObjects];
+   
+    NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];
+    unitOrDepartment_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:unitIDorDep_statement] mutableCopy];
+    
+    NSString *loginStr = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
+    login_Obj=[login_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
+    
+    
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -155,14 +200,47 @@
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     
-    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:@"Test",@"Test 1",@"Test 2", nil];
-    tableViewController.popOverArray=array;
-
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(230, 150);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.size.width*2+10, button.frame.size.height / 1+50, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    popover.popoverContentSize = CGSizeMake(340, 150);
     
+    if([sender tag]==111)
+    {
+       tableViewController.popOverArray=unitOrDepartment_mutArray;
+        [popover presentPopoverFromRect:CGRectMake(button.frame.size.width*2+10, button.frame.size.height / 1+50, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+    else if ([sender tag]==222)
+    {
+       tableViewController.popOverArray=contacts_Info_mutArray;
+        [popover presentPopoverFromRect:CGRectMake(317, 167, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+}
+
+
+-(void)successmethod_ContactsData:(GISJsonRequest *)response
+{
+    GISContactsInfoStore *contactsInfoStore;
+    NSLog(@"successmethod_ContactsData Success---%@",response.responseJson);
+    contactsInfoStore=[[GISContactsInfoStore alloc]initWithJsonDictionary:response.responseJson];
+    [contacts_Info_mutArray removeAllObjects];
+    contacts_Info_mutArray=[[GISStoreManager sharedManager]getContactsInfoObjects];
+    
+    //Contacts INFO DB
+    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CONTACTS_INFO];
+    for (int i=0; i<contacts_Info_mutArray.count; i++) {
+        GISContactsInfoObject *contactObj=[contacts_Info_mutArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects: contactObj.contactInfoId_String,contactObj.contactNo_String,contactObj.contactType_String,contactObj.contactTypeId_String,contactObj.contactTypeNo_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kGetContactInfoId,kGetContactNo,kGetContactType,kGetContactTypeId,kGetContactTypeNo, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertContactInfoData:dic];
+    }
+    
+    ////Contacts INFO
+}
+
+-(void)failuremethod_ContactsData:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
 }
 
 - (void)didReceiveMemoryWarning

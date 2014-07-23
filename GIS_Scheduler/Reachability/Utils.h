@@ -8,6 +8,8 @@
 
 #import "Reachability.h"
 
+
 @interface Utils : Reachability
 +(BOOL)isNetworkAvailable;
 @end
+

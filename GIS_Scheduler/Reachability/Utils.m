@@ -14,13 +14,12 @@
 {
     BOOL isAvailabale = FALSE;
     Reachability *reachability = [Reachability reachabilityWithHostName:@"www.google.com"];
-    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-    if ((internetStatus == ReachableViaWiFi) || (internetStatus == ReachableViaWWAN)) {
+    STNetworkStatus internetStatus = [reachability currentReachabilityStatus];
+    if ((internetStatus == kReachableViaWiFi) || (internetStatus == kReachableViaWiFi)) {
         isAvailabale = TRUE;
     } else {
         isAvailabale = FALSE;
     }
     return isAvailabale;
 }
-
 @end

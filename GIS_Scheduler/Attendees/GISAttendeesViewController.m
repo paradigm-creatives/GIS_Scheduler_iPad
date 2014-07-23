@@ -10,10 +10,13 @@
 #import "GISAttendeesTopCell.h"
 #import "GISConstants.h"
 #import "GISFonts.h"
+#import "GISAttendees_ListObject.h"
 
 @interface GISAttendeesViewController ()
 
 @end
+
+int row_count = 2;
 
 @implementation GISAttendeesViewController
 
@@ -36,6 +39,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    for (int i=0; i<row_count; i++) {
+        attendees_ListObject=[[GISAttendees_ListObject alloc]init];
+        [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject]];
+    }
+    [self.attendees_tableView reloadData];
 }
 
 
@@ -50,7 +58,7 @@
         return 1;
     }
     else if (section==1) {
-        return 3;
+        return row_count;
     }
     return 0;
 }
@@ -136,6 +144,26 @@
     }
     
     return cell;
+}
+
+
+- (IBAction)createAttendee:(id)sender{
+    
+    row_count++;
+    GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
+    [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
+    [self.attendees_tableView reloadData];
+}
+
+-(GISAttendees_ListObject *)addEmptyData :(GISAttendees_ListObject *)listObj
+{
+    listObj.email_String=@"";
+    listObj.firstname_String=@"";
+    listObj.lastname_String=@"";
+    listObj.modeOf_String=@"";
+    listObj.directly_utilzed_String=@"";
+    listObj.servicesNeeded_String=@"";
+    return listObj;
 }
 
 - (void)didReceiveMemoryWarning

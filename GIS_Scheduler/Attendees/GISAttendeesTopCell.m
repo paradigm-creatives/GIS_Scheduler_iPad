@@ -47,11 +47,7 @@
     self.modeOf_answer_Label.font=[GISFonts small];
     self.directly_utilized_services_answer_Label.font=[GISFonts small];
     self.servicesNeeded_answer_Label.font=[GISFonts small];
-    
-    
-    self.attendee_Label.font=[GISFonts large];
-    self.attendee_count_Label.font=[GISFonts large];
-   
+
     self.modeOf_Label_2.font=[GISFonts normal];
     self.modeOf_Label.font=[GISFonts normal];
     self.directly_utilized_services_Label_2.font=[GISFonts normal];
@@ -95,6 +91,27 @@
     self.nextButton.titleLabel.font=[GISFonts larger];
     [self.nextButton.layer setCornerRadius:3.0f];
     
+    ////////////////Localized strings
+    
+    self.expectedNo_Label.text=NSLocalizedStringFromTable(@"select_no_of_expected_attendees", TABLE, nil);
+    self.genderPreference_Label.text=NSLocalizedStringFromTable(@"gender_Preference", TABLE, nil);
+    self.serviceProvider_preference_Label.text=NSLocalizedStringFromTable(@"service_Provider", TABLE, nil);
+    self.preference_Label.text=NSLocalizedStringFromTable(@"preference", TABLE, nil);
+    
+    self.firstname_Label.text=NSLocalizedStringFromTable(@"first_name", TABLE, nil);
+    self.lastname_Label.text=NSLocalizedStringFromTable(@"last_name", TABLE, nil);
+    self.email_Label.text=NSLocalizedStringFromTable(@"email", TABLE, nil);
+    self.attendeesList_Label.text=NSLocalizedStringFromTable(@"attendees_List", TABLE, nil);
+    self.attendee_Label.text=NSLocalizedStringFromTable(@"attendee", TABLE, nil);
+    
+    self.modeOf_Label_2.text=NSLocalizedStringFromTable(@"communication", TABLE, nil);
+    self.modeOf_Label.text=NSLocalizedStringFromTable(@"primary_mode_of", TABLE, nil);
+    self.directly_utilized_services_Label_2.text=NSLocalizedStringFromTable(@"services", TABLE, nil);
+    self.directly_utilized_services_Label.text=NSLocalizedStringFromTable(@"directly_utilized", TABLE, nil);
+    self.servicesNeeded_Label.text=NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
+    [self.nextButton setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
+    
+    /////////////////
 }
 
 @end

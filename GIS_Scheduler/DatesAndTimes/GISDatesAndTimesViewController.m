@@ -105,8 +105,32 @@
     [next_Button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
     next_Button.titleLabel.font=[GISFonts larger];
     [next_Button.layer setCornerRadius:3.0f];
+    
+    //Localized strings
+    createDatesTimes_Label.text=NSLocalizedStringFromTable(@"create_dates_times", TABLE, nil);
+    viewEditDatesTimes_Label.text=NSLocalizedStringFromTable(@"view_edit_dates_times", TABLE, nil);
+    editALL_Label.text=NSLocalizedStringFromTable(@"", TABLE, nil);
+    dateLabel.text=NSLocalizedStringFromTable(@"date", TABLE, nil);
+    dayLabel.text=NSLocalizedStringFromTable(@"day", TABLE, nil);
+    startTime_Header_Label.text=NSLocalizedStringFromTable(@"startTime", TABLE, nil);
+    endTime_header_Label.text=NSLocalizedStringFromTable(@"endTime", TABLE, nil);
+    startTime_Label.text=NSLocalizedStringFromTable(@"start_time_", TABLE, nil);
+    endTime_Label.text=NSLocalizedStringFromTable(@"end_time_", TABLE, nil);
+    startDate_Label.text=NSLocalizedStringFromTable(@"start_date_", TABLE, nil);
+    endDate_Label.text=NSLocalizedStringFromTable(@"end_date_", TABLE, nil);
+    weekDays_Label.text=NSLocalizedStringFromTable(@"weekDays", TABLE, nil);
+    monday_Label.text=NSLocalizedStringFromTable(@"monday", TABLE, nil);
+    tuesday_Label.text=NSLocalizedStringFromTable(@"tuesday", TABLE, nil);
+    wednesday_Label.text=NSLocalizedStringFromTable(@"wednesday", TABLE, nil);
+    thursday_Label.text=NSLocalizedStringFromTable(@"thursday", TABLE, nil);
+    friday_Label.text=NSLocalizedStringFromTable(@"friday", TABLE, nil);
+    saturday_Label.text=NSLocalizedStringFromTable(@"saturday", TABLE, nil);
+    sunday_Label.text=NSLocalizedStringFromTable(@"sunday", TABLE, nil);
+    [create_DateTime_Button setTitle:NSLocalizedStringFromTable(@"create_dates_times_Btn", TABLE, nil) forState:UIControlStateNormal];
+    [create_Jobs_Button setTitle:NSLocalizedStringFromTable(@"create_jobs_btn", TABLE, nil) forState:UIControlStateNormal];
+    [next_Button setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
+    ////
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

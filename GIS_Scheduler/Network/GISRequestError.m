@@ -31,7 +31,7 @@
 - (void)dealloc
 {
     //[request release];
-    //[super dealloc];
+    [super dealloc];
 }
 
 - (NSInteger)responseCode

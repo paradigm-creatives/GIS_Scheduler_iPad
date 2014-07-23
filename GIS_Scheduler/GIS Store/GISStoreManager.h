@@ -9,10 +9,127 @@
 #import <Foundation/Foundation.h>
 
 #import "GISLoginDetailsObject.h"
+#import "GISDropDownsObject.h"
+#import "GISBilingDataObject.h"
+#import "GISContactAndBillingObject.h"
+#import "GISContactsInfoObject.h"
+#import "GISChooseRequestDetailsObject.h"
+#import "GISDatesAndTimesObject.h"
+#import "GISAttendeesObject.h"
+#import "GISAttendees_ListObject.h"
+#import "GISSearchReqObject.h"
+#import "GISViewScheduleObject.h"
 
 @interface GISStoreManager : NSObject
 + (GISStoreManager *)sharedManager;
 - (BOOL)addLoginObject:(GISLoginDetailsObject*)loginObject;
 - (NSMutableArray*)getLoginObjects;
 - (void)removeLoginObjects;
+- (void)destroy;
+
+
+- (BOOL)addBuildingNameObject:(GISDropDownsObject *)buildingNameObj;
+- (NSMutableArray *)getBuildingNameObjects;
+- (void)removeBuildingNameObjects;
+
+- (BOOL)addDressCodeObject:(GISDropDownsObject *)dressCodeObj;
+- (NSMutableArray *)getDressCodeObjects;
+- (void)removeDressCodeObjects;
+
+- (BOOL)addLocationCodeObject:(GISDropDownsObject *)locationCodeObj;
+- (NSMutableArray *)getLocationCodeObjects;
+- (void)removeLocationCodeObjects;
+
+- (BOOL)addEventTypeObject:(GISDropDownsObject *)eventTypeObj;
+- (NSMutableArray *)getEventTypeObjects;
+- (void)removeEventTypeObjects;
+
+- (BOOL)addUnitOrDepartmentObject:(GISDropDownsObject *)unitOrDepartmentObj;
+- (NSMutableArray *)getUnitOrDepartmentObjects;
+- (void)removeUnitOrDepartmentObjects;
+
+- (BOOL)addBillingDataObject:(GISBilingDataObject *)billingDataObj;
+- (NSMutableArray *)getBillingDataObject;
+- (void)removeBillingDataObjects;
+
+
+- (BOOL)addRequestNumbersObject:(GISDropDownsObject *)requestNumbersObject;
+- (NSMutableArray*)getRequestNumbersObjects;
+- (void)removeRequestNumbersObjects;
+
+- (BOOL)addRequestDetailsObject:(GISBilingDataObject *)requestDetails;
+- (NSMutableArray *)getRequestDetailsObject;
+- (void)removeRequestDetailsObjects;
+
+- (BOOL)addContactsInfoObject:(GISContactsInfoObject *)contactsObj;
+- (NSMutableArray *)getContactsInfoObjects;
+- (void)removeContactsInfoObjects;
+
+
+- (BOOL)addChooseRequestDetailsObject:(GISChooseRequestDetailsObject *)chooseRequestDetailsObj;
+- (NSMutableArray *)getChooseRequestDetailsObjects;
+- (void)removeChooseRequestDetailsObjects;
+
+- (BOOL)addModeOfCommunicationObject:(GISDropDownsObject *)modeOfCommunicationObj;
+- (NSMutableArray *)getModeOfCommunicationObjects;
+- (void)removeModeOfCommunicationObjects;
+
+- (BOOL)addServiceProvGenderPrefObject:(GISDropDownsObject *)serviceProvGenderPrefObj;
+- (NSMutableArray *)getServiceProvGenderPrefObjects;
+- (void)removeServiceProvGenderPrefObjects;
+
+- (BOOL)addServiceNeededObject:(GISDropDownsObject *)serviceNeededObj;
+- (NSMutableArray *)getServiceNeededObjects;
+- (void)removeServiceNeededObjects;
+
+- (BOOL)addAttendees_Details_Object:(GISAttendees_ListObject *)attendees_Details_Obj;
+- (NSMutableArray *)getAttendees_Details_Objects;
+- (void)removeAttendees_Details_Objects;
+
+- (BOOL)addClosestmetroObject:(GISDropDownsObject *)ClosestmetroObj;
+- (NSMutableArray *)getClosestmetroObjects;
+- (void)removeClosestmetroObjects;
+
+
+- (BOOL)addDateTimes_detail_Object:(GISDatesAndTimesObject *)dateTimes_detail_Obj;
+- (NSMutableArray *)getDateTimes_detail_Objects;
+- (void)removeDateTimes_detail_Objects;
+
+- (BOOL)addLocationNameObject:(GISDropDownsObject *)LocationNameObj;
+- (NSMutableArray *)getLocationNameObjects;
+- (void)removeLocationNameObjects;
+
+- (BOOL)addPrimaryAudienceObject:(GISDropDownsObject *)PrimaryAudience;
+- (NSMutableArray *)getPrimaryAudienceObjects;
+- (void)removePrimaryAudienceObjects;
+
+
+- (BOOL)addSearchRequestJobsObject:(GISSearchReqObject *)searchRequestJobsObj;
+- (NSMutableArray*)getSearchRequestJobsObjects;
+- (void)removeSearchRequestJobsObjects;
+
+- (BOOL)addViewSchedule_Details_Object:(GISViewScheduleObject *)viewSchedule_Details_Obj;
+- (NSMutableArray *)getViewSchedule_Objects;
+- (void)removeViewSchedule_Objects;
+
+- (BOOL)addSkillLevelObject:(GISDropDownsObject *)SkillLevelObj;
+- (NSMutableArray *)getSkillLevelObjects;
+- (void)removeSkillLevelObjects;
+
+- (BOOL)addPayLevelObject:(GISDropDownsObject *)PayLevelObj;
+- (NSMutableArray *)getPayLevelObjects;
+- (void)removePayLevelObjects;
+
+- (BOOL)addServiceType_ServiceProviderObject:(GISDropDownsObject *)ServiceType_ServiceProviderObj;
+- (NSMutableArray *)getServiceType_ServiceProviderObjects;
+- (void)removeServiceType_ServiceProviderObjects;
+
+- (BOOL)addRegisteredConsumersObject:(GISDropDownsObject *)registeredConsumersObj;
+- (NSMutableArray *)getRegisteredConsumersObjects;
+- (void)removeRegisteredConsumersObjects;
+
+- (BOOL)addRequestNumbers_SearchJobsObject:(GISDropDownsObject *)requestNumbers_SearchJobsObject;
+- (NSMutableArray*)getRequestNumbers_SearchJobsObjects;
+- (void)removeRequestNumbers_SearchJobsObjects;
+
 @end

@@ -1,0 +1,139 @@
+/* 
+  custom.strings
+  GIS_Scheduler
+
+  Created by Anand on 21/07/14.
+  Copyright (c) 2014 Paradigm. All rights reserved.
+*/
+
+
+////////    Login   //////////
+
+"user_name" = "User Name";
+"password"  = "Password";
+"login"     = "Login";
+"gis_title" = "GIS";
+"enter_username_password" = "Please Enter Username and Password";
+"enter_validEmail" = "Please Enter Valid Email";
+"network_connection"="This action could not be completed. Please check your network connection.";
+"login_requestFail" = "Get User Login request fail";
+"enter_valid_username_password" = "Please Enter Valid Username and Password";
+"alert_ok" = "OK";
+
+
+////////   Event Details ///////
+
+"event_name" = "Event Name :";
+"event_type"  = "Event Type :";
+"open_toPublic"     = "Open To Public :";
+"dress_Code" = "Dress Code :";
+"recorede_braoadcast" = "Recorded/Broadcast :";
+"on_going" = "On Going :";
+"course_id"="Course ID :";
+"other_technologies" = "Other technologies :";
+"fm_system" = "FM System";
+"micro_phone" = "Microphone";
+"phone_conferencing" = "Phone Conferencing";
+"webinar" = "Webinar";
+"preparation_material" = "Preparation Material";
+"document"     = "Document";
+"blackboard_access" = "Blackboard Access";
+"website" = "Website";
+"other" = "Other";
+"event_description"="Event Description";
+"description" = "Description :";
+"other_servicesNeeded" = "Other Services Needed";
+"other_services" = "Other Services :";
+"captioning_type" = "Captioning Type :";
+"viewing_type" = "Viewing Type :";
+"of_users" = "#of Users :";
+"yes"  = "Yes";
+"no" = "No";
+
+
+////////   Location Details ///////
+
+"locationDetails_offcampus" = "Location Details Off Campus";
+"building_name"  = "Building Name :";
+"room_no"     = "Room No :";
+"room_name" = "Room Name :";
+"other" = "Other :";
+"social_protocol" = "Social Protocol :";
+"metro_nearby"="Metro Nearby :";
+"parking" = "Parking :";
+"garage" = "Garage";
+"matered" = "Matered";
+"street" = "Street";
+"unknown" = "Unknown";
+"general_location" = "General Location";
+"location_details_onCampus"     = "Location Details On Campus";
+"store_location" = "Store Location :";
+"location_name" = "Location Name :";
+"address1" = "Address1 :";
+"address2"="Address2 :";
+"city" = "City :";
+"state" = "State :";
+"zip" = "Zip :";
+"closest_metro" = "Closest Metro :";
+"special_protocol" = "Special Protocol :";
+"other_info" = "Other Information :";
+"next"  = "Next";
+
+
+////////--------- Contacts and Billing---------////////
+
+"unit_department"="Unit/Department :";
+"first_name"="First Name :";
+"last_name"="Last Name :";
+"email"="Email :";
+"contacts"="Contacts :";
+"billing_details"="Billing Details";
+"requestor_Details"="Requestor Details";
+"department"="Department :";
+"buh_first_name"="BUH First Name :";
+"buh_last_name"="BUH Last Name :";
+"buh_email"="BUH Email :";
+"buh_address_one"="BUH Address 1 :";
+"buh_address_two"="BUH Address 2 :";
+"buh_city"="BUH City :";
+"buh_state"="BUH State :";
+"buh_zip"="BUH ZIP :";
+"next"="Next";
+
+
+////////--------- Attendees ---------////////
+"select_no_of_expected_attendees"= "Select No of expected attendees";
+"gender_Preference"="Gender Preference :";
+"attendees_List"="Attendees List";
+"service_Provider" = "Service Provider";
+"preference"="Preference :";
+"primary_mode_of"= "Primary mode of";
+"communication"= "communication :";
+"directly_utilized"= "Directly utilized";
+"services"= "services :";
+"attendee"= "Attendee";
+"service_Needed"= "Service Needed :";
+
+////Dates and Times
+"create_dates_times" = "Create Dates and Times";
+"start_date_" = "Start Date :";
+"end_date_" = "End Date :";
+"start_time_" = "Start Time :";
+"end_time_" = "End Time :";
+"weekDays" = "Week Days :";
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"sunday" = "Sunday";
+
+"view_edit_dates_times" = "View/Edit Dates and Times";
+"day" = "Day";
+"date" = "Date";
+"startTime" = "Start Time";
+"endTime" = "End Time";
+"create_dates_times_Btn" = "Create Dates/Times";
+"create_jobs_btn" = "Create Jobs";
+
