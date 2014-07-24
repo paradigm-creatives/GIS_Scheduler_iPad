@@ -39,6 +39,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *microPhonebtn;
 @property (strong, nonatomic) IBOutlet UIButton *phnConferencebtn;
 @property (strong, nonatomic) IBOutlet UIButton *webinarbtn;
+@property (strong, nonatomic) IBOutlet UIButton *eventTypebtn;
+@property (strong, nonatomic) IBOutlet UIButton *dressCodebtn;
 
 
 @end

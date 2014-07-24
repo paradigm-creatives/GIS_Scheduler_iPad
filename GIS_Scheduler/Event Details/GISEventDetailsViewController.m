@@ -9,6 +9,8 @@
 #import "GISEventDetailsViewController.h"
 #import "GISEventDetailsCell.h"
 #import  "GISPreparationMaterialCell.h"
+#import "GISDatabaseManager.h"
+#import "GISUtility.h"
 
 @interface GISEventDetailsViewController ()
 
@@ -32,6 +34,13 @@
     
     self.navigationItem.backBarButtonItem=nil;
     [_eventDetaislTabelView setContentSize:CGSizeMake(1024, 880)];
+    
+    
+    NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
+    NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
+    
+    _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
+    _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -82,6 +91,11 @@
         [cell.microPhonebtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.phnConferencebtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.webinarbtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.eventTypebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.dressCodebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
     }
     
     if(indexPath.section == 1){
@@ -115,8 +129,25 @@
     {
         [btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
     }
+}
+
+- (IBAction)showPopoverDetails:(id)sender{
+    
+    UIButton *btn=(UIButton*)sender;
+    if(btn.tag == 1){
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_eventTypeArray];
+    }else if(btn.tag == 2){
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_dresscodeArray];
+    }
+    _popover.delegate = self;
 
     
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning
