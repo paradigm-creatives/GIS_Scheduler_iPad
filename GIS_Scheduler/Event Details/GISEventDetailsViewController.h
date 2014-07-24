@@ -13,6 +13,6 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *eventDetaislTabelView;
 
-//- (IBAction)previousVersionBtnTap:(id)sender;
+- (IBAction)previousVersionBtnTap:(id)sender;
 
 @end
