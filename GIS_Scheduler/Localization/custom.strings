@@ -80,6 +80,7 @@
 "next"  = "Next";
 
 
+
 ////////   Comment ///////
 
 "account_administration" = "Accounts Administration";
@@ -98,5 +99,60 @@
 "summary" = "Summary";
 "comments" = "Comments";
 
+////////--------- Contacts and Billing---------////////
 
+"unit_department"="Unit/Department :";
+"first_name"="First Name :";
+"last_name"="Last Name :";
+"email"="Email :";
+"contacts"="Contacts :";
+"billing_details"="Billing Details";
+"requestor_Details"="Requestor Details";
+"department"="Department :";
+"buh_first_name"="BUH First Name :";
+"buh_last_name"="BUH Last Name :";
+"buh_email"="BUH Email :";
+"buh_address_one"="BUH Address 1 :";
+"buh_address_two"="BUH Address 2 :";
+"buh_city"="BUH City :";
+"buh_state"="BUH State :";
+"buh_zip"="BUH ZIP :";
+"next"="Next";
+
+
+////////--------- Attendees ---------////////
+"select_no_of_expected_attendees"= "Select No of expected attendees";
+"gender_Preference"="Gender Preference :";
+"attendees_List"="Attendees List";
+"service_Provider" = "Service Provider";
+"preference"="Preference :";
+"primary_mode_of"= "Primary mode of";
+"communication"= "communication :";
+"directly_utilized"= "Directly utilized";
+"services"= "services :";
+"attendee"= "Attendee";
+"service_Needed"= "Service Needed :";
+
+////Dates and Times
+"create_dates_times" = "Create Dates and Times";
+"start_date_" = "Start Date :";
+"end_date_" = "End Date :";
+"start_time_" = "Start Time :";
+"end_time_" = "End Time :";
+"weekDays" = "Week Days :";
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"sunday" = "Sunday";
+
+"view_edit_dates_times" = "View/Edit Dates and Times";
+"day" = "Day";
+"date" = "Date";
+"startTime" = "Start Time";
+"endTime" = "End Time";
+"create_dates_times_Btn" = "Create Dates/Times";
+"create_jobs_btn" = "Create Jobs";
 

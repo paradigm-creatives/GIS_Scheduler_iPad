@@ -64,6 +64,37 @@ static GISStoreManager *singletonManager = nil;
     if ([super init]) {
         _loginArray = [[NSMutableArray alloc]init];
 
+        _buildingnamesArray = [[NSMutableArray alloc]init];
+        _dressCodeArray = [[NSMutableArray alloc]init];
+        _locatioCodeArray = [[NSMutableArray alloc]init];
+        _eventTypeArray = [[NSMutableArray alloc]init];
+        _unitOrDepArray = [[NSMutableArray alloc]init];
+        _billingDataArray = [[NSMutableArray alloc]init];
+        _requestNumbersArray = [[NSMutableArray alloc]init];
+        _requestDetailsArray = [[NSMutableArray alloc]init];
+        _contactsInfoArray = [[NSMutableArray alloc]init];
+        _chooseRequestDetailsArray = [[NSMutableArray alloc]init];
+        
+        _modeOfCommunicationArray = [[NSMutableArray alloc]init];
+        _serviceNeededArray = [[NSMutableArray alloc]init];
+        _serviceProviderGenderPrefernceArray = [[NSMutableArray alloc]init];
+        _attendees_Details_Array = [[NSMutableArray alloc]init];
+        _closestMetroArray = [[NSMutableArray alloc]init];
+        _datesTimes_detail_Array= [[NSMutableArray alloc]init];
+        _location_name_Array= [[NSMutableArray alloc]init];
+        _primaryAudience_Array= [[NSMutableArray alloc]init];
+        
+        _searchRequestJobs_Array= [[NSMutableArray alloc]init];
+        
+        _viewSchedule_Array= [[NSMutableArray alloc]init];
+        _skillLevel_Array= [[NSMutableArray alloc]init];
+        _payLevel_Array= [[NSMutableArray alloc]init];
+        _serviceType_ServiceProvider_Array= [[NSMutableArray alloc]init];
+        _registeredCOnsumers_Array= [[NSMutableArray alloc]init];
+        
+        _requestNumbers_SearchJObsArray= [[NSMutableArray alloc]init];
+        
+        
     }
     return self;
 }

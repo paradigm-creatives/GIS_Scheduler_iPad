@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface GISContactsAndBillingViewController : UIViewController
+#import "GISLoginDetailsObject.h"
+@interface GISContactsAndBillingViewController : UIViewController<UIPopoverControllerDelegate>
 {
-//    IBOutlet UILabel *_Label;
-//    IBOutlet UILabel *_Answer_Label;
-    
+
     IBOutlet UILabel *requestorDetails_Label;
     
     IBOutlet UILabel *unitOrDep_Label;
@@ -63,5 +61,14 @@
     IBOutlet UILabel *buhZip_Answer_Label;
     
     IBOutlet UIButton *nextButton;
+    UIPopoverController *popover;
+    
+    NSMutableArray *unitOrDepartment_mutArray;
+    NSMutableArray *contacts_Info_mutArray;
+    GISLoginDetailsObject *login_Obj;
+    
+    IBOutlet UIButton *contacts_button;
+    IBOutlet UIButton *unitDep_Button;
 }
+- (IBAction)chooseRequestDropDown:(id)sender;
 @end

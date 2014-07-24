@@ -72,6 +72,7 @@
     [_password_textfield setFont:[GISFonts large]];
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+
     
     viewUpHeight = 155;
     
@@ -258,7 +259,7 @@
     NSMutableArray *unitOrDepartmentArray=[[GISStoreManager sharedManager] getUnitOrDepartmentObjects];
     NSMutableArray *closestMetroArray=[[GISStoreManager sharedManager] getClosestmetroObjects];
     
-    //
+    //////
     NSMutableArray *modeOfCommunicationArray=[[GISStoreManager sharedManager] getModeOfCommunicationObjects];
     NSMutableArray *serviceProvGenderPrefArray=[[GISStoreManager sharedManager] getServiceProvGenderPrefObjects];
     NSMutableArray *serviceNeededArray=[[GISStoreManager sharedManager] getServiceNeededObjects];
@@ -304,6 +305,7 @@
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SKILL_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
     
+
     for (int i=0; i<payLevelArray.count; i++) {
         GISDropDownsObject *bObj=[payLevelArray objectAtIndex:i];
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
@@ -311,7 +313,6 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
-    
     
     for (int i=0; i<buildingArray.count; i++) {
         GISDropDownsObject *bObj=[buildingArray objectAtIndex:i];
@@ -360,8 +361,7 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CLOSEST_METRO(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
-    
-    
+
     //
     for (int i=0; i<modeOfCommunicationArray.count; i++) {
         GISDropDownsObject *bObj=[modeOfCommunicationArray objectAtIndex:i];
@@ -370,6 +370,7 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_OF_COMMUNICATION(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
+    
     for (int i=0; i<serviceProvGenderPrefArray.count; i++) {
         GISDropDownsObject *bObj=[serviceProvGenderPrefArray objectAtIndex:i];
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
@@ -377,6 +378,7 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROV_GENDER_PREFERENCE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
+    
     for (int i=0; i<serviceNeededArray.count; i++) {
         GISDropDownsObject *bObj=[serviceNeededArray objectAtIndex:i];
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
@@ -384,9 +386,8 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_NEEDED(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
+        
     ///
-    
-    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
@@ -458,14 +459,18 @@
 {
     return YES;
 }
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [GISUtility moveemailView:YES viewHeight:-120 view:self.view];
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
 }
+
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
