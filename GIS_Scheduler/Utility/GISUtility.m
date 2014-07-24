@@ -8,6 +8,7 @@
 
 #import "GISUtility.h"
 #import "GISFonts.h"
+#import "GISPopOverTableViewController.h"
 
 @implementation GISUtility
 
@@ -160,5 +161,20 @@
     }
     
 }
+
++(UIPopoverController *)showPopOver:(NSMutableArray *)localArray{
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    UIPopoverController *popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    popover.popoverContentSize = CGSizeMake(300, 210);
+    tableViewController.popOverArray=localArray;
+   
+    return popover;
+}
+
+
+
+
 
 @end

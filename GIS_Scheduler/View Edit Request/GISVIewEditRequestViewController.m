@@ -17,7 +17,13 @@
 
 #import "GISFonts.h"
 #import "GISLocationDetailsViewController.h"
-
+#import "GISUtility.h"
+#import "GISDatabaseManager.h"
+#import "GISStoreManager.h"
+#import "GISServerManager.h"
+#import "GISJSONProperties.h"
+#import "GISJsonRequest.h"
+#import "GISDatabaseConstants.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -39,6 +45,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
+    
+    requestNumbers_mutArray = [[NSMutableArray alloc] init];
     
     self.title=@"View/Edit Service Request";
     [[UITabBarItem appearance] setTitleTextAttributes:
@@ -112,10 +120,18 @@
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
     self.requestID_Label.font=[GISFonts normal];
     
-    self.requestID_Answer_Label.textColor=UIColorFromRGB(0x666666);
-    self.requestID_Answer_Label.font=[GISFonts small];
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    login_Obj=[requetId_array lastObject];
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [[GISStoreManager sharedManager]removeRequestNumbersObjects];
+    
+    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
 }
 
 -(void)setItemFont:(UITabBarItem *)tabbarItem{
@@ -144,6 +160,45 @@
     [self.view bringSubviewToFront:_mainView];
     
     
+}
+
+- (IBAction)showPopoverDetails:(id)sender{
+    
+    UIButton *btn=(UIButton*)sender;
+
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_requetDetails];
+       
+    _popover.delegate = self;
+    
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+}
+
+-(void)successmethod_chooseRequest:(GISJsonRequest *)response
+{
+    NSLog(@"Success---%@",response.responseJson);
+    dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+    requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
+    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+    for (int i=0; i<requestNumbers_mutArray.count; i++) {
+        GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY ID DESC;"];
+    _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+}
+
+-(void)failuremethod_chooseRequest:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
 }
 
 

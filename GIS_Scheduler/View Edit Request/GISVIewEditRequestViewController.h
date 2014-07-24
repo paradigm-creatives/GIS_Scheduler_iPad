@@ -7,14 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISLoginDetailsObject.h"
+#import "GISDropDownStore.h"
 
-@interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate>
+@interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate>
+{
+    GISLoginDetailsObject *login_Obj;
+    GISDropDownStore *dropDownStore;
+    NSMutableArray *requestNumbers_mutArray;
+}
 
 @property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
-@property (nonatomic, strong) IBOutlet UILabel *requestID_Answer_Label;
+@property (nonatomic, strong) IBOutlet UIButton *requestBtn;
 
 @property (nonatomic, retain) NSArray *viewControllers;
 @property (nonatomic, retain) UIViewController *currentController;
+@property (nonatomic,strong) UIPopoverController *popover;
 
 @property (nonatomic, retain) IBOutlet UIView *mainView;
 @property (nonatomic, retain) IBOutlet UITabBar *mainTabbar;
@@ -26,5 +34,6 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *jobdetailsItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *summarYItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *commentsItem;
+@property (strong, nonatomic) NSArray *requetDetails;
 
 @end

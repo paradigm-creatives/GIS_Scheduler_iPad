@@ -26,5 +26,6 @@
 +(void)showAlertWithTitle:(NSString*)title andMessage:(NSString*)message;
 +(void)moveemailView:(BOOL)ismove viewHeight:(int)viewUpHeight view:(UIView *)currentView;
 +(NSString *)returningstring:(id)string;
++(UIPopoverController *)showPopOver:(NSMutableArray *)localArray;
 
 @end
