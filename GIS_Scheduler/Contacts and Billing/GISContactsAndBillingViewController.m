@@ -9,7 +9,6 @@
 #import "GISContactsAndBillingViewController.h"
 #import "GISFonts.h"
 #import "GISConstants.h"
-#import "GISPopOverTableViewController.h"
 #import "GISDatabaseManager.h"
 #import "GISJSONProperties.h"
 #import "GISServerManager.h"
@@ -17,6 +16,7 @@
 #import "GISJsonRequest.h"
 #import "GISStoreManager.h"
 #import "GISDatabaseConstants.h"
+#import "GISUtility.h"
 @interface GISContactsAndBillingViewController ()
 
 @end
@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    btnTag=0;
     requestorDetails_Label.textColor=UIColorFromRGB(0x666666);
     
     unitOrDep_Label.textColor=UIColorFromRGB(0x666666);
@@ -180,6 +180,10 @@
     NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
     login_Obj=[login_array lastObject];
     
+    firstName_Answer_Label.text=login_Obj.firstName_string;
+    lastName_Answer_Label.text=login_Obj.lastName_string;
+    email_Answer_Label.text=login_Obj.email_string;
+    
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -196,21 +200,25 @@
 }
 
 - (IBAction)chooseRequestDropDown:(id)sender{
+    
     UIButton *button = (UIButton*)sender;
     
-    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
-    
+    tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController.popOverDelegate=self;
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 150);
     
     if([sender tag]==111)
     {
+        btnTag=111;
        tableViewController.popOverArray=unitOrDepartment_mutArray;
         [popover presentPopoverFromRect:CGRectMake(button.frame.size.width*2+10, button.frame.size.height / 1+50, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
     else if ([sender tag]==222)
     {
+        btnTag=222;
        tableViewController.popOverArray=contacts_Info_mutArray;
         [popover presentPopoverFromRect:CGRectMake(317, 167, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
@@ -241,6 +249,85 @@
 -(void)failuremethod_ContactsData:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str
+{
+    if (btnTag==111) {
+        unitOrDep_Answer_Label.text=value_str;
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:id_str forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
+    }
+    else
+    {
+        contacts_Answer_Label.text=value_str;
+    }
+    [popover dismissPopoverAnimated:YES];
+}
+
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    currentTextField=textField;
+    [GISUtility moveemailView:YES viewHeight:195 view:self.view];
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+}
+
+-(void)resignCurrentTextField
+{
+    
+    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+    [currentTextField resignFirstResponder];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self resignCurrentTextField];
+    return YES;
+}
+
+
+-(void)successmethod_BillingsData:(GISJsonRequest *)response
+{
+    NSLog(@"Success---%@----",response.responseJson);
+    [self loadTableWithBuildingdata:response.responseJson];
+}
+
+-(void)failuremethod_BillingsData:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+-(void)loadTableWithBuildingdata:(id)sender
+{
+    [[GISStoreManager sharedManager]removeBillingDataObjects];
+    GISBilingDataObject *billingDataObj=[[GISBilingDataObject alloc]initWithStoreBillingDataDictionary:sender];
+    [[GISStoreManager sharedManager]addBillingDataObject:billingDataObj];
+    
+    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
+    if (billingArray.count>0) {
+        billingDataObj=[billingArray lastObject];
+        buhAddress1_TextView.text=billingDataObj.buh_address1_String;
+       buhAddress2_textView.text=billingDataObj.buh_address2_String;
+       buhCity_Answer_Label.text=billingDataObj.buh_city_String;
+       buhEmail_Answer_Label.text=billingDataObj.buh_email_String;
+       buhFirstName_Answer_Label.text=billingDataObj.buh_firstName_String;
+       buhLastName_Answer_Label.text=billingDataObj.buh_lastName_String;
+       buhState_Answer_Label.text=billingDataObj.buh_state_String;
+       buhZip_Answer_Label.text=billingDataObj.buh_zip_String;
+       department_Answer_Label.text=billingDataObj.department_String;
+    }
 }
 
 - (void)didReceiveMemoryWarning

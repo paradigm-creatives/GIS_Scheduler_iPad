@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PopOverSelected_Protocol <NSObject>
+-(void)sendTheSelectedPopOverData:(NSString *)id_str:(NSString *)value_str;
+@end
 @interface GISPopOverTableViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITableView *popOverTableView;
 }
+
+@property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
 
 @end

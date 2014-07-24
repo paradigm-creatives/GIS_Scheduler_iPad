@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "GISLoginDetailsObject.h"
-@interface GISContactsAndBillingViewController : UIViewController<UIPopoverControllerDelegate>
-{
+#import "GISPopOverTableViewController.h"
 
+
+@interface GISContactsAndBillingViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
+{
+    UITextField *currentTextField;
+    
     IBOutlet UILabel *requestorDetails_Label;
     
     IBOutlet UILabel *unitOrDep_Label;
@@ -69,6 +73,10 @@
     
     IBOutlet UIButton *contacts_button;
     IBOutlet UIButton *unitDep_Button;
+    
+    GISPopOverTableViewController *tableViewController;
+    
+    int btnTag;
 }
 - (IBAction)chooseRequestDropDown:(id)sender;
 @end

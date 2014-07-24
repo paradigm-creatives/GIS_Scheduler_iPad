@@ -64,7 +64,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+    [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String :dropDownObj.value_String];
 }
 
 - (void)didReceiveMemoryWarning
