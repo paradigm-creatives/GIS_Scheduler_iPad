@@ -12,4 +12,22 @@
     
 @property(nonatomic,strong) IBOutlet UIButton *nextButton;
 
+@property(nonatomic,strong)IBOutlet UILabel *locationDetailsOncampus_label;
+@property(nonatomic,strong)IBOutlet UILabel *storeLocation_label;
+@property(nonatomic,strong)IBOutlet UILabel *location_name_label;
+@property(nonatomic,strong)IBOutlet UILabel *address1_label;
+@property(nonatomic,strong)IBOutlet UILabel *address2_label;
+@property(nonatomic,strong)IBOutlet UILabel *city_label;
+@property(nonatomic,strong)IBOutlet UILabel *state_label;
+@property(nonatomic,strong)IBOutlet UILabel *parking_label;
+@property(nonatomic,strong)IBOutlet UILabel *garage_label;
+@property(nonatomic,strong)IBOutlet UILabel *mattered_label;
+@property(nonatomic,strong)IBOutlet UILabel *street_label;
+@property(nonatomic,strong)IBOutlet UILabel *unknown_label;
+@property(nonatomic,strong)IBOutlet UILabel *zip_label;
+@property(nonatomic,strong)IBOutlet UILabel *closestmetro_label;
+@property(nonatomic,strong)IBOutlet UILabel *specialProtocol_label;
+@property(nonatomic,strong)IBOutlet UILabel *otherInfo_label;
+
+
 @end

@@ -47,5 +47,7 @@
 @property(nonatomic,strong)IBOutlet UINavigationItem *navigation_item;
 @property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
--(void)pushToViewController;
+
+-(void)pushToViewController:(int)section rowValue:(int)row;
+
 @end

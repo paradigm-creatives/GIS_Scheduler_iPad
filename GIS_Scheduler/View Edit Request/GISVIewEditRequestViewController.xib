@@ -70,14 +70,14 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <items>
-                                <tabBarItem title="Contact &amp; Billing" image="contact_and_billing.png" id="vC9-iw-Nlc"/>
-                                <tabBarItem tag="1" title="Event Details" image="event_details.png" id="e7e-VT-ARa"/>
-                                <tabBarItem tag="2" title="Attendees" image="attendees_unPressed.png" id="tIJ-Sg-zet" userLabel="Tab Bar Item - Favorites"/>
-                                <tabBarItem tag="3" title="Location Details" image="location.png" id="hiv-TS-EzL"/>
-                                <tabBarItem tag="4" title="Dates &amp; Times" image="dates_and_times.png" id="NW9-Dz-83d"/>
-                                <tabBarItem tag="4" title="Job Details" image="job_details.png" id="xJ6-Qi-GBD"/>
-                                <tabBarItem tag="4" title="Summary" image="summary_unPressed.png" id="eOQ-r2-XVz"/>
-                                <tabBarItem tag="5" title="Comments" image="comments_unPressed.png" id="ofu-Uk-8bn"/>
+                                <tabBarItem title="" image="contact_and_billing.png" id="vC9-iw-Nlc"/>
+                                <tabBarItem tag="1" title="" image="event_details.png" id="e7e-VT-ARa"/>
+                                <tabBarItem tag="2" title="" image="attendees_unPressed.png" id="tIJ-Sg-zet" userLabel="Tab Bar Item - Favorites"/>
+                                <tabBarItem tag="3" title="" image="location.png" id="hiv-TS-EzL"/>
+                                <tabBarItem tag="4" title="" image="dates_and_times.png" id="NW9-Dz-83d"/>
+                                <tabBarItem tag="4" title="" image="job_details.png" id="xJ6-Qi-GBD"/>
+                                <tabBarItem tag="4" title="" image="summary_unPressed.png" id="eOQ-r2-XVz"/>
+                                <tabBarItem tag="5" title="" image="comments_unPressed.png" id="ofu-Uk-8bn"/>
                             </items>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">

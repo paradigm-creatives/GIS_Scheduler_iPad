@@ -9,6 +9,7 @@
 #import "GISCommentViewController.h"
 #import "GISCommentCell.h"
 #import "GISConstants.h"
+#import "GISFonts.h"
 
 @interface GISCommentViewController ()
 
@@ -63,16 +64,16 @@
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         cell.commentTextView.delegate = self;
-        cell.commentTextView.text = @"Add Comments";
+        cell.commentTextView.text = NSLocalizedStringFromTable(@"add_Comments", TABLE, nil);
         cell.commentTextView.textColor = UIColorFromRGB(0x00457c);
-        
+        [cell.commentTextView setFont:[GISFonts normal]];
         
         return cell;
     }
     
 - (void)textViewDidBeginEditing:(UITextView *)textView
     {
-        if ([textView.text isEqualToString:@"Add Comments"]) {
+        if ([textView.text isEqualToString:NSLocalizedStringFromTable(@"add_Comments", TABLE, nil)]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }

@@ -188,11 +188,15 @@
     return 35;
 }
 
--(void)pushToViewController{
-    [self.navigationController popViewControllerAnimated:NO];
-    GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
-    [self.navigationController pushViewController:viewEditView animated:NO];
+-(void)pushToViewController:(int)section rowValue:(int)row{
     
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    if(section ==1 && row == 1){
+        GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+        [self.navigationController pushViewController:viewEditView animated:NO];
+        
+    }
     
 }
 

@@ -80,6 +80,16 @@
     [self setItemFont:_summarYItem];
     [self setItemFont:_commentsItem];
     
+    [_contactItem setTitle:NSLocalizedStringFromTable(@"contact_billing", TABLE, nil)];
+    [_eventDetailsItem setTitle:NSLocalizedStringFromTable(@"event_details", TABLE, nil)];
+    [_attendeesItem setTitle:NSLocalizedStringFromTable(@"attendees", TABLE, nil)];
+    [_locationdetaislItem setTitle:NSLocalizedStringFromTable(@"location_details", TABLE, nil)];
+    [_datesItem setTitle:NSLocalizedStringFromTable(@"dates_times", TABLE, nil)];
+    [_jobdetailsItem setTitle:NSLocalizedStringFromTable(@"job_details", TABLE, nil)];
+    [_summarYItem setTitle:NSLocalizedStringFromTable(@"summary", TABLE, nil)];
+    [_commentsItem setTitle:NSLocalizedStringFromTable(@"comments", TABLE, nil)];
+    
+    
     [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selected.png"]];
     
     _contactItem.selectedImage = [[UIImage imageNamed:@"contact_and_billing_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -94,7 +104,7 @@
     UIColor *titleHighlightedColor = UIColorFromRGB(0xffffff);
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        titleHighlightedColor, NSForegroundColorAttributeName,
-                                                       nil] forState:UIControlStateHighlighted];
+                                                       nil] forState:UIControlStateSelected];
     
     
     self.navigationItem.title = @"View/Edit Service Request";
@@ -112,7 +122,7 @@
     
     [tabbarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                           UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
-                                          [GISFonts tiny], NSFontAttributeName, nil]
+                                          [GISFonts small], NSFontAttributeName, nil]
                                 forState:UIControlStateNormal];//[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
     
 
