@@ -54,9 +54,19 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"popPver"];
     }
-    GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+    
+    if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
+    {
+        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        cell.textLabel.text=dropDownObj.value_String;
+    }
+    else
+    {
+        cell.textLabel.text=[self.popOverArray objectAtIndex:indexPath.row];
+    }
+    
 
-    cell.textLabel.text=dropDownObj.value_String;
+    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -64,8 +74,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
-    [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String :dropDownObj.value_String];
+    if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
+    {
+        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String :dropDownObj.value_String];
+    }
+    else
+    {
+        [self.popOverDelegate sendTheSelectedPopOverData:@"" :[self.popOverArray objectAtIndex:indexPath.row]];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -213,6 +213,7 @@
     if([sender tag]==111)
     {
         btnTag=111;
+        
        tableViewController.popOverArray=unitOrDepartment_mutArray;
         [popover presentPopoverFromRect:CGRectMake(button.frame.size.width*2+10, button.frame.size.height / 1+50, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
