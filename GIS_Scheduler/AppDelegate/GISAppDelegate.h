@@ -20,5 +20,6 @@
 @property(nonatomic,strong)id detailViewController;
 
 @property (readwrite, nonatomic) BOOL isLogout;
+@property (readwrite, nonatomic) BOOL isContact;
 
 @end

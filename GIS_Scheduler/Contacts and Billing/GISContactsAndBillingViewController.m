@@ -251,7 +251,7 @@
     NSLog(@"Failure");
 }
 
--(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str
+-(void)sendTheSelectedPopOverData:(NSString *)id_str  value:(NSString *)value_str
 {
     if (btnTag==111) {
         unitOrDep_Answer_Label.text=value_str;

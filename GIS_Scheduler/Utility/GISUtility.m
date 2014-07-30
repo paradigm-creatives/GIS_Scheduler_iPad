@@ -162,10 +162,8 @@
     
 }
 
-+(UIPopoverController *)showPopOver:(NSMutableArray *)localArray{
-    
-    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
-    
++(UIPopoverController *)showPopOver:(NSMutableArray *)localArray viewController:(GISPopOverTableViewController*)tableViewController{
+
     UIPopoverController *popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     popover.popoverContentSize = CGSizeMake(300, 210);
     tableViewController.popOverArray=localArray;

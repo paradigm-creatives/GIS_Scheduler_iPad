@@ -27,4 +27,17 @@
 @property(nonatomic,strong)IBOutlet UILabel *viewingType_label;
 @property(nonatomic,strong)IBOutlet UILabel *ofUsers_label;
 
+@property (strong, nonatomic) IBOutlet UIButton *otherServicesbtn;
+@property (strong, nonatomic) IBOutlet UIButton *captionTypebtn;
+@property (strong, nonatomic) IBOutlet UIButton *viewingTypebtn;
+
+@property (strong, nonatomic) IBOutlet UIButton *documentbtn;
+@property (strong, nonatomic) IBOutlet UIButton *blackboardAccessbtn;
+@property (strong, nonatomic) IBOutlet UIButton *websitebtn;
+@property (strong, nonatomic) IBOutlet UIButton *othersbtn;
+
+@property(nonatomic,strong)IBOutlet UITextField *blackboardAccessTextField;
+@property(nonatomic,strong)IBOutlet UITextField *websiteTextField;
+@property(nonatomic,strong)IBOutlet UITextField *othersTextField;
+
 @end

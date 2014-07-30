@@ -49,6 +49,7 @@
       [GISFonts larger], NSFontAttributeName,nil]];
     
     self.isLogout = NO;
+    self.isContact = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

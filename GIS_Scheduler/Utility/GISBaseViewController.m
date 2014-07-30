@@ -46,6 +46,8 @@
     [leftRecognizer setNumberOfTouchesRequired:1];
     
     [self.view addGestureRecognizer:leftRecognizer];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectPopOver:) name:kSelectPopOver object:nil];
 
 }
 
@@ -135,13 +137,24 @@
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
-    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    //[self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
-    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+   // [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+}
+
+-(void)selectPopOver:(NSNotification *) notification{
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kSelectPopOver object:nil];
+    
 }
 
 

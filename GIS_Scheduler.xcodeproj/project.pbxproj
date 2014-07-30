@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A051EC919891AFB00F5FC6B /* GISPopOverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A051EC819891AFB00F5FC6B /* GISPopOverTableViewController.xib */; };
 		8A15B4CB197D0A4C008B4129 /* GISLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */; };
 		8A15B4CD197D0CAC008B4129 /* PCAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2B197CF54500963E8C /* PCAvailability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A15B4CE197D0CAC008B4129 /* PCDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2D197CF54500963E8C /* PCDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -233,7 +234,6 @@
 		BADFD9CB197CF003003033FD /* GISStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9CA197CF003003033FD /* GISStore.m */; };
 		BAE081F7197F92100056B3B8 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B1E27197CF54500963E8C /* AWSiOSSDK.framework */; };
 		BAE081FC197FD9900056B3B8 /* GISPopOverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */; };
-		BAE081FD197FD9900056B3B8 /* GISPopOverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAE081FB197FD9900056B3B8 /* GISPopOverTableViewController.xib */; };
 		BAE08204197FDBA30056B3B8 /* GISFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE08200197FDBA30056B3B8 /* GISFonts.m */; };
 		BAE08205197FDBA30056B3B8 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAE08201197FDBA30056B3B8 /* MyriadPro-Bold.otf */; };
 		BAE08206197FDBA30056B3B8 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAE08202197FDBA30056B3B8 /* MyriadPro-Regular.otf */; };
@@ -252,6 +252,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A051EC819891AFB00F5FC6B /* GISPopOverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPopOverTableViewController.xib; sourceTree = "<group>"; };
 		8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISLoginViewController.m; sourceTree = "<group>"; };
 		8A15B4CF197D23B1008B4129 /* GISDropDownsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDropDownsObject.m; sourceTree = "<group>"; };
 		8A15B4D0197D23B1008B4129 /* GISDropDownsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDropDownsObject.h; sourceTree = "<group>"; };
@@ -547,7 +548,6 @@
 		BADFD9CA197CF003003033FD /* GISStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISStore.m; sourceTree = "<group>"; };
 		BAE081F9197FD9900056B3B8 /* GISPopOverTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISPopOverTableViewController.h; sourceTree = "<group>"; };
 		BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISPopOverTableViewController.m; sourceTree = "<group>"; };
-		BAE081FB197FD9900056B3B8 /* GISPopOverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPopOverTableViewController.xib; sourceTree = "<group>"; };
 		BAE081FF197FDBA30056B3B8 /* GISFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISFonts.h; sourceTree = "<group>"; };
 		BAE08200197FDBA30056B3B8 /* GISFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISFonts.m; sourceTree = "<group>"; };
 		BAE08201197FDBA30056B3B8 /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
@@ -1171,7 +1171,7 @@
 			children = (
 				BAE081F9197FD9900056B3B8 /* GISPopOverTableViewController.h */,
 				BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */,
-				BAE081FB197FD9900056B3B8 /* GISPopOverTableViewController.xib */,
+				8A051EC819891AFB00F5FC6B /* GISPopOverTableViewController.xib */,
 			);
 			path = PopOverViewController;
 			sourceTree = "<group>";
@@ -1264,7 +1264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9E6B2A1977E88400609E69 /* incomplete_request@2x.png in Resources */,
-				BAE081FD197FD9900056B3B8 /* GISPopOverTableViewController.xib in Resources */,
 				BA9E6B501977E88400609E69 /* service_provider_hollow@2x.png in Resources */,
 				BA9E6B141977E88400609E69 /* dates_and_times@2x.png in Resources */,
 				BA9E6B471977E88400609E69 /* save.png in Resources */,
@@ -1297,6 +1296,7 @@
 				BA9E6B021977E88400609E69 /* comments@2x.png in Resources */,
 				BA9E6B4A1977E88400609E69 /* scheduling@2x.png in Resources */,
 				BA9E6B371977E88400609E69 /* login_username.png in Resources */,
+				8A051EC919891AFB00F5FC6B /* GISPopOverTableViewController.xib in Resources */,
 				BA9E6B161977E88400609E69 /* dates_and_times_pressed@2x.png in Resources */,
 				BA9E6B591977E88400609E69 /* summary_pressed.png in Resources */,
 				BA9E6B241977E88400609E69 /* event_details_pressed@2x.png in Resources */,
@@ -1565,7 +1565,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1606,7 +1607,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1631,6 +1633,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
@@ -1651,6 +1654,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,

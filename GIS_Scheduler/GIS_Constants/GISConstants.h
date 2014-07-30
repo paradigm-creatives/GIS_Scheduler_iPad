@@ -23,6 +23,8 @@
 #define kFontFamilyNormal @"MyriadPro-Regular"
 #define kFontFamilyBold  @"MyriadPro-Semibold"
 
+#define kSelectPopOver  @"SelectPopover"
+
 
 
 #endif

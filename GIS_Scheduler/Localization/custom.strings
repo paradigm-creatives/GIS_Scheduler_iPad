@@ -57,7 +57,7 @@
 "building_name"  = "Building Name :";
 "room_no"     = "Room No :";
 "room_name" = "Room Name :";
-"other" = "Other :";
+"other" = "Other";
 "social_protocol" = "Social Protocol :";
 "metro_nearby"="Metro Nearby :";
 "parking" = "Parking :";

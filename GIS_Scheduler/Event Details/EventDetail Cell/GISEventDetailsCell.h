@@ -41,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *webinarbtn;
 @property (strong, nonatomic) IBOutlet UIButton *eventTypebtn;
 @property (strong, nonatomic) IBOutlet UIButton *dressCodebtn;
+@property (strong, nonatomic) IBOutlet UILabel *broadcastYesSelcted;
 
 
 @end

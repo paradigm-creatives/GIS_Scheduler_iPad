@@ -8,6 +8,8 @@
 
 #import "GISPopOverTableViewController.h"
 #import "GISDropDownsObject.h"
+#import "GISConstants.h"
+
 @interface GISPopOverTableViewController ()
 
 @end
@@ -27,10 +29,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     self.preferredContentSize=popOverTableView.contentSize;
+    popOverTableView.delegate = self;
     [super viewWillAppear:animated];
 }
 
@@ -54,9 +59,18 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"popPver"];
     }
-    GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
-
-    cell.textLabel.text=dropDownObj.value_String;
+    if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
+    {
+        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        cell.textLabel.text=dropDownObj.value_String;
+    }
+    else
+    {
+        cell.textLabel.text=[self.popOverArray objectAtIndex:indexPath.row];
+        
+        self.tableHeightConstraint.constant = 80;
+        [popOverTableView needsUpdateConstraints];
+    }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -64,8 +78,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
-    [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String :dropDownObj.value_String];
+    if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
+    {
+        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String value:dropDownObj.value_String];
+    }
+    else
+    {
+        [self.popOverDelegate sendTheSelectedPopOverData:@"" value:[self.popOverArray objectAtIndex:indexPath.row]];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

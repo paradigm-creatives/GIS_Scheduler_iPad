@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISAppDelegate.h"
 
 @protocol PopOverSelected_Protocol <NSObject>
--(void)sendTheSelectedPopOverData:(NSString *)id_str:(NSString *)value_str;
+-(void)sendTheSelectedPopOverData: (NSString *)id_str value:(NSString *)value_str;
 @end
 @interface GISPopOverTableViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITableView *popOverTableView;
+    GISAppDelegate *appDelegate;
 }
 
 @property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
+@property (weak,nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstraint;
 
 @end

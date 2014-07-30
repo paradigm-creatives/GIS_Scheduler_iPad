@@ -17,7 +17,7 @@
 -(void)createCustomNavigationBar:(NSString *)title;
 -(IBAction)menuTapped:(id)sender;
 -(IBAction)doneButtonClicked:(id)sender;
-
+-(void)selectPopOver:(NSNotification *) notification;
 - (IBAction)hideAndUnHideMaster:(id)sender;
 @property(nonatomic,readwrite) BOOL isMasterHide;
 

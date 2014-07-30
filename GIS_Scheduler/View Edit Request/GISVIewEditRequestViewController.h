@@ -9,12 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "GISLoginDetailsObject.h"
 #import "GISDropDownStore.h"
+#import "GISPopOverTableViewController.h"
+#import "GISAppDelegate.h"
+#import "GISPopOverTableViewController.h"
 
-@interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate>
+
+@interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISLoginDetailsObject *login_Obj;
     GISDropDownStore *dropDownStore;
     NSMutableArray *requestNumbers_mutArray;
+    GISAppDelegate *appDelegate;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
