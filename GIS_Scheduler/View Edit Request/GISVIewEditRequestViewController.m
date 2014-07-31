@@ -139,6 +139,9 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted) name:kTabSelected object:nil];
+    
+    
 }
 
 -(void)setItemFont:(UITabBarItem *)tabbarItem{
@@ -168,7 +171,6 @@
         appDelegate.isContact = NO;
     }
 
-    
     for (UIView *subView in _mainView.subviews)
     {
         [subView removeFromSuperview];
@@ -243,6 +245,21 @@
    [GISUtility moveemailView:YES viewHeight:[value intValue] view:self.view];
 }
 
+-(void)tabSelcted{
+    
+    UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:1];
+    [self tabBar:self.mainTabbar didSelectItem:tabItem];
+    [self.mainTabbar setSelectedItem:tabItem];
+}
+
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kMoveUp object:nil];
+    
+}
 
 
 - (void)didReceiveMemoryWarning

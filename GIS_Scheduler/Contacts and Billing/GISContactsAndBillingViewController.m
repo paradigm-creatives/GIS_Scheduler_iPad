@@ -563,6 +563,8 @@
                 else{
                     eventViewController =[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
                 }
+            
+                [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil];
                 
             
         }else{
