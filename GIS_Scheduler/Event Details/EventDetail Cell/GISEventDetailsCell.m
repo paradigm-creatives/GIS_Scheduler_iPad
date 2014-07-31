@@ -45,6 +45,10 @@
     [_microPhone_label setFont:[GISFonts normal]];
     [_phoneConference_label setFont:[GISFonts normal]];
     [_othertechnologies_label setFont:[GISFonts normal]];
+    [_broadcastYesSelcted setFont:[GISFonts tiny]];
+    
+    [_eventTypebtn.titleLabel setFont:[GISFonts small]];
+    [_dressCodebtn.titleLabel setFont:[GISFonts small]];
     
     [_eventName_label setText:NSLocalizedStringFromTable(@"event_name", TABLE, nil)];
     [_eventType_label setText:NSLocalizedStringFromTable(@"event_type", TABLE, nil)];

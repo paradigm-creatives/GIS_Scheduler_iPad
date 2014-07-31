@@ -44,6 +44,10 @@
     [_ofUsers_label setFont:[GISFonts normal]];
     [_otherServices_label setFont:[GISFonts normal]];
     
+    [_otherServicesbtn.titleLabel setFont:[GISFonts small]];
+    [_captionTypebtn.titleLabel setFont:[GISFonts small]];
+    [_viewingTypebtn.titleLabel setFont:[GISFonts small]];
+    
     [_othertechnologies_label setText:NSLocalizedStringFromTable(@"other_technologies", TABLE, nil)];
     [_otherservicesneeded_label setText:NSLocalizedStringFromTable(@"other_servicesNeeded", TABLE, nil)];
     [_other_label setText:NSLocalizedStringFromTable(@"other", TABLE, nil)];

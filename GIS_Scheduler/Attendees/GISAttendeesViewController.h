@@ -46,7 +46,7 @@
     GISLoginDetailsObject *login_Obj;
     
 }
-
+-(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str;
 @property (nonatomic,strong) UIPopoverController *popover_controller;
 
 @property(nonatomic,strong)IBOutlet UITableView *attendees_tableView;

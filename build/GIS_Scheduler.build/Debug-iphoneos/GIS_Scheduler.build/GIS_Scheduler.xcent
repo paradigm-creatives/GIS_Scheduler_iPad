@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>VYLV63448Q.com.pc.GIS</string>
+	<key>com.apple.developer.team-identifier</key>
+	<string>VYLV63448Q</string>
+	<key>get-task-allow</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>VYLV63448Q.com.pc.GIS</string>
+	</array>
+</dict>
+</plist>

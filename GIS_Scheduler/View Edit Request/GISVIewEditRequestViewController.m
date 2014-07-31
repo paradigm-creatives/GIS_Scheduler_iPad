@@ -24,6 +24,8 @@
 #import "GISJSONProperties.h"
 #import "GISJsonRequest.h"
 #import "GISDatabaseConstants.h"
+#import "GISConstants.h"
+#import "GISContactsAndBillingViewController.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -45,6 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     requestNumbers_mutArray = [[NSMutableArray alloc] init];
     
@@ -119,6 +122,7 @@
     
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
     self.requestID_Label.font=[GISFonts normal];
+    [_requestBtn.titleLabel setFont:[GISFonts small]];
     
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
@@ -132,6 +136,9 @@
     [[GISStoreManager sharedManager]removeRequestNumbersObjects];
     
     [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
+    
 }
 
 -(void)setItemFont:(UITabBarItem *)tabbarItem{
@@ -152,6 +159,16 @@
     
     [_currentController.view removeFromSuperview];
     _currentController=selectedTabView;
+    
+    if(_currentController == [_viewControllers objectAtIndex:0]){
+        
+        appDelegate.isContact = YES;
+    }else{
+        
+        appDelegate.isContact = NO;
+    }
+
+    
     for (UIView *subView in _mainView.subviews)
     {
         [subView removeFromSuperview];
@@ -162,11 +179,24 @@
     
 }
 
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    appDelegate.chooseRequest_ID_String=id_str;
+    [_requestBtn setTitle:value_str forState:UIControlStateNormal];
+    
+    if(_popover)
+        [_popover dismissPopoverAnimated:YES];
+    
+}
+
 - (IBAction)showPopoverDetails:(id)sender{
     
     UIButton *btn=(UIButton*)sender;
+    
+     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController.popOverDelegate = self;
 
-    _popover =   [GISUtility showPopOver:(NSMutableArray *)_requetDetails];
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_requetDetails viewController:tableViewController];
        
     _popover.delegate = self;
     
@@ -200,6 +230,19 @@
 {
     NSLog(@"Failure");
 }
+
+-(void)moveUp:(NSNotification *) notification{
+    
+    NSDictionary *infoDict=notification.userInfo;
+    
+    NSString *value;
+    if(infoDict != nil){
+       value =[infoDict objectForKey:@"yValue"];
+    }
+    
+   [GISUtility moveemailView:YES viewHeight:[value intValue] view:self.view];
+}
+
 
 
 - (void)didReceiveMemoryWarning
