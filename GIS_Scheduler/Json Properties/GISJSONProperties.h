@@ -9,6 +9,7 @@
 #ifndef Gallaudet_Interpreting_Service_GISJSONProperties_h
 #define Gallaudet_Interpreting_Service_GISJSONProperties_h
 
+#define kselectedChooseReqNumber @"selectedChooseRequestNumber"
 
 #pragma mark EventDetails Saving
 #define keventDetails_requestNo @"requestNo"

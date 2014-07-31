@@ -14,6 +14,12 @@
 #import "GISPopOverTableViewController.h"
 #import "GISEventDetailsViewController.h";
 
+@protocol chooseRequestProtocol <NSObject>
+
+-(void)selectedChooseRequestNumber:(NSString *)dropDown_ID:(NSString *)dropDownValue;
+
+@end
+
 @interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISLoginDetailsObject *login_Obj;
@@ -21,7 +27,7 @@
     NSMutableArray *requestNumbers_mutArray;
     GISAppDelegate *appDelegate;
 }
-
+@property(nonatomic,strong)id<chooseRequestProtocol> chooseReq_protocol;
 @property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
 @property (nonatomic, strong) IBOutlet UIButton *requestBtn;
 

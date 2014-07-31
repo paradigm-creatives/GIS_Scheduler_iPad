@@ -182,6 +182,14 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     appDelegate.chooseRequest_ID_String=id_str;
+    
+    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+    [dict setValue:id_str forKey:@"id"];
+    [dict setValue:value_str forKey:@"value"];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
+    
+    //[self.chooseReq_protocol selectedChooseRequestNumber:id_str :value_str];
     [_requestBtn setTitle:value_str forState:UIControlStateNormal];
     
     if(_popover)
