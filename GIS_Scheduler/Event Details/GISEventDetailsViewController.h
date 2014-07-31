@@ -10,7 +10,7 @@
 #import "GISBaseViewController.h"
 #import "GISPopOverTableViewController.h"
 
-@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate>
 
 {
     NSString *eventTypedata;

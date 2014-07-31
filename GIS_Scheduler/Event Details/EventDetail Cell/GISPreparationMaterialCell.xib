@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -229,6 +229,7 @@
                 <outlet property="blackboardaccess_label" destination="pm6-EX-3Q9" id="4Wp-yi-Mfm"/>
                 <outlet property="captionTypebtn" destination="rAK-tU-CXn" id="whj-ZT-d7U"/>
                 <outlet property="captioning_type_label" destination="rXJ-6R-FsQ" id="QzL-3r-i4l"/>
+                <outlet property="descriptionTextView" destination="AxG-E9-kLW" id="C3T-3p-Yh1"/>
                 <outlet property="description_label" destination="Zmn-Ky-RQO" id="H0f-sq-4sN"/>
                 <outlet property="document_label" destination="jZu-d6-Hm5" id="U8s-Tu-b25"/>
                 <outlet property="documentbtn" destination="83j-WK-8bz" id="tgU-u2-38u"/>

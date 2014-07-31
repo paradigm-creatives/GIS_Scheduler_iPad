@@ -106,7 +106,7 @@
         [UIView setAnimationDuration:1.0];
         
         CGRect frame=currentView.frame;
-        frame.origin.x=viewUpHeight;
+        frame.origin.y=viewUpHeight;
         currentView.frame=frame;
         [UIView commitAnimations];
     }
@@ -116,28 +116,11 @@
         [UIView setAnimationBeginsFromCurrentState: YES];
         [UIView setAnimationDuration:0.2];
         CGRect frame=currentView.frame;
-        frame.origin.x=0;
+        frame.origin.y=0;
         currentView.frame=frame;
         
         [UIView commitAnimations];
     }
-//    CGRect frame=currentView.frame;
-//    if(ismove)
-//    {
-//        frame.origin.x-=viewUpHeight;
-//    }
-//    else
-//    {
-//        
-//        frame.origin.x+=viewUpHeight;
-//    }
-//    [UIView animateWithDuration:0.3f
-//                          delay:0.0f
-//                        options:UIViewAnimationOptionCurveEaseIn
-//                     animations:^{
-//                         [currentView setFrame:frame];
-//                     }
-//                     completion:nil];
 }
 
 +(NSString *)returningstring:(id)string

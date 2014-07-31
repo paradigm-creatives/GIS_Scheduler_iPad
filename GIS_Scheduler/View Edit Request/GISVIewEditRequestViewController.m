@@ -137,7 +137,7 @@
     
     [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
     
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
     
 }
 
@@ -228,6 +228,18 @@
 -(void)failuremethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+}
+
+-(void)moveUp:(NSNotification *) notification{
+    
+    NSDictionary *infoDict=notification.userInfo;
+    
+    NSString *value;
+    if(infoDict != nil){
+       value =[infoDict objectForKey:@"yValue"];
+    }
+    
+   [GISUtility moveemailView:YES viewHeight:[value intValue] view:self.view];
 }
 
 - (void)didReceiveMemoryWarning

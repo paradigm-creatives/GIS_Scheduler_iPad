@@ -50,6 +50,12 @@
     _otherServicesArray = [[NSArray alloc] initWithObjects:@"Captioning",@"VRI", nil];
     _viewingTypeArray = [[NSArray alloc] initWithObjects:@"Individuals", nil];
     _captionTypeArray = [[NSArray alloc] initWithObjects:@"Onsite", nil];
+    
+    eventTypedata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    dresscodeData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    otherServicesdata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    captionData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    viewingTypeData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -120,6 +126,7 @@
         [cell.microPhonebtn setTag:10];
         [cell.phnConferencebtn setTag:11];
         [cell.webinarbtn setTag:12];
+        [cell.broadcastYesSelcted  setTag:555];
         
         if(broadCastSelected){
             cell.broadcastYesSelcted.text = _broadcastType_Str;
@@ -158,6 +165,8 @@
         [cell.otherServicesbtn setTag:13];
         [cell.captionTypebtn setTag:14];
         [cell.viewingTypebtn setTag:15];
+        
+        [cell.descriptionTextView setDelegate:self];
 
         
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -183,6 +192,8 @@
     if(btn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
     {
         [btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+        UILabel *broadcastSelectedLabel=(UILabel *)[self.view viewWithTag:555];
+
         
         if(btn.tag == 111){
             
@@ -201,9 +212,11 @@
         }else if(btn.tag == 5){
             _re_broadcastStr = @" ";
             broadCastSelected = NO;
+            [broadcastSelectedLabel setText:@""];
         }else if(btn.tag == 6){
             _re_broadcastStr = @" ";
             broadCastSelected = NO;
+            [broadcastSelectedLabel setText:@""];
         }else if(btn.tag == 7){
             _on_goingStr = @" ";
         }else if(btn.tag == 8){
@@ -256,6 +269,9 @@
             {
                 [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             }
+            
+            UILabel *broadcastSelectedLabel=(UILabel *)[self.view viewWithTag:555];
+            [broadcastSelectedLabel setText:@""];
             
             broadCastSelected = NO;
             
@@ -319,11 +335,11 @@
         eventTypedata= value_str;
     }else if(btn_tag == 2){
         dresscodeData = value_str;
-    }else if(btn_tag == 3){
+    }else if(btn_tag == 13){
         otherServicesdata = value_str;
-    }else if(btn_tag == 4){
+    }else if(btn_tag == 14){
         captionData = value_str;
-    }else if(btn_tag == 5){
+    }else if(btn_tag == 15){
         viewingTypeData = value_str;
     }
     
@@ -408,13 +424,16 @@
         UIButton *btnn2=(UIButton *)[_alertCustomView viewWithTag:18];
         
         broadCastSelected = YES;
+        UILabel *broadcastSelectedLabel=(UILabel *)[self.view viewWithTag:555];
         
         if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
         {
             _broadcastType_Str = @"Audio";
+            
         }else if(btnn1.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
         {
             _broadcastType_Str = @"Video";
+            
         }else if(btnn2.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
         {
             _broadcastType_Str = @"Both";
@@ -426,6 +445,9 @@
             alert.delegate = self;
             [alert show];
         }
+        
+        [broadcastSelectedLabel setText:_broadcastType_Str];
+
         
     }else if(alertView.tag == RECORDED_TYPE && buttonIndex == 0)
     {
@@ -443,9 +465,51 @@
         
         [self showBroadcastAlertView];
     }
-    
-    [self.eventDetaislTabelView reloadData];
 }
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldBeginEditing:");
+    
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing:");
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-120",@"yValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldEndEditing:");
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    NSLog(@"textViewDidEndEditing:");
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    
+    [textView resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSCharacterSet *doneButtonCharacterSet = [NSCharacterSet newlineCharacterSet];
+    NSRange replacementTextRange = [text rangeOfCharacterFromSet:doneButtonCharacterSet];
+    NSUInteger location = replacementTextRange.location;
+    
+    if (textView.text.length + text.length > 140){
+        if (location != NSNotFound){
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    else if (location != NSNotFound){
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 
 
 - (void)didReceiveMemoryWarning

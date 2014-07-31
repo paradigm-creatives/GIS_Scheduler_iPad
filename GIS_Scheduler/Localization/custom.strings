@@ -49,6 +49,7 @@
 "of_users" = "#of Users :";
 "yes"  = "Yes";
 "no" = "No";
+"empty_selection" = "-- Select --";
 
 
 ////////   Location Details ///////

@@ -24,6 +24,7 @@
 #define kFontFamilyBold  @"MyriadPro-Semibold"
 
 #define kSelectPopOver  @"SelectPopover"
+#define kMoveUp  @"moveUp"
 
 
 
