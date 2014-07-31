@@ -235,6 +235,7 @@
                 <outlet property="documentbtn" destination="83j-WK-8bz" id="tgU-u2-38u"/>
                 <outlet property="eventDescription_label" destination="kAy-HC-4kg" id="U1c-3F-Myf"/>
                 <outlet property="nextButton" destination="26p-jQ-FiS" id="iyD-m1-76h"/>
+                <outlet property="noOfUsersTextField" destination="TmU-Pf-TWl" id="lWp-hl-WIN"/>
                 <outlet property="ofUsers_label" destination="H6d-xa-yZG" id="J99-Gc-tJ0"/>
                 <outlet property="otherServices_label" destination="jpj-Fe-6TA" id="pWU-1G-nOQ"/>
                 <outlet property="otherServicesbtn" destination="rKl-vT-vDW" id="kuj-cj-xjJ"/>

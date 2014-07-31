@@ -39,6 +39,7 @@
 @property(nonatomic,strong)IBOutlet UITextField *blackboardAccessTextField;
 @property(nonatomic,strong)IBOutlet UITextField *websiteTextField;
 @property(nonatomic,strong)IBOutlet UITextField *othersTextField;
+@property(nonatomic,strong)IBOutlet UITextField *noOfUsersTextField;
 
 @property(nonatomic,strong)IBOutlet UITextView *descriptionTextView;
 
