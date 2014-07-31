@@ -205,6 +205,14 @@
     
     tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
+    CGRect frame=tableViewController.view.frame;
+    frame.size.width=438;
+    tableViewController.view.frame=frame;
+    
+    CGRect frame1= tableViewController.popOverTableView.frame;
+    frame1.size.width=438;
+    tableViewController.popOverTableView.frame=frame1;
+    
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     
     popover.delegate = self;
