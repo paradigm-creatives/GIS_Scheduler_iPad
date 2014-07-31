@@ -52,6 +52,10 @@
 @property(nonatomic,strong)IBOutlet UIButton *preference_Button;
 @property(nonatomic,strong)IBOutlet UIButton *nextButton;
 
+
+@property(nonatomic,strong)IBOutlet UILabel *primaryAudience_Label;
+@property(nonatomic,strong)IBOutlet UILabel *primaryAudience_answer_Label;
+
 @property (nonatomic, readwrite) NSInteger cellSectionNumber;
 @property (nonatomic, readwrite) NSInteger cellRowNumber;
 @property (nonatomic, retain) NSIndexPath *cellIndexpath;

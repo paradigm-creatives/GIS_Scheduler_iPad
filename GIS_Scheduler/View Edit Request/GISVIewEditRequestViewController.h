@@ -12,7 +12,7 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
-
+#import "GISEventDetailsViewController.h";
 
 @interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {

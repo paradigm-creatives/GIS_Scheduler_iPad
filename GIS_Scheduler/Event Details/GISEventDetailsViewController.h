@@ -51,7 +51,6 @@
 
 
 
-
 - (IBAction)previousVersionBtnTap:(id)sender;
 - (IBAction)showPopoverDetails:(id)sender;
 

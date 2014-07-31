@@ -34,6 +34,8 @@
     self.serviceProvider_preference_Label.font=[GISFonts normal];
     self.preference_answer_Label.font=[GISFonts small];
     self.preference_Label.font=[GISFonts normal];
+    self.primaryAudience_answer_Label.font=[GISFonts small];
+    self.primaryAudience_Label.font=[GISFonts normal];
     
     self.firstname_Label.font=[GISFonts normal];
     self.lastname_Label.font=[GISFonts normal];
@@ -62,6 +64,8 @@
     self.serviceProvider_preference_Label.textColor=UIColorFromRGB(0x666666);
     self.preference_answer_Label.textColor=UIColorFromRGB(0x666666);
     self.preference_Label.textColor=UIColorFromRGB(0x666666);
+    self.primaryAudience_Label.textColor=UIColorFromRGB(0x666666);
+    self.primaryAudience_answer_Label.textColor=UIColorFromRGB(0x666666);
     
     self.firstname_Label.textColor=UIColorFromRGB(0x666666);
     self.lastname_Label.textColor=UIColorFromRGB(0x666666);

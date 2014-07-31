@@ -11,7 +11,8 @@
 #import "GISConstants.h"
 #import "GISFonts.h"
 #import "GISAttendees_ListObject.h"
-
+#import "GISUtility.h"
+#import "GISDatabaseManager.h"
 @interface GISAttendeesViewController ()
 
 @end
@@ -34,6 +35,40 @@ int row_count = 2;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    attendeesObject=[[GISAttendeesObject alloc]init];
+    attendeesObject.attendeesList_mutArray=[[NSMutableArray alloc]init];
+    
+    btnTag=0;
+    
+    preference_mutArray=[[NSMutableArray alloc]init];
+    modeofcommunication_mutArray=[[NSMutableArray alloc]init];
+    servicesNeeded_mutArray=[[NSMutableArray alloc]init];
+    primaryAudience_mutArray=[[NSMutableArray alloc]init];
+    
+    expectedNo_mutArray=[[NSMutableArray alloc]initWithObjects:@"2-5",@"6-15",@"16-50", @"50+" , nil];
+    expectedNo_ID_mutArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3", @"4" , nil];
+    genderPreference_mutArray=[[NSMutableArray alloc]initWithObjects:@"No Preference",@"Male",@"Female", nil];
+    genderPreference_ID_Array=[[NSMutableArray alloc]initWithObjects:@"0",@"M",@"F", nil];
+    
+    directly_utilizedServices_mutArray=[[NSMutableArray alloc]initWithObjects:@"Yes",@"No",@"Unknown", nil];
+    
+    
+    NSString *preference_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROV_GENDER_PREFERENCE;"];
+    preference_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:preference_statement] mutableCopy];
+    
+    NSString *modeofcommunication_statement = [[NSString alloc]initWithFormat:@"select * from TBL_MODE_OF_COMMUNICATION;"];
+    modeofcommunication_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:modeofcommunication_statement] mutableCopy];
+    
+    NSString *servicesNeeded_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_NEEDED;"];
+    servicesNeeded_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:servicesNeeded_statement] mutableCopy];
+    
+    NSString *primaryAudience_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PRIMARY_AUDIENCE;"];
+    primaryAudience_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:primaryAudience_statement] mutableCopy];
+    
+    NSString *loginStr = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
+    login_Obj=[login_array lastObject];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -142,6 +177,25 @@ int row_count = 2;
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesTopCell" owner:self options:nil] objectAtIndex:0];
     }
+    if ([attendeesObject.primaryAudience_String length])
+        cell.primaryAudience_answer_Label.text=attendeesObject.primaryAudience_String;
+    else
+        cell.primaryAudience_answer_Label.text=@"";
+    
+    if ([attendeesObject.expectedNo_String length])
+        cell.expectedNo_answer_Label.text=attendeesObject.expectedNo_String;
+    else
+        cell.expectedNo_answer_Label.text=@"";
+    
+    if ([attendeesObject.genderPreference_String length])
+        cell.genderPreference_answer_Label.text=attendeesObject.genderPreference_String;
+    else
+        cell.genderPreference_answer_Label.text=@"";
+    
+    if ([attendeesObject.preference_String length])
+        cell.preference_answer_Label.text=attendeesObject.preference_String;
+    else
+        cell.preference_answer_Label.text=@"";
     
     return cell;
 }
@@ -166,6 +220,130 @@ int row_count = 2;
     return listObj;
 }
 
+
+
+-(IBAction)pickerButtonPressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController.popOverDelegate=self;
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    
+    popover.delegate = self;
+    popover.popoverContentSize = CGSizeMake(340, 150);
+    
+    if([sender tag]==111)
+    {
+        btnTag=111;
+        
+        tableViewController.popOverArray=expectedNo_mutArray;
+    }
+    else if ([sender tag]==222)
+    {
+        btnTag=222;
+        tableViewController.popOverArray=genderPreference_mutArray;
+    }
+    else if ([sender tag]==333)
+    {
+        btnTag=333;
+        tableViewController.popOverArray=preference_mutArray;
+        
+    }
+    else if ([sender tag]==444)
+    {
+        btnTag=444;
+        tableViewController.popOverArray=primaryAudience_mutArray;
+        
+    }
+    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+135, button.frame.origin.y+20, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+
+
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str
+{
+    [popover dismissPopoverAnimated:YES];
+    
+    if (btnTag==111) {
+        attendeesObject.expectedNo_String=value_str;
+        attendeesObject.expectedNo_ID_String=[expectedNo_ID_mutArray objectAtIndex:[self getExpectedNoRowCount:value_str]];
+        
+        int countHere=[self getExpectedStr_value_before_hypen:attendeesObject.expectedNo_String];
+        
+        //Duplicates Removing delete duplicates (this is the best code)
+        NSMutableArray *discardedItems = [[NSMutableArray alloc]init];
+        if(countHere<[attendeesObject.attendeesList_mutArray count]){
+            int incrementCount=[attendeesObject.attendeesList_mutArray count];
+            for (int i=countHere; i<incrementCount;i++){
+                GISAttendees_ListObject *listObj=[attendeesObject.attendeesList_mutArray objectAtIndex:countHere];
+                [discardedItems addObject:listObj];
+                [attendeesObject.attendeesList_mutArray removeObjectsInArray:discardedItems];
+            }
+        }
+        
+        if(![attendeesObject.attendeesList_mutArray count]<countHere){
+            for (int i=row_count; i<countHere;i++){
+                GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
+                [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
+            }
+            countHere=[attendeesObject.attendeesList_mutArray count];
+        }
+        
+        row_count=[attendeesObject.attendeesList_mutArray count];
+    }
+    else if (btnTag==222)
+    {
+        attendeesObject.genderPreference_String=value_str;
+        attendeesObject.genderPreference_ID_String=[genderPreference_ID_Array objectAtIndex:[self getGenderRowCount:value_str]];
+    }
+    else if (btnTag==333)
+    {
+        attendeesObject.preference_String=value_str;
+        attendeesObject.preference_ID_String=id_str;
+    }
+    else if (btnTag==444)
+    {
+        attendeesObject.primaryAudience_String=value_str;
+        attendeesObject.primaryAudience_ID_String=id_str;
+    }
+    [self.attendees_tableView reloadData];
+    
+}
+
+
+-(int)getExpectedStr_value_before_hypen:(NSString *)idSTr
+{
+    NSArray *array=[idSTr componentsSeparatedByString:@"-"];
+    if ([idSTr isEqualToString:@"4"]) {
+        array=[attendeesObject.expectedNo_String componentsSeparatedByString:@"+"];
+    }
+    
+    return [[array objectAtIndex:0] intValue];
+}
+
+-(int)getExpectedNoRowCount:(NSString *)valueStr
+{
+    int rowValue;
+    for (int i=0; i<expectedNo_mutArray.count; i++) {
+        NSString *findValue_str=[expectedNo_mutArray objectAtIndex:i];
+        if([findValue_str isEqualToString:valueStr])
+            rowValue=i;
+    }
+    return rowValue;
+}
+
+-(int)getGenderRowCount:(NSString *)valueStr
+{
+    int rowValue;
+    for (int i=0; i<genderPreference_mutArray.count; i++) {
+        NSString *findValue_str=[genderPreference_mutArray objectAtIndex:i];
+        if([findValue_str isEqualToString:valueStr])
+            rowValue=i;
+    }
+    return rowValue;
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

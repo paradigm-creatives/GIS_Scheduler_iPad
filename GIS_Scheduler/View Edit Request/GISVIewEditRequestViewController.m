@@ -181,6 +181,7 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
+    appDelegate.chooseRequest_ID_String=id_str;
     [_requestBtn setTitle:value_str forState:UIControlStateNormal];
     
     if(_popover)
@@ -241,6 +242,8 @@
     
    [GISUtility moveemailView:YES viewHeight:[value intValue] view:self.view];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -59,6 +59,7 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"popPver"];
     }
+
     if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
     {
         GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
@@ -67,6 +68,7 @@
     else
     {
         cell.textLabel.text=[self.popOverArray objectAtIndex:indexPath.row];
+
         
         self.tableHeightConstraint.constant = 80;
         [popOverTableView needsUpdateConstraints];

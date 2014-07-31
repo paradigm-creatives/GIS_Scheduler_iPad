@@ -15,8 +15,11 @@
 @interface GISPopOverTableViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITableView *popOverTableView;
+
     GISAppDelegate *appDelegate;
 }
+
+@property(nonatomic,strong) IBOutlet UITableView *popOverTableView;
 
 @property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
