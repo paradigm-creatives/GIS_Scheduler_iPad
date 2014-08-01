@@ -13,6 +13,14 @@
 #import "GISAttendees_ListObject.h"
 #import "GISUtility.h"
 #import "GISDatabaseManager.h"
+#import "GISJSONProperties.h"
+#import "GISLoadingView.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISStoreManager.h"
+#import "PCLogger.h"
+#import "GISAttendeesDetailsStore.h"
+
 @interface GISAttendeesViewController ()
 
 @end
@@ -74,11 +82,16 @@ int row_count = 2;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
+    viewEditSchedule_obj=[[GISVIewEditRequestViewController alloc]init];
+    viewEditSchedule_obj.chooseReq_protocol=self;
     for (int i=0; i<row_count; i++) {
         attendees_ListObject=[[GISAttendees_ListObject alloc]init];
         [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject]];
     }
     [self.attendees_tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 
@@ -170,6 +183,56 @@ int row_count = 2;
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesCell" owner:self options:nil] objectAtIndex:0];
         }
         cell.attendee_count_Label.text=[NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
+        cell.email_textField.delegate=self;
+        cell.firstname_textField.delegate=self;
+        cell.lastname_textField.delegate=self;
+        
+        @try {
+            GISAttendees_ListObject *attendee_ListObj_here ;
+            @try {
+                attendee_ListObj_here = [attendeesObject.attendeesList_mutArray objectAtIndex:indexPath.row];
+            }
+            @catch (NSException *exception) {
+                [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees CellForRowAtIndexPath %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+            }
+            
+            
+            cell.email_textField.text=attendee_ListObj_here.email_String;
+            cell.firstname_textField.text=attendee_ListObj_here.firstname_String;
+            cell.lastname_textField.text=attendee_ListObj_here.lastname_String;
+            cell.modeOf_answer_Label.text=attendee_ListObj_here.modeOf_String;
+            cell.directly_utilized_services_answer_Label.text=attendee_ListObj_here.directly_utilzed_String;
+            cell.servicesNeeded_answer_Label.text=attendee_ListObj_here.servicesNeeded_String;
+            
+            
+            cell.cellSectionNumber = indexPath.section;
+            cell.cellRowNumber = indexPath.row;
+            cell.cellIndexpath = indexPath;
+            
+            
+            cell.attendee_Label.textColor=UIColorFromRGB(0x000000);
+            cell.attendee_Label.font=[GISFonts large];
+            cell.firstname_Label.font=[GISFonts normal];
+            cell.firstname_textField.font=[GISFonts small];
+            cell.lastname_Label.font=[GISFonts normal];
+            cell.lastname_textField.font=[GISFonts small];
+            cell.email_Label.font=[GISFonts normal];
+            cell.email_textField.font=[GISFonts small];
+            
+            cell.modeOf_Label_2.font=[GISFonts normal];
+            cell.modeOf_Label.font=[GISFonts normal];
+            cell.modeOf_answer_Label.font=[GISFonts small];
+            cell.directly_utilized_services_Label_2.font=[GISFonts normal];
+            cell.directly_utilized_services_Label.font=[GISFonts normal];
+            cell.directly_utilized_services_answer_Label.font=[GISFonts small];
+            
+            cell.servicesNeeded_Label.font=[GISFonts normal];
+            cell.servicesNeeded_answer_Label.font=[GISFonts small];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        @catch (NSException *exception) {
+            [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees CellFor  action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+        }
         return cell;
     }
     
@@ -221,10 +284,13 @@ int row_count = 2;
 }
 
 
-
 -(IBAction)pickerButtonPressed:(id)sender
 {
+    [self resignCurrentTextField];
+    
     UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISAttendeesTopCell *)button.superview.superview.superview;
+    attendeesCell=(GISAttendeesTopCell *)tempCellRef;
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
@@ -256,59 +322,98 @@ int row_count = 2;
         tableViewController.popOverArray=primaryAudience_mutArray;
         
     }
+    if (attendeesCell.cellSectionNumber==1) {
+        if ([sender tag]==555)
+        {
+            btnTag=555;
+            tableViewController.popOverArray=modeofcommunication_mutArray;
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.modeOf_Button.frame.origin.x+135, attendeesCell.modeOf_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
+        else if ([sender tag]==666)
+        {
+            btnTag=666;
+            tableViewController.popOverArray=directly_utilizedServices_mutArray;
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.directly_utilized_services_Button.frame.origin.x+135, attendeesCell.directly_utilized_services_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
+        else if ([sender tag]==777)
+        {
+            btnTag=777;
+            tableViewController.popOverArray=servicesNeeded_mutArray;
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.servicesNeeded_Button.frame.origin.x+135, attendeesCell.servicesNeeded_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
+        
+    }
+    else
+    {
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+135, button.frame.origin.y+20, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
 }
 
-
-
--(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    [popover dismissPopoverAnimated:YES];
-    
-    if (btnTag==111) {
-        attendeesObject.expectedNo_String=value_str;
-        attendeesObject.expectedNo_ID_String=[expectedNo_ID_mutArray objectAtIndex:[self getExpectedNoRowCount:value_str]];
-        
-        int countHere=[self getExpectedStr_value_before_hypen:attendeesObject.expectedNo_String];
-        
-        //Duplicates Removing delete duplicates (this is the best code)
-        NSMutableArray *discardedItems = [[NSMutableArray alloc]init];
-        if(countHere<[attendeesObject.attendeesList_mutArray count]){
-            int incrementCount=[attendeesObject.attendeesList_mutArray count];
-            for (int i=countHere; i<incrementCount;i++){
-                GISAttendees_ListObject *listObj=[attendeesObject.attendeesList_mutArray objectAtIndex:countHere];
-                [discardedItems addObject:listObj];
-                [attendeesObject.attendeesList_mutArray removeObjectsInArray:discardedItems];
+        [popover dismissPopoverAnimated:YES];
+        GISAttendees_ListObject *attendees_ListObject_here = [attendeesObject.attendeesList_mutArray objectAtIndex:attendeesCell.cellRowNumber];
+        if (btnTag==111) {
+            attendeesObject.expectedNo_String=value_str;
+            attendeesObject.expectedNo_ID_String=[expectedNo_ID_mutArray objectAtIndex:[self getExpectedNoRowCount:value_str]];
+            
+            int countHere=[self getExpectedStr_value_before_hypen:attendeesObject.expectedNo_String];
+            
+            //Duplicates Removing delete duplicates (this is the best code)
+            NSMutableArray *discardedItems = [[NSMutableArray alloc]init];
+            if(countHere<[attendeesObject.attendeesList_mutArray count]){
+                int incrementCount=[attendeesObject.attendeesList_mutArray count];
+                for (int i=countHere; i<incrementCount;i++){
+                    GISAttendees_ListObject *listObj=[attendeesObject.attendeesList_mutArray objectAtIndex:countHere];
+                    [discardedItems addObject:listObj];
+                    [attendeesObject.attendeesList_mutArray removeObjectsInArray:discardedItems];
+                }
             }
-        }
-        
-        if(![attendeesObject.attendeesList_mutArray count]<countHere){
-            for (int i=row_count; i<countHere;i++){
-                GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
-                [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
+            
+            if(![attendeesObject.attendeesList_mutArray count]<countHere){
+                for (int i=row_count; i<countHere;i++){
+                    GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
+                    [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
+                }
+                countHere=[attendeesObject.attendeesList_mutArray count];
             }
-            countHere=[attendeesObject.attendeesList_mutArray count];
+            
+            row_count=[attendeesObject.attendeesList_mutArray count];
         }
+        else if (btnTag==222)
+        {
+            attendeesObject.genderPreference_String=value_str;
+            attendeesObject.genderPreference_ID_String=[genderPreference_ID_Array objectAtIndex:[self getGenderRowCount:value_str]];
+        }
+        else if (btnTag==333)
+        {
+            attendeesObject.preference_String=value_str;
+            attendeesObject.preference_ID_String=id_str;
+        }
+        else if (btnTag==444)
+        {
+            attendeesObject.primaryAudience_String=value_str;
+            attendeesObject.primaryAudience_ID_String=id_str;
+        }
+        else if (btnTag==555)
+        {
+            attendees_ListObject_here.modeOf_String=value_str;
+            attendees_ListObject_here.modeOfCommuniation_ID_String=id_str;
+            [attendeesObject.attendeesList_mutArray replaceObjectAtIndex:attendeesCell.cellRowNumber withObject:attendees_ListObject_here];
+        }
+        else if (btnTag==666)
+        {
+            attendees_ListObject_here.directly_utilzed_String=value_str;
+            [attendeesObject.attendeesList_mutArray replaceObjectAtIndex:attendeesCell.cellRowNumber withObject:attendees_ListObject_here];
+        }
+        else if (btnTag==777)
+        {
+            attendees_ListObject_here.servicesNeeded_String=value_str;
+            attendees_ListObject_here.serviceNedded_ID_String=id_str;
+            [attendeesObject.attendeesList_mutArray replaceObjectAtIndex:attendeesCell.cellRowNumber withObject:attendees_ListObject_here];
+        }
+        [self.attendees_tableView reloadData];
         
-        row_count=[attendeesObject.attendeesList_mutArray count];
-    }
-    else if (btnTag==222)
-    {
-        attendeesObject.genderPreference_String=value_str;
-        attendeesObject.genderPreference_ID_String=[genderPreference_ID_Array objectAtIndex:[self getGenderRowCount:value_str]];
-    }
-    else if (btnTag==333)
-    {
-        attendeesObject.preference_String=value_str;
-        attendeesObject.preference_ID_String=id_str;
-    }
-    else if (btnTag==444)
-    {
-        attendeesObject.primaryAudience_String=value_str;
-        attendeesObject.primaryAudience_ID_String=id_str;
-    }
-    [self.attendees_tableView reloadData];
-    
 }
 
 
@@ -333,6 +438,7 @@ int row_count = 2;
     return rowValue;
 }
 
+
 -(int)getGenderRowCount:(NSString *)valueStr
 {
     int rowValue;
@@ -344,6 +450,463 @@ int row_count = 2;
     return rowValue;
     
 }
+
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
+{
+    NSDictionary *dict=[notification userInfo];
+    [[NSNotificationCenter defaultCenter]removeObserver:kselectedChooseReqNumber];
+    attendeesObject.choose_request_String=[dict valueForKey:@"value"];
+    attendeesObject.choose_request_ID_String=[dict valueForKey:@"id"];
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+}
+
+-(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    //[self removeLoadingView];
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeChooseRequestDetailsObjects];
+    chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
+    [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequestDetailsObj];
+    
+    appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
+    appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+    appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    
+    
+    
+    @try {
+        //Expected no
+        // attendeesObject.expectedNo_String=chooseRequestDetailsObj.expected_No_of_attendees_String_chooseReqParsedDetails;
+        isCompleteRequest = chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+        inCompleteTab_string = chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
+        
+        for (int i=0; i<expectedNo_ID_mutArray.count; i++) {
+            NSString *findValue_str=[expectedNo_ID_mutArray objectAtIndex:i];
+            BOOL found;
+            if([findValue_str isEqualToString:chooseRequestDetailsObj.expected_No_of_attendees_String_chooseReqParsedDetails])
+            {
+                found=YES;
+                attendeesObject.expectedNo_String=[expectedNo_mutArray objectAtIndex:i];
+                attendeesObject.expectedNo_ID_String=[expectedNo_ID_mutArray objectAtIndex:i];
+            }
+            if(!found)
+                attendeesObject.expectedNo_String=@"";
+            
+        }
+        
+        //Gender Value
+        //attendeesObject.genderPreference_String=chooseRequestDetailsObj.gender_preference_String_chooseReqParsedDetails;
+        for (int i=0; i<genderPreference_ID_Array.count; i++) {
+            BOOL found;
+            NSString *find_str= [genderPreference_ID_Array objectAtIndex:i];
+            if([find_str isEqualToString:chooseRequestDetailsObj.gender_preference_String_chooseReqParsedDetails])
+            {
+                found=YES;
+                attendeesObject.genderPreference_String=[genderPreference_mutArray objectAtIndex:i];
+                attendeesObject.genderPreference_ID_String=[genderPreference_ID_Array objectAtIndex:i];
+            }
+            if(!found)
+                attendeesObject.genderPreference_String=@"";
+        }
+        
+        ////service Provider Preference
+        //attendeesObject.preference_String=chooseRequestDetailsObj.service_providergender_preference_String_chooseReqParsedDetails;
+        for (int i=0; i<preference_mutArray.count; i++) {
+            BOOL found;
+            GISDropDownsObject *reqObj= [preference_mutArray objectAtIndex:i];
+            if([reqObj.id_String isEqualToString:chooseRequestDetailsObj.service_providergender_preference_String_chooseReqParsedDetails])
+            {
+                found=YES;
+                attendeesObject.preference_String=reqObj.value_String;
+                attendeesObject.preference_ID_String=reqObj.id_String;
+            }
+            if(!found)
+                attendeesObject.preference_String=@"";
+        }
+        
+        for (int i=0; i<primaryAudience_mutArray.count; i++) {
+            BOOL found;
+            GISDropDownsObject *reqObj= [primaryAudience_mutArray objectAtIndex:i];
+            if([reqObj.id_String isEqualToString:chooseRequestDetailsObj.primaryAudience_String_chooseReqParsedDetails])
+            {
+                found=YES;
+                attendeesObject.primaryAudience_String=reqObj.value_String;
+                attendeesObject.primaryAudience_ID_String=reqObj.id_String;
+            }
+            if(!found)
+                attendeesObject.primaryAudience_String=@"";
+        }
+    }
+    @catch (NSException *exception) {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees getChooseRequestDetails  action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    
+    [[GISServerManager sharedManager] getAttendees_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_get_Attendees_Details:) failAction:@selector(failuremethod_get_Attendees_Details:)];
+}
+
+-(void)failuremethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+
+-(void)successmethod_get_Attendees_Details:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    GISAttendeesDetailsStore *store;
+    NSLog(@"successmethod_get_Attendees_Details Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeAttendees_Details_Objects];
+    [attendeesObject.attendeesList_mutArray removeAllObjects];
+    store =[[GISAttendeesDetailsStore alloc]initWithStoreDictionary:response.responseJson];
+    attendeesObject.attendeesList_mutArray= [[GISStoreManager sharedManager]getAttendees_Details_Objects];
+    
+    
+    if (attendeesObject.attendeesList_mutArray.count==0) {
+        row_count=2;
+        [self performSelector:@selector(add_AttendeeListObj_ForStoring_Data) withObject:nil];
+    }
+    else if (attendeesObject.attendeesList_mutArray.count==1) {
+        row_count=2;
+        [self performSelector:@selector(add_AttendeeListObj_ForStoring_Data) withObject:nil];
+    }
+    else
+    {
+        row_count=[attendeesObject.attendeesList_mutArray count];
+        
+    }
+    [self.attendees_tableView reloadData];
+    
+    
+    
+}
+-(void)failuremethod_get_Attendees_Details:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+-(void)add_AttendeeListObj_ForStoring_Data
+{
+    [attendeesObject.attendeesList_mutArray removeAllObjects];
+    NSMutableArray *arrayHere=[[NSMutableArray alloc]init];
+    for (int i=0; i<row_count; i++)
+    {
+        GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
+        [arrayHere addObject:[self addEmptyData:attendees_ListObject1]];
+    }
+    attendeesObject.attendeesList_mutArray=arrayHere;
+    [attendees_tableView reloadData];
+}
+
+#pragma mark Text Field Delegate Methods
+
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self.attendees_tableView setContentSize:CGSizeMake(1004, 800)];
+    currentTextField=textField;
+    id textFieldSuper = textField;
+    while (![textFieldSuper isKindOfClass:[GISAttendeesTopCell class]]) {
+        textFieldSuper = [textFieldSuper superview];
+    }
+    id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
+    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
+    if (attendeeCellHere.cellSectionNumber == 1){
+        if (attendeeCellHere.cellRowNumber==1&&textField.tag==111&&textField.tag==222) {
+            [GISUtility moveemailView:YES viewHeight:0 view:self.view];
+        }
+        else{
+            [GISUtility moveemailView:YES viewHeight:-(attendeeCellHere.cellRowNumber*attendeeCellHere.frame.size.height+40) view:self.view];
+        }
+    }
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    // Get the cell in which the textfield is embedded
+    id textFieldSuper = textField;
+    while (![textFieldSuper isKindOfClass:[GISAttendeesTopCell class]]) {
+        textFieldSuper = [textFieldSuper superview];
+    }
+    //[GISUtility moveemailView:YES viewHeight:195 view:_currentView];
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
+    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
+    if (attendeeCellHere.cellSectionNumber == 1)
+    {
+        if (textField.tag==333) {
+            [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+        }
+        GISAttendees_ListObject *attendees_ListObject_here = [attendeesObject.attendeesList_mutArray objectAtIndex:attendeeCellHere.cellRowNumber];
+        attendees_ListObject_here.email_String=attendeeCellHere.email_textField.text;
+        attendees_ListObject_here.firstname_String=attendeeCellHere.firstname_textField.text;
+        attendees_ListObject_here.lastname_String=attendeeCellHere.lastname_textField.text;
+        [attendeesObject.attendeesList_mutArray replaceObjectAtIndex:attendeeCellHere.cellRowNumber withObject:attendees_ListObject_here];
+        
+        if ([attendees_ListObject_here.email_String length]) {
+            NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+            NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailReg];
+            if ([emailTest evaluateWithObject:attendees_ListObject_here.email_String] != YES)
+            {
+                [self resignCurrentTextField];
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_Enter_Valid_Email", TABLE, nil)];
+                return;
+            }
+        }
+    }
+}
+
+-(void)resignCurrentTextField
+{
+    [self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
+    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+    [currentTextField resignFirstResponder];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    [self resignCurrentTextField];
+    return YES;
+}
+
+-(void)nextButtonPressed:(id)sender
+{
+    [self resignCurrentTextField];
+    if(!appDelegate.isFromContacts){
+        
+        
+        if([inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"] || [inCompleteTab_string isEqualToString:@"Attendees are In-Complete"]|| [inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]|| [inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
+            
+            
+        }else{
+            if([isCompleteRequest isEqualToString:@"false"]){
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:inCompleteTab_string];
+                [self removeLoadingView];
+                return;
+            }
+        }
+        
+    }
+    [self saveAttendeesData];
+    
+}
+-(void)saveAttendeesData
+{
+    @try {
+        
+        appDelegate.isNewRequest = NO;
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
+        if ([attendeesObject.choose_request_String isEqualToString:NSLocalizedStringFromTable(@"new request", TABLE, nil)]) {
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
+            [self removeLoadingView];
+            return;
+        }
+        else if([attendeesObject.expectedNo_ID_String length]<1)
+        {
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_no_of_expected_attendees", TABLE, nil)];
+            [self removeLoadingView];
+            return;
+        }
+        else if([login_Obj.userStatus_string isEqualToString:kInternal])
+        {
+            if([attendeesObject.primaryAudience_String length]<1)
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_primary_audience", TABLE, nil)];
+                [self removeLoadingView];
+                return;
+            }
+        }
+        
+        
+        
+        NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
+        NSMutableDictionary *attendeesDict=[[NSMutableDictionary alloc]init];
+        NSMutableArray *attendees_array=[[NSMutableArray alloc]init];
+        NSMutableArray *attendees_list_array=[[NSMutableArray alloc]init];
+        NSMutableDictionary *atteedees_Listdict;
+        
+        int max_count=0;
+        BOOL isValidate_Mandatory=YES;
+        if (attendeesObject.attendeesList_mutArray.count>0)
+        {
+            for (int i=0;i<[attendeesObject.attendeesList_mutArray count];i++)
+            {
+                
+                GISAttendees_ListObject *gisList = [attendeesObject.attendeesList_mutArray objectAtIndex:i];
+                
+                if (max_count==2)
+                    isValidate_Mandatory=NO;
+                
+                if (isValidate_Mandatory) {
+                    max_count++;
+                    if (([gisList.firstname_String length]==0) || ([gisList.lastname_String length]==0) || ([gisList.email_String length]==0)){
+                        
+                        [self removeLoadingView];
+                        
+                        if(([gisList.firstname_String length]==0)&&([gisList.lastname_String length]==0)&&([gisList.email_String length]==0))
+                        {
+                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"provide atleast 2 attendees", TABLE, nil)];
+                            
+                            return;
+                        }
+                        if([gisList.firstname_String length]==0)
+                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_first_name", TABLE, nil)];
+                        else if([gisList.lastname_String length]==0)
+                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_last_name", TABLE, nil)];
+                        else if([gisList.email_String length]==0)
+                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_email", TABLE, nil)];
+                        
+                        return;
+                        
+                    }
+                    if ([gisList.email_String length])
+                    {
+                        NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailReg];
+                        if ([emailTest evaluateWithObject:gisList.email_String] != YES)
+                        {
+                            [self resignCurrentTextField];
+                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_Enter_Valid_Email", TABLE, nil)];
+                            [self removeLoadingView];
+                            return;
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        
+        NSMutableArray *duplicates=[[NSMutableArray alloc]init];
+        for(int i=0 ;i<attendeesObject.attendeesList_mutArray.count;i++)
+        {
+            GISAttendees_ListObject *gisList = [attendeesObject.attendeesList_mutArray objectAtIndex:i];
+            if (([gisList.firstname_String length]==0) && ([gisList.lastname_String length]==0) && ([gisList.email_String length]==0) && ([gisList.modeOf_String length]==0)&&([gisList.servicesNeeded_String length]==0)&&([gisList.directly_utilzed_String length]==0))
+            {
+                
+                [duplicates addObject:gisList];
+            }
+            
+        }
+        [attendeesObject.attendeesList_mutArray removeObjectsInArray:duplicates];
+        
+        if (attendeesObject.attendeesList_mutArray.count>0)
+        {
+            for (int i=0;i<[attendeesObject.attendeesList_mutArray count];i++)
+            {
+                GISAttendees_ListObject *gisList = [attendeesObject.attendeesList_mutArray objectAtIndex:i];
+                atteedees_Listdict=[[NSMutableDictionary alloc]init];
+                if (gisList.attendee_ID_String.length==0 || [gisList.attendee_ID_String isKindOfClass:[NSNull class]])
+                    [atteedees_Listdict  setObject:@"" forKey:kAttendees_Attendee_ID];
+                else
+                    [atteedees_Listdict  setObject:gisList.attendee_ID_String forKey:kAttendees_Attendee_ID];
+                
+                [atteedees_Listdict  setObject:gisList.firstname_String forKey:kAttendees_Firstname];
+                [atteedees_Listdict  setObject:gisList.lastname_String forKey:kAttendees_Lastname];
+                [atteedees_Listdict  setObject:gisList.email_String forKey:kAttendees_Email];
+                [atteedees_Listdict  setObject:[GISUtility returningstring:gisList.modeOfCommuniation_ID_String] forKey:kAttendees_Modeofcommunication];
+                [atteedees_Listdict  setObject:[GISUtility returningstring:gisList.serviceNedded_ID_String] forKey:kAttendees_Serviceneeded];
+                [atteedees_Listdict  setObject:[GISUtility returningstring:gisList.directly_utilzed_String] forKey:kAttendees_Utilizeservice];
+                [attendees_list_array addObject:atteedees_Listdict];
+            }
+        }
+        
+        [attendeesDict setValue:attendeesObject.choose_request_ID_String forKey:kAttendees_RequestNo];
+        [attendeesDict setValue:attendeesObject.expectedNo_ID_String forKey:kAttendees_NoOfAttendees];
+        [attendeesDict setValue:attendeesObject.genderPreference_ID_String forKey:kAttendees_GenderPreference];
+        [attendeesDict setValue:attendeesObject.preference_ID_String forKey:kAttendees_ServiceProviderGenderPref];
+        
+        [attendeesDict setValue:login_Obj.token_string forKey:kAttendees_token];
+        [attendeesDict setValue:@"" forKey:kAttendees_PrimaryAudience];
+        if([login_Obj.userStatus_string isEqualToString:kInternal])
+            [attendeesDict setValue:[GISUtility returningstring:attendeesObject.primaryAudience_ID_String] forKey:kAttendees_PrimaryAudience];
+        
+        [attendees_array addObject:attendeesDict];
+        
+        [mainDict setObject:attendees_array forKey:kAttendees_oAttendee];
+        [mainDict setObject:attendees_list_array forKey:kAttendees_oRequest];
+        
+        
+        NSLog(@"--------main Dict-->%@",mainDict);
+        
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults synchronize];
+        [userDefaults setValue:attendeesObject.choose_request_String forKey:kDropDownValue];
+        
+        
+        
+        
+        [[GISServerManager sharedManager] saveAttendeesData:self withParams:mainDict finishAction:@selector(successmethod_Attendees_save_update:) failAction:@selector(failuremethod_Attendees_save_update:)];
+    }
+    @catch (NSException *exception) {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees For Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+    
+    
+}
+
+
+-(void)successmethod_Attendees_save_update:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Attendees successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSArray *array=response.responseJson;
+    NSDictionary *dictNew=[array lastObject];
+    NSString *success= [dictNew objectForKey:kStatusCode];
+    
+    if ([success isEqualToString:@"200"]) {
+        
+        if([appDelegate.attendeesArray count] >0)
+            [appDelegate.attendeesArray removeAllObjects];
+        
+        [appDelegate.attendeesArray addObjectsFromArray:attendeesObject.attendeesList_mutArray];
+        
+            appDelegate.isFromAttendees = YES;
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+            
+    }
+    else
+    {
+        appDelegate.isFromAttendees = NO;
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_Failed", TABLE, nil)];
+    }
+    
+    
+    
+}
+-(void)failuremethod_Attendees_save_update:(GISJsonRequest *)response
+{
+    appDelegate.isFromAttendees = NO;
+    NSLog(@"Failure");
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

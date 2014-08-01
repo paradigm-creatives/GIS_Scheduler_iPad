@@ -114,6 +114,7 @@
 		BA7D6A031977EE720014C505 /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		BA8D0CB4198A241100143AA1 /* GISPopOverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA8D0CB3198A241100143AA1 /* GISPopOverTableViewController.xib */; };
 		BA8D0CB6198A272500143AA1 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */; };
+		BA8D0CB9198A674700143AA1 /* GISAttendeesDetailsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8D0CB8198A674700143AA1 /* GISAttendeesDetailsStore.m */; };
 		BA93BE0C197940A80097426C /* GISJobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93BE0A197940A80097426C /* GISJobDetailsViewController.m */; };
 		BA93BE0D197940A80097426C /* GISJobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA93BE0B197940A80097426C /* GISJobDetailsViewController.xib */; };
 		BA9E6AE71977E88400609E69 /* GISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9E6A601977E88400609E69 /* GISAppDelegate.m */; };
@@ -434,6 +435,8 @@
 		BA694A4F1975389D00AC8CCC /* GISDatesAndTimesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDatesAndTimesViewController.xib; sourceTree = "<group>"; };
 		BA8D0CB3198A241100143AA1 /* GISPopOverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPopOverTableViewController.xib; sourceTree = "<group>"; };
 		BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISVIewEditRequestViewController.xib; sourceTree = "<group>"; };
+		BA8D0CB7198A674700143AA1 /* GISAttendeesDetailsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISAttendeesDetailsStore.h; sourceTree = "<group>"; };
+		BA8D0CB8198A674700143AA1 /* GISAttendeesDetailsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISAttendeesDetailsStore.m; sourceTree = "<group>"; };
 		BA93BE09197940A80097426C /* GISJobDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsViewController.h; sourceTree = "<group>"; };
 		BA93BE0A197940A80097426C /* GISJobDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsViewController.m; sourceTree = "<group>"; };
 		BA93BE0B197940A80097426C /* GISJobDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobDetailsViewController.xib; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 		BA9E6A611977E88400609E69 /* Attendees */ = {
 			isa = PBXGroup;
 			children = (
+				BA8D0CB7198A674700143AA1 /* GISAttendeesDetailsStore.h */,
+				BA8D0CB8198A674700143AA1 /* GISAttendeesDetailsStore.m */,
 				BA9E6A631977E88400609E69 /* GISAttendeesTopCell.h */,
 				BA9E6A641977E88400609E69 /* GISAttendeesTopCell.m */,
 				BA9E6A651977E88400609E69 /* GISAttendeesTopCell.xib */,
@@ -1526,6 +1531,7 @@
 				8A3B1E4E197CF58300963E8C /* NSString+SBJSON.m in Sources */,
 				BA93BE0C197940A80097426C /* GISJobDetailsViewController.m in Sources */,
 				8A15B4E3197D2A70008B4129 /* GISDatesAndTimesObject.m in Sources */,
+				BA8D0CB9198A674700143AA1 /* GISAttendeesDetailsStore.m in Sources */,
 				8A15B4E6197D2AC9008B4129 /* GISAttendeesObject.m in Sources */,
 				8A505303197807C7007288F5 /* GISLocationDetailsCell.m in Sources */,
 				8A15B4E0197D2A39008B4129 /* GISChooseRequestDetailsObject.m in Sources */,

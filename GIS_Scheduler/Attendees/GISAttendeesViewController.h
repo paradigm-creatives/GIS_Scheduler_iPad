@@ -13,8 +13,14 @@
 #import "GISLoginDetailsObject.h"
 #import "GISPopOverTableViewController.h"
 #import "GISLoginDetailsObject.h"
-@interface GISAttendeesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISVIewEditRequestViewController.h"
+#import "GISChooseRequestDetailsObject.h"
+#import "GISAttendeesTopCell.h"
+@interface GISAttendeesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,chooseRequestProtocol>
 {
+    GISAttendeesTopCell *attendeesCell;
+    
+    GISChooseRequestDetailsObject *chooseRequestDetailsObj;
     GISAttendeesObject *attendeesObject;
     GISAttendees_ListObject *attendees_ListObject;
     GISAppDelegate *appDelegate;
@@ -45,8 +51,11 @@
     
     GISLoginDetailsObject *login_Obj;
     
+    GISVIewEditRequestViewController *viewEditSchedule_obj;
+    NSString *isCompleteRequest;
+    NSString * inCompleteTab_string;
 }
--(void)sendTheSelectedPopOverData:(NSString *)id_str :(NSString *)value_str;
+
 @property (nonatomic,strong) UIPopoverController *popover_controller;
 
 @property(nonatomic,strong)IBOutlet UITableView *attendees_tableView;

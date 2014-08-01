@@ -32,4 +32,11 @@
 @property (strong, nonatomic) NSString *createdDateString;
 @property (strong, nonatomic) NSString *statusString;
 
+@property (strong, nonatomic) NSMutableArray *attendeesArray;
+@property (strong, nonatomic) NSMutableArray *datesArray;
+@property (strong, nonatomic) NSMutableArray *detailArray;
+@property (readwrite, nonatomic) BOOL isFromAttendees;
+
+
+
 @end

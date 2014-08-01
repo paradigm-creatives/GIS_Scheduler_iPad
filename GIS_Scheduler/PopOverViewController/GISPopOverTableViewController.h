@@ -18,6 +18,7 @@
 
     GISAppDelegate *appDelegate;
 }
++(GISPopOverTableViewController *)sharedManager;
 
 @property(nonatomic,strong) IBOutlet UITableView *popOverTableView;
 

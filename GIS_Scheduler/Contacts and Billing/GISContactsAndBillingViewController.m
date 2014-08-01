@@ -280,7 +280,7 @@
 //        [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
         
         if (![appDelegate.chooseRequest_ID_String isKindOfClass:[NSNull class]]|| (appDelegate.chooseRequest_ID_String!=nil)) {
-            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+            [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
             [paramsDict setObject:login_Obj.token_string forKey:kToken];
              [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
         }
