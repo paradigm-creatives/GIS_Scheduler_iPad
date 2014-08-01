@@ -19,6 +19,8 @@
 #import "GISAttendees_ListObject.h"
 #import "GISSearchReqObject.h"
 #import "GISViewScheduleObject.h"
+#import "GISSchedulerSPJobsObject.h"
+#import "GISSchedulerNMRequestsObject.h"
 
 @interface GISStoreManager : NSObject
 + (GISStoreManager *)sharedManager;
@@ -131,5 +133,13 @@
 - (BOOL)addRequestNumbers_SearchJobsObject:(GISDropDownsObject *)requestNumbers_SearchJobsObject;
 - (NSMutableArray*)getRequestNumbers_SearchJobsObjects;
 - (void)removeRequestNumbers_SearchJobsObjects;
+
+-(BOOL)addRequestJobs_SPJobsObject:(GISSchedulerSPJobsObject *)request_SPJobsObject;
+- (NSMutableArray*)getRequestJobs_SPJobsObject;
+- (void)removeRequestJobs_SPJobsObject;
+
+-(BOOL)addRequests_NMRequestObject:(GISSchedulerNMRequestsObject *)request_NMRequestsObject;
+- (NSMutableArray*)getRequest_NMRequestObject;
+- (void)removeRequest_NMRequestObject;
 
 @end

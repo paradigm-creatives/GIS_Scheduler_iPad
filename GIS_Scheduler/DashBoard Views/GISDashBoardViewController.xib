@@ -16,10 +16,15 @@
                 <outlet property="datListView" destination="CVS-Xi-47g" id="glk-rU-zak"/>
                 <outlet property="earlierDateReq_Label" destination="Acy-iD-IjV" id="01f-hU-pnl"/>
                 <outlet property="earliestDate_Label" destination="jBc-an-Ajg" id="Jej-Gd-wb3"/>
+                <outlet property="endTimeSP_Label" destination="XF1-M8-eVh" id="Qk0-F3-EKS"/>
                 <outlet property="eventTypeReq_Label" destination="aFD-XW-sSA" id="bhw-0O-6go"/>
                 <outlet property="eventType_Label" destination="gws-PH-1qC" id="N2A-mi-qNC"/>
+                <outlet property="eventtypeSP_Label" destination="Qhz-32-zMA" id="E2K-jg-Xxt"/>
+                <outlet property="gisResponseSP_Label" destination="ZDR-kC-7DM" id="9XF-wR-DZv"/>
                 <outlet property="inProgress_Label" destination="kwC-lM-eY7" id="Wox-1H-asz"/>
                 <outlet property="incompleteRequest_Label" destination="vbc-tS-jxt" id="zW5-Vk-3zG"/>
+                <outlet property="jobDateSP_Label" destination="YQh-5f-YhV" id="KcK-aW-84p"/>
+                <outlet property="jobNameSP_Label" destination="PiQ-Ev-N4R" id="73M-Hy-gsI"/>
                 <outlet property="listTableView" destination="fuA-kP-1JD" id="XhX-l2-5Kt"/>
                 <outlet property="navigationBar" destination="svv-nw-C3G" id="Dqz-pL-sKf"/>
                 <outlet property="navigation_item" destination="uHX-gQ-yUy" id="VIy-49-edC"/>
@@ -27,17 +32,22 @@
                 <outlet property="onHold_Label" destination="W7R-uy-ned" id="bfW-tQ-KpF"/>
                 <outlet property="otherServicesReq_Label" destination="Htf-jQ-qkx" id="h2g-oh-h9H"/>
                 <outlet property="otherServices_Label" destination="Cqc-n4-9xB" id="yLa-u7-3HY"/>
+                <outlet property="payTypeSP_Label" destination="61o-H0-1gQ" id="mf0-nI-hNK"/>
                 <outlet property="requestIDReq_Label" destination="Ja6-w2-VG0" id="bPS-ET-9Rb"/>
                 <outlet property="requestID_Label" destination="f8v-c4-MLA" id="it1-OY-dPf"/>
+                <outlet property="requestedDateSP_Label" destination="Eiq-vq-vaO" id="ZXt-SZ-CLl"/>
                 <outlet property="schedulerReq_Label" destination="VNM-Kg-t2L" id="g9Y-Wm-EZ2"/>
                 <outlet property="scheduler_Label" destination="ywO-Yt-wNd" id="mL9-PN-rJf"/>
                 <outlet property="segmentedControl_" destination="2RQ-aI-GaV" id="dkS-tG-Rq0"/>
+                <outlet property="serviceProviderSP_Label" destination="Apw-P7-ugz" id="8d9-T7-YQ9"/>
+                <outlet property="startTimeSP_Label" destination="4VL-D6-3qE" id="tNc-mh-sAN"/>
                 <outlet property="statusReq_Label" destination="Wfy-aU-s5r" id="gdk-Yx-IdG"/>
                 <outlet property="status_Label" destination="hBS-Oj-AHh" id="tM8-i1-G92"/>
                 <outlet property="submissionDateReq_Label" destination="jw1-T4-0bE" id="zdQ-k8-Elb"/>
                 <outlet property="tableHeader1_UIView" destination="72S-dD-uFA" id="wyH-GV-UD8"/>
                 <outlet property="tableHeader2_UIView" destination="a1G-iw-NCI" id="sgA-Tn-2Nn"/>
                 <outlet property="tableHeader3_UIView" destination="sTX-Le-4yc" id="XdZ-mT-BeB"/>
+                <outlet property="totalHoursSP_Label" destination="Hjk-EG-IUJ" id="hhl-Bz-kKi"/>
                 <outlet property="view" destination="m9C-ho-NXv" id="bch-MF-ISM"/>
                 <outlet property="waitingForApproval_Label" destination="xdD-XX-ph0" id="Js9-6G-zec"/>
             </connections>
@@ -202,7 +212,7 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fuA-kP-1JD">
                             <rect key="frame" x="0.0" y="158" width="961" height="546"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.84674228279999997" green="0.89082785909999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="aFc-TM-DBj"/>
                                 <outlet property="delegate" destination="-1" id="zUv-Pt-dNk"/>
@@ -416,119 +426,119 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiQ-Ev-N4R">
-                                    <rect key="frame" x="7" y="7" width="43" height="21"/>
+                                    <rect key="frame" x="39" y="7" width="43" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQh-5f-YhV">
-                                    <rect key="frame" x="65" y="7" width="71" height="21"/>
+                                    <rect key="frame" x="120" y="7" width="71" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VL-D6-3qE">
-                                    <rect key="frame" x="147" y="7" width="74" height="21"/>
+                                    <rect key="frame" x="197" y="7" width="74" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XF1-M8-eVh">
-                                    <rect key="frame" x="237" y="7" width="63" height="21"/>
+                                    <rect key="frame" x="285" y="7" width="63" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Hours" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="58" translatesAutoresizingMaskIntoConstraints="NO" id="Hjk-EG-IUJ">
-                                    <rect key="frame" x="317" y="0.0" width="58" height="34"/>
+                                    <rect key="frame" x="360" y="0.0" width="58" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="83" translatesAutoresizingMaskIntoConstraints="NO" id="Qhz-32-zMA">
-                                    <rect key="frame" x="387" y="1" width="83" height="34"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="40" translatesAutoresizingMaskIntoConstraints="NO" id="Qhz-32-zMA">
+                                    <rect key="frame" x="429" y="1" width="40" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcm-LM-cuD">
-                                    <rect key="frame" x="471" y="1" width="1" height="36"/>
+                                    <rect key="frame" x="477" y="1" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Service Provider Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="109" translatesAutoresizingMaskIntoConstraints="NO" id="Apw-P7-ugz">
-                                    <rect key="frame" x="480" y="2" width="109" height="34"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Service Provider Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="Apw-P7-ugz">
+                                    <rect key="frame" x="478" y="2" width="108" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requested Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eiq-vq-vaO">
-                                    <rect key="frame" x="601" y="7" width="104" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requested Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="74" translatesAutoresizingMaskIntoConstraints="NO" id="Eiq-vq-vaO">
+                                    <rect key="frame" x="590" y="1" width="74" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n6v-LR-3c3">
-                                    <rect key="frame" x="59" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="113" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aD6-Sg-X58">
-                                    <rect key="frame" x="138" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="194" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9F-Xh-vbY">
-                                    <rect key="frame" x="384" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="418" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I3u-Ub-c5u">
-                                    <rect key="frame" x="591" y="1" width="1" height="36"/>
+                                    <rect key="frame" x="585" y="1" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fe8-R8-bw1">
-                                    <rect key="frame" x="227" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="276" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dP8-en-0Gn">
-                                    <rect key="frame" x="308" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="356" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J37-F6-H3v">
-                                    <rect key="frame" x="713" y="-1" width="1" height="36"/>
+                                    <rect key="frame" x="669" y="-1" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pay Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="47" translatesAutoresizingMaskIntoConstraints="NO" id="61o-H0-1gQ">
-                                    <rect key="frame" x="716" y="1" width="47" height="34"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pay Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="61" translatesAutoresizingMaskIntoConstraints="NO" id="61o-H0-1gQ">
+                                    <rect key="frame" x="681" y="2" width="61" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="omG-09-Jgm">
-                                    <rect key="frame" x="764" y="0.0" width="1" height="36"/>
+                                    <rect key="frame" x="759" y="0.0" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gis Response" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="96" translatesAutoresizingMaskIntoConstraints="NO" id="ZDR-kC-7DM">
-                                    <rect key="frame" x="768" y="2" width="96" height="34"/>
+                                    <rect key="frame" x="763" y="2" width="96" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yr6-e1-6rS">
-                                    <rect key="frame" x="866" y="1" width="1" height="36"/>
+                                    <rect key="frame" x="862" y="1" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2rM-n5-IJg">
-                                    <rect key="frame" x="909" y="2" width="1" height="36"/>
+                                    <rect key="frame" x="910" y="2" width="1" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>

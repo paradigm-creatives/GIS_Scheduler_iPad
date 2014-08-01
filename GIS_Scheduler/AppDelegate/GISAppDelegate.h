@@ -31,4 +31,5 @@
 @property (strong, nonatomic) NSString *createdByString;
 @property (strong, nonatomic) NSString *createdDateString;
 @property (strong, nonatomic) NSString *statusString;
+
 @end

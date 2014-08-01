@@ -45,6 +45,8 @@
 @property (nonatomic, retain) NSMutableArray *payLevel_Array;
 @property (nonatomic, retain) NSMutableArray *serviceType_ServiceProvider_Array;
 @property (nonatomic, retain) NSMutableArray *registeredCOnsumers_Array;
+@property (nonatomic, retain) NSMutableArray *request_SPJobsArray;
+@property (nonatomic, retain) NSMutableArray *request_NMRequestsArray;
 
 @end
 
@@ -93,6 +95,8 @@ static GISStoreManager *singletonManager = nil;
         _registeredCOnsumers_Array= [[NSMutableArray alloc]init];
         
         _requestNumbers_SearchJObsArray= [[NSMutableArray alloc]init];
+        _request_SPJobsArray = [[NSMutableArray alloc]init];
+        _request_NMRequestsArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -608,6 +612,47 @@ static GISStoreManager *singletonManager = nil;
 {
     [_requestNumbers_SearchJObsArray removeAllObjects];
 }
+
+#pragma mark ServiceProviderSPJobs Start
+-(BOOL)addRequestJobs_SPJobsObject:(GISSchedulerSPJobsObject *)request_SPJobsObject
+{
+    BOOL isAdded = FALSE;
+    if (request_SPJobsObject != nil) {
+        [_request_SPJobsArray addObject:request_SPJobsObject];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getRequestJobs_SPJobsObject
+{
+    return [_request_SPJobsArray count]?_request_SPJobsArray:nil;
+}
+- (void)removeRequestJobs_SPJobsObject
+{
+    [_request_SPJobsArray removeAllObjects];
+}
+
+#pragma mark ServiceProviderNMRequests Start
+-(BOOL)addRequests_NMRequestObject:(GISSchedulerNMRequestsObject *)request_NMRequestsObject
+{
+    BOOL isAdded = FALSE;
+    if (request_NMRequestsObject != nil) {
+        [_request_NMRequestsArray addObject:request_NMRequestsObject];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getRequest_NMRequestObject
+{
+    return [_request_NMRequestsArray count]?_request_NMRequestsArray:nil;
+}
+- (void)removeRequest_NMRequestObject
+{
+    [_request_NMRequestsArray removeAllObjects];
+}
+
 
 
 - (void)destroy{

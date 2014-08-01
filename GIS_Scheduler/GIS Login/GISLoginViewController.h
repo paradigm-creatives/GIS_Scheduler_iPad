@@ -10,6 +10,7 @@
 #import "GISAppDelegate.h"
 #import "GISStore.h"
 #import "GISDropDownStore.h"
+#import "GISSchedulerSPJobsStore.h"
 
 @interface GISLoginViewController : UIViewController<UITextFieldDelegate>
 {
@@ -21,6 +22,7 @@
     
     GISStore *gisStore;
     GISDropDownStore *dropDownStore;
+    GISSchedulerSPJobsStore *spJobsStore;
 }
 
 @property (nonatomic,strong) IBOutlet UITextField *userName_textfield;

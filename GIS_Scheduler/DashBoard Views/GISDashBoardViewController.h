@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
+#import "GISSchedulerSPJobsStore.h"
+#import "GISSchedulerNMRequestsStore.h"
 
 @interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -61,6 +63,11 @@
     IBOutlet UILabel *requestedDateSP_Label;
     IBOutlet UILabel *payTypeSP_Label;
     IBOutlet UILabel *gisResponseSP_Label;
+    
+    GISSchedulerSPJobsStore *spJobsStore;
+    GISSchedulerNMRequestsStore *nmRequestStore;
+    NSMutableArray *SPJobsArray;
+    NSMutableArray *NMRequestsArray;
 
     
     
