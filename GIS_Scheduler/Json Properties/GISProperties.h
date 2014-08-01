@@ -49,4 +49,6 @@
 
 #define GIS_SUBMIT_TIME_SHEET @"SubmitforTimeSheet"
 #define GIS_SUBMIT_FOR_REQUEST @"SubmitforRequest"
+#define GIS_GET_SCHEDULER_REQUESTED_JOBS @"GetSchedulerSPRequestedJobs"
+
 #endif

@@ -167,6 +167,9 @@
         [cell.viewingTypebtn setTag:15];
         
         [cell.descriptionTextView setDelegate:self];
+        
+        [cell.noOfUsersTextField setTag:666];
+        [cell.noOfUsersTextField setDelegate:self];
 
         
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -510,6 +513,36 @@
     }
     return YES;
 }
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    // Get the cell in which the textfield is embedded
+    if(textField.tag == 666){
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-290",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    // Get the cell in which the textfield is embedded
+    if(textField.tag == 666){
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 
 

@@ -33,12 +33,35 @@
     IBOutlet UILabel *incompleteRequest_Label;
     
     IBOutlet UIView *dashBoard_UIView;
-    IBOutlet UIView *tableHeader_UIView;
+    IBOutlet UIView *tableHeader1_UIView;
+    IBOutlet UIView *tableHeader2_UIView;
+    IBOutlet UIView *tableHeader3_UIView;
     
     IBOutlet UIView *colorIndicator_UIView;
     IBOutlet UISegmentedControl *segmentedControl_;
     
     IBOutlet UITableView *listTableView;
+    
+    IBOutlet UILabel *accountNameReq_Label;
+    IBOutlet UILabel *requestIDReq_Label;
+    IBOutlet UILabel *eventTypeReq_Label;
+    IBOutlet UILabel *otherServicesReq_Label;
+    IBOutlet UILabel *submissionDateReq_Label;
+    IBOutlet UILabel *earlierDateReq_Label;
+    IBOutlet UILabel *statusReq_Label;
+    IBOutlet UILabel *schedulerReq_Label;
+    
+    IBOutlet UILabel *jobNameSP_Label;
+    IBOutlet UILabel *jobDateSP_Label;
+    IBOutlet UILabel *startTimeSP_Label;
+    IBOutlet UILabel *endTimeSP_Label;
+    IBOutlet UILabel *totalHoursSP_Label;
+    IBOutlet UILabel *eventtypeSP_Label;
+    IBOutlet UILabel *serviceProviderSP_Label;
+    IBOutlet UILabel *requestedDateSP_Label;
+    IBOutlet UILabel *payTypeSP_Label;
+    IBOutlet UILabel *gisResponseSP_Label;
+
     
     
 }

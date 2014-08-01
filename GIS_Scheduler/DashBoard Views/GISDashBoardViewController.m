@@ -147,12 +147,22 @@
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender {
     
     if (sender.selectedSegmentIndex==0) {
+        tableHeader1_UIView.hidden = FALSE;
+        tableHeader2_UIView.hidden = TRUE;
+        tableHeader3_UIView.hidden = TRUE;
+        
     }
     else if(sender.selectedSegmentIndex==1)
     {
+        tableHeader2_UIView.hidden = FALSE;
+        tableHeader1_UIView.hidden = TRUE;
+        tableHeader3_UIView.hidden = TRUE;
     }
     else if(sender.selectedSegmentIndex==2)
     {
+        tableHeader3_UIView.hidden = FALSE;
+        tableHeader1_UIView.hidden = TRUE;
+        tableHeader2_UIView.hidden = TRUE;
     }
 }
 
