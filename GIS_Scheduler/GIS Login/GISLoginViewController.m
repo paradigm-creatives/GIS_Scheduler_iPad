@@ -178,8 +178,6 @@
                     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
                     [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
                     
-                    [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
-                    
                     //LOGIN DB
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_LOGIN];
                     NSArray *objectsArray1 = [NSArray arrayWithObjects: login_Obj.requestorID_string,login_Obj.email_string,login_Obj.firstName_string,login_Obj.lastName_string,login_Obj.token_string,login_Obj.userStatus_string,login_Obj.roles_string,login_Obj.role_ID_string, nil];
@@ -390,14 +388,14 @@
     }
         
     ///
-    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-    GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
-    [paramsDict setObject:unitObj1.token_string forKey:kToken];
+//    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+//    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+//    GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//    [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
+//    [paramsDict setObject:unitObj1.token_string forKey:kToken];
     
-    [[GISServerManager sharedManager] getviewSchedule:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+    //[[GISServerManager sharedManager] getviewSchedule:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
     
 }
 
@@ -444,43 +442,6 @@
 {
     NSLog(@"Failure");
 }
-
--(void)successmethod_Requestjobs:(GISJsonRequest *)response
-{
-    
-    NSLog(@"successmethod_getViewSchedule Success---%@",response.responseJson);
-    @try {
-        if ([response.responseJson isKindOfClass:[NSArray class]])
-        {
-            
-            id array=response.responseJson;
-            NSDictionary *dictHere=[array lastObject];
-            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
-                [self removeLoadingView];
-     
-            }
-            else
-            {
-                [self removeLoadingView];
-            }
-        }
-        else
-        {
-            [self removeLoadingView];
-        }
-    }
-    @catch (NSException *exception)
-    {
-        [self removeLoadingView];
-        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Request JObs action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
-    }
-}
--(void)failuremethod_Requestjobs:(GISJsonRequest *)response
-{
-    NSLog(@"Failure");
-}
-
-
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {

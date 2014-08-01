@@ -11,6 +11,16 @@
 #import "GISConstants.h"
 #import "GISDashBoardCell.h"
 #import "GISVIewEditRequestViewController.h"
+#import "GISDashBoardReqCell.h"
+#import "GISDashBoardSPCell.h"
+#import "GISStoreManager.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISJSONProperties.h"
+#import "GISLoadingView.h"
+#import "PCLogger.h"
+#import "GISDatabaseManager.h"
+
 @interface GISDashBoardViewController ()
 
 @end
@@ -47,6 +57,9 @@
     self.isMasterHide= YES;
     
     self.title=@"DashBoard";
+    
+    SPJobsArray = [[NSMutableArray alloc] init];
+    NMRequestsArray = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -77,6 +90,26 @@
     waitingForApproval_Label.font=[GISFonts small];
     approvedRequest_Label.font=[GISFonts small];
     incompleteRequest_Label.font=[GISFonts small];
+    
+    accountNameReq_Label.font=[GISFonts normal];
+    requestIDReq_Label.font=[GISFonts normal];
+    eventTypeReq_Label.font=[GISFonts normal];
+    otherServicesReq_Label.font=[GISFonts normal];
+    submissionDateReq_Label.font=[GISFonts normal];
+    earlierDateReq_Label.font=[GISFonts normal];
+    statusReq_Label.font=[GISFonts normal];
+    schedulerReq_Label.font=[GISFonts normal];
+    
+    jobNameSP_Label.font=[GISFonts normal];
+    jobDateSP_Label.font=[GISFonts normal];
+    startTimeSP_Label.font=[GISFonts normal];
+    endTimeSP_Label.font=[GISFonts normal];
+    totalHoursSP_Label.font=[GISFonts normal];
+    eventtypeSP_Label.font=[GISFonts normal];
+    serviceProviderSP_Label.font=[GISFonts normal];
+    requestedDateSP_Label.font=[GISFonts normal];
+    payTypeSP_Label.font=[GISFonts normal];
+    gisResponseSP_Label.font=[GISFonts normal];
 
     accountName_Label.textColor=UIColorFromRGB(0x00457c);
     requestID_Label.textColor=UIColorFromRGB(0x00457c);
@@ -96,6 +129,36 @@
     waitingForApproval_Label.textColor=UIColorFromRGB(0x333333);
     approvedRequest_Label.textColor=UIColorFromRGB(0x333333);
     incompleteRequest_Label.textColor=UIColorFromRGB(0x333333);
+    
+    accountNameReq_Label.textColor=UIColorFromRGB(0x00457c);
+    requestIDReq_Label.textColor=UIColorFromRGB(0x00457c);
+    eventTypeReq_Label.textColor=UIColorFromRGB(0x00457c);
+    otherServicesReq_Label.textColor=UIColorFromRGB(0x00457c);
+    submissionDateReq_Label.textColor=UIColorFromRGB(0x00457c);
+    earlierDateReq_Label.textColor=UIColorFromRGB(0x00457c);
+    statusReq_Label.textColor=UIColorFromRGB(0x00457c);
+    schedulerReq_Label.textColor=UIColorFromRGB(0x00457c);
+    
+    jobNameSP_Label.textColor=UIColorFromRGB(0x00457c);
+    jobDateSP_Label.textColor=UIColorFromRGB(0x00457c);
+    startTimeSP_Label.textColor=UIColorFromRGB(0x00457c);
+    endTimeSP_Label.textColor=UIColorFromRGB(0x00457c);
+    totalHoursSP_Label.textColor=UIColorFromRGB(0x00457c);
+    eventtypeSP_Label.textColor=UIColorFromRGB(0x00457c);
+    serviceProviderSP_Label.textColor=UIColorFromRGB(0x00457c);
+    requestedDateSP_Label.textColor=UIColorFromRGB(0x00457c);
+    payTypeSP_Label.textColor=UIColorFromRGB(0x00457c);
+    gisResponseSP_Label.textColor=UIColorFromRGB(0x00457c);
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
 
 }
 
@@ -146,49 +209,157 @@
 
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender {
     
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+
+    
     if (sender.selectedSegmentIndex==0) {
         tableHeader1_UIView.hidden = FALSE;
         tableHeader2_UIView.hidden = TRUE;
         tableHeader3_UIView.hidden = TRUE;
         
+        CGRect frame = listTableView.frame;
+        frame.origin.x = 0;
+        listTableView.frame = frame;
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+
     }
     else if(sender.selectedSegmentIndex==1)
     {
         tableHeader2_UIView.hidden = FALSE;
         tableHeader1_UIView.hidden = TRUE;
         tableHeader3_UIView.hidden = TRUE;
+        
+        CGRect frame = listTableView.frame;
+        frame.origin.x = 20;
+        listTableView.frame = frame;
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
+        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+    
     }
     else if(sender.selectedSegmentIndex==2)
     {
         tableHeader3_UIView.hidden = FALSE;
         tableHeader1_UIView.hidden = TRUE;
         tableHeader2_UIView.hidden = TRUE;
+        
+        CGRect frame = listTableView.frame;
+        frame.origin.x = 0;
+        listTableView.frame = frame;
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
+        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
     }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{   
+{
+    if(!tableHeader3_UIView.isHidden)
+        return [SPJobsArray count];
+    else if(!tableHeader1_UIView.isHidden)
+        return [NMRequestsArray count];
+    else if (!tableHeader2_UIView.isHidden)
+        return [NMRequestsArray count];
+        
     return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GISDashBoardCell *cell=(GISDashBoardCell *)[tableView dequeueReusableCellWithIdentifier:@"dashBoardCell"];
-    if (cell==nil) {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardCell" owner:self options:nil] objectAtIndex:0];
+    GISDashBoardCell *cell;
+    if(!tableHeader1_UIView.isHidden){
+       GISDashBoardCell *cell=(GISDashBoardCell *)[tableView dequeueReusableCellWithIdentifier:@"dashBoardCell"];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardCell" owner:self options:nil] objectAtIndex:0];
+        }
+        
+        GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
+
+        cell.accountName_Label.text = nmReqObj.AccountName_String;
+        cell.requestID_Label.text = nmReqObj.RequestID_String;
+        cell.eventType_Label.text = nmReqObj.EventType_String;
+        cell.otherServices_Label.text = nmReqObj.OtherServices_String;
+        cell.earliestDate_Label.text = nmReqObj.EarliestDate_String;
+        cell.approvalDate_Label.text = nmReqObj.ApprovalDate_String;
+        cell.approvedBy_Label.text = nmReqObj.ApproveddBy_String;
+        cell.scheduler_Label.text = nmReqObj.Shceduler_String;
+        
+        if ([nmReqObj.RequestStatus_String isEqualToString:@"SkyBlue"]) {
+            cell.status_Label.backgroundColor=UIColorFromRGB(0x6698FF);
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Yellow"]) {
+            cell.status_Label.backgroundColor=[UIColor yellowColor];
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Orange"]) {
+            cell.status_Label.backgroundColor=[UIColor orangeColor];
+        }
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        return cell;
     }
-    cell.accountName_Label.text=@"10008";
-    cell.requestID_Label.text=@"14-8564";
-    cell.eventType_Label.text=@"VRI";
-    cell.otherServices_Label.text=@"Captioning";
-    cell.earliestDate_Label.text=@"11/07/2014";
-    cell.approvalDate_Label.text=@"11/07/2014";
-    cell.approvedBy_Label.text=@"Admin";
+    if(!tableHeader2_UIView.isHidden){
+        
+        GISDashBoardReqCell *cell=(GISDashBoardReqCell *)[tableView dequeueReusableCellWithIdentifier:@"dashBoardReqCell"];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardReqCell" owner:self options:nil] objectAtIndex:0];
+        }
+        
+        GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
+        
+        cell.accountName_Label.text = nmReqObj.AccountName_String;
+        cell.requestID_Label.text = nmReqObj.RequestID_String;
+        cell.eventType_Label.text = nmReqObj.EventType_String;
+        cell.otherServices_Label.text = nmReqObj.OtherServices_String;
+        cell.requestSubmissinDate_Label.text = nmReqObj.RequestSubmissionDate_String;
+        cell.dateOfEarlier_Label.text = nmReqObj.DateofEarlierAssigment_String;
+        cell.scheduler_Label.text = nmReqObj.Shceduler_String;
+        
+        if ([nmReqObj.RequestStatus_String isEqualToString:@"SkyBlue"]) {
+            cell.status_Label.backgroundColor=UIColorFromRGB(0x6698FF);
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Yellow"]) {
+            cell.status_Label.backgroundColor=[UIColor yellowColor];
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Orange"]) {
+            cell.status_Label.backgroundColor=[UIColor orangeColor];
+        }
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        return cell;
+    }
+    if(!tableHeader3_UIView.isHidden){
+        
+        GISDashBoardSPCell *cell=(GISDashBoardSPCell *)[tableView dequeueReusableCellWithIdentifier:@"dashBoardSPCell"];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardSPCell" owner:self options:nil] objectAtIndex:0];
+        }
+        
+        GISSchedulerSPJobsObject *spJobsObj = [SPJobsArray objectAtIndex:indexPath.row];
+        
+        [cell.jobId_Label setText:spJobsObj.JobNumber_String];
+        [cell.jobdate_Label setText:spJobsObj.JobDate_String];
+        [cell.startTime_Label setText:spJobsObj.startTime_String];
+        [cell.endTime_Label setText:spJobsObj.endTime_String];
+        [cell.totalHours_Label setText:spJobsObj.TotalHours_String];
+        [cell.eventType_Label setText:spJobsObj.EventType_String];
+        [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
+        [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        
+        return cell;
+    }
     
-    cell.scheduler_Label.text=@"David";
-    if (indexPath.row%2==0) {
-        cell.status_Label.backgroundColor=[UIColor yellowColor];
-    }
     return cell;
 }
 
@@ -209,6 +380,104 @@
     }
     
 }
+
+-(void)successmethod_Requestjobs:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_getRequestJobs Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
+                spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
+                SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+                
+                [self removeLoadingView];
+                
+                [listTableView reloadData];
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Request JObs action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_Requestjobs:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+-(void)successmethod_NewModifiedRequests:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_getRequestJobs Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                [[GISStoreManager sharedManager] removeRequest_NMRequestObject];
+
+                nmRequestStore=[[GISSchedulerNMRequestsStore alloc]initWithJsonDictionary:response.responseJson];
+                NMRequestsArray=[[GISStoreManager sharedManager] getRequest_NMRequestObject];
+                
+                [self removeLoadingView];
+                
+                [listTableView reloadData];
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Request JObs action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_NewModifiedRequests:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

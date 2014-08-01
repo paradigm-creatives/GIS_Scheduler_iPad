@@ -420,6 +420,42 @@
 #define kSubmitTimeSheet_token @"token"
 
 #pragma Mark SubmitTimeSheet End
+
+
+#pragma Mark ServiceProviderSPRequestJobs Start
+
+#define kSPRequestJobs_EventType @"EventType"
+#define kSPRequestJobs_EndTime @"EndTime"
+#define kSPRequestJobs_GisResponse @"GisResponse"
+#define kSPRequestJobs_JobDate @"JobDate"
+#define kSPRequestJobs_JobID @"JobID"
+#define kSPRequestJobs_JobNumber @"JobNumber"
+#define kSPRequestJobs_PayType @"PayType"
+#define kSPRequestJobs_RequestedDate @"RequestedDate"
+#define kSPRequestJobs_StartTime @"StartTime"
+#define kSPRequestJobs_ServiceProviderName @"ServiceProviderName"
+#define kSPRequestJobs_TotalHours @"TotalHours"
+
+#pragma Mark ServiceProviderSPRequestJobs End
+
+#pragma Mark ServiceProviderNMRequests Start
+
+#define kNMRequests_AccountName @"AccountName"
+#define kNMRequests_ApprovalDate @"ApprovalDate"
+#define kNMRequests_ApproveddBy @"ApproveddBy"
+#define kNMRequests_DateofEarlierAssigment @"DateofEarlierAssigment"
+#define kNMRequests_EarliestDate @"EarliestDate"
+#define kNMRequests_EventType @"EventType"
+#define kNMRequests_OtherServices @"OtherServices"
+#define kNMRequests_RequestID @"RequestID"
+#define kNMRequests_RequestStatus @"RequestStatus"
+#define kNMRequests_RequestSubmissionDate @"RequestSubmissionDate"
+#define kNMRequests_Shceduler @"Shceduler"
+#define kNMRequests_Tab @"Tab"
+
+#pragma Mark ServiceProviderNMRequests End
+
+
 #endif
 
 
