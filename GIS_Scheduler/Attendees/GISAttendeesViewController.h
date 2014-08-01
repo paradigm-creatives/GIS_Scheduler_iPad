@@ -16,7 +16,7 @@
 #import "GISVIewEditRequestViewController.h"
 #import "GISChooseRequestDetailsObject.h"
 #import "GISAttendeesTopCell.h"
-@interface GISAttendeesViewController : UIViewController<AttendeesTopProtocol,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,chooseRequestProtocol>
+@interface GISAttendeesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,chooseRequestProtocol>
 {
     GISAttendeesTopCell *attendeesCell;
     

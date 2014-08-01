@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol AttendeesTopProtocol <NSObject>
--(IBAction)picker_attendee_Delegate:(id)sender;
--(IBAction)textField_delegate:(id)sender;
-@end
+
 
 @interface GISAttendeesTopCell : UITableViewCell
 
@@ -57,6 +54,7 @@
 @property(nonatomic,strong)IBOutlet UIButton *nextButton;
 
 
+
 @property(nonatomic,strong)IBOutlet UILabel *primaryAudience_Label;
 @property(nonatomic,strong)IBOutlet UILabel *primaryAudience_answer_Label;
 
@@ -64,5 +62,4 @@
 @property (nonatomic, readwrite) NSInteger cellRowNumber;
 @property (nonatomic, retain) NSIndexPath *cellIndexpath;
 
-@property(nonatomic,strong)id <AttendeesTopProtocol> attendees_delegate;
 @end

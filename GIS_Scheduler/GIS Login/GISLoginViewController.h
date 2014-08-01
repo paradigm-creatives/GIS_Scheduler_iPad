@@ -10,7 +10,6 @@
 #import "GISAppDelegate.h"
 #import "GISStore.h"
 #import "GISDropDownStore.h"
-
 @interface GISLoginViewController : UIViewController<UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;

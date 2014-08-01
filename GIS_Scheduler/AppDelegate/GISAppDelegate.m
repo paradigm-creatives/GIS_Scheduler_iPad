@@ -21,6 +21,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    _attendeesArray = [[NSMutableArray alloc] init];
+    _datesArray = [[NSMutableArray alloc] init];
+    _detailArray = [[NSMutableArray alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];
