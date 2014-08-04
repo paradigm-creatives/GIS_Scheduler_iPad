@@ -259,19 +259,19 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="MRk-4u-Oho">
+                    <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="MRk-4u-Oho">
                         <rect key="frame" x="183" y="14" width="149" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="u6z-bA-3jD">
+                    <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="u6z-bA-3jD">
                         <rect key="frame" x="183" y="143" width="149" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chY-Jy-5nW">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chY-Jy-5nW">
                         <rect key="frame" x="194" y="121" width="73" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -284,9 +284,11 @@
             <connections>
                 <outlet property="broadcastYesSelcted" destination="chY-Jy-5nW" id="J94-OA-qPC"/>
                 <outlet property="course_label" destination="UPt-DT-hKa" id="5OR-kL-9KY"/>
+                <outlet property="course_textField" destination="u6z-bA-3jD" id="7V9-4Q-dxK"/>
                 <outlet property="dressCodebtn" destination="EML-Nt-w1g" id="T8s-vZ-w96"/>
                 <outlet property="dresscode_label" destination="SAa-E3-po8" id="cAU-UI-IaV"/>
                 <outlet property="eventName_label" destination="tai-vW-9Xp" id="6FN-80-dOP"/>
+                <outlet property="eventName_textField" destination="MRk-4u-Oho" id="ZQX-iH-xhQ"/>
                 <outlet property="eventType_label" destination="VTs-vC-klX" id="lW5-5R-YjJ"/>
                 <outlet property="eventTypebtn" destination="ovJ-wA-INB" id="OWz-oB-IrP"/>
                 <outlet property="fmSystembtn" destination="K1G-pE-E4y" id="ykQ-5a-yyC"/>

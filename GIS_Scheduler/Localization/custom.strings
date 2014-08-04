@@ -50,7 +50,8 @@
 "yes"  = "Yes";
 "no" = "No";
 "empty_selection" = "-- Select --";
-
+"select_choose_request"= "Select Choose Request";
+"enter_valid_details"="Please enter details in these fields : \n %@ ";
 
 ////////   Location Details ///////
 

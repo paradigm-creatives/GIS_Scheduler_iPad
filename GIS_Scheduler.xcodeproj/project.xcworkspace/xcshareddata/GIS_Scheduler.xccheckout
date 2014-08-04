@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8D3F324E-F92E-4078-BA85-CD3A51CA3331</string>
+	<string>8B735C05-B71B-441B-A872-E13FC955C6C3</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GIS_Scheduler</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9B950955-F7D5-4173-9977-C64FAD52B4E8</key>
-		<string>https://github.com/babulraok/GIS_Scheduler_iPad.git</string>
+		<key>309D0258-6CA5-4E03-81EB-E1E77AC06ED7</key>
+		<string>https://github.com/ananddusi/GIS_Scheduler_iPad.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>GIS_Scheduler.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9B950955-F7D5-4173-9977-C64FAD52B4E8</key>
+		<key>309D0258-6CA5-4E03-81EB-E1E77AC06ED7</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/babulraok/GIS_Scheduler_iPad.git</string>
+	<string>https://github.com/ananddusi/GIS_Scheduler_iPad.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9B950955-F7D5-4173-9977-C64FAD52B4E8</string>
+	<string>309D0258-6CA5-4E03-81EB-E1E77AC06ED7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9B950955-F7D5-4173-9977-C64FAD52B4E8</string>
+			<string>309D0258-6CA5-4E03-81EB-E1E77AC06ED7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GIS_Scheduler_iPad</string>
 		</dict>
