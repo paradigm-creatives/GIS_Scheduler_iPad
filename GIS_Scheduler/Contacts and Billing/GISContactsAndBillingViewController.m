@@ -204,7 +204,11 @@
 
 }
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+}
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
@@ -521,6 +525,7 @@
     
     NSDictionary *saveUpdateDict;
     
+
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
@@ -542,7 +547,6 @@
             [userDefaults synchronize];
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
-            
         }
         
         if([saveUpdateDict count] > 0){
@@ -557,7 +561,6 @@
             
             
             appDelegate.contact_billingObject = contactBilling_Object;
-            
             
                 GISEventDetailsViewController *eventViewController;
                 

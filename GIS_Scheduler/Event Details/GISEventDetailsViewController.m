@@ -705,8 +705,6 @@
         evevntNamedata = textField.text;
     if(textField.tag == 101)
         courseIdData = textField.text;
-    
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

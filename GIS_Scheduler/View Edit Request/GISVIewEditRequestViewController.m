@@ -124,7 +124,6 @@
     self.requestID_Label.font=[GISFonts normal];
     [_requestBtn.titleLabel setFont:[GISFonts small]];
     
-    
     [[UITabBar appearance] setSelectedItem:_contactItem];
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -214,7 +213,6 @@
     
     [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
-
 
 
 -(void)successmethod_chooseRequest:(GISJsonRequest *)response
