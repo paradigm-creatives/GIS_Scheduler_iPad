@@ -18,6 +18,8 @@
 #import "GISDatabaseConstants.h"
 #import "GISUtility.h"
 #import "GISEventDetailsViewController.h"
+#import "GISVIewEditRequestViewController.h"
+
 @interface GISContactsAndBillingViewController ()
 
 @end
@@ -198,14 +200,23 @@
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
     
-    
-    
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+
 }
 
--(void)viewWillAppear:(BOOL)animated
+
+
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
-    [super viewWillAppear: animated];
+    NSDictionary *dict=[notification userInfo];
+
+    contactBilling_Object.chooseRequest_String=[dict valueForKey:@"value"];
+    contactBilling_Object.chooseRequest_ID_String=[dict valueForKey:@"id"];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
 }
 
 - (IBAction)chooseRequestDropDown:(id)sender{
@@ -260,7 +271,6 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertContactInfoData:dic];
     }
-    
     ////Contacts INFO
 }
 
@@ -287,8 +297,6 @@
         else{
             [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
         }
-       
-        
     }
     else
     {
@@ -321,19 +329,17 @@
                 unitId_found=YES;
                 contactBilling_Object.unitOrDepartment_String=dropDownObj.value_String;
                 contactBilling_Object.unitOrDepartment_ID_String=dropDownObj.id_String;
-                
+                unitOrDep_Answer_Label.text=dropDownObj.value_String;
             }
         }
         if (unitId_found)
         {
-            
         }
         else
         {
             contactBilling_Object.unitOrDepartment_String=[reqDict objectForKey:KGetRequestDetails_UnitID ];
             contactBilling_Object.unitOrDepartment_ID_String=[reqDict objectForKey:KGetRequestDetails_UnitID ];
         }
-        
         [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
     }
     else
@@ -377,7 +383,6 @@
     return YES;
 }
 
-
 -(void)successmethod_BillingsData:(GISJsonRequest *)response
 {
     NSLog(@"Success---%@----",response.responseJson);
@@ -412,7 +417,7 @@
 
 - (IBAction)nextButtonPressed:(id)sender
 {
-    
+
     contactBilling_Object.chooseRequest_ID_String=[GISUtility returningstring:appDelegate.chooseRequest_ID_String];
     
     @try {
@@ -575,11 +580,16 @@
         
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
     }
-    
 }
+
 -(void)failuremethod_saveUpdateRequest:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
 }
 
 - (void)didReceiveMemoryWarning

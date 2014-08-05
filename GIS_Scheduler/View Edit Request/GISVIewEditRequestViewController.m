@@ -136,22 +136,16 @@
     [[GISStoreManager sharedManager]removeRequestNumbersObjects];
     
     [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
-    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
-    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted) name:kTabSelected object:nil];
-    
-    
 }
 
+
 -(void)setItemFont:(UITabBarItem *)tabbarItem{
-    
     [tabbarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                           UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
                                           [GISFonts small], NSFontAttributeName, nil]
                                 forState:UIControlStateNormal];//[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
-    
-
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
@@ -177,8 +171,6 @@
     }
     [_mainView addSubview:selectedTabView.view];
     [self.view bringSubviewToFront:_mainView];
-    
-    
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
@@ -216,8 +208,9 @@
     }
     
     [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
 }
+
+
 
 -(void)successmethod_chooseRequest:(GISJsonRequest *)response
 {

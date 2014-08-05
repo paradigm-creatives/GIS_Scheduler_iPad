@@ -82,7 +82,7 @@ int row_count = 2;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
+    //[self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
     viewEditSchedule_obj=[[GISVIewEditRequestViewController alloc]init];
     viewEditSchedule_obj.chooseReq_protocol=self;
     for (int i=0; i<row_count; i++) {
@@ -286,11 +286,13 @@ int row_count = 2;
 
 -(IBAction)pickerButtonPressed:(id)sender
 {
+    
     [self resignCurrentTextField];
     
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISAttendeesTopCell *)button.superview.superview.superview;
     attendeesCell=(GISAttendeesTopCell *)tempCellRef;
+    
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
@@ -302,42 +304,46 @@ int row_count = 2;
     if([sender tag]==111)
     {
         btnTag=111;
-        
+        tableViewController.view_String=attendeesCell.expectedNo_answer_Label.text;
         tableViewController.popOverArray=expectedNo_mutArray;
     }
     else if ([sender tag]==222)
     {
         btnTag=222;
+        tableViewController.view_String=attendeesCell.genderPreference_answer_Label.text;
         tableViewController.popOverArray=genderPreference_mutArray;
     }
     else if ([sender tag]==333)
     {
         btnTag=333;
+        tableViewController.view_String=attendeesCell.preference_answer_Label.text;
         tableViewController.popOverArray=preference_mutArray;
-        
     }
     else if ([sender tag]==444)
     {
         btnTag=444;
+        tableViewController.view_String=attendeesCell.primaryAudience_answer_Label.text;
         tableViewController.popOverArray=primaryAudience_mutArray;
-        
     }
     if (attendeesCell.cellSectionNumber==1) {
         if ([sender tag]==555)
         {
             btnTag=555;
+            tableViewController.view_String=attendeesCell.modeOf_answer_Label.text;
             tableViewController.popOverArray=modeofcommunication_mutArray;
             [popover presentPopoverFromRect:CGRectMake(attendeesCell.modeOf_Button.frame.origin.x+135, attendeesCell.modeOf_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         }
         else if ([sender tag]==666)
         {
             btnTag=666;
+            tableViewController.view_String=attendeesCell.directly_utilized_services_answer_Label.text;
             tableViewController.popOverArray=directly_utilizedServices_mutArray;
             [popover presentPopoverFromRect:CGRectMake(attendeesCell.directly_utilized_services_Button.frame.origin.x+135, attendeesCell.directly_utilized_services_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         }
         else if ([sender tag]==777)
         {
             btnTag=777;
+            tableViewController.view_String=attendeesCell.servicesNeeded_answer_Label.text;
             tableViewController.popOverArray=servicesNeeded_mutArray;
             [popover presentPopoverFromRect:CGRectMake(attendeesCell.servicesNeeded_Button.frame.origin.x+135, attendeesCell.servicesNeeded_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         }
@@ -610,7 +616,7 @@ int row_count = 2;
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [self.attendees_tableView setContentSize:CGSizeMake(1004, 800)];
+    //[self.attendees_tableView setContentSize:CGSizeMake(1004, 800)];
     currentTextField=textField;
     id textFieldSuper = textField;
     while (![textFieldSuper isKindOfClass:[GISAttendeesTopCell class]]) {
@@ -670,14 +676,14 @@ int row_count = 2;
 
 -(void)resignCurrentTextField
 {
-    [self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
+    //[self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [currentTextField resignFirstResponder];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    
+    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [self resignCurrentTextField];
     return YES;
 }

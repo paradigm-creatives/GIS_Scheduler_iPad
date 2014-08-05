@@ -37,10 +37,65 @@
     self.preferredContentSize=popOverTableView.contentSize;
     popOverTableView.delegate = self;
     [super viewWillAppear:animated];
+    
+    dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"MM/dd/yyyy"];
+    
+    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 325, 300)];
+    datePicker.date = [NSDate date];
+    
+    if ([self.view_String isEqualToString:@"timesdates"])
+    {
+        datePicker.datePickerMode = UIDatePickerModeTime;
+        
+        [dateformatter setDateFormat:@"hh:mm a"];
+        
+        if ([self.dateTimeMoveUp_string length]) {
+            NSDate *tempDate=[dateformatter dateFromString:self.dateTimeMoveUp_string];
+            [datePicker setDate:tempDate];
+        }
+        else
+        {
+            datePicker.date=[NSDate date];
+        }
+        
+    }
+    else
+    {
+        datePicker.datePickerMode = UIDatePickerModeDate;
+
+        if ([self.dateTimeMoveUp_string length]) {
+            NSDate *date = [dateformatter dateFromString:self.dateTimeMoveUp_string];
+            [datePicker setDate:date];
+        }
+        else
+        {
+            datePicker.date= [NSDate date];
+        }
+        
+    }
+    
+    
+    [datePicker addTarget:self
+                   action:@selector(datePickerChange:)
+         forControlEvents:UIControlEventValueChanged];
+    
+    if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
+        popOverTableView.scrollEnabled=NO;
+    }
+}
+
+-(void)datePickerChange:(id)sender
+{
+    NSLog(@"Called DateTime-->%@",datePicker.date);
+    [self.popOverDelegate sendTheSelectedPopOverData:@"" value:[dateformatter stringFromDate:datePicker.date]];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
+        return 250;
+    }
     return 35;
 }
 
@@ -50,11 +105,25 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    
+    if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
+        return 1;
+    }
     return [self.popOverArray count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"popOver"];
+        if (cell==nil) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"popPver"];
+        }
+        [cell.contentView addSubview:datePicker];
+        return cell;
+    }
+    
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"popOver"];
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"popPver"];
@@ -74,6 +143,7 @@
         [popOverTableView needsUpdateConstraints];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
     return cell;
     
 }
@@ -91,6 +161,7 @@
     }
     
 }
+
 
 - (void)didReceiveMemoryWarning
 {

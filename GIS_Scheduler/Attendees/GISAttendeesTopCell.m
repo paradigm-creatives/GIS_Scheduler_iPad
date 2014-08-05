@@ -26,7 +26,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
     self.expectedNo_Label.font=[GISFonts normal];
     self.expectedNo_answer_Label.font=[GISFonts small];
     self.genderPreference_Label.font=[GISFonts normal];

@@ -157,3 +157,19 @@
 "create_dates_times_Btn" = "Create Dates/Times";
 "create_jobs_btn" = "Create Jobs";
 
+/////Alert Msgs
+"successfully_saved" = "Successfully Saved";
+"successfully_deleted" = "Successfully Deleted";
+"please_enter_first_name" = "Please enter first name";
+"please_enter_last_name" ="Please enter last name";
+"please_enter_email" = "Please enter email";
+"select Unit/Department"= "Select Unit/Department";
+"do you want to delete"= "Do you want to delete ?";
+"gis" = "GIS";
+"requests found" = "Requests Found";
+"jobs found"= "Jobs Found";
+"start Date alert"= "Start Date should be less than end Date";
+"end Date alert" = "End Date should be more than start Date";
+"time alert"="Please select between time";
+"loading" = "loading";
+

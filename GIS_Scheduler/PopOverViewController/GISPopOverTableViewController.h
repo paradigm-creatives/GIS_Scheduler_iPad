@@ -17,13 +17,21 @@
     IBOutlet UITableView *popOverTableView;
 
     GISAppDelegate *appDelegate;
+    
+    UIDatePicker *datePicker;
+    
+    NSDateFormatter *dateformatter;
 }
 +(GISPopOverTableViewController *)sharedManager;
-
+@property(readwrite,nonatomic)int tagValue;
+@property(nonatomic,strong)NSString *view_String;
+@property(nonatomic,strong)NSString *value_String;
+@property(nonatomic,strong)NSString *dateTimeMoveUp_string;
 @property(nonatomic,strong) IBOutlet UITableView *popOverTableView;
 
 @property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
 @property (weak,nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstraint;
+
 
 @end

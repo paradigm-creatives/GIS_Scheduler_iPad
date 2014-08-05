@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+#import "GISPopOverTableViewController.h"
+#import "GISAppDelegate.h"
+#import "GISLoginDetailsObject.h"
+@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
+    GISAppDelegate *appDelegate;
     IBOutlet UITableView *datesTimes_tableView;
-    
 
     IBOutlet UILabel *startDate_Label;
     IBOutlet UITextField *startDate_TextField;
@@ -64,6 +66,26 @@
     IBOutlet UILabel *endTime_header_Label;
     IBOutlet UILabel *editALL_Label;
 
+    UIPopoverController *popover;
+    int btnTag;
     
+    NSMutableDictionary *weekDays_dictionary_here;
+    NSMutableArray *createDateTimes_mutArray;
+    NSMutableArray *detail_mut_array;
+    
+    NSDateFormatter *dateformatter;
+    NSDateFormatter *timeformatter;
+    BOOL isDelete;
+    int currentObjTag_toDelete;
+
+    GISLoginDetailsObject *login_Obj;
 }
+@property(nonatomic,retain) NSString * inCompleteTab_string;
+@property(nonatomic,retain) NSString * isCompleteRequest;
+
+@property(nonatomic,strong)  NSMutableArray *createDateTimes_mutArray;
+@property(nonatomic,strong)NSMutableArray *detail_mut_array;
+
+-(IBAction)weekDays_ButtonPressed:(id)sender;
+-(IBAction)createDateTimeButtonPressed:(id)sender;
 @end

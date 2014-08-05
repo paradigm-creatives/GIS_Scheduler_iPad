@@ -11,6 +11,7 @@
 
 @interface GISAppDelegate : UIResponder <UIApplicationDelegate,UISplitViewControllerDelegate>
 
+@property (nonatomic) SEL finishAction_chooseRequestNumber;
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong,nonatomic) UISplitViewController *spiltViewController;
