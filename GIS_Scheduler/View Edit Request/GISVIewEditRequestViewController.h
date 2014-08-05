@@ -24,6 +24,12 @@
 }
 @property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
 @property (nonatomic, strong) IBOutlet UIButton *requestBtn;
+@property (nonatomic, strong) IBOutlet UILabel *created_by_Label;
+@property (nonatomic, strong) IBOutlet UILabel *created_by_value_Label;
+@property (nonatomic, strong) IBOutlet UILabel *created_date_Label;
+@property (nonatomic, strong) IBOutlet UILabel *created_date_value_Label;
+@property (nonatomic, strong) IBOutlet UILabel *status_Label;
+@property (nonatomic, strong) IBOutlet UILabel *status_value_Label;
 
 @property (nonatomic, retain) NSArray *viewControllers;
 @property (nonatomic, retain) UIViewController *currentController;

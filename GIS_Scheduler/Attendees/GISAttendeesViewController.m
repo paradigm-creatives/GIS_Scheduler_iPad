@@ -43,7 +43,7 @@ int row_count = 2;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     attendeesObject=[[GISAttendeesObject alloc]init];
     attendeesObject.attendeesList_mutArray=[[NSMutableArray alloc]init];
     
@@ -91,6 +91,17 @@ int row_count = 2;
     [self.attendees_tableView reloadData];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    if (appDelegate.isFromContacts && !appDelegate.isNewRequest) {
+        
+        //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        attendeesObject.choose_request_ID_String=appDelegate.chooseRequest_ID_String;//[userDefaults valueForKey:kDropDownValue];
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+    }
 }
 
 
@@ -861,8 +872,6 @@ int row_count = 2;
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees For Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
-    
-    
 }
 
 
@@ -915,6 +924,12 @@ int row_count = 2;
 -(void)removeLoadingView
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

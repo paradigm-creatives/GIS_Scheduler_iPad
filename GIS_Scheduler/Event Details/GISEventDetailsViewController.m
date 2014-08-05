@@ -705,8 +705,6 @@
         evevntNamedata = textField.text;
     if(textField.tag == 101)
         courseIdData = textField.text;
-    
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -1013,6 +1011,7 @@
     appDelegate.createdByString = chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails;
     appDelegate.statusString = chooseRequest_Detailed_DetailsObj.requestStatus_String_chooseReqParsedDetails;
     
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setValue:chooseRequest_Detailed_DetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];

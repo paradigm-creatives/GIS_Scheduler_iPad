@@ -26,6 +26,7 @@
 #define kSelectPopOver  @"SelectPopover"
 #define kMoveUp  @"moveUp"
 #define kTabSelected  @"tabSelected"
+#define kRequestInfo  @"requestInfo"
 
 
 

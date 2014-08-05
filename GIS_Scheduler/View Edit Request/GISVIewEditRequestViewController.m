@@ -118,7 +118,23 @@
     self.navigationItem.title = @"View/Edit Service Request";
     
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
+    self.created_by_value_Label.textColor=UIColorFromRGB(0x00457c);
+    self.created_date_value_Label.textColor=UIColorFromRGB(0x00457c);
+    self.status_value_Label.textColor=UIColorFromRGB(0x00457c);
+    
+    self.created_by_Label.textColor=UIColorFromRGB(0x666666);
+    self.created_date_Label.textColor=UIColorFromRGB(0x666666);
+    self.status_Label.textColor=UIColorFromRGB(0x666666);
+    
     self.requestID_Label.font=[GISFonts normal];
+    self.created_by_Label.font=[GISFonts normal];
+    self.created_date_Label.font=[GISFonts normal];
+    self.status_Label.font=[GISFonts normal];
+    
+    self.created_by_value_Label.font=[GISFonts normal];
+    self.created_date_value_Label.font=[GISFonts normal];
+    self.status_value_Label.font=[GISFonts normal];
+    
     [_requestBtn.titleLabel setFont:[GISFonts small]];
     [_requestBtn.titleLabel setTextColor:UIColorFromRGB(0x00457c)];
     
@@ -146,7 +162,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
     
     
 
@@ -198,6 +214,7 @@
     //[self.chooseReq_protocol selectedChooseRequestNumber:id_str :value_str];
     [_requestBtn setTitle:value_str forState:UIControlStateNormal];
     
+    
     if(_popover)
         [_popover dismissPopoverAnimated:YES];
     
@@ -221,7 +238,6 @@
     
     [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
-
 
 
 -(void)successmethod_chooseRequest:(GISJsonRequest *)response
@@ -273,12 +289,22 @@
     [self.mainTabbar setSelectedItem:tabItem];
 }
 
+-(void)getRequestInfo{
+    
+    _created_by_value_Label.text = appDelegate.createdByString;
+    _created_date_value_Label.text = appDelegate.createdDateString;
+    _status_value_Label.text = appDelegate.statusString;
+    
+}
+
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kMoveUp object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kTabSelected object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kRequestInfo object:nil];
     
 }
 

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISPopOverTableViewController.h"
 
-@interface GISLocationDetailsViewController : UIViewController
+@interface GISLocationDetailsViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
 
 @property (nonatomic, retain) IBOutlet UITableView *locationDetaislTabelView;
+@property (strong, nonatomic) NSArray *generalLocationArray;
+@property (strong, nonatomic) NSArray *closestMetroArray;
+@property (strong, nonatomic) NSArray *buildingNameArray;
+@property (nonatomic,strong) UIPopoverController *popover;
 
 @end

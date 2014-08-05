@@ -201,10 +201,13 @@
     [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
-
 }
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+}
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
@@ -317,6 +320,9 @@
     appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
+    unit_departmentID_String = chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
     
     NSArray *reqDetailsArray=response.responseJson;
     if (reqDetailsArray.count>0) {
@@ -527,6 +533,7 @@
     
     NSDictionary *saveUpdateDict;
     
+
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
@@ -548,7 +555,6 @@
             [userDefaults synchronize];
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
-            
         }
         
         if([saveUpdateDict count] > 0){
@@ -563,7 +569,6 @@
             
             
             appDelegate.contact_billingObject = contactBilling_Object;
-            
             
                 GISEventDetailsViewController *eventViewController;
                 
