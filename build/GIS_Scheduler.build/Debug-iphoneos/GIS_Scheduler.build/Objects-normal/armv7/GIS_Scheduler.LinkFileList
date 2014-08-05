@@ -3,6 +3,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/PCLogger.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDashBoardViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISCommentCell.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSchedulerSPJobsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDashBoardListViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/AmazonClientManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/UncaughtExceptionHandler.o
@@ -14,6 +15,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISStore.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISEventDetailsViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/SBFBJsonParser.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSchedulerNMRequestsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDatesTimesDetailCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISServerManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSearchReqObject.o
@@ -25,7 +27,9 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISRequestError.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISLoadingView.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISLocationDetailsViewController.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDashBoardReqCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISBaseViewController.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDashBoardSPCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/SBJSON.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISUtility.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISEventDetailsCell.o
@@ -34,9 +38,11 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISPopOverTableViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISNetworkUtility.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISAttendees_ListObject.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSchedulerNMRequestsStore.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/NSString+SBJSON.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISJobDetailsViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDatesAndTimesObject.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISAttendeesDetailsStore.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISAttendeesObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISLocationDetailsCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISChooseRequestDetailsObject.o
@@ -47,6 +53,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISFonts.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/SBFBJsonWriter.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISDropDownsObject.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSchedulerSPJobsStore.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/SBJsonWriter.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISViewScheduleObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISBilingDataObject.o

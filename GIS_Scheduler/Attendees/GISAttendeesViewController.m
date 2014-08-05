@@ -84,7 +84,6 @@ int row_count = 2;
     [super viewWillAppear:animated];
     //[self.attendees_tableView setContentSize:CGSizeMake(1004, 572)];
     viewEditSchedule_obj=[[GISVIewEditRequestViewController alloc]init];
-    viewEditSchedule_obj.chooseReq_protocol=self;
     for (int i=0; i<row_count; i++) {
         attendees_ListObject=[[GISAttendees_ListObject alloc]init];
         [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject]];
@@ -608,7 +607,7 @@ int row_count = 2;
         [arrayHere addObject:[self addEmptyData:attendees_ListObject1]];
     }
     attendeesObject.attendeesList_mutArray=arrayHere;
-    [attendees_tableView reloadData];
+    [_attendees_tableView reloadData];
 }
 
 #pragma mark Text Field Delegate Methods
@@ -881,9 +880,14 @@ int row_count = 2;
             [appDelegate.attendeesArray removeAllObjects];
         
         [appDelegate.attendeesArray addObjectsFromArray:attendeesObject.attendeesList_mutArray];
+        appDelegate.isFromAttendees = YES;
         
-            appDelegate.isFromAttendees = YES;
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];
+        
+            //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
             
     }
     else

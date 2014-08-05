@@ -137,7 +137,12 @@
     
     [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted) name:kTabSelected object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
+
+    
+    
+
 }
 
 
@@ -246,9 +251,17 @@
    [GISUtility moveemailView:YES viewHeight:[value intValue] view:self.view];
 }
 
--(void)tabSelcted{
+-(void)tabSelcted:(NSNotification *) notification{
     
-    UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:1];
+    NSDictionary *infoDict=notification.userInfo;
+    
+    NSString *value;
+    if(infoDict != nil){
+        value =[infoDict objectForKey:@"tabValue"];
+    }
+
+    
+    UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:[value intValue]];
     [self tabBar:self.mainTabbar didSelectItem:tabItem];
     [self.mainTabbar setSelectedItem:tabItem];
 }

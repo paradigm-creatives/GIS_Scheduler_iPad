@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GISBaseViewController.h"
 #import "GISPopOverTableViewController.h"
+#import "GISChooseRequestDetailsObject.h"
 
 @interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate,UITextFieldDelegate>
 
@@ -18,8 +19,14 @@
     NSString *otherServicesdata;
     NSString *captionData;
     NSString *viewingTypeData;
+    NSString *evevntNamedata;
+    NSString *courseIdData;
+    
     int btn_tag;
     BOOL broadCastSelected;
+    GISAppDelegate *appDelegate;
+    GISChooseRequestDetailsObject *chooseRequest_Detailed_DetailsObj;
+    NSMutableArray *otherTechStr;
     
 }
 
@@ -31,6 +38,9 @@
 @property (strong, nonatomic) NSArray *viewingTypeArray;
 @property (nonatomic,strong) UIPopoverController *popover;
 @property(nonatomic,retain) IBOutlet UIView * alertCustomView;
+@property(nonatomic,strong)NSMutableString *fields;
+@property (strong, nonatomic) NSArray *otherTechArray;
+@property (strong, nonatomic) NSArray *requetDetails;
 
 @property(nonatomic,strong)NSString *eventTypeId_string;
 @property(nonatomic,strong)NSString *dressCode_Id_string;
@@ -46,12 +56,11 @@
 @property(nonatomic,strong)NSString *eventdetails_unitIdStr;
 @property(nonatomic,strong)NSString *eventdetails_statusStr;
 @property(nonatomic,strong)NSString *eventdetails_viewOptions;
-@property(nonatomic,strong)NSMutableString *fields;
 @property(nonatomic,strong)NSString *outsideAgencyStr;
-
 
 
 - (IBAction)previousVersionBtnTap:(id)sender;
 - (IBAction)showPopoverDetails:(id)sender;
+
 
 @end

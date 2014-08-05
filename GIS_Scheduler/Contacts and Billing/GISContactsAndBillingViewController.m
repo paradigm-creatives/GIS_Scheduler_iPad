@@ -569,7 +569,9 @@
                     eventViewController =[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
                 }
             
-                [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil];
+                NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"tabValue",nil];
+            
+                [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
                 
             
         }else{

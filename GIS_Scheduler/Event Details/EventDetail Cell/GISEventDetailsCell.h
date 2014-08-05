@@ -28,6 +28,8 @@
 @property(nonatomic,strong)IBOutlet UILabel *recordedno_label;
 @property(nonatomic,strong)IBOutlet UILabel *onGoingyes_label;
 @property(nonatomic,strong)IBOutlet UILabel *onGoingno_label;
+@property(nonatomic,strong)IBOutlet UITextField *eventName_textField;
+@property(nonatomic,strong)IBOutlet UITextField *course_textField;
 
 @property (strong, nonatomic) IBOutlet UIButton *opentoPublicbtn1;
 @property (strong, nonatomic) IBOutlet UIButton *opentoPublicbtn2;
