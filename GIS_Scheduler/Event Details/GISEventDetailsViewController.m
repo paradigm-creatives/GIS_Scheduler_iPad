@@ -87,11 +87,11 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if(appDelegate.isFromContacts){
+    if(appDelegate.isFromContacts && !appDelegate.isNewRequest){
         
         [self getEventDetailsdata];
         
-    }else if(appDelegate.isFromContacts){
+    }else if(appDelegate.isFromContacts  && appDelegate.isNewRequest){
         
         UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
         UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];

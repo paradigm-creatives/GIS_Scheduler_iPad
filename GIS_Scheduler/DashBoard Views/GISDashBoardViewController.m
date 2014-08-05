@@ -60,6 +60,8 @@
     
     SPJobsArray = [[NSMutableArray alloc] init];
     NMRequestsArray = [[NSMutableArray alloc] init];
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -373,9 +375,18 @@
     
     [self.navigationController popViewControllerAnimated:NO];
     
-    if(section ==1 && row == 1){
-        GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
-        [self.navigationController pushViewController:viewEditView animated:NO];
+    if(section ==1){
+        if(row == 1){
+            
+            appDelegate.isNewRequest = NO;
+            GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+            [self.navigationController pushViewController:viewEditView animated:NO];
+        }else if(row == 0){
+            
+            appDelegate.isNewRequest = YES;
+            GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+            [self.navigationController pushViewController:viewEditView animated:NO];
+        }
         
     }
     

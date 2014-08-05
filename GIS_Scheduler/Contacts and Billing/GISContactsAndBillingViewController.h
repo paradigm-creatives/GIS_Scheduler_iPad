@@ -82,6 +82,8 @@
     GISPopOverTableViewController *tableViewController;
     
     int btnTag;
+    
+    NSString *unit_departmentID_String;
 }
 - (IBAction)chooseRequestDropDown:(id)sender;
 - (IBAction)nextButtonPressed:(id)sender;

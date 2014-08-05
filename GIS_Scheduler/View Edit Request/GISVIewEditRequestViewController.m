@@ -70,9 +70,6 @@
     
     GISDatesAndTimesViewController *datesAndTimesView=[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
 
-    
-
-    
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
     _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,commentView, nil];
@@ -123,7 +120,17 @@
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
     self.requestID_Label.font=[GISFonts normal];
     [_requestBtn.titleLabel setFont:[GISFonts small]];
+    [_requestBtn.titleLabel setTextColor:UIColorFromRGB(0x00457c)];
     
+    if(appDelegate.isNewRequest){
+        [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+        appDelegate.chooseRequest_ID_String = @"0";
+    }else{
+        [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
+    }
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
     
