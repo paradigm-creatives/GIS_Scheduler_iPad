@@ -27,5 +27,10 @@
 @property(nonatomic,strong)IBOutlet UITextField *startTime_TextField;
 @property(nonatomic,strong)IBOutlet UITextField *endTime_TextField;
 
+@property(nonatomic,strong)IBOutlet UIButton *date_edit_button_detailView;
+@property(nonatomic,strong)IBOutlet UIButton *startTime_edit_button_detailView;
+@property(nonatomic,strong)IBOutlet UIButton *endTime_edit_button_detailView;
 
+@property(nonatomic,strong)IBOutlet UIButton *save_button_detailView;
+@property(nonatomic,strong)IBOutlet UIButton *cancel_button_detailView;
 @end
