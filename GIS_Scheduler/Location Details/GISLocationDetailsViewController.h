@@ -10,6 +10,9 @@
 #import "GISPopOverTableViewController.h"
 
 @interface GISLocationDetailsViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
+{
+    NSString *generalLocationdata;
+}
 
 @property (nonatomic, retain) IBOutlet UITableView *locationDetaislTabelView;
 @property (strong, nonatomic) NSArray *generalLocationArray;

@@ -87,17 +87,18 @@
 {
     GISLocationDetailsCell *cell;
     
-    if(indexPath.section == 0){
-    
-        cell=(GISLocationDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if(cell==nil)
-        {
-            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationDetailsCell" owner:self options:nil]objectAtIndex:0];
-        }
-
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
-    }else if(indexPath.section == 1){
+//    if(indexPath.section == 0){
+//    
+//        cell=(GISLocationDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//        if(cell==nil)
+//        {
+//            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationDetailsCell" owner:self options:nil]objectAtIndex:0];
+//        }
+//
+//        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+//    
+//    }
+    if(indexPath.section == 1){
         
        GISLocationOnCampusCell *cell=(GISLocationOnCampusCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
         if(cell==nil)
@@ -135,6 +136,7 @@
         [generalLocationBtn.titleLabel setFont:[GISFonts small]];
         [generalLocationBtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
         [generalLocationBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [generalLocationBtn setTag:121];
         [generalLocationBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:generalLocationBtn];
@@ -165,6 +167,15 @@
     }
     
     [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown animated:YES];
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    generalLocationdata= value_str;
+    UIButton *eventTypeBtn=(UIButton *)[self.view viewWithTag:121];
+    [eventTypeBtn setTitle:generalLocationdata forState:UIControlStateNormal];
+    if(_popover)
+        [_popover dismissPopoverAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
