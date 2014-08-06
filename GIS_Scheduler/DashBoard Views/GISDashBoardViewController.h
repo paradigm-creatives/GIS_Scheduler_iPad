@@ -68,7 +68,7 @@
     GISSchedulerNMRequestsStore *nmRequestStore;
     NSMutableArray *SPJobsArray;
     NSMutableArray *NMRequestsArray;
-
+    GISAppDelegate *appDelegate;
     
     
 }

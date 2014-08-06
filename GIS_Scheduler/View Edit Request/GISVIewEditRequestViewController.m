@@ -70,9 +70,6 @@
     
     GISDatesAndTimesViewController *datesAndTimesView=[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
 
-    
-
-    
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
     _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,commentView, nil];
@@ -121,8 +118,35 @@
     self.navigationItem.title = @"View/Edit Service Request";
     
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
+    self.created_by_value_Label.textColor=UIColorFromRGB(0x00457c);
+    self.created_date_value_Label.textColor=UIColorFromRGB(0x00457c);
+    self.status_value_Label.textColor=UIColorFromRGB(0x00457c);
+    
+    self.created_by_Label.textColor=UIColorFromRGB(0x666666);
+    self.created_date_Label.textColor=UIColorFromRGB(0x666666);
+    self.status_Label.textColor=UIColorFromRGB(0x666666);
+    
     self.requestID_Label.font=[GISFonts normal];
+    self.created_by_Label.font=[GISFonts normal];
+    self.created_date_Label.font=[GISFonts normal];
+    self.status_Label.font=[GISFonts normal];
+    
+    self.created_by_value_Label.font=[GISFonts normal];
+    self.created_date_value_Label.font=[GISFonts normal];
+    self.status_value_Label.font=[GISFonts normal];
+    
     [_requestBtn.titleLabel setFont:[GISFonts small]];
+    [_requestBtn.titleLabel setTextColor:UIColorFromRGB(0x00457c)];
+    
+    if(appDelegate.isNewRequest){
+        [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+        appDelegate.chooseRequest_ID_String = @"0";
+    }else{
+        [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
+    }
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
     
@@ -138,7 +162,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
     
     
 
@@ -189,6 +213,7 @@
     
     //[self.chooseReq_protocol selectedChooseRequestNumber:id_str :value_str];
     [_requestBtn setTitle:value_str forState:UIControlStateNormal];
+    
     
     if(_popover)
         [_popover dismissPopoverAnimated:YES];
@@ -264,12 +289,22 @@
     [self.mainTabbar setSelectedItem:tabItem];
 }
 
+-(void)getRequestInfo{
+    
+    _created_by_value_Label.text = appDelegate.createdByString;
+    _created_date_value_Label.text = appDelegate.createdDateString;
+    _status_value_Label.text = appDelegate.statusString;
+    
+}
+
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kMoveUp object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kTabSelected object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kRequestInfo object:nil];
     
 }
 

@@ -201,7 +201,6 @@
     [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -288,6 +287,7 @@
     if (btnTag==111) {
         unitOrDep_Answer_Label.text=value_str;
         contactBilling_Object.unitOrDepartment_ID_String=id_str;
+        unit_departmentID_String = id_str;
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
 //        [paramsDict setObject:id_str forKey:kID];
 //        [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -320,6 +320,9 @@
     appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
+    unit_departmentID_String = chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
     
     NSArray *reqDetailsArray=response.responseJson;
     if (reqDetailsArray.count>0) {
@@ -424,11 +427,16 @@
 
     contactBilling_Object.chooseRequest_ID_String=[GISUtility returningstring:appDelegate.chooseRequest_ID_String];
     
+    if([contactBilling_Object.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
+        return;
+    }
+    
     @try {
         
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         
-        if ([contactBilling_Object.chooseRequest_String isEqualToString:NSLocalizedStringFromTable(@"new request", TABLE, nil)]||  contactBilling_Object.chooseRequest_String==nil || [contactBilling_Object.chooseRequest_String isKindOfClass:[NSNull class]])
+        if (appDelegate.isNewRequest)
         {
             [paramsDict setObject:@"0" forKey:@"requestNo"];
             appDelegate.isNewRequest = YES;
@@ -446,11 +454,11 @@
         
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults synchronize];
-        [userDefaults setValue:contactBilling_Object.unitOrDepartment_ID_String forKey:kunitid];
+        [userDefaults setValue:unit_departmentID_String forKey:kunitid];
         [userDefaults setValue:contactBilling_Object.chooseRequest_String forKey:kRequestNo];
         
         [paramsDict setObject:login_Obj.requestorID_string forKey:krequestorid];
-        if ([contactBilling_Object.chooseRequest_ID_String length] == 0 || [contactBilling_Object.chooseRequest_ID_String isKindOfClass:[NSNull class]])
+        if (appDelegate.isNewRequest)
         {
             [paramsDict setObject:kInComplete forKey:kstatusid];
             [paramsDict setObject:@"" forKey:keventDetails_capnoofUsers];

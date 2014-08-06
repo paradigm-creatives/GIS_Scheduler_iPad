@@ -19,6 +19,7 @@
 "login_requestFail" = "Get User Login request fail";
 "enter_valid_username_password" = "Please Enter Valid Username and Password";
 "alert_ok" = "OK";
+"new request" = "New Request";
 
 
 ////////   Event Details ///////
@@ -52,6 +53,7 @@
 "empty_selection" = "-- Select --";
 "select_choose_request"= "Select Choose Request";
 "enter_valid_details"="Please enter details in these fields : \n %@ ";
+"please_check_details"="Please check details entered";
 
 ////////   Location Details ///////
 
