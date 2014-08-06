@@ -14,6 +14,14 @@
 #import "GISDatabaseManager.h"
 #import "GISPopOverTableViewController.h"
 #import "GISUtility.h"
+#import "GISLoginDetailsObject.h"
+#import "GISJSONProperties.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISStoreManager.h"
+#import "GISDropDownStore.h"
+#import "PCLogger.h"
+#import "GISDatesAndTimesViewController.h"
 
 @interface GISLocationDetailsViewController ()
 
@@ -37,6 +45,7 @@
         
         [_locationDetaislTabelView setContentSize:CGSizeMake(1024, 940)];
         
+        
         NSString *generalLocation_statement = [[NSString alloc]initWithFormat:@"select * from TBL_GENERAL_LOCATION  ORDER BY ID DESC;"];
         _generalLocationArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:generalLocation_statement];
         
@@ -45,6 +54,20 @@
         
         NSString *buildingName_statement = [[NSString alloc]initWithFormat:@"select * from TBL_BUILDING_NAME  ORDER BY ID DESC;"];
         _buildingNameArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:buildingName_statement];
+        
+        _generalLocationdata = NSLocalizedStringFromTable(@"gallaudet_campus", TABLE, nil);
+        _buildingNamedata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        _locationName_Value_string = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        _closestMetrodata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        _generalLocationId_string = @"1";
+        
+         appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+        
+        _parkingArray = [[NSMutableArray alloc] init];
+        
+        _locationNames = [[NSMutableArray alloc] init];
     }
 
 
@@ -65,19 +88,13 @@
     GISLocationDetailsCell *locationCell;
     
     if(indexPath.section == 0){
-        
         return 0;
-    
-       // locationCell=(GISLocationDetailsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    
-       // return locationCell.frame.size.height;
     }
     if(indexPath.section == 1){
         
-        GISLocationOnCampusCell * onCampusCell=(GISLocationOnCampusCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return onCampusCell.frame.size.height;
+         locationCell=(GISLocationDetailsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+         return locationCell.frame.size.height;
     }
-    
     return locationCell.frame.size.height;
     
 }
@@ -87,29 +104,149 @@
 {
     GISLocationDetailsCell *cell;
     
-//    if(indexPath.section == 0){
-//    
-//        cell=(GISLocationDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
-//        if(cell==nil)
-//        {
-//            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationDetailsCell" owner:self options:nil]objectAtIndex:0];
-//        }
-//
-//        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-//    
-//    }
     if(indexPath.section == 1){
         
-       GISLocationOnCampusCell *cell=(GISLocationOnCampusCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
-        if(cell==nil)
-        {
-            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationOnCampusCell" owner:self options:nil]objectAtIndex:0];
+        if([_generalLocationId_string isEqualToString:@"1"]){
+            
+            cell=(GISLocationDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+            if(cell==nil)
+            {
+                cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationDetailsCell" owner:self options:nil]objectAtIndex:0];
+            }
+            
+            
+            [cell.buildingNamebtn setTitle:_buildingNamedata forState:UIControlStateNormal];
+            [cell.buildingNamebtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+            cell.roomNametextField.delegate = self;
+            cell.roomnotextField.delegate = self;
+            cell.othertextField.delegate = self;
+            cell.specialProtocoltextView.delegate = self;
+            
+            cell.roomNametextField.text = _room_name_string;
+            cell.roomnotextField.text = _room_no_string;
+            cell.othertextField.text = _other_string;
+            cell.specialProtocoltextView.text = _specialProtocol_string;
+            
+            [cell.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.buildingNamebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.garageonCampusbtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.materedonCampusBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.streetonCampusBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.UnknownonCampusbtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            if([_parkingArray count]>0)
+                [_parkingArray removeAllObjects];
+            
+            for(int i=0 ;i<[_getParkingOfflocArray count];i++)
+            {
+                NSString *value = [_getParkingOfflocArray objectAtIndex:i];
+                switch ([value intValue]) {
+                    case 1:
+                        [cell.garageonCampusbtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 2:
+                        [cell.materedonCampusBtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 3:
+                        [cell.streetonCampusBtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 4:
+                        [cell.UnknownonCampusbtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
+            return cell;
+        }else{
+            GISLocationOnCampusCell *cell =(GISLocationOnCampusCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+            if(cell==nil)
+            {
+                cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationOnCampusCell" owner:self options:nil]objectAtIndex:0];
+            }
+            
+            [cell.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.storeLocationbtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.storeLocationbtn setTitle:_locationName_Value_string forState:UIControlStateNormal];
+            [cell.storeLocationbtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+            
+            [cell.closestMetrobtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.closestMetrobtn setTitle:_closestMetrodata forState:UIControlStateNormal];
+            [cell.closestMetrobtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+            
+            [cell.garagebtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.materedBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.streetBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.Unknownbtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.transportationyesBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.transportationnoBtn addTarget:self action:@selector(tickBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+            
+            if([_transportation_string isEqualToString:@"True"]){
+                [cell.transportationyesBtn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                [cell.transportationnoBtn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            }else if([_transportation_string isEqualToString:@"False"]){
+                [cell.transportationyesBtn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+                [cell.transportationnoBtn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            }
+            
+            if([_parkingArray count]>0)
+                [_parkingArray removeAllObjects];
+            
+            cell.locationtextField.text = _LocationName_string;
+            cell.address1Textview.text = _address1_string;
+            cell.address2Textview.text = _address2_string;
+            cell.citytextField.text = _city_string;
+            cell.statetextField.text = _state_string;
+            cell.ziptextField.text = _zip_string;
+            cell.specialTextview.text = _special_string;
+            cell.otherinfoTextview.text = _otherinfo_string;
+            
+            for(int i=0 ;i<[_getParkingArray count];i++)
+            {
+                NSString *value = [_getParkingArray objectAtIndex:i];
+                switch ([value intValue]) {
+                    case 1:
+                        [cell.garagebtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 2:
+                        [cell.materedBtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 3:
+                        [cell.streetBtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    case 4:
+                        [cell.Unknownbtn setBackgroundImage: [UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+                        [_parkingArray addObject:value];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            //        if([login_Obj.userStatus_string isEqualToString:kInternal]){
+            //            cell.transportationLabel.hidden=YES;
+            //            cell.transportationyesBtn.hidden=YES;
+            //            cell.transportationYesLabel.hidden=YES;
+            //            cell.transportationnoBtn.hidden=YES;
+            //            cell.transportationNoLabel.hidden=YES;
+            //        }
+            
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
+            return cell;
         }
-        
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        
-        return cell;
     }
+
     
     
     return cell;
@@ -135,7 +272,7 @@
         generalLocationBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
         [generalLocationBtn.titleLabel setFont:[GISFonts small]];
         [generalLocationBtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
-        [generalLocationBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [generalLocationBtn setTitle:_generalLocationdata forState:UIControlStateNormal];
         [generalLocationBtn setTag:121];
         [generalLocationBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -158,9 +295,23 @@
 - (IBAction)showPopoverDetails:(id)sender{
     
     UIButton *btn=(UIButton*)sender;
+    btn_tag = btn.tag;
+    
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate = self;
-    _popover =   [GISUtility showPopOver:(NSMutableArray *)_generalLocationArray viewController:tableViewController];
+    
+    if(btn.tag ==1){
+        
+         _popover =   [GISUtility showPopOver:(NSMutableArray *)_buildingNameArray viewController:tableViewController];
+    }else if(btn_tag == 101){
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_locationNames viewController:tableViewController];
+        
+    }else if(btn_tag == 102){
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_closestMetroArray viewController:tableViewController];
+        
+    }else{
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_generalLocationArray viewController:tableViewController];
+    }
     _popover.delegate = self;
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
@@ -171,12 +322,615 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    generalLocationdata= value_str;
-    UIButton *eventTypeBtn=(UIButton *)[self.view viewWithTag:121];
-    [eventTypeBtn setTitle:generalLocationdata forState:UIControlStateNormal];
+    if(btn_tag == 1){
+        
+        _buildingNamedata= value_str;
+        _buildingname_Id_string = id_str;
+        UIButton *buildingNameBtn=(UIButton *)[self.view viewWithTag:1];
+        [buildingNameBtn setTitle:_buildingNamedata forState:UIControlStateNormal];
+    }else if(btn_tag == 101){
+        
+        _locationName_Value_string= value_str;
+        _locationName_ID_string = id_str;
+        UIButton *storeLocationBtn=(UIButton *)[self.view viewWithTag:101];
+        [storeLocationBtn setTitle:_locationName_Value_string forState:UIControlStateNormal];
+        
+        
+        for(GISDropDownsObject *unitObj in _locationNames){
+            
+            if([id_str isEqualToString:unitObj.id_String]){
+                
+                _requestorLocationId_string=unitObj.id_String;
+                _locationName_Value_string = unitObj.value_String;
+                
+                if ([_requestorLocationId_string length]==0) {
+                    _requestorLocationId_string=@"";
+                }
+                
+                NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+                NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+                GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+                NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+                [paramsDict setObject:_requestorLocationId_string forKey:kID];
+                [paramsDict setObject:unitObj1.token_string forKey:kToken];
+                
+                [[GISServerManager sharedManager] getoffCampusLocation_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_getoffLocationRequestDetails:) failAction:@selector(failuremethod_getoffLocationRequestDetails:)];
+            }
+        }
+
+    }else if(btn_tag == 102){
+        
+        _closestMetro_Id_string = id_str;
+        _closestMetrodata = value_str;
+        UIButton *closestMetroBtn=(UIButton *)[self.view viewWithTag:102];
+        [closestMetroBtn setTitle:_closestMetrodata forState:UIControlStateNormal];
+    
+    }else{
+        _generalLocationdata= value_str;
+        _generalLocationId_string = id_str;
+        UIButton *generalLocationBtn=(UIButton *)[self.view viewWithTag:121];
+        [generalLocationBtn setTitle:_generalLocationdata forState:UIControlStateNormal];
+        
+        
+        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+        GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:_generalLocationId_string forKey:kID];
+        [paramsDict setObject:unitObj1.token_string forKey:kToken];
+        [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
+        
+        [[GISServerManager sharedManager] getLocation_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_getLocationRequestDetails:) failAction:@selector(failuremethod_getLocationRequestDetails:)];
+    }
+    
     if(_popover)
         [_popover dismissPopoverAnimated:YES];
 }
+
+-(void)successmethod_getLocationRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"--%@",response.responseJson);
+    GISDropDownStore *dropDownStore;
+    
+    [[GISStoreManager sharedManager] removeLocationNameObjects];
+    dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+    _locationNames = [[GISStoreManager sharedManager] getLocationNameObjects];
+    
+    NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+    if (chooseReqDetailedArray.count>0) {
+        
+        _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
+    }
+    
+    for (GISDropDownsObject *dropDownObj in _locationNames) {
+        if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails]) {
+            _locationName_Value_string =  dropDownObj.value_String;
+        }
+    }
+    
+    [_locationDetaislTabelView reloadData];
+    
+}
+
+-(void)failuremethod_getLocationRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+- (IBAction)tickBtnTap:(id)sender
+{    
+    UIButton *btn=(UIButton*)sender;
+    int item_value;
+    
+    if(btn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+    {
+        [btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else
+    {
+        [btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+        if(btn.tag == 555 || btn.tag == 570){
+            item_value = 1;
+            [_parkingArray addObject:[NSString stringWithFormat:@"%d",item_value]];
+        }else if(btn.tag == 556 || btn.tag == 571){
+            item_value = 2;
+            [_parkingArray addObject:[NSString stringWithFormat:@"%d",item_value]];
+        }else if(btn.tag == 557 || btn.tag == 572){
+            item_value = 3;
+            [_parkingArray addObject:[NSString stringWithFormat:@"%d",item_value]];
+        }else if(btn.tag == 558 || btn.tag == 573){
+            item_value = 4;
+            [_parkingArray addObject:[NSString stringWithFormat:@"%d",item_value]];
+        }else if(btn.tag == 574){
+            _transportation_string = @"true";
+            UIButton *btnn=(UIButton *)[self.view viewWithTag:575];
+            if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+            {
+                [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            }
+            UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:@"Transportation? :" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            alertVIew.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertVIew.tag = btn.tag;
+            alertVIew.delegate = self;
+            [alertVIew show];
+            
+            
+        }else if(btn.tag == 575){
+            _transportation_string = @"false";
+            
+            UIButton *btnn=(UIButton *)[self.view viewWithTag:574];
+            if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+            {
+                [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            }
+            
+            [btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            
+            
+        }
+    }
+}
+
+-(void)nextButtonPressed:(id)sender
+{
+    if ([_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]) {
+        
+    }
+    else if(!appDelegate.isFromContacts){
+        if([_isCompleteRequest isEqualToString:@"false"] && ![_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]){
+            if(![_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+                return;
+            }
+        }
+    }
+    
+    [self saveLocationsData];
+}
+
+-(void)saveLocationsData
+{
+    @try {
+//        if((appDelegate.isFromContacts && !appDelegate.isNewRequest) || (appDelegate.isFromContacts && appDelegate.isNewRequest) || [_isCompleteRequest isEqualToString:@"true"] || ([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]) || [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]||[_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]){
+        
+    if((!appDelegate.isNewRequest)){
+        
+            _parkingstring = [[NSMutableString alloc] init];
+            
+            if([_transportation_string length] >0)
+                _transportation_string = @"";
+            if([_transportationYes_string length] > 0)
+                _transportationYes_string = @"";
+            
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            
+            NSMutableArray *chooseDetailsArray = [[NSMutableArray alloc] initWithArray:[[GISStoreManager sharedManager]getChooseRequestDetailsObjects]];
+            
+            _chooseRequestDetailsObj = [chooseDetailsArray lastObject];
+            
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *unitObj=[requetId_array lastObject];
+            
+            [paramsDict setObject:unitObj.requestorID_string forKey:keventDetails_requestID];
+            [paramsDict setObject:_chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];
+            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:keventDetails_requestNo];
+            [paramsDict setObject:unitObj.token_string forKey:keventDetails_token];
+            [paramsDict setObject:_chooseRequestDetailsObj.statusID_String_chooseReqParsedDetails forKey:kstatusid];
+            [paramsDict setObject:_chooseRequestDetailsObj.CapNoOfUsers_String_chooseReqParsedDetails forKey:keventDetails_capnoofUsers];
+            [paramsDict setObject:_chooseRequestDetailsObj.CapViewOptions_String_chooseReqParsedDetails forKey:keventDetails_captionView];
+            [paramsDict setObject:_chooseRequestDetailsObj.CaptionTypeID_String_chooseReqParsedDetails forKey:keventDetails_captiontype];
+            [paramsDict setObject:_chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails forKey:keventDetails_dresscodeId];
+            [paramsDict setObject:_chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails forKey:keventDetails_eventDesc];
+            [paramsDict setObject:_chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails forKey:keventDetails_eventName];
+            [paramsDict setObject:_chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails forKey:keventDetails_eventId];
+            [paramsDict setObject:_chooseRequestDetailsObj.onGoing_String_chooseReqParsedDetails forKey:keventDetails_onGoing];
+            [paramsDict setObject:_chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails forKey:keventDetails_eventPublic];
+            [paramsDict setObject:_chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails forKey:keventDetails_otherServices];
+            [paramsDict setObject:_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails forKey:keventDetails_Othertech];
+            [paramsDict setObject:_chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails forKey:keventDetails_broadcast];
+            [paramsDict setObject:_chooseRequestDetailsObj.recBroadcastYes_String_chooseReqParsedDetails forKey:keventDetails_recordBroadcastYes];
+            [paramsDict setObject:_chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails forKey:keventDetails_CourseId];
+            
+            if([_generalLocationId_string isEqualToString:@"1"]){
+                [_parkingstring setString:@""];
+                for(int i=0; i <[_parkingArray count];i++){
+                    //othertechvalueStr = [[otherTechStr objectAtIndex:i] componentsJoinedByString:@","];
+                    [_parkingstring appendFormat:@"%@%@",[_parkingArray objectAtIndex:i],@","];
+                }
+                NSRange range = [_parkingstring rangeOfString:@"," options:NSBackwardsSearch];
+                if (range.location == NSNotFound) {
+                    //  [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,maxRange-1)];
+                } else {
+                    [_parkingstring setString:[_parkingstring substringToIndex:range.location]];
+                }
+                
+                if([_other_string length] == 0){
+                    _other_string = @"";
+                }
+                if([_generalLocationId_string length] == 0){
+                    _generalLocationId_string = @"";
+                }
+                if([_buildingname_Id_string length] == 0){
+                    _buildingname_Id_string = @"";
+                }
+                if([_room_name_string length] == 0 ){
+                    _room_name_string = @"";
+                }
+                if([_room_no_string length] == 0){
+                    _room_no_string = @"";
+                }
+                if([_specialProtocol_string length] == 0){
+                    _specialProtocol_string = @"";
+                }
+                if([_requestorLocationId_string length] == 0){
+                    _requestorLocationId_string = @"";
+                }
+                if([_transportation_string length] == 0){
+                    _transportation_string = @"";
+                }
+                if([_transportationYes_string length] == 0){
+                    _transportationYes_string = @"";
+                }
+                
+                [paramsDict setObject:@"" forKey:kLocation_closestmetro];
+                //[paramsDict setObject:@"" forKey:kLocation_eventname];
+                [paramsDict setObject:@"" forKey:kLocation_offcampaddress1];
+                [paramsDict setObject:@"" forKey:kLocation_offcampaddress2];
+                [paramsDict setObject:@"" forKey:kLocation_offcampcity];
+                [paramsDict setObject:@"" forKey:kLocation_offcamplocname];
+                [paramsDict setObject:@"" forKey:kLocation_offcampstate];
+                [paramsDict setObject:@"" forKey:kLocation_offcampzip];
+                [paramsDict setObject:_requestorLocationId_string forKey:kLocation_reqlocationid];
+                [paramsDict setObject:_other_string forKey:kLocation_other];
+                [paramsDict setObject:_generalLocationId_string forKey:kLocation_generallocationid];
+                [paramsDict setObject:_buildingname_Id_string forKey:kLocation_buildingid];
+                [paramsDict setObject:@"" forKey:kLocation_other_info];
+                [paramsDict setObject:_room_name_string forKey:kLocation_roomname];
+                [paramsDict setObject:_room_no_string forKey:kLocation_roomnunber];
+                [paramsDict setObject:_specialProtocol_string forKey:kLocation_specialprotocol];
+                [paramsDict setObject:_parkingstring forKey:kLocation_parking];
+                [paramsDict setObject:_transportation_string forKey:kLocation_transport];
+                [paramsDict setObject:_transportationYes_string forKey:kLocation_transportnotes];
+                
+            }else{
+                
+                [_parkingstring setString:@""];
+                
+                for(int i=0; i <[_parkingArray count];i++){
+                    //othertechvalueStr = [[otherTechStr objectAtIndex:i] componentsJoinedByString:@","];
+                    [_parkingstring appendFormat:@"%@%@",[_parkingArray objectAtIndex:i],@","];
+                }
+                NSRange range = [_parkingstring rangeOfString:@"," options:NSBackwardsSearch];
+                if (range.location == NSNotFound) {
+                    //  [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,maxRange-1)];
+                } else {
+                    [_parkingstring setString:[_parkingstring substringToIndex:range.location]];
+                }
+                
+                if([_address1_string length] == 0){
+                    _address1_string = @"";
+                }
+                if([_address2_string length] == 0){
+                    _address2_string = @"";
+                }
+                if([_city_string length] == 0){
+                    _city_string = @"";
+                }
+                if([_LocationName_string length] == 0 ){
+                    _LocationName_string = @"";
+                }
+                if([_state_string length] == 0){
+                    _state_string = @"";
+                }
+                if([_zip_string length] == 0){
+                    _zip_string = @"";
+                }
+                if([_generalLocationId_string length] == 0){
+                    _generalLocationId_string = @"";
+                }
+                if([_special_string length] == 0){
+                    _special_string = @"";
+                }
+                if([_otherinfo_string length] == 0 ){
+                    _otherinfo_string = @"";
+                }
+                if([_requestorLocationId_string length] == 0){
+                    _requestorLocationId_string = @"";
+                }
+                if([_closestMetro_Id_string length] == 0){
+                    _closestMetro_Id_string = @"";
+                }
+                if([_transportation_string length] == 0){
+                    _transportation_string = @"";
+                }if([_transportationYes_string length] == 0){
+                    _transportationYes_string = @"";
+                }
+                
+                
+                [paramsDict setObject:_closestMetro_Id_string forKey:kLocation_closestmetro];
+                //[paramsDict setObject:@"" forKey:kLocation_eventname];
+                [paramsDict setObject:_address1_string forKey:kLocation_offcampaddress1];
+                [paramsDict setObject:_address2_string forKey:kLocation_offcampaddress2];
+                [paramsDict setObject:_city_string forKey:kLocation_offcampcity];
+                [paramsDict setObject:_LocationName_string forKey:kLocation_offcamplocname];
+                [paramsDict setObject:_state_string forKey:kLocation_offcampstate];
+                [paramsDict setObject:_zip_string forKey:kLocation_offcampzip];
+                [paramsDict setObject:_requestorLocationId_string forKey:kLocation_reqlocationid];
+                [paramsDict setObject:_generalLocationId_string forKey:kLocation_generallocationid];
+                [paramsDict setObject:@"" forKey:kLocation_buildingid];
+                [paramsDict setObject:@"" forKey:kLocation_other];
+                [paramsDict setObject:@"" forKey:kLocation_roomname];
+                [paramsDict setObject:@"" forKey:kLocation_roomnunber];
+                [paramsDict setObject:_special_string forKey:kLocation_specialprotocol];
+                [paramsDict setObject:_parkingstring forKey:kLocation_parking];
+                [paramsDict setObject:_otherinfo_string forKey:kLocation_other_info];
+                [paramsDict setObject:_transportation_string forKey:kLocation_transport];
+                [paramsDict setObject:_transportationYes_string forKey:kLocation_transportnotes];
+                
+            }
+            if([_generalLocationdata length]>0){
+                
+                if([_generalLocationId_string isEqualToString:@"1"]){
+                    if([_buildingNamedata length]>0){
+                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
+                    }else{
+                        if([_fields length]>0)
+                            [_fields setString:@""];
+                        
+                        if([_buildingNamedata length] == 0)
+                            [_fields appendFormat:@"%@%@",@"Building Name",@", \n"];
+                        
+                        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                        
+                    }
+                }else{
+                    if([_LocationName_string length]>0 && [_address1_string length]>0
+                       && [_city_string length] >0 && [_zip_string length] >0 && [_state_string length] >0){
+                        
+                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
+                    }else{
+                        if([_fields length]>0)
+                            [_fields setString:@""];
+                        
+                        if([_LocationName_string length] == 0)
+                            [_fields appendFormat:@"%@%@",@"Location Name",@", \n"];
+                        if([_address1_string length] == 0)
+                            [_fields appendFormat:@"%@%@",@"Address1",@", \n"];
+                        if([_city_string length] == 0)
+                            [_fields appendFormat:@"%@%@",@"City",@", \n"];
+                        if([_state_string length] == 0)
+                            [_fields appendFormat:@"%@%@",@"State",@", \n"];
+                        if([_zip_string length] == 0)
+                            [_fields appendFormat:@"%@",@"Zip"];
+                        
+                        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                        
+                    }
+                    
+                }
+            }else{
+                
+                if([_fields length]>0)
+                    [_fields setString:@""];
+                
+                if([_generalLocationdata length] == 0)
+                    [_fields appendFormat:@"%@%@",@"General Location",@", \n"];
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                
+            }
+        }
+        
+        else{
+            
+            [GISUtility showAlertWithTitle:@"" andMessage:@"Select Choose Request"];
+            
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Location Details action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+    
+}
+
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(textField.tag == 3){
+        _room_name_string  = textField.text;
+    }else if(textField.tag == 2){
+        _room_no_string = textField.text;
+    }else if(textField.tag == 4){
+        _other_string = textField.text;
+    }else if(textField.tag == 44){
+        _LocationName_string = textField.text;
+    }else if(textField.tag == 55){
+        _city_string = textField.text;
+    }else if(textField.tag == 66){
+        _state_string = textField.text;
+    }else if(textField.tag == 77){
+        _zip_string = textField.text;
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+     return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(textField.tag == 2){
+        /*  limit to only numeric characters  */
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+        for (int i = 0; i < [string length]; i++) {
+            unichar c = [string characterAtIndex:i];
+            if ([myCharSet characterIsMember:c]) {
+                return YES;
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please enter Numbers Only" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                [alert show];
+                return NO;
+            }
+        }
+        
+        /*  limit the users input to only 9 characters  */
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength > 6) ? NO : YES;
+    }else{
+        return YES;
+    }
+    return NO;
+}
+
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldBeginEditing:");
+ 
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing:");
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldEndEditing:");
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    NSLog(@"textViewDidEndEditing:");
+  
+    [textView resignFirstResponder];
+    
+    if(textView.tag == 5)
+    {
+        _specialProtocol_string = textView.text;
+    }else if(textView.tag == 562)
+    {
+        _address1_string = textView.text;
+    }else if(textView.tag == 563)
+    {
+        _address2_string = textView.text;
+    }else if(textView.tag == 569)
+    {
+        _otherinfo_string = textView.text;
+    }else if(textView.tag == 555)
+    {
+        _special_string = textView.text;
+    }
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSCharacterSet *doneButtonCharacterSet = [NSCharacterSet newlineCharacterSet];
+    NSRange replacementTextRange = [text rangeOfCharacterFromSet:doneButtonCharacterSet];
+    NSUInteger location = replacementTextRange.location;
+    
+    if (textView.text.length + text.length > 140){
+        if (location != NSNotFound){
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    else if (location != NSNotFound){
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+-(void)successmethod_eventDetailsRequest:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_saveUpdateRequest Success---%@",saveUpdateDict);
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults synchronize];
+        [userDefaults setValue:_chooseRequestData forKey:kDropDownValue];
+        appDelegate.isFromlocation  = YES;
+        GISDatesAndTimesViewController *datesAndTimesViewController;
+        
+        datesAndTimesViewController =[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];
+        
+    }else{
+        appDelegate.isFromlocation  = NO;
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
+    }
+}
+
+-(void)failuremethod_eventDetailsRequest:(GISJsonRequest *)response
+{
+    appDelegate.isFromlocation  = NO;
+    NSLog(@"Failure");
+}
+
+-(void)successmethod_getoffLocationRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    
+    if ([response.responseJson isKindOfClass:[NSArray class]])
+    {
+        id array=response.responseJson;
+        NSDictionary *dictHere=[array lastObject];
+        if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+            
+            NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+            if (chooseReqDetailedArray.count>0) {
+                
+                _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
+            }
+            
+            _address1_string = [dictHere objectForKey:kOffLoc_Address1];
+            _address2_string = [dictHere objectForKey:kOffLoc_Address2];
+            _LocationName_string = [dictHere objectForKey:kOffLoc_LocationName];
+            _city_string = [dictHere objectForKey:kOffLoc_City];
+            _state_string = [dictHere objectForKey:kOffLoc_State];
+            _zip_string = [dictHere objectForKey:kOffLoc_Zip];
+            _closestMetro_Id_string = [dictHere objectForKey:kOffLoc_Closestmetro];
+            
+            for (GISDropDownsObject *dropDownObj in _closestMetroArray) {
+                if ([dropDownObj.id_String isEqualToString:_closestMetro_Id_string]) {
+                    _closestMetrodata =  dropDownObj.value_String;
+                }
+            }
+            
+            [_locationDetaislTabelView reloadData];
+        }
+    }
+    
+}
+
+-(void)failuremethod_getoffLocationRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -40,8 +40,11 @@
     [_street_label setFont:[GISFonts normal]];
     [_unknown_label setFont:[GISFonts normal]];
     [_generalLocation_label setFont:[GISFonts normal]];
-    
-    [_locationDetailsOffcampus_label setText:NSLocalizedStringFromTable(@"locationDetails_offcampus", TABLE, nil)];
+    [_buildingNamebtn.titleLabel setFont:[GISFonts small]];
+    [_nextButton setBackgroundColor:UIColorFromRGB(0x00457c)];
+    [_nextButton setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
+
+    [_locationDetailsOffcampus_label setText:NSLocalizedStringFromTable(@"location_details_onCampus", TABLE, nil)];
     [_buildingName_label setText:NSLocalizedStringFromTable(@"building_name", TABLE, nil)];
     [_roomName_label setText:NSLocalizedStringFromTable(@"room_name", TABLE, nil)];
     [_roomNo_label setText:NSLocalizedStringFromTable(@"room_no", TABLE, nil)];
