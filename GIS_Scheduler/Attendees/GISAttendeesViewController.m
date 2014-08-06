@@ -92,15 +92,20 @@ int row_count = 2;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if (appDelegate.isFromContacts && !appDelegate.isNewRequest) {
+    if ((appDelegate.isFromContacts && !appDelegate.isNewRequest)||([appDelegate.chooseRequest_ID_String length])) {
         
         //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-        attendeesObject.choose_request_ID_String=appDelegate.chooseRequest_ID_String;//[userDefaults valueForKey:kDropDownValue];
+        //[userDefaults valueForKey:kDropDownValue];
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
+        [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
+        if ([appDelegate.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]) {
+        }
+        else
+        {[self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+        }
     }
 }
 
@@ -472,6 +477,7 @@ int row_count = 2;
     [[NSNotificationCenter defaultCenter]removeObserver:kselectedChooseReqNumber];
     attendeesObject.choose_request_String=[dict valueForKey:@"value"];
     attendeesObject.choose_request_ID_String=[dict valueForKey:@"id"];
+    appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -561,7 +567,8 @@ int row_count = 2;
     }
     
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:attendeesObject.choose_request_ID_String forKey:kID];
+    
+    [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     
     [[GISServerManager sharedManager] getAttendees_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_get_Attendees_Details:) failAction:@selector(failuremethod_get_Attendees_Details:)];

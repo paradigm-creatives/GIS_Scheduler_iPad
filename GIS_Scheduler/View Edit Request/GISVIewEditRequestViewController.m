@@ -295,6 +295,9 @@
     _created_date_value_Label.text = appDelegate.createdDateString;
     _status_value_Label.text = appDelegate.statusString;
     
+    _created_by_value_Label.textColor = UIColorFromRGB(0x003e84);
+    _created_date_value_Label.textColor = UIColorFromRGB(0x003e84);
+    _status_value_Label.textColor = UIColorFromRGB(0x003e84);
 }
 
 

@@ -1,8 +1,3 @@
-
-
-
-
-
 //
 //  GISDatesTimesDetailStore.m
 //  Gallaudet-Interpreting-Service

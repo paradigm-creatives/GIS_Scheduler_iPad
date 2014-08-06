@@ -81,6 +81,10 @@
     GISLoginDetailsObject *login_Obj;
     int selected_row;
     GISPopOverTableViewController *tableViewController;
+    
+    NSString *date_temp_string;
+    NSString *endTime_temp_string;
+    NSString *startTime_temp_string;
 }
 @property(nonatomic,retain) NSString * inCompleteTab_string;
 @property(nonatomic,retain) NSString * isCompleteRequest;

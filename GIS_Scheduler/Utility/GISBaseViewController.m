@@ -114,8 +114,8 @@
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.isMasterHide= !self.isMasterHide;
-    NSString *buttonTitle = self.isMasterHide ? @"UnHide"  : @"Hide";
-    if ([buttonTitle isEqualToString:@"UnHide"])
+    NSString *buttonTitle = self.isMasterHide ? @""  : @"  ";//@""== Unhide   @"  "==Hide
+    if ([buttonTitle isEqualToString:@""])
     {
         dashBoard_UIView.hidden=NO;
         

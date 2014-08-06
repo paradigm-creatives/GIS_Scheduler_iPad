@@ -206,7 +206,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    if ([appDelegate.chooseRequest_ID_String length]) {
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+    }
+    
 }
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
@@ -215,7 +225,7 @@
 
     contactBilling_Object.chooseRequest_String=[dict valueForKey:@"value"];
     contactBilling_Object.chooseRequest_ID_String=[dict valueForKey:@"id"];
-    
+    appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
