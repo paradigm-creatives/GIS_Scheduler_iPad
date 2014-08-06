@@ -298,7 +298,6 @@ int row_count = 2;
 {
     
     [self resignCurrentTextField];
-    
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISAttendeesTopCell *)button.superview.superview.superview;
     attendeesCell=(GISAttendeesTopCell *)tempCellRef;

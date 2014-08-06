@@ -156,6 +156,15 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
     
+    selected_row=999999;
+    tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController.popOverDelegate=self;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -183,13 +192,36 @@
     cell.startTime_Label.text=detailObj.startTime_String;
     cell.endTimeLabel.text=detailObj.endTime_String;
     
+    cell.date_TextField.text=detailObj.date_String;
+    cell.startTime_TextField.text=detailObj.startTime_String;
+    cell.endTime_TextField.text=detailObj.endTime_String;
+    
     cell.editButton.tag=indexPath.row;
     cell.deleteButton.tag=indexPath.row;
     
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.date_edit_button_detailView addTarget:self action:@selector(dateButton_Edit_Pressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.startTime_edit_button_detailView addTarget:self action:@selector(startTimeButton_Edit_Pressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.endTime_edit_button_detailView addTarget:self action:@selector(endTimeButton_Edit_Pressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.save_button_detailView addTarget:self action:@selector(saveButton_Edit_Pressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.cancel_button_detailView addTarget:self action:@selector(cancelButton_Edit_Pressed:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
+    if (selected_row==indexPath.row) {
+        cell.date_UIview.hidden=NO;
+        cell.startTime_UIview.hidden=NO;
+        cell.endTime_UIview.hidden=NO;
+        cell.saveCancel_UIview.hidden=NO;
+    }
+    else
+    {
+        cell.date_UIview.hidden=YES;
+        cell.startTime_UIview.hidden=YES;
+        cell.endTime_UIview.hidden=YES;
+        cell.saveCancel_UIview.hidden=YES;
+    }
     return cell;
 }
 
@@ -441,6 +473,7 @@
         [self getBetween_dates];
     }
 }
+
 -(void)getBetween_dates
 {
     [createDateTimes_mutArray removeAllObjects];
@@ -530,7 +563,7 @@
         
         NSLog(@"--%@----",[createDateTimes_mutArray description]);
         if (createDateTimes_mutArray.count<1) {
-            // [self getBetween_dates];
+             [self getBetween_dates];
         }
         
         //[self pushToDatesAndTimes_DetailView];
@@ -544,41 +577,8 @@
     
 }
 
--(void)editButtonPressed:(id)sender
-{
-    NSLog(@"tag--%d",[sender tag]);
-    int tag=[sender tag];
-    /*
-    for (UIViewController *viewController in self.navigationController.viewControllers) {
-        if ([viewController isKindOfClass:[GISDatesAndTimesViewController class]]) {
-            GISDatesAndTimesViewController *dates_controller=(GISDatesAndTimesViewController *)viewController;
-            dates_controller.isFrom_Dates_Detail_View_String=@"edit";
-            GISDatesAndTimesObject *dobj= [detail_mut_array objectAtIndex:tag];
-            dobj.tagValue=tag;
-            
-            
-            [dates_controller.createDateTimes_mutArray removeAllObjects];//jun5th
-            [dates_controller.createDateTimes_mutArray addObjectsFromArray:detail_mut_array];//jun5th
-            
-            dates_controller.datesAndTime_Object_from_dateDetailView=dobj;
-            //NSLog(@"---%@---%@---",dobj.date_String,dobj.day_String);
-            [self.navigationController popToViewController:dates_controller animated:NO];
-        }
-    }
-    */
-}
-
--(void)deleteButtonPressed:(id)sender
-{
-    UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    alertVIew.tag = [sender tag];
-    alertVIew.delegate = self;
-    [alertVIew show];
-}
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     if(buttonIndex == 1)
     {
         GISDatesAndTimesObject *dateObj = [detail_mut_array objectAtIndex:alertView.tag];
@@ -714,7 +714,6 @@
         }
         
     }
-    //[dates_TableView reloadData];
     [self sortTheDatesAndTimes];
 }
 
@@ -763,6 +762,120 @@
         }
     }
     [detail_mut_array removeObjectsInArray:duplicates];
+}
+
+-(void)editButtonPressed:(id)sender
+{
+    NSLog(@"tag--%d",[sender tag]);
+    int tag=[sender tag];
+    selected_row=[sender tag];
+    [datesTimes_tableView reloadData];
+//    NSIndexPath *indexPath =[NSIndexPath indexPathForRow:[sender tag] inSection:0];
+//    NSArray *array=[[NSArray alloc]initWithObjects:indexPath, nil];
+//    [datesTimes_tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
+    /*
+     for (UIViewController *viewController in self.navigationController.viewControllers) {
+     if ([viewController isKindOfClass:[GISDatesAndTimesViewController class]]) {
+     GISDatesAndTimesViewController *dates_controller=(GISDatesAndTimesViewController *)viewController;
+     dates_controller.isFrom_Dates_Detail_View_String=@"edit";
+     GISDatesAndTimesObject *dobj= [detail_mut_array objectAtIndex:tag];
+     dobj.tagValue=tag;
+     
+     
+     [dates_controller.createDateTimes_mutArray removeAllObjects];//jun5th
+     [dates_controller.createDateTimes_mutArray addObjectsFromArray:detail_mut_array];//jun5th
+     
+     dates_controller.datesAndTime_Object_from_dateDetailView=dobj;
+     //NSLog(@"---%@---%@---",dobj.date_String,dobj.day_String);
+     [self.navigationController popToViewController:dates_controller animated:NO];
+     }
+     }
+     */
+}
+
+-(void)deleteButtonPressed:(id)sender
+{
+    UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alertVIew.tag = [sender tag];
+    alertVIew.delegate = self;
+    [alertVIew show];
+}
+
+-(IBAction)dateButton_Edit_Pressed:(id)sender
+{
+    
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
+    btnTag=111;
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"datestimes" :tempObj.date_String :tempCell.date_edit_button_detailView.frame :btnTag];
+    [popOver_temp presentPopoverFromRect:CGRectMake(350, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    
+}
+-(UIPopoverController *)showPopOver:(GISDatesTimesDetailCell *)cell:(NSString *)view_str:(NSString *)moveUp_str:(CGRect)frameTemp:(int)tag
+{
+    tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController.popOverDelegate=self;
+    btnTag=tag;
+    tableViewController.view_String=view_str;
+    tableViewController.dateTimeMoveUp_string=moveUp_str;
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    
+    popover.delegate = self;
+    popover.popoverContentSize = CGSizeMake(340, 150);
+    return  popover;
+    
+}
+
+-(IBAction)startTimeButton_Edit_Pressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
+    btnTag=222;
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
+    
+    [popOver_temp presentPopoverFromRect:CGRectMake(770, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+   
+}
+
+-(IBAction)endTimeButton_Edit_Pressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
+    btnTag=222;
+    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
+    [popOver_temp presentPopoverFromRect:CGRectMake(900,800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+}
+
+-(IBAction)saveButton_Edit_Pressed:(id)sender
+{
+    
+}
+
+-(IBAction)cancelButton_Edit_Pressed:(id)sender
+{
+    selected_row=999999;
+    [datesTimes_tableView reloadData];
+}
+
+
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
+{
+    NSDictionary *dict=[notification userInfo];
+   
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

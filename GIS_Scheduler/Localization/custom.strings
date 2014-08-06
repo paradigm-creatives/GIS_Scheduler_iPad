@@ -176,3 +176,14 @@
 "time alert"="Please select between time";
 "loading" = "loading";
 
+
+
+"select_primary_audience"= "Select Primary Audience";
+"please_Enter_Valid_Email"= "Please Enter Valid Email";
+
+"request_Failed"= "Request Failed";
+"select_Start_Date"= "Select Start Date";
+"select_End_Date"= "Select End Date";
+"select_Start_Time"="Select Start Time";
+"select_End_Time"="Select End Time";
+"add attendee"  = "Add Attendee";

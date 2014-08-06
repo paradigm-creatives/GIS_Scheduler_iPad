@@ -79,6 +79,8 @@
     int currentObjTag_toDelete;
 
     GISLoginDetailsObject *login_Obj;
+    int selected_row;
+    GISPopOverTableViewController *tableViewController;
 }
 @property(nonatomic,retain) NSString * inCompleteTab_string;
 @property(nonatomic,retain) NSString * isCompleteRequest;
@@ -88,4 +90,11 @@
 
 -(IBAction)weekDays_ButtonPressed:(id)sender;
 -(IBAction)createDateTimeButtonPressed:(id)sender;
+
+-(IBAction)dateButton_Edit_Pressed:(id)sender;
+-(IBAction)startTimeButton_Edit_Pressed:(id)sender;
+-(IBAction)endTimeButton_Edit_Pressed:(id)sender;
+
+-(IBAction)saveButton_Edit_Pressed:(id)sender;
+-(IBAction)cancelButton_Edit_Pressed:(id)sender;
 @end
