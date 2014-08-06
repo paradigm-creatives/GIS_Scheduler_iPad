@@ -161,6 +161,12 @@
     tableViewController.popOverDelegate=self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return detail_mut_array.count;
@@ -571,11 +577,8 @@
     
 }
 
-
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     if(buttonIndex == 1)
     {
         GISDatesAndTimesObject *dateObj = [detail_mut_array objectAtIndex:alertView.tag];
@@ -711,7 +714,6 @@
         }
         
     }
-    //[dates_TableView reloadData];
     [self sortTheDatesAndTimes];
 }
 
@@ -807,10 +809,11 @@
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
     btnTag=111;
-    [self showPopOver:tempCell:@"datestimes" :tempObj.date_String :tempCell.date_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"datestimes" :tempObj.date_String :tempCell.date_edit_button_detailView.frame :btnTag];
+    [popOver_temp presentPopoverFromRect:CGRectMake(350, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     
 }
--(void)showPopOver:(GISDatesTimesDetailCell *)cell:(NSString *)view_str:(NSString *)moveUp_str:(CGRect)frameTemp:(int)tag
+-(UIPopoverController *)showPopOver:(GISDatesTimesDetailCell *)cell:(NSString *)view_str:(NSString *)moveUp_str:(CGRect)frameTemp:(int)tag
 {
     tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
@@ -821,7 +824,8 @@
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 150);
-    [popover presentPopoverFromRect:CGRectMake(frameTemp.origin.x+155, frameTemp.origin.y+24, 1, 1) inView:cell.contentView permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    return  popover;
+    
 }
 
 -(IBAction)startTimeButton_Edit_Pressed:(id)sender
@@ -831,7 +835,10 @@
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
     btnTag=222;
-    [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
+    
+    [popOver_temp presentPopoverFromRect:CGRectMake(770, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+   
 }
 
 -(IBAction)endTimeButton_Edit_Pressed:(id)sender
@@ -841,7 +848,8 @@
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
     btnTag=222;
-    [self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
+    [popOver_temp presentPopoverFromRect:CGRectMake(900,800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
 -(IBAction)saveButton_Edit_Pressed:(id)sender
@@ -854,6 +862,22 @@
     selected_row=999999;
     [datesTimes_tableView reloadData];
 }
+
+
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
+{
+    NSDictionary *dict=[notification userInfo];
+   
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
+    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+}
+
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
