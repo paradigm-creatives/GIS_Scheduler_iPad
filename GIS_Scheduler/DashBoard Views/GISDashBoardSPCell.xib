@@ -70,7 +70,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="R9k-3M-HTb">
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="R9k-3M-HTb">
                         <rect key="frame" x="769" y="14" width="77" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -104,7 +104,9 @@
                 <outlet property="eventType_Label" destination="hM7-Mz-Ybg" id="0ht-DI-Cqb"/>
                 <outlet property="jobId_Label" destination="QUj-PZ-npO" id="bWV-tj-4Kb"/>
                 <outlet property="jobdate_Label" destination="FtL-IX-KWk" id="STr-yR-Rwh"/>
+                <outlet property="payType_btn" destination="hlW-3Q-f3i" id="WYF-Wn-ede"/>
                 <outlet property="requestedDate_Label" destination="aBg-S3-Wcu" id="Lmi-xK-bxd"/>
+                <outlet property="response_status_btn" destination="R9k-3M-HTb" id="2aH-e3-zKR"/>
                 <outlet property="serviceProviderName_Label" destination="iNw-M0-Acr" id="QpK-EY-z7b"/>
                 <outlet property="startTime_Label" destination="Z63-Cf-YSa" id="og3-rO-vqO"/>
                 <outlet property="totalHours_Label" destination="M0a-CB-Y8r" id="ZPM-TB-fQt"/>

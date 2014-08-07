@@ -163,6 +163,7 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
+   
     
     
 
@@ -287,6 +288,11 @@
     UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:[value intValue]];
     [self tabBar:self.mainTabbar didSelectItem:tabItem];
     [self.mainTabbar setSelectedItem:tabItem];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [_requestBtn setTitle:[userDefaults valueForKey:kDropDownValue] forState:UIControlStateNormal];
+    appDelegate.chooseRequest_ID_String = [userDefaults valueForKey:kDropDownID];
+    
 }
 
 -(void)getRequestInfo{
@@ -296,7 +302,6 @@
     _status_value_Label.text = appDelegate.statusString;
     
 }
-
 
 
 -(void)viewWillDisappear:(BOOL)animated

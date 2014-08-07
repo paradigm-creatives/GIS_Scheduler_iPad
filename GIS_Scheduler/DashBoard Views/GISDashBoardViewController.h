@@ -10,8 +10,9 @@
 #import "GISAppDelegate.h"
 #import "GISSchedulerSPJobsStore.h"
 #import "GISSchedulerNMRequestsStore.h"
+#import "GISPopOverTableViewController.h"
 
-@interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     IBOutlet UIView *datListView;
     //IBOutlet UILabel *_Label;
@@ -69,7 +70,9 @@
     NSMutableArray *SPJobsArray;
     NSMutableArray *NMRequestsArray;
     GISAppDelegate *appDelegate;
-    
+    int btn_tag;
+    NSString *pay_type_data;
+    NSString *pay_type_ID_String;
     
 }
 - (IBAction)hideAndUnHideMaster:(id)sender;
@@ -77,6 +80,8 @@
 @property(nonatomic,strong)IBOutlet UINavigationItem *navigation_item;
 @property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) NSArray *payTypeArray;
+@property (nonatomic,strong) UIPopoverController *popover;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;
 

@@ -102,6 +102,11 @@
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addRequestNumbers_SearchJobsObject:dropDownObject];
                 }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kPayType]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addPayTypeObject:dropDownObject];
+                }
+
             }
         }
     }
