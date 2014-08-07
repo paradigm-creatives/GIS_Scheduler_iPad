@@ -29,5 +29,26 @@
 @property(nonatomic,strong)IBOutlet UILabel *specialProtocol_label;
 @property(nonatomic,strong)IBOutlet UILabel *otherInfo_label;
 
+@property (strong, nonatomic) IBOutlet UIButton *storeLocationbtn;
+@property (strong, nonatomic) IBOutlet UIButton *closestMetrobtn;
+@property (strong, nonatomic) IBOutlet UIButton *garagebtn;
+@property (strong, nonatomic) IBOutlet UIButton *materedBtn;
+@property (strong, nonatomic) IBOutlet UIButton *streetBtn;
+@property (strong, nonatomic) IBOutlet UIButton *Unknownbtn;
+@property (strong, nonatomic) IBOutlet UIButton *transportationyesBtn;
+@property (strong, nonatomic) IBOutlet UIButton *transportationnoBtn;
+
+@property (strong, nonatomic) IBOutlet UITextField *locationtextField;
+@property (strong, nonatomic) IBOutlet UITextField *citytextField;
+@property (strong, nonatomic) IBOutlet UITextField *statetextField;
+@property (strong, nonatomic) IBOutlet UITextField *ziptextField;
+
+@property (strong, nonatomic) IBOutlet UITextView *address1Textview;
+@property (strong, nonatomic) IBOutlet UITextView *address2Textview;
+@property (strong, nonatomic) IBOutlet UITextView *specialTextview;
+@property (strong, nonatomic) IBOutlet UITextView *otherinfoTextview;
+
+
+
 
 @end

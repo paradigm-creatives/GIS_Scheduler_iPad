@@ -24,4 +24,16 @@
 @property(nonatomic,strong)IBOutlet UILabel *unknown_label;
 @property(nonatomic,strong)IBOutlet UILabel *generalLocation_label;
 
+@property (strong, nonatomic) IBOutlet UIButton *garageonCampusbtn;
+@property (strong, nonatomic) IBOutlet UIButton *materedonCampusBtn;
+@property (strong, nonatomic) IBOutlet UIButton *streetonCampusBtn;
+@property (strong, nonatomic) IBOutlet UIButton *UnknownonCampusbtn;
+
+@property (strong, nonatomic) IBOutlet UITextField *roomnotextField;
+@property (strong, nonatomic) IBOutlet UITextField *roomNametextField;
+@property (strong, nonatomic) IBOutlet UITextField *othertextField;
+@property (strong, nonatomic) IBOutlet UITextView *specialProtocoltextView;
+@property (strong, nonatomic) IBOutlet UIButton *buildingNamebtn;
+@property(nonatomic,strong) IBOutlet UIButton *nextButton;
+
 @end

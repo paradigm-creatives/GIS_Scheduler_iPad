@@ -45,9 +45,10 @@
     [_specialProtocol_label setFont:[GISFonts normal]];
     [_otherInfo_label setFont:[GISFonts normal]];
     [_city_label setFont:[GISFonts normal]];
+    [_storeLocationbtn.titleLabel setFont:[GISFonts small]];
+    [_closestMetrobtn.titleLabel setFont:[GISFonts small]];
     
-    
-    [_locationDetailsOncampus_label setText:NSLocalizedStringFromTable(@"location_details_onCampus", TABLE, nil)];
+    [_locationDetailsOncampus_label setText:NSLocalizedStringFromTable(@"locationDetails_offcampus", TABLE, nil)];
     [_storeLocation_label setText:NSLocalizedStringFromTable(@"store_location", TABLE, nil)];
     [_location_name_label setText:NSLocalizedStringFromTable(@"location_name", TABLE, nil)];
     [_address1_label setText:NSLocalizedStringFromTable(@"address1", TABLE, nil)];
