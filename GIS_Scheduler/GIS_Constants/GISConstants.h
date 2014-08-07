@@ -27,6 +27,7 @@
 #define kMoveUp  @"moveUp"
 #define kTabSelected  @"tabSelected"
 #define kRequestInfo  @"requestInfo"
+#define kNextSelected  @"nextSelected"
 
 
 

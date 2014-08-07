@@ -82,4 +82,6 @@
 
 - (void)getSchedulerNewandModifiedRequests:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
+- (void)getPayTypedata:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
 @end

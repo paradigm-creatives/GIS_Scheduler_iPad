@@ -20,6 +20,9 @@
 #import "GISLoadingView.h"
 #import "PCLogger.h"
 #import "GISDatabaseManager.h"
+#import "GISDropDownStore.h"
+#import "GISDropDownsObject.h"
+#import "GISUtility.h"
 
 @interface GISDashBoardViewController ()
 
@@ -261,6 +264,10 @@
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
         [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+        
+        [[GISServerManager sharedManager] getPayTypedata:self withParams:paramsDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+
+        
     }
     
 }
@@ -355,6 +362,11 @@
         [cell.eventType_Label setText:spJobsObj.EventType_String];
         [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
         [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
+        
+        [cell.payType_btn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.response_status_btn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.payType_btn setTag:indexPath.row];
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
@@ -477,6 +489,50 @@
     NSLog(@"Failure");
 }
 
+-(void)successmethod_PatTypedata:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_PatTypedata Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                GISDropDownStore *dropDownStore;
+                
+                [[GISStoreManager sharedManager] removePayTypeObjects];
+                dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+                _payTypeArray = [[GISStoreManager sharedManager] getPayTypeObjects];
+                [self removeLoadingView];
+                
+                //[listTableView reloadData];
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_PatTypedata:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
@@ -488,6 +544,46 @@
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
+
+- (IBAction)showPopoverDetails:(id)sender{
+    
+    UIButton *btn=(UIButton*)sender;
+    
+    btn_tag = btn.tag;
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    tableViewController.popOverDelegate = self;
+    
+    
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_payTypeArray viewController:tableViewController];
+    
+//    }else if(btn.tag == 2){
+//        _popover =   [GISUtility showPopOver:(NSMutableArray *)_dresscodeArray viewController:tableViewController];
+//    }    
+    _popover.delegate = self;
+    
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+120, btn.frame.origin.y+245, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+    
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    if(btn_tag == 1){
+        pay_type_data= value_str;
+        UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:1];
+        [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
+        pay_type_ID_String=id_str;
+        
+    }
+}
+
 
 
 - (void)didReceiveMemoryWarning

@@ -47,6 +47,7 @@
 @property (nonatomic, retain) NSMutableArray *registeredCOnsumers_Array;
 @property (nonatomic, retain) NSMutableArray *request_SPJobsArray;
 @property (nonatomic, retain) NSMutableArray *request_NMRequestsArray;
+@property (nonatomic, retain) NSMutableArray *payTypeArray;
 
 @end
 
@@ -97,6 +98,7 @@ static GISStoreManager *singletonManager = nil;
         _requestNumbers_SearchJObsArray= [[NSMutableArray alloc]init];
         _request_SPJobsArray = [[NSMutableArray alloc]init];
         _request_NMRequestsArray = [[NSMutableArray alloc]init];
+        _payTypeArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -653,6 +655,26 @@ static GISStoreManager *singletonManager = nil;
     [_request_NMRequestsArray removeAllObjects];
 }
 
+
+#pragma mark PayType Start
+- (BOOL)addPayTypeObject:(GISDropDownsObject *)payTypeObj
+{
+    BOOL isAdded = FALSE;
+    if (payTypeObj != nil) {
+        [_payTypeArray addObject:payTypeObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getPayTypeObjects
+{
+    return [_payTypeArray count]?_payTypeArray:nil;
+}
+- (void)removePayTypeObjects
+{
+    [_payTypeArray removeAllObjects];
+}
 
 
 - (void)destroy{

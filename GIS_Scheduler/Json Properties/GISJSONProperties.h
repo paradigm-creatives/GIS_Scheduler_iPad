@@ -73,6 +73,7 @@
 #define kPay_Level @"Pay_Level"
 #define kServiceType_serviceProvider @"Serviceprovider_Type"
 #define kServiceType_Registerd_Consumers @"Registerd_Consumers"
+#define kPayType @"Pay_Type"
 #pragma mark - Get Drop Downs End
 
 

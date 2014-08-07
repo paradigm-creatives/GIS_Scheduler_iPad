@@ -45,6 +45,8 @@
         
         [_locationDetaislTabelView setContentSize:CGSizeMake(1024, 940)];
         
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY ID DESC;"];
+        _chooseReqArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
         NSString *generalLocation_statement = [[NSString alloc]initWithFormat:@"select * from TBL_GENERAL_LOCATION  ORDER BY ID DESC;"];
         _generalLocationArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:generalLocation_statement];
@@ -68,8 +70,25 @@
         _parkingArray = [[NSMutableArray alloc] init];
         
         _locationNames = [[NSMutableArray alloc] init];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+
+
     }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    if(appDelegate.isFromContacts && !appDelegate.isNewRequest){
+        
+        [self getLocationDetails];
+        
+    }
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -198,6 +217,13 @@
             
             if([_parkingArray count]>0)
                 [_parkingArray removeAllObjects];
+            
+            cell.specialTextview.delegate = self;
+            cell.otherinfoTextview.delegate = self;
+            
+            cell.citytextField.delegate = self;
+            cell.statetextField.delegate = self;
+            cell.ziptextField.delegate = self;
             
             cell.locationtextField.text = _LocationName_string;
             cell.address1Textview.text = _address1_string;
@@ -741,11 +767,20 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    if(textField.tag == 55 || textField.tag == 66 || textField.tag == 77){
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if(textField.tag == 55 || textField.tag == 66 || textField.tag == 77){
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
     if(textField.tag == 3){
         _room_name_string  = textField.text;
     }else if(textField.tag == 2){
@@ -805,6 +840,13 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"textViewDidBeginEditing:");
+    
+    if(textView.tag == 569 || textView.tag == 555)
+    {
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
+
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
@@ -814,6 +856,12 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     NSLog(@"textViewDidEndEditing:");
+    
+    if(textView.tag == 569 || textView.tag == 555)
+    {
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
   
     [textView resignFirstResponder];
     
@@ -928,9 +976,166 @@
     NSLog(@"Failure");
 }
 
+-(void) getLocationDetails{
+    
+    @try {
+        
+        //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+        if (chooseReqDetailedArray.count>0) {
+            
+            _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
+            NSLog(@"----now--%@",_chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails);
+            
+            for (GISDropDownsObject *dropDownObj in _chooseReqArray) {
+                if ([dropDownObj.value_String isEqualToString:_chooseRequestDetailsObj.requestNo_String_chooseReqParsedDetails]) {
+                    _choose_req_Id_string=dropDownObj.id_String;
+                    _chooseRequestData = dropDownObj.value_String;
+                }
+            }
+            
+            for (GISDropDownsObject *dropDownObj in _generalLocationArray) {
+                if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.generalLocation_String_chooseReqParsedDetails]) {
+                    _generalLocationId_string = dropDownObj.id_String;
+                    _generalLocationdata =  dropDownObj.value_String;
+                }
+            }
+            
+            if([_generalLocationId_string length] == 0)
+                _generalLocationId_string = @"";
+            
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:unitObj1.token_string forKey:kToken];
+            [paramsDict setObject:_generalLocationId_string forKey:kID];
+            [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
+            
+            [[GISServerManager sharedManager] getLocation_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_getLocationRequestDetails:) failAction:@selector(failuremethod_getLocationRequestDetails:)];
+            
+            
+            
+            for (GISDropDownsObject *dropDownObj in _closestMetroArray) {
+                if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails]) {
+                    _closestMetro_Id_string = dropDownObj.id_String;
+                    _closestMetrodata =  dropDownObj.value_String;
+                }
+            }
+            
+            for (GISDropDownsObject *dropDownObj in _buildingNameArray) {
+                if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.building_Id_String_chooseReqParsedDetails]) {
+                    _buildingNamedata =  dropDownObj.value_String;
+                    _buildingname_Id_string = dropDownObj.id_String;
+                }
+            }
+            
+            _LocationName_string =[self returningstring:_chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails];
+            _address1_string = [self returningstring:_chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails];
+            _address2_string = [self returningstring:_chooseRequestDetailsObj.offCamp_address2_String_chooseReqParsedDetails];
+            _city_string = [self returningstring:_chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails];
+            _state_string = [self returningstring:_chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails];
+            _zip_string = [self returningstring:_chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails];
+            _otherinfo_string =[self returningstring:_chooseRequestDetailsObj.otherInfo_String_chooseReqParsedDetails];
+            _other_string =  [self returningstring:_chooseRequestDetailsObj.other_String_chooseReqParsedDetails];
+            _parking_value_String =[self returningstring:_chooseRequestDetailsObj.parking_String_chooseReqParsedDetails];
+            _room_name_string = [self returningstring:_chooseRequestDetailsObj.RoomName_String_chooseReqParsedDetails];
+            _room_no_string = [self returningstring:_chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails];
+            _requestorLocationId_string = [self returningstring:_chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails];
+            
+            _transportation_string = [self returningstring:_chooseRequestDetailsObj.transportation_String_chooseReqParsedDetails];
+            
+            _transportationYes_string = [self returningstring:_chooseRequestDetailsObj.transportationYes_String_chooseReqParsedDetails];
+            
+            if([_generalLocationId_string isEqualToString:@"1"]){
+                
+                _specialProtocol_string = [self returningstring:_chooseRequestDetailsObj.SpecialProtocol_String_chooseReqParsedDetails];
+                
+                if([_parking_value_String length] >0){
+                    _getParkingOfflocArray = [[NSMutableArray alloc] initWithArray:[_parking_value_String componentsSeparatedByString:@","]];
+                    if([_parkingArray count]>0)
+                        [_parkingArray removeAllObjects];
+                }
+            }else{
+                
+                _special_string = [self returningstring:_chooseRequestDetailsObj.SpecialProtocol_String_chooseReqParsedDetails];
+                
+                if([_parking_value_String length] >0){
+                    _getParkingArray = [[NSMutableArray alloc] initWithArray:[_parking_value_String componentsSeparatedByString:@","]];
+                    if([_parkingArray count]>0)
+                        [_parkingArray removeAllObjects];
+                }
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get locationdetails action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+    
+}
 
+-(NSString *)returningstring:(id)string
+{
+    if ([string length] == 0)
+    {
+        return @"";
+    }
+    else
+    {
+        if (![string isKindOfClass:[NSString class]])
+        {
+            NSString *str= [string stringValue];
+            return str;
+        }
+        else
+        {
+            return string;
+        }
+    }
+    
+}
 
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
+{
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+    [paramsDict setObject:unitObj1.token_string forKey:kToken];
+    
+    [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+    
+}
+-(void)successmethod_getRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
+    _chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
+    [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
+    
+    appDelegate.createdDateString = _chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
+    appDelegate.createdByString = _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+    appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:_chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];
+    [self getLocationDetails];
+}
 
+-(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

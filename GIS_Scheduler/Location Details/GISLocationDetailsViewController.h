@@ -18,9 +18,11 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *locationDetaislTabelView;
+@property (strong, nonatomic) NSArray *chooseReqArray;
 @property (strong, nonatomic) NSArray *generalLocationArray;
 @property (strong, nonatomic) NSArray *closestMetroArray;
 @property (strong, nonatomic) NSArray *buildingNameArray;
+
 @property (nonatomic,strong) UIPopoverController *popover;
 
 

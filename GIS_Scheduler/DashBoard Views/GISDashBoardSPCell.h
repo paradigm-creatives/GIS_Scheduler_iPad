@@ -19,4 +19,7 @@
 @property(nonatomic,strong) IBOutlet UILabel *startTime_Label;
 @property(nonatomic,strong) IBOutlet UILabel *totalHours_Label;
 
+@property(nonatomic,strong) IBOutlet UIButton *payType_btn;
+@property(nonatomic,strong) IBOutlet UIButton *response_status_btn;
+
 @end

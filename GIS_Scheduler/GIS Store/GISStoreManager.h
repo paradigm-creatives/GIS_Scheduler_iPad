@@ -142,4 +142,8 @@
 - (NSMutableArray*)getRequest_NMRequestObject;
 - (void)removeRequest_NMRequestObject;
 
+- (BOOL)addPayTypeObject:(GISDropDownsObject *)payTypeObj;
+- (NSMutableArray*)getPayTypeObjects;
+- (void)removePayTypeObjects;
+
 @end
