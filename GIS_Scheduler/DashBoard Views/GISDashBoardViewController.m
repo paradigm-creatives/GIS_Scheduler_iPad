@@ -165,6 +165,10 @@
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
 
+    
+    UIGestureRecognizer *gestureRecog=[[UIGestureRecognizer alloc]initWithTarget:self action:nil];
+    gestureRecog.delegate=self;
+    [self.view addGestureRecognizer:gestureRecog];
 }
 
 
@@ -363,8 +367,8 @@
         [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
         [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
         
-        [cell.payType_btn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.response_status_btn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.payType_btn addTarget:self action:@selector(showPopoverDetails_payType_btn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.response_status_btn addTarget:self action:@selector(showPopoverDetails_response_status_btn:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.payType_btn setTag:indexPath.row];
         
@@ -545,9 +549,12 @@
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 
-- (IBAction)showPopoverDetails:(id)sender{
+
+- (IBAction)showPopoverDetails_payType_btn:(id)sender{
     
     UIButton *btn=(UIButton*)sender;
+    
+    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)btn.superview.superview.superview;
     
     btn_tag = btn.tag;
     
@@ -555,20 +562,36 @@
     
     tableViewController.popOverDelegate = self;
     
-    
     _popover =   [GISUtility showPopOver:(NSMutableArray *)_payTypeArray viewController:tableViewController];
-    
-//    }else if(btn.tag == 2){
-//        _popover =   [GISUtility showPopOver:(NSMutableArray *)_dresscodeArray viewController:tableViewController];
-//    }    
     _popover.delegate = self;
-    
     
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
     }
+    [_popover presentPopoverFromRect:CGRectMake(spCell.payType_btn.frame.origin.x+66, spCell.payType_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+120, btn.frame.origin.y+245, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+}
+
+- (IBAction)showPopoverDetails_response_status_btn:(id)sender{
+    
+    UIButton *btn=(UIButton*)sender;
+    
+    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)btn.superview.superview.superview;
+    
+    btn_tag = btn.tag;
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    tableViewController.popOverDelegate = self;
+    
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_payTypeArray viewController:tableViewController];
+    _popover.delegate = self;
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    [_popover presentPopoverFromRect:CGRectMake(spCell.response_status_btn.frame.origin.x+66, spCell.response_status_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
     
 }
@@ -584,7 +607,13 @@
     }
 }
 
-
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    CGPoint location=[[touches anyObject]locationInView:self.view];
+    NSLog(@"-----------x-%f--y-%f-",location.x,location.y);
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

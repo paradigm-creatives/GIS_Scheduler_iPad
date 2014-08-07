@@ -895,6 +895,7 @@
     [popOver_temp presentPopoverFromRect:CGRectMake(200,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
+
 -(IBAction)endTimeButton_Edit_Pressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
@@ -959,7 +960,6 @@
 
 -(IBAction)saveButtonPressed:(id)sender
 {
-    
     @try {
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
@@ -1019,7 +1019,6 @@
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Dates and Times Detail View Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
-    
 }
 
 
@@ -1031,7 +1030,6 @@
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
-    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
     
 }
 
