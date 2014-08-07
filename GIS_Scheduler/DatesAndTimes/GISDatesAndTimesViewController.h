@@ -85,6 +85,9 @@
     NSString *date_temp_string;
     NSString *endTime_temp_string;
     NSString *startTime_temp_string;
+    NSString *day_temp_string;
+    
+    BOOL isDateTimeDataAvailable;
 }
 @property(nonatomic,retain) NSString * inCompleteTab_string;
 @property(nonatomic,retain) NSString * isCompleteRequest;

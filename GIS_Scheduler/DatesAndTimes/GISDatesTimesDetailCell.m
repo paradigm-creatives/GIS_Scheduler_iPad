@@ -35,7 +35,6 @@
     self.startTime_TextField.textColor=UIColorFromRGB(0x666666);
     self.endTime_TextField.textColor=UIColorFromRGB(0x666666);
     
-    
     self.dateLabel.font=[GISFonts small];
     self.dayLabel.font=[GISFonts small];
     self.startTime_Label.font=[GISFonts small];
