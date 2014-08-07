@@ -164,11 +164,6 @@
     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
-
-    
-    UIGestureRecognizer *gestureRecog=[[UIGestureRecognizer alloc]initWithTarget:self action:nil];
-    gestureRecog.delegate=self;
-    [self.view addGestureRecognizer:gestureRecog];
 }
 
 
@@ -598,22 +593,16 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    if(btn_tag == 1){
-        pay_type_data= value_str;
-        UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:1];
-        [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
-        pay_type_ID_String=id_str;
-        
-    }
+    
+    pay_type_data= value_str;
+    UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:btn_tag];
+    [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
+    pay_type_ID_String=id_str;
+    
+    
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-    CGPoint location=[[touches anyObject]locationInView:self.view];
-    NSLog(@"-----------x-%f--y-%f-",location.x,location.y);
-    
-}
+
 
 - (void)didReceiveMemoryWarning
 {
