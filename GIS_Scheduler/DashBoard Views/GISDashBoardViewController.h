@@ -12,7 +12,7 @@
 #import "GISSchedulerNMRequestsStore.h"
 #import "GISPopOverTableViewController.h"
 
-@interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UIGestureRecognizerDelegate>
 {
     IBOutlet UIView *datListView;
     //IBOutlet UILabel *_Label;

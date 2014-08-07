@@ -52,7 +52,7 @@
     
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-    {
+{
         GISCommentCell *cell;
         
         cell=(GISCommentCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -69,7 +69,7 @@
         [cell.commentTextView setFont:[GISFonts normal]];
         
         return cell;
-    }
+}
     
 - (void)textViewDidBeginEditing:(UITextView *)textView
     {

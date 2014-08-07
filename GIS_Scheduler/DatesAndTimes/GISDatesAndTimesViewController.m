@@ -101,7 +101,6 @@
     saturday_Label.textColor=UIColorFromRGB(0x666666);
     sunday_Label.textColor=UIColorFromRGB(0x666666);
     
-    
     //create_DateTime_Button.backgroundColor=UIColorFromRGB(0x00457c);
     //[create_DateTime_Button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
     create_DateTime_Button.titleLabel.font=[GISFonts larger];
@@ -187,6 +186,7 @@
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in DatesAndTimesDetailView CellForRowAtIndexPath %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
+    
     cell.dateLabel.text=detailObj.date_String;
     cell.dayLabel.text=detailObj.day_String;
     cell.startTime_Label.text=detailObj.startTime_String;
@@ -198,6 +198,12 @@
     
     cell.editButton.tag=indexPath.row;
     cell.deleteButton.tag=indexPath.row;
+    
+    cell.date_edit_button_detailView.tag=indexPath.row;
+    cell.startTime_edit_button_detailView.tag=indexPath.row;
+    cell.endTime_edit_button_detailView.tag=indexPath.row;
+    cell.save_button_detailView.tag=indexPath.row;
+    cell.cancel_button_detailView.tag=indexPath.row;
     
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -214,6 +220,11 @@
         cell.startTime_UIview.hidden=NO;
         cell.endTime_UIview.hidden=NO;
         cell.saveCancel_UIview.hidden=NO;
+        
+        cell.date_TextField.text=date_temp_string;
+        cell.startTime_TextField.text=startTime_temp_string;
+        cell.endTime_TextField.text=endTime_temp_string;
+        cell.dayLabel.text=day_temp_string;
     }
     else
     {
@@ -239,7 +250,10 @@
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
     
-    
+    if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
+    {
+        [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
+    }
     
     if([sender tag]==111)
     {
@@ -327,7 +341,58 @@
             }
         }
     }
-    
+    else if (btnTag==555 || btnTag==666 || btnTag==777)
+    {
+        if (btnTag==555)
+        {
+            date_temp_string=value_str;
+            
+            NSDateFormatter  *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+            NSString *strVisitDate = [NSString stringWithFormat:@"%@", date_temp_string];
+            NSDate *visitDate = [dateFormatter dateFromString:strVisitDate];
+            strVisitDate = [dateFormatter stringFromDate:visitDate];
+            //Here you can set any date Format as per your need
+            [dateFormatter setDateFormat:@"EEEE"];
+            strVisitDate = [dateFormatter stringFromDate:visitDate];
+            day_temp_string=strVisitDate;
+            [datesTimes_tableView reloadData];
+            if ([startDate_TextField.text length] && [endDate_TextField.text length]){
+                if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text:NO])
+                {}
+                else
+                {
+                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
+                    endDate_TextField.text=@"";
+                }
+            }
+        }
+        else if (btnTag==666)
+        {
+            startTime_temp_string=value_str;
+            if ([startTime_TextField.text length]&& [endTime_TextField.text length]) {
+                if([GISUtility timeComparision:startTime_TextField.text :endTime_TextField.text]){}
+                else
+                {
+                    startTime_TextField.text=@"";
+                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+                }
+            }
+        }
+        else if (btnTag==777)
+        {
+            endTime_temp_string=value_str;
+            if ([startTime_TextField.text length]&& [endTime_TextField.text length]) {
+                if([GISUtility timeComparision:startTime_TextField.text :endTime_TextField.text]){}
+                else
+                {
+                    endTime_TextField.text=@"";
+                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+                }
+            }
+        }
+        [datesTimes_tableView reloadData];
+    }
     
     
 }
@@ -397,69 +462,92 @@
 }
 -(IBAction)createDateTimeButtonPressed:(id)sender
 {
-    [self getBetween_dates];
-    if(!appDelegate.isFromContacts){
-        if([@"chooseReqLabel" isEqualToString:@"-- select --"]){
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Choose_Request", TABLE, nil)];
-            return;
-        }
-        
-        else if(([_isCompleteRequest isEqualToString:@"true"] && [_inCompleteTab_string isEqualToString:@"Completed"]&& ![startDate_TextField.text length] && ![endDate_TextField.text length] && ![startTime_TextField.text length] && ![endTime_TextField.text length]&& weekDays_dictionary_here.count<1)||([_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]))
+    NSLog(@"-createDateTimeButtonPressed---appDelegate.chooseRequest_ID_String-->%@",appDelegate.chooseRequest_ID_String);
+    
+    if(!appDelegate.isFromContacts)
+    {
+         if(([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]) || [_isCompleteRequest isEqualToString:@"true"]
+                 || ([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]))
         {
-            //[self pushToDatesAndTimes_DetailView];
-        }
-        else  if(([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]) || [_isCompleteRequest isEqualToString:@"true"]
-                 || ([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"])){
             
-            if ([@"chooseReqLabel" length] && [startDate_TextField.text length]&& [startDate_TextField.text length] && [endDate_TextField.text length] && [startTime_TextField.text length] && [endTime_TextField.text length] ){
+            if ([appDelegate.chooseRequest_ID_String length] && [startDate_TextField.text length]&& [startDate_TextField.text length] && [endDate_TextField.text length] && [startTime_TextField.text length] && [endTime_TextField.text length] ){
                 [self getBetween_dates];
                 return;//called 2 times push thats why returned here
             }
-            else{
+            else
+            {
                 
-                if ([@"chooseReqLabel" isEqualToString:@"-- select --"]){
-                    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Choose_Request", TABLE, nil)]; return;}
-                if (![startDate_TextField.text length]){
+                if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- select --"]){
+                    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;}
+                else if (![startDate_TextField.text length]){
                     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Start_Date", TABLE, nil)]; return;}
-                if (![endDate_TextField.text length]){
+                else if (![endDate_TextField.text length]){
                     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_End_Date", TABLE, nil)]; return;}
-                if (![startTime_TextField.text length]){
+                else if (![startTime_TextField.text length]){
                     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Start_Time", TABLE, nil)]; return;}
-                if (![endTime_TextField.text length]){
+                else if (![endTime_TextField.text length]){
                     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_End_Time", TABLE, nil)]; return;}
                 
-                //[self enableUserInteraction];
             }
         }
-        else{
-            [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
-            return;
-        }
-    }
-    
-    
-    else{
-//        if (!isDateTimeDataAvailable) {
-//            [self validate];
-//        }
-//        else
-        if (appDelegate.isFromContacts && !appDelegate.isNewRequest && ![startDate_TextField.text length]&& ![startDate_TextField.text length] && ![endDate_TextField.text length] && ![startTime_TextField.text length] && ![endTime_TextField.text length] )
+        
+        if([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"])
         {
-            if ([@"chooseReqLabel" isEqualToString:@"-- select --"]){
-                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Choose_Request", TABLE, nil)]; return;}
-            //[self pushToDatesAndTimes_DetailView];
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
+            return;
         }
         else
         {
             [self validate];
         }
     }
+    else
+    {
+        if (!isDateTimeDataAvailable)
+        {
+            [self validate];
+        }
+        else if (appDelegate.isFromContacts && !appDelegate.isNewRequest && ![startDate_TextField.text length]&& ![startDate_TextField.text length] && ![endDate_TextField.text length] && ![startTime_TextField.text length] && ![endTime_TextField.text length] )
+        {
+            if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"])
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
+                return;
+            }
+            //[self pushToDatesAndTimes_DetailView];
+        }
+        else
+        {
+            if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"]){
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;
+            }
+            else if (![startDate_TextField.text length]){
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Start_Date", TABLE, nil)]; return;
+            }
+            else if (![endDate_TextField.text length])
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_End_Date", TABLE, nil)]; return;
+            }
+            else if (![startTime_TextField.text length])
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Start_Time", TABLE, nil)]; return;
+            }
+            else if (![endTime_TextField.text length])
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_End_Time", TABLE, nil)]; return;
+            }
+            else
+            {
+                [self validate];
+            }
+        }
+    }
 }
 
 -(void)validate
 {
-    if ([@"chooseReqLabel" isEqualToString:@"-- select --"]){
-        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Choose_Request", TABLE, nil)]; return;}
+    if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- select --"]){
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;}
     if (![startDate_TextField.text length]){
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Start_Date", TABLE, nil)]; return;}
     if (![endDate_TextField.text length]){
@@ -572,9 +660,14 @@
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Dates and Times Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
-    detail_mut_array=createDateTimes_mutArray;
-    [datesTimes_tableView reloadData];
     
+    detail_mut_array=[[NSMutableArray alloc]init];
+    [detail_mut_array addObjectsFromArray:createDateTimes_mutArray];
+    
+    [datesTimes_tableView reloadData];
+    if (createDateTimes_mutArray.count>0) {
+        [self performSelector:@selector(saveButtonPressed:) withObject:nil];
+    }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -659,7 +752,7 @@
 -(void)successmethod_save_Date_Time:(GISJsonRequest *)response
 {
     [self removeLoadingView];
-    NSLog(@"successmethod_get_Attendees_Details Success--successmethod_save_Date_Time -%@",response.responseJson);
+    NSLog(@"successmethod_save_Date_Time -%@",response.responseJson);
     NSArray *array=response.responseJson;
     NSDictionary *dictNew=[array lastObject];
     NSString *success= [dictNew objectForKey:kStatusCode];
@@ -696,25 +789,17 @@
     [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
     
     store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
-    NSMutableArray *tempArray=[[NSMutableArray alloc]init];
-    tempArray= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
-    if (self.detail_mut_array.count>0)
-    {
-        [detail_mut_array removeAllObjects];
-        [detail_mut_array addObjectsFromArray:self.detail_mut_array];
-        if (detail_mut_array.count>0) {
-            [detail_mut_array addObjectsFromArray:tempArray];
-        }
+    [detail_mut_array removeAllObjects];
+    detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
+    [self sortTheDatesAndTimes];
+    
+    if (detail_mut_array.count>0) {
+        isDateTimeDataAvailable=YES;
     }
     else
     {
-        if (tempArray.count>0) {
-            detail_mut_array=[[NSMutableArray alloc]init];
-            [detail_mut_array addObjectsFromArray:tempArray];
-        }
-        
+        isDateTimeDataAvailable=NO;
     }
-    [self sortTheDatesAndTimes];
 }
 
 -(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
@@ -767,30 +852,15 @@
 -(void)editButtonPressed:(id)sender
 {
     NSLog(@"tag--%d",[sender tag]);
-    int tag=[sender tag];
     selected_row=[sender tag];
+    
+    GISDatesAndTimesObject *tempObj=[detail_mut_array objectAtIndex:[sender tag]];
+    date_temp_string=tempObj.date_String;
+    startTime_temp_string=tempObj.startTime_String;
+    endTime_temp_string=tempObj.endTime_String;
+    day_temp_string=tempObj.day_String;
+    
     [datesTimes_tableView reloadData];
-//    NSIndexPath *indexPath =[NSIndexPath indexPathForRow:[sender tag] inSection:0];
-//    NSArray *array=[[NSArray alloc]initWithObjects:indexPath, nil];
-//    [datesTimes_tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
-    /*
-     for (UIViewController *viewController in self.navigationController.viewControllers) {
-     if ([viewController isKindOfClass:[GISDatesAndTimesViewController class]]) {
-     GISDatesAndTimesViewController *dates_controller=(GISDatesAndTimesViewController *)viewController;
-     dates_controller.isFrom_Dates_Detail_View_String=@"edit";
-     GISDatesAndTimesObject *dobj= [detail_mut_array objectAtIndex:tag];
-     dobj.tagValue=tag;
-     
-     
-     [dates_controller.createDateTimes_mutArray removeAllObjects];//jun5th
-     [dates_controller.createDateTimes_mutArray addObjectsFromArray:detail_mut_array];//jun5th
-     
-     dates_controller.datesAndTime_Object_from_dateDetailView=dobj;
-     //NSLog(@"---%@---%@---",dobj.date_String,dobj.day_String);
-     [self.navigationController popToViewController:dates_controller animated:NO];
-     }
-     }
-     */
 }
 
 -(void)deleteButtonPressed:(id)sender
@@ -807,12 +877,36 @@
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
-    btnTag=111;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    btnTag=555;
     UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"datestimes" :tempObj.date_String :tempCell.date_edit_button_detailView.frame :btnTag];
-    [popOver_temp presentPopoverFromRect:CGRectMake(350, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-    
+    [popOver_temp presentPopoverFromRect:CGRectMake(100,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
+
+-(IBAction)startTimeButton_Edit_Pressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    btnTag=666;
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
+    
+    [popOver_temp presentPopoverFromRect:CGRectMake(200,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+}
+
+
+-(IBAction)endTimeButton_Edit_Pressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
+    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    btnTag=777;
+    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
+    [popOver_temp presentPopoverFromRect:CGRectMake(315,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+}
+
 -(UIPopoverController *)showPopOver:(GISDatesTimesDetailCell *)cell:(NSString *)view_str:(NSString *)moveUp_str:(CGRect)frameTemp:(int)tag
 {
     tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
@@ -827,39 +921,28 @@
     return  popover;
     
 }
-
--(IBAction)startTimeButton_Edit_Pressed:(id)sender
-{
-    UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
-    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
-    btnTag=222;
-    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
-    
-    [popOver_temp presentPopoverFromRect:CGRectMake(770, 800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-   
-}
-
--(IBAction)endTimeButton_Edit_Pressed:(id)sender
-{
-    UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
-    GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:selected_row];
-    btnTag=222;
-    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
-    [popOver_temp presentPopoverFromRect:CGRectMake(900,800, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-}
-
 -(IBAction)saveButton_Edit_Pressed:(id)sender
 {
+    GISDatesAndTimesObject *tempObj=[detail_mut_array objectAtIndex:[sender tag]];
     
+    tempObj.date_String=date_temp_string;
+    tempObj.startTime_String=startTime_temp_string;
+    tempObj.endTime_String=endTime_temp_string;
+    tempObj.day_String=day_temp_string;
+    
+    [detail_mut_array replaceObjectAtIndex:[sender tag] withObject:tempObj];
+    
+    [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
 }
 
 -(IBAction)cancelButton_Edit_Pressed:(id)sender
 {
     selected_row=999999;
+    date_temp_string=@"";
+    startTime_temp_string=@"";
+    endTime_temp_string=@"";
+    day_temp_string=@"";
+
     [datesTimes_tableView reloadData];
 }
 
@@ -871,8 +954,74 @@
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
     [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
 }
+
+-(IBAction)saveButtonPressed:(id)sender
+{
+    @try {
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
+        NSMutableDictionary *detail_date_Dict=[[NSMutableDictionary alloc]init];
+        NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
+        NSMutableArray *detail_date_list_Array=[[NSMutableArray alloc]init];
+        NSMutableDictionary *detail_Listdict;
+        if (detail_mut_array.count>0)
+        {
+            for (int i=0;i<[detail_mut_array count];i++)
+            {
+                GISDatesAndTimesObject *gisList = [detail_mut_array objectAtIndex:i];
+                detail_Listdict=[[NSMutableDictionary alloc]init];
+                
+                if (gisList.dateTime_ID_String.length==0 || [gisList.dateTime_ID_String isKindOfClass:[NSNull class]])
+                    [detail_Listdict  setObject:@"" forKey:kDateTime_datetimeID];
+                else
+                    [detail_Listdict  setObject:[GISUtility returningstring:gisList.dateTime_ID_String] forKey:kDateTime_datetimeID];
+                
+                [detail_Listdict  setObject:[GISUtility returningstring:gisList.dateTime_ID_String] forKey:kDateTime_datetimeID];
+                [detail_Listdict  setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kDateTime_requestNo];
+                
+                
+                NSDateFormatter  *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+                NSString *strVisitDate = [NSString stringWithFormat:@"%@", gisList.date_String];
+                NSDate *visitDate = [dateFormatter dateFromString:strVisitDate];
+                strVisitDate = [dateFormatter stringFromDate:visitDate];
+                //Here you can set any date Format as per your need
+                [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                strVisitDate = [dateFormatter stringFromDate:visitDate];
+                [detail_Listdict  setObject:[GISUtility returningstring:strVisitDate] forKey:kDateTime_date];
+                
+                
+                
+                [detail_Listdict  setObject:[GISUtility returningstring:gisList.startTime_String] forKey:kDateTime_starttime];
+                [detail_Listdict  setObject:[GISUtility returningstring:gisList.endTime_String] forKey:kDateTime_endtime];
+                [detail_date_list_Array addObject:detail_Listdict];
+            }
+            
+        }
+        
+        [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
+        [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.token_string] forKey:kDateTime_token];
+        
+        
+        [requestor_array addObject:detail_date_Dict];
+        
+        [mainDict setObject:requestor_array forKey:kDateTime_oDatetime];
+        [mainDict setObject:detail_date_list_Array forKey:kDateTime_oRequest];
+        
+        NSLog(@"--------main Dict-->%@",mainDict);
+        isDelete=NO;
+        
+        [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
+    }
+    @catch (NSException *exception) {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Dates and Times Detail View Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
@@ -881,7 +1030,6 @@
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
-    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
     
 }
 
