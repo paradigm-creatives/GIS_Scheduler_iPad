@@ -8,6 +8,8 @@
 
 #import "GISSchedulerSPJobsObject.h"
 #import "GISJSONProperties.h"
+#import "GISDropDownsObject.h"
+#import "GISStoreManager.h"
 
 @implementation GISSchedulerSPJobsObject
 
@@ -22,7 +24,8 @@
 @synthesize startTime_String;
 @synthesize TotalHours_String;
 @synthesize EventType_String;
-
+@synthesize PayType_id_String;
+@synthesize SPRequestJobID_String;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json
 {
@@ -41,11 +44,13 @@
             JobID_String = [self returningstring:[json objectForKey:kSPRequestJobs_JobID]];
             JobNumber_String = [self returningstring:[json objectForKey:kSPRequestJobs_JobNumber]];
             
-            PayType_String = [self returningstring:[json objectForKey:kSPRequestJobs_PayType]];
+            PayType_id_String = [self returningstring:[json objectForKey:kSPRequestJobs_PayType]];
             RequestedDate_String = [self returningstring:[json objectForKey:kSPRequestJobs_RequestedDate]];
             startTime_String = [self returningstring:[json objectForKey:kSPRequestJobs_StartTime]];
             ServiceProviderName_String = [self returningstring:[json objectForKey:kSPRequestJobs_ServiceProviderName]];
             TotalHours_String = [self returningstring:[json objectForKey:kSPRequestJobs_TotalHours]];
+            SPRequestJobID_String = [self returningstring:[json objectForKey:kSPRequestJobs_SPRequestJobID]];
+            
         }
         @catch (NSException *exception) {
             NSLog(@"EXCEPTION raised, reason was: %@", [exception reason]);

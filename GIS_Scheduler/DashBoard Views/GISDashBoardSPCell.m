@@ -7,6 +7,7 @@
 //
 
 #import "GISDashBoardSPCell.h"
+#import "GISFonts.h"
 
 @implementation GISDashBoardSPCell
 
@@ -20,6 +21,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+    [_payType_btn.titleLabel setFont:[GISFonts small]];
+    [_response_status_btn.titleLabel setFont:[GISFonts small]];
+
 }
 
 @end

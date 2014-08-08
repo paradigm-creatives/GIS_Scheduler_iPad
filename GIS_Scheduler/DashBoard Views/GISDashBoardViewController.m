@@ -64,6 +64,8 @@
     SPJobsArray = [[NSMutableArray alloc] init];
     NMRequestsArray = [[NSMutableArray alloc] init];
     
+    _gisresponseArray = [[NSArray alloc] initWithObjects:@"Select",@"Assigned",@"Not Assigned",@"Need More Information", nil];
+    
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
@@ -362,10 +364,36 @@
         [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
         [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
         
+        NSArray *payTypeArray = [[GISStoreManager sharedManager] getPayTypeObjects];
+        
+        for (GISDropDownsObject *dropDownObj in payTypeArray) {
+            if ([dropDownObj.id_String isEqualToString:spJobsObj.PayType_id_String]) {
+                spJobsObj.PayType_String=dropDownObj.value_String;
+            }
+        }
+        
+        [cell.done_btn addTarget:self action:@selector(saveSPData:) forControlEvents:UIControlEventTouchUpInside];
+        
         [cell.payType_btn addTarget:self action:@selector(showPopoverDetails_payType_btn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.payType_btn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+        
+        if([spJobsObj.PayType_String length] == 0)
+           [cell.payType_btn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        else
+            [cell.payType_btn setTitle:spJobsObj.PayType_String forState:UIControlStateNormal];
+        
         [cell.response_status_btn addTarget:self action:@selector(showPopoverDetails_response_status_btn:) forControlEvents:UIControlEventTouchUpInside];
         
+        [cell.response_status_btn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+        
+        if([spJobsObj.GisResponse_String length] == 0)
+            [cell.response_status_btn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        else
+            [cell.response_status_btn setTitle:spJobsObj.GisResponse_String forState:UIControlStateNormal];
+        
         [cell.payType_btn setTag:indexPath.row];
+        [cell.response_status_btn setTag:indexPath.row];
+        [cell.done_btn setTag:indexPath.row];
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
@@ -547,6 +575,8 @@
 
 - (IBAction)showPopoverDetails_payType_btn:(id)sender{
     
+    pay_type = YES;
+    
     UIButton *btn=(UIButton*)sender;
     
     GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)btn.superview.superview.superview;
@@ -560,15 +590,20 @@
     _popover =   [GISUtility showPopOver:(NSMutableArray *)_payTypeArray viewController:tableViewController];
     _popover.delegate = self;
     
+    _popover.popoverContentSize = CGSizeMake(180, 210);
+
+    
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
     }
-    [_popover presentPopoverFromRect:CGRectMake(spCell.payType_btn.frame.origin.x+66, spCell.payType_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [_popover presentPopoverFromRect:CGRectMake(spCell.payType_btn.frame.origin.x+66, spCell.payType_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
     
     
 }
 
 - (IBAction)showPopoverDetails_response_status_btn:(id)sender{
+    
+    pay_type = NO;
     
     UIButton *btn=(UIButton*)sender;
     
@@ -580,7 +615,7 @@
     
     tableViewController.popOverDelegate = self;
     
-    _popover =   [GISUtility showPopOver:(NSMutableArray *)_payTypeArray viewController:tableViewController];
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_gisresponseArray viewController:tableViewController];
     _popover.delegate = self;
     
     if (_popover) {
@@ -594,13 +629,120 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     
-    pay_type_data= value_str;
-    UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:btn_tag];
-    [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
-    pay_type_ID_String=id_str;
+    if(pay_type){
+        
+        pay_type_data= value_str;
+        pay_type_ID_String=id_str;
+        
+        GISSchedulerSPJobsObject *spJobsObj = [SPJobsArray objectAtIndex:btn_tag];
+        spJobsObj.PayType_String = pay_type_data;
+        spJobsObj.PayType_id_String = pay_type_ID_String;
+        
+        NSIndexPath *path = [NSIndexPath indexPathForRow:btn_tag inSection:0];
+        
+        NSArray *reloadArray = [[NSArray alloc] initWithObjects:path, nil];
+        
+        [listTableView reloadRowsAtIndexPaths:reloadArray withRowAnimation:UITableViewRowAnimationNone];
+        
+    }else{
+        
+        gis_response_data= value_str;
+        if([gis_response_data isEqualToString:@"Select"]){
+            
+            gisresponse_ID_String=@"0";
+        }else if([gis_response_data isEqualToString:@"Assigned"]){
+            
+            gisresponse_ID_String=@"1";
+        }else if([gis_response_data isEqualToString:@"Not Assigned"]){
+            
+            gisresponse_ID_String=@"2";
+        }else if([gis_response_data isEqualToString:@"Need More Information"]){
+            
+            gisresponse_ID_String=@"3";
+        }
+        
+        GISSchedulerSPJobsObject *spJobsObj = [SPJobsArray objectAtIndex:btn_tag];
+        spJobsObj.GisResponse_String = gis_response_data;
+        spJobsObj.GisResponse_id_String = gisresponse_ID_String;
+        
+        NSIndexPath *path = [NSIndexPath indexPathForRow:btn_tag inSection:0];
+        
+        NSArray *reloadArray = [[NSArray alloc] initWithObjects:path, nil];
+        
+        [listTableView reloadRowsAtIndexPaths:reloadArray withRowAnimation:UITableViewRowAnimationNone];
+    }
     
+    if(_popover)
+        [_popover dismissPopoverAnimated:YES];
+
     
 }
+
+- (IBAction)saveSPData:(id)sender{
+    
+    GISSchedulerSPJobsObject *spJobsObj = [SPJobsArray objectAtIndex:btn_tag];
+    
+    UIButton *btn=(UIButton*)sender;
+    
+    btn_tag = btn.tag;
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:@"RequestorID"];
+    [paramsDict setObject:spJobsObj.SPRequestJobID_String forKey:@"SPRequestJobID"];
+    [paramsDict setObject:spJobsObj.JobID_String forKey:@"JobID"];
+    [paramsDict setObject:spJobsObj.GisResponse_id_String forKey:@"GISResponse"];
+    [paramsDict setObject:spJobsObj.PayType_id_String forKey:@"PayTypeID"];
+
+
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"GISResponse", TABLE, nil)];
+    [[GISServerManager sharedManager] saveSPRequestData:self withParams:paramsDict finishAction:@selector(successmethod_SaveSPRequests:) failAction:@selector(failuremethod_SaveSPRequests:)];
+
+    
+}
+
+-(void)successmethod_SaveSPRequests:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_SaveSPRequests Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] doubleValue] == 200) {
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+                
+                [self removeLoadingView];
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_SaveSPRequests:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
 
 
 

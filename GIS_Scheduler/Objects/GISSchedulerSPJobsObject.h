@@ -18,9 +18,13 @@
 @property(nonatomic,strong)NSString *JobNumber_String;
 @property(nonatomic,strong)NSString *JobDate_String;
 @property(nonatomic,strong)NSString *PayType_String;
+@property(nonatomic,strong)NSString *PayType_id_String;
 @property(nonatomic,strong)NSString *startTime_String;
 @property(nonatomic,strong)NSString *TotalHours_String;
 @property(nonatomic,strong)NSString *GisResponse_String;
+@property(nonatomic,strong)NSString *GisResponse_id_String;
+@property(nonatomic,strong)NSString *SPRequestJobID_String;
+
 
 
 - (id)initWithStoreDictionary:(NSDictionary *)json;

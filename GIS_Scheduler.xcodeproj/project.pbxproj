@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0EE3861994A1B00004CF0A /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		8A15B4CB197D0A4C008B4129 /* GISLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */; };
 		8A15B4CD197D0CAC008B4129 /* PCAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2B197CF54500963E8C /* PCAvailability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A15B4CE197D0CAC008B4129 /* PCDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2D197CF54500963E8C /* PCDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1570,6 +1571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3AF235196BBAF8006A1E3B /* GIS_SchedulerTests.m in Sources */,
+				8A0EE3861994A1B00004CF0A /* GISDashBoardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

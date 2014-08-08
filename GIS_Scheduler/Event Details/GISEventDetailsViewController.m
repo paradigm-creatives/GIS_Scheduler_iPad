@@ -89,6 +89,7 @@
     
     if(appDelegate.isFromContacts && !appDelegate.isNewRequest){
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [self getEventDetailsdata];
         
     }else if(appDelegate.isFromContacts  && appDelegate.isNewRequest){
@@ -1209,6 +1210,8 @@
         }
         
     }
+    
+    [self removeLoadingView];
 }
 
 

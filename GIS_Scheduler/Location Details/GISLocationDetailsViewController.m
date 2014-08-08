@@ -85,6 +85,7 @@
     
     if(appDelegate.isFromContacts && !appDelegate.isNewRequest){
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [self getLocationDetails];
         
     }
@@ -1076,6 +1077,8 @@
                 }
             }
         }
+        
+        [self removeLoadingView];
     }
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get locationdetails action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];

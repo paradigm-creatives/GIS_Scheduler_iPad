@@ -84,4 +84,6 @@
 
 - (void)getPayTypedata:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
+- (void)saveSPRequestData:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
 @end

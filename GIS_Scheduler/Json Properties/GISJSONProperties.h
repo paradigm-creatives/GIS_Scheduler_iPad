@@ -436,6 +436,7 @@
 #define kSPRequestJobs_StartTime @"StartTime"
 #define kSPRequestJobs_ServiceProviderName @"ServiceProviderName"
 #define kSPRequestJobs_TotalHours @"TotalHours"
+#define kSPRequestJobs_SPRequestJobID @"SPRequestJobID"
 
 #pragma Mark ServiceProviderSPRequestJobs End
 
