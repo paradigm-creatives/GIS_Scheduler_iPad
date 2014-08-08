@@ -165,10 +165,6 @@
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
 
-    
-    UIGestureRecognizer *gestureRecog=[[UIGestureRecognizer alloc]initWithTarget:self action:nil];
-    gestureRecog.delegate=self;
-    [self.view addGestureRecognizer:gestureRecog];
 }
 
 
@@ -593,7 +589,6 @@
     }
     [_popover presentPopoverFromRect:CGRectMake(spCell.response_status_btn.frame.origin.x+66, spCell.response_status_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-    
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
@@ -607,13 +602,7 @@
     }
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-    CGPoint location=[[touches anyObject]locationInView:self.view];
-    NSLog(@"-----------x-%f--y-%f-",location.x,location.y);
-    
-}
+
 
 - (void)didReceiveMemoryWarning
 {
