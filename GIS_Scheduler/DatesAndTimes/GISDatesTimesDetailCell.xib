@@ -192,7 +192,9 @@
                 <outlet property="date_edit_button_detailView" destination="7ZR-Cf-7bX" id="RFc-pn-vEz"/>
                 <outlet property="dayLabel" destination="HLt-Mo-N6o" id="ktW-oW-vwu"/>
                 <outlet property="deleteButton" destination="YgN-Pp-Ucb" id="NYz-RO-KCr"/>
+                <outlet property="delete_imageview" destination="0L0-6X-9N7" id="KWF-39-ZaX"/>
                 <outlet property="editButton" destination="Sve-vY-42R" id="CEg-fq-fWt"/>
+                <outlet property="edit_imageView" destination="1UT-Nm-ENZ" id="pd0-EE-NOK"/>
                 <outlet property="endTimeLabel" destination="FWB-FC-vdV" id="ucF-IQ-6kE"/>
                 <outlet property="endTime_TextField" destination="5iz-eT-mR8" id="cRP-tE-SG5"/>
                 <outlet property="endTime_UIview" destination="rKu-pp-rk4" id="ATu-is-LdT"/>

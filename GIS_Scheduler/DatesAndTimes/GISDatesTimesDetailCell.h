@@ -17,6 +17,8 @@
 @property(nonatomic,strong) IBOutlet UILabel *endTimeLabel;
 @property(nonatomic,strong) IBOutlet UIButton *editButton;
 @property(nonatomic,strong) IBOutlet UIButton *deleteButton;
+@property(nonatomic,strong) IBOutlet UIImageView *edit_imageView;
+@property(nonatomic,strong) IBOutlet UIImageView *delete_imageview;
 
 @property(nonatomic,strong)IBOutlet UIView *saveCancel_UIview;
 @property(nonatomic,strong)IBOutlet UIView *date_UIview;

@@ -130,10 +130,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        
     return 50;
 }
-
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -206,7 +204,6 @@
     }
     
     return headerView;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -217,7 +214,6 @@
         return 50;
     if(section == 2)
         return 50;
-    
     return 0;
 }
 

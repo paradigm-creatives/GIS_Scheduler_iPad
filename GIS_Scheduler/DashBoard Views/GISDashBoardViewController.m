@@ -593,15 +593,13 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    if(btn_tag == 1){
-        pay_type_data= value_str;
-        UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:1];
-        [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
-        pay_type_ID_String=id_str;
-        
-    }
+    pay_type_data= value_str;
+    UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:btn_tag];
+    [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
+    pay_type_ID_String=id_str;
+    
+    
 }
-
 
 
 - (void)didReceiveMemoryWarning

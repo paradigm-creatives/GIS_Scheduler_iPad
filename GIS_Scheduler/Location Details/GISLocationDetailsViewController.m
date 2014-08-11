@@ -22,6 +22,7 @@
 #import "GISDropDownStore.h"
 #import "PCLogger.h"
 #import "GISDatesAndTimesViewController.h"
+#import "GISLoadingView.h"
 
 @interface GISLocationDetailsViewController ()
 
@@ -514,6 +515,8 @@
         }
     }
     
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
     [self saveLocationsData];
 }
 
@@ -711,6 +714,7 @@
                             [_fields appendFormat:@"%@%@",@"Building Name",@", \n"];
                         
                         [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                        [self removeLoadingView];
                         
                     }
                 }else{
@@ -735,6 +739,8 @@
                         
                         [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
                         
+                        [self removeLoadingView];
+                        
                     }
                     
                 }
@@ -747,11 +753,13 @@
                     [_fields appendFormat:@"%@%@",@"General Location",@", \n"];
                 
                 [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                [self removeLoadingView];
                 
             }
         }
         
         else{
+            [self removeLoadingView];
             
             [GISUtility showAlertWithTitle:@"" andMessage:@"Select Choose Request"];
             
@@ -916,6 +924,7 @@
         [userDefaults setValue:_chooseRequestData forKey:kDropDownValue];
         appDelegate.isFromlocation  = YES;
         GISDatesAndTimesViewController *datesAndTimesViewController;
+        [self removeLoadingView];
         
         datesAndTimesViewController =[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
         
@@ -1097,6 +1106,7 @@
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
@@ -1113,6 +1123,8 @@
     [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
     _chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
     [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
+    
+    [self removeLoadingView];
     
     appDelegate.createdDateString = _chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
     appDelegate.createdByString = _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
@@ -1134,8 +1146,19 @@
 {
     [super viewWillDisappear:YES];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
     
 }
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

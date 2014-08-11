@@ -891,11 +891,7 @@ int row_count = 2;
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees For Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
-    
-    
-    
 }
-
 
 -(void)successmethod_Attendees_save_update:(GISJsonRequest *)response
 {

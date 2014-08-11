@@ -934,11 +934,14 @@
         
         [self removeLoadingView];
         
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults synchronize];
+        [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
+        [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
+        
          NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"tabValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
-        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-        [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];
-  
+
       
     }else{
         
@@ -998,6 +1001,9 @@
     [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict setObject:unitObj1.token_string forKey:kToken];
     
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+
+    
     [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
 
 }
@@ -1007,6 +1013,8 @@
     [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
     chooseRequest_Detailed_DetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
     [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequest_Detailed_DetailsObj];
+    
+    [self removeLoadingView];
     
     appDelegate.createdDateString = chooseRequest_Detailed_DetailsObj.createdDate_String_chooseReqParsedDetails;
     appDelegate.createdByString = chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails;
