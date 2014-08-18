@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
+
 #import "GISDatesTimesDetailStore.h"
 #import "GISStoreManager.h"
 @implementation GISDatesTimesDetailStore

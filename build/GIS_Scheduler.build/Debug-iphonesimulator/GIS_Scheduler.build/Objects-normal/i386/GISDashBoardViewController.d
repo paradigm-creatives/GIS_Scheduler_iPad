@@ -38,4 +38,5 @@ dependencies: \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/PCLogger.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/UncaughtExceptionHandler.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISDatabaseManager.h \
-  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISUtility.h
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISUtility.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/AppDelegate/GISServiceProviderRequestedJobsViewController.h

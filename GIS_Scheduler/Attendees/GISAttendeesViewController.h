@@ -32,7 +32,6 @@
     NSMutableArray *expectedNo_mutArray;
     NSMutableArray *expectedNo_ID_mutArray;
     
-    
     NSMutableArray *genderPreference_mutArray,*genderPreference_ID_Array;
     NSMutableArray *preference_mutArray;
     NSMutableArray *modeofcommunication_mutArray;
@@ -54,6 +53,7 @@
     NSString *isCompleteRequest;
     NSString * inCompleteTab_string;
 }
+
 
 @property (nonatomic,strong) UIPopoverController *popover_controller;
 

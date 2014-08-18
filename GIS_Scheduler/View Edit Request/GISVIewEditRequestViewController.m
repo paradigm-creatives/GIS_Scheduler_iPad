@@ -26,6 +26,8 @@
 #import "GISDatabaseConstants.h"
 #import "GISConstants.h"
 #import "GISContactsAndBillingViewController.h"
+#import "GISJobDetailsViewController.h"
+#import "GISSummaryViewController.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -69,10 +71,14 @@
     GISAttendeesViewController *attendeesView=[[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
     GISDatesAndTimesViewController *datesAndTimesView=[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
+    
+    GISJobDetailsViewController *jobDetailsViewController=[[GISJobDetailsViewController alloc]initWithNibName:@"GISJobDetailsViewController" bundle:nil];
+    
+    GISSummaryViewController *summaryView =[[GISSummaryViewController alloc]initWithNibName:@"GISSummaryViewController" bundle:nil];
 
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
-    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,commentView, nil];
+    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView, nil];
     
     _currentController= contactsBillingView;
     
@@ -174,7 +180,8 @@
     [tabbarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                           UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
                                           [GISFonts small], NSFontAttributeName, nil]
-                                forState:UIControlStateNormal];//[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
+                                forState:UIControlStateNormal];
+    //[NSValue  valueWithUIOffset:UIOffsetMake(0,0)], NSShadowAttributeName,
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
@@ -283,7 +290,6 @@
     if(infoDict != nil){
         value =[infoDict objectForKey:@"tabValue"];
     }
-
     
     UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:[value intValue]];
     [self tabBar:self.mainTabbar didSelectItem:tabItem];

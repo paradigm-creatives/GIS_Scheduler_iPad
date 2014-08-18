@@ -10,7 +10,8 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
-@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISCreateJobsViewController.h"
+@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol,CreateJobsProtocol>
 {
     GISAppDelegate *appDelegate;
     IBOutlet UITableView *datesTimes_tableView;
@@ -88,7 +89,25 @@
     NSString *day_temp_string;
     
     BOOL isDateTimeDataAvailable;
+    
+    GISCreateJobsViewController *createJobs;
+    
+    IBOutlet UIView *createJobs_UIVIew;
+    IBOutlet UIView *createJobs_Middle_UIVIew;
+    
+    IBOutlet UITableView *createJObs_tableView;
+    
+    IBOutlet UITextField *noOfServiceProviders_TextField;
+    IBOutlet UILabel *typeOfServiceProvidersLabel;
+    IBOutlet UILabel *payLevel_Label;
+    IBOutlet UILabel *billLevel_Label;
+    
+    NSMutableDictionary *createJobsCheckDictionary;
+    BOOL isAlljobs_Checked;
+    IBOutlet UIButton *alljobs_Checked_button;
 }
+@property(nonatomic,strong) IBOutlet UIButton *cancelBtn_createJobs;
+@property(nonatomic,strong) IBOutlet UIButton *doneBtn_createJobs;
 @property(nonatomic,retain) NSString * inCompleteTab_string;
 @property(nonatomic,retain) NSString * isCompleteRequest;
 
@@ -104,4 +123,11 @@
 
 -(IBAction)saveButton_Edit_Pressed:(id)sender;
 -(IBAction)cancelButton_Edit_Pressed:(id)sender;
+
+-(IBAction)createJobsButton_Pressed:(id)sender;
+
+-(IBAction)cancelButtonPressed_CreateJobs:(id)sender;
+-(IBAction)doneButtonPressed_CreateJobs:(id)sender;
+
+-(IBAction)checkAllJobs_buttonPressed:(id)sender;
 @end

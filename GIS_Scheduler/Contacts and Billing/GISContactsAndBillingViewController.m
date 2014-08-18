@@ -466,8 +466,8 @@
         [userDefaults synchronize];
         [userDefaults setValue:unit_departmentID_String forKey:kunitid];
         [userDefaults setValue:contactBilling_Object.chooseRequest_String forKey:kRequestNo];
-        
         [paramsDict setObject:login_Obj.requestorID_string forKey:krequestorid];
+        
         if (appDelegate.isNewRequest)
         {
             [paramsDict setObject:kInComplete forKey:kstatusid];
@@ -476,8 +476,8 @@
             [paramsDict setObject:@"" forKey:keventDetails_captiontype];
             [paramsDict setObject:@"" forKey:keventDetails_dresscodeId];
             [paramsDict setObject:@"" forKey:keventDetails_eventDesc];
-            [paramsDict setObject:@""forKey:keventDetails_eventName];
-            [paramsDict setObject:@""forKey:keventDetails_eventId];
+            [paramsDict setObject:@"" forKey:keventDetails_eventName];
+            [paramsDict setObject:@"" forKey:keventDetails_eventId];
             [paramsDict setObject:@"" forKey:keventDetails_onGoing];
             [paramsDict setObject:@"" forKey:keventDetails_eventPublic];
             [paramsDict setObject:@"" forKey:keventDetails_otherServices];
@@ -543,7 +543,6 @@
     
     NSDictionary *saveUpdateDict;
     
-
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {

@@ -263,7 +263,7 @@ static PCLogger *manager = nil;
     if ((name != nil) && [name isKindOfClass:[NSString class]]) {
      
         bucketName = (NSString *)name;
-          // NSLog(@"bucket name is %@",bucketName);
+          NSLog(@"bucket name is %@",bucketName);
     } else {
         PCLogDebug(@"Bucket name couldn't be parsed");
     }

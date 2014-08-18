@@ -23,7 +23,7 @@
 #import "GISDropDownStore.h"
 #import "GISDropDownsObject.h"
 #import "GISUtility.h"
-
+#import "GISServiceProviderRequestedJobsViewController.h"
 @interface GISDashBoardViewController ()
 
 @end
@@ -166,6 +166,7 @@
     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+
 }
 
 
@@ -426,6 +427,10 @@
             GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
             [self.navigationController pushViewController:viewEditView animated:NO];
         }
+        else if(row == 2){
+            GISServiceProviderRequestedJobsViewController *serviceProviderRequested=[[GISServiceProviderRequestedJobsViewController alloc]initWithNibName:@"GISServiceProviderRequestedJobsViewController" bundle:nil];
+            [self.navigationController pushViewController:serviceProviderRequested animated:NO];
+        }
         
     }
     
@@ -623,12 +628,10 @@
     }
     [_popover presentPopoverFromRect:CGRectMake(spCell.response_status_btn.frame.origin.x+66, spCell.response_status_btn.frame.origin.y+12, 1, 1) inView:spCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-    
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    
     if(pay_type){
         
         pay_type_data= value_str;
@@ -702,6 +705,10 @@
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"GISResponse", TABLE, nil)];
     [[GISServerManager sharedManager] saveSPRequestData:self withParams:paramsDict finishAction:@selector(successmethod_SaveSPRequests:) failAction:@selector(failuremethod_SaveSPRequests:)];
 
+//    pay_type_data= value_str;
+//    UIButton *payTypeBtn=(UIButton *)[self.view viewWithTag:btn_tag];
+//    [payTypeBtn setTitle:pay_type_data forState:UIControlStateNormal];
+//    pay_type_ID_String=id_str;
     
 }
 
@@ -742,7 +749,6 @@
 {
     NSLog(@"Failure");
 }
-
 
 
 

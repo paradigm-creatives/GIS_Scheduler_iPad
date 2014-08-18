@@ -704,6 +704,7 @@ int row_count = 2;
     return YES;
 }
 
+
 -(void)nextButtonPressed:(id)sender
 {
     [self resignCurrentTextField];
@@ -724,15 +725,14 @@ int row_count = 2;
         
     }
     [self saveAttendeesData];
-    
 }
+
 -(void)saveAttendeesData
 {
     @try {
         
         appDelegate.isNewRequest = NO;
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        
         if ([attendeesObject.choose_request_String isEqualToString:NSLocalizedStringFromTable(@"new request", TABLE, nil)]) {
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
             [self removeLoadingView];
@@ -867,27 +867,19 @@ int row_count = 2;
         
         [mainDict setObject:attendees_array forKey:kAttendees_oAttendee];
         [mainDict setObject:attendees_list_array forKey:kAttendees_oRequest];
-        
-        
-        NSLog(@"--------main Dict-->%@",mainDict);
+
+         NSLog(@"--------main Dict-->%@",mainDict);
         
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults synchronize];
         [userDefaults setValue:attendeesObject.choose_request_String forKey:kDropDownValue];
-        
-        
-        
         
         [[GISServerManager sharedManager] saveAttendeesData:self withParams:mainDict finishAction:@selector(successmethod_Attendees_save_update:) failAction:@selector(failuremethod_Attendees_save_update:)];
     }
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees For Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
-    
-    
-    
 }
-
 
 -(void)successmethod_Attendees_save_update:(GISJsonRequest *)response
 {
@@ -910,7 +902,7 @@ int row_count = 2;
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];
         
-            //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+        //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
             
     }
     else
@@ -918,10 +910,8 @@ int row_count = 2;
         appDelegate.isFromAttendees = NO;
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_Failed", TABLE, nil)];
     }
-    
-    
-    
 }
+
 -(void)failuremethod_Attendees_save_update:(GISJsonRequest *)response
 {
     appDelegate.isFromAttendees = NO;

@@ -21,6 +21,7 @@
 #import "GISDatabaseManager.h"
 #import "GISStoreManager.h"
 #import "GISDatesTimesDetailStore.h"
+#import "GISCreateJobs_Cell.h"
 
 @interface GISDatesAndTimesViewController ()
 
@@ -163,7 +164,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    createJobs_UIVIew.hidden=YES;
+    createJobs=[[GISCreateJobsViewController alloc]initWithNibName:@"GISCreateJobsViewController" bundle:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    [self.cancelBtn_createJobs addTarget:self action:@selector(cancelButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
+        [self.doneBtn_createJobs addTarget:self action:@selector(doneButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -173,6 +179,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    if (tableView==createJObs_tableView) {
+        GISCreateJobs_Cell *cell=(GISCreateJobs_Cell *)[tableView dequeueReusableCellWithIdentifier:@"GISCreateJobsCell"];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISCreateJobs_Cell" owner:self options:nil] objectAtIndex:0];
+        }
+        
+        GISDatesAndTimesObject *detailObj;
+        @try {
+            if([detail_mut_array count] >0)
+                detailObj=[detail_mut_array objectAtIndex:indexPath.row];
+        }
+        @catch (NSException *exception) {
+            [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in DatesAndTimesDetailView CellForRowAtIndexPath %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+        }
+        cell.check_uncheck_button.tag=indexPath.row;
+        
+        if ([createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
+            [cell.check_uncheck_button setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateNormal];
+        else
+            [cell.check_uncheck_button setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+        
+        [cell.check_uncheck_button addTarget:self action:@selector(check_uncheck_createjobsButtonPresses:) forControlEvents:UIControlEventTouchUpInside];
+        cell.dateLabel.text=detailObj.date_String;
+        cell.dayLabel.text=detailObj.day_String;
+        cell.startTime_Label.text=detailObj.startTime_String;
+        cell.endTimeLabel.text=detailObj.endTime_String;
+        return cell;
+    }
     GISDatesTimesDetailCell *cell=(GISDatesTimesDetailCell *)[tableView dequeueReusableCellWithIdentifier:@"datesTimesDetailCell"];
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDatesTimesDetailCell" owner:self options:nil] objectAtIndex:0];
@@ -233,6 +268,7 @@
         cell.endTime_UIview.hidden=YES;
         cell.saveCancel_UIview.hidden=YES;
     }
+    
     return cell;
 }
 
@@ -247,10 +283,10 @@
     
     UIButton *button=(UIButton *)sender;
     
-    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
-    tableViewController.popOverDelegate=self;
+    GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController1.popOverDelegate=self;
     
-    if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
+    //if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
     {
         [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
     }
@@ -258,34 +294,58 @@
     if([sender tag]==111)
     {
         btnTag=111;
-        tableViewController.view_String=@"datestimes";
-        tableViewController.dateTimeMoveUp_string=startDate_TextField.text;
+        tableViewController1.view_String=@"datestimes";
+        tableViewController1.dateTimeMoveUp_string=startDate_TextField.text;
     }
     else if ([sender tag]==222)
     {
         btnTag=222;
-        tableViewController.view_String=@"datestimes";
-        tableViewController.dateTimeMoveUp_string=endDate_TextField.text;
+        tableViewController1.view_String=@"datestimes";
+        tableViewController1.dateTimeMoveUp_string=endDate_TextField.text;
     }
     else if ([sender tag]==333)
     {
         btnTag=333;
-        tableViewController.view_String=@"timesdates";
-        tableViewController.dateTimeMoveUp_string=startTime_TextField.text;
+        tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=startTime_TextField.text;
         
     }
     else if ([sender tag]==444)
     {
         btnTag=444;
-        tableViewController.view_String=@"timesdates";
-        tableViewController.dateTimeMoveUp_string=endTime_TextField.text;
+        tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=endTime_TextField.text;
         
     }
-    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    else if ([sender tag]==888)//Create Jobs View Buttons
+    {
+        btnTag=222;
+        tableViewController1.view_String=@"datestimes";
+        tableViewController1.dateTimeMoveUp_string=endDate_TextField.text;
+    }
+    else if ([sender tag]==999)//Create Jobs View Buttons
+    {
+        btnTag=333;
+        tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=startTime_TextField.text;
+        
+    }
+    else if ([sender tag]==1010)//Create Jobs View Buttons
+    {
+        btnTag=444;
+        tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=endTime_TextField.text;
+        
+    }
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 150);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+131, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+    else
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+131, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
@@ -393,7 +453,19 @@
         }
         [datesTimes_tableView reloadData];
     }
-    
+    if (btnTag==888)
+    {
+        typeOfServiceProvidersLabel.text=value_str;
+    }
+    else if (btnTag==999)
+    {
+        payLevel_Label.text=value_str;
+        
+    }
+    else if (btnTag==1010)
+    {
+        billLevel_Label.text=value_str;
+    }
     
 }
 
@@ -401,6 +473,7 @@
 {
     [popover dismissPopoverAnimated:YES];
 }
+
 -(IBAction)weekDays_ButtonPressed:(id)sender
 {
     if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]){
@@ -460,6 +533,7 @@
     
     NSLog(@"----week Day dict-->%@",[weekDays_dictionary_here description]);
 }
+
 -(IBAction)createDateTimeButtonPressed:(id)sender
 {
     NSLog(@"-createDateTimeButtonPressed---appDelegate.chooseRequest_ID_String-->%@",appDelegate.chooseRequest_ID_String);
@@ -727,7 +801,6 @@
             [detail_Listdict  setObject:[GISUtility returningstring:gisList.endTime_String] forKey:kDateTime_endtime];
             [detail_date_list_Array addObject:detail_Listdict];
         }
-        
     }
     
     [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
@@ -742,8 +815,6 @@
     NSLog(@"--------main Dict-->%@",mainDict);
     
     isDelete=YES;
-    
-    
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
 }
@@ -761,26 +832,25 @@
         {
             [detail_mut_array removeObjectAtIndex:currentObjTag_toDelete];
             [datesTimes_tableView reloadData];
+            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_deleted", TABLE, nil)];
         }
         else
         {
-            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
-            
         }
     }
     else
     {
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_Failed", TABLE, nil)];
     }
+    [createJObs_tableView reloadData];
 }
 
 -(void)failuremethod_save_Date_Time:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
 }
-
 
 -(void)successmethod_get_Date_Time:(GISJsonRequest *)response
 {
@@ -800,7 +870,10 @@
     {
         isDateTimeDataAvailable=NO;
     }
+    [createJObs_tableView reloadData];
 }
+
+
 
 -(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
 {
@@ -1004,8 +1077,6 @@
         
         [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
         [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.token_string] forKey:kDateTime_token];
-        
-        
         [requestor_array addObject:detail_date_Dict];
         
         [mainDict setObject:requestor_array forKey:kDateTime_oDatetime];
@@ -1021,12 +1092,71 @@
     }
 }
 
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
 }
 
+-(IBAction)createJobsButton_Pressed:(id)sender
+{
+    isAlljobs_Checked=NO;
+    createJobsCheckDictionary=[[NSMutableDictionary alloc]init];
+    //createJobs_UIVIew.hidden=NO;
+    createJobs_UIVIew.hidden=NO;
+    //createJobs_UIVIew.frame=CGRectMake(40, -80, 453, 570);
+    //CGRect frame= createJobs_UIVIew.frame;
+    //frame.origin.y=-40;
+    //createJobs_UIVIew.frame=frame;
+    [createJobs_Middle_UIVIew.layer setCornerRadius:10.0f];
+    [createJobs_Middle_UIVIew.layer setBorderWidth:0.3f];
+    //[self.view addSubview:createJobs_UIVIew];
+}
+
+-(IBAction)checkAllJobs_buttonPressed:(id)sender
+{
+    if (isAlljobs_Checked) {
+        isAlljobs_Checked=NO;
+        [createJobsCheckDictionary removeAllObjects];
+        [alljobs_Checked_button setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [alljobs_Checked_button setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateNormal];
+        
+        isAlljobs_Checked=YES;
+        [createJobsCheckDictionary removeAllObjects];
+        for (int i=0; i<detail_mut_array.count; i++) {
+            [createJobsCheckDictionary setObject:[NSString stringWithFormat:@"%ld",(long)i] forKey:[NSString stringWithFormat:@"%ld",(long)i]];
+        }
+        
+    }
+    [createJObs_tableView reloadData];
+}
+-(IBAction)cancelButtonPressed_CreateJobs:(id)sender
+{
+    createJobs_UIVIew.hidden=YES;
+    //[createJobs_UIVIew removeFromSuperview];
+}
+
+-(IBAction)doneButtonPressed_CreateJobs:(id)sender
+{
+    //[createJobs_UIVIew removeFromSuperview];
+    createJobs_UIVIew.hidden=YES;
+}
+
+
+-(void)check_uncheck_createjobsButtonPresses:(id)sender
+{
+    
+    if ([createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]) {
+        [createJobsCheckDictionary removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
+    }
+    else
+    {
+        [createJobsCheckDictionary setObject:[NSString stringWithFormat:@"%ld",(long)[sender tag]] forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
+    }
+    [createJObs_tableView reloadData];
+}
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
@@ -1045,6 +1175,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 
 @end

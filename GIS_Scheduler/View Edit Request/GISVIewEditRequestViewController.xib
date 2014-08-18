@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISVIewEditRequestViewController">
@@ -66,9 +66,9 @@
                                 <tabBarItem tag="2" title="" image="attendees_unPressed.png" id="tIJ-Sg-zet" userLabel="Tab Bar Item - Favorites"/>
                                 <tabBarItem tag="3" title="" image="location.png" id="hiv-TS-EzL"/>
                                 <tabBarItem tag="4" title="" image="dates_and_times.png" id="NW9-Dz-83d"/>
-                                <tabBarItem tag="4" title="" image="job_details.png" id="xJ6-Qi-GBD"/>
-                                <tabBarItem tag="4" title="" image="summary_unPressed.png" id="eOQ-r2-XVz"/>
-                                <tabBarItem tag="5" title="" image="comments_unPressed.png" id="ofu-Uk-8bn"/>
+                                <tabBarItem tag="5" title="" image="job_details.png" id="xJ6-Qi-GBD"/>
+                                <tabBarItem tag="6" title="" image="summary_unPressed.png" id="eOQ-r2-XVz"/>
+                                <tabBarItem tag="7" title="" image="comments_unPressed.png" id="ofu-Uk-8bn"/>
                             </items>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">

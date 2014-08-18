@@ -12,7 +12,7 @@
 #import "GISDashBoardViewController.h"
 #import "GISDatabaseManager.h"
 #import "GISLoginViewController.h"
-
+#import "GISServiceProviderRequestedJobsViewController.h"
 
 #define LOGOUT_TAG 1632
 
@@ -130,10 +130,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        
     return 50;
 }
-
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -206,7 +204,6 @@
     }
     
     return headerView;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -217,7 +214,6 @@
         return 50;
     if(section == 2)
         return 50;
-    
     return 0;
 }
 
@@ -246,6 +242,7 @@
         label.textColor = UIColorFromRGB(0xe8d3a4);
     
     UIButton *cellBtn = (UIButton *)[cell viewWithTag:indexPath.row+2];
+    
     if(cellBtn != nil){
         if(indexPath.section == 0){
             [cellBtn setBackgroundImage:[UIImage imageNamed:@"dashboard_pressed.png"] forState:UIControlStateNormal];
@@ -267,6 +264,8 @@
         [alertVIew show];
         
     }
+    
+
     UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
     
     for(UIViewController *viewcontroller in navController.viewControllers)
@@ -293,7 +292,6 @@
     }
 }
 
-
 -(IBAction)hideRows:(id)sender{
     
     
@@ -319,8 +317,6 @@
     }
     [_dashBoard_ListTableView reloadData];
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
