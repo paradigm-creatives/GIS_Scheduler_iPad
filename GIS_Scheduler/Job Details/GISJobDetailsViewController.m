@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
-#import "GISJobDetailsViewController.h"
 
+#import "GISJobDetailsViewController.h"
+#import "GISJobDetailsCell.h"
 @interface GISJobDetailsViewController ()
 
 @end
@@ -28,6 +29,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GISJobDetailsCell *cell=(GISJobDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"GISJobDetailsCell"];
+    if (cell==nil) {
+        cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobDetailsCell" owner:self options:nil] objectAtIndex:0];
+    }
+
+    return cell;
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -12,7 +12,7 @@
 #import "GISDashBoardViewController.h"
 #import "GISDatabaseManager.h"
 #import "GISLoginViewController.h"
-
+#import "GISServiceProviderRequestedJobsViewController.h"
 
 #define LOGOUT_TAG 1632
 
@@ -242,6 +242,7 @@
         label.textColor = UIColorFromRGB(0xe8d3a4);
     
     UIButton *cellBtn = (UIButton *)[cell viewWithTag:indexPath.row+2];
+    
     if(cellBtn != nil){
         if(indexPath.section == 0){
             [cellBtn setBackgroundImage:[UIImage imageNamed:@"dashboard_pressed.png"] forState:UIControlStateNormal];
@@ -263,6 +264,8 @@
         [alertVIew show];
         
     }
+    
+
     UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
     
     for(UIViewController *viewcontroller in navController.viewControllers)

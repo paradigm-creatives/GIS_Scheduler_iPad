@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GISJobDetailsViewController : UIViewController
+@interface GISJobDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    IBOutlet UITableView *jobDetails_tableView;
+}
 
 @end

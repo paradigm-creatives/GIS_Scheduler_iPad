@@ -23,7 +23,7 @@
 #import "GISDropDownStore.h"
 #import "GISDropDownsObject.h"
 #import "GISUtility.h"
-
+#import "GISServiceProviderRequestedJobsViewController.h"
 @interface GISDashBoardViewController ()
 
 @end
@@ -398,6 +398,10 @@
             appDelegate.isNewRequest = YES;
             GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
             [self.navigationController pushViewController:viewEditView animated:NO];
+        }
+        else if(row == 2){
+            GISServiceProviderRequestedJobsViewController *serviceProviderRequested=[[GISServiceProviderRequestedJobsViewController alloc]initWithNibName:@"GISServiceProviderRequestedJobsViewController" bundle:nil];
+            [self.navigationController pushViewController:serviceProviderRequested animated:NO];
         }
         
     }

@@ -473,6 +473,7 @@
 {
     [popover dismissPopoverAnimated:YES];
 }
+
 -(IBAction)weekDays_ButtonPressed:(id)sender
 {
     if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]){
@@ -532,6 +533,7 @@
     
     NSLog(@"----week Day dict-->%@",[weekDays_dictionary_here description]);
 }
+
 -(IBAction)createDateTimeButtonPressed:(id)sender
 {
     NSLog(@"-createDateTimeButtonPressed---appDelegate.chooseRequest_ID_String-->%@",appDelegate.chooseRequest_ID_String);
@@ -799,7 +801,6 @@
             [detail_Listdict  setObject:[GISUtility returningstring:gisList.endTime_String] forKey:kDateTime_endtime];
             [detail_date_list_Array addObject:detail_Listdict];
         }
-        
     }
     
     [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
@@ -814,8 +815,6 @@
     NSLog(@"--------main Dict-->%@",mainDict);
     
     isDelete=YES;
-    
-    
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
 }
@@ -853,7 +852,6 @@
     NSLog(@"Failure");
 }
 
-
 -(void)successmethod_get_Date_Time:(GISJsonRequest *)response
 {
     GISDatesTimesDetailStore *store;
@@ -874,6 +872,8 @@
     }
     [createJObs_tableView reloadData];
 }
+
+
 
 -(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
 {
