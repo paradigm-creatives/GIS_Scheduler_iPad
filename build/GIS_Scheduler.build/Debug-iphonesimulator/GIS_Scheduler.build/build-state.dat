@@ -7,8 +7,8 @@ cProcessPCH /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.Developer
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/PCAvailability.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/PCAvailability.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/PCDebug.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/PCDebug.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/PCLogger.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/PCLogger.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISCommentCell.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Comments/Comment\ cell/GISCommentCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISDashBoardViewController.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoard\ Views/GISDashBoardViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISCommentCell.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Comments/Comment\ cell/GISCommentCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISSchedulerSPJobsObject.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISSchedulerSPJobsObject.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISDashBoardListViewController.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoard\ Views/GISDashBoardListViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/AmazonClientManager.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon/AmazonClientManager.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -3929,7 +3929,7 @@ t1407500706
 s5882
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM
-t1407500188
+t1407500707
 s102
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISAttendeesCell.nib
@@ -5236,7 +5236,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies4a611a20f994b941^a9124520f994b941^---0#1#1#--18"Check dependencies36"925F86EF-7992-4F1F-9AAE-11F609A8C077-
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesc5caf451c5a1b941^e0117952c5a1b941^---0#1#1#--18"Check dependencies36"33E459A7-0764-4465-A51A-AEB14EC773B7-
 
 CCompileAssetCatalog /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Images.xcassets
 s429170072.641319
