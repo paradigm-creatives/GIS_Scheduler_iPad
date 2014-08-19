@@ -23,4 +23,7 @@
 @property (strong, nonatomic) NSString *generalLocationId_string;
 @property (strong, nonatomic) NSString *generalLocationValue_string;
 
+@property (strong, nonatomic) NSArray *eventTypeArray;
+@property (strong, nonatomic) NSArray *dresscodeArray;
+
 @end

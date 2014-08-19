@@ -138,6 +138,7 @@
 "attendee"= "Attendee";
 "service_Needed"= "Service Needed :";
 "mode_of_communication"= "Mode of Communication :";
+"directly_utilized_Services"= "Directly Utilized Services :";
 
 ////Dates and Times
 "create_dates_times" = "Create Dates and Times";

@@ -837,6 +837,10 @@
         }
         else
         {
+            if([appDelegate.datesArray count]>0)
+                [appDelegate.datesArray removeAllObjects];
+            [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
+            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
         }
     }

@@ -7,6 +7,8 @@
 //
 
 #import "GISSummaryAttendeesCell.h"
+#import "GISFonts.h"
+#import "GISConstants.h"
 
 @implementation GISSummaryAttendeesCell
 
@@ -20,6 +22,29 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+    [_modeOf_communication_label setFont:[GISFonts large]];
+    [_directly_utilized_label setFont:[GISFonts normal]];
+    [_other_services_label setFont:[GISFonts normal]];
+    [_firstName_label setFont:[GISFonts normal]];
+    [_lastName_label setFont:[GISFonts normal]];
+    [_attendee_label setFont:[GISFonts large]];
+    [_attendee_count_label setFont:[GISFonts large]];
+    
+    [_modeOf_communication_ans_label setFont:[GISFonts large]];
+    [_directly_utilized_ans_label setFont:[GISFonts normal]];
+    [_other_services_ans_label setFont:[GISFonts normal]];
+    [_firstName_ans_label setFont:[GISFonts normal]];
+    [_lastName_ans_label setFont:[GISFonts normal]];
+    
+    _modeOf_communication_ans_label.textColor = UIColorFromRGB(0x999999);
+    _directly_utilized_ans_label.textColor = UIColorFromRGB(0x999999);
+    _firstName_ans_label.textColor = UIColorFromRGB(0x999999);
+    _lastName_ans_label.textColor = UIColorFromRGB(0x999999);
+    _other_services_ans_label.textColor = UIColorFromRGB(0x999999);
+    _attendee_count_label.textColor = UIColorFromRGB(0x00457c);
+    _attendee_label.textColor = UIColorFromRGB(0x00457c);
+
 }
 
 @end

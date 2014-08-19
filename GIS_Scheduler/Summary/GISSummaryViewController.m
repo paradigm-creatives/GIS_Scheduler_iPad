@@ -14,6 +14,11 @@
 #import "GISDropDownsObject.h"
 #import "GISStoreManager.h"
 #import "PCLogger.h"
+#import "GISSummaryAttendeesCell.h"
+#import "GISFonts.h"
+#import "GISSummaryDatesAndTimesCell.h"
+#import "GISSummaryDatesDetailViewCell.h"
+#import "GISDatesAndTimesObject.h"
 
 @interface GISSummaryViewController ()
 
@@ -41,13 +46,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 2)
         return [appDelegate.attendeesArray count];
+    else if(section == 4)
+        return [appDelegate.datesArray count];
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,11 +64,17 @@
         
         summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return summaryCell.frame.size.height;
+        
     }else if(indexPath.section == 2){
         
-        summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        GISSummaryAttendeesCell *attendeesCell=(GISSummaryAttendeesCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         
-        return summaryCell.frame.size.height-50.0;
+        return attendeesCell.frame.size.height;
+    }else if(indexPath.section == 4){
+        
+        GISSummaryDatesDetailViewCell *datesDetailCell=(GISSummaryDatesDetailViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        return datesDetailCell.frame.size.height;
     }
     
     return summaryCell.frame.size.height;
@@ -71,7 +84,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GISSummaryCell *cell;
-    if(indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3){
+    if(indexPath.section == 0 || indexPath.section == 1  || indexPath.section == 3){
         cell=(GISSummaryCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
         if(cell==nil)
         {
@@ -120,7 +133,41 @@
         cell.city_label.text =  NSLocalizedStringFromTable(@"description", TABLE, nil);
         cell.state_label.hidden = YES;
         
+        NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+        if (chooseReqDetailedArray.count>0) {
+            _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
+        }
+        NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
+        NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
+        
+        _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
+        _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
+        
+        for (GISDropDownsObject *dropDownObj in _eventTypeArray) {
+            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails]) {
+                cell.unitacNumber_ans_label.text = dropDownObj.value_String;
+            }
+        }
+        
+        for (GISDropDownsObject *dropDownObj in _dresscodeArray) {
+            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails]) {
+                cell.email_ans_label.text = dropDownObj.value_String;
+            }
+        }
+        
+        
+        cell.requestor_ans_label.text = _chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails;
+        cell.zip_ans_label.text = _chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails;
+        cell.city_ans_label.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
+        
     }else if(indexPath.section == 2){
+        
+        GISSummaryAttendeesCell *summarycell=(GISSummaryAttendeesCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        if(summarycell==nil)
+        {
+            summarycell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryAttendeesCell" owner:self options:nil]objectAtIndex:0];
+        }
+
     
         GISAttendees_ListObject *attendeesObj;
         @try {
@@ -131,25 +178,23 @@
         }
         //cell.requestor_label.text = [NSString stringWithFormat:@"%d",(int)indexPath.row +1];
         
-        cell.requestor_label.text =  NSLocalizedStringFromTable(@"first_name", TABLE, nil);
-        cell.unitacNumber_label.text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
-        cell.firstName_label.text =  NSLocalizedStringFromTable(@"email", TABLE, nil);
-        cell.lastName_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
-        cell.email_label.text =  NSLocalizedStringFromTable(@"directly_utilized", TABLE, nil);
-        cell.zip_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
-        cell.section_label.text =  NSLocalizedStringFromTable(@"attendees", TABLE, nil);
+        summarycell.firstName_label.text =  NSLocalizedStringFromTable(@"first_name", TABLE, nil);
+        summarycell.lastName_label .text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
+        summarycell.modeOf_communication_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
+        summarycell.directly_utilized_label.text =  NSLocalizedStringFromTable(@"directly_utilized_Services", TABLE, nil);
+        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
         
-        cell.requestor_ans_label.text = attendeesObj.firstname_String;
-        cell.unitacNumber_ans_label.text = attendeesObj.lastname_String;
-        cell.firstName_ans_label.text = attendeesObj.email_String;
-        cell.lastName_ans_label.text = attendeesObj.modeOf_String;
-        cell.email_ans_label.text = attendeesObj.directly_utilzed_String;
-        cell.zip_ans_label.text = attendeesObj.servicesNeeded_String;
-        cell.address1_label.hidden = YES;
-        cell.address2_label.hidden = YES;
-        cell.city_label.hidden = YES;
-        cell.state_label.hidden = YES;
+        summarycell.firstName_ans_label.text = attendeesObj.firstname_String;
+        summarycell.lastName_ans_label.text = attendeesObj.lastname_String;
+        summarycell.modeOf_communication_ans_label.text = attendeesObj.modeOf_String;
+        summarycell.directly_utilized_ans_label.text = attendeesObj.directly_utilzed_String;
+        summarycell.other_services_ans_label.text = attendeesObj.servicesNeeded_String;
         
+        summarycell.attendee_count_label.text = [NSString stringWithFormat:@"%d" ,indexPath.row];
+        
+        summarycell.selectionStyle=UITableViewCellSelectionStyleNone;
+     
+        return summarycell;
     }else if(indexPath.section == 3){
         
         NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
@@ -229,11 +274,85 @@
             
         }
 
+    }else if(indexPath.section == 4){
+        
+        GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        if(summaryDatescell==nil)
+        {
+            summaryDatescell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryDatesDetailViewCell" owner:self options:nil]objectAtIndex:0];
+        }
+        
+        
+        GISDatesAndTimesObject *datesAndTimesObj;
+        @try {
+            datesAndTimesObj = [appDelegate.datesArray objectAtIndex:indexPath.row];
+        }
+        @catch (NSException *exception) {
+            [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in SummaryView CellForRowAtIndexPath section 3--> %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+        }
+        //cell.requestor_label.text = [NSString stringWithFormat:@"%d",(int)indexPath.row +1];
+        
+//        summarycell.firstName_label.text =  NSLocalizedStringFromTable(@"first_name", TABLE, nil);
+//        summarycell.lastName_label .text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
+//        summarycell.modeOf_communication_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
+//        summarycell.directly_utilized_label.text =  NSLocalizedStringFromTable(@"directly_utilized_Services", TABLE, nil);
+//        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
+//        
+        summaryDatescell.date_label.text = datesAndTimesObj.date_String;
+        summaryDatescell.day_label.text = datesAndTimesObj.day_String;
+        summaryDatescell.startTime_label.text = datesAndTimesObj.startTime_String;
+        summaryDatescell.endTime_label.text = datesAndTimesObj.endTime_String;
+        
+        summaryDatescell.selectionStyle=UITableViewCellSelectionStyleNone;
+        
+        return summaryDatescell;
+
     }
     
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
+
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView* headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+    UILabel* headerLabel = [[UILabel alloc] init];
+    headerLabel.frame = CGRectMake(8, 0, 320, 20);
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.textColor = UIColorFromRGB(0x00457c);
+    headerLabel.font = [GISFonts large];
+    [headerLabel setTextAlignment:NSTextAlignmentLeft];
+    headerLabel.text = NSLocalizedStringFromTable(@"attendees", TABLE, nil);
+    [headerView addSubview:headerLabel];
+    
+    UIView *leftLine_view=[[UIView alloc]init];
+    
+    leftLine_view.backgroundColor=UIColorFromRGB(0xDEDEDE);
+    
+    headerLabel.textColor = UIColorFromRGB(0x00457c);
+    leftLine_view.frame=CGRectMake(8, headerLabel.frame.size.height+headerLabel.frame.origin.y+10, 693, 2);
+    [headerView addSubview:leftLine_view];
+    
+    
+    UIButton *infoButton = [[UIButton alloc] init];
+    infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [infoButton setBackgroundImage:[UIImage imageNamed:@"summary_edit.png"] forState:UIControlStateNormal];
+    infoButton.frame = CGRectMake(678, 0.0, 17.0, 17.0);
+    
+    [headerView addSubview:infoButton];
+
+    
+    return headerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 2)
+        return 35;
+    
+    return 0;
+}
+
 
 
 - (void)didReceiveMemoryWarning

@@ -922,7 +922,9 @@
         
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults synchronize];
-        [userDefaults setValue:_chooseRequestData forKey:kDropDownValue];
+        [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
+        [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
+        
         appDelegate.isFromlocation  = YES;
         GISDatesAndTimesViewController *datesAndTimesViewController;
         [self removeLoadingView];
@@ -931,7 +933,6 @@
         
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"tabValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
-        [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];
         
     }else{
         appDelegate.isFromlocation  = NO;
