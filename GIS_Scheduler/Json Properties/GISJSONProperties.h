@@ -10,6 +10,7 @@
 #define Gallaudet_Interpreting_Service_GISJSONProperties_h
 
 #define kselectedChooseReqNumber @"selectedChooseRequestNumber"
+#define KRequestId @"RequestId"
 
 #pragma mark EventDetails Saving
 #define keventDetails_requestNo @"requestNo"
@@ -456,6 +457,23 @@
 
 #pragma Mark ServiceProviderNMRequests End
 
+
+#pragma mark JobDetails Start
+#define kJobDetais_BillAmount @"BillAmount"
+#define kJobDetais_EndTime @"EndTime"
+#define kJobDetais_JobDate @"JobDate"
+#define kJobDetais_JobID @"JobID"
+#define kJobDetais_JobNumber @"JobNumber"
+#define kJobDetais_PayType @"PayType"
+#define kJobDetais_ServiceProvider @"ServiceProvider"
+#define kJobDetais_StartTime @"StartTime"
+#define kJobDetais_Status @"Status"
+#define kJobDetais_StatusCode @"StatusCode"
+#define kJobDetais_Timely @"Timely"
+#define kJobDetais_TypeofService @"TypeofService"
+
+
+#pragma mark JobDetails End
 
 #endif
 

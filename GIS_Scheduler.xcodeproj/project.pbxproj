@@ -240,6 +240,8 @@
 		BA9E6B631977E88400609E69 /* view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6AE41977E88400609E69 /* view@2x.png */; };
 		BA9E6B641977E88400609E69 /* view_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6AE51977E88400609E69 /* view_pressed.png */; };
 		BA9E6B651977E88400609E69 /* view_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6AE61977E88400609E69 /* view_pressed@2x.png */; };
+		BAB64AAD19A37100005296EE /* GISJobDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */; };
+		BAB64AB019A37230005296EE /* GISJobDetailsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */; };
 		BADFD998197CE5CB003033FD /* GISStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD990197CE5CB003033FD /* GISStoreManager.m */; };
 		BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */; };
 		BADFD9C8197CEFD8003033FD /* GISLoginDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9C7197CEFD8003033FD /* GISLoginDetailsObject.m */; };
@@ -581,6 +583,10 @@
 		BA9E6AE51977E88400609E69 /* view_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_pressed.png; sourceTree = "<group>"; };
 		BA9E6AE61977E88400609E69 /* view_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "view_pressed@2x.png"; sourceTree = "<group>"; };
 		BA9E6B681977E8EE00609E69 /* GISConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISConstants.h; sourceTree = "<group>"; };
+		BAB64AAB19A37100005296EE /* GISJobDetailsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsObject.h; sourceTree = "<group>"; };
+		BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsObject.m; sourceTree = "<group>"; };
+		BAB64AAE19A37230005296EE /* GISJobDetailsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsStore.h; sourceTree = "<group>"; };
+		BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsStore.m; sourceTree = "<group>"; };
 		BADFD98F197CE5CB003033FD /* GISStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISStoreManager.h; sourceTree = "<group>"; };
 		BADFD990197CE5CB003033FD /* GISStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISStoreManager.m; sourceTree = "<group>"; };
 		BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -790,6 +796,7 @@
 		8A5E2E231974F9CE00BE3C04 /* View Edit Request */ = {
 			isa = PBXGroup;
 			children = (
+				BAE081F8197FD9900056B3B8 /* PopOverViewController */,
 				8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */,
 				8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */,
 				BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */,
@@ -942,7 +949,6 @@
 				8A5052D61977E418007288F5 /* Location Details */,
 				BA34A655197CE27F00A7083C /* Network */,
 				BADFD999197CE7D8003033FD /* Objects */,
-				BAE081F8197FD9900056B3B8 /* PopOverViewController */,
 				8A9B25AF1976796F002F1AC0 /* Reachability */,
 				8A9B25A3197676C1002F1AC0 /* Utility */,
 				8A5E2E231974F9CE00BE3C04 /* View Edit Request */,
@@ -1017,6 +1023,10 @@
 				BAFC81BE1999EB750070D00D /* GISJobDetailsCell.h */,
 				BAFC81BF1999EB750070D00D /* GISJobDetailsCell.m */,
 				BAFC81C11999EB850070D00D /* GISJobDetailsCell.xib */,
+				BAB64AAB19A37100005296EE /* GISJobDetailsObject.h */,
+				BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */,
+				BAB64AAE19A37230005296EE /* GISJobDetailsStore.h */,
+				BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */,
 			);
 			path = "Job Details";
 			sourceTree = "<group>";
@@ -1220,6 +1230,7 @@
 				8A15B4D8197D2968008B4129 /* GISDropDownStore.m */,
 				8A15B4DE197D2A39008B4129 /* GISChooseRequestDetailsObject.m */,
 				8A15B4DF197D2A39008B4129 /* GISChooseRequestDetailsObject.h */,
+				8A15B4E2197D2A70008B4129 /* GISDatesAndTimesObject.h */,
 				8A15B4E1197D2A70008B4129 /* GISDatesAndTimesObject.m */,
 				8A15B4EA197D2B22008B4129 /* GISSearchReqObject.h */,
 				8A15B4EB197D2B22008B4129 /* GISSearchReqObject.m */,
@@ -1227,7 +1238,6 @@
 				8A15B4E7197D2AEC008B4129 /* GISAttendees_ListObject.m */,
 				8A15B4ED197D2B36008B4129 /* GISViewScheduleObject.m */,
 				8A15B4EE197D2B36008B4129 /* GISViewScheduleObject.h */,
-				8A15B4E2197D2A70008B4129 /* GISDatesAndTimesObject.h */,
 				8A15B4DA197D2968008B4129 /* GISContactsInfoObject.h */,
 				8A15B4D9197D2968008B4129 /* GISContactsInfoObject.m */,
 				8A15B4DB197D2968008B4129 /* GISDropDownStore.h */,
@@ -1256,7 +1266,8 @@
 				BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */,
 				BA8D0CB3198A241100143AA1 /* GISPopOverTableViewController.xib */,
 			);
-			path = PopOverViewController;
+			name = PopOverViewController;
+			path = ../PopOverViewController;
 			sourceTree = "<group>";
 		};
 		BAE081FE197FDBA30056B3B8 /* Fonts */ = {
@@ -1558,6 +1569,7 @@
 				8A3B1E39197CF54500963E8C /* UncaughtExceptionHandler.m in Sources */,
 				8A3B1E52197CF58300963E8C /* SBJsonBase.m in Sources */,
 				BA9E6AEB1977E88400609E69 /* GISAttendeesViewController.m in Sources */,
+				BAB64AAD19A37100005296EE /* GISJobDetailsObject.m in Sources */,
 				BAFA6BF119949E51005FE5A1 /* GISCreateJobsCell.m in Sources */,
 				BAFA6BED19949E1F005FE5A1 /* GISCreateJobsViewController.m in Sources */,
 				8A3B1E35197CF54500963E8C /* Constants.m in Sources */,
@@ -1622,6 +1634,7 @@
 				8A15B4DD197D2968008B4129 /* GISContactsInfoObject.m in Sources */,
 				BADFD998197CE5CB003033FD /* GISStoreManager.m in Sources */,
 				BA34A654197CE02D00A7083C /* Utils.m in Sources */,
+				BAB64AB019A37230005296EE /* GISJobDetailsStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

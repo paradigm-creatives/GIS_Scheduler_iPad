@@ -21,6 +21,7 @@
 #import "GISViewScheduleObject.h"
 #import "GISSchedulerSPJobsObject.h"
 #import "GISSchedulerNMRequestsObject.h"
+#import "GISJobDetailsObject.h"
 
 @interface GISStoreManager : NSObject
 + (GISStoreManager *)sharedManager;
@@ -145,5 +146,9 @@
 - (BOOL)addPayTypeObject:(GISDropDownsObject *)payTypeObj;
 - (NSMutableArray*)getPayTypeObjects;
 - (void)removePayTypeObjects;
+
+- (BOOL)addJobDetailsObject:(GISJobDetailsObject *)jobdetailsObj;
+- (NSMutableArray*)getJobDetailsObjects;
+- (void)removeJobDetailsObjects;
 
 @end

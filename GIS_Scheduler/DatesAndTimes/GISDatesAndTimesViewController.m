@@ -40,6 +40,7 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -62,7 +63,6 @@
     dayLabel.textColor=UIColorFromRGB(0x00457c);;
     startTime_Header_Label.textColor=UIColorFromRGB(0x00457c);;
     endTime_header_Label.textColor=UIColorFromRGB(0x00457c);;
-    
     
     startTime_Label .font=[GISFonts normal];
     startTime_TextField.font=[GISFonts small];
@@ -143,7 +143,6 @@
     
     weekDays_dictionary_here= [[NSMutableDictionary alloc]init];
     createDateTimes_mutArray=[[NSMutableArray alloc]init];
-    
     
     dateformatter=[[NSDateFormatter alloc]init];
     [dateformatter setDateFormat:@"MM/dd/yyyy"];
@@ -286,10 +285,7 @@
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     
-    //if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
-    {
-        [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
-    }
+   [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
     
     if([sender tag]==111)
     {

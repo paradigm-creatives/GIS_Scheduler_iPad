@@ -727,6 +727,7 @@ int row_count = 2;
     [self saveAttendeesData];
 }
 
+
 -(void)saveAttendeesData
 {
     @try {
@@ -754,8 +755,6 @@ int row_count = 2;
             }
         }
         
-        
-        
         NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
         NSMutableDictionary *attendeesDict=[[NSMutableDictionary alloc]init];
         NSMutableArray *attendees_array=[[NSMutableArray alloc]init];
@@ -768,22 +767,18 @@ int row_count = 2;
         {
             for (int i=0;i<[attendeesObject.attendeesList_mutArray count];i++)
             {
-                
                 GISAttendees_ListObject *gisList = [attendeesObject.attendeesList_mutArray objectAtIndex:i];
-                
                 if (max_count==2)
                     isValidate_Mandatory=NO;
                 
                 if (isValidate_Mandatory) {
                     max_count++;
                     if (([gisList.firstname_String length]==0) || ([gisList.lastname_String length]==0) || ([gisList.email_String length]==0)){
-                        
                         [self removeLoadingView];
                         
                         if(([gisList.firstname_String length]==0)&&([gisList.lastname_String length]==0)&&([gisList.email_String length]==0))
                         {
                             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"provide atleast 2 attendees", TABLE, nil)];
-                            
                             return;
                         }
                         if([gisList.firstname_String length]==0)
@@ -794,7 +789,6 @@ int row_count = 2;
                             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_email", TABLE, nil)];
                         
                         return;
-                        
                     }
                     if ([gisList.email_String length])
                     {
@@ -809,9 +803,7 @@ int row_count = 2;
                         }
                     }
                 }
-                
             }
-            
         }
         
         NSMutableArray *duplicates=[[NSMutableArray alloc]init];
@@ -823,7 +815,6 @@ int row_count = 2;
                 
                 [duplicates addObject:gisList];
             }
-            
         }
         [attendeesObject.attendeesList_mutArray removeObjectsInArray:duplicates];
         

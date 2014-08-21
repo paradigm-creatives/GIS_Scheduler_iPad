@@ -54,7 +54,6 @@
     NSString * inCompleteTab_string;
 }
 
-
 @property (nonatomic,strong) UIPopoverController *popover_controller;
 
 @property(nonatomic,strong)IBOutlet UITableView *attendees_tableView;
