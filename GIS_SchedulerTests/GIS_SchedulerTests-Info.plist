@@ -19,5 +19,6 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
         <string>Hello World!</string>
+<string>Hello World! Samle project</string>
 </dict>
 </plist>
