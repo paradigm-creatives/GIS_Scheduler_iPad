@@ -133,4 +133,6 @@
 
 
 -(IBAction)pickerButtonPressed:(id)sender;
+
+-(IBAction)nextButtonPressed:(id)sender;
 @end

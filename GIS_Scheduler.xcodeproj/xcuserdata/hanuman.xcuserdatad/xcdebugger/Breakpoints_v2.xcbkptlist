@@ -58,27 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/DatesAndTimes/GISDatesAndTimesViewController.m"
-            timestampString = "430310359.16965"
+            timestampString = "430660851.95227"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1194"
-            endingLineNumber = "1194">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/DatesAndTimes/GISDatesAndTimesViewController.m"
-            timestampString = "430310359.16965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1163"
-            endingLineNumber = "1163"
-            landmarkName = "-addLoadViewWithLoadingText:"
-            landmarkType = "5">
+            startingLineNumber = "1203"
+            endingLineNumber = "1203">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -103,7 +87,7 @@
                   symbolName = "-[GISAttendeesViewController saveAttendeesData]"
                   moduleName = "GIS_Scheduler"
                   urlString = "file:///Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/Attendees/GISAttendeesViewController.m"
-                  timestampString = "430296506.036762"
+                  timestampString = "430660852.272837"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "735"
@@ -117,7 +101,7 @@
                   symbolName = "-[GISAttendeesViewController saveAttendeesData]"
                   moduleName = "GIS_Scheduler"
                   urlString = "file:///Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/Attendees/GISAttendeesViewController.m"
-                  timestampString = "430296506.037013"
+                  timestampString = "430660852.273193"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "735"

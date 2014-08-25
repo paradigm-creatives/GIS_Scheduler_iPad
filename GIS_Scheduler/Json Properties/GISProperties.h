@@ -15,6 +15,7 @@
 #define GIS_GET_Billing_Details @"GetBillingDetails"
 
 #define GIS_GET_DROP_DOWNS @"GetMasters"
+
 #define GIS_GET_EVENT_REQUEST @"GetRequestdetails"
 
 #define GIS_GET_REQUEST_NUMBERS @"GetRequestNumbers"
@@ -59,4 +60,8 @@
 #define GIS_GET_JOB_DETAILS @"GetJobDetails"
 
 
+
+///iPAD
+#define GIS_GET_SERVICE_PROVIDERS_NAMES_iPAD @"GetServiceProviders"
+#define GIS_GET_DROP_DOWNS_Scheduler @"GetSchedulerMasters"
 #endif

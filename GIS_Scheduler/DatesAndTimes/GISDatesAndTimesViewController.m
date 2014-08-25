@@ -846,6 +846,7 @@
             [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
             
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+            [self performSelector:@selector(nextButtonPressed:) withObject:nil];
         }
     }
     else
@@ -929,6 +930,7 @@
     }
     [detail_mut_array removeObjectsInArray:duplicates];
 }
+
 
 -(void)editButtonPressed:(id)sender
 {
@@ -1177,6 +1179,13 @@
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 
+
+-(IBAction)nextButtonPressed:(id)sender
+{
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

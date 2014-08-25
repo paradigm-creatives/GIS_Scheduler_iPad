@@ -49,6 +49,7 @@
 @property (nonatomic, retain) NSMutableArray *request_NMRequestsArray;
 @property (nonatomic, retain) NSMutableArray *payTypeArray;
 @property (nonatomic, retain) NSMutableArray *jobDetailsArray;
+@property (nonatomic, retain) NSMutableArray *typeOfServiceArray;
 
 @end
 
@@ -101,6 +102,7 @@ static GISStoreManager *singletonManager = nil;
         _request_NMRequestsArray = [[NSMutableArray alloc]init];
         _payTypeArray = [[NSMutableArray alloc]init];
         _jobDetailsArray = [[NSMutableArray alloc]init];
+        _typeOfServiceArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -694,6 +696,25 @@ static GISStoreManager *singletonManager = nil;
 - (void)removeJobDetailsObjects
 {
     [_jobDetailsArray removeAllObjects];
+}
+
+- (BOOL)addTypeOfServiceObject:(GISDropDownsObject *)typeOfServiceObj
+{
+    BOOL isAdded = FALSE;
+    if (typeOfServiceObj != nil) {
+        [_typeOfServiceArray addObject:typeOfServiceObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getTypeOfServiceObjects
+{
+    return [_typeOfServiceArray count]?_typeOfServiceArray:nil;
+}
+- (void)removeTypeOfServiceObjects
+{
+    [_typeOfServiceArray removeAllObjects];
 }
 
 - (void)destroy{

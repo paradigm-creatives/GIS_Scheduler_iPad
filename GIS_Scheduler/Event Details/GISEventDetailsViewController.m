@@ -1003,11 +1003,12 @@
     [paramsDict setObject:unitObj1.token_string forKey:kToken];
     
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-
     
     [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
 
 }
+
+
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);

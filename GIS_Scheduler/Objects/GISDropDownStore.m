@@ -106,6 +106,10 @@
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addPayTypeObject:dropDownObject];
                 }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kTypeOfService]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addTypeOfServiceObject:dropDownObject];
+                }
 
             }
         }
