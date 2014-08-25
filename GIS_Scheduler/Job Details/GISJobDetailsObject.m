@@ -21,37 +21,37 @@
     if ([dict objectForKey:kJobDetais_BillAmount]) {
         gobj.billAmount_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_BillAmount]];
     }
-    else if ([dict objectForKey:kJobDetais_EndTime]) {
+    if ([dict objectForKey:kJobDetais_EndTime]) {
         gobj.endTime_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_EndTime]];
     }
-    else if ([dict objectForKey:kJobDetais_JobDate]) {
+    if ([dict objectForKey:kJobDetais_JobDate]) {
         gobj.jobDate_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_JobDate]];
     }
-    else if ([dict objectForKey:kJobDetais_JobID]) {
+    if ([dict objectForKey:kJobDetais_JobID]) {
         gobj.jobID_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_JobID]];
     }
-    else if ([dict objectForKey:kJobDetais_JobNumber]) {
+    if ([dict objectForKey:kJobDetais_JobNumber]) {
         gobj.jobNumber_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_JobNumber]];
     }
-    else if ([dict objectForKey:kJobDetais_PayType]) {
+    if ([dict objectForKey:kJobDetais_PayType]) {
         gobj.payType_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_PayType]];
     }
-    else if ([dict objectForKey:kJobDetais_ServiceProvider]) {
+    if ([dict objectForKey:kJobDetais_ServiceProvider]) {
         gobj.serviceProvider_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_ServiceProvider]];
     }
-    else if ([dict objectForKey:kJobDetais_StartTime]) {
+    if ([dict objectForKey:kJobDetais_StartTime]) {
         gobj.startTime_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_StartTime]];
     }
-    else if ([dict objectForKey:kJobDetais_Status]) {
+    if ([dict objectForKey:kJobDetais_Status]) {
         gobj.status_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_Status]];
     }
-    else if ([dict objectForKey:kJobDetais_StatusCode]) {
+    if ([dict objectForKey:kJobDetais_StatusCode]) {
         gobj.statusCode_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_StatusCode]];
     }
-    else if ([dict objectForKey:kJobDetais_Timely]) {
+    if ([dict objectForKey:kJobDetais_Timely]) {
         gobj.timely_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_Timely]];
     }
-    else if ([dict objectForKey:kJobDetais_TypeofService]) {
+    if ([dict objectForKey:kJobDetais_TypeofService]) {
         gobj.typeOfService_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_TypeofService]];
     }
     

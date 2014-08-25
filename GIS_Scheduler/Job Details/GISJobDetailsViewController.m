@@ -15,6 +15,7 @@
 #import "GISServerManager.h"
 #import "GISJobDetailsStore.h"
 #import "GISStoreManager.h"
+#import "GISConstants.h"
 @interface GISJobDetailsViewController ()
 
 @end
@@ -41,6 +42,8 @@
     
     jobDetails_Array=[[NSMutableArray alloc]init];
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c", nil];
+    
+     selected_row=999999;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -64,8 +67,9 @@
 -(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeJobDetailsObjects];
     GISJobDetailsStore *jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
-    
+
     if(jobDetails_Array.count>0)
        [jobDetails_Array removeAllObjects];
     
@@ -81,7 +85,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,7 +95,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return jobDetails_Array.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,9 +104,41 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobDetailsCell" owner:self options:nil] objectAtIndex:0];
     }
-    GISJobDetailsObject *jobDetailsohijk
-    cell.job_ID_Label.text=
+    if (jobDetails_Array.count>0) {
+        GISJobDetailsObject *temp_obj_jobDetails=[jobDetails_Array objectAtIndex:indexPath.row];
+        cell.job_ID_Label.text=temp_obj_jobDetails.jobID_string;
+        cell.job_date_Label.text=temp_obj_jobDetails.jobDate_string;
+        cell.start_time_Label.text=temp_obj_jobDetails.startTime_string;
+        cell.end_time_Label.text=temp_obj_jobDetails.endTime_string;
+        cell.typeOf_service_Label.text=temp_obj_jobDetails.typeOfService_string;
+        cell.service_provider_Label.text=temp_obj_jobDetails.jobDate_string;
+        cell.payType_Label.text=temp_obj_jobDetails.payType_string;
+        cell.timely_Label.text=temp_obj_jobDetails.timely_string;
+        cell.billAmt_Label.text=temp_obj_jobDetails.billAmount_string;
+    }
 
+    if (selected_row==indexPath.row) {
+        cell.typeOf_service_UIView.hidden=NO;
+        cell.serviceProvider_UIView.hidden=NO;
+        cell.payType_UIView.hidden=NO;
+        
+        cell.typeOf_service_EDIT_Label.text=typeOfservice_temp_string;
+        cell.service_provider_EDIT_Label.text=serviceProvider_temp_string;
+        cell.payType_EDIT_Label.text=payType_temp_string;
+    }
+    else
+    {
+        cell.typeOf_service_UIView.hidden=YES;
+        cell.serviceProvider_UIView.hidden=YES;
+        cell.payType_UIView.hidden=YES;
+    }
+    
+    cell.editButton.tag=indexPath.row;
+    cell.deleteButton.tag=indexPath.row;
+    
+    [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
@@ -145,6 +181,46 @@
     {
     }
 }
+
+-(void)editButtonPressed:(id)sender
+{
+    NSLog(@"tag--%d",[sender tag]);
+    selected_row=[sender tag];
+    
+    GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
+    serviceProvider_temp_string=tempObj.serviceProvider_string;
+    typeOfservice_temp_string=tempObj.typeOfService_string;
+    payType_temp_string=tempObj.payType_string;
+    
+    [jobDetails_tableView reloadData];
+}
+
+
+-(void)deleteButtonPressed:(id)sender
+{
+    UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alertVIew.tag = [sender tag];
+    alertVIew.delegate = self;
+    [alertVIew show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        GISJobDetailsObject *jobObj = [jobDetails_Array objectAtIndex:alertView.tag];
+        if([jobObj.jobID_string length])
+        {
+            currentObjTag_toDelete=alertView.tag;
+        }
+        else
+        {
+            [jobDetails_Array removeObjectAtIndex:alertView.tag];
+            [jobDetails_tableView reloadData];
+        }
+    }
+}
+
 
 -(void)dismissPopOverNow
 {

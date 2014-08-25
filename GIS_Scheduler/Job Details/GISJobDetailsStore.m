@@ -35,7 +35,6 @@
                 [[GISStoreManager sharedManager]addJobDetailsObject:jobDetailsObj];
                 
             }
-            NSMutableArray *arr=[[GISStoreManager sharedManager] getJobDetailsObjects];
         }
     }
     @catch (NSException *exception) {

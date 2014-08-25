@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -100,6 +100,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="done_btn" destination="SE5-Rx-q1e" id="VPd-hs-twc"/>
                 <outlet property="endTime_Label" destination="Vmv-3R-FuY" id="F0l-nT-40G"/>
                 <outlet property="eventType_Label" destination="hM7-Mz-Ybg" id="0ht-DI-Cqb"/>
                 <outlet property="jobId_Label" destination="QUj-PZ-npO" id="bWV-tj-4Kb"/>

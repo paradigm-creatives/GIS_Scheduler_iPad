@@ -71,8 +71,13 @@
     NSMutableArray *NMRequestsArray;
     GISAppDelegate *appDelegate;
     int btn_tag;
+    int payTypeBtn_tag;
     NSString *pay_type_data;
     NSString *pay_type_ID_String;
+    NSString *gis_response_data;
+    NSString *gisresponse_ID_String;
+    
+    BOOL pay_type;
     
 }
 - (IBAction)hideAndUnHideMaster:(id)sender;
@@ -81,6 +86,7 @@
 @property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) NSArray *payTypeArray;
+@property (strong, nonatomic) NSArray *gisresponseArray;
 @property (nonatomic,strong) UIPopoverController *popover;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;

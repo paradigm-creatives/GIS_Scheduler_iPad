@@ -839,9 +839,6 @@ int row_count = 2;
             }
         }
         
-        
-        
-        
         [attendeesDict setValue:attendeesObject.expectedNo_ID_String forKey:kAttendees_NoOfAttendees];
         [attendeesDict setValue:attendeesObject.genderPreference_ID_String forKey:kAttendees_GenderPreference];
         [attendeesDict setValue:attendeesObject.preference_ID_String forKey:kAttendees_ServiceProviderGenderPref];
@@ -849,15 +846,7 @@ int row_count = 2;
         [attendeesDict setValue:login_Obj.token_string forKey:kAttendees_token];
         [attendeesDict setValue:@"" forKey:kAttendees_PrimaryAudience];
         NSLog(@"------------%@",appDelegate.chooseRequest_ID_String);
-        if([appDelegate.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]||([appDelegate.chooseRequest_ID_String isKindOfClass:[NSNull class]])||(appDelegate.chooseRequest_ID_String==nil)||[appDelegate.chooseRequest_ID_String isEqualToString:@"0"])
-        {
-            [attendeesDict setValue:@"0" forKey:kAttendees_RequestNo];
-  
-        }
-        else
-        {
-              [attendeesDict setValue:[GISUtility returningstring:attendeesObject.choose_request_ID_String ] forKey:kAttendees_RequestNo];
-        }
+              [attendeesDict setValue:[GISUtility returningstring:appDelegate.chooseRequest_ID_String ] forKey:kAttendees_RequestNo];
         
         if([login_Obj.userStatus_string isEqualToString:kInternal])
             [attendeesDict setValue:[GISUtility returningstring:attendeesObject.primaryAudience_ID_String] forKey:kAttendees_PrimaryAudience];

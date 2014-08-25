@@ -833,6 +833,10 @@
         }
         else
         {
+            if([appDelegate.datesArray count]>0)
+                [appDelegate.datesArray removeAllObjects];
+            [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
+            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
         }
     }
@@ -842,6 +846,7 @@
     }
     [createJObs_tableView reloadData];
 }
+
 
 -(void)failuremethod_save_Date_Time:(GISJsonRequest *)response
 {
@@ -868,7 +873,6 @@
     }
     [createJObs_tableView reloadData];
 }
-
 
 
 -(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
@@ -942,7 +946,6 @@
 
 -(IBAction)dateButton_Edit_Pressed:(id)sender
 {
-    
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;

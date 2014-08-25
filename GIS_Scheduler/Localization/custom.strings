@@ -83,7 +83,7 @@
 "other_info" = "Other Information :";
 "next"  = "Next";
 "gallaudet_campus"  = "Gallaudet Campus";
-
+"location_Details" = "Location Details";
 
 
 ////////   Comment ///////
@@ -137,6 +137,8 @@
 "services"= "services :";
 "attendee"= "Attendee";
 "service_Needed"= "Service Needed :";
+"mode_of_communication"= "Mode of Communication :";
+"directly_utilized_Services"= "Directly Utilized Services :";
 
 ////Dates and Times
 "create_dates_times" = "Create Dates and Times";
@@ -188,3 +190,8 @@
 "select_Start_Time"="Select Start Time";
 "select_End_Time"="Select End Time";
 "add attendee"  = "Add Attendee";
+
+
+     ////// Summary ////////
+
+"contact_billing_info" = "Contact And Billing Info";

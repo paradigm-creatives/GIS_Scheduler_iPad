@@ -17,6 +17,7 @@ dependencies: \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISAttendees_ListObject.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Attendees/GISAttendeesTopCell.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DatesAndTimes/GISDatesAndTimesViewController.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Create\ Jobs/GISCreateJobsViewController.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Comments/GISCommentViewController.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Fonts/GISFonts.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Location\ Details/GISLocationDetailsViewController.h \
@@ -36,4 +37,6 @@ dependencies: \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISJsonRequest.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISRequest.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISRequestError.h \
-  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISDatabaseConstants.h
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISDatabaseConstants.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsViewController.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Summary/GISSummaryViewController.h
