@@ -576,7 +576,6 @@
             
             appDelegate.isFromContacts = YES;
             
-            
             appDelegate.contact_billingObject = contactBilling_Object;
             
                 GISEventDetailsViewController *eventViewController;
@@ -590,10 +589,8 @@
                 }
             
                 NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"tabValue",nil];
-            
                 [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
                 
-            
         }else{
             
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];

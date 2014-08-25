@@ -186,13 +186,18 @@
     if ([buttonTitle isEqualToString:@""])
     {
         dashBoard_UIView.hidden=NO;
-
-        
+        CGRect frame1=datListView.frame;
+        frame1.origin.x=75;
+        datListView.frame=frame1;
     }
     else
     {
+        
         dashBoard_UIView.hidden=YES;
-
+        CGRect frame1=datListView.frame;
+        frame1.origin.x=0;
+        datListView.frame=frame1;
+        
     }
     
     [btn setTitle:buttonTitle forState:UIControlStateNormal];

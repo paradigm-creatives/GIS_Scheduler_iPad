@@ -144,6 +144,30 @@ static GISServerManager *singletonManager = nil;
    
 }
 
+- (void)getMastersData_Schedulers:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_GET_DROP_DOWNS_Scheduler];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+    
+}
+
+
+//iPAd
+- (void)getService_Provider_Names:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_GET_SERVICE_PROVIDERS_NAMES_iPAD];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+    
+}
+
 - (void)getEventDetailsData:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
 {
     if (![self isNetworkAvailable]) { [self alert]; return;}

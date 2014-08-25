@@ -11,6 +11,7 @@
 
 #define kselectedChooseReqNumber @"selectedChooseRequestNumber"
 #define KRequestId @"RequestId"
+#define KRequestorId @"requestorId"
 
 #pragma mark EventDetails Saving
 #define keventDetails_requestNo @"requestNo"
@@ -75,6 +76,7 @@
 #define kServiceType_serviceProvider @"Serviceprovider_Type"
 #define kServiceType_Registerd_Consumers @"Registerd_Consumers"
 #define kPayType @"Pay_Type"
+#define kTypeOfService @"TypeofService"
 #pragma mark - Get Drop Downs End
 
 

@@ -151,4 +151,8 @@
 - (NSMutableArray*)getJobDetailsObjects;
 - (void)removeJobDetailsObjects;
 
+- (BOOL)addTypeOfServiceObject:(GISDropDownsObject *)typeOfServiceObj;
+- (NSMutableArray*)getTypeOfServiceObjects;
+- (void)removeTypeOfServiceObjects;
+
 @end

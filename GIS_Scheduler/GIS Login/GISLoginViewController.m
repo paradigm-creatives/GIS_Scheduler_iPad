@@ -178,6 +178,15 @@
                     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
                     [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
                     
+                    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
+                    {
+                        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+                        [paramsDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+                        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+                        [[GISServerManager sharedManager] getMastersData_Schedulers:self withParams:paramsDict finishAction:@selector(successmethod_dropDown_schedulers:) failAction:@selector(failuremethod_dropDown_schedulers:)];
+                    }
+                    
+                    
                     //LOGIN DB
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_LOGIN];
                     NSArray *objectsArray1 = [NSArray arrayWithObjects: login_Obj.requestorID_string,login_Obj.email_string,login_Obj.firstName_string,login_Obj.lastName_string,login_Obj.token_string,login_Obj.userStatus_string,login_Obj.roles_string,login_Obj.role_ID_string, nil];
@@ -206,6 +215,10 @@
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REGISTERED_CONSUMERS];
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PRIMARY_AUDIENCE];
+                    
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PAY_TYPE];
+                    
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_TYPE_OF_SERVICE];
                 }
 
                 
@@ -405,7 +418,36 @@
     NSLog(@"Failure");
 }
 
-
+-(void)successmethod_dropDown_schedulers:(GISJsonRequest *)response
+{
+    NSLog(@"Success---%@",response.responseJson);
+    
+    [[GISStoreManager sharedManager] removePayTypeObjects];
+    [[GISStoreManager sharedManager] removeTypeOfServiceObjects];
+    dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+    NSMutableArray *payTypeArray=[[GISStoreManager sharedManager] getPayTypeObjects];
+    NSMutableArray *typeOfServiceArray=[[GISStoreManager sharedManager] getTypeOfServiceObjects];
+    for (int i=0; i<payTypeArray.count; i++) {
+        GISDropDownsObject *bObj=[payTypeArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    
+    for (int i=0; i<typeOfServiceArray.count; i++) {
+        GISDropDownsObject *bObj=[typeOfServiceArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    
+}
+-(void)failuremethod_dropDown_schedulers:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getViewSchedule Success---%@",response.responseJson);
@@ -461,7 +503,7 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [GISUtility moveemailView:YES viewHeight:-120 view:self.view];
+    //®[GISUtility moveemailView:YES viewHeight:-120 view:self.view];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -476,6 +518,7 @@
 
     return YES;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
