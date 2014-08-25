@@ -689,6 +689,25 @@
     
     btn_tag = btn.tag;
     
+    NSMutableString *alertString = [[NSMutableString alloc] init];
+    [alertString setString:@""];
+    
+    if([spJobsObj.GisResponse_id_String length] == 0 || [spJobsObj.PayType_id_String length] == 0){
+        
+        if([spJobsObj.GisResponse_id_String length] == 0){
+            [alertString appendFormat:@"%@ %@",@"GIS Response",@"\n"];
+        }
+        
+        if([spJobsObj.PayType_id_String length] == 0){
+            
+            [alertString appendFormat:@"%@",@"PayType"];
+        }
+        
+        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),alertString]];
+        
+        return;
+    }
+    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];

@@ -16,6 +16,7 @@
     GISAppDelegate *appDelegate;
 }
 
+@property (strong, nonatomic) IBOutlet UITableView *summary_tableView;
 @property(nonatomic,strong)GISChooseRequestDetailsObject *chooseRequestDetailsObj;
 @property (strong, nonatomic) NSString *buildingNameString;
 @property (strong, nonatomic) NSArray *buildingNameArray;

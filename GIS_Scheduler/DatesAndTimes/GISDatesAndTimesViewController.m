@@ -665,6 +665,13 @@
                                                               toDate:endDate
                                                              options:0];
         
+        //unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
+        //NSDateComponents *comps = [gregorian components:unitFlags fromDate:startDate  toDate:endDate  options:0];
+        //int months = [comps month];
+        //int days = [comps day];
+        
+        NSLog(@"StartDate-->%@",startDate);
+        NSLog(@"EndDate-->%@",endDate);
         NSLog(@"date-IS->%ld",(long)[components day]);
         
         for (int i=0; i<[components day]+1;i++)
@@ -691,7 +698,7 @@
             NSString *dayString= [dateFormatter stringFromDate:visitDate];
             
             NSLog(@"d*********************   DayString----%@", dayString);
-            
+            BOOL isFound;
             for (int i=1; i<=7; i++)
             {
                 if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%d",i]])
@@ -721,7 +728,8 @@
         
         NSLog(@"--%@----",[createDateTimes_mutArray description]);
         if (createDateTimes_mutArray.count<1) {
-             [self getBetween_dates];
+          //   [self getBetween_dates];
+            [GISUtility showAlertWithTitle:@"GIS" andMessage:@"No data found to seleced dates"];
         }
         
         //[self pushToDatesAndTimes_DetailView];

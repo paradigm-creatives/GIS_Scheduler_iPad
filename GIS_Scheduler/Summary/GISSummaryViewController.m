@@ -43,6 +43,12 @@
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+        
+    [_summary_tableView reloadData];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

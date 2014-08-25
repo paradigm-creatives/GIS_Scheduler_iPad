@@ -9,6 +9,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/UncaughtExceptionHandler.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/SBJsonBase.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAttendeesViewController.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISCreateJobsCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISCreateJobsViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISSummaryDatesAndTimesCell.o
@@ -21,6 +22,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/SBFBJsonParser.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISSchedulerNMRequestsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISDatesTimesDetailCell.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobAssignmentCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISServerManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISCreateJobs_Cell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISSearchReqObject.o
@@ -74,7 +76,9 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISDatabaseManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISLoginDetailsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/Reachability.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobAssignmentViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISPreparationMaterialCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISContactsInfoObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISStoreManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/Utils.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsStore.o
