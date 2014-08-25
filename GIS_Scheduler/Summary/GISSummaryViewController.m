@@ -219,6 +219,8 @@
                 _generalLocationValue_string = dropDownObj.value_String;
             }
         }
+
+        
         
         cell.section_label.text =  NSLocalizedStringFromTable(@"location_Details", TABLE, nil);
         
@@ -249,9 +251,7 @@
             
             
         }else{
-            
-     
-            
+
             cell.requestor_label.text = @"Store Location :";
             cell.unitacNumber_label.text = @"General Location :";
             cell.firstName_label.text = @"Address1 :";

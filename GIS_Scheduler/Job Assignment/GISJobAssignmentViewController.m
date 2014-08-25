@@ -1,18 +1,18 @@
 //
-//  GISServiceProviderRequestedJobsViewController.m
+//  GISJobAssignmentViewController.m
 //  GIS_Scheduler
 //
-//  Created by Paradigm on 14/08/14.
+//  Created by Paradigm on 22/08/14.
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
-#import "GISServiceProviderRequestedJobsViewController.h"
+#import "GISJobAssignmentViewController.h"
 
-@interface GISServiceProviderRequestedJobsViewController ()
+@interface GISJobAssignmentViewController ()
 
 @end
 
-@implementation GISServiceProviderRequestedJobsViewController
+@implementation GISJobAssignmentViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +27,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.hidesBackButton = YES;
-    self.title=@"Service Provider Requested jobs - Search";
 }
 
 - (void)didReceiveMemoryWarning

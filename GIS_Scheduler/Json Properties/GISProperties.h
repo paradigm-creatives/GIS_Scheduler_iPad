@@ -56,4 +56,7 @@
 
 
 
+#define GIS_GET_JOB_DETAILS @"GetJobDetails"
+
+
 #endif

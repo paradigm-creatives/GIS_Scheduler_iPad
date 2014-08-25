@@ -167,7 +167,6 @@
             headerLabel.textColor = UIColorFromRGB(0xe8d3a4);
             [headerCellButton setBackgroundImage:[UIImage imageNamed:@"requests_jobs_pressed.png"] forState:UIControlStateNormal];
             [headerButton setBackgroundColor:UIColorFromRGB(0x00508f)];
-            
         }
         else{
             headerLabel.textColor = UIColorFromRGB(0xefefef);
@@ -184,6 +183,7 @@
         
         if(rowsectionClicked){
             
+            
             headerLabel.textColor = UIColorFromRGB(0xe8d3a4);
             [headerCellButton setBackgroundImage:[UIImage imageNamed:@"scheduling_pressed.png"] forState:UIControlStateNormal];
             [headerButton setBackgroundColor:UIColorFromRGB(0x00508f)];
@@ -192,7 +192,7 @@
             headerLabel.textColor = UIColorFromRGB(0xefefef);
             [headerCellButton setBackgroundImage: [UIImage imageNamed:@"scheduling.png"] forState:UIControlStateNormal];
         }
-        
+
     }else if(section == 0){
         
         UIImageView *labelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 110, 50)];
@@ -257,14 +257,11 @@
         // cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
     }else if(indexPath.section == 4){
         //cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
-        
         UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:@"Logout:" message:@"Are you sure want to logout ?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         alertVIew.tag = LOGOUT_TAG;
         alertVIew.delegate = self;
         [alertVIew show];
-        
     }
-    
 
     UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
     
@@ -293,7 +290,6 @@
 }
 
 -(IBAction)hideRows:(id)sender{
-    
     
     if([sender tag] == 1){
         if(!hideClicked)

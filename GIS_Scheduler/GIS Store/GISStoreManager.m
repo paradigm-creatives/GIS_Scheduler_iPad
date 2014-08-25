@@ -48,6 +48,7 @@
 @property (nonatomic, retain) NSMutableArray *request_SPJobsArray;
 @property (nonatomic, retain) NSMutableArray *request_NMRequestsArray;
 @property (nonatomic, retain) NSMutableArray *payTypeArray;
+@property (nonatomic, retain) NSMutableArray *jobDetailsArray;
 
 @end
 
@@ -99,6 +100,7 @@ static GISStoreManager *singletonManager = nil;
         _request_SPJobsArray = [[NSMutableArray alloc]init];
         _request_NMRequestsArray = [[NSMutableArray alloc]init];
         _payTypeArray = [[NSMutableArray alloc]init];
+        _jobDetailsArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -676,6 +678,23 @@ static GISStoreManager *singletonManager = nil;
     [_payTypeArray removeAllObjects];
 }
 
+- (BOOL)addJobDetailsObject:(GISJobDetailsObject *)jobdetailsObj
+{
+    BOOL isAdded = FALSE;
+    if (jobdetailsObj != nil) {
+        [_jobDetailsArray addObject:jobdetailsObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+- (NSMutableArray*)getJobDetailsObjects
+{
+    return [_jobDetailsArray count]?_jobDetailsArray:nil;
+}
+- (void)removeJobDetailsObjects
+{
+    [_jobDetailsArray removeAllObjects];
+}
 
 - (void)destroy{
     
