@@ -7,6 +7,7 @@
 //
 
 #import "GISSummaryDatesDetailViewCell.h"
+#import "GISFonts.h"
 
 @implementation GISSummaryDatesDetailViewCell
 
@@ -20,6 +21,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+    [_date_label setFont:[GISFonts small]];
+    [_day_label setFont:[GISFonts small]];
+    [_startTime_label setFont:[GISFonts small]];
+    [_endTime_label setFont:[GISFonts small]];
 }
 
 @end

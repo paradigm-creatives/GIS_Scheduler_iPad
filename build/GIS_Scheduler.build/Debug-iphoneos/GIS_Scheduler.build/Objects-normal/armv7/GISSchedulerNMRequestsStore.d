@@ -14,4 +14,5 @@ dependencies: \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISAttendees_ListObject.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISSearchReqObject.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISViewScheduleObject.h \
-  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISSchedulerSPJobsObject.h
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Objects/GISSchedulerSPJobsObject.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsObject.h

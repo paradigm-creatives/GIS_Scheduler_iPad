@@ -52,7 +52,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -61,6 +61,9 @@
         return [appDelegate.attendeesArray count];
     else if(section == 4)
         return [appDelegate.datesArray count];
+    else if(section == 5)
+        return 0;
+    
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,7 +85,6 @@
         
         return datesDetailCell.frame.size.height;
     }
-    
     return summaryCell.frame.size.height;
 }
 
@@ -236,11 +238,6 @@
             cell.firstName_label.text = @"General Location :";
             cell.lastName_label.text = @"Room Name :";
             cell.email_label.text = @"Other :";
-            [cell.requestor_label sizeToFit];
-            [cell.unitacNumber_label sizeToFit];
-            [cell.firstName_label sizeToFit];
-            [cell.lastName_label sizeToFit];
-            [cell.email_label sizeToFit];
             
             cell.requestor_ans_label.text = _chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails;
             cell.unitacNumber_ans_label.text = _buildingNameString;
@@ -320,33 +317,68 @@
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView* headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
-    UILabel* headerLabel = [[UILabel alloc] init];
-    headerLabel.frame = CGRectMake(8, 0, 320, 20);
-    headerLabel.backgroundColor = [UIColor clearColor];
-    headerLabel.textColor = UIColorFromRGB(0x00457c);
-    headerLabel.font = [GISFonts large];
-    [headerLabel setTextAlignment:NSTextAlignmentLeft];
-    headerLabel.text = NSLocalizedStringFromTable(@"attendees", TABLE, nil);
-    [headerView addSubview:headerLabel];
+    UIView* headerView;
     
-    UIView *leftLine_view=[[UIView alloc]init];
-    
-    leftLine_view.backgroundColor=UIColorFromRGB(0xDEDEDE);
-    
-    headerLabel.textColor = UIColorFromRGB(0x00457c);
-    leftLine_view.frame=CGRectMake(8, headerLabel.frame.size.height+headerLabel.frame.origin.y+10, 693, 2);
-    [headerView addSubview:leftLine_view];
-    
-    
-    UIButton *infoButton = [[UIButton alloc] init];
-    infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [infoButton setBackgroundImage:[UIImage imageNamed:@"summary_edit.png"] forState:UIControlStateNormal];
-    infoButton.frame = CGRectMake(678, 0.0, 17.0, 17.0);
-    
-    [headerView addSubview:infoButton];
+    if(section == 4){
+        
+        UIView *headerView1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+        
+        NSArray *datesViewArray =  [[NSBundle mainBundle] loadNibNamed:@"GISSummaryDatesAndTimesCell" owner:self options:nil];
+        
+        UIView *datesView = [datesViewArray lastObject];
+        [headerView1 addSubview:datesView];
+        
+        return headerView1;
+        
+    }
+    else if(section == 2){
+        headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+        UILabel* headerLabel = [[UILabel alloc] init];
+        headerLabel.frame = CGRectMake(8, 0, 320, 20);
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = UIColorFromRGB(0x00457c);
+        headerLabel.font = [GISFonts large];
+        [headerLabel setTextAlignment:NSTextAlignmentLeft];
+        headerLabel.text = NSLocalizedStringFromTable(@"attendees", TABLE, nil);
+        [headerView addSubview:headerLabel];
+        
+        UIView *leftLine_view=[[UIView alloc]init];
+        
+        leftLine_view.backgroundColor=UIColorFromRGB(0xDEDEDE);
+        
+        headerLabel.textColor = UIColorFromRGB(0x00457c);
+        leftLine_view.frame=CGRectMake(8, headerLabel.frame.size.height+headerLabel.frame.origin.y+10, 693, 2);
+        [headerView addSubview:leftLine_view];
+        
+        
+        UIButton *infoButton = [[UIButton alloc] init];
+        infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [infoButton setBackgroundImage:[UIImage imageNamed:@"summary_edit.png"] forState:UIControlStateNormal];
+        infoButton.frame = CGRectMake(678, 0.0, 17.0, 17.0);
+        
+        [headerView addSubview:infoButton];
+        
+    }if(section == 5){
+        
+        UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+        UIButton *nextButton = [[UIButton alloc] init];
+        nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [nextButton addTarget:self
+                       action:@selector(nextButtonPressed:)
+             forControlEvents:UIControlEventTouchUpInside];
+        nextButton.frame = CGRectMake(470.0, 30.0, 80.0, 30.0);
+        
+        
+        [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
+        nextButton.backgroundColor=UIColorFromRGB(0x00457c);
+        [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+        nextButton.titleLabel.font=[GISFonts larger];
+        [nextButton.layer setCornerRadius:3.0f];
+        [headerView2 addSubview:nextButton];
+        
+        return headerView2;
+    }
 
-    
     return headerView;
 }
 
@@ -354,11 +386,18 @@
 {
     if(section == 2)
         return 35;
-    
+    if(section == 4)
+        return 50;
+    if(section == 5)
+        return 80;
+
     return 0;
 }
 
-
+-(void)nextButtonPressed:(id)sender{
+    
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

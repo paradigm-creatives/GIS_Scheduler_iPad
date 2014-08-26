@@ -418,9 +418,14 @@
 
 -(void)pushToViewController:(int)section rowValue:(int)row{
     
-    [self.navigationController popViewControllerAnimated:NO];
-    
-    if(section ==1){
+    if(section == 0){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    else if(section ==1){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
         if(row == 1){
             
             appDelegate.isNewRequest = NO;
