@@ -867,8 +867,6 @@
 		8A74422919A1C89700CE3B32 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
-				BA1EF44719A719E900D1219E /* Find Request Jobs */,
-				BA1EF44819A719E900D1219E /* Job Assignment */,
 				8A74422F19A1C94000CE3B32 /* summary Cell */,
 				8A74422A19A1C8BD00CE3B32 /* GISSummaryViewController.h */,
 				8A74422B19A1C8BD00CE3B32 /* GISSummaryViewController.m */,
@@ -1017,7 +1015,6 @@
 		BA3AF215196BBAF7006A1E3B /* GIS_Scheduler */ = {
 			isa = PBXGroup;
 			children = (
-				8A74422919A1C89700CE3B32 /* Summary */,
 				BA9E6A5E1977E88400609E69 /* AppDelegate */,
 				BA9E6A611977E88400609E69 /* Attendees */,
 				BAFA6BE919949E04005FE5A1 /* Create Jobs */,
@@ -1028,12 +1025,14 @@
 				8A5052BC1977D76F007288F5 /* DashBoard Views */,
 				BA694A4C1975387300AC8CCC /* DatesAndTimes */,
 				8A5E2E2919753B3B00BE3C04 /* Event Details */,
+				BA1EF44719A719E900D1219E /* Find Request Jobs */,
 				BAE081FE197FDBA30056B3B8 /* Fonts */,
 				8A3B1E22197CF54500963E8C /* External */,
 				BA9E6B671977E8EE00609E69 /* GIS_Constants */,
 				8A232EE41973ACC100E2BEDF /* GIS Login */,
 				BADFD980197CE5CB003033FD /* GIS Store */,
 				BA9E6A691977E88400609E69 /* Images */,
+				BA1EF44819A719E900D1219E /* Job Assignment */,
 				BA93BE081979408B0097426C /* Job Details */,
 				8A3B1E3A197CF58300963E8C /* Json Properties */,
 				8A3B1E01197CF42400963E8C /* Localization */,
@@ -1041,6 +1040,7 @@
 				BA34A655197CE27F00A7083C /* Network */,
 				BADFD999197CE7D8003033FD /* Objects */,
 				8A9B25AF1976796F002F1AC0 /* Reachability */,
+				8A74422919A1C89700CE3B32 /* Summary */,
 				8A9B25A3197676C1002F1AC0 /* Utility */,
 				8A5E2E231974F9CE00BE3C04 /* View Edit Request */,
 				BA3AF216196BBAF7006A1E3B /* Supporting Files */,
@@ -1318,9 +1318,9 @@
 		BADFD999197CE7D8003033FD /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				8A15B4DF197D2A39008B4129 /* GISChooseRequestDetailsObject.h */,
 				8A15B4D8197D2968008B4129 /* GISDropDownStore.m */,
 				8A15B4DE197D2A39008B4129 /* GISChooseRequestDetailsObject.m */,
-				8A15B4DF197D2A39008B4129 /* GISChooseRequestDetailsObject.h */,
 				8A15B4E2197D2A70008B4129 /* GISDatesAndTimesObject.h */,
 				8A15B4E1197D2A70008B4129 /* GISDatesAndTimesObject.m */,
 				8A15B4EA197D2B22008B4129 /* GISSearchReqObject.h */,

@@ -828,7 +828,6 @@
         {
             [detail_mut_array removeObjectAtIndex:currentObjTag_toDelete];
             [datesTimes_tableView reloadData];
-            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_deleted", TABLE, nil)];
         }
         else

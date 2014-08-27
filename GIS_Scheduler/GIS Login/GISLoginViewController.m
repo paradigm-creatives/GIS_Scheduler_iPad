@@ -442,8 +442,8 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
-    
 }
+
 -(void)failuremethod_dropDown_schedulers:(GISJsonRequest *)response
 {
     NSLog(@"Failure");

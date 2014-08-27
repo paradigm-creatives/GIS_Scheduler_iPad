@@ -10,6 +10,7 @@
 #import "GISStoreManager.h"
 #import "GISJSONProperties.h"
 #import "GISDatabaseManager.h"
+
 @implementation GISDatesAndTimesObject
 
 @synthesize chooseReq_answer_String;
@@ -23,6 +24,8 @@
 @synthesize tagValue;
 @synthesize status_String,statusCode_String;
 @synthesize unavailableID_String,notes_String;
+
+//
 - (id)initWithStoreDictionary:(NSDictionary *)json
 {
     if (self = [super init]) {
@@ -41,9 +44,6 @@
                 startTime_String=[self returningstring: [dict objectForKey:kDateTime_Detail_StartTime]];
                 status_String=[self returningstring: [dict objectForKey:kDateTime_Detail_Status]];
                 statusCode_String=[self returningstring: [dict objectForKey:kDateTime_Detail_StatusCode]];
-                
-                
-                
             }
             else if ([json isKindOfClass:[NSArray class]]) {
                 
