@@ -273,6 +273,7 @@ static PCLogger *manager = nil;
         S3PutObjectRequest *pop = [[[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"logs/iOS/%@/%@.log", dateString1, amazonPath] inBucket:bucketName]autorelease];
         pop.data = [NSData dataWithContentsOfFile:file];
         pop.contentType = @"text/plain";
+        
         [[AmazonClientManager s3] putObject:pop];
         
         
