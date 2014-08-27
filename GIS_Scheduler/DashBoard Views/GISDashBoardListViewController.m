@@ -13,7 +13,7 @@
 #import "GISDatabaseManager.h"
 #import "GISLoginViewController.h"
 #import "GISServiceProviderRequestedJobsViewController.h"
-
+#import "GISJobAssignmentViewController.h"
 #define LOGOUT_TAG 1632
 
 @interface GISDashBoardListViewController ()
@@ -252,8 +252,31 @@
             [cellBtn setBackgroundImage:[UIImage imageNamed:@"logout_pressed.png"] forState:UIControlStateNormal];
         }
     }
-    
-    if(indexPath.section == 3){
+
+    if(indexPath.section == 2){
+         if (indexPath.row==0) {
+         GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+        UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+        detailViewController.view_string=kJobAssignment_Screen;
+        NSMutableArray* arr = [[NSMutableArray alloc] initWithArray:appDelegate.spiltViewController.viewControllers];
+        [arr replaceObjectAtIndex:1 withObject:detailView]; //index 1 corresponds to the detail VC
+        
+        appDelegate.spiltViewController.viewControllers = arr;
+        }
+    }
+    else if(indexPath.section == 3){
+        
+        if (indexPath.row==0) {
+            
+            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+            UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+            detailViewController.view_string=kFindRequestJobs_Screen;
+            NSMutableArray* arr = [[NSMutableArray alloc] initWithArray:appDelegate.spiltViewController.viewControllers];
+            [arr replaceObjectAtIndex:1 withObject:detailView]; //index 1 corresponds to the detail VC
+            
+            appDelegate.spiltViewController.viewControllers = arr;
+        }
+        
         // cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
     }else if(indexPath.section == 4){
         //cell.contentView.backgroundColor = UIColorFromRGB(0x00457c);
@@ -262,17 +285,34 @@
         alertVIew.delegate = self;
         [alertVIew show];
     }
-
-    UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
-    
-    for(UIViewController *viewcontroller in navController.viewControllers)
-    {
-        if([viewcontroller isKindOfClass:[GISDashBoardViewController class]])
+   else
+  {
+      
+      GISDashBoardViewController *detailViewController = (GISDashBoardViewController *)[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
+      UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+      
+      NSMutableArray* arr = [[NSMutableArray alloc] initWithArray:appDelegate.spiltViewController.viewControllers];
+      [arr replaceObjectAtIndex:1 withObject:detailView]; //index 1 corresponds to the detail VC
+      
+      @try {
+          appDelegate.spiltViewController.viewControllers = arr;
+      }
+      @catch (NSException *exception) {
+          NSLog(@"Exception in ---- Dash Board --- appDelegate.spiltViewController.viewControllers = arr");
+      }
+      
+      
+        UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
+        
+        for(UIViewController *viewcontroller in navController.viewControllers)
         {
-            GISDashBoardViewController *dashBoardViewController=(GISDashBoardViewController *)viewcontroller;
-            [dashBoardViewController pushToViewController:indexPath.section rowValue:indexPath.row];
+            if([viewcontroller isKindOfClass:[GISDashBoardViewController class]])
+            {
+                GISDashBoardViewController *dashBoardViewController=(GISDashBoardViewController *)viewcontroller;
+                [dashBoardViewController pushToViewController:indexPath.section rowValue:indexPath.row];
+            }
         }
-    }
+  }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

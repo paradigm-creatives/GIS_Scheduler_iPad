@@ -442,8 +442,8 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
-    
 }
+
 -(void)failuremethod_dropDown_schedulers:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
@@ -503,12 +503,12 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //®[GISUtility moveemailView:YES viewHeight:-120 view:self.view];
+    [self moveAction:YES viewHeight:-120];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+   [self moveAction:YES viewHeight:0];
 }
 
 
@@ -517,6 +517,33 @@
     [textField resignFirstResponder];
 
     return YES;
+}
+
+-(void)moveAction:(BOOL)isMove viewHeight:(int)viewHeight{
+    
+    if(isMove)
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:1.0];
+        
+        CGRect frame=self.view.frame;
+        frame.origin.x=viewHeight;
+        self.view.frame=frame;
+        [UIView commitAnimations];
+    }
+    else
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:0.2];
+        CGRect frame=self.view.frame;
+        frame.origin.x=0;
+        self.view.frame=frame;
+        
+        [UIView commitAnimations];
+    }
+
 }
 
 

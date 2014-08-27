@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
     rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [rightRecognizer setNumberOfTouchesRequired:1];
@@ -66,7 +66,8 @@
     
     _gisresponseArray = [[NSArray alloc] initWithObjects:@"Select",@"Assigned",@"Not Assigned",@"Need More Information", nil];
     
-    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -192,11 +193,14 @@
     }
     else
     {
-        
         dashBoard_UIView.hidden=YES;
         CGRect frame1=datListView.frame;
         frame1.origin.x=0;
         datListView.frame=frame1;
+        
+//        CGRect dashBoard_tempFrame=dashBoard_UIView.frame;
+//        dashBoard_tempFrame.origin.x=130;
+//        dashBoard_UIView.frame=dashBoard_tempFrame;
         
     }
     
@@ -229,7 +233,6 @@
     [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
 
-    
     if (sender.selectedSegmentIndex==0) {
         tableHeader1_UIView.hidden = FALSE;
         tableHeader2_UIView.hidden = TRUE;
@@ -273,10 +276,7 @@
         [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
         
         [[GISServerManager sharedManager] getPayTypedata:self withParams:paramsDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
-
-        
     }
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -377,7 +377,7 @@
                 spJobsObj.PayType_String=dropDownObj.value_String;
             }
         }
-        
+
         [cell.done_btn addTarget:self action:@selector(saveSPData:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.payType_btn addTarget:self action:@selector(showPopoverDetails_payType_btn:) forControlEvents:UIControlEventTouchUpInside];
@@ -743,7 +743,7 @@
 
 -(void)successmethod_SaveSPRequests:(GISJsonRequest *)response
 {
-    
+
     NSLog(@"successmethod_SaveSPRequests Success---%@",response.responseJson);
     @try {
         if ([response.responseJson isKindOfClass:[NSArray class]])
@@ -771,7 +771,7 @@
     @catch (NSException *exception)
     {
         [self removeLoadingView];
-        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in successmethod_SaveSPRequests action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
 }
 -(void)failuremethod_SaveSPRequests:(GISJsonRequest *)response
