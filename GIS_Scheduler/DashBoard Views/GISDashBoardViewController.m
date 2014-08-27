@@ -24,6 +24,10 @@
 #import "GISDropDownsObject.h"
 #import "GISUtility.h"
 #import "GISServiceProviderRequestedJobsViewController.h"
+#import "GISViewEditServiceViewController.h"
+#import "GISJobAssignmentViewController.h"
+
+
 @interface GISDashBoardViewController ()
 
 @end
@@ -418,11 +422,15 @@
 
 -(void)pushToViewController:(int)section rowValue:(int)row{
     
+     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
     if(section == 0){
-        
+        appDelegate.isFromViewEditService = NO;
         [self.navigationController popViewControllerAnimated:NO];
     }
     else if(section ==1){
+        
+        appDelegate.isFromViewEditService = NO;
         
         [self.navigationController popViewControllerAnimated:NO];
         
@@ -442,8 +450,46 @@
             [self.navigationController pushViewController:serviceProviderRequested animated:NO];
         }
         
+    } else if(section ==2){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
+        if (row==0) {
+            
+            appDelegate.isFromViewEditService = NO;
+            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+            detailViewController.view_string = kJobAssignment_Screen;
+            [self.navigationController pushViewController:detailViewController animated:NO];
+        }
+
+        if(row == 1){
+            
+            appDelegate.isFromViewEditService = YES;
+            GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+            [self.navigationController pushViewController:viewEditView animated:NO];
+            
+//            GISViewEditServiceViewController *serviceViewController =[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
+//            [self.navigationController pushViewController:serviceViewController animated:NO];
+        }
     }
     
+  
+    else if(section == 3){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
+        appDelegate.isFromViewEditService = NO;
+        
+        if (row==0) {
+            
+            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+            
+            detailViewController.view_string = kFindRequestJobs_Screen;
+
+            [self.navigationController pushViewController:detailViewController animated:NO];
+            
+        }
+    }
 }
 
 -(void)successmethod_Requestjobs:(GISJsonRequest *)response

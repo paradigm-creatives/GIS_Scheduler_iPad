@@ -53,6 +53,7 @@
     
     self.isLogout = NO;
     self.isContact = NO;
+    self.isFromViewEditService = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

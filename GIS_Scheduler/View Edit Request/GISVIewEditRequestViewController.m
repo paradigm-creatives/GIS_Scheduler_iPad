@@ -28,6 +28,7 @@
 #import "GISContactsAndBillingViewController.h"
 #import "GISJobDetailsViewController.h"
 #import "GISSummaryViewController.h"
+#import "GISViewEditServiceViewController.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -64,9 +65,9 @@
     
     GISEventDetailsViewController *eventDetailsView=[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
     GISLocationDetailsViewController *locationDetailsView=[[GISLocationDetailsViewController alloc]initWithNibName:@"GISLocationDetailsViewController" bundle:nil];
-    _viewControllers=[NSArray arrayWithObjects: eventDetailsView,locationDetailsView, nil];
-    _currentController= eventDetailsView;
-    [_mainView addSubview:_currentController.view];
+//    _viewControllers=[NSArray arrayWithObjects: eventDetailsView,locationDetailsView, nil];
+//    _currentController= eventDetailsView;
+//    [_mainView addSubview:_currentController.view];
 
     GISAttendeesViewController *attendeesView=[[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
@@ -78,11 +79,19 @@
 
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
-    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView, nil];
+    GISViewEditServiceViewController *serviceView=[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
     
-    _currentController= contactsBillingView;
+    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView,serviceView, nil];
+    
+    if(appDelegate.isFromViewEditService){
+        
+        _currentController= serviceView;
+    }else{
+        _currentController= contactsBillingView;
+    }
     
     [_mainView addSubview:_currentController.view];
+    
     [[UINavigationBar appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[GISFonts large],NSFontAttributeName,UIColorFromRGB(0x00457c),NSForegroundColorAttributeName, nil]];
 
     [self setItemFont:_contactItem];

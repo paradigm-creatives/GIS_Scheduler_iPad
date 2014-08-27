@@ -31,6 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    self.navigationItem.hidesBackButton = YES;
     dashBoard_UIView.hidden=YES;
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
     rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;

@@ -76,8 +76,8 @@
     
     viewUpHeight = 155;
     
-   // _userName_textfield.text=@"swamy.pilla@gmail.com";
-   // _password_textfield.text=@"admin";
+    _userName_textfield.text=@"swamy.pilla@gmail.com";
+    _password_textfield.text=@"admin";
     
 }
 
