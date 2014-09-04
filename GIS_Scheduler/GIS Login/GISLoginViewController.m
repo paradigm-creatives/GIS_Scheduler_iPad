@@ -78,7 +78,6 @@
     
     _userName_textfield.text=@"swamy.pilla@gmail.com";
     _password_textfield.text=@"admin";
-    
 }
 
 -(void)addRightView:(UITextField *) textField{
@@ -238,7 +237,6 @@
 -(void)failuremethod_login:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
-    
 }
 
 -(void)successmethod_dropDown:(GISJsonRequest *)response
@@ -518,7 +516,6 @@
 
     return YES;
 }
-
 
 - (void)didReceiveMemoryWarning
 {

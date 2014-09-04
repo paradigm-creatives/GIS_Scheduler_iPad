@@ -442,9 +442,9 @@
 		8AA8387D198BB545004B6C87 /* GISSchedulerNMRequestsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISSchedulerNMRequestsObject.h; sourceTree = "<group>"; };
 		8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSchedulerNMRequestsObject.m; sourceTree = "<group>"; };
 		8AE9B419197E6308004D9157 /* dashboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard_pressed.png; sourceTree = "<group>"; };
-		BA00DF40199C875C006057AD /* GISServiceProviderRequestedJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderRequestedJobsViewController.h; sourceTree = "<group>"; };
-		BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderRequestedJobsViewController.m; sourceTree = "<group>"; };
-		BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISServiceProviderRequestedJobsViewController.xib; sourceTree = "<group>"; };
+		BA00DF40199C875C006057AD /* GISServiceProviderRequestedJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GISServiceProviderRequestedJobsViewController.h; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.h; sourceTree = "<group>"; };
+		BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GISServiceProviderRequestedJobsViewController.m; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.m; sourceTree = "<group>"; };
+		BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GISServiceProviderRequestedJobsViewController.xib; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.xib; sourceTree = "<group>"; };
 		BA05F308199B6452002E6859 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BA1EF44919A71A0E00D1219E /* GISJobAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobAssignmentViewController.h; sourceTree = "<group>"; };
 		BA1EF44A19A71A0E00D1219E /* GISJobAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobAssignmentViewController.m; sourceTree = "<group>"; };
@@ -1040,6 +1040,7 @@
 				BA34A655197CE27F00A7083C /* Network */,
 				BADFD999197CE7D8003033FD /* Objects */,
 				8A9B25AF1976796F002F1AC0 /* Reachability */,
+				BAFC458A19ADEFC1000B4D30 /* SP Requested Jobs */,
 				8A74422919A1C89700CE3B32 /* Summary */,
 				8A9B25A3197676C1002F1AC0 /* Utility */,
 				8A5E2E231974F9CE00BE3C04 /* View Edit Request */,
@@ -1127,9 +1128,6 @@
 			children = (
 				BA9E6A5F1977E88400609E69 /* GISAppDelegate.h */,
 				BA9E6A601977E88400609E69 /* GISAppDelegate.m */,
-				BA00DF40199C875C006057AD /* GISServiceProviderRequestedJobsViewController.h */,
-				BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */,
-				BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -1384,6 +1382,16 @@
 				BAFA6BF219949E6A005FE5A1 /* GISCreateJobsCell.xib */,
 			);
 			path = "Create Jobs";
+			sourceTree = "<group>";
+		};
+		BAFC458A19ADEFC1000B4D30 /* SP Requested Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				BA00DF40199C875C006057AD /* GISServiceProviderRequestedJobsViewController.h */,
+				BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */,
+				BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */,
+			);
+			path = "SP Requested Jobs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

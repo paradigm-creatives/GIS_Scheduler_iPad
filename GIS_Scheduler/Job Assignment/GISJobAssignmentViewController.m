@@ -9,6 +9,8 @@
 #import "GISJobAssignmentViewController.h"
 #import "GISJobAssignmentCell.h"
 #import "GISConstants.h"
+#import "GISDatabaseManager.h"
+#import "GISUtility.h"
 
 @interface GISJobAssignmentViewController ()
 
@@ -30,6 +32,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    
+    chooseRequest_mutArray=[[NSMutableArray alloc]init];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
     dashBoard_UIView.hidden=YES;
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
@@ -62,8 +69,8 @@
         table_UIView.frame=new_frame;
         self.title=@"Find Requests/Jobs - Result";
     }
-    
 }
+
 - (BOOL)splitViewController: (UISplitViewController*)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
 {
     return self.isMasterHide;
@@ -130,7 +137,128 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
     }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.service_Provider_type_button.tag=indexPath.row;
+    cell.service_Provider_button.tag=indexPath.row;
+    cell.payType_button.tag=indexPath.row;
+    
     return cell;
+}
+
+
+-(IBAction)pickerButton_pressed:(id)sender
+{
+
+    UIButton *button=(UIButton *)sender;
+    GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    tableViewController1.popOverDelegate=self;
+    
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
+    popover.delegate = self;
+    popover.popoverContentSize = CGSizeMake(340, 150);
+    if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
+    {
+           if([sender tag]==111)
+        {
+            btnTag=111;
+            tableViewController1.view_String=[GISUtility returningstring:chooseRequest_ID_answer_Label.text];
+            tableViewController1.popOverArray=chooseRequest_mutArray;
+        }
+        else if([sender tag]==222)
+        {
+            btnTag=222;
+            tableViewController1.view_String=@"datestimes";
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:from_answer_Label.text];
+        }
+        else if ([sender tag]==333)
+        {
+            btnTag=333;
+            tableViewController1.view_String=@"datestimes";
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:to_answer_Label.text];
+            
+        }
+        else if ([sender tag]==444)
+        {
+            btnTag=444;
+            tableViewController1.view_String=[GISUtility returningstring:typeOfService_answer_Label.text];
+            tableViewController1.popOverArray=chooseRequest_mutArray;
+            
+        }
+        NSLog(@"-----x-->%@",NSStringFromCGRect(button.frame));
+        if ([sender tag]==111)
+            [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+45, 148, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        else
+            [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+45, 185, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+    else
+    {
+        GISJobAssignmentCell *tempCell_JobAssignment=(GISJobAssignmentCell *)button.superview.superview.superview.superview.superview;
+        
+        tableViewController1.view_String=[GISUtility returningstring:chooseRequest_ID_answer_Label.text];
+        tableViewController1.popOverArray=chooseRequest_mutArray;
+        
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+45, button.frame.origin.x+button.frame.size.width, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
+    }
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
+    if (btnTag==111)
+    {
+        chooseRequest_ID_answer_Label.text=value_str;
+        
+    }
+    else if (btnTag==222)
+    {
+        from_answer_Label.text=value_str;
+        if ([from_answer_Label.text length] && [to_answer_Label.text length]){
+            if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                from_answer_Label.text=@"";
+            }
+        }
+    }
+    else if (btnTag==333)
+    {
+        to_answer_Label.text=value_str;
+        if ([from_answer_Label.text length] && [to_answer_Label.text length]){
+            if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:NO])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
+                to_answer_Label.text=@"";
+            }
+        }
+    }
+    else  if (btnTag==444)
+    {
+        typeOfService_answer_Label.text=value_str;
+        
+    }
+}
+
+-(void)dismissPopOverNow
+{
+    [popover dismissPopoverAnimated:YES];
+}
+
+-(IBAction)filterMore_ButtonPressed:(id)sender
+{
+    
+}
+-(IBAction)searchButton_Pressed:(id)sender
+{
+    
+}
+-(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
