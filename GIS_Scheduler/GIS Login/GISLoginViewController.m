@@ -78,6 +78,10 @@
     
     _userName_textfield.text=@"swamy.pilla@gmail.com";
     _password_textfield.text=@"admin";
+    _userName_textfield.text=@"kbabulenjoy@gmail.com";
+    _password_textfield.text=@"babul";
+    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    //_password_textfield.text=@"admin";
     
 }
 
@@ -163,6 +167,14 @@
         {
             id array=response.responseJson;
             NSDictionary *dictHere=[array lastObject];
+            
+            if(dictHere == nil){
+                
+                [self removeLoadingView];
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
+                return;
+            }
+                
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
                 [self removeLoadingView];
@@ -544,6 +556,51 @@
         [UIView commitAnimations];
     }
 
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    CGFloat mCurrentScale = 0.0;
+    CGFloat mLastScale  = 0.0;
+    
+    NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
+    mCurrentScale += [gestureRecognizer scale] - mLastScale;
+    mLastScale = [gestureRecognizer scale];
+    
+    switch (gestureRecognizer.state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSLog(@"Pinch start:");
+        } break;
+        case UIGestureRecognizerStateChanged:
+        {
+            //NSLog(@"scale = %f", recognizer.scale);
+            NSLog(@"Pinch origin:");
+            
+        } break;
+        case UIGestureRecognizerStateEnded:
+        {
+            NSLog(@"Pinch end:");
+            mLastScale = 1.0;
+            
+            if(gestureRecognizer.scale < 1.0){
+                mCurrentScale = 1.0;
+            }
+            if(gestureRecognizer.scale > 1.5){
+                mCurrentScale = 1.0;
+            }
+        } break;
+        default :
+        {
+            NSLog(@"other state");
+        }
+    }
+    CGAffineTransform currentTransform = CGAffineTransformIdentity;
+    currentTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0f);
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, mCurrentScale, mCurrentScale);
+    self.view.transform = newTransform;
+    
 }
 
 

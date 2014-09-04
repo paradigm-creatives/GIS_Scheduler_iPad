@@ -11,10 +11,11 @@
 #import "GISSchedulerSPJobsStore.h"
 #import "GISSchedulerNMRequestsStore.h"
 #import "GISPopOverTableViewController.h"
+#import "GISBaseViewController.h"
 
-@interface GISDashBoardViewController : UIViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISDashBoardViewController : GISBaseViewController<UISplitViewControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
-    IBOutlet UIView *datListView;
+    //IBOutlet UIView *datListView;
     //IBOutlet UILabel *_Label;
     IBOutlet UILabel *accountName_Label;
     IBOutlet UILabel *requestID_Label;
@@ -35,7 +36,8 @@
     IBOutlet UILabel *approvedRequest_Label;
     IBOutlet UILabel *incompleteRequest_Label;
     
-    IBOutlet UIView *dashBoard_UIView;
+    
+    //IBOutlet UIView *dashBoard_UIView;
     IBOutlet UIView *tableHeader1_UIView;
     IBOutlet UIView *tableHeader2_UIView;
     IBOutlet UIView *tableHeader3_UIView;
@@ -88,6 +90,10 @@
 @property (strong, nonatomic) NSArray *payTypeArray;
 @property (strong, nonatomic) NSArray *gisresponseArray;
 @property (nonatomic,strong) UIPopoverController *popover;
+
+@property(nonatomic,strong) IBOutlet UILabel *countLabel1;
+@property(nonatomic,strong) IBOutlet UILabel *countLabel2;
+@property(nonatomic,strong) IBOutlet UILabel *countLabel3;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;
 

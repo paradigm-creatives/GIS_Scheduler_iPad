@@ -11,9 +11,10 @@
 #import "GISStore.h"
 #import "GISDropDownStore.h"
 #import "GISSchedulerSPJobsStore.h"
+#import "GISBaseViewController.h"
 
 
-@interface GISLoginViewController : UIViewController<UITextFieldDelegate>
+@interface GISLoginViewController : GISBaseViewController<UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
     

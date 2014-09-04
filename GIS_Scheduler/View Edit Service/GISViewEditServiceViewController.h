@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISBaseViewController.h"
 
 @protocol FFCalendarViewControllerProtocol <NSObject>
 @required
 - (void)arrayUpdatedWithAllEvents:(NSMutableArray *)arrayUpdated;
 @end
 
-@interface GISViewEditServiceViewController : UIViewController
+@interface GISViewEditServiceViewController : GISBaseViewController
 
 @property (nonatomic, strong) id <FFCalendarViewControllerProtocol> protocol;
 @property (nonatomic, strong) NSMutableArray *arrayWithEvents;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *fill_UnfillSegmentControl;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *staff_freeLancerSegmentControl;
+@property (nonatomic, strong) IBOutlet UIButton *staff_freeLancerButton;
+
+- (void)setArrayWithEvents:(NSMutableArray *)_arrayWithEvents;
 
 
 @end

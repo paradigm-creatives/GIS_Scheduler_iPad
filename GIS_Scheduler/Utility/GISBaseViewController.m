@@ -48,13 +48,13 @@
     [self.view addGestureRecognizer:leftRecognizer];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectPopOver:) name:kSelectPopOver object:nil];
+    
+    UIPinchGestureRecognizer *twoFingerPinch = [[UIPinchGestureRecognizer alloc]
+                                                initWithTarget:self
+                                                action:@selector(handlePinch:)];
+    
+    [[self view] addGestureRecognizer:twoFingerPinch];
 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)createCustomNavigationBar:(NSString *)title
@@ -137,13 +137,13 @@
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
-    //[self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
-   // [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 -(void)selectPopOver:(NSNotification *) notification{
@@ -156,6 +156,59 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kSelectPopOver object:nil];
     
 }
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    CGFloat mCurrentScale = 0.0;
+    CGFloat mLastScale  = 0.0;
+    
+    NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
+    mCurrentScale += [gestureRecognizer scale] - mLastScale;
+    mLastScale = [gestureRecognizer scale];
+    
+    switch (gestureRecognizer.state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSLog(@"Pinch start:");
+        } break;
+        case UIGestureRecognizerStateChanged:
+        {
+            //NSLog(@"scale = %f", recognizer.scale);
+            NSLog(@"Pinch origin:");
+            
+        } break;
+        case UIGestureRecognizerStateEnded:
+        {
+            NSLog(@"Pinch end:");
+            mLastScale = 1.0;
+            
+            if(gestureRecognizer.scale < 1.0){
+                mCurrentScale = 1.0;
+            }
+            if(gestureRecognizer.scale > 1.5){
+                mCurrentScale = 1.0;
+            }
+        } break;
+        default :
+        {
+            NSLog(@"other state");
+        }
+    }
+    CGAffineTransform currentTransform = CGAffineTransformIdentity;
+    //currentTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0f);
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, mCurrentScale, mCurrentScale);
+    self.view.transform = newTransform;
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 
 
 

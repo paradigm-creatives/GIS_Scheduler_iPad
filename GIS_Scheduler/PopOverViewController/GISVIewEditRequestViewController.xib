@@ -24,6 +24,7 @@
                 <outlet property="status_Label" destination="Jul-iz-keh" id="erR-PI-YLX"/>
                 <outlet property="status_value_Label" destination="Tad-nu-2rg" id="p9y-Rp-rJd"/>
                 <outlet property="summarYItem" destination="eOQ-r2-XVz" id="5lU-Nh-mqd"/>
+                <outlet property="topView" destination="yEc-YG-u4i" id="2CY-3r-4z8"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>

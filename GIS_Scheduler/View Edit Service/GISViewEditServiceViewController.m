@@ -8,6 +8,7 @@
 
 #import "GISViewEditServiceViewController.h"
 #import "FFCalendar.h"
+#import "GISConstants.h"
 
 
 @interface GISViewEditServiceViewController ()<FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol>
@@ -67,7 +68,47 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.hidesBackButton = YES;
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys: UIColorFromRGB(0x666666), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
+    self.navigationController.navigationBarHidden = YES;
+    
+    [self customNavigationBarLayout];
+    
+    [self addCalendars];
+    
+    [self buttonYearMonthWeekDayAction:[arrayButtons objectAtIndex:0]];
+    
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selected.png"]];
+    
+    self.dayItem.selectedImage = [[UIImage imageNamed:@"day_clicked.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.weekItem.selectedImage = [[UIImage imageNamed:@"week_clicked.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.monthItem.selectedImage = [[UIImage imageNamed:@"month_clicked.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIColor *titleHighlightedColor = UIColorFromRGB(0xffffff);
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       titleHighlightedColor, NSForegroundColorAttributeName,
+                                                       nil] forState:UIControlStateSelected];
+    
+    [[UITabBar appearance] setSelectedItem:self.dayItem];
+
+
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if (!boolDidLoad) {
+        boolDidLoad = YES;
+        [self buttonTodayAction:nil];
+    }
+}
+
 
 #pragma mark - FFDateManager Notification
 
@@ -285,8 +326,32 @@
     [self.mainView bringSubviewToFront:[arrayCalendars objectAtIndex:index]];
     
     boolYearViewIsShowing = (index == 0);
-    [self updateLabelWithMonthAndYear];}
+    [self updateLabelWithMonthAndYear];
 
+}
+
+-(IBAction)SegmentToggle:(UISegmentedControl*)sender {
+    
+    if (sender.selectedSegmentIndex==0) {
+        
+        [_staff_freeLancerSegmentControl setHidden:NO];
+        [_staff_freeLancerButton setHidden:NO];
+        
+        CGRect frame = _mainView.frame;
+        frame.origin.y= 154.0f;
+        _mainView.frame = frame;
+        
+    }else if(sender.selectedSegmentIndex==1)
+    {
+      
+        [_staff_freeLancerSegmentControl setHidden:YES];
+        [_staff_freeLancerButton setHidden:YES];
+        
+        CGRect frame = _mainView.frame;
+        frame.origin.y= 121.0f;
+        _mainView.frame = frame;
+    }
+}
 
 
 - (void)didReceiveMemoryWarning
