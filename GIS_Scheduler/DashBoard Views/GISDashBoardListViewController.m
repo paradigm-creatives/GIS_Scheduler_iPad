@@ -265,20 +265,6 @@
    else
    {
        
-       GISDashBoardViewController *detailViewController = (GISDashBoardViewController *)[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
-       UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
-       
-       NSMutableArray* arr = [[NSMutableArray alloc] initWithArray:appDelegate.spiltViewController.viewControllers];
-       [arr replaceObjectAtIndex:1 withObject:detailView]; //index 1 corresponds to the detail VC
-       
-       @try {
-           appDelegate.spiltViewController.viewControllers = arr;
-       }
-       @catch (NSException *exception) {
-           NSLog(@"Exception in ---- Dash Board --- appDelegate.spiltViewController.viewControllers = arr");
-       }
-       
-       
        UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
        
        for(UIViewController *viewcontroller in navController.viewControllers)
