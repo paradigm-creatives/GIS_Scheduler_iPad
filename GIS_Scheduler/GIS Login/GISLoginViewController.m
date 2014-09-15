@@ -251,6 +251,9 @@
 {
     NSLog(@"Failure");
     
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
+    
 }
 
 -(void)successmethod_dropDown:(GISJsonRequest *)response
