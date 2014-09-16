@@ -30,99 +30,159 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		crF2Ay/NERES9dkK3l8jQTz2/R8=
+		RHUw1DV/YgOOiem9xQUDe9MK91E=
+		</data>
+		<key>DailyCalendar.png</key>
+		<data>
+		d3HbaPxq53u+hpHoKNBMdTC+uVQ=
+		</data>
+		<key>Day@2x.png</key>
+		<data>
+		OBxr/4DQUSwqOpMzDA/kffQ6U6E=
 		</data>
 		<key>GISAttendeesCell.nib</key>
 		<data>
-		BrDS6+UW1BgCkfDE6xe/ujEJJac=
+		Wdl84rnS/cenU6Uz5mm4dMZ1Jv8=
 		</data>
 		<key>GISAttendeesTopCell.nib</key>
 		<data>
-		1q0EYSmtzc5HCbf4r1/nCAWkUKI=
+		spJO/RUBoZNPAB+FJlrJOlsw3aU=
 		</data>
 		<key>GISAttendeesViewController.nib</key>
 		<data>
-		xEtd7lUEpyK4WOKH0Z2pYxSP1+Q=
+		E//vM0xMD370Tv8gjluHYkiUn1s=
 		</data>
 		<key>GISCommentCell.nib</key>
 		<data>
-		fpwvoUh2vMn0m03p4+6vO5+3qKA=
+		LP/y9xzvY+2u00q9o3UepsPnCmI=
 		</data>
 		<key>GISCommentViewController.nib</key>
 		<data>
-		FZ1zZHX90zwmg1NYH+4aIB9hmqw=
+		hXqa8Mc2nueaq2P8l/ZPRkppCfo=
 		</data>
 		<key>GISContactsAndBillingViewController.nib</key>
 		<data>
-		luPMdc2TNVeLxqTEUpnwbKIwx3Q=
+		03srAgiessu3UIWHJRickRkKfTo=
+		</data>
+		<key>GISCreateJobsCell.nib</key>
+		<data>
+		oiNrjFD8MIxNkGrkIFmGnpPN53A=
+		</data>
+		<key>GISCreateJobsViewController.nib</key>
+		<data>
+		ZoCXp1rJ/GToIb3GsnO+O626oko=
+		</data>
+		<key>GISCreateJobs_Cell.nib</key>
+		<data>
+		cN2u4t/3ZztN0I80dfCqS/E0HKY=
 		</data>
 		<key>GISDashBoardCell.nib</key>
 		<data>
-		F3yo/JAPzbFhGYQBJx53tKCOqxY=
+		qT4fC52b6f70C/RSPhVdG616E88=
 		</data>
 		<key>GISDashBoardListViewController.nib</key>
 		<data>
-		yr9qrSwIOA3Rw7EshyDZOeq/JFI=
+		+RH3R9eaVNsUcrXMCX2PPmBBfyE=
 		</data>
 		<key>GISDashBoardReqCell.nib</key>
 		<data>
-		BkSGt06x+gtyGNjbbhpPKHE7z7s=
+		m0mFAAVMMrOS/O0W+lE75SNCORQ=
 		</data>
 		<key>GISDashBoardSPCell.nib</key>
 		<data>
-		Xr/2B+CNYznMqpgpj3vmZnConzY=
+		fzyV+D4afttCXN7fi4qXii4DDf4=
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		WjV1GqdPJMmgJUsci8pdh8TOeXg=
+		TKj0EFAV0Z1vr4g2kDKKeBgUy5w=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
-		8faAdX25rJQGM+4FWYRRo0JLM6k=
+		2/0XGdr46F/UdvNGfn5Ar0ajzqk=
 		</data>
 		<key>GISDatesTimesDetailCell.nib</key>
 		<data>
-		3dLv3QUu1Tt4m53gQggJA33Oezk=
+		tEVFA3q/6z7oHE02Q2xvnUB1mAw=
 		</data>
 		<key>GISEventDetailsCell.nib</key>
 		<data>
-		OxJfOgfFTaWGwPRjVtBiKz8BKJ8=
+		q/ZlTlmXb8u4T5T+8bSMbam38U4=
 		</data>
 		<key>GISEventDetailsViewController.nib</key>
 		<data>
-		00hASQpuGr20CiLIqLtpxg/9p2I=
+		yL0wpfp8wzNIGrSV547TBJI8Rxg=
+		</data>
+		<key>GISJobAssignmentCell.nib</key>
+		<data>
+		r9KH+AIxahe4DuxruxahQ1SKwvg=
+		</data>
+		<key>GISJobAssignmentViewController.nib</key>
+		<data>
+		n2MvcWblKutgD+OViQcCfWgrFe4=
+		</data>
+		<key>GISJobDetailsCell.nib</key>
+		<data>
+		mT0df2vSzxXZqJIXsHkuFRt37pY=
 		</data>
 		<key>GISJobDetailsViewController.nib</key>
 		<data>
-		sHQAUQSLGz5UCWXg1Z1c0f2eIP0=
+		/fTTrVPLmV4Gs/r/HAXYI6OeGoA=
 		</data>
 		<key>GISLocationDetailsCell.nib</key>
 		<data>
-		NOeUyqxfbdQasgZi/vHafGLGT4o=
+		yYOiBuMasuZjs0JlKTz2rpXhO78=
 		</data>
 		<key>GISLocationDetailsViewController.nib</key>
 		<data>
-		J50EV/WAiwkUiEVwXHcZuwtqUgE=
+		koESAocpL7MtQNzKZ8T7c3Cb4KI=
 		</data>
 		<key>GISLocationOnCampusCell.nib</key>
 		<data>
-		s6J9j5r9VTKQmQYbiA5GV5eug4A=
+		yyFrLu3uZeLmQnuJmPQFDObNWtI=
 		</data>
 		<key>GISLoginViewController.nib</key>
 		<data>
-		ArF519C6z6XfnvEX0WpEXGL1Mr0=
+		vszatqKRMTZLWCDKSHvHXI7qotw=
 		</data>
 		<key>GISPopOverTableViewController.nib</key>
 		<data>
-		eEnnoC+AtUMgPcsN20UbfTMo/0I=
+		u2GeUXLNrEBrQtDPxFqrIyMC42Q=
 		</data>
 		<key>GISPreparationMaterialCell.nib</key>
 		<data>
-		Z006Tbs6iyV76fZsWI1n1CoHaFI=
+		ccJHtmEpgEvNiZtJE+Bheh/k6Q4=
+		</data>
+		<key>GISServiceProviderRequestedJobsViewController.nib</key>
+		<data>
+		d9PEFrH30hINkulaOFZ2I+h7PHY=
+		</data>
+		<key>GISSummaryAttendeesCell.nib</key>
+		<data>
+		b9zVFeRu6YoU6cSwzUJ47X9eoPs=
+		</data>
+		<key>GISSummaryCell.nib</key>
+		<data>
+		rABYN+jwx6ElZ5904JO7/jWQHGI=
+		</data>
+		<key>GISSummaryDatesAndTimesCell.nib</key>
+		<data>
+		Aq8x59Y+kHDNWPfzP9m+Bhd/TgY=
+		</data>
+		<key>GISSummaryDatesDetailViewCell.nib</key>
+		<data>
+		YDlT3qi8e6IHrpLJuLvCJwDgAzE=
+		</data>
+		<key>GISSummaryViewController.nib</key>
+		<data>
+		ucSoW+h71+hJsO5R5WhQQyEFUYs=
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		S0aDcIZ88sZ/1p408BGmixxxOds=
+		l+ixqOu8LWZxujlK2AgixIhjwGE=
+		</data>
+		<key>GISViewEditServiceViewController.nib</key>
+		<data>
+		uEr965JJxVc9iIpRF6kzMOucsk0=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -131,6 +191,10 @@
 		<key>Locationdetails@2x.png</key>
 		<data>
 		DxLoWSxeZ54TCq725jk2YkwLFmI=
+		</data>
+		<key>MonthlyCalendar.png</key>
+		<data>
+		lEAkTDNdca6XBa45fRP8ou7JcBc=
 		</data>
 		<key>MyriadPro-Bold.otf</key>
 		<data>
@@ -147,6 +211,14 @@
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>WeeklyCalendar.png</key>
+		<data>
+		Cvx3Yr09b20qXhag/5uxwn12vyw=
+		</data>
+		<key>YearlyCalendar.png</key>
+		<data>
+		tByz1XYoYfeDiZadpCbtDLqGKw0=
 		</data>
 		<key>add.png</key>
 		<data>
@@ -187,6 +259,10 @@
 		<key>attendees_unPressed@2x.png</key>
 		<data>
 		T/ToAKTzy6xqBxV+FQUQmhHB338=
+		</data>
+		<key>blackCircle.png</key>
+		<data>
+		vhQesM7K9nuVKuXo1F84X9mDZ7M=
 		</data>
 		<key>calender.png</key>
 		<data>
@@ -286,7 +362,7 @@
 		</data>
 		<key>custom.strings</key>
 		<data>
-		M4v8HszOaX5tV6AXg3LTkkDcIFg=
+		GWA7mMsdyYYCIOwQn0xR4x+romk=
 		</data>
 		<key>dashboard.png</key>
 		<data>
@@ -327,6 +403,18 @@
 		<key>dates_and_times_pressed@2x.png</key>
 		<data>
 		tqsI5gMuLXEv4yGCZxb/+3YIibA=
+		</data>
+		<key>day.png</key>
+		<data>
+		MWTJPpNp5rHfiKQoIaO3RJ1d+Vo=
+		</data>
+		<key>day_clicked.png</key>
+		<data>
+		JcWlalwrR3XyiO6g4ASZX4S/gW4=
+		</data>
+		<key>day_clicked@2x.png</key>
+		<data>
+		ikf95K5oo2cyu4nw51URJbahJoE=
 		</data>
 		<key>delete.png</key>
 		<data>
@@ -512,6 +600,22 @@
 		<data>
 		DlxrCJBmgszRcdxjvSa/SvVk9zg=
 		</data>
+		<key>month.png</key>
+		<data>
+		qcK4QgQ8SzU5PstNnuaOtSqmT1A=
+		</data>
+		<key>month@2x.png</key>
+		<data>
+		vc8hoSkJnKVLx1xJYNZYsHocpYM=
+		</data>
+		<key>month_clicked.png</key>
+		<data>
+		Ph7bxZ/fW+t+aQNWeQwt4EM4UJI=
+		</data>
+		<key>month_clicked@2x.png</key>
+		<data>
+		omMXeUV0ZYlxDdjDJXi+Bv1FPrQ=
+		</data>
 		<key>radio_button_empty.png</key>
 		<data>
 		f/dShXMMCOtZJ9np0cKBFAqlPpE=
@@ -527,6 +631,10 @@
 		<key>radio_button_filled@2x.png</key>
 		<data>
 		0HlZvBd0ca7cec0427Jic9KaZpI=
+		</data>
+		<key>redCircle.png</key>
+		<data>
+		wiWaVKFE1zJ5abpGvV6UE3h+Fws=
 		</data>
 		<key>requests_Jobs@2x</key>
 		<data>
@@ -578,11 +686,11 @@
 		</data>
 		<key>selected.png</key>
 		<data>
-		kY/lwEgTJLBTbd0Fgr9EMjn5QNA=
+		BhPvvCSeBlnO7yjOkhHqM2XZd/s=
 		</data>
 		<key>selected@2x.png</key>
 		<data>
-		wV7AYiehaSvliG3BHtnFu2FkR8w=
+		SHV+IaIErZ7//wqBXCsrBrDFqv0=
 		</data>
 		<key>service_provider_hollow.png</key>
 		<data>
@@ -683,6 +791,22 @@
 		<key>view_pressed@2x.png</key>
 		<data>
 		Jz6JTYFBQivonF9kD9bwvxTf9jY=
+		</data>
+		<key>week.png</key>
+		<data>
+		SJXHtRZHJEm3fCptKO+tCdwlMSU=
+		</data>
+		<key>week@2x.png</key>
+		<data>
+		EYAYCeh7x1/9fFRPVFdC7yCGqJA=
+		</data>
+		<key>week_clicked.png</key>
+		<data>
+		zzTBiw9MRZfhwiDlC5Qo5nDxaWU=
+		</data>
+		<key>week_clicked@2x.png</key>
+		<data>
+		YgPTSD7aZKqQRuNhmyEsJoGLTD0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -713,99 +837,159 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		crF2Ay/NERES9dkK3l8jQTz2/R8=
+		RHUw1DV/YgOOiem9xQUDe9MK91E=
+		</data>
+		<key>DailyCalendar.png</key>
+		<data>
+		d3HbaPxq53u+hpHoKNBMdTC+uVQ=
+		</data>
+		<key>Day@2x.png</key>
+		<data>
+		OBxr/4DQUSwqOpMzDA/kffQ6U6E=
 		</data>
 		<key>GISAttendeesCell.nib</key>
 		<data>
-		BrDS6+UW1BgCkfDE6xe/ujEJJac=
+		Wdl84rnS/cenU6Uz5mm4dMZ1Jv8=
 		</data>
 		<key>GISAttendeesTopCell.nib</key>
 		<data>
-		1q0EYSmtzc5HCbf4r1/nCAWkUKI=
+		spJO/RUBoZNPAB+FJlrJOlsw3aU=
 		</data>
 		<key>GISAttendeesViewController.nib</key>
 		<data>
-		xEtd7lUEpyK4WOKH0Z2pYxSP1+Q=
+		E//vM0xMD370Tv8gjluHYkiUn1s=
 		</data>
 		<key>GISCommentCell.nib</key>
 		<data>
-		fpwvoUh2vMn0m03p4+6vO5+3qKA=
+		LP/y9xzvY+2u00q9o3UepsPnCmI=
 		</data>
 		<key>GISCommentViewController.nib</key>
 		<data>
-		FZ1zZHX90zwmg1NYH+4aIB9hmqw=
+		hXqa8Mc2nueaq2P8l/ZPRkppCfo=
 		</data>
 		<key>GISContactsAndBillingViewController.nib</key>
 		<data>
-		luPMdc2TNVeLxqTEUpnwbKIwx3Q=
+		03srAgiessu3UIWHJRickRkKfTo=
+		</data>
+		<key>GISCreateJobsCell.nib</key>
+		<data>
+		oiNrjFD8MIxNkGrkIFmGnpPN53A=
+		</data>
+		<key>GISCreateJobsViewController.nib</key>
+		<data>
+		ZoCXp1rJ/GToIb3GsnO+O626oko=
+		</data>
+		<key>GISCreateJobs_Cell.nib</key>
+		<data>
+		cN2u4t/3ZztN0I80dfCqS/E0HKY=
 		</data>
 		<key>GISDashBoardCell.nib</key>
 		<data>
-		F3yo/JAPzbFhGYQBJx53tKCOqxY=
+		qT4fC52b6f70C/RSPhVdG616E88=
 		</data>
 		<key>GISDashBoardListViewController.nib</key>
 		<data>
-		yr9qrSwIOA3Rw7EshyDZOeq/JFI=
+		+RH3R9eaVNsUcrXMCX2PPmBBfyE=
 		</data>
 		<key>GISDashBoardReqCell.nib</key>
 		<data>
-		BkSGt06x+gtyGNjbbhpPKHE7z7s=
+		m0mFAAVMMrOS/O0W+lE75SNCORQ=
 		</data>
 		<key>GISDashBoardSPCell.nib</key>
 		<data>
-		Xr/2B+CNYznMqpgpj3vmZnConzY=
+		fzyV+D4afttCXN7fi4qXii4DDf4=
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		WjV1GqdPJMmgJUsci8pdh8TOeXg=
+		TKj0EFAV0Z1vr4g2kDKKeBgUy5w=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
-		8faAdX25rJQGM+4FWYRRo0JLM6k=
+		2/0XGdr46F/UdvNGfn5Ar0ajzqk=
 		</data>
 		<key>GISDatesTimesDetailCell.nib</key>
 		<data>
-		3dLv3QUu1Tt4m53gQggJA33Oezk=
+		tEVFA3q/6z7oHE02Q2xvnUB1mAw=
 		</data>
 		<key>GISEventDetailsCell.nib</key>
 		<data>
-		OxJfOgfFTaWGwPRjVtBiKz8BKJ8=
+		q/ZlTlmXb8u4T5T+8bSMbam38U4=
 		</data>
 		<key>GISEventDetailsViewController.nib</key>
 		<data>
-		00hASQpuGr20CiLIqLtpxg/9p2I=
+		yL0wpfp8wzNIGrSV547TBJI8Rxg=
+		</data>
+		<key>GISJobAssignmentCell.nib</key>
+		<data>
+		r9KH+AIxahe4DuxruxahQ1SKwvg=
+		</data>
+		<key>GISJobAssignmentViewController.nib</key>
+		<data>
+		n2MvcWblKutgD+OViQcCfWgrFe4=
+		</data>
+		<key>GISJobDetailsCell.nib</key>
+		<data>
+		mT0df2vSzxXZqJIXsHkuFRt37pY=
 		</data>
 		<key>GISJobDetailsViewController.nib</key>
 		<data>
-		sHQAUQSLGz5UCWXg1Z1c0f2eIP0=
+		/fTTrVPLmV4Gs/r/HAXYI6OeGoA=
 		</data>
 		<key>GISLocationDetailsCell.nib</key>
 		<data>
-		NOeUyqxfbdQasgZi/vHafGLGT4o=
+		yYOiBuMasuZjs0JlKTz2rpXhO78=
 		</data>
 		<key>GISLocationDetailsViewController.nib</key>
 		<data>
-		J50EV/WAiwkUiEVwXHcZuwtqUgE=
+		koESAocpL7MtQNzKZ8T7c3Cb4KI=
 		</data>
 		<key>GISLocationOnCampusCell.nib</key>
 		<data>
-		s6J9j5r9VTKQmQYbiA5GV5eug4A=
+		yyFrLu3uZeLmQnuJmPQFDObNWtI=
 		</data>
 		<key>GISLoginViewController.nib</key>
 		<data>
-		ArF519C6z6XfnvEX0WpEXGL1Mr0=
+		vszatqKRMTZLWCDKSHvHXI7qotw=
 		</data>
 		<key>GISPopOverTableViewController.nib</key>
 		<data>
-		eEnnoC+AtUMgPcsN20UbfTMo/0I=
+		u2GeUXLNrEBrQtDPxFqrIyMC42Q=
 		</data>
 		<key>GISPreparationMaterialCell.nib</key>
 		<data>
-		Z006Tbs6iyV76fZsWI1n1CoHaFI=
+		ccJHtmEpgEvNiZtJE+Bheh/k6Q4=
+		</data>
+		<key>GISServiceProviderRequestedJobsViewController.nib</key>
+		<data>
+		d9PEFrH30hINkulaOFZ2I+h7PHY=
+		</data>
+		<key>GISSummaryAttendeesCell.nib</key>
+		<data>
+		b9zVFeRu6YoU6cSwzUJ47X9eoPs=
+		</data>
+		<key>GISSummaryCell.nib</key>
+		<data>
+		rABYN+jwx6ElZ5904JO7/jWQHGI=
+		</data>
+		<key>GISSummaryDatesAndTimesCell.nib</key>
+		<data>
+		Aq8x59Y+kHDNWPfzP9m+Bhd/TgY=
+		</data>
+		<key>GISSummaryDatesDetailViewCell.nib</key>
+		<data>
+		YDlT3qi8e6IHrpLJuLvCJwDgAzE=
+		</data>
+		<key>GISSummaryViewController.nib</key>
+		<data>
+		ucSoW+h71+hJsO5R5WhQQyEFUYs=
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		S0aDcIZ88sZ/1p408BGmixxxOds=
+		l+ixqOu8LWZxujlK2AgixIhjwGE=
+		</data>
+		<key>GISViewEditServiceViewController.nib</key>
+		<data>
+		uEr965JJxVc9iIpRF6kzMOucsk0=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -814,6 +998,10 @@
 		<key>Locationdetails@2x.png</key>
 		<data>
 		DxLoWSxeZ54TCq725jk2YkwLFmI=
+		</data>
+		<key>MonthlyCalendar.png</key>
+		<data>
+		lEAkTDNdca6XBa45fRP8ou7JcBc=
 		</data>
 		<key>MyriadPro-Bold.otf</key>
 		<data>
@@ -830,6 +1018,14 @@
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>WeeklyCalendar.png</key>
+		<data>
+		Cvx3Yr09b20qXhag/5uxwn12vyw=
+		</data>
+		<key>YearlyCalendar.png</key>
+		<data>
+		tByz1XYoYfeDiZadpCbtDLqGKw0=
 		</data>
 		<key>add.png</key>
 		<data>
@@ -870,6 +1066,10 @@
 		<key>attendees_unPressed@2x.png</key>
 		<data>
 		T/ToAKTzy6xqBxV+FQUQmhHB338=
+		</data>
+		<key>blackCircle.png</key>
+		<data>
+		vhQesM7K9nuVKuXo1F84X9mDZ7M=
 		</data>
 		<key>calender.png</key>
 		<data>
@@ -969,7 +1169,7 @@
 		</data>
 		<key>custom.strings</key>
 		<data>
-		M4v8HszOaX5tV6AXg3LTkkDcIFg=
+		GWA7mMsdyYYCIOwQn0xR4x+romk=
 		</data>
 		<key>dashboard.png</key>
 		<data>
@@ -1010,6 +1210,18 @@
 		<key>dates_and_times_pressed@2x.png</key>
 		<data>
 		tqsI5gMuLXEv4yGCZxb/+3YIibA=
+		</data>
+		<key>day.png</key>
+		<data>
+		MWTJPpNp5rHfiKQoIaO3RJ1d+Vo=
+		</data>
+		<key>day_clicked.png</key>
+		<data>
+		JcWlalwrR3XyiO6g4ASZX4S/gW4=
+		</data>
+		<key>day_clicked@2x.png</key>
+		<data>
+		ikf95K5oo2cyu4nw51URJbahJoE=
 		</data>
 		<key>delete.png</key>
 		<data>
@@ -1195,6 +1407,22 @@
 		<data>
 		DlxrCJBmgszRcdxjvSa/SvVk9zg=
 		</data>
+		<key>month.png</key>
+		<data>
+		qcK4QgQ8SzU5PstNnuaOtSqmT1A=
+		</data>
+		<key>month@2x.png</key>
+		<data>
+		vc8hoSkJnKVLx1xJYNZYsHocpYM=
+		</data>
+		<key>month_clicked.png</key>
+		<data>
+		Ph7bxZ/fW+t+aQNWeQwt4EM4UJI=
+		</data>
+		<key>month_clicked@2x.png</key>
+		<data>
+		omMXeUV0ZYlxDdjDJXi+Bv1FPrQ=
+		</data>
 		<key>radio_button_empty.png</key>
 		<data>
 		f/dShXMMCOtZJ9np0cKBFAqlPpE=
@@ -1210,6 +1438,10 @@
 		<key>radio_button_filled@2x.png</key>
 		<data>
 		0HlZvBd0ca7cec0427Jic9KaZpI=
+		</data>
+		<key>redCircle.png</key>
+		<data>
+		wiWaVKFE1zJ5abpGvV6UE3h+Fws=
 		</data>
 		<key>requests_Jobs@2x</key>
 		<data>
@@ -1261,11 +1493,11 @@
 		</data>
 		<key>selected.png</key>
 		<data>
-		kY/lwEgTJLBTbd0Fgr9EMjn5QNA=
+		BhPvvCSeBlnO7yjOkhHqM2XZd/s=
 		</data>
 		<key>selected@2x.png</key>
 		<data>
-		wV7AYiehaSvliG3BHtnFu2FkR8w=
+		SHV+IaIErZ7//wqBXCsrBrDFqv0=
 		</data>
 		<key>service_provider_hollow.png</key>
 		<data>
@@ -1366,6 +1598,22 @@
 		<key>view_pressed@2x.png</key>
 		<data>
 		Jz6JTYFBQivonF9kD9bwvxTf9jY=
+		</data>
+		<key>week.png</key>
+		<data>
+		SJXHtRZHJEm3fCptKO+tCdwlMSU=
+		</data>
+		<key>week@2x.png</key>
+		<data>
+		EYAYCeh7x1/9fFRPVFdC7yCGqJA=
+		</data>
+		<key>week_clicked.png</key>
+		<data>
+		zzTBiw9MRZfhwiDlC5Qo5nDxaWU=
+		</data>
+		<key>week_clicked@2x.png</key>
+		<data>
+		YgPTSD7aZKqQRuNhmyEsJoGLTD0=
 		</data>
 	</dict>
 	<key>rules</key>

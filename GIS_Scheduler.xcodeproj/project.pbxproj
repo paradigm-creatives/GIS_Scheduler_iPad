@@ -99,9 +99,92 @@
 		8AA83879198B8B63004B6C87 /* GISSchedulerSPJobsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA83878198B8B63004B6C87 /* GISSchedulerSPJobsStore.m */; };
 		8AA8387C198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA8387B198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m */; };
 		8AA8387F198BB545004B6C87 /* GISSchedulerNMRequestsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */; };
+		8AE7ECD819ADFB7F00E02258 /* GISViewEditServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */; };
+		8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */; };
+		8AE7ED7419AE082600E02258 /* FFDayCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECDE19AE082600E02258 /* FFDayCalendarView.m */; };
+		8AE7ED7519AE082600E02258 /* FFDayHeaderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECE219AE082600E02258 /* FFDayHeaderButton.m */; };
+		8AE7ED7619AE082600E02258 /* FFDayHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECE419AE082600E02258 /* FFDayHeaderCell.m */; };
+		8AE7ED7719AE082600E02258 /* FFDayHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECE619AE082600E02258 /* FFDayHeaderCollectionView.m */; };
+		8AE7ED7819AE082600E02258 /* FFDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECEB19AE082600E02258 /* FFDayCell.m */; };
+		8AE7ED7919AE082600E02258 /* FFDayCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECED19AE082600E02258 /* FFDayCollectionView.m */; };
+		8AE7ED7A19AE082600E02258 /* FFDayCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECEF19AE082600E02258 /* FFDayCollectionViewFlowLayout.m */; };
+		8AE7ED7B19AE082600E02258 /* FFDayScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECF119AE082600E02258 /* FFDayScrollView.m */; };
+		8AE7ED7C19AE082600E02258 /* FFMonthCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECF419AE082600E02258 /* FFMonthCalendarView.m */; };
+		8AE7ED7D19AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECF819AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */; };
+		8AE7ED7E19AE082600E02258 /* FFMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECFA19AE082600E02258 /* FFMonthCell.m */; };
+		8AE7ED7F19AE082600E02258 /* FFMonthCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECFC19AE082600E02258 /* FFMonthCollectionView.m */; };
+		8AE7ED8019AE082600E02258 /* FFMonthCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECFE19AE082600E02258 /* FFMonthCollectionViewFlowLayout.m */; };
+		8AE7ED8119AE082600E02258 /* FFMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0119AE082600E02258 /* FFMonthHeaderView.m */; };
+		8AE7ED8219AE082600E02258 /* FFWeekCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0419AE082600E02258 /* FFWeekCalendarView.m */; };
+		8AE7ED8319AE082600E02258 /* FFWeekHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0719AE082600E02258 /* FFWeekHeaderCell.m */; };
+		8AE7ED8419AE082600E02258 /* FFWeekHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0919AE082600E02258 /* FFWeekHeaderCollectionView.m */; };
+		8AE7ED8519AE082600E02258 /* FFHourAndMinLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0D19AE082600E02258 /* FFHourAndMinLabel.m */; };
+		8AE7ED8619AE082600E02258 /* FFViewWithHourLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED0F19AE082600E02258 /* FFViewWithHourLines.m */; };
+		8AE7ED8719AE082600E02258 /* FFWeekCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED1219AE082600E02258 /* FFWeekCell.m */; };
+		8AE7ED8819AE082600E02258 /* FFWeekCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED1419AE082600E02258 /* FFWeekCollectionView.m */; };
+		8AE7ED8919AE082600E02258 /* FFWeekCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED1619AE082600E02258 /* FFWeekCollectionViewFlowLayout.m */; };
+		8AE7ED8A19AE082600E02258 /* FFWeekScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED1819AE082600E02258 /* FFWeekScrollView.m */; };
+		8AE7ED8B19AE082600E02258 /* FFYearCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED1B19AE082600E02258 /* FFYearCalendarView.m */; };
+		8AE7ED8C19AE082600E02258 /* FFHeaderMonthForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2019AE082600E02258 /* FFHeaderMonthForYearCell.m */; };
+		8AE7ED8D19AE082600E02258 /* FFMonthCellForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2219AE082600E02258 /* FFMonthCellForYearCell.m */; };
+		8AE7ED8E19AE082600E02258 /* FFMonthCollectionViewForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2419AE082600E02258 /* FFMonthCollectionViewForYearCell.m */; };
+		8AE7ED8F19AE082600E02258 /* FFYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2619AE082600E02258 /* FFYearCell.m */; };
+		8AE7ED9019AE082600E02258 /* FFYearCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2819AE082600E02258 /* FFYearCollectionView.m */; };
+		8AE7ED9119AE082600E02258 /* FFYearCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2A19AE082600E02258 /* FFYearCollectionViewFlowLayout.m */; };
+		8AE7ED9219AE082600E02258 /* FFBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED2E19AE082600E02258 /* FFBlueButton.m */; };
+		8AE7ED9319AE082600E02258 /* FFRedAndWhiteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3019AE082600E02258 /* FFRedAndWhiteButton.m */; };
+		8AE7ED9419AE082600E02258 /* NSDate+FFDaysCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3319AE082600E02258 /* NSDate+FFDaysCount.m */; };
+		8AE7ED9519AE082600E02258 /* UIColor+FFMoreColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3519AE082600E02258 /* UIColor+FFMoreColors.m */; };
+		8AE7ED9619AE082600E02258 /* UIImage+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3719AE082600E02258 /* UIImage+FFCustomMethods.m */; };
+		8AE7ED9719AE082600E02258 /* UILabel+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3919AE082600E02258 /* UILabel+FFCustomMethods.m */; };
+		8AE7ED9819AE082600E02258 /* FFDateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED3D19AE082600E02258 /* FFDateManager.m */; };
+		8AE7ED9919AE082600E02258 /* FFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4019AE082600E02258 /* FFEvent.m */; };
+		8AE7ED9A19AE082600E02258 /* FFButtonWithDatePopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4519AE082600E02258 /* FFButtonWithDatePopover.m */; };
+		8AE7ED9B19AE082600E02258 /* FFDatePopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4719AE082600E02258 /* FFDatePopoverController.m */; };
+		8AE7ED9C19AE082600E02258 /* FFButtonWithHourPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4A19AE082600E02258 /* FFButtonWithHourPopover.m */; };
+		8AE7ED9D19AE082600E02258 /* FFHourPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4C19AE082600E02258 /* FFHourPopoverController.m */; };
+		8AE7ED9E19AE082600E02258 /* FFEditEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED4E19AE082600E02258 /* FFEditEventPopoverController.m */; };
+		8AE7ED9F19AE082600E02258 /* FFEditEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5019AE082600E02258 /* FFEditEventView.m */; };
+		8AE7EDA019AE082600E02258 /* FFGuestsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5319AE082600E02258 /* FFGuestsTableView.m */; };
+		8AE7EDA119AE082600E02258 /* FFGuestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5519AE082600E02258 /* FFGuestsTableViewCell.m */; };
+		8AE7EDA219AE082600E02258 /* FFSearchBarWithAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5819AE082600E02258 /* FFSearchBarWithAutoComplete.m */; };
+		8AE7EDA319AE082600E02258 /* FFEventDetailPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5B19AE082600E02258 /* FFEventDetailPopoverController.m */; };
+		8AE7EDA419AE082600E02258 /* FFEventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ED5D19AE082600E02258 /* FFEventDetailView.m */; };
+		8AE7EDA519AE082600E02258 /* blackCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6019AE082600E02258 /* blackCircle.png */; };
+		8AE7EDA619AE082600E02258 /* DailyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6119AE082600E02258 /* DailyCalendar.png */; };
+		8AE7EDA719AE082600E02258 /* day.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6219AE082600E02258 /* day.png */; };
+		8AE7EDA819AE082600E02258 /* Day@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6319AE082600E02258 /* Day@2x.png */; };
+		8AE7EDA919AE082600E02258 /* day_clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6419AE082600E02258 /* day_clicked.png */; };
+		8AE7EDAA19AE082600E02258 /* day_clicked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6519AE082600E02258 /* day_clicked@2x.png */; };
+		8AE7EDAB19AE082600E02258 /* month.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6619AE082600E02258 /* month.png */; };
+		8AE7EDAC19AE082600E02258 /* month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6719AE082600E02258 /* month@2x.png */; };
+		8AE7EDAD19AE082600E02258 /* month_clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6819AE082600E02258 /* month_clicked.png */; };
+		8AE7EDAE19AE082600E02258 /* month_clicked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6919AE082600E02258 /* month_clicked@2x.png */; };
+		8AE7EDAF19AE082600E02258 /* MonthlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6A19AE082600E02258 /* MonthlyCalendar.png */; };
+		8AE7EDB019AE082600E02258 /* redCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6B19AE082600E02258 /* redCircle.png */; };
+		8AE7EDB119AE082600E02258 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6C19AE082600E02258 /* selected.png */; };
+		8AE7EDB219AE082600E02258 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6D19AE082600E02258 /* selected@2x.png */; };
+		8AE7EDB319AE082600E02258 /* week.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6E19AE082600E02258 /* week.png */; };
+		8AE7EDB419AE082600E02258 /* week@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED6F19AE082600E02258 /* week@2x.png */; };
+		8AE7EDB519AE082600E02258 /* week_clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED7019AE082600E02258 /* week_clicked.png */; };
+		8AE7EDB619AE082600E02258 /* week_clicked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED7119AE082600E02258 /* week_clicked@2x.png */; };
+		8AE7EDB719AE082600E02258 /* WeeklyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED7219AE082600E02258 /* WeeklyCalendar.png */; };
+		8AE7EDB819AE082600E02258 /* YearlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ED7319AE082600E02258 /* YearlyCalendar.png */; };
+		8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */; };
 		8AE9B41A197E6308004D9157 /* dashboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE9B419197E6308004D9157 /* dashboard_pressed.png */; };
+		BA00413119C19E92003D7217 /* GISFilterMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA00412F19C19E92003D7217 /* GISFilterMoreViewController.m */; };
+		BA00413219C19E92003D7217 /* GISFilterMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */; };
 		BA00DF43199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */; };
 		BA00DF44199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */; };
+		BA0A156619BF124B00165C1A /* GISAddUpdateJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0A156419BF124B00165C1A /* GISAddUpdateJobsViewController.m */; };
+		BA0A156719BF124B00165C1A /* GISAddUpdateJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A156519BF124B00165C1A /* GISAddUpdateJobsViewController.xib */; };
+		BA0A156D19BF17D200165C1A /* GISAddUpdateJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0A156C19BF17D200165C1A /* GISAddUpdateJobCell.m */; };
+		BA0A156F19BF17E900165C1A /* GISJobInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A156E19BF17E900165C1A /* GISJobInfoCell.xib */; };
+		BA0A157119BF17FF00165C1A /* GISBillingPaymentInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A157019BF17FF00165C1A /* GISBillingPaymentInfo.xib */; };
+		BA0A157319BF181900165C1A /* GISNotesHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A157219BF181900165C1A /* GISNotesHistoryCell.xib */; };
+		BA0A157519BF182F00165C1A /* GISRequestServiceProvidersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A157419BF182F00165C1A /* GISRequestServiceProvidersCell.xib */; };
+		BA1BA29219B991780096CE1D /* GISFindReqJobs_ReqDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1BA29119B991780096CE1D /* GISFindReqJobs_ReqDataCell.m */; };
+		BA1BA29419B9BE020096CE1D /* GISFindReqJobs_ReqDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1BA29319B9BE020096CE1D /* GISFindReqJobs_ReqDataCell.xib */; };
 		BA1EF44C19A71A0E00D1219E /* GISJobAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1EF44A19A71A0E00D1219E /* GISJobAssignmentViewController.m */; };
 		BA1EF44D19A71A0E00D1219E /* GISJobAssignmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1EF44B19A71A0E00D1219E /* GISJobAssignmentViewController.xib */; };
 		BA21684A198F8523004CC301 /* GISDatesTimesDetailStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BA216849198F8523004CC301 /* GISDatesTimesDetailStore.m */; };
@@ -124,6 +207,9 @@
 		BA4224461978FEE900A4E283 /* GISDatesTimesDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4224451978FEE900A4E283 /* GISDatesTimesDetailCell.xib */; };
 		BA59EC411977EC530083864D /* GISDashBoardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA59EC3F1977EC530083864D /* GISDashBoardListViewController.m */; };
 		BA59EC421977EC530083864D /* GISDashBoardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA59EC401977EC530083864D /* GISDashBoardListViewController.xib */; };
+		BA5D30DF19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5D30DD19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m */; };
+		BA5D30E019C2F4A300726AD4 /* GISServiceProviderPopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA5D30DE19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.xib */; };
+		BA5D30E219C2F83300726AD4 /* GISServiceProviderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA5D30E119C2F83300726AD4 /* GISServiceProviderCell.xib */; };
 		BA694A4A1975306000AC8CCC /* GISContactsAndBillingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA694A481975306000AC8CCC /* GISContactsAndBillingViewController.m */; };
 		BA694A4B1975306000AC8CCC /* GISContactsAndBillingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA694A491975306000AC8CCC /* GISContactsAndBillingViewController.xib */; };
 		BA694A501975389D00AC8CCC /* GISDatesAndTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA694A4E1975389D00AC8CCC /* GISDatesAndTimesViewController.m */; };
@@ -131,7 +217,6 @@
 		BA7D6A031977EE720014C505 /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		BA88741B19A77359000676F4 /* GISJobAssignmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA88741919A77359000676F4 /* GISJobAssignmentCell.m */; };
 		BA88741C19A77359000676F4 /* GISJobAssignmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA88741A19A77359000676F4 /* GISJobAssignmentCell.xib */; };
-		BA8D0CB6198A272500143AA1 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */; };
 		BA8D0CB9198A674700143AA1 /* GISAttendeesDetailsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8D0CB8198A674700143AA1 /* GISAttendeesDetailsStore.m */; };
 		BA93BE0C197940A80097426C /* GISJobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93BE0A197940A80097426C /* GISJobDetailsViewController.m */; };
 		BA93BE0D197940A80097426C /* GISJobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA93BE0B197940A80097426C /* GISJobDetailsViewController.xib */; };
@@ -257,6 +342,7 @@
 		BA9E6B651977E88400609E69 /* view_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA9E6AE61977E88400609E69 /* view_pressed@2x.png */; };
 		BAB64AAD19A37100005296EE /* GISJobDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */; };
 		BAB64AB019A37230005296EE /* GISJobDetailsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */; };
+		BADD9B1819BDB085006DE6B8 /* GISFindReqJobs_JobDataToSearch_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADD9B1719BDB085006DE6B8 /* GISFindReqJobs_JobDataToSearch_Cell.xib */; };
 		BADFD998197CE5CB003033FD /* GISStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD990197CE5CB003033FD /* GISStoreManager.m */; };
 		BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */; };
 		BADFD9C8197CEFD8003033FD /* GISLoginDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9C7197CEFD8003033FD /* GISLoginDetailsObject.m */; };
@@ -274,6 +360,8 @@
 		BAFA6BEE19949E1F005FE5A1 /* GISCreateJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFA6BEC19949E1F005FE5A1 /* GISCreateJobsViewController.xib */; };
 		BAFA6BF119949E51005FE5A1 /* GISCreateJobsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFA6BF019949E51005FE5A1 /* GISCreateJobsCell.m */; };
 		BAFA6BF319949E6A005FE5A1 /* GISCreateJobsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFA6BF219949E6A005FE5A1 /* GISCreateJobsCell.xib */; };
+		BAFB26D519B87BEB003E45FC /* GISFindRequestJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB26D319B87BEB003E45FC /* GISFindRequestJobsViewController.m */; };
+		BAFB26D619B87BEB003E45FC /* GISFindRequestJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFB26D419B87BEB003E45FC /* GISFindRequestJobsViewController.xib */; };
 		BAFC81C01999EB750070D00D /* GISJobDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFC81BF1999EB750070D00D /* GISJobDetailsCell.m */; };
 		BAFC81C21999EB850070D00D /* GISJobDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFC81C11999EB850070D00D /* GISJobDetailsCell.xib */; };
 /* End PBXBuildFile section */
@@ -441,11 +529,151 @@
 		8AA8387B198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSchedulerNMRequestsStore.m; sourceTree = "<group>"; };
 		8AA8387D198BB545004B6C87 /* GISSchedulerNMRequestsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISSchedulerNMRequestsObject.h; sourceTree = "<group>"; };
 		8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSchedulerNMRequestsObject.m; sourceTree = "<group>"; };
+		8AE7ECD519ADFB7F00E02258 /* GISViewEditServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISViewEditServiceViewController.h; sourceTree = "<group>"; };
+		8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISViewEditServiceViewController.m; sourceTree = "<group>"; };
+		8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISViewEditServiceViewController.xib; sourceTree = "<group>"; };
+		8AE7ECDB19AE082600E02258 /* FFCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCalendar.h; sourceTree = "<group>"; };
+		8AE7ECDD19AE082600E02258 /* FFDayCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCalendarView.h; sourceTree = "<group>"; };
+		8AE7ECDE19AE082600E02258 /* FFDayCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCalendarView.m; sourceTree = "<group>"; };
+		8AE7ECE119AE082600E02258 /* FFDayHeaderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderButton.h; sourceTree = "<group>"; };
+		8AE7ECE219AE082600E02258 /* FFDayHeaderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderButton.m; sourceTree = "<group>"; };
+		8AE7ECE319AE082600E02258 /* FFDayHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCell.h; sourceTree = "<group>"; };
+		8AE7ECE419AE082600E02258 /* FFDayHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCell.m; sourceTree = "<group>"; };
+		8AE7ECE519AE082600E02258 /* FFDayHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCollectionView.h; sourceTree = "<group>"; };
+		8AE7ECE619AE082600E02258 /* FFDayHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCollectionView.m; sourceTree = "<group>"; };
+		8AE7ECEA19AE082600E02258 /* FFDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCell.h; sourceTree = "<group>"; };
+		8AE7ECEB19AE082600E02258 /* FFDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCell.m; sourceTree = "<group>"; };
+		8AE7ECEC19AE082600E02258 /* FFDayCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionView.h; sourceTree = "<group>"; };
+		8AE7ECED19AE082600E02258 /* FFDayCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionView.m; sourceTree = "<group>"; };
+		8AE7ECEE19AE082600E02258 /* FFDayCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		8AE7ECEF19AE082600E02258 /* FFDayCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		8AE7ECF019AE082600E02258 /* FFDayScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayScrollView.h; sourceTree = "<group>"; };
+		8AE7ECF119AE082600E02258 /* FFDayScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayScrollView.m; sourceTree = "<group>"; };
+		8AE7ECF319AE082600E02258 /* FFMonthCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCalendarView.h; sourceTree = "<group>"; };
+		8AE7ECF419AE082600E02258 /* FFMonthCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCalendarView.m; sourceTree = "<group>"; };
+		8AE7ECF719AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithEditAndDetailPopoversForMonthCell.h; sourceTree = "<group>"; };
+		8AE7ECF819AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithEditAndDetailPopoversForMonthCell.m; sourceTree = "<group>"; };
+		8AE7ECF919AE082600E02258 /* FFMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCell.h; sourceTree = "<group>"; };
+		8AE7ECFA19AE082600E02258 /* FFMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCell.m; sourceTree = "<group>"; };
+		8AE7ECFB19AE082600E02258 /* FFMonthCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionView.h; sourceTree = "<group>"; };
+		8AE7ECFC19AE082600E02258 /* FFMonthCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionView.m; sourceTree = "<group>"; };
+		8AE7ECFD19AE082600E02258 /* FFMonthCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		8AE7ECFE19AE082600E02258 /* FFMonthCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		8AE7ED0019AE082600E02258 /* FFMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthHeaderView.h; sourceTree = "<group>"; };
+		8AE7ED0119AE082600E02258 /* FFMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthHeaderView.m; sourceTree = "<group>"; };
+		8AE7ED0319AE082600E02258 /* FFWeekCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCalendarView.h; sourceTree = "<group>"; };
+		8AE7ED0419AE082600E02258 /* FFWeekCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCalendarView.m; sourceTree = "<group>"; };
+		8AE7ED0619AE082600E02258 /* FFWeekHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCell.h; sourceTree = "<group>"; };
+		8AE7ED0719AE082600E02258 /* FFWeekHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCell.m; sourceTree = "<group>"; };
+		8AE7ED0819AE082600E02258 /* FFWeekHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCollectionView.h; sourceTree = "<group>"; };
+		8AE7ED0919AE082600E02258 /* FFWeekHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCollectionView.m; sourceTree = "<group>"; };
+		8AE7ED0C19AE082600E02258 /* FFHourAndMinLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourAndMinLabel.h; sourceTree = "<group>"; };
+		8AE7ED0D19AE082600E02258 /* FFHourAndMinLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourAndMinLabel.m; sourceTree = "<group>"; };
+		8AE7ED0E19AE082600E02258 /* FFViewWithHourLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFViewWithHourLines.h; sourceTree = "<group>"; };
+		8AE7ED0F19AE082600E02258 /* FFViewWithHourLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFViewWithHourLines.m; sourceTree = "<group>"; };
+		8AE7ED1119AE082600E02258 /* FFWeekCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCell.h; sourceTree = "<group>"; };
+		8AE7ED1219AE082600E02258 /* FFWeekCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCell.m; sourceTree = "<group>"; };
+		8AE7ED1319AE082600E02258 /* FFWeekCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionView.h; sourceTree = "<group>"; };
+		8AE7ED1419AE082600E02258 /* FFWeekCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionView.m; sourceTree = "<group>"; };
+		8AE7ED1519AE082600E02258 /* FFWeekCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		8AE7ED1619AE082600E02258 /* FFWeekCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		8AE7ED1719AE082600E02258 /* FFWeekScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekScrollView.h; sourceTree = "<group>"; };
+		8AE7ED1819AE082600E02258 /* FFWeekScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekScrollView.m; sourceTree = "<group>"; };
+		8AE7ED1A19AE082600E02258 /* FFYearCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCalendarView.h; sourceTree = "<group>"; };
+		8AE7ED1B19AE082600E02258 /* FFYearCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCalendarView.m; sourceTree = "<group>"; };
+		8AE7ED1F19AE082600E02258 /* FFHeaderMonthForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHeaderMonthForYearCell.h; sourceTree = "<group>"; };
+		8AE7ED2019AE082600E02258 /* FFHeaderMonthForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHeaderMonthForYearCell.m; sourceTree = "<group>"; };
+		8AE7ED2119AE082600E02258 /* FFMonthCellForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCellForYearCell.h; sourceTree = "<group>"; };
+		8AE7ED2219AE082600E02258 /* FFMonthCellForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCellForYearCell.m; sourceTree = "<group>"; };
+		8AE7ED2319AE082600E02258 /* FFMonthCollectionViewForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewForYearCell.h; sourceTree = "<group>"; };
+		8AE7ED2419AE082600E02258 /* FFMonthCollectionViewForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewForYearCell.m; sourceTree = "<group>"; };
+		8AE7ED2519AE082600E02258 /* FFYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCell.h; sourceTree = "<group>"; };
+		8AE7ED2619AE082600E02258 /* FFYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCell.m; sourceTree = "<group>"; };
+		8AE7ED2719AE082600E02258 /* FFYearCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionView.h; sourceTree = "<group>"; };
+		8AE7ED2819AE082600E02258 /* FFYearCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionView.m; sourceTree = "<group>"; };
+		8AE7ED2919AE082600E02258 /* FFYearCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		8AE7ED2A19AE082600E02258 /* FFYearCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		8AE7ED2D19AE082600E02258 /* FFBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBlueButton.h; sourceTree = "<group>"; };
+		8AE7ED2E19AE082600E02258 /* FFBlueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBlueButton.m; sourceTree = "<group>"; };
+		8AE7ED2F19AE082600E02258 /* FFRedAndWhiteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFRedAndWhiteButton.h; sourceTree = "<group>"; };
+		8AE7ED3019AE082600E02258 /* FFRedAndWhiteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFRedAndWhiteButton.m; sourceTree = "<group>"; };
+		8AE7ED3219AE082600E02258 /* NSDate+FFDaysCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FFDaysCount.h"; sourceTree = "<group>"; };
+		8AE7ED3319AE082600E02258 /* NSDate+FFDaysCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FFDaysCount.m"; sourceTree = "<group>"; };
+		8AE7ED3419AE082600E02258 /* UIColor+FFMoreColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FFMoreColors.h"; sourceTree = "<group>"; };
+		8AE7ED3519AE082600E02258 /* UIColor+FFMoreColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FFMoreColors.m"; sourceTree = "<group>"; };
+		8AE7ED3619AE082600E02258 /* UIImage+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FFCustomMethods.h"; sourceTree = "<group>"; };
+		8AE7ED3719AE082600E02258 /* UIImage+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FFCustomMethods.m"; sourceTree = "<group>"; };
+		8AE7ED3819AE082600E02258 /* UILabel+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FFCustomMethods.h"; sourceTree = "<group>"; };
+		8AE7ED3919AE082600E02258 /* UILabel+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FFCustomMethods.m"; sourceTree = "<group>"; };
+		8AE7ED3A19AE082600E02258 /* FFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFConstants.h; sourceTree = "<group>"; };
+		8AE7ED3C19AE082600E02258 /* FFDateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDateManager.h; sourceTree = "<group>"; };
+		8AE7ED3D19AE082600E02258 /* FFDateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDateManager.m; sourceTree = "<group>"; };
+		8AE7ED3F19AE082600E02258 /* FFEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEvent.h; sourceTree = "<group>"; };
+		8AE7ED4019AE082600E02258 /* FFEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEvent.m; sourceTree = "<group>"; };
+		8AE7ED4419AE082600E02258 /* FFButtonWithDatePopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithDatePopover.h; sourceTree = "<group>"; };
+		8AE7ED4519AE082600E02258 /* FFButtonWithDatePopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithDatePopover.m; sourceTree = "<group>"; };
+		8AE7ED4619AE082600E02258 /* FFDatePopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDatePopoverController.h; sourceTree = "<group>"; };
+		8AE7ED4719AE082600E02258 /* FFDatePopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDatePopoverController.m; sourceTree = "<group>"; };
+		8AE7ED4919AE082600E02258 /* FFButtonWithHourPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithHourPopover.h; sourceTree = "<group>"; };
+		8AE7ED4A19AE082600E02258 /* FFButtonWithHourPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithHourPopover.m; sourceTree = "<group>"; };
+		8AE7ED4B19AE082600E02258 /* FFHourPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourPopoverController.h; sourceTree = "<group>"; };
+		8AE7ED4C19AE082600E02258 /* FFHourPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourPopoverController.m; sourceTree = "<group>"; };
+		8AE7ED4D19AE082600E02258 /* FFEditEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventPopoverController.h; sourceTree = "<group>"; };
+		8AE7ED4E19AE082600E02258 /* FFEditEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventPopoverController.m; sourceTree = "<group>"; };
+		8AE7ED4F19AE082600E02258 /* FFEditEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventView.h; sourceTree = "<group>"; };
+		8AE7ED5019AE082600E02258 /* FFEditEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventView.m; sourceTree = "<group>"; };
+		8AE7ED5219AE082600E02258 /* FFGuestsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableView.h; sourceTree = "<group>"; };
+		8AE7ED5319AE082600E02258 /* FFGuestsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableView.m; sourceTree = "<group>"; };
+		8AE7ED5419AE082600E02258 /* FFGuestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableViewCell.h; sourceTree = "<group>"; };
+		8AE7ED5519AE082600E02258 /* FFGuestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableViewCell.m; sourceTree = "<group>"; };
+		8AE7ED5719AE082600E02258 /* FFSearchBarWithAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFSearchBarWithAutoComplete.h; sourceTree = "<group>"; };
+		8AE7ED5819AE082600E02258 /* FFSearchBarWithAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFSearchBarWithAutoComplete.m; sourceTree = "<group>"; };
+		8AE7ED5A19AE082600E02258 /* FFEventDetailPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailPopoverController.h; sourceTree = "<group>"; };
+		8AE7ED5B19AE082600E02258 /* FFEventDetailPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailPopoverController.m; sourceTree = "<group>"; };
+		8AE7ED5C19AE082600E02258 /* FFEventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailView.h; sourceTree = "<group>"; };
+		8AE7ED5D19AE082600E02258 /* FFEventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailView.m; sourceTree = "<group>"; };
+		8AE7ED5E19AE082600E02258 /* FFImportantFilesForCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFImportantFilesForCalendar.h; sourceTree = "<group>"; };
+		8AE7ED6019AE082600E02258 /* blackCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackCircle.png; sourceTree = "<group>"; };
+		8AE7ED6119AE082600E02258 /* DailyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DailyCalendar.png; sourceTree = "<group>"; };
+		8AE7ED6219AE082600E02258 /* day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day.png; sourceTree = "<group>"; };
+		8AE7ED6319AE082600E02258 /* Day@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Day@2x.png"; sourceTree = "<group>"; };
+		8AE7ED6419AE082600E02258 /* day_clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = day_clicked.png; sourceTree = "<group>"; };
+		8AE7ED6519AE082600E02258 /* day_clicked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "day_clicked@2x.png"; sourceTree = "<group>"; };
+		8AE7ED6619AE082600E02258 /* month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = month.png; sourceTree = "<group>"; };
+		8AE7ED6719AE082600E02258 /* month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "month@2x.png"; sourceTree = "<group>"; };
+		8AE7ED6819AE082600E02258 /* month_clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = month_clicked.png; sourceTree = "<group>"; };
+		8AE7ED6919AE082600E02258 /* month_clicked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "month_clicked@2x.png"; sourceTree = "<group>"; };
+		8AE7ED6A19AE082600E02258 /* MonthlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MonthlyCalendar.png; sourceTree = "<group>"; };
+		8AE7ED6B19AE082600E02258 /* redCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle.png; sourceTree = "<group>"; };
+		8AE7ED6C19AE082600E02258 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		8AE7ED6D19AE082600E02258 /* selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected@2x.png"; sourceTree = "<group>"; };
+		8AE7ED6E19AE082600E02258 /* week.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = week.png; sourceTree = "<group>"; };
+		8AE7ED6F19AE082600E02258 /* week@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "week@2x.png"; sourceTree = "<group>"; };
+		8AE7ED7019AE082600E02258 /* week_clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = week_clicked.png; sourceTree = "<group>"; };
+		8AE7ED7119AE082600E02258 /* week_clicked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "week_clicked@2x.png"; sourceTree = "<group>"; };
+		8AE7ED7219AE082600E02258 /* WeeklyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeeklyCalendar.png; sourceTree = "<group>"; };
+		8AE7ED7319AE082600E02258 /* YearlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YearlyCalendar.png; sourceTree = "<group>"; };
+		8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GISVIewEditRequestViewController.xib; path = ../PopOverViewController/GISVIewEditRequestViewController.xib; sourceTree = "<group>"; };
 		8AE9B419197E6308004D9157 /* dashboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard_pressed.png; sourceTree = "<group>"; };
+		BA00412E19C19E92003D7217 /* GISFilterMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISFilterMoreViewController.h; sourceTree = "<group>"; };
+		BA00412F19C19E92003D7217 /* GISFilterMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISFilterMoreViewController.m; sourceTree = "<group>"; };
+		BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISFilterMoreViewController.xib; sourceTree = "<group>"; };
 		BA00DF40199C875C006057AD /* GISServiceProviderRequestedJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GISServiceProviderRequestedJobsViewController.h; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.h; sourceTree = "<group>"; };
 		BA00DF41199C875C006057AD /* GISServiceProviderRequestedJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GISServiceProviderRequestedJobsViewController.m; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.m; sourceTree = "<group>"; };
 		BA00DF42199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GISServiceProviderRequestedJobsViewController.xib; path = ../AppDelegate/GISServiceProviderRequestedJobsViewController.xib; sourceTree = "<group>"; };
 		BA05F308199B6452002E6859 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BA0A156319BF124B00165C1A /* GISAddUpdateJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISAddUpdateJobsViewController.h; sourceTree = "<group>"; };
+		BA0A156419BF124B00165C1A /* GISAddUpdateJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISAddUpdateJobsViewController.m; sourceTree = "<group>"; };
+		BA0A156519BF124B00165C1A /* GISAddUpdateJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISAddUpdateJobsViewController.xib; sourceTree = "<group>"; };
+		BA0A156B19BF17D200165C1A /* GISAddUpdateJobCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISAddUpdateJobCell.h; sourceTree = "<group>"; };
+		BA0A156C19BF17D200165C1A /* GISAddUpdateJobCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISAddUpdateJobCell.m; sourceTree = "<group>"; };
+		BA0A156E19BF17E900165C1A /* GISJobInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobInfoCell.xib; sourceTree = "<group>"; };
+		BA0A157019BF17FF00165C1A /* GISBillingPaymentInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISBillingPaymentInfo.xib; sourceTree = "<group>"; };
+		BA0A157219BF181900165C1A /* GISNotesHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISNotesHistoryCell.xib; sourceTree = "<group>"; };
+		BA0A157419BF182F00165C1A /* GISRequestServiceProvidersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISRequestServiceProvidersCell.xib; sourceTree = "<group>"; };
+		BA1BA29019B991780096CE1D /* GISFindReqJobs_ReqDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISFindReqJobs_ReqDataCell.h; sourceTree = "<group>"; };
+		BA1BA29119B991780096CE1D /* GISFindReqJobs_ReqDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISFindReqJobs_ReqDataCell.m; sourceTree = "<group>"; };
+		BA1BA29319B9BE020096CE1D /* GISFindReqJobs_ReqDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISFindReqJobs_ReqDataCell.xib; sourceTree = "<group>"; };
 		BA1EF44919A71A0E00D1219E /* GISJobAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobAssignmentViewController.h; sourceTree = "<group>"; };
 		BA1EF44A19A71A0E00D1219E /* GISJobAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobAssignmentViewController.m; sourceTree = "<group>"; };
 		BA1EF44B19A71A0E00D1219E /* GISJobAssignmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobAssignmentViewController.xib; sourceTree = "<group>"; };
@@ -480,6 +708,10 @@
 		BA59EC3E1977EC530083864D /* GISDashBoardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDashBoardListViewController.h; sourceTree = "<group>"; };
 		BA59EC3F1977EC530083864D /* GISDashBoardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDashBoardListViewController.m; sourceTree = "<group>"; };
 		BA59EC401977EC530083864D /* GISDashBoardListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDashBoardListViewController.xib; sourceTree = "<group>"; };
+		BA5D30DC19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderPopUpViewController.h; sourceTree = "<group>"; };
+		BA5D30DD19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderPopUpViewController.m; sourceTree = "<group>"; };
+		BA5D30DE19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISServiceProviderPopUpViewController.xib; sourceTree = "<group>"; };
+		BA5D30E119C2F83300726AD4 /* GISServiceProviderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISServiceProviderCell.xib; sourceTree = "<group>"; };
 		BA694A471975306000AC8CCC /* GISContactsAndBillingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISContactsAndBillingViewController.h; sourceTree = "<group>"; };
 		BA694A481975306000AC8CCC /* GISContactsAndBillingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISContactsAndBillingViewController.m; sourceTree = "<group>"; };
 		BA694A491975306000AC8CCC /* GISContactsAndBillingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISContactsAndBillingViewController.xib; sourceTree = "<group>"; };
@@ -489,7 +721,6 @@
 		BA88741819A77359000676F4 /* GISJobAssignmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobAssignmentCell.h; sourceTree = "<group>"; };
 		BA88741919A77359000676F4 /* GISJobAssignmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobAssignmentCell.m; sourceTree = "<group>"; };
 		BA88741A19A77359000676F4 /* GISJobAssignmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobAssignmentCell.xib; sourceTree = "<group>"; };
-		BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISVIewEditRequestViewController.xib; sourceTree = "<group>"; };
 		BA8D0CB7198A674700143AA1 /* GISAttendeesDetailsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISAttendeesDetailsStore.h; sourceTree = "<group>"; };
 		BA8D0CB8198A674700143AA1 /* GISAttendeesDetailsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISAttendeesDetailsStore.m; sourceTree = "<group>"; };
 		BA93BE09197940A80097426C /* GISJobDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsViewController.h; sourceTree = "<group>"; };
@@ -623,6 +854,7 @@
 		BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsObject.m; sourceTree = "<group>"; };
 		BAB64AAE19A37230005296EE /* GISJobDetailsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsStore.h; sourceTree = "<group>"; };
 		BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsStore.m; sourceTree = "<group>"; };
+		BADD9B1719BDB085006DE6B8 /* GISFindReqJobs_JobDataToSearch_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GISFindReqJobs_JobDataToSearch_Cell.xib; path = ../DatesAndTimes/GISFindReqJobs_JobDataToSearch_Cell.xib; sourceTree = "<group>"; };
 		BADFD98F197CE5CB003033FD /* GISStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISStoreManager.h; sourceTree = "<group>"; };
 		BADFD990197CE5CB003033FD /* GISStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISStoreManager.m; sourceTree = "<group>"; };
 		BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -648,6 +880,9 @@
 		BAFA6BEF19949E51005FE5A1 /* GISCreateJobsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISCreateJobsCell.h; sourceTree = "<group>"; };
 		BAFA6BF019949E51005FE5A1 /* GISCreateJobsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISCreateJobsCell.m; sourceTree = "<group>"; };
 		BAFA6BF219949E6A005FE5A1 /* GISCreateJobsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISCreateJobsCell.xib; sourceTree = "<group>"; };
+		BAFB26D219B87BEB003E45FC /* GISFindRequestJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISFindRequestJobsViewController.h; sourceTree = "<group>"; };
+		BAFB26D319B87BEB003E45FC /* GISFindRequestJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISFindRequestJobsViewController.m; sourceTree = "<group>"; };
+		BAFB26D419B87BEB003E45FC /* GISFindRequestJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISFindRequestJobsViewController.xib; sourceTree = "<group>"; };
 		BAFC81BE1999EB750070D00D /* GISJobDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobDetailsCell.h; sourceTree = "<group>"; };
 		BAFC81BF1999EB750070D00D /* GISJobDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobDetailsCell.m; sourceTree = "<group>"; };
 		BAFC81C11999EB850070D00D /* GISJobDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobDetailsCell.xib; sourceTree = "<group>"; };
@@ -835,7 +1070,7 @@
 				BAE081F8197FD9900056B3B8 /* PopOverViewController */,
 				8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */,
 				8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */,
-				BA8D0CB5198A272500143AA1 /* GISVIewEditRequestViewController.xib */,
+				8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */,
 			);
 			path = "View Edit Request";
 			sourceTree = "<group>";
@@ -942,9 +1177,411 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		8AE7ECD419ADF97100E02258 /* View Edit Service */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECDA19AE082600E02258 /* FFCalendars */,
+				8AE7ECD519ADFB7F00E02258 /* GISViewEditServiceViewController.h */,
+				8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */,
+				8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */,
+			);
+			path = "View Edit Service";
+			sourceTree = "<group>";
+		};
+		8AE7ECDA19AE082600E02258 /* FFCalendars */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECDB19AE082600E02258 /* FFCalendar.h */,
+				8AE7ECDC19AE082600E02258 /* FFDayCalendarView */,
+				8AE7ECF219AE082600E02258 /* FFMonthCalendarView */,
+				8AE7ED0219AE082600E02258 /* FFWeekCalendarView */,
+				8AE7ED1919AE082600E02258 /* FFYearCalendarView */,
+				8AE7ED2B19AE082600E02258 /* Util */,
+			);
+			path = FFCalendars;
+			sourceTree = "<group>";
+		};
+		8AE7ECDC19AE082600E02258 /* FFDayCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECDD19AE082600E02258 /* FFDayCalendarView.h */,
+				8AE7ECDE19AE082600E02258 /* FFDayCalendarView.m */,
+				8AE7ECDF19AE082600E02258 /* FFDayHeaderCollectionView */,
+				8AE7ECE719AE082600E02258 /* FFDayScrollView */,
+			);
+			path = FFDayCalendarView;
+			sourceTree = "<group>";
+		};
+		8AE7ECDF19AE082600E02258 /* FFDayHeaderCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECE019AE082600E02258 /* FFDayHeaderCell */,
+				8AE7ECE519AE082600E02258 /* FFDayHeaderCollectionView.h */,
+				8AE7ECE619AE082600E02258 /* FFDayHeaderCollectionView.m */,
+			);
+			path = FFDayHeaderCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ECE019AE082600E02258 /* FFDayHeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECE119AE082600E02258 /* FFDayHeaderButton.h */,
+				8AE7ECE219AE082600E02258 /* FFDayHeaderButton.m */,
+				8AE7ECE319AE082600E02258 /* FFDayHeaderCell.h */,
+				8AE7ECE419AE082600E02258 /* FFDayHeaderCell.m */,
+			);
+			path = FFDayHeaderCell;
+			sourceTree = "<group>";
+		};
+		8AE7ECE719AE082600E02258 /* FFDayScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECE819AE082600E02258 /* FFDayCollectionView */,
+				8AE7ECF019AE082600E02258 /* FFDayScrollView.h */,
+				8AE7ECF119AE082600E02258 /* FFDayScrollView.m */,
+			);
+			path = FFDayScrollView;
+			sourceTree = "<group>";
+		};
+		8AE7ECE819AE082600E02258 /* FFDayCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECE919AE082600E02258 /* FFDayCell */,
+				8AE7ECEC19AE082600E02258 /* FFDayCollectionView.h */,
+				8AE7ECED19AE082600E02258 /* FFDayCollectionView.m */,
+				8AE7ECEE19AE082600E02258 /* FFDayCollectionViewFlowLayout.h */,
+				8AE7ECEF19AE082600E02258 /* FFDayCollectionViewFlowLayout.m */,
+			);
+			path = FFDayCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ECE919AE082600E02258 /* FFDayCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECEA19AE082600E02258 /* FFDayCell.h */,
+				8AE7ECEB19AE082600E02258 /* FFDayCell.m */,
+			);
+			path = FFDayCell;
+			sourceTree = "<group>";
+		};
+		8AE7ECF219AE082600E02258 /* FFMonthCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECF319AE082600E02258 /* FFMonthCalendarView.h */,
+				8AE7ECF419AE082600E02258 /* FFMonthCalendarView.m */,
+				8AE7ECF519AE082600E02258 /* FFMonthCollectionView */,
+				8AE7ECFF19AE082600E02258 /* FFMonthHeaderView */,
+			);
+			path = FFMonthCalendarView;
+			sourceTree = "<group>";
+		};
+		8AE7ECF519AE082600E02258 /* FFMonthCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECF619AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell */,
+				8AE7ECF919AE082600E02258 /* FFMonthCell.h */,
+				8AE7ECFA19AE082600E02258 /* FFMonthCell.m */,
+				8AE7ECFB19AE082600E02258 /* FFMonthCollectionView.h */,
+				8AE7ECFC19AE082600E02258 /* FFMonthCollectionView.m */,
+				8AE7ECFD19AE082600E02258 /* FFMonthCollectionViewFlowLayout.h */,
+				8AE7ECFE19AE082600E02258 /* FFMonthCollectionViewFlowLayout.m */,
+			);
+			path = FFMonthCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ECF619AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ECF719AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */,
+				8AE7ECF819AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */,
+			);
+			path = FFButtonWithEditAndDetailPopoversForMonthCell;
+			sourceTree = "<group>";
+		};
+		8AE7ECFF19AE082600E02258 /* FFMonthHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED0019AE082600E02258 /* FFMonthHeaderView.h */,
+				8AE7ED0119AE082600E02258 /* FFMonthHeaderView.m */,
+			);
+			path = FFMonthHeaderView;
+			sourceTree = "<group>";
+		};
+		8AE7ED0219AE082600E02258 /* FFWeekCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED0319AE082600E02258 /* FFWeekCalendarView.h */,
+				8AE7ED0419AE082600E02258 /* FFWeekCalendarView.m */,
+				8AE7ED0519AE082600E02258 /* FFWeekHeaderCollectionView */,
+				8AE7ED0A19AE082600E02258 /* FFWeekScrollView */,
+			);
+			path = FFWeekCalendarView;
+			sourceTree = "<group>";
+		};
+		8AE7ED0519AE082600E02258 /* FFWeekHeaderCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED0619AE082600E02258 /* FFWeekHeaderCell.h */,
+				8AE7ED0719AE082600E02258 /* FFWeekHeaderCell.m */,
+				8AE7ED0819AE082600E02258 /* FFWeekHeaderCollectionView.h */,
+				8AE7ED0919AE082600E02258 /* FFWeekHeaderCollectionView.m */,
+			);
+			path = FFWeekHeaderCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ED0A19AE082600E02258 /* FFWeekScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED0B19AE082600E02258 /* FFViewWithHourLines */,
+				8AE7ED1019AE082600E02258 /* FFWeekCollectionView */,
+				8AE7ED1719AE082600E02258 /* FFWeekScrollView.h */,
+				8AE7ED1819AE082600E02258 /* FFWeekScrollView.m */,
+			);
+			path = FFWeekScrollView;
+			sourceTree = "<group>";
+		};
+		8AE7ED0B19AE082600E02258 /* FFViewWithHourLines */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED0C19AE082600E02258 /* FFHourAndMinLabel.h */,
+				8AE7ED0D19AE082600E02258 /* FFHourAndMinLabel.m */,
+				8AE7ED0E19AE082600E02258 /* FFViewWithHourLines.h */,
+				8AE7ED0F19AE082600E02258 /* FFViewWithHourLines.m */,
+			);
+			path = FFViewWithHourLines;
+			sourceTree = "<group>";
+		};
+		8AE7ED1019AE082600E02258 /* FFWeekCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED1119AE082600E02258 /* FFWeekCell.h */,
+				8AE7ED1219AE082600E02258 /* FFWeekCell.m */,
+				8AE7ED1319AE082600E02258 /* FFWeekCollectionView.h */,
+				8AE7ED1419AE082600E02258 /* FFWeekCollectionView.m */,
+				8AE7ED1519AE082600E02258 /* FFWeekCollectionViewFlowLayout.h */,
+				8AE7ED1619AE082600E02258 /* FFWeekCollectionViewFlowLayout.m */,
+			);
+			path = FFWeekCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ED1919AE082600E02258 /* FFYearCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED1A19AE082600E02258 /* FFYearCalendarView.h */,
+				8AE7ED1B19AE082600E02258 /* FFYearCalendarView.m */,
+				8AE7ED1C19AE082600E02258 /* FFYearCollectionView */,
+			);
+			path = FFYearCalendarView;
+			sourceTree = "<group>";
+		};
+		8AE7ED1C19AE082600E02258 /* FFYearCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED1D19AE082600E02258 /* FFYearCell */,
+				8AE7ED2719AE082600E02258 /* FFYearCollectionView.h */,
+				8AE7ED2819AE082600E02258 /* FFYearCollectionView.m */,
+				8AE7ED2919AE082600E02258 /* FFYearCollectionViewFlowLayout.h */,
+				8AE7ED2A19AE082600E02258 /* FFYearCollectionViewFlowLayout.m */,
+			);
+			path = FFYearCollectionView;
+			sourceTree = "<group>";
+		};
+		8AE7ED1D19AE082600E02258 /* FFYearCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED1E19AE082600E02258 /* FFMonthCollectionViewForYearCell */,
+				8AE7ED2519AE082600E02258 /* FFYearCell.h */,
+				8AE7ED2619AE082600E02258 /* FFYearCell.m */,
+			);
+			path = FFYearCell;
+			sourceTree = "<group>";
+		};
+		8AE7ED1E19AE082600E02258 /* FFMonthCollectionViewForYearCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED1F19AE082600E02258 /* FFHeaderMonthForYearCell.h */,
+				8AE7ED2019AE082600E02258 /* FFHeaderMonthForYearCell.m */,
+				8AE7ED2119AE082600E02258 /* FFMonthCellForYearCell.h */,
+				8AE7ED2219AE082600E02258 /* FFMonthCellForYearCell.m */,
+				8AE7ED2319AE082600E02258 /* FFMonthCollectionViewForYearCell.h */,
+				8AE7ED2419AE082600E02258 /* FFMonthCollectionViewForYearCell.m */,
+			);
+			path = FFMonthCollectionViewForYearCell;
+			sourceTree = "<group>";
+		};
+		8AE7ED2B19AE082600E02258 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED2C19AE082600E02258 /* FFBlue and FFRed Buttons */,
+				8AE7ED3119AE082600E02258 /* FFCategories */,
+				8AE7ED3A19AE082600E02258 /* FFConstants.h */,
+				8AE7ED3B19AE082600E02258 /* FFDateManeger */,
+				8AE7ED3E19AE082600E02258 /* FFEvent */,
+				8AE7ED4119AE082600E02258 /* FFEventDetail and FFEditEvent Views and Popovers */,
+				8AE7ED5E19AE082600E02258 /* FFImportantFilesForCalendar.h */,
+				8AE7ED5F19AE082600E02258 /* Images */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		8AE7ED2C19AE082600E02258 /* FFBlue and FFRed Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED2D19AE082600E02258 /* FFBlueButton.h */,
+				8AE7ED2E19AE082600E02258 /* FFBlueButton.m */,
+				8AE7ED2F19AE082600E02258 /* FFRedAndWhiteButton.h */,
+				8AE7ED3019AE082600E02258 /* FFRedAndWhiteButton.m */,
+			);
+			path = "FFBlue and FFRed Buttons";
+			sourceTree = "<group>";
+		};
+		8AE7ED3119AE082600E02258 /* FFCategories */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED3219AE082600E02258 /* NSDate+FFDaysCount.h */,
+				8AE7ED3319AE082600E02258 /* NSDate+FFDaysCount.m */,
+				8AE7ED3419AE082600E02258 /* UIColor+FFMoreColors.h */,
+				8AE7ED3519AE082600E02258 /* UIColor+FFMoreColors.m */,
+				8AE7ED3619AE082600E02258 /* UIImage+FFCustomMethods.h */,
+				8AE7ED3719AE082600E02258 /* UIImage+FFCustomMethods.m */,
+				8AE7ED3819AE082600E02258 /* UILabel+FFCustomMethods.h */,
+				8AE7ED3919AE082600E02258 /* UILabel+FFCustomMethods.m */,
+			);
+			path = FFCategories;
+			sourceTree = "<group>";
+		};
+		8AE7ED3B19AE082600E02258 /* FFDateManeger */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED3C19AE082600E02258 /* FFDateManager.h */,
+				8AE7ED3D19AE082600E02258 /* FFDateManager.m */,
+			);
+			path = FFDateManeger;
+			sourceTree = "<group>";
+		};
+		8AE7ED3E19AE082600E02258 /* FFEvent */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED3F19AE082600E02258 /* FFEvent.h */,
+				8AE7ED4019AE082600E02258 /* FFEvent.m */,
+			);
+			path = FFEvent;
+			sourceTree = "<group>";
+		};
+		8AE7ED4119AE082600E02258 /* FFEventDetail and FFEditEvent Views and Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED4219AE082600E02258 /* FFEditEvent View and Popover */,
+				8AE7ED5919AE082600E02258 /* FFEventDetail View and Popover */,
+			);
+			path = "FFEventDetail and FFEditEvent Views and Popovers";
+			sourceTree = "<group>";
+		};
+		8AE7ED4219AE082600E02258 /* FFEditEvent View and Popover */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED4319AE082600E02258 /* FFButtonWithDatePopover */,
+				8AE7ED4819AE082600E02258 /* FFButtonWithTimePopover */,
+				8AE7ED4D19AE082600E02258 /* FFEditEventPopoverController.h */,
+				8AE7ED4E19AE082600E02258 /* FFEditEventPopoverController.m */,
+				8AE7ED4F19AE082600E02258 /* FFEditEventView.h */,
+				8AE7ED5019AE082600E02258 /* FFEditEventView.m */,
+				8AE7ED5119AE082600E02258 /* FFGuestsTableViewCell */,
+				8AE7ED5619AE082600E02258 /* FFSearchBarWithAutoComplete */,
+			);
+			path = "FFEditEvent View and Popover";
+			sourceTree = "<group>";
+		};
+		8AE7ED4319AE082600E02258 /* FFButtonWithDatePopover */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED4419AE082600E02258 /* FFButtonWithDatePopover.h */,
+				8AE7ED4519AE082600E02258 /* FFButtonWithDatePopover.m */,
+				8AE7ED4619AE082600E02258 /* FFDatePopoverController.h */,
+				8AE7ED4719AE082600E02258 /* FFDatePopoverController.m */,
+			);
+			path = FFButtonWithDatePopover;
+			sourceTree = "<group>";
+		};
+		8AE7ED4819AE082600E02258 /* FFButtonWithTimePopover */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED4919AE082600E02258 /* FFButtonWithHourPopover.h */,
+				8AE7ED4A19AE082600E02258 /* FFButtonWithHourPopover.m */,
+				8AE7ED4B19AE082600E02258 /* FFHourPopoverController.h */,
+				8AE7ED4C19AE082600E02258 /* FFHourPopoverController.m */,
+			);
+			path = FFButtonWithTimePopover;
+			sourceTree = "<group>";
+		};
+		8AE7ED5119AE082600E02258 /* FFGuestsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED5219AE082600E02258 /* FFGuestsTableView.h */,
+				8AE7ED5319AE082600E02258 /* FFGuestsTableView.m */,
+				8AE7ED5419AE082600E02258 /* FFGuestsTableViewCell.h */,
+				8AE7ED5519AE082600E02258 /* FFGuestsTableViewCell.m */,
+			);
+			path = FFGuestsTableViewCell;
+			sourceTree = "<group>";
+		};
+		8AE7ED5619AE082600E02258 /* FFSearchBarWithAutoComplete */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED5719AE082600E02258 /* FFSearchBarWithAutoComplete.h */,
+				8AE7ED5819AE082600E02258 /* FFSearchBarWithAutoComplete.m */,
+			);
+			path = FFSearchBarWithAutoComplete;
+			sourceTree = "<group>";
+		};
+		8AE7ED5919AE082600E02258 /* FFEventDetail View and Popover */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED5A19AE082600E02258 /* FFEventDetailPopoverController.h */,
+				8AE7ED5B19AE082600E02258 /* FFEventDetailPopoverController.m */,
+				8AE7ED5C19AE082600E02258 /* FFEventDetailView.h */,
+				8AE7ED5D19AE082600E02258 /* FFEventDetailView.m */,
+			);
+			path = "FFEventDetail View and Popover";
+			sourceTree = "<group>";
+		};
+		8AE7ED5F19AE082600E02258 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7ED6019AE082600E02258 /* blackCircle.png */,
+				8AE7ED6119AE082600E02258 /* DailyCalendar.png */,
+				8AE7ED6219AE082600E02258 /* day.png */,
+				8AE7ED6319AE082600E02258 /* Day@2x.png */,
+				8AE7ED6419AE082600E02258 /* day_clicked.png */,
+				8AE7ED6519AE082600E02258 /* day_clicked@2x.png */,
+				8AE7ED6619AE082600E02258 /* month.png */,
+				8AE7ED6719AE082600E02258 /* month@2x.png */,
+				8AE7ED6819AE082600E02258 /* month_clicked.png */,
+				8AE7ED6919AE082600E02258 /* month_clicked@2x.png */,
+				8AE7ED6A19AE082600E02258 /* MonthlyCalendar.png */,
+				8AE7ED6B19AE082600E02258 /* redCircle.png */,
+				8AE7ED6C19AE082600E02258 /* selected.png */,
+				8AE7ED6D19AE082600E02258 /* selected@2x.png */,
+				8AE7ED6E19AE082600E02258 /* week.png */,
+				8AE7ED6F19AE082600E02258 /* week@2x.png */,
+				8AE7ED7019AE082600E02258 /* week_clicked.png */,
+				8AE7ED7119AE082600E02258 /* week_clicked@2x.png */,
+				8AE7ED7219AE082600E02258 /* WeeklyCalendar.png */,
+				8AE7ED7319AE082600E02258 /* YearlyCalendar.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		BA1EF44719A719E900D1219E /* Find Request Jobs */ = {
 			isa = PBXGroup;
 			children = (
+				BAFB26D219B87BEB003E45FC /* GISFindRequestJobsViewController.h */,
+				BAFB26D319B87BEB003E45FC /* GISFindRequestJobsViewController.m */,
+				BAFB26D419B87BEB003E45FC /* GISFindRequestJobsViewController.xib */,
+				BA1BA29019B991780096CE1D /* GISFindReqJobs_ReqDataCell.h */,
+				BA1BA29119B991780096CE1D /* GISFindReqJobs_ReqDataCell.m */,
+				BA1BA29319B9BE020096CE1D /* GISFindReqJobs_ReqDataCell.xib */,
+				BADD9B1719BDB085006DE6B8 /* GISFindReqJobs_JobDataToSearch_Cell.xib */,
 			);
 			name = "Find Request Jobs";
 			path = "GIS_Scheduler/Find Request Jobs";
@@ -956,9 +1593,16 @@
 				BA1EF44919A71A0E00D1219E /* GISJobAssignmentViewController.h */,
 				BA1EF44A19A71A0E00D1219E /* GISJobAssignmentViewController.m */,
 				BA1EF44B19A71A0E00D1219E /* GISJobAssignmentViewController.xib */,
+				BA00412E19C19E92003D7217 /* GISFilterMoreViewController.h */,
+				BA00412F19C19E92003D7217 /* GISFilterMoreViewController.m */,
+				BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */,
 				BA88741819A77359000676F4 /* GISJobAssignmentCell.h */,
 				BA88741919A77359000676F4 /* GISJobAssignmentCell.m */,
 				BA88741A19A77359000676F4 /* GISJobAssignmentCell.xib */,
+				BA5D30E119C2F83300726AD4 /* GISServiceProviderCell.xib */,
+				BA5D30DC19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.h */,
+				BA5D30DD19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m */,
+				BA5D30DE19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.xib */,
 			);
 			name = "Job Assignment";
 			path = "GIS_Scheduler/Job Assignment";
@@ -1015,6 +1659,7 @@
 		BA3AF215196BBAF7006A1E3B /* GIS_Scheduler */ = {
 			isa = PBXGroup;
 			children = (
+				8AE7ECD419ADF97100E02258 /* View Edit Service */,
 				BA9E6A5E1977E88400609E69 /* AppDelegate */,
 				BA9E6A611977E88400609E69 /* Attendees */,
 				BAFA6BE919949E04005FE5A1 /* Create Jobs */,
@@ -1119,6 +1764,15 @@
 				BAB64AAC19A37100005296EE /* GISJobDetailsObject.m */,
 				BAB64AAE19A37230005296EE /* GISJobDetailsStore.h */,
 				BAB64AAF19A37230005296EE /* GISJobDetailsStore.m */,
+				BA0A156319BF124B00165C1A /* GISAddUpdateJobsViewController.h */,
+				BA0A156419BF124B00165C1A /* GISAddUpdateJobsViewController.m */,
+				BA0A156519BF124B00165C1A /* GISAddUpdateJobsViewController.xib */,
+				BA0A156B19BF17D200165C1A /* GISAddUpdateJobCell.h */,
+				BA0A156C19BF17D200165C1A /* GISAddUpdateJobCell.m */,
+				BA0A156E19BF17E900165C1A /* GISJobInfoCell.xib */,
+				BA0A157019BF17FF00165C1A /* GISBillingPaymentInfo.xib */,
+				BA0A157219BF181900165C1A /* GISNotesHistoryCell.xib */,
+				BA0A157419BF182F00165C1A /* GISRequestServiceProvidersCell.xib */,
 			);
 			path = "Job Details";
 			sourceTree = "<group>";
@@ -1487,11 +2141,13 @@
 				BA9E6B5F1977E88400609E69 /* trash@2x.png in Resources */,
 				BA9E6AFC1977E88400609E69 /* checked@2x.png in Resources */,
 				BA9E6AEF1977E88400609E69 /* arrow.png in Resources */,
+				BAFB26D619B87BEB003E45FC /* GISFindRequestJobsViewController.xib in Resources */,
 				BA9E6B191977E88400609E69 /* delete_pressed.png in Resources */,
+				8AE7EDAA19AE082600E02258 /* day_clicked@2x.png in Resources */,
 				BA9E6B291977E88400609E69 /* incomplete_request.png in Resources */,
 				BA9E6B1A1977E88400609E69 /* delete_pressed@2x.png in Resources */,
 				BA9E6B431977E88400609E69 /* requests_jobs.png in Resources */,
-				BA8D0CB6198A272500143AA1 /* GISVIewEditRequestViewController.xib in Resources */,
+				BA0A157519BF182F00165C1A /* GISRequestServiceProvidersCell.xib in Resources */,
 				BA9E6B3F1977E88400609E69 /* radio_button_empty.png in Resources */,
 				BA9E6B5C1977E88400609E69 /* text_field_bg@2x.png in Resources */,
 				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
@@ -1522,7 +2178,10 @@
 				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
 				BA9E6B011977E88400609E69 /* comments.png in Resources */,
 				BA9E6B631977E88400609E69 /* view@2x.png in Resources */,
+				BA00413219C19E92003D7217 /* GISFilterMoreViewController.xib in Resources */,
+				8AE7EDB619AE082600E02258 /* week_clicked@2x.png in Resources */,
 				BA9E6AF81977E88400609E69 /* check@2x.png in Resources */,
+				8AE7EDAB19AE082600E02258 /* month.png in Resources */,
 				BA9E6B531977E88400609E69 /* slider.png in Resources */,
 				BA9E6B361977E88400609E69 /* login_password@2x.png in Resources */,
 				BAFC81C21999EB850070D00D /* GISJobDetailsCell.xib in Resources */,
@@ -1530,9 +2189,13 @@
 				8A232EE91973ACD700E2BEDF /* GISLoginViewController.xib in Resources */,
 				8A8DA6E81979026600EE8EFE /* jobdetails.png in Resources */,
 				BA9E6B651977E88400609E69 /* view_pressed@2x.png in Resources */,
+				BA0A156F19BF17E900165C1A /* GISJobInfoCell.xib in Resources */,
+				8AE7EDAD19AE082600E02258 /* month_clicked.png in Resources */,
 				8A8DA6E31979026600EE8EFE /* contact&billing@2x.png in Resources */,
+				8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */,
 				8A74422E19A1C8BD00CE3B32 /* GISSummaryViewController.xib in Resources */,
 				8A5E2E2E19753B5D00BE3C04 /* GISEventDetailsViewController.xib in Resources */,
+				BA5D30E219C2F83300726AD4 /* GISServiceProviderCell.xib in Resources */,
 				BA9E6AFF1977E88400609E69 /* clock.png in Resources */,
 				8A5052C61977D76F007288F5 /* GISDashBoardViewController.xib in Resources */,
 				8A8DA6ED1979026600EE8EFE /* summary_unPressed@2x.png in Resources */,
@@ -1546,8 +2209,10 @@
 				BA9E6AF11977E88400609E69 /* attendees.png in Resources */,
 				8A8DA7001979251A00EE8EFE /* GISCommentViewController.xib in Resources */,
 				8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */,
+				8AE7EDA719AE082600E02258 /* day.png in Resources */,
 				8A8DA6E91979026600EE8EFE /* jobdetails@2x.png in Resources */,
 				BA9E6B301977E88400609E69 /* job_details_pressed@2x.png in Resources */,
+				8AE7EDA919AE082600E02258 /* day_clicked.png in Resources */,
 				BA9E6B621977E88400609E69 /* view.png in Resources */,
 				BA9E6B251977E88400609E69 /* find_requests_jobs.png in Resources */,
 				BA9E6B221977E88400609E69 /* event_details@2x.png in Resources */,
@@ -1557,9 +2222,12 @@
 				8A8DA6DE1979026600EE8EFE /* attendees_unPressed.png in Resources */,
 				8A8DA6F01979062200EE8EFE /* selected@2x.png in Resources */,
 				8A8DA6EC1979026600EE8EFE /* summary_unPressed.png in Resources */,
+				8AE7EDA819AE082600E02258 /* Day@2x.png in Resources */,
 				BA9E6B441977E88400609E69 /* requests_Jobs@2x in Resources */,
 				BA9E6B601977E88400609E69 /* unchecked.png in Resources */,
 				8A8DA6C01978EE5A00EE8EFE /* Images.xcassets in Resources */,
+				8AE7EDA519AE082600E02258 /* blackCircle.png in Resources */,
+				8AE7EDB519AE082600E02258 /* week_clicked.png in Resources */,
 				BA9E6B341977E88400609E69 /* location_pressed@2x.png in Resources */,
 				BA9E6B0A1977E88400609E69 /* dashboard.png in Resources */,
 				BA9E6AF41977E88400609E69 /* attendees_pressed@2x.png in Resources */,
@@ -1567,6 +2235,8 @@
 				BA694A4B1975306000AC8CCC /* GISContactsAndBillingViewController.xib in Resources */,
 				8A8DA6E51979026600EE8EFE /* date&times@2x.png in Resources */,
 				BA9E6B061977E88400609E69 /* contact_and_billing@2x.png in Resources */,
+				BA1BA29419B9BE020096CE1D /* GISFindReqJobs_ReqDataCell.xib in Resources */,
+				8AE7EDAE19AE082600E02258 /* month_clicked@2x.png in Resources */,
 				BA9E6B321977E88400609E69 /* location@2x.png in Resources */,
 				BA9E6B041977E88400609E69 /* comments_pressed@2x.png in Resources */,
 				BA9E6AEE1977E88400609E69 /* add@2x.png in Resources */,
@@ -1578,8 +2248,11 @@
 				BA9E6AEA1977E88400609E69 /* GISAttendeesTopCell.xib in Resources */,
 				BA9E6B031977E88400609E69 /* comments_pressed.png in Resources */,
 				BA9E6B131977E88400609E69 /* dates_and_times.png in Resources */,
+				BA0A157319BF181900165C1A /* GISNotesHistoryCell.xib in Resources */,
+				8AE7EDB219AE082600E02258 /* selected@2x.png in Resources */,
 				8A8DA6DF1979026600EE8EFE /* attendees_unPressed@2x.png in Resources */,
 				BA9E6B071977E88400609E69 /* contact_and_billing_pressed.png in Resources */,
+				8AE7EDB419AE082600E02258 /* week@2x.png in Resources */,
 				BA9E6B0B1977E88400609E69 /* dashboard@2x.png in Resources */,
 				BA9E6B641977E88400609E69 /* view_pressed.png in Resources */,
 				BA9E6B381977E88400609E69 /* login_username@2x.png in Resources */,
@@ -1591,23 +2264,30 @@
 				BA9E6AFB1977E88400609E69 /* checked.png in Resources */,
 				BA9E6B421977E88400609E69 /* radio_button_filled@2x.png in Resources */,
 				8A8DA6E11979026600EE8EFE /* comments_unPressed@2x.png in Resources */,
+				BA5D30E019C2F4A300726AD4 /* GISServiceProviderPopUpViewController.xib in Resources */,
 				BA9E6AF91977E88400609E69 /* check_pressed.png in Resources */,
+				BA0A156719BF124B00165C1A /* GISAddUpdateJobsViewController.xib in Resources */,
+				8AE7EDB719AE082600E02258 /* WeeklyCalendar.png in Resources */,
 				8A8DA6EB1979026600EE8EFE /* Locationdetails@2x.png in Resources */,
 				BA9E6B521977E88400609E69 /* service_providers@2x.png in Resources */,
+				8AE7EDB019AE082600E02258 /* redCircle.png in Resources */,
 				BA1EF44D19A71A0E00D1219E /* GISJobAssignmentViewController.xib in Resources */,
 				8A8DA6E71979026600EE8EFE /* eventdetails@2x.png in Resources */,
 				BA9E6B4C1977E88400609E69 /* scheduling_pressed@2x.png in Resources */,
+				8AE7EDA619AE082600E02258 /* DailyCalendar.png in Resources */,
 				8A8DA6E41979026600EE8EFE /* date&times.png in Resources */,
 				BA9E6AF31977E88400609E69 /* attendees_pressed.png in Resources */,
 				8A5052CB1977D77E007288F5 /* GISDashBoardCell.xib in Resources */,
 				BA88741C19A77359000676F4 /* GISJobAssignmentCell.xib in Resources */,
 				BA9E6B311977E88400609E69 /* location.png in Resources */,
 				8A8DA6E01979026600EE8EFE /* comments_unPressed.png in Resources */,
+				8AE7EDB819AE082600E02258 /* YearlyCalendar.png in Resources */,
 				BA9E6B561977E88400609E69 /* summary@2x.png in Resources */,
 				BA9E6B1C1977E88400609E69 /* dropdown@2x.png in Resources */,
 				BA93BE0D197940A80097426C /* GISJobDetailsViewController.xib in Resources */,
 				BA9E6B411977E88400609E69 /* radio_button_filled.png in Resources */,
 				8A8DA706197925D000EE8EFE /* GISCommentCell.xib in Resources */,
+				8AE7EDB319AE082600E02258 /* week.png in Resources */,
 				8A74424519A2387300CE3B32 /* GISSummaryAttendeesCell.xib in Resources */,
 				BA694A511975389D00AC8CCC /* GISDatesAndTimesViewController.xib in Resources */,
 				BA9E6B181977E88400609E69 /* delete@2x.png in Resources */,
@@ -1624,14 +2304,19 @@
 				BA9E6B611977E88400609E69 /* unchecked@2x.png in Resources */,
 				BA00DF44199C875C006057AD /* GISServiceProviderRequestedJobsViewController.xib in Resources */,
 				BA9E6B1F1977E88400609E69 /* edit_pressed.png in Resources */,
+				8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */,
 				BA9E6B051977E88400609E69 /* contact_and_billing.png in Resources */,
 				BA9E6B1D1977E88400609E69 /* edit.png in Resources */,
 				8A74424019A2294900CE3B32 /* GISSummaryDatesDetailViewCell.xib in Resources */,
 				8A74423419A1CA1300CE3B32 /* GISSummaryCell.xib in Resources */,
 				BA9E6B3E1977E88400609E69 /* logout_pressed@2x.png in Resources */,
+				8AE7EDAF19AE082600E02258 /* MonthlyCalendar.png in Resources */,
 				BA9E6B2B1977E88400609E69 /* info.png in Resources */,
 				BAFA6BEE19949E1F005FE5A1 /* GISCreateJobsViewController.xib in Resources */,
+				BADD9B1819BDB085006DE6B8 /* GISFindReqJobs_JobDataToSearch_Cell.xib in Resources */,
 				BA9E6B4F1977E88400609E69 /* service_provider_hollow.png in Resources */,
+				8AE7EDAC19AE082600E02258 /* month@2x.png in Resources */,
+				BA0A157119BF17FF00165C1A /* GISBillingPaymentInfo.xib in Resources */,
 				BA9E6B2F1977E88400609E69 /* job_details_pressed.png in Resources */,
 				BA9E6AFE1977E88400609E69 /* choose_request_bg@2x.png in Resources */,
 				BA9E6B3D1977E88400609E69 /* logout_pressed.png in Resources */,
@@ -1644,6 +2329,7 @@
 				BAE08205197FDBA30056B3B8 /* MyriadPro-Bold.otf in Resources */,
 				BA9E6B5E1977E88400609E69 /* text_field_bg_with_btn@2x.png in Resources */,
 				BA9E6AE81977E88400609E69 /* GISAttendeesCell.xib in Resources */,
+				8AE7EDB119AE082600E02258 /* selected.png in Resources */,
 				BA9E6B151977E88400609E69 /* dates_and_times_pressed.png in Resources */,
 				8AA8386D198B666D004B6C87 /* GISDashBoardSPCell.xib in Resources */,
 			);
@@ -1664,39 +2350,71 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0A156D19BF17D200165C1A /* GISAddUpdateJobCell.m in Sources */,
 				8A15B4CD197D0CAC008B4129 /* PCAvailability.m in Sources */,
+				8AE7ED9519AE082600E02258 /* UIColor+FFMoreColors.m in Sources */,
+				8AE7ED7719AE082600E02258 /* FFDayHeaderCollectionView.m in Sources */,
+				8AE7ED9619AE082600E02258 /* UIImage+FFCustomMethods.m in Sources */,
 				8A15B4CE197D0CAC008B4129 /* PCDebug.m in Sources */,
 				8A90D46D197D0901002D4C8A /* PCLogger.m in Sources */,
+				8AE7ED7F19AE082600E02258 /* FFMonthCollectionView.m in Sources */,
 				BA7D6A031977EE720014C505 /* GISDashBoardViewController.m in Sources */,
+				8AE7ED7519AE082600E02258 /* FFDayHeaderButton.m in Sources */,
 				8A8DA704197925B100EE8EFE /* GISCommentCell.m in Sources */,
+				8AE7ED8C19AE082600E02258 /* FFHeaderMonthForYearCell.m in Sources */,
 				8AA83870198B7AA6004B6C87 /* GISSchedulerSPJobsObject.m in Sources */,
+				8AE7ED7819AE082600E02258 /* FFDayCell.m in Sources */,
+				8AE7ED7619AE082600E02258 /* FFDayHeaderCell.m in Sources */,
 				BA59EC411977EC530083864D /* GISDashBoardListViewController.m in Sources */,
+				BA5D30DF19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m in Sources */,
 				8A3B1E33197CF54500963E8C /* AmazonClientManager.m in Sources */,
 				8A3B1E39197CF54500963E8C /* UncaughtExceptionHandler.m in Sources */,
+				8AE7ED9B19AE082600E02258 /* FFDatePopoverController.m in Sources */,
+				8AE7ED7A19AE082600E02258 /* FFDayCollectionViewFlowLayout.m in Sources */,
 				8A3B1E52197CF58300963E8C /* SBJsonBase.m in Sources */,
+				8AE7ED9219AE082600E02258 /* FFBlueButton.m in Sources */,
+				8AE7ED7C19AE082600E02258 /* FFMonthCalendarView.m in Sources */,
+				8AE7EDA019AE082600E02258 /* FFGuestsTableView.m in Sources */,
+				8AE7ED9419AE082600E02258 /* NSDate+FFDaysCount.m in Sources */,
 				BA9E6AEB1977E88400609E69 /* GISAttendeesViewController.m in Sources */,
 				BAB64AAD19A37100005296EE /* GISJobDetailsObject.m in Sources */,
+				8AE7ED7B19AE082600E02258 /* FFDayScrollView.m in Sources */,
 				BAFA6BF119949E51005FE5A1 /* GISCreateJobsCell.m in Sources */,
 				BAFA6BED19949E1F005FE5A1 /* GISCreateJobsViewController.m in Sources */,
 				8A74423A19A2273900CE3B32 /* GISSummaryDatesAndTimesCell.m in Sources */,
+				8AE7ED8F19AE082600E02258 /* FFYearCell.m in Sources */,
 				8A3B1E35197CF54500963E8C /* Constants.m in Sources */,
+				8AE7ED8919AE082600E02258 /* FFWeekCollectionViewFlowLayout.m in Sources */,
+				8AE7ED9D19AE082600E02258 /* FFHourPopoverController.m in Sources */,
+				8AE7ED9F19AE082600E02258 /* FFEditEventView.m in Sources */,
 				8A15B4CB197D0A4C008B4129 /* GISLoginViewController.m in Sources */,
+				8AE7ED8719AE082600E02258 /* FFWeekCell.m in Sources */,
 				BAE0820A197FE5DC0056B3B8 /* GISContactsInfoStore.m in Sources */,
+				8AE7ED9719AE082600E02258 /* UILabel+FFCustomMethods.m in Sources */,
 				BADFD9CB197CF003003033FD /* GISStore.m in Sources */,
 				8A74424419A2387300CE3B32 /* GISSummaryAttendeesCell.m in Sources */,
+				8AE7ED8519AE082600E02258 /* FFHourAndMinLabel.m in Sources */,
+				8AE7ED8219AE082600E02258 /* FFWeekCalendarView.m in Sources */,
 				8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */,
 				8A3B1E4F197CF58300963E8C /* SBFBJsonParser.m in Sources */,
 				8AA8387F198BB545004B6C87 /* GISSchedulerNMRequestsObject.m in Sources */,
 				BA4224441978FED900A4E283 /* GISDatesTimesDetailCell.m in Sources */,
+				8AE7ED8B19AE082600E02258 /* FFYearCalendarView.m in Sources */,
+				8AE7ED8E19AE082600E02258 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				BA88741B19A77359000676F4 /* GISJobAssignmentCell.m in Sources */,
 				BA34A661197CE27F00A7083C /* GISServerManager.m in Sources */,
 				BAF7BAB91998D11300A8F196 /* GISCreateJobs_Cell.m in Sources */,
+				8AE7ED9019AE082600E02258 /* FFYearCollectionView.m in Sources */,
+				8AE7EDA219AE082600E02258 /* FFSearchBarWithAutoComplete.m in Sources */,
+				8AE7ED8A19AE082600E02258 /* FFWeekScrollView.m in Sources */,
 				8A15B4EC197D2B22008B4129 /* GISSearchReqObject.m in Sources */,
 				BAFC81C01999EB750070D00D /* GISJobDetailsCell.m in Sources */,
 				8A15B4DC197D2968008B4129 /* GISDropDownStore.m in Sources */,
 				8A15B4D7197D28CF008B4129 /* GISContactAndBillingObject.m in Sources */,
+				8AE7ED9C19AE082600E02258 /* FFButtonWithHourPopover.m in Sources */,
 				8A5E2E271974F9F000BE3C04 /* GISVIewEditRequestViewController.m in Sources */,
 				BA34A65E197CE27F00A7083C /* GISJsonRequest.m in Sources */,
+				8AE7ED9919AE082600E02258 /* FFEvent.m in Sources */,
 				8A3B1E4D197CF58300963E8C /* NSObject+SBJSON.m in Sources */,
 				BA34A660197CE27F00A7083C /* GISRequestError.m in Sources */,
 				8A3B1E32197CF54500963E8C /* GISLoadingView.m in Sources */,
@@ -1724,30 +2442,54 @@
 				8A15B4E0197D2A39008B4129 /* GISChooseRequestDetailsObject.m in Sources */,
 				8A8DA6FF1979251A00EE8EFE /* GISCommentViewController.m in Sources */,
 				8A74423F19A2294900CE3B32 /* GISSummaryDatesDetailViewCell.m in Sources */,
+				8AE7ED8319AE082600E02258 /* FFWeekHeaderCell.m in Sources */,
+				8AE7ED8119AE082600E02258 /* FFMonthHeaderView.m in Sources */,
+				8AE7EDA419AE082600E02258 /* FFEventDetailView.m in Sources */,
 				BA9E6AE71977E88400609E69 /* GISAppDelegate.m in Sources */,
 				BA3AF21C196BBAF7006A1E3B /* main.m in Sources */,
 				8A74423319A1CA1300CE3B32 /* GISSummaryCell.m in Sources */,
+				8AE7ED9E19AE082600E02258 /* FFEditEventPopoverController.m in Sources */,
 				BA694A4A1975306000AC8CCC /* GISContactsAndBillingViewController.m in Sources */,
 				BAE08204197FDBA30056B3B8 /* GISFonts.m in Sources */,
 				8A3B1E50197CF58300963E8C /* SBFBJsonWriter.m in Sources */,
+				8AE7EDA119AE082600E02258 /* FFGuestsTableViewCell.m in Sources */,
+				8AE7ED8D19AE082600E02258 /* FFMonthCellForYearCell.m in Sources */,
+				8AE7ED8419AE082600E02258 /* FFWeekHeaderCollectionView.m in Sources */,
+				8AE7ED7919AE082600E02258 /* FFDayCollectionView.m in Sources */,
+				8AE7ECD819ADFB7F00E02258 /* GISViewEditServiceViewController.m in Sources */,
 				8A15B4D1197D23B1008B4129 /* GISDropDownsObject.m in Sources */,
 				BA21684A198F8523004CC301 /* GISDatesTimesDetailStore.m in Sources */,
 				8AA83879198B8B63004B6C87 /* GISSchedulerSPJobsStore.m in Sources */,
+				8AE7ED7D19AE082600E02258 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				8A3B1E53197CF58300963E8C /* SBJsonWriter.m in Sources */,
 				8A15B4EF197D2B36008B4129 /* GISViewScheduleObject.m in Sources */,
+				8AE7ED8819AE082600E02258 /* FFWeekCollectionView.m in Sources */,
 				8A15B4D4197D23F5008B4129 /* GISBilingDataObject.m in Sources */,
 				BA694A501975389D00AC8CCC /* GISDatesAndTimesViewController.m in Sources */,
+				8AE7EDA319AE082600E02258 /* FFEventDetailPopoverController.m in Sources */,
 				BA9E6AE91977E88400609E69 /* GISAttendeesTopCell.m in Sources */,
+				8AE7ED7419AE082600E02258 /* FFDayCalendarView.m in Sources */,
+				8AE7ED9319AE082600E02258 /* FFRedAndWhiteButton.m in Sources */,
+				8AE7ED9819AE082600E02258 /* FFDateManager.m in Sources */,
 				BA34A65F197CE27F00A7083C /* GISRequest.m in Sources */,
+				BAFB26D519B87BEB003E45FC /* GISFindRequestJobsViewController.m in Sources */,
+				8AE7ED8619AE082600E02258 /* FFViewWithHourLines.m in Sources */,
 				8A3B1E00197CF3DD00963E8C /* GISDatabaseManager.m in Sources */,
 				BADFD9C8197CEFD8003033FD /* GISLoginDetailsObject.m in Sources */,
 				8A3B1E59197CFDF000963E8C /* Reachability.m in Sources */,
 				BA1EF44C19A71A0E00D1219E /* GISJobAssignmentViewController.m in Sources */,
+				8AE7ED7E19AE082600E02258 /* FFMonthCell.m in Sources */,
 				8A5052B519779CFD007288F5 /* GISPreparationMaterialCell.m in Sources */,
+				8AE7ED9A19AE082600E02258 /* FFButtonWithDatePopover.m in Sources */,
+				8AE7ED8019AE082600E02258 /* FFMonthCollectionViewFlowLayout.m in Sources */,
 				8A15B4DD197D2968008B4129 /* GISContactsInfoObject.m in Sources */,
 				BADFD998197CE5CB003033FD /* GISStoreManager.m in Sources */,
+				BA00413119C19E92003D7217 /* GISFilterMoreViewController.m in Sources */,
+				BA1BA29219B991780096CE1D /* GISFindReqJobs_ReqDataCell.m in Sources */,
 				BA34A654197CE02D00A7083C /* Utils.m in Sources */,
 				BAB64AB019A37230005296EE /* GISJobDetailsStore.m in Sources */,
+				BA0A156619BF124B00165C1A /* GISAddUpdateJobsViewController.m in Sources */,
+				8AE7ED9119AE082600E02258 /* FFYearCollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

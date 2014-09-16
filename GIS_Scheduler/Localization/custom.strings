@@ -195,3 +195,75 @@
      ////// Summary ////////
 
 "contact_billing_info" = "Contact And Billing Info";
+
+"Request_ID" = "Request ID :";
+"Start_Date" = "StartDate :";
+"End_Date" = "End Date :";
+"Start_Time" = "Start Time :";
+"End_Time" = "End Time :";
+"Requestor_Type" = "Requestor Type :";
+"Requestor" = "Requestor :";
+"Registered_Consumer" = "Registered Consumer :";
+"General_Location" = "General Location :";
+"Pay_Level" = "Pay Level :";
+"Primary_Audience" = "Primary Audience :";
+"Model" = "Model :";
+"Open_to_Public" = "Open to Public :";
+"Request_Data_to_Search" = "Request Data to Search";
+"Job_Data_to_Search" = "Job Data to Search";
+"Choose_Weekdays" = "Choose Weekdays :";
+"Service_Provider_Type" = "Service Provider Type :";
+"Service_Provider" = "Service Provider :";
+"Filled" = "Filled :";
+"Pay_Type" = "Pay Type :";
+"OutORAgency" = "Out/Agency :";
+"Created_By" = "Created_By :";
+"Timely" = "Timely :";
+"Canceled" = "Canceled :";
+"Timely" = "Timely";
+"untimely" = "untimely";
+"Bill_Level" = "Bill Level :";
+"Cancel_Date" = "Cancel Date :";
+
+//Navigation Titles
+"Find_Requests_Jobs"= "Find Requests/Jobs - Result";
+"Jobs_Assignment"="Jobs Assignment";
+
+"Job_Info"= "Job Info";
+"Job_Date"="Job Date :";
+"Call_In_Time"="Call In Time :";
+"Type_of_Service_Provider"="Type of Service Provider :";
+"Service_Provider_ID"="Service Provider ID :";
+"Out_Agency"="Out Agency :";
+"Timely_and_Half"="Timely and 1/2 :";
+"BillOrPayment_Info"="Bill/PaymentInfo";
+"Bill_Amt"="Bill Amt :";
+"Mileage"="Mileage :";
+"Invoice"="Invoice :";
+"Amt_Paid"="Amt Paid :";
+"Bill_Date"="Bill Date :";
+"Agency_Fee"="Agency Fee :";
+"Pay_Status"="Pay Status :";
+"Exp_Status"="Exp Status :";
+"Notes/History"="Notes/History";
+"Add_Notes"="Add Notes";
+"Requests_by_Service_Providers"="Requests by Service Providers";
+"Service_Provider_Name"="Service Provider Name";
+"Requested_Date"="Requested Date";
+"GIS_Response"="GIS Response";
+"Cancel"="Cancel";
+"Job_Change_History"="Job Change History";
+"Done"="Done";
+"Please_record_any_changes_you_made"="Please record any changes you made into the Change Notes filed";
+"Time"="Time :";
+"Date_"="Date :";
+"User"="User :";
+"Job_History_Notes"="Job History Notes :";
+"Service_Provider_Sub_role"="Service Provider Sub role :";
+"Service_Provider_Name"="Service Provider Name :";
+"Unit/Account"="Unit/Acount :";
+"Type_of_Account"="Type of Account :";
+"External"="External";
+"Internal"="Internal";
+"On_Going_Request"="On-Going Request :";
+"Restricted"="Restricted : ";

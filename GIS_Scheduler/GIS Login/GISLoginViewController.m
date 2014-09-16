@@ -73,11 +73,16 @@
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 
-    
     viewUpHeight = 155;
     
     _userName_textfield.text=@"swamy.pilla@gmail.com";
     _password_textfield.text=@"admin";
+
+    _userName_textfield.text=@"kbabulenjoy@gmail.com";
+    _password_textfield.text=@"babul";
+    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    //_password_textfield.text=@"admin";
+    
 }
 
 -(void)addRightView:(UITextField *) textField{
@@ -162,6 +167,14 @@
         {
             id array=response.responseJson;
             NSDictionary *dictHere=[array lastObject];
+            
+            if(dictHere == nil){
+                
+                [self removeLoadingView];
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
+                return;
+            }
+                
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
                 [self removeLoadingView];
@@ -236,6 +249,9 @@
 
 -(void)failuremethod_login:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
+    
     NSLog(@"Failure");
 }
 
@@ -446,6 +462,7 @@
 {
     NSLog(@"Failure");
 }
+
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getViewSchedule Success---%@",response.responseJson);
@@ -501,12 +518,12 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //®[GISUtility moveemailView:YES viewHeight:-120 view:self.view];
+    [self moveAction:YES viewHeight:-120];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+   [self moveAction:YES viewHeight:0];
 }
 
 
@@ -516,6 +533,81 @@
 
     return YES;
 }
+
+
+-(void)moveAction:(BOOL)isMove viewHeight:(int)viewHeight{
+    
+    if(isMove)
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:1.0];
+        
+        CGRect frame=self.view.frame;
+        frame.origin.x=viewHeight;
+        self.view.frame=frame;
+        [UIView commitAnimations];
+    }
+    else
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:0.2];
+        CGRect frame=self.view.frame;
+        frame.origin.x=0;
+        self.view.frame=frame;
+        
+        [UIView commitAnimations];
+    }
+
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    CGFloat mCurrentScale = 0.0;
+    CGFloat mLastScale  = 0.0;
+    
+    NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
+    mCurrentScale += [gestureRecognizer scale] - mLastScale;
+    mLastScale = [gestureRecognizer scale];
+    
+    switch (gestureRecognizer.state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSLog(@"Pinch start:");
+        } break;
+        case UIGestureRecognizerStateChanged:
+        {
+            //NSLog(@"scale = %f", recognizer.scale);
+            NSLog(@"Pinch origin:");
+            
+        } break;
+        case UIGestureRecognizerStateEnded:
+        {
+            NSLog(@"Pinch end:");
+            mLastScale = 1.0;
+            
+            if(gestureRecognizer.scale < 1.0){
+                mCurrentScale = 1.0;
+            }
+            if(gestureRecognizer.scale > 1.5){
+                mCurrentScale = 1.0;
+            }
+        } break;
+        default :
+        {
+            NSLog(@"other state");
+        }
+    }
+    CGAffineTransform currentTransform = CGAffineTransformIdentity;
+    currentTransform = CGAffineTransformMakeRotation (M_PI * 270 / 180.0f);
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, mCurrentScale, mCurrentScale);
+    self.view.transform = newTransform;
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {

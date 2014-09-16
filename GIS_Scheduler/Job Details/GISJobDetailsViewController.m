@@ -16,6 +16,7 @@
 #import "GISJobDetailsStore.h"
 #import "GISStoreManager.h"
 #import "GISConstants.h"
+#import "GISAddUpdateJobsViewController.h"
 @interface GISJobDetailsViewController ()
 
 @end
@@ -44,18 +45,23 @@
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c", nil];
     
      selected_row=999999;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+     jobChangeHistory_background_UIView.hidden=YES;
+     jobChangeHistory_foreground_UIView.hidden=YES;
+    
+    
 }
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
     NSDictionary *dict=[notification userInfo];
-    
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     //[paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
     [paramsDict setObject:@"2701" forKey:KRequestId];
@@ -68,7 +74,8 @@
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
     [[GISStoreManager sharedManager]removeJobDetailsObjects];
-    GISJobDetailsStore *jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
+    GISJobDetailsStore *jobDetailsStore;
+    jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
 
     if(jobDetails_Array.count>0)
        [jobDetails_Array removeAllObjects];
@@ -81,7 +88,6 @@
 {
     NSLog(@"Failure");
 }
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -176,6 +182,7 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
+    
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
     if (btnTag==111)
     {
@@ -221,13 +228,42 @@
     }
 }
 
-
 -(void)dismissPopOverNow
 {
     [popover dismissPopoverAnimated:YES];
 }
 
+-(IBAction)addNewJob_buttonPressed:(id)sender
+{
+    GISAddUpdateJobsViewController *jobaddUpdate=[[GISAddUpdateJobsViewController alloc]initWithNibName:@"GISAddUpdateJobsViewController" bundle:nil];
+    [self presentViewController:jobaddUpdate animated:YES completion:nil];
+}
+
+
+-(IBAction)nextButtonPressed:(id)sender
+{
     
+    
+}
+-(IBAction)jobHistory_TitleButtonPressed:(id)sender
+{
+    jobChangeHistory_background_UIView.hidden=YES;
+    jobChangeHistory_foreground_UIView.hidden=YES;
+    if ([sender tag]==1)//Cancel Button
+    {
+        
+    }
+    else//Done Button
+    {
+        
+    }
+    
+}
+-(void)showChangeJobHistoryView
+{
+    jobChangeHistory_background_UIView.hidden=NO;
+    jobChangeHistory_foreground_UIView.hidden=NO;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

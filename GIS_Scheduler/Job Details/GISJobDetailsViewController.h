@@ -30,10 +30,16 @@
     NSString *payType_temp_string;
     BOOL isDelete;
     int currentObjTag_toDelete;
+    IBOutlet UIView *jobChangeHistory_background_UIView;
+     IBOutlet UIView *jobChangeHistory_foreground_UIView;
+    
 }
 
-
+-(IBAction)nextButtonPressed:(id)sender;
 -(IBAction)pickerButtonPressed:(id)sender;
 -(void)editButtonPressed:(id)sender;
 -(void)deleteButtonPressed:(id)sender;
+-(IBAction)addNewJob_buttonPressed:(id)sender;
+
+-(IBAction)jobHistory_TitleButtonPressed:(id)sender;
 @end

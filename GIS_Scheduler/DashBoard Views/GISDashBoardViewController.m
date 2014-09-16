@@ -24,6 +24,11 @@
 #import "GISDropDownsObject.h"
 #import "GISUtility.h"
 #import "GISServiceProviderRequestedJobsViewController.h"
+#import "GISViewEditServiceViewController.h"
+#import "GISJobAssignmentViewController.h"
+#import "GISFindRequestJobsViewController.h"
+
+
 @interface GISDashBoardViewController ()
 
 @end
@@ -167,6 +172,28 @@
     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+    [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+    
+    [_countLabel1 setFont:[GISFonts tiny]];
+    _countLabel1.textAlignment = NSTextAlignmentCenter;
+    _countLabel1.layer.cornerRadius = 10.0;
+    _countLabel1.layer.masksToBounds = YES;
+    [_countLabel1 setTextColor:[UIColor blackColor]];
+    _countLabel1.userInteractionEnabled = YES;
+    
+    [_countLabel2 setFont:[GISFonts tiny]];
+    _countLabel2.textAlignment = NSTextAlignmentCenter;
+    _countLabel2.layer.cornerRadius = 10.0;
+    _countLabel2.layer.masksToBounds = YES;
+    [_countLabel2 setTextColor:[UIColor blackColor]];
+    _countLabel2.userInteractionEnabled = YES;
+    
+    [_countLabel3 setFont:[GISFonts tiny]];
+    _countLabel3.textAlignment = NSTextAlignmentCenter;
+    _countLabel3.layer.cornerRadius = 10.0;
+    _countLabel3.layer.masksToBounds = YES;
+    [_countLabel3 setTextColor:[UIColor blackColor]];
+    _countLabel3.userInteractionEnabled = YES;
 
 }
 
@@ -281,13 +308,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(!tableHeader3_UIView.isHidden)
+    if(!tableHeader3_UIView.isHidden){
         return [SPJobsArray count];
-    else if(!tableHeader1_UIView.isHidden)
+    }
+    else if(!tableHeader1_UIView.isHidden){
         return [NMRequestsArray count];
-    else if (!tableHeader2_UIView.isHidden)
+    }
+    else if (!tableHeader2_UIView.isHidden){
         return [NMRequestsArray count];
-        
+    }
+    
     return 20;
 }
 
@@ -418,9 +448,18 @@
 
 -(void)pushToViewController:(int)section rowValue:(int)row{
     
-    [self.navigationController popViewControllerAnimated:NO];
+     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if(section ==1){
+    if(section == 0){
+        appDelegate.isFromViewEditService = NO;
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    else if(section ==1){
+        
+        appDelegate.isFromViewEditService = NO;
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
         if(row == 1){
             
             appDelegate.isNewRequest = NO;
@@ -437,8 +476,48 @@
             [self.navigationController pushViewController:serviceProviderRequested animated:NO];
         }
         
+    } else if(section ==2){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
+        if (row==0) {
+            
+            appDelegate.isFromViewEditService = NO;
+            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+            detailViewController.view_string = kJobAssignment_Screen;
+            [self.navigationController pushViewController:detailViewController animated:NO];
+        }
+
+        if(row == 1){
+            
+            appDelegate.isFromViewEditService = YES;
+            GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+            
+            [self.navigationController pushViewController:viewEditView animated:NO];
+            
+//            GISViewEditServiceViewController *serviceViewController =[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
+//            [self.navigationController pushViewController:serviceViewController animated:NO];
+        }
     }
     
+  
+    else if(section == 3){
+        
+        [self.navigationController popViewControllerAnimated:NO];
+        
+        appDelegate.isFromViewEditService = NO;
+        
+        if (row==0) {
+            
+            GISFindRequestJobsViewController *findReqJobs=(GISFindRequestJobsViewController *)[[GISFindRequestJobsViewController alloc]initWithNibName:@"GISFindRequestJobsViewController" bundle:nil];
+            [self.navigationController pushViewController:findReqJobs animated:NO];
+            
+//            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+//            detailViewController.view_string = kFindRequestJobs_Screen;
+//            [self.navigationController pushViewController:detailViewController animated:NO];
+            
+        }
+    }
 }
 
 -(void)successmethod_Requestjobs:(GISJsonRequest *)response
@@ -457,6 +536,8 @@
                 [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
                 spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
                 SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+                [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
+
                 
                 [self removeLoadingView];
                 
@@ -500,6 +581,9 @@
 
                 nmRequestStore=[[GISSchedulerNMRequestsStore alloc]initWithJsonDictionary:response.responseJson];
                 NMRequestsArray=[[GISStoreManager sharedManager] getRequest_NMRequestObject];
+                
+                [_countLabel1 setText:[NSString stringWithFormat:@"%d",[NMRequestsArray count]]];
+                [_countLabel2 setText:[NSString stringWithFormat:@"%d",[NMRequestsArray count]]];
                 
                 [self removeLoadingView];
                 
@@ -694,6 +778,25 @@
     
     btn_tag = btn.tag;
     
+    NSMutableString *alertString = [[NSMutableString alloc] init];
+    [alertString setString:@""];
+    
+    if([spJobsObj.GisResponse_id_String length] == 0 || [spJobsObj.PayType_id_String length] == 0){
+        
+        if([spJobsObj.GisResponse_id_String length] == 0){
+            [alertString appendFormat:@"%@ %@",@"GIS Response",@"\n"];
+        }
+        
+        if([spJobsObj.PayType_id_String length] == 0){
+            
+            [alertString appendFormat:@"%@",@"PayType"];
+        }
+        
+        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),alertString]];
+        
+        return;
+    }
+    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
@@ -754,8 +857,6 @@
 {
     NSLog(@"Failure");
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {

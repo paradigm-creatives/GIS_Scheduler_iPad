@@ -29,9 +29,10 @@
     UIPopoverController *popover;
     int btnTag;
     
-     NSMutableArray *chooseRequest_mutArray;
-    
+    NSMutableArray *chooseRequest_mutArray;
 }
+
+
 @property(nonatomic,strong) NSString *view_string;
 
 @property(nonatomic,readwrite) BOOL isMasterHide;
@@ -41,4 +42,6 @@
 -(IBAction)searchButton_Pressed:(id)sender;
 -(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender;
 -(IBAction)pickerButton_pressed:(id)sender;
+
+-(IBAction)listOfServiceProviders_ButtonPressed:(id)sender;
 @end

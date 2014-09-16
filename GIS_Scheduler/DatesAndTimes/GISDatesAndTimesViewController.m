@@ -23,6 +23,7 @@
 #import "GISDatesTimesDetailStore.h"
 #import "GISCreateJobs_Cell.h"
 
+
 @interface GISDatesAndTimesViewController ()
 
 @end
@@ -169,6 +170,16 @@
     
     [self.cancelBtn_createJobs addTarget:self action:@selector(cancelButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
         [self.doneBtn_createJobs addTarget:self action:@selector(doneButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if(!appDelegate.isNewRequest){
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+        
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -665,6 +676,13 @@
                                                               toDate:endDate
                                                              options:0];
         
+        //unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
+        //NSDateComponents *comps = [gregorian components:unitFlags fromDate:startDate  toDate:endDate  options:0];
+        //int months = [comps month];
+        //int days = [comps day];
+        
+        NSLog(@"StartDate-->%@",startDate);
+        NSLog(@"EndDate-->%@",endDate);
         NSLog(@"date-IS->%ld",(long)[components day]);
         
         for (int i=0; i<[components day]+1;i++)
@@ -691,7 +709,7 @@
             NSString *dayString= [dateFormatter stringFromDate:visitDate];
             
             NSLog(@"d*********************   DayString----%@", dayString);
-            
+            BOOL isFound;
             for (int i=1; i<=7; i++)
             {
                 if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%d",i]])
@@ -721,7 +739,8 @@
         
         NSLog(@"--%@----",[createDateTimes_mutArray description]);
         if (createDateTimes_mutArray.count<1) {
-             [self getBetween_dates];
+          //   [self getBetween_dates];
+            [GISUtility showAlertWithTitle:@"GIS" andMessage:@"No data found to seleced dates"];
         }
         
         //[self pushToDatesAndTimes_DetailView];
@@ -857,27 +876,48 @@
 {
     GISDatesTimesDetailStore *store;
     NSLog(@"successmethod_get_Date_Time Success---%@",response.responseJson);
-    [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
     
-    store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
-    [detail_mut_array removeAllObjects];
-    detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
-    [self sortTheDatesAndTimes];
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
     
-    if (detail_mut_array.count>0) {
-        isDateTimeDataAvailable=YES;
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [self removeLoadingView];
+        [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
+        
+        store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
+        [detail_mut_array removeAllObjects];
+        detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
+        [self sortTheDatesAndTimes];
+        
+        if (detail_mut_array.count>0) {
+            isDateTimeDataAvailable=YES;
+        }
+        else
+        {
+            isDateTimeDataAvailable=NO;
+        }
+        
+        if([appDelegate.datesArray count]>0)
+            [appDelegate.datesArray removeAllObjects];
+        [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
+        
+        [createJObs_tableView reloadData];
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     }
-    else
-    {
-        isDateTimeDataAvailable=NO;
-    }
-    [createJObs_tableView reloadData];
 }
 
 
 -(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+
 }
 
 -(void)sortTheDatesAndTimes
@@ -1180,13 +1220,11 @@
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
 
 @end

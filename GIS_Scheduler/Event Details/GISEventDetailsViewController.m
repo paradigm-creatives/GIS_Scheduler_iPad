@@ -87,7 +87,7 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if(appDelegate.isFromContacts && !appDelegate.isNewRequest){
+    if(!appDelegate.isNewRequest){
         
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [self getEventDetailsdata];

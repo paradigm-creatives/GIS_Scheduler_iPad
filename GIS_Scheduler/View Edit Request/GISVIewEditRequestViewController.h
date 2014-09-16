@@ -13,9 +13,10 @@
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
 #import "GISEventDetailsViewController.h"
+#import "GISBaseViewController.h"
 
 
-@interface GISVIewEditRequestViewController : UIViewController<UITabBarDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISVIewEditRequestViewController : GISBaseViewController<UITabBarDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISLoginDetailsObject *login_Obj;
     GISDropDownStore *dropDownStore;
@@ -36,6 +37,7 @@
 @property (nonatomic,strong) UIPopoverController *popover;
 
 @property (nonatomic, retain) IBOutlet UIView *mainView;
+@property (nonatomic, retain) IBOutlet UIView *topView;
 @property (nonatomic, retain) IBOutlet UITabBar *mainTabbar;
 @property (nonatomic, retain) IBOutlet UITabBarItem *contactItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *eventDetailsItem;

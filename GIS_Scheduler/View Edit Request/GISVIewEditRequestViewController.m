@@ -28,6 +28,9 @@
 #import "GISContactsAndBillingViewController.h"
 #import "GISJobDetailsViewController.h"
 #import "GISSummaryViewController.h"
+#import "GISViewEditServiceViewController.h"
+#import "FFEvent.h"
+#import "FFImportantFilesForCalendar.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -64,9 +67,9 @@
     
     GISEventDetailsViewController *eventDetailsView=[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
     GISLocationDetailsViewController *locationDetailsView=[[GISLocationDetailsViewController alloc]initWithNibName:@"GISLocationDetailsViewController" bundle:nil];
-    _viewControllers=[NSArray arrayWithObjects: eventDetailsView,locationDetailsView, nil];
-    _currentController= eventDetailsView;
-    [_mainView addSubview:_currentController.view];
+//    _viewControllers=[NSArray arrayWithObjects: eventDetailsView,locationDetailsView, nil];
+//    _currentController= eventDetailsView;
+//    [_mainView addSubview:_currentController.view];
 
     GISAttendeesViewController *attendeesView=[[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
     
@@ -78,11 +81,26 @@
 
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
-    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView, nil];
+    GISViewEditServiceViewController *serviceView=[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
+    [serviceView setArrayWithEvents:[self arrayWithEvents]];
     
-    _currentController= contactsBillingView;
+    _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView,serviceView, nil];
+    
+    if(appDelegate.isFromViewEditService){
+        
+        _currentController= serviceView;
+
+        [_topView setHidden:YES];
+        CGRect frame = _mainView.frame;
+        frame.origin.y = 64;
+        _mainView.frame = frame;
+        
+    }else{
+        _currentController= contactsBillingView;
+    }
     
     [_mainView addSubview:_currentController.view];
+    
     [[UINavigationBar appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[GISFonts large],NSFontAttributeName,UIColorFromRGB(0x00457c),NSForegroundColorAttributeName, nil]];
 
     [self setItemFont:_contactItem];
@@ -320,6 +338,85 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kRequestInfo object:nil];
     
+}
+
+- (NSMutableArray *)arrayWithEvents {
+    
+    FFEvent *event1 = [FFEvent new];
+    [event1 setStringCustomerName: @"Customer A"];
+    [event1 setNumCustomerID:@1];
+    [event1 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
+    [event1 setDateTimeBegin:[NSDate dateWithHour:10 min:00]];
+    [event1 setDateTimeEnd:[NSDate dateWithHour:15 min:13]];
+    [event1 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event2 = [FFEvent new];
+    [event2 setStringCustomerName: @"Customer B"];
+    [event2 setNumCustomerID:@2];
+    [event2 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
+    [event2 setDateTimeBegin:[NSDate dateWithHour:9 min:15]];
+    [event2 setDateTimeEnd:[NSDate dateWithHour:12 min:138]];
+    [event2 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event3 = [FFEvent new];
+    [event3 setStringCustomerName: @"Customer C"];
+    [event3 setNumCustomerID:@3];
+    [event3 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
+    [event3 setDateTimeBegin:[NSDate dateWithHour:16 min:00]];
+    [event3 setDateTimeEnd:[NSDate dateWithHour:17 min:13]];
+    [event3 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event4 = [FFEvent new];
+    [event4 setStringCustomerName: @"Customer D"];
+    [event4 setNumCustomerID:@4];
+    [event4 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
+    [event4 setDateTimeBegin:[NSDate dateWithHour:18 min:00]];
+    [event4 setDateTimeEnd:[NSDate dateWithHour:19 min:13]];
+    [event4 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event5 = [FFEvent new];
+    [event5 setStringCustomerName: @"Customer E"];
+    [event5 setNumCustomerID:@5];
+    [event5 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
+    [event5 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
+    [event5 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
+    [event5 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event6 = [FFEvent new];
+    [event6 setStringCustomerName: @"Customer F"];
+    [event6 setNumCustomerID:@6];
+    [event6 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:25]];
+    [event6 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
+    [event6 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
+    [event6 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event7 = [FFEvent new];
+    [event7 setStringCustomerName: @"Customer G"];
+    [event7 setNumCustomerID:@7];
+    [event7 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:1]];
+    [event7 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
+    [event7 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
+    [event7 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    FFEvent *event8 = [FFEvent new];
+    [event8 setStringCustomerName: @"Customer H"];
+    [event8 setNumCustomerID:@8];
+    [event8 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:2]];
+    [event8 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
+    [event8 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
+    [event8 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
+    
+    return [NSMutableArray arrayWithArray:@[event1, event2, event3, event4, event5, event6, event7, event8]];
+}
+
+- (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"rightSwipeHandle");
+}
+
+- (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"leftSwipeHandle");
 }
 
 

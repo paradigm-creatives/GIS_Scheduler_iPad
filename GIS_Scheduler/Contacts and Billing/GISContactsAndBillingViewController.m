@@ -365,6 +365,7 @@
     }
     
 }
+
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"Failure");

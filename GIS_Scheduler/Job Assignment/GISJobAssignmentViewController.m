@@ -11,6 +11,9 @@
 #import "GISConstants.h"
 #import "GISDatabaseManager.h"
 #import "GISUtility.h"
+#import "GISFilterMoreViewController.h"
+#import "GISServiceProviderPopUpViewController.h"
+
 
 @interface GISJobAssignmentViewController ()
 
@@ -33,11 +36,11 @@
     // Do any additional setup after loading the view from its nib.
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
+    //self.navigationItem.hidesBackButton = YES;
     dashBoard_UIView.hidden=YES;
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
     rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -52,8 +55,7 @@
     
     [self.view addGestureRecognizer:leftRecognizer];
     
-    self.title=@"Jobs Assignment";
-    
+    self.title=NSLocalizedStringFromTable(@"Jobs_Assignment", TABLE, nil);
     CGRect frame1=table_UIView.frame;
     frame1.origin.x=0;
     table_UIView.frame=frame1;
@@ -67,8 +69,21 @@
         CGRect new_frame=table_UIView.frame;
         new_frame.origin.y=90;
         table_UIView.frame=new_frame;
-        self.title=@"Find Requests/Jobs - Result";
+        self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     }
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = item;
+}
+
+-(void)backButtonPressed
+{
+    if (table_UIView.frame.origin.x==0) {
+        [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)splitViewController: (UISplitViewController*)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
@@ -122,17 +137,19 @@
 {
     return 1;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44;
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 10;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     GISJobAssignmentCell *cell=(GISJobAssignmentCell *)[tableView dequeueReusableCellWithIdentifier:@"AssignmentCell"];
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
@@ -148,8 +165,10 @@
 
 -(IBAction)pickerButton_pressed:(id)sender
 {
-
     UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISJobAssignmentCell *)button.superview.superview.superview.superview.superview;
+    GISJobAssignmentCell *jobAssignmentCell=(GISJobAssignmentCell *)tempCellRef;
+    
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     
@@ -198,9 +217,9 @@
         tableViewController1.popOverArray=chooseRequest_mutArray;
         
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+45, button.frame.origin.x+button.frame.size.width, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-        
     }
 }
+
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
@@ -243,6 +262,7 @@
     }
 }
 
+
 -(void)dismissPopOverNow
 {
     [popover dismissPopoverAnimated:YES];
@@ -250,15 +270,38 @@
 
 -(IBAction)filterMore_ButtonPressed:(id)sender
 {
+    UIButton *button=(UIButton *)sender;
     
+    GISFilterMoreViewController *tableViewController = [[GISFilterMoreViewController alloc] initWithNibName:@"GISFilterMoreViewController" bundle:nil];
+    //tableViewController.popOverDelegate=self;
+    //popover.popoverContentSize = CGSizeMake(433, 504);
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
+    popover.popoverContentSize = CGSizeMake(433, 504);
+    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+68, button.frame.origin.y+88, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+
 }
+
+
 -(IBAction)searchButton_Pressed:(id)sender
 {
     
 }
+
 -(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender
 {
     
+}
+
+-(IBAction)listOfServiceProviders_ButtonPressed:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISJobAssignmentCell *)button.superview.superview.superview.superview.superview;
+    GISJobAssignmentCell *attendeesCell=(GISJobAssignmentCell *)tempCellRef;
+    
+    GISServiceProviderPopUpViewController *popOverController=[[GISServiceProviderPopUpViewController alloc]initWithNibName:@"GISServiceProviderPopUpViewController" bundle:nil];
+    popover=[[UIPopoverController alloc]initWithContentViewController:popOverController];
+    popover.popoverContentSize = CGSizeMake(340, 357);
+    [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+480, attendeesCell.service_Provider_button.frame.origin.y+35, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
