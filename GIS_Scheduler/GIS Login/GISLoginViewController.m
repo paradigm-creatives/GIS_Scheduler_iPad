@@ -253,6 +253,7 @@
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
     
     NSLog(@"Failure");
+
 }
 
 -(void)successmethod_dropDown:(GISJsonRequest *)response
