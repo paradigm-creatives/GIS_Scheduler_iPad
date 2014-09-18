@@ -172,6 +172,28 @@
     return lastDay;
 }
 
++(NSDate *)getMonthFirstDate:(NSDate *)date{
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    components.day = 1;
+    NSDate *firstDayOfMonthDate = [[NSCalendar currentCalendar] dateFromComponents: components];
+    NSLog(@"First day of month: %@", [firstDayOfMonthDate descriptionWithLocale:[NSLocale currentLocale]]);
+    
+    return firstDayOfMonthDate;
+}
++(NSDate *)getMonthlastDate:(NSDate *)date{
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    [components setMonth:[components month]+1];
+    [components setDay:0];
+    NSDate *lastDayOfMonthDate = [[NSCalendar currentCalendar] dateFromComponents:components];
+    NSLog(@"last day of month: %@", [lastDayOfMonthDate descriptionWithLocale:[NSLocale currentLocale]]);
+    
+    return lastDayOfMonthDate;
+}
+
 + (BOOL)isTheSameDateTheCompA:(NSDateComponents *)compA compB:(NSDateComponents *)compB {
     
     return ([compA day]==[compB day] && [compA month]==[compB month ]&& [compA year]==[compB year]);

@@ -11,7 +11,7 @@
 #import "FFEventDetailView.h"
 
 #import "FFImportantFilesForCalendar.h"
-#import "TestListViewController.h"
+#import "GISViewEditListViewController.h"
 
 @interface FFEventDetailView ()
 @property (nonatomic, strong) FFEvent *event;

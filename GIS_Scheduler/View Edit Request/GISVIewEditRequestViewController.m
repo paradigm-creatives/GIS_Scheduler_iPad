@@ -86,7 +86,7 @@
     GISCommentViewController *commentView=[[GISCommentViewController alloc]initWithNibName:@"GISCommentViewController" bundle:nil];
     
     GISViewEditServiceViewController *serviceView=[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
-    //[serviceView setArrayWithEvents:[self arrayWithEvents]];
+    [serviceView setArrayWithEvents:[self arrayWithEvents]];
     
     _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView,serviceView, nil];
     appDelegate.isDateView = YES;
@@ -192,9 +192,7 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
-    
-     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUpdatedEventDetails) name:kEventsUpdated object:nil];
-   
+       
     [self getUpdatedEventDetails];
     
 

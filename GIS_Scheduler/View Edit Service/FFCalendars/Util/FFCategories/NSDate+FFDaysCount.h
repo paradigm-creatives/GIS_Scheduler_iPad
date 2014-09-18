@@ -31,5 +31,7 @@
 + (NSDate *)dateWithString:(NSString *)string;
 +(NSDate *)getWeekFirstDate:(NSDate *)date;
 +(NSDate *)getWeeklastDate:(NSDate *)date;
++(NSDate *)getMonthFirstDate:(NSDate *)date;
++(NSDate *)getMonthlastDate:(NSDate *)date;
 
 @end

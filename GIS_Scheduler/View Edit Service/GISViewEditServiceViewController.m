@@ -155,8 +155,8 @@
         [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
     }else if(appDelegate.isMonthView){
         
-        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
-        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthlastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
         
     }
     [paramsDict setObject:@"" forKey:@"ServiceProvider"];

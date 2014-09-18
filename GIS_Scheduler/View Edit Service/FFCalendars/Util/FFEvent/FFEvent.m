@@ -17,6 +17,5 @@
 @synthesize dateDay;
 @synthesize dateTimeBegin;
 @synthesize dateTimeEnd;
-@synthesize arrayWithGuests;
 
 @end

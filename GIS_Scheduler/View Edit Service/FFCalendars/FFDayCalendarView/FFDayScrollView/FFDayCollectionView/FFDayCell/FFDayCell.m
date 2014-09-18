@@ -13,6 +13,8 @@
 #import "FFHourAndMinLabel.h"
 #import "FFBlueButton.h"
 #import "FFImportantFilesForCalendar.h"
+#import "GISEventLabel.h"
+#import "GISEeventShowBackgroundView.h"
 
 @interface FFDayCell ()
 @property (nonatomic, strong) NSMutableArray *arrayLabelsHourAndMin;
@@ -110,7 +112,7 @@
 - (void)addButtonsWithArray:(NSArray *)array {
     
     for (UIView *subview in self.subviews) {
-        if ([subview isKindOfClass:[FFBlueButton class]] || [subview isKindOfClass:[UIView class]] || [subview isKindOfClass:[UILabel class]]) {
+        if ([subview isKindOfClass:[FFBlueButton class]] || [subview isKindOfClass:[GISEventLabel class]] || [subview isKindOfClass:[GISEeventShowBackgroundView class]]) {
             [subview removeFromSuperview];
         }
     }
@@ -121,7 +123,7 @@
     [labelWithSameYOfCurrentHour setAlpha:!boolIsToday];
     
     NSArray *arrayEvents = array;
-    UIView *view;
+    GISEeventShowBackgroundView *view;
     
     if (arrayEvents) {
         
@@ -148,22 +150,25 @@
             //[_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
             [_button setEvent:event];
             
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, _button.frame.origin.y,  _button.frame.size.width, _button.frame.size.height)];
+            view = [[GISEeventShowBackgroundView alloc] initWithFrame:CGRectMake(70, _button.frame.origin.y,  30, _button.frame.size.height)];
             [view setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
             
             [self addSubview:view];
             
-            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(30, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+            GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+            [label1 setBackgroundColor:[UIColor clearColor]];
             label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.numCustomerID];
             [label1 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
             [self addSubview:label1];
             
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(30, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+            GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+            [label2 setBackgroundColor:[UIColor clearColor]];
             label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
             [label2 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
             [self addSubview:label2];
             
-            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(30, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+            GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+            [label3 setBackgroundColor:[UIColor clearColor]];
             label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
             [label3 setFont:[UIFont fontWithName:@"Arial" size:10.0f]];
             [self addSubview:label3];

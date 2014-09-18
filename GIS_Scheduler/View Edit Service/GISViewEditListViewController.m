@@ -38,8 +38,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-     _testArray = [[NSArray alloc] initWithObjects:@"Anand",@"test",@"demo", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +57,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return  [_testArray count];
+    return  1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,9 +69,9 @@
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISViewEditListVIewCell" owner:self options:nil]objectAtIndex:0];
     }
     
-    cell.jobName.text = [GISUtility eventDisplayFormat:_testEvent.dateDay];
-    cell.eventTime.text = [NSDate stringTimeOfDate:_testEvent.dateTimeBegin];
-    cell.eventTitle.text = [NSDate stringTimeOfDate:_testEvent.dateTimeEnd];
+    cell.jobName.text = _testEvent.stringCustomerName;
+    cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
+    cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
     
     // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //    if (cell == nil) {

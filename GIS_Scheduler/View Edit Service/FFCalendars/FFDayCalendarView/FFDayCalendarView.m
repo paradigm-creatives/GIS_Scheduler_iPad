@@ -178,7 +178,6 @@
     appDelegate.isDateView = YES;
 
     [self addSubview:vlistView.view];
-    //[self addSubview:viewDetail];
 }
 
 #pragma mark - FFEventDetailView Protocol

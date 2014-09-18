@@ -15,7 +15,7 @@
 #import "FFSearchBarWithAutoComplete.h"
 #import "FFGuestsTableView.h"
 #import "FFImportantFilesForCalendar.h"
-#import "TestLabel.h"
+#import "GISEventLabel.h"
 //#import "SVProgressHUD.h"
 
 @interface FFEditEventView () <UIGestureRecognizerDelegate>
@@ -23,7 +23,7 @@
 @property (nonatomic, strong) UIButton *buttonCancel;
 @property (nonatomic, strong) UIButton *buttonDone;
 @property (nonatomic, strong) UIButton *buttonDelete;
-@property (nonatomic, strong) TestLabel *labelEventName;
+@property (nonatomic, strong) GISEventLabel *labelEventName;
 @property (nonatomic, strong) FFSearchBarWithAutoComplete *searchBarCustom;
 @property (nonatomic, strong) FFButtonWithDatePopover *buttonDate;
 @property (nonatomic, strong) FFButtonWithHourPopover *buttonTimeBegin;
@@ -118,7 +118,6 @@
     eventNew.dateDay = buttonDate.dateOfButton;
     eventNew.dateTimeBegin = buttonTimeBegin.dateOfButton;
     eventNew.dateTimeEnd = buttonTimeEnd.dateOfButton;
-    eventNew.arrayWithGuests = tableViewGuests.arrayWithSelectedItens;
     
 //    NSString *stringError;
 //    
@@ -211,7 +210,7 @@
 
 - (void)addEventTitle{
     
-    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height, self.frame.size.width, BUTTON_HEIGHT)];
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height, self.frame.size.width, BUTTON_HEIGHT)];
     [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentCenter];
     labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
@@ -234,7 +233,7 @@
 
 - (void)addTypeOfService{
     
-    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
     [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentCenter];
     labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
@@ -243,7 +242,7 @@
 
 - (void)addServiceProvider{
     
-    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
     [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentCenter];
     labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
@@ -269,7 +268,6 @@
     
     tableViewGuests = [[FFGuestsTableView alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width,buttonDelete.frame.origin.y-y-BUTTON_HEIGHT)];
     [tableViewGuests setAutoresizingMask:AR_WIDTH_HEIGHT];
-    [tableViewGuests setArrayWithSelectedItens:event.arrayWithGuests];
     [self addSubview:tableViewGuests];
 }
 
