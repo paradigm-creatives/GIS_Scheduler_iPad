@@ -9,7 +9,20 @@
 #import "GISViewEditServiceViewController.h"
 #import "FFCalendar.h"
 #import "GISConstants.h"
-
+#import "GISLoginDetailsObject.h"
+#import "GISDatabaseManager.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISDropDownStore.h"
+#import "GISStoreManager.h"
+#import "GISLoadingView.h"
+#import "PCLogger.h"
+#import "GISConstants.h"
+#import "GISJSONProperties.h"
+#import "GISUtility.h"
+#import "GISViewEditStore.h"
+#import "NSDate+FFDaysCount.h"
+#import "FFDateManager.h"
 
 @interface GISViewEditServiceViewController ()<FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol>
 @property (nonatomic) BOOL boolDidLoad;
@@ -19,7 +32,7 @@
 @property (nonatomic, strong) NSArray *arrayButtons;
 @property (nonatomic, strong) NSArray *arrayCalendars;
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
-@property (nonatomic, strong) FFYearCalendarView *viewCalendarYear;
+
 @property (nonatomic, strong) FFMonthCalendarView *viewCalendarMonth;
 @property (nonatomic, strong) FFWeekCalendarView *viewCalendarWeek;
 @property (nonatomic, strong) FFDayCalendarView *viewCalendarDay;
@@ -43,7 +56,6 @@
 @synthesize arrayButtons;
 @synthesize arrayCalendars;
 @synthesize popoverControllerEditar;
-@synthesize viewCalendarYear;
 @synthesize viewCalendarMonth;
 @synthesize viewCalendarWeek;
 @synthesize viewCalendarDay;
@@ -76,6 +88,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
     self.navigationController.navigationBarHidden = YES;
     
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
     [self customNavigationBarLayout];
     
     [self addCalendars];
@@ -94,7 +108,8 @@
                                                        nil] forState:UIControlStateSelected];
     
     [[UITabBar appearance] setSelectedItem:self.dayItem];
-
+    
+    viewEdit_Array = [[NSMutableArray alloc] init];
 
 }
 
@@ -114,6 +129,7 @@
 
 - (void)dateChanged:(NSNotification *)notification {
     
+    
     [self updateLabelWithMonthAndYear];
 }
 
@@ -123,6 +139,29 @@
     NSString *string = [NSString stringWithFormat:@"%@ %i", [arrayMonthName objectAtIndex:comp.month-1], comp.year];
     [labelWithMonthAndYear setText:string];
     [labelMonthAndYear setText:string];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    if(appDelegate.isDateView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+    }else if(appDelegate.isWeekView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeekFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }else if(appDelegate.isMonthView){
+        
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+        
+    }
+    [paramsDict setObject:@"" forKey:@"ServiceProvider"];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
 }
 
 #pragma mark - Init dictEvents
@@ -323,6 +362,22 @@
     
     int index = item.tag;//[arrayButtons indexOfObject:sender];
     
+    if(item.tag == 0){
+        appDelegate.isDateView = YES;
+        appDelegate.isWeekView = NO;
+        appDelegate.isMonthView = NO;
+        
+    }else if(item.tag == 1){
+        appDelegate.isWeekView = YES;
+        appDelegate.isDateView = NO;
+        appDelegate.isMonthView = NO;
+        
+    }else if(item.tag == 2){
+        appDelegate.isMonthView = YES;
+        appDelegate.isWeekView = NO;
+        appDelegate.isDateView = NO;
+    }
+    
     [self.mainView bringSubviewToFront:[arrayCalendars objectAtIndex:index]];
     
     boolYearViewIsShowing = (index == 0);
@@ -351,6 +406,107 @@
         frame.origin.y= 121.0f;
         _mainView.frame = frame;
     }
+}
+-(void)successmethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_viewEditSchedule Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                GISViewEditStore *viewEditStore;
+                
+                if([viewEdit_Array count]>0)
+                   [viewEdit_Array removeAllObjects];
+                
+                [[GISStoreManager sharedManager] removeViewEditObjects];
+               viewEditStore=[[GISViewEditStore alloc]initWithJsonDictionary:response.responseJson];
+               viewEdit_Array = [[GISStoreManager sharedManager] getViewEditObjects];
+                
+                [self addEventCalander:viewEdit_Array];
+                
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
+
+- (IBAction) dateSelected:(id)sender{
+    
+//    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+//    
+//    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+//    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+//    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+//    
+//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//    [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+//    [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+//    [paramsDict setObject:@"" forKey:@"ServiceProvider"];
+//    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+//    [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
+    
+}
+
+-(void)addEventCalander:(NSMutableArray *)eventArray{
+    
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [dictEvents removeAllObjects];
+        
+    for(GISViewEditDateObject *viewEditObject in eventArray){
+        
+        FFEvent *event = [FFEvent new];
+        [event setStringCustomerName: viewEditObject.jobNumber_String];
+        [event setNumCustomerID:[f numberFromString:viewEditObject.jobId_String]];
+        [event setDateDay:[NSDate dateWithString:viewEditObject.jobDate_String]];
+        NSString *str = [GISUtility getTimeData:viewEditObject.startTime_String];
+        NSArray *strArray = [str componentsSeparatedByString:@":"];
+        [event setDateTimeBegin:[NSDate dateWithHour:[[strArray objectAtIndex:0] intValue] min:[[strArray objectAtIndex:1] intValue]]];
+        NSString *endTimestr = [GISUtility getTimeData:viewEditObject.endTime_String];
+        NSArray *endTImestrArray = [endTimestr componentsSeparatedByString:@":"];
+        [event setDateTimeEnd:[NSDate dateWithHour:[[endTImestrArray objectAtIndex:0] intValue] min:[[endTImestrArray objectAtIndex:1] intValue]]];
+        [self addNewEvent:event];
+    }
+    
+    [self removeLoadingView];
+    
 }
 
 

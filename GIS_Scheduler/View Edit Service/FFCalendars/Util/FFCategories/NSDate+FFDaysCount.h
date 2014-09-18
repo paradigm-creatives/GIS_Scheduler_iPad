@@ -28,5 +28,8 @@
 + (NSDateComponents *)componentsWithHour:(NSInteger)hour min:(NSInteger)min;
 + (BOOL)isTheSameDateTheCompA:(NSDateComponents *)compA compB:(NSDateComponents *)compB;
 + (BOOL)isTheSameTimeTheCompA:(NSDateComponents *)compA compB:(NSDateComponents *)compB;
++ (NSDate *)dateWithString:(NSString *)string;
++(NSDate *)getWeekFirstDate:(NSDate *)date;
++(NSDate *)getWeeklastDate:(NSDate *)date;
 
 @end

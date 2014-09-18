@@ -11,6 +11,7 @@
 #import "FFEventDetailView.h"
 
 #import "FFImportantFilesForCalendar.h"
+#import "TestListViewController.h"
 
 @interface FFEventDetailView ()
 @property (nonatomic, strong) FFEvent *event;
@@ -65,6 +66,7 @@
         [self addLabelCustomerNameWithViewSize:frame.size];
         [self addLabelDateWithViewSize:frame.size];
         [self addLabelHoursWithViewSize:frame.size];
+        
     }
     return self;
 }
@@ -123,7 +125,7 @@
     CGFloat gap = 30;
     
     labelCustomerName = [[UILabel alloc] initWithFrame:CGRectMake(gap, buttonEditPopover.frame.origin.y, sizeView.width-3*gap-buttonEditPopover.frame.size.width, buttonEditPopover.frame.size.height)];
-    [labelCustomerName setText:event.stringCustomerName];
+    [labelCustomerName setText:[NSString stringWithFormat:@"Job Id %@",event.numCustomerID]];
     [labelCustomerName setFont:[UIFont boldSystemFontOfSize:labelCustomerName.font.pointSize]];
     
     [self addSubview:labelCustomerName];

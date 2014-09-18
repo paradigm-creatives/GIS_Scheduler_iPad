@@ -12,10 +12,13 @@
 
 #import "FFEventDetailPopoverController.h"
 #import "FFEditEventPopoverController.h"
+#import "GISAppDelegate.h"
+#import "GISPopOverController.h"
 
-@interface FFButtonWithEditAndDetailPopoversForMonthCell () <FFEventDetailPopoverControllerProtocol, FFEditEventPopoverControllerProtocol>
+@interface FFButtonWithEditAndDetailPopoversForMonthCell () <FFEventDetailPopoverControllerProtocol, FFEditEventPopoverControllerProtocol,TestEventDetailPopoverControllerProtocol>
 @property (nonatomic, strong) FFEventDetailPopoverController *popoverControllerDetails;
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
+@property (nonatomic, strong) GISPopOverController *testPopoverControllerDetails;
 @end
 
 @implementation FFButtonWithEditAndDetailPopoversForMonthCell
@@ -26,6 +29,7 @@
 @synthesize event;
 @synthesize popoverControllerDetails;
 @synthesize popoverControllerEditar;
+@synthesize testPopoverControllerDetails;
 
 #pragma mark - Lifecycle
 
@@ -66,13 +70,24 @@
     
     if (event) {
         
-        popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:event];
-        [popoverControllerDetails setProtocol:self];
+//        popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:event];
+//        [popoverControllerDetails setProtocol:self];
+//        
+//        [popoverControllerDetails presentPopoverFromRect:self.frame
+//                                           inView:[super superview]
+//                         permittedArrowDirections:UIPopoverArrowDirectionAny
+//                                         animated:YES];
         
-        [popoverControllerDetails presentPopoverFromRect:self.frame
-                                           inView:[super superview]
-                         permittedArrowDirections:UIPopoverArrowDirectionAny
-                                         animated:YES];
+        GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+        appDelegate.isMonthView = YES;
+        testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:event];
+        [testPopoverControllerDetails setTestProtocol:self];
+        
+         [testPopoverControllerDetails presentPopoverFromRect:self.frame
+                                                           inView:[super superview]
+                                         permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                         animated:YES];
+
     }
 }
 
@@ -96,6 +111,25 @@
     if (protocol != nil && [protocol respondsToSelector:@selector(saveEditedEvent:ofButton:)]) {
         [protocol saveEditedEvent:eventNew ofButton:self];
     }
+}
+
+
+#pragma mark - TestEventDetailPopoverController Protocol
+
+- (void)showPopoverEventDetailWithEvent:(FFEvent *)_event{
+    
+    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isMonthView) {
+        
+        popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:_event];
+        [popoverControllerDetails setProtocol:self];
+        
+        [popoverControllerDetails presentPopoverFromRect:self.frame
+                                                  inView:self
+                                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                animated:YES];
+    }
+    
 }
 
 - (void)deleteEvent {

@@ -50,6 +50,7 @@
 @property (nonatomic, retain) NSMutableArray *payTypeArray;
 @property (nonatomic, retain) NSMutableArray *jobDetailsArray;
 @property (nonatomic, retain) NSMutableArray *typeOfServiceArray;
+@property (nonatomic, retain) NSMutableArray *viewEditArray;
 
 @end
 
@@ -103,6 +104,7 @@ static GISStoreManager *singletonManager = nil;
         _payTypeArray = [[NSMutableArray alloc]init];
         _jobDetailsArray = [[NSMutableArray alloc]init];
         _typeOfServiceArray = [[NSMutableArray alloc]init];
+        _viewEditArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -716,6 +718,25 @@ static GISStoreManager *singletonManager = nil;
 {
     [_typeOfServiceArray removeAllObjects];
 }
+
+- (BOOL)addViewEditObject:(GISViewEditDateObject *)viewEditObj
+{
+    BOOL isAdded = FALSE;
+    if (viewEditObj != nil) {
+        [_viewEditArray addObject:viewEditObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+- (NSMutableArray*)getViewEditObjects
+{
+    return [_viewEditArray count]?_viewEditArray:nil;
+}
+- (void)removeViewEditObjects
+{
+    [_viewEditArray removeAllObjects];
+}
+
 
 - (void)destroy{
     

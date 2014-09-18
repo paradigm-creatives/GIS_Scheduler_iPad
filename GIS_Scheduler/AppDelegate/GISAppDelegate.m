@@ -54,6 +54,10 @@
     self.isLogout = NO;
     self.isContact = NO;
     self.isFromViewEditService = NO;
+    
+    self.isDateView = NO;
+    self.isMonthView = NO;
+    self.isWeekView = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

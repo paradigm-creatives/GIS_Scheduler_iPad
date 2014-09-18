@@ -13,6 +13,9 @@
 
 #define DATE_MANAGER_DATE_CHANGED @"br.com.FFCalendar.DateManager.DateChanged"
 #define DATE_MANAGER_DATE_CHANGED_KEY @"br.com.FFCalendar.DateManager.DateChanged.Key"
+#define SHOW_EVENT @"showEvent"
+#define SHOW_WEEK_EVENT @"showweekEvent"
+#define SHOW_MONTH_EVENT @"showMonthEvent"
 
 @interface FFDateManager : NSObject
 

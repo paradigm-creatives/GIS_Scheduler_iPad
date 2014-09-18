@@ -22,6 +22,7 @@
     GISDropDownStore *dropDownStore;
     NSMutableArray *requestNumbers_mutArray;
     GISAppDelegate *appDelegate;
+    NSMutableArray *viewEdit_Array;
 }
 @property (nonatomic, strong) IBOutlet UILabel *requestID_Label;
 @property (nonatomic, strong) IBOutlet UIButton *requestBtn;

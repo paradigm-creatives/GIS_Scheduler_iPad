@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GISBaseViewController.h"
+#import "GISAppDelegate.h"
 
 @protocol FFCalendarViewControllerProtocol <NSObject>
 @required
@@ -15,6 +16,10 @@
 @end
 
 @interface GISViewEditServiceViewController : GISBaseViewController
+{
+    NSMutableArray *viewEdit_Array;
+    GISAppDelegate *appDelegate;
+}
 
 @property (nonatomic, strong) id <FFCalendarViewControllerProtocol> protocol;
 @property (nonatomic, strong) NSMutableArray *arrayWithEvents;
@@ -23,6 +28,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *staff_freeLancerButton;
 
 - (void)setArrayWithEvents:(NSMutableArray *)_arrayWithEvents;
-
+- (IBAction) dateSelected:(id)sender;
 
 @end

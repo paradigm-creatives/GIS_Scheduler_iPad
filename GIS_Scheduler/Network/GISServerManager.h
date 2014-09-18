@@ -85,6 +85,8 @@
 
 - (void)getPayTypedata:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
+- (void)getViewEditScheduledata:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
 
 - (void)getJobDetails_data:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 

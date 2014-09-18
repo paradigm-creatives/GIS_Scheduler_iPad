@@ -478,6 +478,22 @@
 
 #pragma mark JobDetails End
 
+#pragma Mark ViewEditSchedle Start
+
+#define kViewSchedule_BillAmount @"BillAmount"
+#define kViewSchedule_EndTime @"EndTime"
+#define kViewSchedule_JobDate @"JobDate"
+#define kViewSchedule_JobID @"JobID"
+#define kViewSchedule_JobNumber @"JobNumber"
+#define kViewSchedule_PayType @"PayType"
+#define kViewSchedule_ServiceProvider @"ServiceProvider"
+#define kViewSchedule_StartTime @"StartTime"
+#define kViewSchedule_Timely @"Timely"
+#define kViewSchedule_TypeofService @"TypeofService"
+
+
+#pragma mark JobDetails End
+
 #endif
 
 

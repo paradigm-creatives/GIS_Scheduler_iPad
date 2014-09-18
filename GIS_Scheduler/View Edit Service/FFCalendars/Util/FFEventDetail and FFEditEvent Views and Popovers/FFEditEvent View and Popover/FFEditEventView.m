@@ -15,6 +15,7 @@
 #import "FFSearchBarWithAutoComplete.h"
 #import "FFGuestsTableView.h"
 #import "FFImportantFilesForCalendar.h"
+#import "TestLabel.h"
 //#import "SVProgressHUD.h"
 
 @interface FFEditEventView () <UIGestureRecognizerDelegate>
@@ -22,7 +23,7 @@
 @property (nonatomic, strong) UIButton *buttonCancel;
 @property (nonatomic, strong) UIButton *buttonDone;
 @property (nonatomic, strong) UIButton *buttonDelete;
-@property (nonatomic, strong) UILabel *labelEventName;
+@property (nonatomic, strong) TestLabel *labelEventName;
 @property (nonatomic, strong) FFSearchBarWithAutoComplete *searchBarCustom;
 @property (nonatomic, strong) FFButtonWithDatePopover *buttonDate;
 @property (nonatomic, strong) FFButtonWithHourPopover *buttonTimeBegin;
@@ -89,7 +90,10 @@
         [self addButtonTimeBegin];
         [self addButtonTimeEnd];
         [self addButtonDelete];
-        [self addtableViewGuests];
+        [self addEventTitle];
+        [self addTypeOfService];
+        [self addServiceProvider];
+        //[self addtableViewGuests];
     }
     return self;
 }
@@ -116,20 +120,21 @@
     eventNew.dateTimeEnd = buttonTimeEnd.dateOfButton;
     eventNew.arrayWithGuests = tableViewGuests.arrayWithSelectedItens;
     
-    NSString *stringError;
-    
-    if (!eventNew.numCustomerID) {
-        stringError = @"Please select a customer.";
-    } else if (![self isTimeBeginEarlier:eventNew.dateTimeBegin timeEnd:eventNew.dateTimeEnd]) {
-        stringError = @"Start time must occur earlier than end time.";
-    } else if (eventNew.arrayWithGuests.count == 0) {
-        stringError = @"Please select a guest.";
-    }
-    
-    if (stringError) {
-        [[[UIAlertView alloc] initWithTitle:nil message:stringError delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-        //        [SVProgressHUD showErrorWithStatus:stringError];
-    } else if (protocol != nil && [protocol respondsToSelector:@selector(saveEvent:)]) {
+//    NSString *stringError;
+//    
+//    if (!eventNew.numCustomerID) {
+//        stringError = @"Please select a customer.";
+//    } else if (![self isTimeBeginEarlier:eventNew.dateTimeBegin timeEnd:eventNew.dateTimeEnd]) {
+//        stringError = @"Start time must occur earlier than end time.";
+//    } else if (eventNew.arrayWithGuests.count == 0) {
+//        stringError = @"Please select a guest.";
+//    }
+//    
+//    if (stringError) {
+//        [[[UIAlertView alloc] initWithTitle:nil message:stringError delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+//        //        [SVProgressHUD showErrorWithStatus:stringError];
+//    } else
+    if (protocol != nil && [protocol respondsToSelector:@selector(saveEvent:)]) {
         [protocol saveEvent:eventNew];
         [self buttonDeleteAction:nil];
     }
@@ -204,6 +209,15 @@
     [self addSubview:buttonDate];
 }
 
+- (void)addEventTitle{
+    
+    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height, self.frame.size.width, BUTTON_HEIGHT)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentCenter];
+    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
+    [self addSubview:labelEventName];
+}
+
 - (void)addButtonTimeBegin {
     
     buttonTimeBegin = [[FFButtonWithHourPopover alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height+BUTTON_HEIGHT, self.frame.size.width, BUTTON_HEIGHT) date:event.dateTimeBegin];
@@ -218,11 +232,29 @@
     [self addSubview:buttonTimeEnd];
 }
 
+- (void)addTypeOfService{
+    
+    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentCenter];
+    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
+    [self addSubview:labelEventName];
+}
+
+- (void)addServiceProvider{
+    
+    labelEventName = [[TestLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentCenter];
+    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
+    [self addSubview:labelEventName];
+}
+
 - (void)addButtonDelete {
     
     buttonDelete = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonDelete setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
-    [self customLayoutOfButton:buttonDelete withTitle:@"Delete Event" action:@selector(buttonDeleteAction:) frame:CGRectMake(0, self.frame.size.height-2*BUTTON_HEIGHT, self.frame.size.width, 2*BUTTON_HEIGHT)];
+    [self customLayoutOfButton:buttonDelete withTitle:@"Assign" action:@selector(buttonDeleteAction:) frame:CGRectMake(0, self.frame.size.height-2*BUTTON_HEIGHT, self.frame.size.width, 2*BUTTON_HEIGHT)];
     [buttonDelete setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:buttonDelete];
     
