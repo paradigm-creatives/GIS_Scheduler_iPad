@@ -158,19 +158,16 @@
             GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
             [label1 setBackgroundColor:[UIColor clearColor]];
             label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.numCustomerID];
-            [label1 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
             [self addSubview:label1];
             
             GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
             [label2 setBackgroundColor:[UIColor clearColor]];
             label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
-            [label2 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
             [self addSubview:label2];
             
             GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
             [label3 setBackgroundColor:[UIColor clearColor]];
             label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
-            [label3 setFont:[UIFont fontWithName:@"Arial" size:10.0f]];
             [self addSubview:label3];
             
             [self bringSubviewToFront:_button];

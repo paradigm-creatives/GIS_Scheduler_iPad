@@ -17,6 +17,7 @@
 #import "FFImportantFilesForCalendar.h"
 #import "GISPopOverController.h"
 #import "GISAppDelegate.h"
+#import "GISEventLabel.h"
 
 @interface FFWeekCell () <FFEventDetailPopoverControllerProtocol, FFEditEventPopoverControllerProtocol, TestEventDetailPopoverControllerProtocol>
 @property (nonatomic, strong) NSMutableArray *arrayLabelsHourAndMin;
@@ -133,19 +134,19 @@
             
             [self addSubview:view];
             
-            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(5, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+            GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(5, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
             label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.numCustomerID];
-            [label1 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
+            [label1 setBackgroundColor:[UIColor clearColor]];
             [self addSubview:label1];
             
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(5, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+            GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(5, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
             label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
-            [label2 setFont:[UIFont fontWithName:@"Arial" size:12.0f]];
+            [label2 setBackgroundColor:[UIColor clearColor]];
             [self addSubview:label2];
             
-            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(3, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+            GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(3, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
             label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
-            [label3 setFont:[UIFont fontWithName:@"Arial" size:10.0f]];
+            [label3 setBackgroundColor:[UIColor clearColor]];
             [self addSubview:label3];
             
             [self bringSubviewToFront:_button];

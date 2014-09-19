@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFDayCalendarView/FFDayScrollView/FFDayCollectionView/FFDayCell/FFDayCell.m"
-            timestampString = "432733856.572557"
+            timestampString = "432803516.60599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-buttonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFWeekCalendarView/FFWeekScrollView/FFWeekCollectionView/FFWeekCell.m"
-            timestampString = "432730994.297976"
+            timestampString = "432803790.748669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-addButtonsWithArray:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFWeekCalendarView/FFWeekScrollView/FFWeekCollectionView/FFWeekCell.m"
-            timestampString = "432732388.487441"
+            timestampString = "432803898.955417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "-addButtonsWithArray:"
             landmarkType = "5">
          </BreakpointContent>
@@ -304,6 +304,22 @@
             startingLineNumber = "164"
             endingLineNumber = "164"
             landmarkName = "-updateLabelWithMonthAndYear"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFDayCalendarView/FFDayCalendarView.m"
+            timestampString = "432804608.545607"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "-gestureRecognizerShouldBegin:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,6 +7,7 @@
 //
 
 #import "GISViewEditListVIewCell.h"
+#import "GISFonts.h"
 
 @implementation GISViewEditListVIewCell
 
@@ -20,6 +21,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+    [_jobName setFont:[GISFonts normal]];
+    [_eventTime setFont:[GISFonts normal]];
+    [_eventTitle setFont:[GISFonts normal]];
 }
 
 @end

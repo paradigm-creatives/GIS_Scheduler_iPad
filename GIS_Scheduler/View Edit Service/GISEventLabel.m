@@ -7,6 +7,7 @@
 //
 
 #import "GISEventLabel.h"
+#import "GISFonts.h"
 
 @implementation GISEventLabel
 
@@ -17,6 +18,7 @@
         // Initialization code
         
         self.textColor = [UIColor blackColor];
+        [self setFont:[GISFonts normal]];
         
         [self setBackgroundColor:[UIColor whiteColor]];
     }

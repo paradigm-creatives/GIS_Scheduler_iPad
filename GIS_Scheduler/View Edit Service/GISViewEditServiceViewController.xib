@@ -34,22 +34,22 @@
                             <color key="textColor" red="0.084257274509999994" green="0.35492285820000002" blue="0.57565369899999996" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <tabBar contentMode="scaleToFill" id="Wee-oX-bOr">
-                            <rect key="frame" x="0.0" y="0.0" width="276" height="49"/>
+                        <tabBar contentMode="scaleToFill" itemPositioning="centered" itemSpacing="54" itemWidth="30" id="Wee-oX-bOr">
+                            <rect key="frame" x="0.0" y="0.0" width="238" height="49"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <items>
                                 <tabBarItem title="Day" image="Day.png" id="A5X-Mm-3uC">
-                                    <inset key="imageInsets" minX="-20" minY="6" maxX="20" maxY="-6"/>
-                                    <offsetWrapper key="titlePositionAdjustment" horizontal="8" vertical="-14"/>
+                                    <inset key="imageInsets" minX="-24" minY="6" maxX="24" maxY="-6"/>
+                                    <offsetWrapper key="titlePositionAdjustment" horizontal="6" vertical="-15"/>
                                 </tabBarItem>
                                 <tabBarItem tag="1" title="Week" image="week.png" id="pxE-pu-yqq">
-                                    <inset key="imageInsets" minX="-20" minY="6" maxX="20" maxY="-6"/>
-                                    <offsetWrapper key="titlePositionAdjustment" horizontal="13" vertical="-14"/>
+                                    <inset key="imageInsets" minX="-28" minY="6" maxX="28" maxY="-6"/>
+                                    <offsetWrapper key="titlePositionAdjustment" horizontal="4" vertical="-15"/>
                                 </tabBarItem>
                                 <tabBarItem tag="2" title="Month" image="month.png" id="mEG-gT-Sij">
-                                    <inset key="imageInsets" minX="-24" minY="6" maxX="24" maxY="-6"/>
-                                    <offsetWrapper key="titlePositionAdjustment" horizontal="14" vertical="-15"/>
+                                    <inset key="imageInsets" minX="-30" minY="6" maxX="30" maxY="-6"/>
+                                    <offsetWrapper key="titlePositionAdjustment" horizontal="4" vertical="-16"/>
                                 </tabBarItem>
                             </items>
                             <connections>
