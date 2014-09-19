@@ -157,7 +157,7 @@
             
             GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
             [label1 setBackgroundColor:[UIColor clearColor]];
-            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.numCustomerID];
+            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
             [self addSubview:label1];
             
             GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];

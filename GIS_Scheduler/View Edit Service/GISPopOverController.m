@@ -18,7 +18,7 @@
 int Count = 0;
 
 -(id)initWithEvent:(FFEvent *)eventInit {
-    
+        
     GISViewEditListViewController *vlistView=[[GISViewEditListViewController alloc]initWithNibName:@"GISViewEditListViewController" bundle:nil];
     vlistView.testEvent = eventInit;
     
@@ -27,6 +27,7 @@ int Count = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTestEventDetails:) name:SHOW_WEEK_EVENT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMonthEventDetails:) name:SHOW_MONTH_EVENT object:nil];
     
+    vlistView.preferredContentSize = CGSizeMake(300, 250);
     
     self = [super initWithContentViewController:vlistView];
     

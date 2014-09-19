@@ -16,6 +16,7 @@
 #import "FFGuestsTableView.h"
 #import "FFImportantFilesForCalendar.h"
 #import "GISEventLabel.h"
+#import "GISFonts.h"
 //#import "SVProgressHUD.h"
 
 @interface FFEditEventView () <UIGestureRecognizerDelegate>
@@ -89,8 +90,8 @@
         [self addButtonDate];
         [self addButtonTimeBegin];
         [self addButtonTimeEnd];
-        [self addButtonDelete];
-        [self addEventTitle];
+        //[self addButtonDelete];
+        //[self addEventTitle];
         [self addTypeOfService];
         [self addServiceProvider];
         //[self addtableViewGuests];
@@ -180,6 +181,7 @@
     
     buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonCancel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
+    [buttonCancel.titleLabel setFont:[GISFonts large]];
     [self customLayoutOfButton:buttonCancel withTitle:@"Cancel" action:@selector(buttonCancelAction:) frame:CGRectMake(20, 0, 80, BUTTON_HEIGHT+30)];
     [view addSubview:buttonCancel];
 }
@@ -188,6 +190,7 @@
     
     buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonDone setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+    [buttonDone.titleLabel setFont:[GISFonts large]];
     [self customLayoutOfButton:buttonDone withTitle:@"Done" action:@selector(buttonDoneAction:) frame:CGRectMake(buttonCancel.superview.frame.size.width-80-10, buttonCancel.frame.origin.y, 80, buttonCancel.frame.size.height)];
     [buttonCancel.superview addSubview:buttonDone];
 }
@@ -198,13 +201,22 @@
     [searchBarCustom setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [searchBarCustom setStringClientName:event.stringCustomerName];
     [searchBarCustom setNumCustomerID:event.numCustomerID];
+    [searchBarCustom setHidden:TRUE];
     [self addSubview:searchBarCustom];
+    
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0,buttonCancel.superview.frame.origin.y+buttonCancel.superview.frame.size.height+ BUTTON_HEIGHT, self.frame.size.width, BUTTON_HEIGHT)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentCenter];
+    [labelEventName setFont:[GISFonts large]];
+    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.stringCustomerName];
+    [self addSubview:labelEventName];
 }
 
 - (void)addButtonDate {
     
     buttonDate = [[FFButtonWithDatePopover alloc] initWithFrame:CGRectMake(0, searchBarCustom.frame.origin.y+searchBarCustom.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT) date:event.dateDay];
     [buttonDate setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [buttonDate.titleLabel setFont:[GISFonts large]];
     [self addSubview:buttonDate];
 }
 
@@ -221,6 +233,7 @@
     
     buttonTimeBegin = [[FFButtonWithHourPopover alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height+BUTTON_HEIGHT, self.frame.size.width, BUTTON_HEIGHT) date:event.dateTimeBegin];
     [buttonTimeBegin setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [buttonTimeBegin.titleLabel setFont:[GISFonts large]];
     [self addSubview:buttonTimeBegin];
 }
 
@@ -228,6 +241,7 @@
     
     buttonTimeEnd = [[FFButtonWithHourPopover alloc] initWithFrame:CGRectMake(0, buttonTimeBegin.frame.origin.y+buttonTimeBegin.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT) date:event.dateTimeEnd];
     [buttonTimeEnd setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [buttonTimeEnd.titleLabel setFont:[GISFonts large]];
     [self addSubview:buttonTimeEnd];
 }
 

@@ -17,5 +17,7 @@
 @property (nonatomic, strong) NSDate *dateDay;
 @property (nonatomic, strong) NSDate *dateTimeBegin;
 @property (nonatomic, strong) NSDate *dateTimeEnd;
+@property (nonatomic, strong) NSDate *payType;
+@property (nonatomic, strong) NSDate *serviceProvider;
 
 @end

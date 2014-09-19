@@ -17,5 +17,7 @@
 @synthesize dateDay;
 @synthesize dateTimeBegin;
 @synthesize dateTimeEnd;
+@synthesize payType;
+@synthesize serviceProvider;
 
 @end

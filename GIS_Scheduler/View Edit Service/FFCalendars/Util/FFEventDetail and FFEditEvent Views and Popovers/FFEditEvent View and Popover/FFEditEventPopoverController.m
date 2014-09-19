@@ -41,7 +41,7 @@
     
     event = eventInit;
     
-    CGSize size = CGSizeMake(300., 700.);
+    CGSize size = CGSizeMake(300., 500.);
     FFEditEventView *viewEditar = [[FFEditEventView alloc] initWithFrame:CGRectMake(0., 0., size.width, size.height) event:eventInit];
     [viewEditar setProtocol:self];
     

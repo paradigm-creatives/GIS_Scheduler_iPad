@@ -135,7 +135,7 @@
             [self addSubview:view];
             
             GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(5, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
-            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.numCustomerID];
+            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
             [label1 setBackgroundColor:[UIColor clearColor]];
             [self addSubview:label1];
             
@@ -174,11 +174,12 @@
 //                                            animated:YES];
     
     testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
+    
     [testPopoverControllerDetails setTestProtocol:self];
     
     [testPopoverControllerDetails presentPopoverFromRect:button.frame
                                               inView:self
-                            permittedArrowDirections:UIPopoverArrowDirectionLeft
+                            permittedArrowDirections:UIPopoverArrowDirectionAny
                                             animated:YES];
 }
 
