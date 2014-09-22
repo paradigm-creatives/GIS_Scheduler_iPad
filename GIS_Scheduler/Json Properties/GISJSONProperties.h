@@ -494,6 +494,16 @@
 
 #pragma mark JobDetails End
 
+#pragma Mark ServiceProvider Start
+
+#define kServiceProviderID  @"ID"
+#define kServiceProviderType  @"Type"
+#define kServiceProviderSPType  @"SpType"
+#define kServiceProvider @"ServiceProvider"
+#define kServiceProviderResult @"ServiceProvidersResult"
+
+#pragma mark ServiceProvider End
+
 #endif
 
 

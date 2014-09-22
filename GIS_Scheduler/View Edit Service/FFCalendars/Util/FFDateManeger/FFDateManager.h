@@ -16,6 +16,7 @@
 #define SHOW_EVENT @"showEvent"
 #define SHOW_WEEK_EVENT @"showweekEvent"
 #define SHOW_MONTH_EVENT @"showMonthEvent"
+#define DATE_CHANGED_UPDATE_EVENT @"upadteEvent"
 
 @interface FFDateManager : NSObject
 

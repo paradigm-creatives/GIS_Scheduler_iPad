@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISViewEditServiceViewController">
             <connections>
+                <outlet property="dateButton" destination="fYX-kT-Dtv" id="now-c6-OQP"/>
                 <outlet property="dayItem" destination="A5X-Mm-3uC" id="oZj-Ib-7Ku"/>
                 <outlet property="fill_UnfillSegmentControl" destination="Hbk-hj-0dc" id="EMa-MZ-uog"/>
                 <outlet property="labelMonthAndYear" destination="uvu-ZN-CjM" id="RmV-2z-H6W"/>
                 <outlet property="mainTabbar" destination="Wee-oX-bOr" id="9ZD-x3-hwl"/>
                 <outlet property="mainView" destination="ZMu-x7-cuc" id="Lur-Yq-8TQ"/>
                 <outlet property="monthItem" destination="mEG-gT-Sij" id="APz-zd-gxJ"/>
+                <outlet property="serviceProviderButton" destination="xM0-0F-jhs" id="XxR-4M-Kgi"/>
                 <outlet property="staff_freeLancerButton" destination="sdi-2q-jax" id="ScI-NV-e1x"/>
                 <outlet property="staff_freeLancerSegmentControl" destination="3l3-vg-tT5" id="UFf-TJ-Fc4"/>
                 <outlet property="view" destination="tbj-fb-9Ld" id="H03-q9-Ord"/>
@@ -80,6 +82,9 @@
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="serviceProviderSelected:" destination="-1" eventType="touchUpInside" id="lYe-j7-Tt4"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,7 +122,7 @@
                         <action selector="SegmentToggle:" destination="-1" eventType="valueChanged" id="NGd-M0-13f"/>
                     </connections>
                 </segmentedControl>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="3l3-vg-tT5">
+                <segmentedControl opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="3l3-vg-tT5">
                     <rect key="frame" x="0.0" y="121" width="646" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
@@ -126,6 +131,9 @@
                         <segment title="ServiceAgency"/>
                         <segment title="Students"/>
                     </segments>
+                    <connections>
+                        <action selector="SegmentToggle:" destination="-1" eventType="valueChanged" id="1Ks-RD-Wwd"/>
+                    </connections>
                 </segmentedControl>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="sdi-2q-jax">
                     <rect key="frame" x="872" y="123" width="144" height="24"/>
@@ -136,6 +144,9 @@
                         <color key="titleColor" red="0.0" green="0.24313725489999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showServicePopoverDetails:" destination="-1" eventType="touchUpInside" id="Vu9-3K-Zc5"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

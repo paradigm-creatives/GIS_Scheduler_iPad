@@ -23,6 +23,7 @@
 #import "GISSchedulerNMRequestsObject.h"
 #import "GISJobDetailsObject.h"
 #import "GISViewEditDateObject.h"
+#import "GISServiceProviderObject.h"
 
 @interface GISStoreManager : NSObject
 + (GISStoreManager *)sharedManager;
@@ -159,5 +160,9 @@
 - (BOOL)addViewEditObject:(GISViewEditDateObject *)jobdetailsObj;
 - (NSMutableArray*)getViewEditObjects;
 - (void)removeViewEditObjects;
+
+- (BOOL)addServiceProviderObject:(GISServiceProviderObject *)serviceProviderObj;
+- (NSMutableArray*)getServiceProviderObjects;
+- (void)removeServiceProviderObjects;
 
 @end

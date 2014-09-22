@@ -11,6 +11,7 @@
 #import "GISLoginDetailsObject.h"
 #import "GISDropDownsObject.h"
 #import "GISContactsInfoObject.h"
+#import "GISServiceProviderObject.h"
 
 static GISDatabaseManager *sharedDataManager = nil;
 
@@ -415,6 +416,55 @@ NSString* documentDirectory() {
     //[[NSNotificationCenter defaultCenter]postNotificationName:KFileUploadFinishFinalized object:nil];
 }
 
+-(void)insertServiceProviderData:(NSDictionary*)spDict Query:(NSString *)query
+{
+    //    DLog(@"the activity feed is:%@",activityFeedDict);
+    
+    NSString *serviceProvider_ID = [spDict objectForKey:kServiceProviderID];
+    NSString *serviceProvider_type = [spDict objectForKey:kServiceProviderType];
+    NSString *serviceProvider_SpType = [spDict objectForKey:kServiceProviderSPType];
+    NSString *serviceProvider_SP = [spDict objectForKey:kServiceProvider];
+    
+    NSLog(@"Table_Insert_Query:%@",query);
+    const char *insertString = [query UTF8String];
+    
+    sqlite3_stmt *addStmt;
+    if(sqlite3_prepare_v2(_subscriptionDB, insertString, -1, &addStmt, NULL) == SQLITE_OK)
+    {
+        
+        if (serviceProvider_ID) {
+            sqlite3_bind_text(addStmt, 1, [serviceProvider_ID UTF8String], -1, SQLITE_TRANSIENT);
+        }
+        if (serviceProvider_type) {
+            sqlite3_bind_text(addStmt, 2, [serviceProvider_type UTF8String], -1, SQLITE_TRANSIENT);
+        }
+        if (serviceProvider_SpType)
+        {
+            sqlite3_bind_text(addStmt, 3, [serviceProvider_SpType UTF8String], -1, SQLITE_TRANSIENT);
+        }
+        if (serviceProvider_SP)
+        {
+            sqlite3_bind_text(addStmt, 4, [serviceProvider_SP UTF8String], -1, SQLITE_TRANSIENT);
+        }
+        
+    }
+    
+    if(sqlite3_step(addStmt) != SQLITE_DONE){
+        NSLog(@"Insert Failed");
+    }
+    else{
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state != UIApplicationStateActive)
+        {
+            NSLog(@"Application Background State");
+            // [[PCLogger sharedLogger] logToSave:@"Application Background State" ofType:PC_LOG_INFO];
+            
+        }
+    }
+    sqlite3_reset(addStmt);
+    //[[NSNotificationCenter defaultCenter]postNotificationName:KFileUploadFinishFinalized object:nil];
+}
+
 -(NSArray *)geLoginArray:(NSString *)query
 {
     //get DB path
@@ -514,6 +564,53 @@ NSString* documentDirectory() {
             if ((char *)sqlite3_column_text(compiledstmt,2)) {
                 value =[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledstmt,2)];
                 dropdownObject.value_String = value;
+            }
+            [requestArray addObject:dropdownObject];
+            
+        }
+    }
+    //sqlite3_reset(compiledstmt);
+    sqlite3_reset(compiledstmt);
+    //    }
+    //    sqlite3_close(_subscriptionDB);
+    return requestArray;
+}
+
+-(NSArray *)getServiceProviderArray:(NSString *)query
+{
+    //get DB path
+    //    NSString *dbFilePath =[self getDbFilePath];
+    
+    NSMutableArray *requestArray = [[NSMutableArray alloc] init];
+    
+    sqlite3_stmt *compiledstmt;
+    NSString *statement = query;
+    const char *sqlstatement= [statement UTF8String];
+    
+    if(sqlite3_prepare_v2(_subscriptionDB, sqlstatement, -1, &compiledstmt, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(compiledstmt)==SQLITE_ROW)
+        {
+            
+            GISServiceProviderObject *dropdownObject = [GISServiceProviderObject new];
+            
+            if ((char *)sqlite3_column_text(compiledstmt,0)) {
+                NSString *service_ID = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledstmt,0)];
+                dropdownObject.id_String = service_ID;
+            }
+            
+            NSString *type,*serviceType,*serviceProvider;
+            if ((char *)sqlite3_column_text(compiledstmt,1)) {
+                type =[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledstmt,1)];
+                dropdownObject.type_String = type;
+            }
+            if ((char *)sqlite3_column_text(compiledstmt,2)) {
+                serviceType =[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledstmt,2)];
+                dropdownObject.spType_String = serviceType;
+            }
+            if ((char *)sqlite3_column_text(compiledstmt,3)) {
+                serviceProvider =[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledstmt,3)];
+                dropdownObject.service_Provider_String = serviceProvider;
             }
             [requestArray addObject:dropdownObject];
             

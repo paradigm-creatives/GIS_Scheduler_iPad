@@ -112,6 +112,8 @@
 		8A5052DB1977E447007288F5 /* GISLocationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5052D91977E447007288F5 /* GISLocationDetailsViewController.xib */; };
 		8A505303197807C7007288F5 /* GISLocationDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A505302197807C7007288F5 /* GISLocationDetailsCell.m */; };
 		8A505305197807FF007288F5 /* GISLocationDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A505304197807FF007288F5 /* GISLocationDetailsCell.xib */; };
+		8A553FCC19CC5E070066D1C5 /* GISServiceProviderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A553FCB19CC5E070066D1C5 /* GISServiceProviderObject.m */; };
+		8A553FCF19CC60690066D1C5 /* GISServiceProviderStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A553FCE19CC60690066D1C5 /* GISServiceProviderStore.m */; };
 		8A5E2E271974F9F000BE3C04 /* GISVIewEditRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */; };
 		8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2B19753B5D00BE3C04 /* GISEventDetailsViewController.m */; };
 		8A5E2E2E19753B5D00BE3C04 /* GISEventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2C19753B5D00BE3C04 /* GISEventDetailsViewController.xib */; };
@@ -553,6 +555,10 @@
 		8A505301197807C7007288F5 /* GISLocationDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISLocationDetailsCell.h; sourceTree = "<group>"; };
 		8A505302197807C7007288F5 /* GISLocationDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISLocationDetailsCell.m; sourceTree = "<group>"; };
 		8A505304197807FF007288F5 /* GISLocationDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISLocationDetailsCell.xib; sourceTree = "<group>"; };
+		8A553FCA19CC5E070066D1C5 /* GISServiceProviderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderObject.h; sourceTree = "<group>"; };
+		8A553FCB19CC5E070066D1C5 /* GISServiceProviderObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderObject.m; sourceTree = "<group>"; };
+		8A553FCD19CC60690066D1C5 /* GISServiceProviderStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderStore.h; sourceTree = "<group>"; };
+		8A553FCE19CC60690066D1C5 /* GISServiceProviderStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderStore.m; sourceTree = "<group>"; };
 		8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISVIewEditRequestViewController.h; sourceTree = "<group>"; };
 		8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISVIewEditRequestViewController.m; sourceTree = "<group>"; };
 		8A5E2E2A19753B5D00BE3C04 /* GISEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISEventDetailsViewController.h; sourceTree = "<group>"; };
@@ -1905,6 +1911,10 @@
 				8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */,
 				8AC899C519C8701C00B9532C /* GISViewEditStore.h */,
 				8AC899C619C8701C00B9532C /* GISViewEditStore.m */,
+				8A553FCA19CC5E070066D1C5 /* GISServiceProviderObject.h */,
+				8A553FCB19CC5E070066D1C5 /* GISServiceProviderObject.m */,
+				8A553FCD19CC60690066D1C5 /* GISServiceProviderStore.h */,
+				8A553FCE19CC60690066D1C5 /* GISServiceProviderStore.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -2242,6 +2252,7 @@
 				BA7D6A031977EE720014C505 /* GISDashBoardViewController.m in Sources */,
 				8A325BB519CAFE0200C52278 /* GISEeventShowBackgroundView.m in Sources */,
 				8A325B8719CAFA8100C52278 /* FFViewWithHourLines.m in Sources */,
+				8A553FCC19CC5E070066D1C5 /* GISServiceProviderObject.m in Sources */,
 				8A8DA704197925B100EE8EFE /* GISCommentCell.m in Sources */,
 				8A325B8A19CAFA8100C52278 /* FFWeekCollectionViewFlowLayout.m in Sources */,
 				8AA83870198B7AA6004B6C87 /* GISSchedulerSPJobsObject.m in Sources */,
@@ -2307,6 +2318,7 @@
 				8A3B1E51197CF58300963E8C /* SBJSON.m in Sources */,
 				8A9B25AA197676CE002F1AC0 /* GISUtility.m in Sources */,
 				8A5E2E3219753C2200BE3C04 /* GISEventDetailsCell.m in Sources */,
+				8A553FCF19CC60690066D1C5 /* GISServiceProviderStore.m in Sources */,
 				8A8DA6CD1978F3EF00EE8EFE /* GISLocationOnCampusCell.m in Sources */,
 				8A5052CA1977D77E007288F5 /* GISDashBoardCell.m in Sources */,
 				BAE081FC197FD9900056B3B8 /* GISPopOverTableViewController.m in Sources */,

@@ -58,6 +58,7 @@
 
 
 #define GIS_GET_JOB_DETAILS @"GetJobDetails"
+#define GIS_GET_SERVICE_PROVIDERS @"ServiceProviders"
 
 
 

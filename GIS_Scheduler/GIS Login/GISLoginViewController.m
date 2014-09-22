@@ -198,6 +198,7 @@
                         [[GISServerManager sharedManager] getMastersData_Schedulers:self withParams:paramsDict finishAction:@selector(successmethod_dropDown_schedulers:) failAction:@selector(failuremethod_dropDown_schedulers:)];
                     }
                     
+                     [[GISServerManager sharedManager] getService_provider_data:self withParams:nil finishAction:@selector(successmethod_service_Providers:) failAction:@selector(failuremethod_service_Providers:)];
                     
                     //LOGIN DB
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_LOGIN];
@@ -231,6 +232,8 @@
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PAY_TYPE];
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_TYPE_OF_SERVICE];
+                    
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_PROVIDER_INFO];
                 }
 
                 
@@ -606,6 +609,39 @@
     
 }
 
+-(void)successmethod_service_Providers:(GISJsonRequest *)response{
+    
+    NSLog(@"successmethod_service_Providers---%@",response.responseJson);
+    
+   // NSDictionary *saveUpdateDict;
+   // NSArray *responseArray= response.responseJson;
+   // saveUpdateDict = [responseArray lastObject];
+    
+    //if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        
+        [[GISStoreManager sharedManager] removeServiceProviderObjects];
+        ///
+        serviceProviderStore= [[GISServiceProviderStore alloc] initWithJsonDictionary:response.responseJson];
+        
+        NSMutableArray *serviceProviderArray=[[GISStoreManager sharedManager] getServiceProviderObjects];
+    
+    for (int i=0; i<serviceProviderArray.count; i++) {
+        GISServiceProviderObject *bObj=[serviceProviderArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.spType_String,bObj.service_Provider_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kServiceProviderID, kServiceProviderType,kServiceProviderSPType,kServiceProvider, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertServiceProviderData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROVIDER_INFO(ID,TYPE,SPTYPE,SERVICE_PROVIDER) VALUES (?,?,?,?)"]];
+    }
+    
+   // }
+
+}
+
+-(void)failuremethod_service_Providers:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
 
 - (void)didReceiveMemoryWarning
 {

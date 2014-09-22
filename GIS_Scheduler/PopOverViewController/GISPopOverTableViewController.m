@@ -9,6 +9,7 @@
 #import "GISPopOverTableViewController.h"
 #import "GISDropDownsObject.h"
 #import "GISConstants.h"
+#import "GISServiceProviderObject.h"
 
 @interface GISPopOverTableViewController ()
 
@@ -133,6 +134,10 @@
     {
         GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
         cell.textLabel.text=dropDownObj.value_String;
+    }else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
+    {
+        GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        cell.textLabel.text=spObj.service_Provider_String;
     }
     else
     {
@@ -154,6 +159,10 @@
     {
         GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
         [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String value:dropDownObj.value_String];
+    }else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
+    {
+        GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        [self.popOverDelegate sendTheSelectedPopOverData:spObj.id_String value:spObj.service_Provider_String];
     }
     else
     {

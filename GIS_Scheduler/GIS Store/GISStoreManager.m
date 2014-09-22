@@ -7,6 +7,7 @@
 //
 
 #import "GISStoreManager.h"
+#import "GISServiceProviderObject.h"
 
 @interface GISStoreManager ()
 @property (nonatomic, retain) NSMutableArray *loginArray;
@@ -51,6 +52,7 @@
 @property (nonatomic, retain) NSMutableArray *jobDetailsArray;
 @property (nonatomic, retain) NSMutableArray *typeOfServiceArray;
 @property (nonatomic, retain) NSMutableArray *viewEditArray;
+@property (nonatomic, retain) NSMutableArray *serviceProviderArray;
 
 @end
 
@@ -105,6 +107,7 @@ static GISStoreManager *singletonManager = nil;
         _jobDetailsArray = [[NSMutableArray alloc]init];
         _typeOfServiceArray = [[NSMutableArray alloc]init];
         _viewEditArray = [[NSMutableArray alloc]init];
+        _serviceProviderArray = [[NSMutableArray alloc]init];
         
         
     }
@@ -737,11 +740,27 @@ static GISStoreManager *singletonManager = nil;
     [_viewEditArray removeAllObjects];
 }
 
+- (BOOL)addServiceProviderObject:(GISServiceProviderObject *)serviceProviderObj
+{
+    BOOL isAdded = FALSE;
+    if (serviceProviderObj != nil) {
+        [_serviceProviderArray addObject:serviceProviderObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+- (NSMutableArray*)getServiceProviderObjects
+{
+    return [_serviceProviderArray count]?_serviceProviderArray:nil;
+}
+- (void)removeServiceProviderObjects
+{
+    [_serviceProviderArray removeAllObjects];
+}
 
 - (void)destroy{
     
 }
-
 
 #pragma mark Login END
 

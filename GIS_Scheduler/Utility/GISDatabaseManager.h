@@ -31,5 +31,7 @@
 -(void)insertContactInfoData:(NSDictionary*)contactInfoDict;
 -(NSArray *)getContactsArray:(NSString *)query;
 -(void)deleteRequestId:(NSString *)requestId;
+-(void)insertServiceProviderData:(NSDictionary*)spDict Query:(NSString *)query;
+-(NSArray *)getServiceProviderArray:(NSString *)query;
 
 @end
