@@ -14,6 +14,7 @@
 #import "GISLoginViewController.h"
 #import "GISServiceProviderRequestedJobsViewController.h"
 #import "GISJobAssignmentViewController.h"
+#import "GISFindRequestJobsViewController.h"
 
 
 #define LOGOUT_TAG 1632
@@ -261,6 +262,18 @@
         alertVIew.tag = LOGOUT_TAG;
         alertVIew.delegate = self;
         [alertVIew show];
+//         GISFindRequestJobsViewController *detailViewController = (GISFindRequestJobsViewController *)[[GISFindRequestJobsViewController alloc]initWithNibName:@"GISFindRequestJobsViewController" bundle:nil];
+//         UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+//         
+//         NSMutableArray* arr = [[NSMutableArray alloc] initWithArray:appDelegate.spiltViewController.viewControllers];
+//         [arr replaceObjectAtIndex:1 withObject:detailView]; //index 1 corresponds to the detail VC
+         
+//         @try {
+//             appDelegate.spiltViewController.viewControllers = arr;
+//         }
+//         @catch (NSException *exception) {
+//             NSLog(@"Exception in ---- Dash Board --- appDelegate.spiltViewController.viewControllers = arr");
+//         }
     }
    else
    {

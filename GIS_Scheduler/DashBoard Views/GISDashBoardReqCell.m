@@ -21,7 +21,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
     [_accountName_Label setFont:[GISFonts normal]];
     [_requestID_Label setFont:[GISFonts normal]];
     [_eventType_Label setFont:[GISFonts normal]];

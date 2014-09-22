@@ -15,6 +15,7 @@
 #import "GISServiceProviderStore.h"
 
 
+
 @interface GISLoginViewController : GISBaseViewController<UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
@@ -38,7 +39,6 @@
 
 
 -(IBAction)signInClicked:(id)sender;
-
 
 
 @end

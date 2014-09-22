@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
-
-@interface GISJobAssignmentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate>
+#import "GISPopOverTableViewController.h"
+@interface GISJobAssignmentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     IBOutlet UITableView *jobAssignment_tableView;
     IBOutlet UIView *dashBoard_UIView;
@@ -24,15 +24,24 @@
     IBOutlet UIView *segment_UIView;
     IBOutlet UIView *table_UIView;
     
-    UISegmentedControl *segment_filled_Unfilled;
+    IBOutlet UISegmentedControl *segment_filled_Unfilled;
     
+    UIPopoverController *popover;
+    int btnTag;
+    
+    NSMutableArray *chooseRequest_mutArray;
 }
+
+
 @property(nonatomic,strong) NSString *view_string;
 
 @property(nonatomic,readwrite) BOOL isMasterHide;
 
 
 -(IBAction)filterMore_ButtonPressed:(id)sender;
--(IBAction)searchButton_Oressed:(id)sender;
+-(IBAction)searchButton_Pressed:(id)sender;
+-(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender;
+-(IBAction)pickerButton_pressed:(id)sender;
 
+-(IBAction)listOfServiceProviders_ButtonPressed:(id)sender;
 @end

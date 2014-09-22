@@ -26,7 +26,7 @@
 #import "GISServiceProviderRequestedJobsViewController.h"
 #import "GISViewEditServiceViewController.h"
 #import "GISJobAssignmentViewController.h"
-
+#import "GISFindRequestJobsViewController.h"
 
 
 @interface GISDashBoardViewController ()
@@ -509,11 +509,12 @@
         
         if (row==0) {
             
-            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+            GISFindRequestJobsViewController *findReqJobs=(GISFindRequestJobsViewController *)[[GISFindRequestJobsViewController alloc]initWithNibName:@"GISFindRequestJobsViewController" bundle:nil];
+            [self.navigationController pushViewController:findReqJobs animated:NO];
             
-            detailViewController.view_string = kFindRequestJobs_Screen;
-
-            [self.navigationController pushViewController:detailViewController animated:NO];
+//            GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+//            detailViewController.view_string = kFindRequestJobs_Screen;
+//            [self.navigationController pushViewController:detailViewController animated:NO];
             
         }
     }

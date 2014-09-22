@@ -294,7 +294,7 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str  value:(NSString *)value_str
 {
-    if (btnTag==111) {
+    if (btnTag==111){
         unitOrDep_Answer_Label.text=value_str;
         contactBilling_Object.unitOrDepartment_ID_String=id_str;
         unit_departmentID_String = id_str;
@@ -365,6 +365,7 @@
     }
     
 }
+
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"Failure");

@@ -73,11 +73,11 @@
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 
-    
     viewUpHeight = 155;
     
     _userName_textfield.text=@"swamy.pilla@gmail.com";
     _password_textfield.text=@"admin";
+
     _userName_textfield.text=@"kbabulenjoy@gmail.com";
     _password_textfield.text=@"babul";
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
@@ -252,11 +252,11 @@
 
 -(void)failuremethod_login:(GISJsonRequest *)response
 {
-    NSLog(@"Failure");
-    
     [self removeLoadingView];
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)];
     
+    NSLog(@"Failure");
+
 }
 
 -(void)successmethod_dropDown:(GISJsonRequest *)response
@@ -466,6 +466,7 @@
 {
     NSLog(@"Failure");
 }
+
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getViewSchedule Success---%@",response.responseJson);
@@ -536,6 +537,7 @@
 
     return YES;
 }
+
 
 -(void)moveAction:(BOOL)isMove viewHeight:(int)viewHeight{
     
@@ -642,6 +644,7 @@
 {
     NSLog(@"Failure");
 }
+
 
 - (void)didReceiveMemoryWarning
 {

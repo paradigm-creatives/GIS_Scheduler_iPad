@@ -53,8 +53,6 @@
     
     IBOutlet UIImageView *monday_ImageView;
     IBOutlet UIImageView *tuesday_ImageView;
-    __weak IBOutlet UILabel *createDatesTimes_Label;
-    __weak IBOutlet UILabel *viewEditDatesTimes_Label;
     IBOutlet UIImageView *wednesday_ImageView;
     IBOutlet UIImageView *thursday_ImageView;
     IBOutlet UIImageView *friday_ImageView;
@@ -67,6 +65,9 @@
     IBOutlet UILabel *endTime_header_Label;
     IBOutlet UILabel *editALL_Label;
 
+    
+    __weak IBOutlet UILabel *createDatesTimes_Label;
+    __weak IBOutlet UILabel *viewEditDatesTimes_Label;
     UIPopoverController *popover;
     int btnTag;
     
