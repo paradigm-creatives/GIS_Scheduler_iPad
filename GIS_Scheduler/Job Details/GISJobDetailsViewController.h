@@ -18,8 +18,10 @@
     int btnTag;
     
     NSMutableArray *serviceProvider_Array;
+    NSMutableArray *payLevel_Array;
+    NSMutableArray *billLevel_Array;
     NSMutableArray *filled_Unfilled_Array;
-        NSMutableArray *jobDetails_Array;
+    NSMutableArray *jobDetails_Array;
     
     GISAppDelegate *appDelegate;
 

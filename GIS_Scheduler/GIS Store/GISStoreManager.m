@@ -51,6 +51,8 @@
 @property (nonatomic, retain) NSMutableArray *jobDetailsArray;
 @property (nonatomic, retain) NSMutableArray *typeOfServiceArray;
 
+@property (nonatomic, retain) NSMutableArray *billLevel_Array;
+@property (nonatomic, retain) NSMutableArray *payStatus_ExpStatus_Array;
 @end
 
 
@@ -103,6 +105,8 @@ static GISStoreManager *singletonManager = nil;
         _payTypeArray = [[NSMutableArray alloc]init];
         _jobDetailsArray = [[NSMutableArray alloc]init];
         _typeOfServiceArray = [[NSMutableArray alloc]init];
+        _billLevel_Array = [[NSMutableArray alloc]init];
+        _payStatus_ExpStatus_Array = [[NSMutableArray alloc]init];
         
         
     }
@@ -500,6 +504,46 @@ static GISStoreManager *singletonManager = nil;
 {
     [_payLevel_Array removeAllObjects];
 }
+
+
+- (BOOL)addBillLevelObject:(GISDropDownsObject *)billLevelObj
+{
+    BOOL isAdded = FALSE;
+    if (billLevelObj != nil) {
+        [_billLevel_Array addObject:billLevelObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+- (NSMutableArray *)getBillLevelObjects
+{
+    return [_billLevel_Array count]?_billLevel_Array:nil;
+}
+- (void)removeBillLevelObjects
+{
+    [_billLevel_Array removeAllObjects];
+}
+
+
+- (BOOL)addPayStatus_ExpStatusObject:(GISDropDownsObject *)payStatus_ExpStatusObj
+{
+    BOOL isAdded = FALSE;
+    if (payStatus_ExpStatusObj != nil) {
+        [_payStatus_ExpStatus_Array addObject:payStatus_ExpStatusObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+- (NSMutableArray *)getPayStatus_ExpStatusObjects
+{
+    return [_payStatus_ExpStatus_Array count]?_payStatus_ExpStatus_Array:nil;
+}
+- (void)removePayStatus_ExpStatusObjects
+{
+    [_payStatus_ExpStatus_Array removeAllObjects];
+}
+
+
 
 - (BOOL)addServiceType_ServiceProviderObject:(GISDropDownsObject *)ServiceType_ServiceProviderObj
 {

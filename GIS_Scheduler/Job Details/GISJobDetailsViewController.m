@@ -48,6 +48,10 @@
     login_Obj=[requetId_array lastObject];
     
     jobDetails_Array=[[NSMutableArray alloc]init];
+    payLevel_Array=[[NSMutableArray alloc]init];
+    billLevel_Array=[[NSMutableArray alloc]init];
+    payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
+    billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c", nil];
     
      selected_row=999999;

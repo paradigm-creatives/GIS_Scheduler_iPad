@@ -73,6 +73,8 @@
 #define kPrimary_Audience @"Primary_Audience"
 #define kSkill_Level @"Skill_Level"
 #define kPay_Level @"Pay_Level"
+#define kBill_Level @"Bill_Level"
+#define kPayStatus_ExpStatus @"PayStatus_ExpStatus"
 #define kServiceType_serviceProvider @"Serviceprovider_Type"
 #define kServiceType_Registerd_Consumers @"Registerd_Consumers"
 #define kPayType @"Pay_Type"
