@@ -33,7 +33,24 @@
     IBOutlet UIView *jobChangeHistory_background_UIView;
      IBOutlet UIView *jobChangeHistory_foreground_UIView;
     
+    IBOutlet UIView *createJobs_UIVIew;
+    IBOutlet UIView *createJobs_Middle_UIVIew;
+    IBOutlet UITableView *createJObs_tableView;
+    
+    IBOutlet UITextField *noOfServiceProviders_TextField;
+    IBOutlet UILabel *typeOfServiceProvidersLabel;
+    IBOutlet UILabel *payLevel_Label;
+    IBOutlet UILabel *billLevel_Label;
+    NSMutableDictionary *createJobsCheckDictionary;
+    BOOL isAlljobs_Checked;
+    IBOutlet UIButton *alljobs_Checked_button;
+    NSMutableArray *detail_mut_array;
 }
+@property(nonatomic,strong)NSMutableArray *detail_mut_array;
+-(IBAction)createJobsButton_Pressed:(id)sender;
+-(IBAction)cancelButtonPressed_CreateJobs:(id)sender;
+-(IBAction)doneButtonPressed_CreateJobs:(id)sender;
+-(IBAction)checkAllJobs_buttonPressed:(id)sender;
 
 -(IBAction)nextButtonPressed:(id)sender;
 -(IBAction)pickerButtonPressed:(id)sender;

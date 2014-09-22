@@ -1175,6 +1175,7 @@
     }
     [createJObs_tableView reloadData];
 }
+
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender
 {
     createJobs_UIVIew.hidden=YES;
@@ -1200,10 +1201,10 @@
     }
     [createJObs_tableView reloadData];
 }
+
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
-    
 }
 
 

@@ -214,6 +214,8 @@
 		BA694A4B1975306000AC8CCC /* GISContactsAndBillingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA694A491975306000AC8CCC /* GISContactsAndBillingViewController.xib */; };
 		BA694A501975389D00AC8CCC /* GISDatesAndTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA694A4E1975389D00AC8CCC /* GISDatesAndTimesViewController.m */; };
 		BA694A511975389D00AC8CCC /* GISDatesAndTimesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA694A4F1975389D00AC8CCC /* GISDatesAndTimesViewController.xib */; };
+		BA6F4E8119CC58BF001CD19D /* GISServiceProviderNamesObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F4E8019CC58BF001CD19D /* GISServiceProviderNamesObject.m */; };
+		BA6F4E8419CC58E8001CD19D /* GISServiceProvidersNames_Store.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F4E8319CC58E8001CD19D /* GISServiceProvidersNames_Store.m */; };
 		BA7D6A031977EE720014C505 /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		BA88741B19A77359000676F4 /* GISJobAssignmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA88741919A77359000676F4 /* GISJobAssignmentCell.m */; };
 		BA88741C19A77359000676F4 /* GISJobAssignmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA88741A19A77359000676F4 /* GISJobAssignmentCell.xib */; };
@@ -718,6 +720,10 @@
 		BA694A4D1975389D00AC8CCC /* GISDatesAndTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDatesAndTimesViewController.h; sourceTree = "<group>"; };
 		BA694A4E1975389D00AC8CCC /* GISDatesAndTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDatesAndTimesViewController.m; sourceTree = "<group>"; };
 		BA694A4F1975389D00AC8CCC /* GISDatesAndTimesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISDatesAndTimesViewController.xib; sourceTree = "<group>"; };
+		BA6F4E7F19CC58BF001CD19D /* GISServiceProviderNamesObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderNamesObject.h; sourceTree = "<group>"; };
+		BA6F4E8019CC58BF001CD19D /* GISServiceProviderNamesObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderNamesObject.m; sourceTree = "<group>"; };
+		BA6F4E8219CC58E8001CD19D /* GISServiceProvidersNames_Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProvidersNames_Store.h; sourceTree = "<group>"; };
+		BA6F4E8319CC58E8001CD19D /* GISServiceProvidersNames_Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProvidersNames_Store.m; sourceTree = "<group>"; };
 		BA88741819A77359000676F4 /* GISJobAssignmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISJobAssignmentCell.h; sourceTree = "<group>"; };
 		BA88741919A77359000676F4 /* GISJobAssignmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISJobAssignmentCell.m; sourceTree = "<group>"; };
 		BA88741A19A77359000676F4 /* GISJobAssignmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISJobAssignmentCell.xib; sourceTree = "<group>"; };
@@ -1773,6 +1779,10 @@
 				BA0A157019BF17FF00165C1A /* GISBillingPaymentInfo.xib */,
 				BA0A157219BF181900165C1A /* GISNotesHistoryCell.xib */,
 				BA0A157419BF182F00165C1A /* GISRequestServiceProvidersCell.xib */,
+				BA6F4E7F19CC58BF001CD19D /* GISServiceProviderNamesObject.h */,
+				BA6F4E8019CC58BF001CD19D /* GISServiceProviderNamesObject.m */,
+				BA6F4E8219CC58E8001CD19D /* GISServiceProvidersNames_Store.h */,
+				BA6F4E8319CC58E8001CD19D /* GISServiceProvidersNames_Store.m */,
 			);
 			path = "Job Details";
 			sourceTree = "<group>";
@@ -2396,6 +2406,7 @@
 				8AE7ED8519AE082600E02258 /* FFHourAndMinLabel.m in Sources */,
 				8AE7ED8219AE082600E02258 /* FFWeekCalendarView.m in Sources */,
 				8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */,
+				BA6F4E8419CC58E8001CD19D /* GISServiceProvidersNames_Store.m in Sources */,
 				8A3B1E4F197CF58300963E8C /* SBFBJsonParser.m in Sources */,
 				8AA8387F198BB545004B6C87 /* GISSchedulerNMRequestsObject.m in Sources */,
 				BA4224441978FED900A4E283 /* GISDatesTimesDetailCell.m in Sources */,
@@ -2471,6 +2482,7 @@
 				8AE7ED7419AE082600E02258 /* FFDayCalendarView.m in Sources */,
 				8AE7ED9319AE082600E02258 /* FFRedAndWhiteButton.m in Sources */,
 				8AE7ED9819AE082600E02258 /* FFDateManager.m in Sources */,
+				BA6F4E8119CC58BF001CD19D /* GISServiceProviderNamesObject.m in Sources */,
 				BA34A65F197CE27F00A7083C /* GISRequest.m in Sources */,
 				BAFB26D519B87BEB003E45FC /* GISFindRequestJobsViewController.m in Sources */,
 				8AE7ED8619AE082600E02258 /* FFViewWithHourLines.m in Sources */,
