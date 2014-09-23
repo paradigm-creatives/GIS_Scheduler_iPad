@@ -32,7 +32,6 @@
     NSMutableArray *chooseRequest_mutArray;
 }
 
-
 @property(nonatomic,strong) NSString *view_string;
 
 @property(nonatomic,readwrite) BOOL isMasterHide;

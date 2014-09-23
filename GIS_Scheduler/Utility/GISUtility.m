@@ -196,4 +196,40 @@
     
 }
 
++(NSString *)eventDisplayFormat:(NSDate *)fromdate
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSString *dateStr = [dateFormat stringFromDate:fromdate];
+    NSDate *myDate = [dateFormat dateFromString:dateStr];
+    
+    NSDateComponents *components= [[NSDateComponents alloc] init];
+    [components setDay:0];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *dateIncremented= [calendar dateByAddingComponents:components toDate:myDate options:0];
+    
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringFromDate = [myDateFormatter stringFromDate:dateIncremented];
+    
+    return stringFromDate;
+}
+
++(NSString *) getTimeData:(NSString *) timeString{
+    
+    NSDateFormatter *dtf = [[NSDateFormatter alloc] init];
+    [dtf setDateFormat:@"hh:mm a"];
+    [dtf setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    NSLocale *curentLocale = [NSLocale currentLocale];
+    [dtf setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
+    NSDate *date = [dtf dateFromString:timeString];
+    
+    dtf.dateFormat = @"HH:mm";
+    NSString *pmamDateString = [dtf stringFromDate:date];
+    
+    return pmamDateString;
+}
+
+
 @end

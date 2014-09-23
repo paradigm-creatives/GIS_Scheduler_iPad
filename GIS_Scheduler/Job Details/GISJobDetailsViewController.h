@@ -47,6 +47,19 @@
     BOOL isAlljobs_Checked;
     IBOutlet UIButton *alljobs_Checked_button;
     NSMutableArray *detail_mut_array;
+    
+    NSMutableArray *typeOfService_array;
+    NSMutableArray *serviceProvider_array_tableView;
+    NSMutableArray *payType_array;
+    
+    IBOutlet UILabel *jobDate_Answer_Label;
+    IBOutlet UILabel *serviceProvider_Answer_Label;
+    IBOutlet UILabel *filledUnfilled_Answer_Label;
+    IBOutlet UILabel *typeOfServiceProviders_Answer_Label;
+    IBOutlet UILabel *payLevel_Answer_Label;
+    IBOutlet UILabel *billLevel_Answer_Label;
+    
+    BOOL isEdit_Button_Clicked;
 }
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
 -(IBAction)createJobsButton_Pressed:(id)sender;

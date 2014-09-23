@@ -28,7 +28,7 @@
         [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         
         self.titleLabel.numberOfLines = 0;
-        [self setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
+        [self setBackgroundColor:[UIColor clearColor]];//[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         

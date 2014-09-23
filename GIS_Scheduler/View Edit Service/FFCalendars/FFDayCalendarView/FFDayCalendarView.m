@@ -17,11 +17,14 @@
 #import "FFEditEventView.h"
 
 #import "FFImportantFilesForCalendar.h"
+#import "GISViewEditListViewController.h"
+#import "GISAppDelegate.h"
 
 @interface FFDayCalendarView () <FFDayCellProtocol, FFEditEventViewProtocol, FFEventDetailViewProtocol, FFDayHeaderCollectionViewProtocol, FFDayCollectionViewProtocol, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) FFDayHeaderCollectionView *collectionViewHeaderDay;
 @property (nonatomic, strong) FFDayScrollView *dayContainerScroll;
 @property (nonatomic, strong) FFEventDetailView *viewDetail;
+@property (nonatomic, strong) GISViewEditListViewController *vlistView;
 @property (nonatomic, strong) FFEditEventView *viewEdit;
 @property (nonatomic) BOOL boolAnimate;
 @end
@@ -37,6 +40,7 @@
 @synthesize viewEdit;
 @synthesize protocol;
 @synthesize boolAnimate;
+@synthesize vlistView;
 
 #pragma mark - Lifecycle
 
@@ -46,11 +50,14 @@
     if (self) {
         // Initialization code
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showEventDetails:) name:SHOW_EVENT object:nil];
+        
         [self setBackgroundColor:[UIColor whiteColor]];
         
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-        [gesture setDelegate:self];
-        [self addGestureRecognizer:gesture];
+        //UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        //[gesture setDelegate:self];
+        //[self addGestureRecognizer:gesture];
         
         boolAnimate = NO;
         
@@ -114,7 +121,7 @@
 - (void)handleTap:(UITapGestureRecognizer *)recognizer {
     
     for (UIView *subviews in self.subviews) {
-        if ([subviews isKindOfClass:[FFEventDetailView class]] || [subviews isKindOfClass:[FFEditEventView class]]) {
+        if ([subviews isKindOfClass:[FFEventDetailView class]] || [subviews isKindOfClass:[FFEditEventView class]] || [subviews isKindOfClass:[vlistView.view class]]) {
             [subviews removeFromSuperview];
         }
     }
@@ -149,15 +156,28 @@
 
 - (void)showViewDetailsWithEvent:(FFEvent *)_event cell:(UICollectionViewCell *)cell {
     
+    
     [viewEdit removeFromSuperview];
     viewEdit = nil;
     [viewDetail removeFromSuperview];
     viewDetail = nil;
     
+    [vlistView.view removeFromSuperview];
+    vlistView = nil;
+    
     viewDetail = [[FFEventDetailView alloc] initWithFrame:CGRectMake(self.frame.size.width/2., HEADER_HEIGHT_SCROLL, self.frame.size.width/2., self.frame.size.height-HEADER_HEIGHT_SCROLL) event:_event];
     [viewDetail setAutoresizingMask:AR_WIDTH_HEIGHT | UIViewAutoresizingFlexibleLeftMargin];
     [viewDetail setProtocol:self];
-    [self addSubview:viewDetail];
+    
+    vlistView=[[GISViewEditListViewController alloc]initWithNibName:@"GISViewEditListViewController" bundle:nil];
+    vlistView.testEvent = _event;
+    
+    vlistView.view.frame = viewDetail.frame;
+    
+    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    appDelegate.isDateView = YES;
+
+    [self addSubview:vlistView.view];
 }
 
 #pragma mark - FFEventDetailView Protocol
@@ -171,6 +191,9 @@
     
     [viewDetail removeFromSuperview];
     viewDetail = nil;
+    
+    [vlistView.view removeFromSuperview];
+    vlistView.view = nil;
 }
 
 #pragma mark - FFEditEventView Protocol
@@ -206,6 +229,34 @@
     
     [view removeFromSuperview];
     view = nil;
+}
+
+#pragma mark - TestListView Notification
+
+- (void)showEventDetails:(NSNotification *)notification {
+    
+    NSDictionary *infoDict=notification.userInfo;
+    
+    if(infoDict != nil){
+        FFEvent *event = [infoDict objectForKey:@"event"];
+        
+        [viewEdit removeFromSuperview];
+        viewEdit = nil;
+        [viewDetail removeFromSuperview];
+        viewDetail = nil;
+        
+        [vlistView.view removeFromSuperview];
+        vlistView = nil;
+        
+        viewDetail = [[FFEventDetailView alloc] initWithFrame:CGRectMake(self.frame.size.width/2., HEADER_HEIGHT_SCROLL, self.frame.size.width/2., self.frame.size.height-HEADER_HEIGHT_SCROLL) event:event];
+        [viewDetail setAutoresizingMask:AR_WIDTH_HEIGHT | UIViewAutoresizingFlexibleLeftMargin];
+        [viewDetail setProtocol:self];
+        
+       
+        [self addSubview:viewDetail];
+
+    }
+
 }
 
 @end

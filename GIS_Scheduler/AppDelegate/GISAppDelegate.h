@@ -41,6 +41,10 @@
 @property (readwrite, nonatomic) BOOL isFromAttendees;
 @property (readwrite, nonatomic) BOOL isFromlocation;
 
+@property (readwrite, nonatomic) BOOL isDateView;
+@property (readwrite, nonatomic) BOOL isWeekView;
+@property (readwrite, nonatomic) BOOL isMonthView;
+
 
 
 @end

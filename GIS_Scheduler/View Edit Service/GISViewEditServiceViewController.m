@@ -9,7 +9,22 @@
 #import "GISViewEditServiceViewController.h"
 #import "FFCalendar.h"
 #import "GISConstants.h"
-
+#import "GISLoginDetailsObject.h"
+#import "GISDatabaseManager.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "GISDropDownStore.h"
+#import "GISStoreManager.h"
+#import "GISLoadingView.h"
+#import "PCLogger.h"
+#import "GISConstants.h"
+#import "GISJSONProperties.h"
+#import "GISUtility.h"
+#import "GISViewEditStore.h"
+#import "NSDate+FFDaysCount.h"
+#import "FFDateManager.h"
+#import "GISFonts.h"
+#import "GISUtility.h"
 
 @interface GISViewEditServiceViewController ()<FFMonthCalendarViewProtocol, FFWeekCalendarViewProtocol, FFDayCalendarViewProtocol>
 @property (nonatomic) BOOL boolDidLoad;
@@ -19,7 +34,7 @@
 @property (nonatomic, strong) NSArray *arrayButtons;
 @property (nonatomic, strong) NSArray *arrayCalendars;
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
-@property (nonatomic, strong) FFYearCalendarView *viewCalendarYear;
+
 @property (nonatomic, strong) FFMonthCalendarView *viewCalendarMonth;
 @property (nonatomic, strong) FFWeekCalendarView *viewCalendarWeek;
 @property (nonatomic, strong) FFDayCalendarView *viewCalendarDay;
@@ -43,7 +58,6 @@
 @synthesize arrayButtons;
 @synthesize arrayCalendars;
 @synthesize popoverControllerEditar;
-@synthesize viewCalendarYear;
 @synthesize viewCalendarMonth;
 @synthesize viewCalendarWeek;
 @synthesize viewCalendarDay;
@@ -72,9 +86,9 @@
     [[UITabBarItem appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys: UIColorFromRGB(0x666666), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
     self.navigationController.navigationBarHidden = YES;
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     [self customNavigationBarLayout];
     
@@ -94,7 +108,25 @@
                                                        nil] forState:UIControlStateSelected];
     
     [[UITabBar appearance] setSelectedItem:self.dayItem];
-
+    
+    viewEdit_Array = [[NSMutableArray alloc] init];
+    
+    
+    [_staff_freeLancerSegmentControl setHidden:YES];
+    [_staff_freeLancerButton setHidden:YES];
+        
+    CGRect frame = _mainView.frame;
+    frame.origin.y= 121.0f;
+    _mainView.frame = frame;
+    
+    [_staff_freeLancerButton setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+    [_staff_freeLancerButton.titleLabel setFont:[GISFonts normal]];
+    
+    tabNameString = @"Staff";
+    
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
+    _ServiceProvider_TypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
+    
 
 }
 
@@ -107,12 +139,17 @@
         boolDidLoad = YES;
         [self buttonTodayAction:nil];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEvent:) name:DATE_CHANGED_UPDATE_EVENT object:nil];
+
+    
 }
 
 
 #pragma mark - FFDateManager Notification
 
 - (void)dateChanged:(NSNotification *)notification {
+    
     
     [self updateLabelWithMonthAndYear];
 }
@@ -123,6 +160,44 @@
     NSString *string = [NSString stringWithFormat:@"%@ %i", [arrayMonthName objectAtIndex:comp.month-1], comp.year];
     [labelWithMonthAndYear setText:string];
     [labelMonthAndYear setText:string];
+}
+
+- (void)updateEvent:(NSNotification *)notification {
+
+    [self updateNewEvents];
+}
+
+- (void) updateNewEvents {
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    if(appDelegate.isDateView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+    }else if(appDelegate.isWeekView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeekFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }else if(appDelegate.isMonthView){
+        
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthlastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }
+    if(isServiceSelected){
+        
+        if([serviceProvider_IDString length] == 0)
+            serviceProvider_IDString = @"";
+        [paramsDict setObject:serviceProvider_IDString forKey:@"ServiceProvider"];
+    }else{
+        [paramsDict setObject:@"" forKey:@"ServiceProvider"];
+    }
+    
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
 }
 
 #pragma mark - Init dictEvents
@@ -323,41 +398,244 @@
     
     int index = item.tag;//[arrayButtons indexOfObject:sender];
     
+    if(item.tag == 0){
+        appDelegate.isDateView = YES;
+        appDelegate.isWeekView = NO;
+        appDelegate.isMonthView = NO;
+        
+    }else if(item.tag == 1){
+        appDelegate.isWeekView = YES;
+        appDelegate.isDateView = NO;
+        appDelegate.isMonthView = NO;
+        
+    }else if(item.tag == 2){
+        appDelegate.isMonthView = YES;
+        appDelegate.isWeekView = NO;
+        appDelegate.isDateView = NO;
+    }
+    
     [self.mainView bringSubviewToFront:[arrayCalendars objectAtIndex:index]];
     
     boolYearViewIsShowing = (index == 0);
+    
+    [self updateNewEvents];
     [self updateLabelWithMonthAndYear];
 
 }
 
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender {
     
-    if (sender.selectedSegmentIndex==0) {
+    if(sender.tag == 22){
         
-        [_staff_freeLancerSegmentControl setHidden:NO];
-        [_staff_freeLancerButton setHidden:NO];
         
-        CGRect frame = _mainView.frame;
-        frame.origin.y= 154.0f;
-        _mainView.frame = frame;
         
-    }else if(sender.selectedSegmentIndex==1)
-    {
-      
-        [_staff_freeLancerSegmentControl setHidden:YES];
-        [_staff_freeLancerButton setHidden:YES];
+    }else{
         
-        CGRect frame = _mainView.frame;
-        frame.origin.y= 121.0f;
-        _mainView.frame = frame;
+        if (sender.selectedSegmentIndex==0) {
+            
+            [_staff_freeLancerSegmentControl setHidden:NO];
+            [_staff_freeLancerButton setHidden:NO];
+            
+            CGRect frame = _mainView.frame;
+            frame.origin.y= 154.0f;
+            _mainView.frame = frame;
+            
+        }else if(sender.selectedSegmentIndex==1)
+        {
+            
+            [_staff_freeLancerSegmentControl setHidden:YES];
+            [_staff_freeLancerButton setHidden:YES];
+            
+            CGRect frame = _mainView.frame;
+            frame.origin.y= 121.0f;
+            _mainView.frame = frame;
+        }
     }
 }
+-(void)successmethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_viewEditSchedule Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                GISViewEditStore *viewEditStore;
+                
+                if([viewEdit_Array count]>0)
+                   [viewEdit_Array removeAllObjects];
+                
+                [[GISStoreManager sharedManager] removeViewEditObjects];
+               viewEditStore=[[GISViewEditStore alloc]initWithJsonDictionary:response.responseJson];
+               viewEdit_Array = [[GISStoreManager sharedManager] getViewEditObjects];
+                
+                [self addEventCalander:viewEdit_Array];
+                
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
 
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
+
+- (IBAction) dateSelected:(id)sender{
+    
+    isDateSelected = YES;
+    isServiceSelected = NO;
+    
+    [_staff_freeLancerSegmentControl setHidden:YES];
+    [_staff_freeLancerButton setHidden:YES];
+    
+    CGRect frame = _mainView.frame;
+    frame.origin.y= 121.0f;
+    _mainView.frame = frame;
+    
+    [_serviceProviderButton setBackgroundImage:nil  forState:UIControlStateNormal];
+    [_serviceProviderButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [_dateButton setBackgroundImage:[UIImage imageNamed:@"selected.png"]  forState:UIControlStateNormal];
+}
+
+-(void)addEventCalander:(NSMutableArray *)eventArray{
+    
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [dictEvents removeAllObjects];
+        
+    for(GISViewEditDateObject *viewEditObject in eventArray){
+        
+        FFEvent *event = [FFEvent new];
+        [event setStringCustomerName: viewEditObject.jobNumber_String];
+        [event setNumCustomerID:[f numberFromString:viewEditObject.jobId_String]];
+        [event setDateDay:[NSDate dateWithString:viewEditObject.jobDate_String]];
+        NSString *str = [GISUtility getTimeData:viewEditObject.startTime_String];
+        NSArray *strArray = [str componentsSeparatedByString:@":"];
+        [event setDateTimeBegin:[NSDate dateWithHour:[[strArray objectAtIndex:0] intValue] min:[[strArray objectAtIndex:1] intValue]]];
+        NSString *endTimestr = [GISUtility getTimeData:viewEditObject.endTime_String];
+        NSArray *endTImestrArray = [endTimestr componentsSeparatedByString:@":"];
+        [event setDateTimeEnd:[NSDate dateWithHour:[[endTImestrArray objectAtIndex:0] intValue] min:[[endTImestrArray objectAtIndex:1] intValue]]];
+        [self addNewEvent:event];
+    }
+    
+    [self removeLoadingView];
+    
+}
+
+- (IBAction) serviceProviderSelected:(id)sender{
+    
+    
+    isDateSelected = NO;
+    isServiceSelected = YES;
+    
+    [_serviceProviderButton setBackgroundImage:[UIImage imageNamed:@"selected.png"]  forState:UIControlStateNormal];
+    [_dateButton setBackgroundImage:nil  forState:UIControlStateNormal];
+    [_serviceProviderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [_staff_freeLancerSegmentControl setHidden:NO];
+    [_staff_freeLancerButton setHidden:NO];
+    
+    CGRect frame = _mainView.frame;
+    frame.origin.y= 154.0f;
+    _mainView.frame = frame;
+}
+
+- (IBAction)showServicePopoverDetails:(id)sender{
+    
+     UIButton *btn=(UIButton*)sender;
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    tableViewController.popOverDelegate = self;
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_ServiceProvider_TypeArray viewController:tableViewController];
+    _popover.delegate = self;
+    
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown animated:YES];
+    
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    serviceProvider_String= value_str;
+    [_staff_freeLancerButton setTitle:serviceProvider_String forState:UIControlStateNormal];
+    serviceProvider_IDString=id_str;
+    if(_popover)
+        [_popover dismissPopoverAnimated:YES];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    if(appDelegate.isDateView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+    }else if(appDelegate.isWeekView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeekFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }else if(appDelegate.isMonthView){
+        
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthlastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }
+    [paramsDict setObject:serviceProvider_IDString forKey:@"ServiceProvider"];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:DATE_CHANGED_UPDATE_EVENT];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

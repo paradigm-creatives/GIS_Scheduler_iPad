@@ -54,10 +54,11 @@
 #define GIS_GET_SCHEDULER_NEW_MODIFIED_REQUESTS @"GetSchedulerNewandModifiedRequests"
 #define GIS_GET_SCHEDULER_MASTERS @"GetSchedulerMasters"
 #define GIS_SAVE_SPREQUESTED_JOBS @"SaveSPRequestedJobs"
-
+#define GIS_GET_VIEW_EDIT_SCHEDULE @"ViewEditSchedule"
 
 
 #define GIS_GET_JOB_DETAILS @"GetJobDetails"
+#define GIS_GET_SERVICE_PROVIDERS @"ServiceProviders"
 
 
 

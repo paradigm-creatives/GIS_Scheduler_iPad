@@ -47,14 +47,30 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
     
+    serviceProvider_Array=[[NSMutableArray alloc]init];
     jobDetails_Array=[[NSMutableArray alloc]init];
     payLevel_Array=[[NSMutableArray alloc]init];
     billLevel_Array=[[NSMutableArray alloc]init];
+    typeOfService_array=[[NSMutableArray alloc]init];
+    serviceProvider_array_tableView=[[NSMutableArray alloc]init];
+    payType_array=[[NSMutableArray alloc]init];
+
     payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
     billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c", nil];
     
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+    serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
      selected_row=999999;
+    
+    
+    NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+    typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+    
+    NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
+    payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+    
+    
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
 }
@@ -190,6 +206,8 @@
     
     jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
     [jobDetails_tableView reloadData];
+    
+    
 }
 
 -(void)failuremethod_getJobDetails_data:(GISJsonRequest *)response
@@ -258,7 +276,7 @@
         cell.start_time_Label.text=temp_obj_jobDetails.startTime_string;
         cell.end_time_Label.text=temp_obj_jobDetails.endTime_string;
         cell.typeOf_service_Label.text=temp_obj_jobDetails.typeOfService_string;
-        cell.service_provider_Label.text=temp_obj_jobDetails.jobDate_string;
+        cell.service_provider_Label.text=temp_obj_jobDetails.serviceProvider_string;
         cell.payType_Label.text=temp_obj_jobDetails.payType_string;
         cell.timely_Label.text=temp_obj_jobDetails.timely_string;
         cell.billAmt_Label.text=temp_obj_jobDetails.billAmount_string;
@@ -272,6 +290,7 @@
         cell.typeOf_service_EDIT_Label.text=typeOfservice_temp_string;
         cell.service_provider_EDIT_Label.text=serviceProvider_temp_string;
         cell.payType_EDIT_Label.text=payType_temp_string;
+        cell.edit_imageView.image=[UIImage imageNamed:@"check_pressed"];
     }
     else
     {
@@ -293,6 +312,8 @@
 -(IBAction)pickerButtonPressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
+    id tempCellRef=(GISJobDetailsCell *)button.superview.superview.superview.superview;
+    GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)tempCellRef;
     
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
@@ -305,6 +326,7 @@
     else if([sender tag]==222)
     {
         btnTag=222;
+        tableViewController1.popOverArray=serviceProvider_Array;
     }
     else if([sender tag]==333)
     {
@@ -314,32 +336,131 @@
     {
         // Search Button Action
     }
+    else if ([sender tag]==555)
+    {
+        btnTag=555;
+        tableViewController1.popOverArray=typeOfService_array;
+    }
+    else if ([sender tag]==666)
+    {
+        btnTag=666;
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",typeOfservice_temp_string];
+        serviceProvider_array_tableView = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
+        tableViewController1.popOverArray=serviceProvider_array_tableView;
+        
+    }
+    else if ([sender tag]==777)
+    {
+        btnTag=777;
+        tableViewController1.popOverArray=payType_array;
+        
+    }
+    else if ([sender tag]==888)
+    {
+        btnTag=888;
+        tableViewController1.popOverArray=serviceProvider_Array;
+    }
+    else if ([sender tag]==999)
+    {
+        btnTag=999;
+        tableViewController1.popOverArray=payLevel_Array;
+        
+    }
+    else if ([sender tag]==1010)
+    {
+        btnTag=1010;
+        tableViewController1.popOverArray=billLevel_Array;
+        
+    }
+
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    popover.popoverContentSize = CGSizeMake(340, 210);
+    if(([sender tag]==111)||([sender tag]==222)||([sender tag]==333)||([sender tag]==444))
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==555)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==666)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==777)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     
-    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
-    if (btnTag==111)
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
+
+    if(btnTag==111)
+    {
+        jobDate_Answer_Label.text=value_str;
+    }
+    else if(btnTag==222)
+    {
+        serviceProvider_Answer_Label.text=value_str;
+    }
+    else if(btnTag==333)
     {
     }
+    else if(btnTag==444)
+    {
+    }
+    else if (btnTag==555)
+    {
+        typeOfservice_temp_string=value_str;
+    }
+    else if (btnTag==666)
+    {
+        serviceProvider_temp_string=value_str;
+    }
+    else if (btnTag==777)
+    {
+        payType_temp_string=value_str;
+    }
+    else if (btnTag==888)
+    {
+        typeOfServiceProviders_Answer_Label.text=value_str;
+    }
+    else if (btnTag==999)
+    {
+        payLevel_Answer_Label.text=value_str;
+    }
+    else if (btnTag==1010)
+    {
+        billLevel_Answer_Label.text=value_str;
+    }
+    if (btnTag==555||btnTag==666||btnTag==777)
+        [jobDetails_tableView reloadData];
 }
 
 -(void)editButtonPressed:(id)sender
 {
     NSLog(@"tag--%d",[sender tag]);
-    selected_row=[sender tag];
-    
-    GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
-    serviceProvider_temp_string=tempObj.serviceProvider_string;
-    typeOfservice_temp_string=tempObj.typeOfService_string;
-    payType_temp_string=tempObj.payType_string;
-    
+    if(!isEdit_Button_Clicked)
+    {
+        isEdit_Button_Clicked=YES;
+        selected_row=[sender tag];
+        GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
+        typeOfservice_temp_string=tempObj.typeOfService_string;
+        serviceProvider_temp_string=tempObj.serviceProvider_string;
+        payType_temp_string=tempObj.payType_string;
+    }
+    else if(isEdit_Button_Clicked){
+        
+        GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
+        tempObj.typeOfService_string=typeOfservice_temp_string;
+        tempObj.serviceProvider_string=serviceProvider_temp_string;
+        tempObj.payType_string=payType_temp_string;
+        [jobDetails_Array replaceObjectAtIndex:[sender tag] withObject:tempObj];
+        //Call the Save Update JObs Service here
+        selected_row=999999;
+        isEdit_Button_Clicked=NO;
+        
+    }
     [jobDetails_tableView reloadData];
 }
 

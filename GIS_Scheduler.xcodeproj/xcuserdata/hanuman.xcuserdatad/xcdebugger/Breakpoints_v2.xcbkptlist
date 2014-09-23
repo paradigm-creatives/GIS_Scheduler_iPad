@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
-            timestampString = "433072348.167272"
+            timestampString = "433170331.548562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-successmethod_get_Date_Time:"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-successmethod_getJobDetails_data:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

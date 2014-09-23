@@ -17,6 +17,7 @@
 @synthesize dateDay;
 @synthesize dateTimeBegin;
 @synthesize dateTimeEnd;
-@synthesize arrayWithGuests;
+@synthesize payType;
+@synthesize serviceProvider;
 
 @end

@@ -13,6 +13,8 @@
 #import "FFHourAndMinLabel.h"
 #import "FFBlueButton.h"
 #import "FFImportantFilesForCalendar.h"
+#import "GISEventLabel.h"
+#import "GISEeventShowBackgroundView.h"
 
 @interface FFDayCell ()
 @property (nonatomic, strong) NSMutableArray *arrayLabelsHourAndMin;
@@ -110,7 +112,7 @@
 - (void)addButtonsWithArray:(NSArray *)array {
     
     for (UIView *subview in self.subviews) {
-        if ([subview isKindOfClass:[FFBlueButton class]]) {
+        if ([subview isKindOfClass:[FFBlueButton class]] || [subview isKindOfClass:[GISEventLabel class]] || [subview isKindOfClass:[GISEeventShowBackgroundView class]]) {
             [subview removeFromSuperview];
         }
     }
@@ -121,6 +123,7 @@
     [labelWithSameYOfCurrentHour setAlpha:!boolIsToday];
     
     NSArray *arrayEvents = array;
+    GISEeventShowBackgroundView *view;
     
     if (arrayEvents) {
         
@@ -144,8 +147,31 @@
             
             FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70., yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
             [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+            //[_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
             [_button setEvent:event];
+            
+            view = [[GISEeventShowBackgroundView alloc] initWithFrame:CGRectMake(70, _button.frame.origin.y,  30, _button.frame.size.height)];
+            [view setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
+            
+            [self addSubview:view];
+            
+            GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+            [label1 setBackgroundColor:[UIColor clearColor]];
+            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
+            [self addSubview:label1];
+            
+            GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+            [label2 setBackgroundColor:[UIColor clearColor]];
+            label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
+            [self addSubview:label2];
+            
+            GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+            [label3 setBackgroundColor:[UIColor clearColor]];
+            label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
+            [self addSubview:label3];
+            
+            [self bringSubviewToFront:_button];
+
             
             [arrayButtonsEvents addObject:_button];
             [self addSubview:_button];
@@ -162,6 +188,26 @@
     if (protocol != nil && [protocol respondsToSelector:@selector(showViewDetailsWithEvent:cell:)]) {
         [protocol showViewDetailsWithEvent:button.event cell:self];
     }
+}
+
+- (NSString *)eventDisplayFormat:(NSDate *)fromdate
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSString *dateStr = [dateFormat stringFromDate:fromdate];
+    NSDate *myDate = [dateFormat dateFromString:dateStr];
+    
+    NSDateComponents *components= [[NSDateComponents alloc] init];
+    [components setDay:0];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *dateIncremented= [calendar dateByAddingComponents:components toDate:myDate options:0];
+    
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *stringFromDate = [myDateFormatter stringFromDate:dateIncremented];
+    
+    return stringFromDate;
 }
 
 //#pragma mark - FFEventDetailPopoverController Protocol

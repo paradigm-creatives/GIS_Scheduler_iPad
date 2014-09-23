@@ -37,7 +37,12 @@
     
     currentDate = _currentDate;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:DATE_CHANGED_UPDATE_EVENT];
     [[NSNotificationCenter defaultCenter] postNotificationName:DATE_MANAGER_DATE_CHANGED object:_currentDate];
+    [[NSNotificationCenter defaultCenter] postNotificationName:DATE_CHANGED_UPDATE_EVENT object:_currentDate];
+
+    
+    
 }
 
 @end

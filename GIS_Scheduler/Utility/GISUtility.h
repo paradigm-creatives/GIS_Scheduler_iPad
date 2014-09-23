@@ -30,4 +30,7 @@
 +(UIPopoverController *)showPopOver:(NSMutableArray *)localArray viewController:(GISPopOverTableViewController*)tableViewController;
 +(BOOL)dateComparision:(NSString *)startTime:(NSString *)endTime:(BOOL)isStartTimeComaprsion;
 +(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime;
++ (NSString *)eventDisplayFormat:(NSDate *)fromdate;
++(NSString *) getTimeData:(NSString *) timeString;
+
 @end

@@ -11,6 +11,7 @@
 #import "FFEventDetailPopoverController.h"
 
 #import "FFEventDetailView.h"
+#import "GISViewEditListViewController.h"
 
 @interface FFEventDetailPopoverController () <FFEventDetailViewProtocol>
 @property (nonatomic, strong) UIViewController *popoverContent;
@@ -54,4 +55,5 @@
         [protocol showPopoverEditWithEvent:_event];
     }
 }
+
 @end

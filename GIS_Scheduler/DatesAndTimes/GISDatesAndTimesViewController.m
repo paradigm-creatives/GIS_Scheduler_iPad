@@ -326,20 +326,20 @@
     }
     else if ([sender tag]==888)//Create Jobs View Buttons
     {
-        btnTag=222;
+        btnTag=888;
         tableViewController1.view_String=@"datestimes";
         tableViewController1.dateTimeMoveUp_string=endDate_TextField.text;
     }
     else if ([sender tag]==999)//Create Jobs View Buttons
     {
-        btnTag=333;
+        btnTag=999;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=startTime_TextField.text;
         
     }
     else if ([sender tag]==1010)//Create Jobs View Buttons
     {
-        btnTag=444;
+        btnTag=1010;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=endTime_TextField.text;
         

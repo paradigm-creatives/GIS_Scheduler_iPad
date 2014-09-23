@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -7,12 +7,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISJobDetailsViewController">
             <connections>
                 <outlet property="alljobs_Checked_button" destination="TR7-gI-dBl" id="4mq-4n-Qe4"/>
+                <outlet property="billLevel_Answer_Label" destination="ZSP-mf-9lv" id="a6s-8s-CdF"/>
+                <outlet property="billLevel_Label" destination="6AI-xK-E0j" id="hXD-cf-DA9"/>
                 <outlet property="createJObs_tableView" destination="fj2-qm-M0n" id="L56-5Y-7Wo"/>
                 <outlet property="createJobs_Middle_UIVIew" destination="Sw2-hl-n9y" id="4fk-45-HtX"/>
                 <outlet property="createJobs_UIVIew" destination="CI0-TG-lTe" id="bxb-mJ-vqb"/>
+                <outlet property="filledUnfilled_Answer_Label" destination="78b-3r-rRs" id="DLw-9y-wGC"/>
                 <outlet property="jobChangeHistory_background_UIView" destination="UOg-ZE-sOs" id="MXp-KC-Zx6"/>
                 <outlet property="jobChangeHistory_foreground_UIView" destination="Sj6-2U-eOf" id="NwQ-lz-GGr"/>
+                <outlet property="jobDate_Answer_Label" destination="gVF-EM-ylR" id="vQs-q5-Kg0"/>
                 <outlet property="jobDetails_tableView" destination="19L-al-f3O" id="cAx-6E-7b1"/>
+                <outlet property="payLevel_Answer_Label" destination="sg8-UJ-VNm" id="MQC-Em-mJd"/>
+                <outlet property="payLevel_Label" destination="POw-UE-gHF" id="2qK-IP-Thj"/>
+                <outlet property="serviceProvider_Answer_Label" destination="cuW-Wo-Asx" id="I6v-GB-KLX"/>
+                <outlet property="typeOfServiceProvidersLabel" destination="7On-xA-F0s" id="5Cq-Fl-G5G"/>
+                <outlet property="typeOfServiceProviders_Answer_Label" destination="KmR-rJ-9QL" id="OXQ-oP-WIF"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -133,6 +142,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVF-EM-ylR">
+                    <rect key="frame" x="95" y="66" width="90" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calender.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vo8-j6-Lxh">
                     <rect key="frame" x="181" y="66" width="15" height="17"/>
                 </imageView>

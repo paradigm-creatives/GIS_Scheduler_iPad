@@ -95,7 +95,7 @@
     [cell setProtocol:self];
     [cell setDate:[NSDate dateWithYear:comp.year month:comp.month day:1+indexPath.row-(componentsFirstDayOfMonth.weekday-1)-7]];
     [cell showEvents:[dictEvents objectForKey:cell.date]];
-    
+        
     if ([NSDate isTheSameDateTheCompA:cell.date.componentsOfDate compB:[NSDate componentsOfCurrentDate]] && protocol != nil && [protocol respondsToSelector:@selector(showHourLine:)]) {
         [protocol showHourLine:YES];
     }

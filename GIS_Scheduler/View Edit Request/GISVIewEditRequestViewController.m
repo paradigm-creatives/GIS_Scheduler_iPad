@@ -31,6 +31,9 @@
 #import "GISViewEditServiceViewController.h"
 #import "FFEvent.h"
 #import "FFImportantFilesForCalendar.h"
+#import "GISLoadingView.h"
+#import "PCLogger.h"
+#import "GISViewEditStore.h"
 
 @interface GISVIewEditRequestViewController ()
 
@@ -55,6 +58,7 @@
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     requestNumbers_mutArray = [[NSMutableArray alloc] init];
+    viewEdit_Array = [[NSMutableArray alloc] init];
     
     self.title=@"View/Edit Service Request";
     [[UITabBarItem appearance] setTitleTextAttributes:
@@ -85,6 +89,7 @@
     [serviceView setArrayWithEvents:[self arrayWithEvents]];
     
     _viewControllers=[NSArray arrayWithObjects:contactsBillingView, eventDetailsView,attendeesView,locationDetailsView,datesAndTimesView,jobDetailsViewController,summaryView,commentView,serviceView, nil];
+    appDelegate.isDateView = YES;
     
     if(appDelegate.isFromViewEditService){
         
@@ -187,8 +192,8 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
-   
-    
+       
+    [self getUpdatedEventDetails];
     
 
 }
@@ -342,71 +347,7 @@
 
 - (NSMutableArray *)arrayWithEvents {
     
-    FFEvent *event1 = [FFEvent new];
-    [event1 setStringCustomerName: @"Customer A"];
-    [event1 setNumCustomerID:@1];
-    [event1 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-    [event1 setDateTimeBegin:[NSDate dateWithHour:10 min:00]];
-    [event1 setDateTimeEnd:[NSDate dateWithHour:15 min:13]];
-    [event1 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event2 = [FFEvent new];
-    [event2 setStringCustomerName: @"Customer B"];
-    [event2 setNumCustomerID:@2];
-    [event2 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-    [event2 setDateTimeBegin:[NSDate dateWithHour:9 min:15]];
-    [event2 setDateTimeEnd:[NSDate dateWithHour:12 min:138]];
-    [event2 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event3 = [FFEvent new];
-    [event3 setStringCustomerName: @"Customer C"];
-    [event3 setNumCustomerID:@3];
-    [event3 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-    [event3 setDateTimeBegin:[NSDate dateWithHour:16 min:00]];
-    [event3 setDateTimeEnd:[NSDate dateWithHour:17 min:13]];
-    [event3 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event4 = [FFEvent new];
-    [event4 setStringCustomerName: @"Customer D"];
-    [event4 setNumCustomerID:@4];
-    [event4 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-    [event4 setDateTimeBegin:[NSDate dateWithHour:18 min:00]];
-    [event4 setDateTimeEnd:[NSDate dateWithHour:19 min:13]];
-    [event4 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event5 = [FFEvent new];
-    [event5 setStringCustomerName: @"Customer E"];
-    [event5 setNumCustomerID:@5];
-    [event5 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:[NSDate componentsOfCurrentDate].day]];
-    [event5 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
-    [event5 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
-    [event5 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event6 = [FFEvent new];
-    [event6 setStringCustomerName: @"Customer F"];
-    [event6 setNumCustomerID:@6];
-    [event6 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:25]];
-    [event6 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
-    [event6 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
-    [event6 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event7 = [FFEvent new];
-    [event7 setStringCustomerName: @"Customer G"];
-    [event7 setNumCustomerID:@7];
-    [event7 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:1]];
-    [event7 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
-    [event7 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
-    [event7 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    FFEvent *event8 = [FFEvent new];
-    [event8 setStringCustomerName: @"Customer H"];
-    [event8 setNumCustomerID:@8];
-    [event8 setDateDay:[NSDate dateWithYear:[NSDate componentsOfCurrentDate].year month:[NSDate componentsOfCurrentDate].month day:2]];
-    [event8 setDateTimeBegin:[NSDate dateWithHour:20 min:00]];
-    [event8 setDateTimeEnd:[NSDate dateWithHour:21 min:13]];
-    [event8 setArrayWithGuests:[NSMutableArray arrayWithArray:@[@[@111, @"Guest 2", @"email2@email.com"], @[@111, @"Guest 4", @"email4@email.com"], @[@111, @"Guest 5", @"email5@email.com"], @[@111, @"Guest 7", @"email7@email.com"]]]];
-    
-    return [NSMutableArray arrayWithArray:@[event1, event2, event3, event4, event5, event6, event7, event8]];
+    return nil;
 }
 
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
@@ -417,6 +358,131 @@
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
+}
+
+-(void)getUpdatedEventDetails{
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Objs=[requetId_array lastObject];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    if(appDelegate.isDateView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+    }else if(appDelegate.isWeekView){
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeekFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+    }else if(appDelegate.isMonthView){
+        
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+        [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+        
+    }
+    [paramsDict setObject:@"" forKey:@"ServiceProvider"];
+    [paramsDict setObject:login_Objs.token_string forKey:@"token"];
+    [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
+
+}
+
+-(void)successmethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_viewEditSchedule Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                GISViewEditStore *viewEditStore;
+                
+                if([viewEdit_Array count]>0)
+                    [viewEdit_Array removeAllObjects];
+                
+                [[GISStoreManager sharedManager] removeViewEditObjects];
+                viewEditStore=[[GISViewEditStore alloc]initWithJsonDictionary:response.responseJson];
+                viewEdit_Array = [[GISStoreManager sharedManager] getViewEditObjects];
+                
+                [self addEventCalander:viewEdit_Array];
+                
+            }
+            else
+            {
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_viewEditScheduledata:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
+
+-(void)addEventCalander:(NSMutableArray *)eventArray{
+    
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    NSMutableArray *eventDetailsView =  [[NSMutableArray alloc] init];
+    
+    for(GISViewEditDateObject *viewEditObject in eventArray){
+        
+        FFEvent *event = [FFEvent new];
+        [event setStringCustomerName: viewEditObject.jobNumber_String];
+        [event setNumCustomerID:[f numberFromString:viewEditObject.jobId_String]];
+        [event setDateDay:[NSDate dateWithString:viewEditObject.jobDate_String]];
+        NSString *str = [GISUtility getTimeData:viewEditObject.startTime_String];
+        NSArray *strArray = [str componentsSeparatedByString:@":"];
+        [event setDateTimeBegin:[NSDate dateWithHour:[[strArray objectAtIndex:0] intValue] min:[[strArray objectAtIndex:1] intValue]]];
+        NSString *endTimestr = [GISUtility getTimeData:viewEditObject.endTime_String];
+        NSArray *endTImestrArray = [endTimestr componentsSeparatedByString:@":"];
+        [event setDateTimeEnd:[NSDate dateWithHour:[[endTImestrArray objectAtIndex:0] intValue] min:[[endTImestrArray objectAtIndex:1] intValue]]];
+        [eventDetailsView addObject:event];
+    }
+    
+    GISViewEditServiceViewController *serviceView=[[GISViewEditServiceViewController alloc]initWithNibName:@"GISViewEditServiceViewController" bundle:nil];
+    [serviceView setArrayWithEvents:eventDetailsView];
+    
+    if(appDelegate.isFromViewEditService){
+        _currentController= serviceView;
+        [_topView setHidden:YES];
+        CGRect frame = _mainView.frame;
+        frame.origin.y = 64;
+        _mainView.frame = frame;
+    }
+    [_currentController.view removeFromSuperview];
+    [_mainView addSubview:_currentController.view];
+    
+    [self removeLoadingView];
+    
 }
 
 
