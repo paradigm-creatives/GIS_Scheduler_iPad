@@ -490,7 +490,10 @@
 #define kViewSchedule_StartTime @"StartTime"
 #define kViewSchedule_Timely @"Timely"
 #define kViewSchedule_TypeofService @"TypeofService"
-
+#define kViewSchedule_ServiceProviderID @"ServiceProviderID"
+#define kViewSchedule_SubroleID @"SubRoleID"
+#define kViewSchedule_PayTypeID @"PayTypeID"
+#define kViewSchedule_JobNotes @"JobNotes"
 
 #pragma mark JobDetails End
 

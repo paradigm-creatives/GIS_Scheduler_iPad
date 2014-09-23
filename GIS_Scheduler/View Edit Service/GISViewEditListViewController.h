@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "FFEvent.h"
+#import "GISAppDelegate.h"
+#import "FFBlueButton.h"
 
 @interface GISViewEditListViewController : UITableViewController
+{
+    GISAppDelegate *appDelegate;
+}
 
-
-@property (nonatomic,strong) NSArray *testArray;
+@property (nonatomic,strong) NSMutableArray *eventArray;
 @property (nonatomic, strong) FFEvent *testEvent;
+@property (nonatomic, strong) FFBlueButton *eventButton;
 
 @end

@@ -11,7 +11,6 @@
 #import "NSDate+FFDaysCount.h"
 #import "FFDayCalendarView.h"
 #import "FFDateManager.h"
-#import "GISAppDelegate.h"
 #import "GISUtility.h"
 
 @interface GISViewEditListViewController ()
@@ -38,6 +37,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    _eventArray = [[NSMutableArray alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +59,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return  1;
+    if(appDelegate.isMonthView)
+        return 1;
+    
+    return  [appDelegate.jobEventsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,9 +74,20 @@
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISViewEditListVIewCell" owner:self options:nil]objectAtIndex:0];
     }
     
-    cell.jobName.text = _testEvent.stringCustomerName;
-    cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
-    cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
+    if(appDelegate.isMonthView){
+        
+        cell.jobName.text = _testEvent.stringCustomerName;
+        cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
+        cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
+        
+    }else{
+        _eventButton = [appDelegate.jobEventsArray objectAtIndex:indexPath.row];
+        [_eventArray addObject:_eventButton.event];
+        
+        cell.jobName.text = _eventButton.event.stringCustomerName;
+        cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_eventButton.event.dateTimeBegin] ,[NSDate stringTimeOfDate:_eventButton.event.dateTimeEnd]];
+        cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_eventButton.event.dateDay]];
+    }
     
     // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //    if (cell == nil) {
@@ -139,22 +155,20 @@
 {
     // Navigation logic may go here, for example:
     
-    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     //    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
     //
     //    [[NSNotificationCenter defaultCenter]postNotificationName:SHOW_EVENT object:nil userInfo:infoDict];
     
-    
-    
-    
     if(appDelegate.isDateView){
         
+         _testEvent = [_eventArray objectAtIndex:indexPath.row];
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:SHOW_EVENT object:nil userInfo:infoDict];
         
     }else if(appDelegate.isWeekView){
         
+         _testEvent = [_eventArray objectAtIndex:indexPath.row];
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:SHOW_WEEK_EVENT object:nil userInfo:infoDict];
         

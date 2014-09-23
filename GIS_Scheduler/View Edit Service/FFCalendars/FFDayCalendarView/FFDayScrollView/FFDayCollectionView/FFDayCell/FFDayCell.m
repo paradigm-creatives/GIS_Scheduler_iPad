@@ -15,6 +15,7 @@
 #import "FFImportantFilesForCalendar.h"
 #import "GISEventLabel.h"
 #import "GISEeventShowBackgroundView.h"
+#import "GISAppDelegate.h"
 
 @interface FFDayCell ()
 @property (nonatomic, strong) NSMutableArray *arrayLabelsHourAndMin;
@@ -183,10 +184,17 @@
 
 - (IBAction)buttonAction:(id)sender {
     
+    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
     button = (FFBlueButton *)sender;
     
     if (protocol != nil && [protocol respondsToSelector:@selector(showViewDetailsWithEvent:cell:)]) {
+        if([appDelegate.jobEventsArray count] >0)
+           [appDelegate.jobEventsArray removeAllObjects];
+        
+        [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayButtonsEvents];
         [protocol showViewDetailsWithEvent:button.event cell:self];
+        
     }
 }
 

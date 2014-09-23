@@ -30,7 +30,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		A4v/5HP7g+9q5U/UBekYeet/xRs=
+		4ecSjIDdmsSJyWz6yo/QSJV1v24=
 		</data>
 		<key>DailyCalendar.png</key>
 		<data>
@@ -40,157 +40,201 @@
 		<data>
 		OBxr/4DQUSwqOpMzDA/kffQ6U6E=
 		</data>
+		<key>GISAddUpdateJobsViewController.nib</key>
+		<data>
+		H8HNZeq6GQBw9dl5lbcPyiIP6S8=
+		</data>
 		<key>GISAttendeesCell.nib</key>
 		<data>
-		/yAtj/CwYsjolOIvwxq3Z0QFHlg=
+		zG1XW9g5PIlyddG1nygqjrnhXag=
 		</data>
 		<key>GISAttendeesTopCell.nib</key>
 		<data>
-		hpIhUafCTaBva5CDGdrzRfILZfU=
+		o1XXD0r3NWPadyrIVuhcc4bDXVk=
 		</data>
 		<key>GISAttendeesViewController.nib</key>
 		<data>
-		Dgeqe8DWmD2SMnF6IcgYDDkPg3E=
+		TZr/hKKG4X5rl/Gguln1ijqz1GQ=
+		</data>
+		<key>GISBillingPaymentInfo.nib</key>
+		<data>
+		KpupQMtZwCC0GEJ12elM/qGbMX8=
 		</data>
 		<key>GISCommentCell.nib</key>
 		<data>
-		ySgsq5skJWnSG5nobpLsC0citqA=
+		wsNcgUIuMONqpswQZvYn/UF7M1U=
 		</data>
 		<key>GISCommentViewController.nib</key>
 		<data>
-		M/qNfzDlWm7hqfhzjH4+kjk1Ey0=
+		Rdrrxlkl5HevnCvyWgdb+wEAJg8=
 		</data>
 		<key>GISContactsAndBillingViewController.nib</key>
 		<data>
-		DHLgWS8FLmghp+6KsyFtx/iR2vg=
+		j5y1ImLmyUoJrDQvSvZyKcyUMug=
 		</data>
 		<key>GISCreateJobsCell.nib</key>
 		<data>
-		ARDZ+LYXsTLP4voPQ818hD/lSG8=
+		pH1R07a+d2b0VLkbMrR98Ack9AA=
 		</data>
 		<key>GISCreateJobsViewController.nib</key>
 		<data>
-		0BYhS+WGgwlQxFeaPWtkffpCUPo=
+		2VxCqnipTdnYjqKyIqtSSL4dmEY=
 		</data>
 		<key>GISCreateJobs_Cell.nib</key>
 		<data>
-		3g6jKgycjaj2qr6quRajfXSPyC8=
+		RYzXMvv8G4ro7ABoiFYmhSIDG+Q=
 		</data>
 		<key>GISDashBoardCell.nib</key>
 		<data>
-		Pcj1nQ8DiNGJOobtBbbCCC0oEz0=
+		1tXrV4kgZanul3a5A+MUQOJ1I+I=
 		</data>
 		<key>GISDashBoardListViewController.nib</key>
 		<data>
-		bV4rObBkmk+Ijh5OUs91XXZilg4=
+		3tzUagU6D+UZVBHRRoDlytTe6fs=
 		</data>
 		<key>GISDashBoardReqCell.nib</key>
 		<data>
-		dWyuPCC9wypX8sgFgrmpbOEHhgQ=
+		OHNEjlctEDKmn1CkcZyr9xSNltU=
 		</data>
 		<key>GISDashBoardSPCell.nib</key>
 		<data>
-		Z2U8J9KxmOA7dFtIUPlznxqk+KA=
+		fPHQV7d8UFiEVITj4X1eS2hgJck=
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		3etJADinfROD1tfDJ+/CvwLLuoc=
+		wui88bJC4RDDvE2FoyyraYFarTE=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
-		xF2exY3EsNPmwQn8ToyW8JlZfFk=
+		S0C35RGDkxPASqpTU1GIiPc48Qk=
 		</data>
 		<key>GISDatesTimesDetailCell.nib</key>
 		<data>
-		llLWw+iUzmD+yAj1j1igdE4PAFA=
+		4wc+xbxc5oopugSojKSQu1pS5U8=
 		</data>
 		<key>GISEventDetailsCell.nib</key>
 		<data>
-		sPFUI2YBPr0imh65YUCJhbE/PX0=
+		5witRnu4sN9DGfKMEvZU8Qo7TCs=
 		</data>
 		<key>GISEventDetailsViewController.nib</key>
 		<data>
-		fapdbD7ilEqBO4jsZ+0Kl4VIS8c=
+		nzDS/bHvNS5FjeejQmn74V+2vK8=
+		</data>
+		<key>GISFilterMoreViewController.nib</key>
+		<data>
+		DURa6y0+oqNn+v3G4zZ4b8DZLqI=
+		</data>
+		<key>GISFindReqJobs_JobDataToSearch_Cell.nib</key>
+		<data>
+		VOVuZoYSL6ZjJYeEPZ8DaoQ9nfY=
+		</data>
+		<key>GISFindReqJobs_ReqDataCell.nib</key>
+		<data>
+		3csAUCgkwh3LnS0W2v4snZ0P/94=
+		</data>
+		<key>GISFindRequestJobsViewController.nib</key>
+		<data>
+		95MVjsDXwMvtr+dTXYWuKAAQSSc=
 		</data>
 		<key>GISJobAssignmentCell.nib</key>
 		<data>
-		FhZ0X+vUvHtGkEdF6wnP9NIME/0=
+		fyPMrVnQHy4T8V+9kGKFFy/lZWY=
 		</data>
 		<key>GISJobAssignmentViewController.nib</key>
 		<data>
-		NLlH8yMnoM+mAYbaO7Hl7ZuDqHw=
+		o7MLOjwf8anuoer7tBJmiUlWj5I=
 		</data>
 		<key>GISJobDetailsCell.nib</key>
 		<data>
-		8OHXWshwj062XaxNhhdPg4Tg7vo=
+		SNVegBP5YVPMWL+AcBdwt3tnUW0=
 		</data>
 		<key>GISJobDetailsViewController.nib</key>
 		<data>
-		fsZmUvl+lYdBR4f3ODVL5KE+54c=
+		e6oCffXR3CtQ+7Sh2SaJMP5o/bU=
+		</data>
+		<key>GISJobInfoCell.nib</key>
+		<data>
+		08qfxk3RoemgqaKqbTKw0RrBf64=
 		</data>
 		<key>GISLocationDetailsCell.nib</key>
 		<data>
-		9xdbmu0/g1BukLJPTOOEql5YaZo=
+		k2G2VloknWLFjt9JBtX+QgjHHQA=
 		</data>
 		<key>GISLocationDetailsViewController.nib</key>
 		<data>
-		MVmxlQ1K+7/eD4gIvfGxdMLt3No=
+		dvKGSdxlf63xZlcyqBS2+AAClg8=
 		</data>
 		<key>GISLocationOnCampusCell.nib</key>
 		<data>
-		Wi3+btZyCdmqZ1T8e5qiwD3yuoY=
+		bQDGlssbv/mViQtfZxuE0zDYtEk=
 		</data>
 		<key>GISLoginViewController.nib</key>
 		<data>
-		RyFtT4giRQbQeOeKMcDKzJi/EVM=
+		6QQhxrleibp99Bf1fcGAgYwQu3U=
+		</data>
+		<key>GISNotesHistoryCell.nib</key>
+		<data>
+		KQ3rxOFr27Y6oIhlZVemHVHJlKQ=
 		</data>
 		<key>GISPopOverTableViewController.nib</key>
 		<data>
-		iCga3wYqVHqbNhqkvuZZ+gv5Em0=
+		vCpoguhwew0OiKEoA4AAE0Lh0jE=
 		</data>
 		<key>GISPreparationMaterialCell.nib</key>
 		<data>
-		LT+IlAi7OHzELPyFnDVZMwMsQrU=
+		QzRBVCzouZTzmIBG7ife8Z24+TQ=
+		</data>
+		<key>GISRequestServiceProvidersCell.nib</key>
+		<data>
+		ZJX3zNh5GiBVDtpEA3icIq7g2Ug=
+		</data>
+		<key>GISServiceProviderCell.nib</key>
+		<data>
+		6mB3HOYkfhfRqB/TaOCPU/TTGaE=
+		</data>
+		<key>GISServiceProviderPopUpViewController.nib</key>
+		<data>
+		1SwGDZFWXLXJ4Cxg3jR07LjQEjc=
 		</data>
 		<key>GISServiceProviderRequestedJobsViewController.nib</key>
 		<data>
-		WNG59Ed2VH5fRYf98BzBBHiC87M=
+		tS4ezPXBXOb9V4wF2gTSrH6Mmuk=
 		</data>
 		<key>GISSummaryAttendeesCell.nib</key>
 		<data>
-		F4gMAZ5pc3Fm51TFeeaDLufQGRk=
+		zd34pvid+xputPYrVh/xjUfPfrc=
 		</data>
 		<key>GISSummaryCell.nib</key>
 		<data>
-		6l4uV6G76bgVsrkTmtZaGXN7Ngs=
+		17EL4t93/vk1lAblTrz6ela37rY=
 		</data>
 		<key>GISSummaryDatesAndTimesCell.nib</key>
 		<data>
-		f0pX+o/RAjBBBU21Jn5ETGpcXWE=
+		rodbNdX5aRWcfGJI01lKQ8Le1pA=
 		</data>
 		<key>GISSummaryDatesDetailViewCell.nib</key>
 		<data>
-		o74PlBN25AaNR0FgpP7YvIkQADA=
+		EF7MYPa6yWbMKcIpnRl7M8AuHf0=
 		</data>
 		<key>GISSummaryViewController.nib</key>
 		<data>
-		6Txt3aSGFykHdy3x3sEeNEEZCLI=
+		xs/DAMvHdAR9TemJCpRRbTz4/QE=
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		aItIiGC6E9+gdOwGLIMbZ6Zr9IM=
+		skW6Iw42M+POzTTwXl2C8yfBFu0=
 		</data>
 		<key>GISViewEditListVIewCell.nib</key>
 		<data>
-		fO/GsRaK2o+BcYrkzwsNLzpxxyE=
+		MURdyWavsyBabZRxdLGAXFvrwK0=
 		</data>
 		<key>GISViewEditListViewController.nib</key>
 		<data>
-		i2mwaI1w+wQJPJ0W1ngJzfm8nEA=
+		Qvq8fm1cV421feSTaenK5O59B68=
 		</data>
 		<key>GISViewEditServiceViewController.nib</key>
 		<data>
-		iMQegXmDdmXJqpwHNvmPJjuNUsk=
+		HTROC057b1uq9azIRcCKsbj6fJY=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -370,7 +414,7 @@
 		</data>
 		<key>custom.strings</key>
 		<data>
-		GWA7mMsdyYYCIOwQn0xR4x+romk=
+		S7XhIeKCCfhKS6RUYbjDxPg9eJk=
 		</data>
 		<key>dashboard.png</key>
 		<data>
@@ -845,7 +889,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		A4v/5HP7g+9q5U/UBekYeet/xRs=
+		4ecSjIDdmsSJyWz6yo/QSJV1v24=
 		</data>
 		<key>DailyCalendar.png</key>
 		<data>
@@ -855,157 +899,201 @@
 		<data>
 		OBxr/4DQUSwqOpMzDA/kffQ6U6E=
 		</data>
+		<key>GISAddUpdateJobsViewController.nib</key>
+		<data>
+		H8HNZeq6GQBw9dl5lbcPyiIP6S8=
+		</data>
 		<key>GISAttendeesCell.nib</key>
 		<data>
-		/yAtj/CwYsjolOIvwxq3Z0QFHlg=
+		zG1XW9g5PIlyddG1nygqjrnhXag=
 		</data>
 		<key>GISAttendeesTopCell.nib</key>
 		<data>
-		hpIhUafCTaBva5CDGdrzRfILZfU=
+		o1XXD0r3NWPadyrIVuhcc4bDXVk=
 		</data>
 		<key>GISAttendeesViewController.nib</key>
 		<data>
-		Dgeqe8DWmD2SMnF6IcgYDDkPg3E=
+		TZr/hKKG4X5rl/Gguln1ijqz1GQ=
+		</data>
+		<key>GISBillingPaymentInfo.nib</key>
+		<data>
+		KpupQMtZwCC0GEJ12elM/qGbMX8=
 		</data>
 		<key>GISCommentCell.nib</key>
 		<data>
-		ySgsq5skJWnSG5nobpLsC0citqA=
+		wsNcgUIuMONqpswQZvYn/UF7M1U=
 		</data>
 		<key>GISCommentViewController.nib</key>
 		<data>
-		M/qNfzDlWm7hqfhzjH4+kjk1Ey0=
+		Rdrrxlkl5HevnCvyWgdb+wEAJg8=
 		</data>
 		<key>GISContactsAndBillingViewController.nib</key>
 		<data>
-		DHLgWS8FLmghp+6KsyFtx/iR2vg=
+		j5y1ImLmyUoJrDQvSvZyKcyUMug=
 		</data>
 		<key>GISCreateJobsCell.nib</key>
 		<data>
-		ARDZ+LYXsTLP4voPQ818hD/lSG8=
+		pH1R07a+d2b0VLkbMrR98Ack9AA=
 		</data>
 		<key>GISCreateJobsViewController.nib</key>
 		<data>
-		0BYhS+WGgwlQxFeaPWtkffpCUPo=
+		2VxCqnipTdnYjqKyIqtSSL4dmEY=
 		</data>
 		<key>GISCreateJobs_Cell.nib</key>
 		<data>
-		3g6jKgycjaj2qr6quRajfXSPyC8=
+		RYzXMvv8G4ro7ABoiFYmhSIDG+Q=
 		</data>
 		<key>GISDashBoardCell.nib</key>
 		<data>
-		Pcj1nQ8DiNGJOobtBbbCCC0oEz0=
+		1tXrV4kgZanul3a5A+MUQOJ1I+I=
 		</data>
 		<key>GISDashBoardListViewController.nib</key>
 		<data>
-		bV4rObBkmk+Ijh5OUs91XXZilg4=
+		3tzUagU6D+UZVBHRRoDlytTe6fs=
 		</data>
 		<key>GISDashBoardReqCell.nib</key>
 		<data>
-		dWyuPCC9wypX8sgFgrmpbOEHhgQ=
+		OHNEjlctEDKmn1CkcZyr9xSNltU=
 		</data>
 		<key>GISDashBoardSPCell.nib</key>
 		<data>
-		Z2U8J9KxmOA7dFtIUPlznxqk+KA=
+		fPHQV7d8UFiEVITj4X1eS2hgJck=
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		3etJADinfROD1tfDJ+/CvwLLuoc=
+		wui88bJC4RDDvE2FoyyraYFarTE=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
-		xF2exY3EsNPmwQn8ToyW8JlZfFk=
+		S0C35RGDkxPASqpTU1GIiPc48Qk=
 		</data>
 		<key>GISDatesTimesDetailCell.nib</key>
 		<data>
-		llLWw+iUzmD+yAj1j1igdE4PAFA=
+		4wc+xbxc5oopugSojKSQu1pS5U8=
 		</data>
 		<key>GISEventDetailsCell.nib</key>
 		<data>
-		sPFUI2YBPr0imh65YUCJhbE/PX0=
+		5witRnu4sN9DGfKMEvZU8Qo7TCs=
 		</data>
 		<key>GISEventDetailsViewController.nib</key>
 		<data>
-		fapdbD7ilEqBO4jsZ+0Kl4VIS8c=
+		nzDS/bHvNS5FjeejQmn74V+2vK8=
+		</data>
+		<key>GISFilterMoreViewController.nib</key>
+		<data>
+		DURa6y0+oqNn+v3G4zZ4b8DZLqI=
+		</data>
+		<key>GISFindReqJobs_JobDataToSearch_Cell.nib</key>
+		<data>
+		VOVuZoYSL6ZjJYeEPZ8DaoQ9nfY=
+		</data>
+		<key>GISFindReqJobs_ReqDataCell.nib</key>
+		<data>
+		3csAUCgkwh3LnS0W2v4snZ0P/94=
+		</data>
+		<key>GISFindRequestJobsViewController.nib</key>
+		<data>
+		95MVjsDXwMvtr+dTXYWuKAAQSSc=
 		</data>
 		<key>GISJobAssignmentCell.nib</key>
 		<data>
-		FhZ0X+vUvHtGkEdF6wnP9NIME/0=
+		fyPMrVnQHy4T8V+9kGKFFy/lZWY=
 		</data>
 		<key>GISJobAssignmentViewController.nib</key>
 		<data>
-		NLlH8yMnoM+mAYbaO7Hl7ZuDqHw=
+		o7MLOjwf8anuoer7tBJmiUlWj5I=
 		</data>
 		<key>GISJobDetailsCell.nib</key>
 		<data>
-		8OHXWshwj062XaxNhhdPg4Tg7vo=
+		SNVegBP5YVPMWL+AcBdwt3tnUW0=
 		</data>
 		<key>GISJobDetailsViewController.nib</key>
 		<data>
-		fsZmUvl+lYdBR4f3ODVL5KE+54c=
+		e6oCffXR3CtQ+7Sh2SaJMP5o/bU=
+		</data>
+		<key>GISJobInfoCell.nib</key>
+		<data>
+		08qfxk3RoemgqaKqbTKw0RrBf64=
 		</data>
 		<key>GISLocationDetailsCell.nib</key>
 		<data>
-		9xdbmu0/g1BukLJPTOOEql5YaZo=
+		k2G2VloknWLFjt9JBtX+QgjHHQA=
 		</data>
 		<key>GISLocationDetailsViewController.nib</key>
 		<data>
-		MVmxlQ1K+7/eD4gIvfGxdMLt3No=
+		dvKGSdxlf63xZlcyqBS2+AAClg8=
 		</data>
 		<key>GISLocationOnCampusCell.nib</key>
 		<data>
-		Wi3+btZyCdmqZ1T8e5qiwD3yuoY=
+		bQDGlssbv/mViQtfZxuE0zDYtEk=
 		</data>
 		<key>GISLoginViewController.nib</key>
 		<data>
-		RyFtT4giRQbQeOeKMcDKzJi/EVM=
+		6QQhxrleibp99Bf1fcGAgYwQu3U=
+		</data>
+		<key>GISNotesHistoryCell.nib</key>
+		<data>
+		KQ3rxOFr27Y6oIhlZVemHVHJlKQ=
 		</data>
 		<key>GISPopOverTableViewController.nib</key>
 		<data>
-		iCga3wYqVHqbNhqkvuZZ+gv5Em0=
+		vCpoguhwew0OiKEoA4AAE0Lh0jE=
 		</data>
 		<key>GISPreparationMaterialCell.nib</key>
 		<data>
-		LT+IlAi7OHzELPyFnDVZMwMsQrU=
+		QzRBVCzouZTzmIBG7ife8Z24+TQ=
+		</data>
+		<key>GISRequestServiceProvidersCell.nib</key>
+		<data>
+		ZJX3zNh5GiBVDtpEA3icIq7g2Ug=
+		</data>
+		<key>GISServiceProviderCell.nib</key>
+		<data>
+		6mB3HOYkfhfRqB/TaOCPU/TTGaE=
+		</data>
+		<key>GISServiceProviderPopUpViewController.nib</key>
+		<data>
+		1SwGDZFWXLXJ4Cxg3jR07LjQEjc=
 		</data>
 		<key>GISServiceProviderRequestedJobsViewController.nib</key>
 		<data>
-		WNG59Ed2VH5fRYf98BzBBHiC87M=
+		tS4ezPXBXOb9V4wF2gTSrH6Mmuk=
 		</data>
 		<key>GISSummaryAttendeesCell.nib</key>
 		<data>
-		F4gMAZ5pc3Fm51TFeeaDLufQGRk=
+		zd34pvid+xputPYrVh/xjUfPfrc=
 		</data>
 		<key>GISSummaryCell.nib</key>
 		<data>
-		6l4uV6G76bgVsrkTmtZaGXN7Ngs=
+		17EL4t93/vk1lAblTrz6ela37rY=
 		</data>
 		<key>GISSummaryDatesAndTimesCell.nib</key>
 		<data>
-		f0pX+o/RAjBBBU21Jn5ETGpcXWE=
+		rodbNdX5aRWcfGJI01lKQ8Le1pA=
 		</data>
 		<key>GISSummaryDatesDetailViewCell.nib</key>
 		<data>
-		o74PlBN25AaNR0FgpP7YvIkQADA=
+		EF7MYPa6yWbMKcIpnRl7M8AuHf0=
 		</data>
 		<key>GISSummaryViewController.nib</key>
 		<data>
-		6Txt3aSGFykHdy3x3sEeNEEZCLI=
+		xs/DAMvHdAR9TemJCpRRbTz4/QE=
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		aItIiGC6E9+gdOwGLIMbZ6Zr9IM=
+		skW6Iw42M+POzTTwXl2C8yfBFu0=
 		</data>
 		<key>GISViewEditListVIewCell.nib</key>
 		<data>
-		fO/GsRaK2o+BcYrkzwsNLzpxxyE=
+		MURdyWavsyBabZRxdLGAXFvrwK0=
 		</data>
 		<key>GISViewEditListViewController.nib</key>
 		<data>
-		i2mwaI1w+wQJPJ0W1ngJzfm8nEA=
+		Qvq8fm1cV421feSTaenK5O59B68=
 		</data>
 		<key>GISViewEditServiceViewController.nib</key>
 		<data>
-		iMQegXmDdmXJqpwHNvmPJjuNUsk=
+		HTROC057b1uq9azIRcCKsbj6fJY=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -1185,7 +1273,7 @@
 		</data>
 		<key>custom.strings</key>
 		<data>
-		GWA7mMsdyYYCIOwQn0xR4x+romk=
+		S7XhIeKCCfhKS6RUYbjDxPg9eJk=
 		</data>
 		<key>dashboard.png</key>
 		<data>

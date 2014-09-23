@@ -172,8 +172,11 @@
 //                                              inView:self
 //                            permittedArrowDirections:UIPopoverArrowDirectionLeft
 //                                            animated:YES];
+    if([appDelegate.jobEventsArray count] >0)
+        [appDelegate.jobEventsArray removeAllObjects];
     
     testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
+    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayButtonsEvents];
     
     [testPopoverControllerDetails setTestProtocol:self];
     

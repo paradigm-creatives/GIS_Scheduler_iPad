@@ -231,5 +231,23 @@
     return pmamDateString;
 }
 
++(NSString *)getEventTime:(NSDate *)fromdate
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSString *dateStr = [dateFormat stringFromDate:fromdate];
+    NSDate *myDate = [dateFormat dateFromString:dateStr];
+    
+    NSDateFormatter *dtf = [[NSDateFormatter alloc] init];
+    [dtf setDateFormat:@"hh:mm a"];
+    [dtf setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    NSLocale *curentLocale = [NSLocale currentLocale];
+    [dtf setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
+    NSString *stringFromDate = [dtf stringFromDate:myDate];
+    
+    return stringFromDate;
+}
+
 
 @end

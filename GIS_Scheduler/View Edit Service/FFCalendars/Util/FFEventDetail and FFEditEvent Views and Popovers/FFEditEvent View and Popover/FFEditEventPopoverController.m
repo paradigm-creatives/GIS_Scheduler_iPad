@@ -58,9 +58,9 @@
 
 - (void)saveEvent:(FFEvent *)_event {
     
-    if (protocol != nil && [protocol respondsToSelector:@selector(saveEditedEvent:)]) {
-        [protocol saveEditedEvent:_event];
-    }
+//    if (protocol != nil && [protocol respondsToSelector:@selector(saveEditedEvent:)]) {
+//        [protocol saveEditedEvent:_event];
+//    }
     
     [self removeThisView:nil];
 }
