@@ -14,7 +14,7 @@
 
 @protocol FFDayCellProtocol <NSObject>
 - (void)showViewDetailsWithEvent:(FFEvent *)_event cell:(UICollectionViewCell *)cell;
-
+- (void)clearAllSubviews;
 @end
 
 @interface FFDayCell : UICollectionViewCell

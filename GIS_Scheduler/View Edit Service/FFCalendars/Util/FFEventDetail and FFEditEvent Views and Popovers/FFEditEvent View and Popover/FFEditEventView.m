@@ -25,6 +25,9 @@
 #import "GISUtility.h"
 #import "GISLoginDetailsObject.h"
 #import "GISDatabaseManager.h"
+#import "GISUtility.h"
+#import "GISConstants.h"
+#import "FFDateManager.h"
 
 //#import "SVProgressHUD.h"
 
@@ -352,29 +355,25 @@
             id array=response.responseJson;
             NSDictionary *dictHere=[array lastObject];
             
-            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+            if ([[dictHere objectForKey:kStatus] isEqualToString:@"Success"]) {
                 
                 [self removeLoadingView];
-                
-                if (protocol != nil && [protocol respondsToSelector:@selector(removeThisView:)]) {
-                    [protocol removeThisView:self];
-                }
-            
+                [[NSNotificationCenter defaultCenter] postNotificationName:DATE_CHANGED_UPDATE_EVENT object:nil];
             }
             else
             {
-                
-
                 [self removeLoadingView];
             }
         }
         else
         {
-            if (protocol != nil && [protocol respondsToSelector:@selector(removeThisView:)]) {
-                [protocol removeThisView:self];
-            }
             [self removeLoadingView];
         }
+        
+        if (protocol != nil && [protocol respondsToSelector:@selector(removeThisView:)]) {
+            [protocol removeThisView:self];
+        }
+        
     }
     @catch (NSException *exception)
     {

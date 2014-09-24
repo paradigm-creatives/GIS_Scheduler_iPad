@@ -20,6 +20,7 @@
 {
     NSMutableArray *viewEdit_Array;
     NSMutableArray *viewEdit_ServiceProvider_Array;
+    NSMutableArray *viewEdit_ServiceProvider_unfilledArray;
     GISAppDelegate *appDelegate;
     BOOL isDateSelected;
     BOOL isServiceSelected;

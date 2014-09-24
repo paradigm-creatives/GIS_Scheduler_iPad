@@ -129,7 +129,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEvent:) name:DATE_CHANGED_UPDATE_EVENT object:nil];
     
-    viewEdit_ServiceProvider_Array =[[NSMutableArray alloc] init];
+    viewEdit_ServiceProvider_Array = [[NSMutableArray alloc] init];
+    viewEdit_ServiceProvider_unfilledArray = [[NSMutableArray alloc] init];
 
     [_fill_UnfillSegmentControl setSelectedSegmentIndex:1];
 
@@ -500,7 +501,7 @@
             
         }else if(sender.selectedSegmentIndex==1)
         {
-            [self addEventCalander:viewEdit_Array];
+            [self addEventCalander:viewEdit_ServiceProvider_unfilledArray];
             
 //            [_staff_freeLancerSegmentControl setHidden:YES];
 //            [_staff_freeLancerButton setHidden:YES];
@@ -532,6 +533,9 @@
                 if([viewEdit_ServiceProvider_Array count]>0)
                     [viewEdit_ServiceProvider_Array removeAllObjects];
                 
+                if([viewEdit_ServiceProvider_unfilledArray count]>0)
+                    [viewEdit_ServiceProvider_unfilledArray removeAllObjects];
+                
                 [[GISStoreManager sharedManager] removeViewEditObjects];
                viewEditStore=[[GISViewEditStore alloc]initWithJsonDictionary:response.responseJson];
                viewEdit_Array = [[GISStoreManager sharedManager] getViewEditObjects];
@@ -541,6 +545,8 @@
                     if([viewEditObj.serViceProvider_String length]>0){
                         
                         [viewEdit_ServiceProvider_Array addObject:viewEditObj];
+                    }else{
+                        [viewEdit_ServiceProvider_unfilledArray addObject:viewEditObj];
                     }
                 }
                 
@@ -548,7 +554,7 @@
                     
                     [self addEventCalander:viewEdit_ServiceProvider_Array];
                 }else{
-                    [self addEventCalander:viewEdit_Array];
+                    [self addEventCalander:viewEdit_ServiceProvider_unfilledArray];
                 }
                 
             }
