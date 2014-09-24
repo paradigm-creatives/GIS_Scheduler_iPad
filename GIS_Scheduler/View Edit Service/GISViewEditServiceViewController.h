@@ -10,6 +10,7 @@
 #import "GISBaseViewController.h"
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
+#import "FFDatePopoverController.h"
 
 @protocol FFCalendarViewControllerProtocol <NSObject>
 @required
@@ -21,6 +22,10 @@
     NSMutableArray *viewEdit_Array;
     NSMutableArray *viewEdit_ServiceProvider_Array;
     NSMutableArray *viewEdit_ServiceProvider_unfilledArray;
+    NSMutableArray *staff_Array;
+    NSMutableArray *freeLancer_Array;
+    NSMutableArray *serviceAgency_Array;
+    NSMutableArray *students_Array;
     GISAppDelegate *appDelegate;
     BOOL isDateSelected;
     BOOL isServiceSelected;

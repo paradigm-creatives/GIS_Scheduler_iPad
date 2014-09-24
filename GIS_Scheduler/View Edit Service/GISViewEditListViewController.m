@@ -176,8 +176,6 @@
         
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:SHOW_MONTH_EVENT object:nil userInfo:infoDict];
-        
-        appDelegate.isMonthView = NO;
     }
 }
 
