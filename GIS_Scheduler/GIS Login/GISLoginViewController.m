@@ -445,6 +445,11 @@
     dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
     NSMutableArray *payTypeArray=[[GISStoreManager sharedManager] getPayTypeObjects];
     NSMutableArray *typeOfServiceArray=[[GISStoreManager sharedManager] getTypeOfServiceObjects];
+    GISDropDownsObject *tobj=[[GISDropDownsObject alloc]init];
+    tobj.id_String=@"1000";
+    tobj.value_String=@"Any";
+    tobj.type_String=@"Serviceprovider_Type";
+    [typeOfServiceArray addObject:tobj];
     for (int i=0; i<payTypeArray.count; i++) {
         GISDropDownsObject *bObj=[payTypeArray objectAtIndex:i];
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];

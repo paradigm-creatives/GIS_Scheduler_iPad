@@ -10,10 +10,11 @@
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
 #import "GISAddUpdateObject.h"
-
-@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISLoginDetailsObject.h"
+@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
+    GISLoginDetailsObject *login_Obj;
     IBOutlet UITableView *addUpdateJobs_tableView;
     
     UIPopoverController *popover;
@@ -36,6 +37,8 @@
     NSMutableArray *agencyFee_Array;
     NSMutableArray *payStatus_Array;
     NSMutableArray *expStatus_Array;
+    
+    UITextField *currentTextField;
 }
 -(IBAction)pickerButtonPressed:(id)sender;
 -(IBAction)closeButtonPressed:(id)sender;

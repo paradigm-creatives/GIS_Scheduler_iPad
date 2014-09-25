@@ -210,7 +210,9 @@ int row_count = 2;
             @catch (NSException *exception) {
                 [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees CellForRowAtIndexPath %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
             }
-            
+            cell.primaryAudience_UIView.hidden=YES;
+            if([login_Obj.userStatus_string isEqualToString:kInternal])
+                cell.primaryAudience_UIView.hidden=NO;
             
             cell.email_textField.text=attendee_ListObj_here.email_String;
             cell.firstname_textField.text=attendee_ListObj_here.firstname_String;

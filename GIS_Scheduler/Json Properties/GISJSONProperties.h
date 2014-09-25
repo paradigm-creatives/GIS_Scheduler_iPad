@@ -509,6 +509,15 @@
 #define kServiceProviderResult @"ServiceProvidersResult"
 
 #pragma mark ServiceProvider End
+#define kPayLevelID @"PayLevelID"
+#define kCancel @"Cancel"
+#define kOutToAgency @"OutToAgency"
+#define kAmtPaid @"AmtPaid"
+#define kAgencyFee @"AgencyFee"
+#define kOverrideBill @"OverrideBill"
+#define kPayStatus @"PayStatus"
+#define kExpenseStatus @"ExpenseStatus"
+#define kBillingLevelID @"BillingLevelID"
 
 #endif
 

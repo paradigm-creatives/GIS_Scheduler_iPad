@@ -177,6 +177,7 @@
     
     [nextButton setTitle:NSLocalizedStringFromTable(@"Next", TABLE, nil) forState:UIControlStateNormal];
     
+    contacts_Info_mutArray=[[NSMutableArray alloc]init];
     [unitOrDepartment_mutArray removeAllObjects];
    
     NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];

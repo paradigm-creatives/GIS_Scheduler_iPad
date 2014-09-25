@@ -62,4 +62,6 @@
 @property (nonatomic, readwrite) NSInteger cellRowNumber;
 @property (nonatomic, retain) NSIndexPath *cellIndexpath;
 
+@property(nonatomic,strong)IBOutlet UIView *primaryAudience_UIView;
+
 @end
