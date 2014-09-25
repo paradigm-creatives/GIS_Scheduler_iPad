@@ -125,7 +125,7 @@
     CGFloat gap = 30;
     
     labelCustomerName = [[UILabel alloc] initWithFrame:CGRectMake(gap, buttonEditPopover.frame.origin.y, sizeView.width-3*gap-buttonEditPopover.frame.size.width, buttonEditPopover.frame.size.height)];
-    [labelCustomerName setText:[NSString stringWithFormat:@"Job Id %@",event.numCustomerID]];
+    [labelCustomerName setText:[NSString stringWithFormat:@"Job Id %@",event.stringCustomerName]];
     [labelCustomerName setFont:[UIFont boldSystemFontOfSize:labelCustomerName.font.pointSize]];
     
     [self addSubview:labelCustomerName];

@@ -17,6 +17,15 @@
 #import "FFImportantFilesForCalendar.h"
 #import "GISEventLabel.h"
 #import "GISFonts.h"
+#import "GISJSONProperties.h"
+#import "GISServerManager.h"
+#import "GISJsonRequest.h"
+#import "PCLogger.h"
+#import "GISLoadingView.h"
+#import "GISUtility.h"
+#import "GISLoginDetailsObject.h"
+#import "GISDatabaseManager.h"
+
 //#import "SVProgressHUD.h"
 
 @interface FFEditEventView () <UIGestureRecognizerDelegate>
@@ -24,7 +33,7 @@
 @property (nonatomic, strong) UIButton *buttonCancel;
 @property (nonatomic, strong) UIButton *buttonDone;
 @property (nonatomic, strong) UIButton *buttonDelete;
-@property (nonatomic, strong) GISEventLabel *labelEventName;
+@property (nonatomic, strong) GISEventLabel *labelEventName,*paytypeLabel,*serviceProviderTypeLabel;
 @property (nonatomic, strong) FFSearchBarWithAutoComplete *searchBarCustom;
 @property (nonatomic, strong) FFButtonWithDatePopover *buttonDate;
 @property (nonatomic, strong) FFButtonWithHourPopover *buttonTimeBegin;
@@ -47,6 +56,8 @@
 @synthesize buttonTimeBegin;
 @synthesize buttonTimeEnd;
 @synthesize tableViewGuests;
+@synthesize paytypeLabel;
+@synthesize serviceProviderTypeLabel;
 
 #pragma mark - Lifecycle
 
@@ -113,12 +124,35 @@
     //    [[SVProgressHUD sharedView] setTintColor:[UIColor blackColor]];
     //    [[SVProgressHUD sharedView] setBackgroundColor:[UIColor lighterGrayCustom]];
     
-    FFEvent *eventNew = [FFEvent new];
-    eventNew.stringCustomerName = searchBarCustom.stringClientName;
-    eventNew.numCustomerID = searchBarCustom.numCustomerID;
-    eventNew.dateDay = buttonDate.dateOfButton;
-    eventNew.dateTimeBegin = buttonTimeBegin.dateOfButton;
-    eventNew.dateTimeEnd = buttonTimeEnd.dateOfButton;
+//    FFEvent *eventNew = [FFEvent new];
+//    eventNew.stringCustomerName = labelEventName.text;
+//    eventNew.numCustomerID = searchBarCustom.numCustomerID;
+//    eventNew.dateDay = buttonDate.dateOfButton;
+//    eventNew.dateTimeBegin = buttonTimeBegin.dateOfButton;
+//    eventNew.dateTimeEnd = buttonTimeEnd.dateOfButton;
+//    eventNew.payType = paytypeLabel.text;
+//    eventNew.serviceProvider = serviceProviderTypeLabel.text;
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    NSMutableDictionary *update_eventdict;
+    update_eventdict=[[NSMutableDictionary alloc]init];
+    
+    [update_eventdict setObject:event.numCustomerID forKey:kJobDetais_JobID];
+    [update_eventdict setObject:[GISUtility getEventTime:buttonTimeBegin.dateOfButton] forKey:kJobDetais_StartTime];
+    [update_eventdict setObject:[GISUtility getEventTime:buttonTimeEnd.dateOfButton] forKey:kJobDetais_EndTime];
+    [update_eventdict setObject:[GISUtility eventDisplayFormat:buttonDate.dateOfButton] forKey:kJobDetais_JobDate];
+    [update_eventdict setObject:event.payType forKey:kViewSchedule_PayTypeID];
+    [update_eventdict setObject:event.serviceProvider forKey:kViewSchedule_ServiceProviderID];
+    [update_eventdict setObject:@"" forKey:kViewSchedule_SubroleID];
+    [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+    [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
+    
+    [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateScheduledata:) failAction:@selector(failuremethod_updateScheduledata:)];
+    
+    
     
 //    NSString *stringError;
 //    
@@ -129,15 +163,15 @@
 //    } else if (eventNew.arrayWithGuests.count == 0) {
 //        stringError = @"Please select a guest.";
 //    }
-//    
+    
 //    if (stringError) {
 //        [[[UIAlertView alloc] initWithTitle:nil message:stringError delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 //        //        [SVProgressHUD showErrorWithStatus:stringError];
 //    } else
-    if (protocol != nil && [protocol respondsToSelector:@selector(saveEvent:)]) {
-        [protocol saveEvent:eventNew];
-        [self buttonDeleteAction:nil];
-    }
+//    if (protocol != nil && [protocol respondsToSelector:@selector(saveEvent:)]) {
+//        [protocol saveEvent:eventNew];
+//        [self buttonDeleteAction:nil];
+//    }
 }
 
 - (BOOL)isTimeBeginEarlier:(NSDate *)dateBegin timeEnd:(NSDate *)dateEnd {
@@ -247,20 +281,20 @@
 
 - (void)addTypeOfService{
     
-    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
-    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [labelEventName setTextAlignment:NSTextAlignmentCenter];
-    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
-    [self addSubview:labelEventName];
+    paytypeLabel = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    [paytypeLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [paytypeLabel setTextAlignment:NSTextAlignmentCenter];
+    paytypeLabel.text = [NSString stringWithFormat:@" %@", event.payType];
+    [self addSubview:paytypeLabel];
 }
 
 - (void)addServiceProvider{
     
-    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
-    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [labelEventName setTextAlignment:NSTextAlignmentCenter];
-    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
-    [self addSubview:labelEventName];
+    serviceProviderTypeLabel = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    [serviceProviderTypeLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [serviceProviderTypeLabel setTextAlignment:NSTextAlignmentCenter];
+    serviceProviderTypeLabel.text = [NSString stringWithFormat:@"%@", event.serviceProvider];
+    [self addSubview:serviceProviderTypeLabel];
 }
 
 - (void)addButtonDelete {
@@ -306,5 +340,64 @@
     return !(searchBarCustom.arrayOfTableView.count != 0 && CGRectContainsPoint(searchBarCustom.tableViewCustom.frame, point)) &&
     CGRectContainsPoint(tableViewGuests.frame, point) && searchBarCustom.tableViewCustom.superview;
 }
+
+-(void)successmethod_updateScheduledata:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
+    @try {
+        if ([response.responseJson isKindOfClass:[NSArray class]])
+        {
+            
+            id array=response.responseJson;
+            NSDictionary *dictHere=[array lastObject];
+            
+            if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+                [self removeLoadingView];
+                
+                if (protocol != nil && [protocol respondsToSelector:@selector(removeThisView:)]) {
+                    [protocol removeThisView:self];
+                }
+            
+            }
+            else
+            {
+                
+
+                [self removeLoadingView];
+            }
+        }
+        else
+        {
+            if (protocol != nil && [protocol respondsToSelector:@selector(removeThisView:)]) {
+                [protocol removeThisView:self];
+            }
+            [self removeLoadingView];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+-(void)failuremethod_updateScheduledata:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 
 @end

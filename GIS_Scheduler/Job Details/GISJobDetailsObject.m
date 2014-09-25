@@ -49,7 +49,16 @@
         gobj.jobNumber_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_JobNumber]];
     }
     if ([dict objectForKey:kJobDetais_PayType]) {
-        gobj.payType_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_PayType]];
+        NSPredicate *filePredicate;
+        filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[GISUtility returningstring:[dict objectForKey:kJobDetais_PayType]]];
+        NSArray *fileArray=[payType_array filteredArrayUsingPredicate:filePredicate];
+        
+        if([fileArray count]>0)
+        {
+            GISDropDownsObject *obj=[fileArray lastObject];
+            gobj.payType_string=obj.value_String;
+        }
+        //gobj.payType_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_PayType]];
     }
     if ([dict objectForKey:kJobDetais_ServiceProvider]) {
         NSPredicate *filePredicate;

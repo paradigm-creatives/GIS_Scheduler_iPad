@@ -123,9 +123,9 @@
     else if (indexPath.section==1)
         return 393;
     else if (indexPath.section==2)
-        return 53;
+        return 106;
 
-    return 53;
+    return 106;
 }
 
 -(IBAction)closeButtonPressed:(id)sender
@@ -142,6 +142,7 @@
 -(IBAction)pickerButtonPressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
+    GISAddUpdateJobCell *jobCell=(GISAddUpdateJobCell *)button.superview.superview.superview;
     
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
@@ -241,7 +242,7 @@
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+125, button.frame.origin.y+82, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+128, button.frame.origin.y+22, 1, 1) inView:jobCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
 }
 

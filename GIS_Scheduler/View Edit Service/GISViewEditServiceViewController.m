@@ -127,6 +127,11 @@
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
     _ServiceProvider_TypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEvent:) name:DATE_CHANGED_UPDATE_EVENT object:nil];
+    
+    viewEdit_ServiceProvider_Array =[[NSMutableArray alloc] init];
+
+    [_fill_UnfillSegmentControl setSelectedSegmentIndex:1];
 
 }
 
@@ -139,9 +144,6 @@
         boolDidLoad = YES;
         [self buttonTodayAction:nil];
     }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEvent:) name:DATE_CHANGED_UPDATE_EVENT object:nil];
-
     
 }
 
@@ -189,8 +191,12 @@
     }
     if(isServiceSelected){
         
-        if([serviceProvider_IDString length] == 0)
+        if([serviceProvider_IDString length] == 0){
             serviceProvider_IDString = @"";
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_service_provider",TABLE, nil)];
+            [self removeLoadingView];
+            return;
+        }
         [paramsDict setObject:serviceProvider_IDString forKey:@"ServiceProvider"];
     }else{
         [paramsDict setObject:@"" forKey:@"ServiceProvider"];
@@ -426,29 +432,82 @@
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender {
     
     if(sender.tag == 22){
+        if (sender.selectedSegmentIndex == 0) {
+            
+            tabNameString = @"Staff";
+            
+        }else if (sender.selectedSegmentIndex == 1) {
+            
+            tabNameString = @"Freelance";
+            
+        }else if (sender.selectedSegmentIndex == 2) {
+            
+            tabNameString = @"Agency";
+            
+        }else if (sender.selectedSegmentIndex == 3) {
+            
+            tabNameString = @"Student";
+            
+        }
         
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
+        _ServiceProvider_TypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
+
+        NSString *sp_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@' AND SERVICE_PROVIDER = '%@'",tabNameString,_staff_freeLancerButton.titleLabel.text];
+       NSArray * spTypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:sp_statement];
         
+        if([spTypeArray count]>0){
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+            
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            if(appDelegate.isDateView){
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"StartDate"];
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]] forKey:@"EndDate"];
+            }else if(appDelegate.isWeekView){
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeekFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getWeeklastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+            }else if(appDelegate.isMonthView){
+                
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
+                [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthlastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
+            }
+            [paramsDict setObject:serviceProvider_IDString forKey:@"ServiceProvider"];
+            [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+            [[GISServerManager sharedManager] getViewEditScheduledata:self withParams:paramsDict finishAction:@selector(successmethod_viewEditScheduledata:) failAction:@selector(failuremethod_viewEditScheduledata:)];
+            
+        }else{
+            
+            [_staff_freeLancerButton setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        }
         
     }else{
         
         if (sender.selectedSegmentIndex==0) {
             
-            [_staff_freeLancerSegmentControl setHidden:NO];
-            [_staff_freeLancerButton setHidden:NO];
+            [self addEventCalander:viewEdit_ServiceProvider_Array];
             
-            CGRect frame = _mainView.frame;
-            frame.origin.y= 154.0f;
-            _mainView.frame = frame;
+//            [_staff_freeLancerSegmentControl setHidden:NO];
+//            [_staff_freeLancerButton setHidden:NO];
+//            
+//            CGRect frame = _mainView.frame;
+//            frame.origin.y= 154.0f;
+//            _mainView.frame = frame;
             
         }else if(sender.selectedSegmentIndex==1)
         {
+            [self addEventCalander:viewEdit_Array];
             
-            [_staff_freeLancerSegmentControl setHidden:YES];
-            [_staff_freeLancerButton setHidden:YES];
-            
-            CGRect frame = _mainView.frame;
-            frame.origin.y= 121.0f;
-            _mainView.frame = frame;
+//            [_staff_freeLancerSegmentControl setHidden:YES];
+//            [_staff_freeLancerButton setHidden:YES];
+//            
+//            CGRect frame = _mainView.frame;
+//            frame.origin.y= 121.0f;
+//            _mainView.frame = frame;
         }
     }
 }
@@ -470,11 +529,27 @@
                 if([viewEdit_Array count]>0)
                    [viewEdit_Array removeAllObjects];
                 
+                if([viewEdit_ServiceProvider_Array count]>0)
+                    [viewEdit_ServiceProvider_Array removeAllObjects];
+                
                 [[GISStoreManager sharedManager] removeViewEditObjects];
                viewEditStore=[[GISViewEditStore alloc]initWithJsonDictionary:response.responseJson];
                viewEdit_Array = [[GISStoreManager sharedManager] getViewEditObjects];
                 
-                [self addEventCalander:viewEdit_Array];
+                for(GISViewEditDateObject *viewEditObj in viewEdit_Array){
+                    
+                    if([viewEditObj.serViceProvider_String length]>0){
+                        
+                        [viewEdit_ServiceProvider_Array addObject:viewEditObj];
+                    }
+                }
+                
+                if(_fill_UnfillSegmentControl.selectedSegmentIndex == 0){
+                    
+                    [self addEventCalander:viewEdit_ServiceProvider_Array];
+                }else{
+                    [self addEventCalander:viewEdit_Array];
+                }
                 
             }
             else
@@ -533,8 +608,14 @@
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    [dictEvents removeAllObjects];
-        
+    if([eventArray count] == 0){
+        [dictEvents removeAllObjects];
+         [self setNewDictionary:dictEvents];
+    }else{
+    
+        [dictEvents removeAllObjects];
+    }
+    
     for(GISViewEditDateObject *viewEditObject in eventArray){
         
         FFEvent *event = [FFEvent new];
@@ -547,6 +628,8 @@
         NSString *endTimestr = [GISUtility getTimeData:viewEditObject.endTime_String];
         NSArray *endTImestrArray = [endTimestr componentsSeparatedByString:@":"];
         [event setDateTimeEnd:[NSDate dateWithHour:[[endTImestrArray objectAtIndex:0] intValue] min:[[endTImestrArray objectAtIndex:1] intValue]]];
+        [event setPayType:viewEditObject.patType_String];
+        [event setServiceProvider:viewEditObject.serViceProvider_String];
         [self addNewEvent:event];
     }
     
@@ -627,7 +710,7 @@
 {
     [super viewWillDisappear:YES];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:DATE_CHANGED_UPDATE_EVENT];
+    //[[NSNotificationCenter defaultCenter] removeObserver:DATE_CHANGED_UPDATE_EVENT];
     
 }
 

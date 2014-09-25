@@ -24,6 +24,8 @@
     _attendeesArray = [[NSMutableArray alloc] init];
     _datesArray = [[NSMutableArray alloc] init];
     _detailArray = [[NSMutableArray alloc] init];
+    _jobEventsArray = [[NSMutableArray alloc] init];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];

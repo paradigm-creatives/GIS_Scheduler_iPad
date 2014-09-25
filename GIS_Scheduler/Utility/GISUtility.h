@@ -32,5 +32,6 @@
 +(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime;
 + (NSString *)eventDisplayFormat:(NSDate *)fromdate;
 +(NSString *) getTimeData:(NSString *) timeString;
++(NSString *)getEventTime:(NSDate *)fromdate;
 
 @end

@@ -19,6 +19,7 @@
 @interface GISViewEditServiceViewController : GISBaseViewController<PopOverSelected_Protocol,UIPopoverControllerDelegate>
 {
     NSMutableArray *viewEdit_Array;
+    NSMutableArray *viewEdit_ServiceProvider_Array;
     GISAppDelegate *appDelegate;
     BOOL isDateSelected;
     BOOL isServiceSelected;

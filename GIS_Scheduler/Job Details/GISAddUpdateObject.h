@@ -32,4 +32,20 @@
 @property(nonatomic,strong)NSString *expStatus_string;
 
 
+@property(nonatomic,strong)NSString *callInTime_ID_string;
+@property(nonatomic,strong)NSString *payLevel_ID_string;
+@property(nonatomic,strong)NSString *typeOfServiceProvider_ID_string;
+@property(nonatomic,strong)NSString *serviceProvider_ID_string;
+@property(nonatomic,strong)NSString *cancelled_ID_string;
+@property(nonatomic,strong)NSString *payType_ID_string;
+@property(nonatomic,strong)NSString *parking_ID_string;
+@property(nonatomic,strong)NSString *billAmount_ID_string;
+@property(nonatomic,strong)NSString *mileage_ID_string;
+@property(nonatomic,strong)NSString *invoice_ID_string;
+@property(nonatomic,strong)NSString *amtPaid_ID_string;
+@property(nonatomic,strong)NSString *agencyFee_ID_string;
+@property(nonatomic,strong)NSString *payStatus_ID_string;
+@property(nonatomic,strong)NSString *expStatus_ID_string;
+
+
 @end

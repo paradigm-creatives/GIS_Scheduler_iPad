@@ -22,6 +22,8 @@
 #import "GISUtility.h"
 #import "GISDatesTimesDetailStore.h"
 #import "PCLogger.h"
+#import "GISServerManager.h"
+
 @interface GISJobDetailsViewController ()
 
 @end
@@ -69,9 +71,7 @@
     
     NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
     payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
-    
-    
-    
+
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
 }
 
@@ -84,19 +84,11 @@
      jobChangeHistory_background_UIView.hidden=YES;
      jobChangeHistory_foreground_UIView.hidden=YES;
     
-    [[GISServerManager sharedManager] serviceProviderNames_JobDetails:self withParams:nil finishAction:@selector(successmethod_serviceProviderNames_JobDetails:) failAction:@selector(failuremethod_serviceProviderNames_JobDetails:)];
+    [jobHistory_textView.layer setBorderWidth:0.6];
+    [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
+    [jobHistory_textView.layer setCornerRadius:10.0f];
 }
 
--(void)successmethod_serviceProviderNames_JobDetails:(GISJsonRequest *)response
-{
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
-    
-}
-
--(void)failuremethod_serviceProviderNames_JobDetails:(GISJsonRequest *)response
-{
-    NSLog(@"Failure");
-}
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
@@ -107,16 +99,41 @@
     [paramsDict setObject:@"2701" forKey:KRequestId];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     
-    
-    NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
-    [paramsDict1 setObject:[dict valueForKey:@"id"] forKey:kID];
-    [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
-    
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
-    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
     [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
 }
+
+-(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
+{
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeJobDetailsObjects];
+    GISJobDetailsStore *jobDetailsStore;
+    jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
+    
+    if(jobDetails_Array.count>0)
+        [jobDetails_Array removeAllObjects];
+    
+    jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
+    [jobDetails_tableView reloadData];
+    
+    NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
+    [paramsDict1 setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+    [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
+    
+    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    
+    
+}
+
+-(void)failuremethod_getJobDetails_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
 
 -(void)successmethod_get_Date_Time:(GISJsonRequest *)response
 {
@@ -129,6 +146,7 @@
     
     if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
         
+        
         [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
         
         store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
@@ -136,12 +154,13 @@
         detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
         [self sortTheDatesAndTimes];
         
-        [createJObs_tableView reloadData];
+        //[createJObs_tableView reloadData];
+        
     }else{
         
-        [self removeLoadingView];
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     }
+    [self removeLoadingView];
 }
 
 
@@ -150,7 +169,6 @@
     NSLog(@"Failure");
     [self removeLoadingView];
     [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
-    
 }
 
 -(void)sortTheDatesAndTimes
@@ -194,26 +212,7 @@
     [detail_mut_array removeObjectsInArray:duplicates];
 }
 
--(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
-{
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
-    [[GISStoreManager sharedManager]removeJobDetailsObjects];
-    GISJobDetailsStore *jobDetailsStore;
-    jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
 
-    if(jobDetails_Array.count>0)
-       [jobDetails_Array removeAllObjects];
-    
-    jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
-    [jobDetails_tableView reloadData];
-    
-    
-}
-
--(void)failuremethod_getJobDetails_data:(GISJsonRequest *)response
-{
-    NSLog(@"Failure");
-}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -282,11 +281,17 @@
         cell.billAmt_Label.text=temp_obj_jobDetails.billAmount_string;
     }
 
-    if (selected_row==indexPath.row) {
+    if (selected_row==indexPath.row && isEdit_Button_Clicked) {
+        cell.jobDate_UIView.hidden=NO;
+        cell.startTime_UIView.hidden=NO;
+        cell.endTime_UIView.hidden=NO;
         cell.typeOf_service_UIView.hidden=NO;
         cell.serviceProvider_UIView.hidden=NO;
         cell.payType_UIView.hidden=NO;
         
+        cell.jobDate_EDIT_Label.text=jobDate_temp_string;
+        cell.startTime_EDIT_Label.text=startTime_temp_string;
+        cell.endTime_EDIT_Label.text=endTime_temp_string;
         cell.typeOf_service_EDIT_Label.text=typeOfservice_temp_string;
         cell.service_provider_EDIT_Label.text=serviceProvider_temp_string;
         cell.payType_EDIT_Label.text=payType_temp_string;
@@ -294,6 +299,9 @@
     }
     else
     {
+        cell.jobDate_UIView.hidden=YES;
+        cell.startTime_UIView.hidden=YES;
+        cell.endTime_UIView.hidden=YES;
         cell.typeOf_service_UIView.hidden=YES;
         cell.serviceProvider_UIView.hidden=YES;
         cell.payType_UIView.hidden=YES;
@@ -336,6 +344,21 @@
     {
         // Search Button Action
     }
+    else if([sender tag]==1111)//Edit JobDate
+    {
+        btnTag=1111;
+        tableViewController1.view_String=@"datestimes";
+    }
+    else if([sender tag]==1212)//Edit start time
+    {
+        btnTag=1212;
+        tableViewController1.view_String=@"timesdates";
+    }
+    else if([sender tag]==1313)//Edit end time
+    {
+        btnTag=1313;
+        tableViewController1.view_String=@"timesdates";
+    }
     else if ([sender tag]==555)
     {
         btnTag=555;
@@ -372,6 +395,16 @@
         tableViewController1.popOverArray=billLevel_Array;
         
     }
+    else if([sender tag]==4646)//Job Change History Start Time
+    {
+        btnTag=4646;
+        tableViewController1.view_String=@"datestimes";
+    }
+    else if([sender tag]==5656)//Job Change History End Time
+    {
+        btnTag=5656;
+        tableViewController1.view_String=@"timesdates";
+    }
 
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
@@ -381,12 +414,20 @@
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==1111)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+36, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==1212)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+136, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if([sender tag]==1313)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+236, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==555)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==666)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==777)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    if(([sender tag]==4646)||([sender tag]==5656))
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+175, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         
 }
 
@@ -408,6 +449,18 @@
     }
     else if(btnTag==444)
     {
+    }
+    else if (btnTag==1111)
+    {
+        jobDate_temp_string=value_str;
+    }
+    else if (btnTag==1212)
+    {
+        startTime_temp_string=value_str;
+    }
+    else if (btnTag==1313)
+    {
+        endTime_temp_string=value_str;
     }
     else if (btnTag==555)
     {
@@ -433,7 +486,15 @@
     {
         billLevel_Answer_Label.text=value_str;
     }
-    if (btnTag==555||btnTag==666||btnTag==777)
+    else if (btnTag==4646)
+    {
+        startDate_jobHistory_Answer_Label.text=value_str;
+    }
+    else if (btnTag==5656)
+    {
+        endDate_jobHistory_Answer_Label.text=value_str;
+    }
+    if (btnTag==1111||btnTag==1212||btnTag==1313||btnTag==555||btnTag==666||btnTag==777)
         [jobDetails_tableView reloadData];
 }
 
@@ -445,21 +506,28 @@
         isEdit_Button_Clicked=YES;
         selected_row=[sender tag];
         GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
+        jobDate_temp_string=tempObj.jobDate_string;
+        startTime_temp_string=tempObj.startTime_string;
+        endTime_temp_string=tempObj.endTime_string;
         typeOfservice_temp_string=tempObj.typeOfService_string;
         serviceProvider_temp_string=tempObj.serviceProvider_string;
         payType_temp_string=tempObj.payType_string;
     }
     else if(isEdit_Button_Clicked){
-        
+        /*
         GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:[sender tag]];
+        tempObj.jobDate_string=jobDate_temp_string;
+        tempObj.startTime_string=startTime_temp_string;
+        tempObj.endTime_string=endTime_temp_string;
         tempObj.typeOfService_string=typeOfservice_temp_string;
         tempObj.serviceProvider_string=serviceProvider_temp_string;
         tempObj.payType_string=payType_temp_string;
-        [jobDetails_Array replaceObjectAtIndex:[sender tag] withObject:tempObj];
+        //[jobDetails_Array replaceObjectAtIndex:[sender tag] withObject:tempObj];
         //Call the Save Update JObs Service here
-        selected_row=999999;
+        */
+        [self showChangeJobHistoryView];
+        //selected_row=999999;
         isEdit_Button_Clicked=NO;
-        
     }
     [jobDetails_tableView reloadData];
 }
@@ -504,20 +572,68 @@
 
 -(IBAction)nextButtonPressed:(id)sender
 {
-    
-    
 }
+
 -(IBAction)jobHistory_TitleButtonPressed:(id)sender
 {
+    [self hideKeyBoard];
     jobChangeHistory_background_UIView.hidden=YES;
     jobChangeHistory_foreground_UIView.hidden=YES;
     if ([sender tag]==1)//Cancel Button
     {
-        
+        selected_row=999999;
     }
     else//Done Button
     {
+        GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:selected_row];
+        tempObj.jobDate_string=jobDate_temp_string;
+        tempObj.startTime_string=startTime_temp_string;
+        tempObj.endTime_string=endTime_temp_string;
+        tempObj.typeOfService_string=typeOfservice_temp_string;
+        tempObj.serviceProvider_string=serviceProvider_temp_string;
+        tempObj.payType_string=payType_temp_string;
+        [jobDetails_Array replaceObjectAtIndex:selected_row withObject:tempObj];
+
+        NSString *typeOfService_ID_temp_String=@"";
+        NSString *serviceProvider_ID_temp_String=@"";
+        NSString *payType_ID_temp_String=@"";
         
+        NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.typeOfService_string];
+        NSArray *array_typeOfService=[typeOfService_array filteredArrayUsingPredicate:predicate_typeOfService];
+        if (array_typeOfService.count>0) {
+            GISDropDownsObject *obj=[array_typeOfService lastObject];
+            typeOfService_ID_temp_String=obj.id_String;
+        }
+        
+        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.serviceProvider_string];
+        NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
+        if (array_serviceProvider.count>0) {
+            GISServiceProviderObject *obj=[array_serviceProvider lastObject];
+            serviceProvider_ID_temp_String=obj.id_String;
+        }
+        
+        NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.payType_string];
+        NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
+        if (array_payType.count>0) {
+            GISDropDownsObject *obj=[array_payType lastObject];
+            payType_ID_temp_String=obj.id_String;
+        }
+        
+        NSMutableDictionary *update_eventdict;
+        update_eventdict=[[NSMutableDictionary alloc]init];
+        
+        [update_eventdict setObject:tempObj.jobID_string forKey:kJobDetais_JobID];
+        [update_eventdict setObject:tempObj.startTime_string forKey:kJobDetais_StartTime];
+        [update_eventdict setObject:tempObj.endTime_string forKey:kJobDetais_EndTime];
+        [update_eventdict setObject:tempObj.jobDate_string forKey:kJobDetais_JobDate];
+        [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
+        [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
+        [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+        [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+        [update_eventdict setObject:jobHistory_textView.text forKey:kViewSchedule_JobNotes];
+        
+        [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
+        //Call the Save Update JObs Service here
     }
     
 }
@@ -527,7 +643,24 @@
     jobChangeHistory_foreground_UIView.hidden=NO;
 }
 
+-(void)successmethod_updateJobDetails_data:(GISJsonRequest *)response
+{
+    
+    NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
+    [jobDetails_tableView reloadData];
+    
+}
+-(void)failuremethod_updateJobDetails_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
 
+-(void)hideKeyBoard
+{
+    [jobHistory_textView resignFirstResponder];
+    [user_textField resignFirstResponder];
+}
 
 -(IBAction)checkAllJobs_buttonPressed:(id)sender
 {
@@ -567,13 +700,14 @@
 
 -(IBAction)doneButtonPressed_CreateJobs:(id)sender
 {
+    
     createJobs_UIVIew.hidden=YES;
 }
 
 
+
 -(void)check_uncheck_createjobsButtonPresses:(id)sender
 {
-    
     if ([createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]) {
         [createJobsCheckDictionary removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
     }
@@ -583,6 +717,7 @@
     }
     [createJObs_tableView reloadData];
 }
+
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
@@ -594,6 +729,28 @@
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldBeginEditing:");
+    [GISUtility moveemailView:YES viewHeight:-150 view:self.view];
+    return YES;
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing:");
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+    [textView resignFirstResponder];
+}
 
 
 - (void)didReceiveMemoryWarning

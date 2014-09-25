@@ -72,13 +72,13 @@
 }
     
 - (void)textViewDidBeginEditing:(UITextView *)textView
-    {
+{
         if ([textView.text isEqualToString:NSLocalizedStringFromTable(@"add_Comments", TABLE, nil)]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
         [textView becomeFirstResponder];
-    }
+}
     
 - (void)textViewDidEndEditing:(UITextView *)textView
     {
