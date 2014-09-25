@@ -127,7 +127,7 @@
     [_commentsItem setTitle:NSLocalizedStringFromTable(@"comments", TABLE, nil)];
     
     
-    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selected.png"]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tab_selected.png"]];
     
     _contactItem.selectedImage = [[UIImage imageNamed:@"contact_and_billing_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _eventDetailsItem.selectedImage = [[UIImage imageNamed:@"event_details_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -168,11 +168,17 @@
     [_requestBtn.titleLabel setTextColor:UIColorFromRGB(0x00457c)];
     
     if(appDelegate.isNewRequest){
+        
+        self.title=@"Add Service Request";
         [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn setBackgroundImage:nil forState:UIControlStateNormal];
         [_requestBtn removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
         appDelegate.chooseRequest_ID_String = @"0";
     }else{
+        
+        self.title=@"View/Edit Service Request";
         [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [_requestBtn setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [_requestBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
         appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
     }
@@ -306,6 +312,8 @@
 }
 
 -(void)tabSelcted:(NSNotification *) notification{
+    
+    appDelegate.isFromContacts = NO;
     
     NSDictionary *infoDict=notification.userInfo;
     

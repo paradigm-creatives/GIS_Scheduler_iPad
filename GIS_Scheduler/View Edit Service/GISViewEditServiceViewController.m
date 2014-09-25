@@ -510,23 +510,29 @@
             
             [self addEventCalander:viewEdit_ServiceProvider_Array];
             
-//            [_staff_freeLancerSegmentControl setHidden:NO];
-//            [_staff_freeLancerButton setHidden:NO];
-//            
-//            CGRect frame = _mainView.frame;
-//            frame.origin.y= 154.0f;
-//            _mainView.frame = frame;
+            if(isServiceSelected){
+                
+                [_staff_freeLancerSegmentControl setHidden:NO];
+                [_staff_freeLancerButton setHidden:NO];
+            
+                CGRect frame = _mainView.frame;
+                frame.origin.y= 154.0f;
+                _mainView.frame = frame;
+            }
             
         }else if(sender.selectedSegmentIndex==1)
         {
             [self addEventCalander:viewEdit_ServiceProvider_unfilledArray];
             
-//            [_staff_freeLancerSegmentControl setHidden:YES];
-//            [_staff_freeLancerButton setHidden:YES];
-//            
-//            CGRect frame = _mainView.frame;
-//            frame.origin.y= 121.0f;
-//            _mainView.frame = frame;
+            if(isServiceSelected){
+                
+                [_staff_freeLancerSegmentControl setHidden:YES];
+                [_staff_freeLancerButton setHidden:YES];
+                
+                CGRect frame = _mainView.frame;
+                frame.origin.y= 121.0f;
+                _mainView.frame = frame;
+            }
         }
     }
 }
@@ -715,12 +721,15 @@
     [_dateButton setBackgroundImage:nil  forState:UIControlStateNormal];
     [_serviceProviderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [_staff_freeLancerSegmentControl setHidden:NO];
-    [_staff_freeLancerButton setHidden:NO];
-    
-    CGRect frame = _mainView.frame;
-    frame.origin.y= 154.0f;
-    _mainView.frame = frame;
+    if(_fill_UnfillSegmentControl.selectedSegmentIndex == 0){
+        
+        [_staff_freeLancerSegmentControl setHidden:NO];
+        [_staff_freeLancerButton setHidden:NO];
+        
+        CGRect frame = _mainView.frame;
+        frame.origin.y= 154.0f;
+        _mainView.frame = frame;
+    }
 }
 
 - (IBAction)showServicePopoverDetails:(id)sender{

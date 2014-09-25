@@ -98,4 +98,6 @@
 
 - (void)updateJobDetails:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
+- (void)saveMaterialTypeData:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
 @end

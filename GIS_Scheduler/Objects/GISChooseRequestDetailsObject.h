@@ -65,6 +65,11 @@
 @property(nonatomic,strong)NSString *schedulerComments_String_chooseReqParsedDetails;
 @property(nonatomic,strong)NSString *adminComments_String_chooseReqParsedDetails;
 
+@property(nonatomic,strong)NSString *balckboardAccess_String_chooseReqParsedDetails;
+@property(nonatomic,strong)NSString *website_String_chooseReqParsedDetails;
+@property(nonatomic,strong)NSString *other_materialType_String_chooseReqParsedDetails;
+@property(nonatomic,strong)NSString *document_String_chooseReqParsedDetails;
+
 
 - (id)initWithStoreChooseRequestDetailsDictionary:(NSDictionary *)json;
 @end

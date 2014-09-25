@@ -36,6 +36,8 @@
 #define keventDetails_recordBroadcastYes @"recbroadcastyes"
 #define keventDetails_OutsideAgency @"OutsideAgency"
 
+#define kPrepMaterialID @"PrepMaterialID"
+#define kValue @"Value"
 
 #pragma mark EventDetails Saving
 
@@ -49,6 +51,15 @@
 #define kLoginRoleId @"RoleID"
 #define kLoginRoles @"Roles"
 #define kRequestID @"RequestID"
+
+#define kRequestNo @"RequestNo"
+#define kRequestorId @"RequestorId"
+#define kToken @"Token"
+
+#define kORequest @"oRequest"
+#define kOMaterialDetails @"oMaterialDetails"
+#define kPrepMaterialID @"PrepMaterialID"
+#define kValue @"Value"
 
 #pragma mark - Login Details End
 
@@ -186,6 +197,10 @@
 #define kChooseReqDetails_InCompleteTab @"InCompleteTab"
 #define kChooseReqDetails_IsCompleteRequest @"IsCompleteRequest"
 #define kChooseReqDetails_PrimaryAudience @"PrimaryAudience"
+#define kChooseReqDetails_document @"Document"
+#define kChooseReqDetails_blackBoardAccess @"BlackboardAccess"
+#define kChooseReqDetails_website @"Website"
+#define kChooseReqDetails_OtherMaterialType @"OtherMaterial"
 
 #pragma mark - Choose Request Detailed Details END
 

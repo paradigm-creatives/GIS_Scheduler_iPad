@@ -580,6 +580,12 @@
             
             appDelegate.contact_billingObject = contactBilling_Object;
             
+            appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
+            appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+            appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+            
                 GISEventDetailsViewController *eventViewController;
                 
                 if([login_Obj.userStatus_string isEqualToString:kInternal]){

@@ -43,6 +43,7 @@
     [_viewingType_label setFont:[GISFonts normal]];
     [_ofUsers_label setFont:[GISFonts normal]];
     [_otherServices_label setFont:[GISFonts normal]];
+    [_document_attach_label setFont:[GISFonts normal]];
     
     [_otherServicesbtn.titleLabel setFont:[GISFonts small]];
     [_captionTypebtn.titleLabel setFont:[GISFonts small]];

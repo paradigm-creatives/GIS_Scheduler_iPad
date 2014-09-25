@@ -26,6 +26,7 @@
 @property(nonatomic,strong)IBOutlet UILabel *captioning_type_label;
 @property(nonatomic,strong)IBOutlet UILabel *viewingType_label;
 @property(nonatomic,strong)IBOutlet UILabel *ofUsers_label;
+@property(nonatomic,strong)IBOutlet UILabel *document_attach_label;
 
 @property (strong, nonatomic) IBOutlet UIButton *otherServicesbtn;
 @property (strong, nonatomic) IBOutlet UIButton *captionTypebtn;
