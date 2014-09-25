@@ -34,26 +34,28 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.hidesBackButton = YES;
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
-    //self.navigationItem.hidesBackButton = YES;
+//    //self.navigationItem.hidesBackButton = YES;
     dashBoard_UIView.hidden=YES;
-    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
-    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [rightRecognizer setNumberOfTouchesRequired:1];
-    
-    //add the your gestureRecognizer , where to detect the touch..
-    [self.view addGestureRecognizer:rightRecognizer];
-    
-    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [leftRecognizer setNumberOfTouchesRequired:1];
-    
-    [self.view addGestureRecognizer:leftRecognizer];
+//    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
+//    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+//    [rightRecognizer setNumberOfTouchesRequired:1];
+//    
+//    //add the your gestureRecognizer , where to detect the touch..
+//    [self.view addGestureRecognizer:rightRecognizer];
+//    
+//    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+//    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [leftRecognizer setNumberOfTouchesRequired:1];
+//    
+//    [self.view addGestureRecognizer:leftRecognizer];
     
     self.title=NSLocalizedStringFromTable(@"Jobs_Assignment", TABLE, nil);
     CGRect frame1=table_UIView.frame;
@@ -72,10 +74,10 @@
         self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     }
     
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed)];
-    
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.leftBarButtonItem = item;
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed)];
+//    
+//    self.navigationItem.hidesBackButton = YES;
+//    self.navigationItem.leftBarButtonItem = item;
 }
 
 -(void)backButtonPressed

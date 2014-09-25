@@ -10,8 +10,9 @@
 #import "GISBaseViewController.h"
 #import "GISPopOverTableViewController.h"
 #import "GISChooseRequestDetailsObject.h"
+#import "GISLoginDetailsObject.h"
 
-@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate,UITextFieldDelegate>
+@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
 
 {
     NSString *eventTypedata;
@@ -21,12 +22,21 @@
     NSString *viewingTypeData;
     NSString *evevntNamedata;
     NSString *courseIdData;
+    NSString *descriptionData;
+    NSString *noOfUsersData;
     
     int btn_tag;
     BOOL broadCastSelected;
     GISAppDelegate *appDelegate;
     GISChooseRequestDetailsObject *chooseRequest_Detailed_DetailsObj;
     NSMutableArray *otherTechStr;
+    NSMutableArray *material_types_Array;
+    NSData *imgData;
+    NSString *imageName;
+    GISLoginDetailsObject *login_Obj;
+    
+    NSInteger responseCode;
+    NSMutableData *responseData;
     
 }
 
@@ -42,12 +52,15 @@
 @property (strong, nonatomic) NSArray *otherTechArray;
 @property (strong, nonatomic) NSArray *requetDetails;
 
+@property(nonatomic,strong)NSString *choose_req_Id_string;
 @property(nonatomic,strong)NSString *eventTypeId_string;
 @property(nonatomic,strong)NSString *dressCode_Id_string;
 @property(nonatomic,strong)NSString *open_toPublicStr;
 @property(nonatomic,strong)NSString *re_broadcastStr;
 @property(nonatomic,strong)NSString *on_goingStr;
 @property(nonatomic,strong)NSString *otherServices_Str;
+@property(nonatomic,strong)NSString *captioningType_Str;
+@property(nonatomic,strong)NSString *viewingType_Str;
 @property(nonatomic,strong)NSString *blackboard_accessStr;
 @property(nonatomic,strong)NSString *websiteStr;
 @property(nonatomic,strong)NSString *other_Str;
@@ -57,6 +70,12 @@
 @property(nonatomic,strong)NSString *eventdetails_statusStr;
 @property(nonatomic,strong)NSString *eventdetails_viewOptions;
 @property(nonatomic,strong)NSString *outsideAgencyStr;
+
+@property (strong, nonatomic) IBOutlet UILabel *doumentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *blackBoardLabe;;
+@property (strong, nonatomic) IBOutlet UILabel *websiteLabel;
+@property (strong, nonatomic) IBOutlet UILabel *otherLabel;
+@property(nonatomic,strong)NSString *document_Str;
 
 
 - (IBAction)previousVersionBtnTap:(id)sender;

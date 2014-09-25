@@ -59,6 +59,10 @@
 @synthesize adminComments_String_chooseReqParsedDetails;
 @synthesize schedulerComments_String_chooseReqParsedDetails;
 @synthesize requestStatus_String_chooseReqParsedDetails;
+@synthesize document_String_chooseReqParsedDetails;
+@synthesize balckboardAccess_String_chooseReqParsedDetails;
+@synthesize website_String_chooseReqParsedDetails;
+@synthesize other_materialType_String_chooseReqParsedDetails;
 
 @synthesize primaryAudience_String_chooseReqParsedDetails;
 
@@ -130,6 +134,11 @@
                 adminComments_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_adminComments]];
                 schedulerComments_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_schedulerComments]];
                 primaryAudience_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_PrimaryAudience]];
+                
+                website_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_website]];
+                balckboardAccess_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_blackBoardAccess]];
+                document_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_document]];
+                other_materialType_String_chooseReqParsedDetails =  [self returningstring:[dict objectForKey:kChooseReqDetails_OtherMaterialType]];
             }
         }
         @catch (NSException *exception) {

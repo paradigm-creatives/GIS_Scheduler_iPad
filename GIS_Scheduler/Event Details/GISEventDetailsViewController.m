@@ -22,6 +22,10 @@
 #import "GISJsonRequest.h"
 #import "GISAttendeesViewController.h"
 #import "GISLoadingView.h"
+#import <AssetsLibrary/ALAsset.h>
+#import <AssetsLibrary/ALAssetRepresentation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "GISJSONProperties.h"
 
 #define RECORDED_TYPE 9632
 #define REENTER_TYPE 7632
@@ -49,6 +53,11 @@
     self.navigationItem.backBarButtonItem=nil;
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    login_Obj=[requetId_array lastObject];
+
 
     [_eventDetaislTabelView setContentSize:CGSizeMake(1024, 880)];
     
@@ -78,6 +87,8 @@
     
     _open_toPublicStr = @"";
      _outsideAgencyStr = @"";
+    
+     material_types_Array=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
 }
 
@@ -232,7 +243,6 @@
                 }
             }
         }
-
     }
     
     if(indexPath.section == 1){
@@ -251,10 +261,20 @@
         [cell.websitebtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.othersbtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
 
+        if([_otherServices_Str isEqualToString:@"1"]){
+            [cell.otherServicesbtn setTitle:@"Captioning" forState:UIControlStateNormal];
+            cell.captionTypebtn.enabled = TRUE;
+        }else if([_otherServices_Str isEqualToString:@"2"]){
+            [cell.otherServicesbtn setTitle:@"VRI" forState:UIControlStateNormal];
+            cell.captionTypebtn.enabled = FALSE;
+        }else{
+            [cell.otherServicesbtn setTitle:@"" forState:UIControlStateNormal];
+            cell.captionTypebtn.enabled = TRUE;
+            
+        }
         
-        [cell.otherServicesbtn setTitle:otherServicesdata forState:UIControlStateNormal];
         [cell.captionTypebtn setTitle:captionData forState:UIControlStateNormal];
-        [cell.viewingTypebtn setTitle:viewingTypeData forState:UIControlStateNormal];
+        [cell.viewingTypebtn setTitle:_eventdetails_viewOptions forState:UIControlStateNormal];
         
         [cell.documentbtn setTag:44];
         [cell.blackboardAccessbtn setTag:111];
@@ -265,14 +285,81 @@
         [cell.captionTypebtn setTag:14];
         [cell.viewingTypebtn setTag:15];
         
+        cell.descriptionTextView.text = descriptionData;
+        
         [cell.descriptionTextView setDelegate:self];
         
         [cell.noOfUsersTextField setTag:666];
         [cell.noOfUsersTextField setDelegate:self];
+        cell.noOfUsersTextField.text = noOfUsersData;
         
         [cell.nextButton addTarget:self action:@selector(nextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-
         
+        if([chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails length]>0)
+        {
+            [cell.websitebtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            cell.websiteTextField.text = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            _websiteStr = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            
+            [cell.websiteTextField setHidden:NO];
+        }else{
+            [cell.websitebtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            cell.websiteTextField.text = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            _websiteStr = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            
+            [cell.websiteTextField setHidden:YES];
+        }
+        
+        if([chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails length]>0)
+        {
+            [cell.blackboardAccessbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            cell.blackboardAccessTextField.text = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            _blackboard_accessStr = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            
+            [cell.blackboardAccessTextField setHidden:NO];
+        }else{
+            [cell.blackboardAccessbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            cell.blackboardAccessTextField.text = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            _blackboard_accessStr = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            
+            [cell.blackboardAccessTextField setHidden:YES];
+        }
+        if([chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails length]>0)
+        {
+            [cell.othersbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            cell.othersTextField.text = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            _other_Str = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            
+            [cell.othersTextField setHidden:NO];
+        }else{
+            [cell.othersbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            cell.othersTextField.text = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            _other_Str = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            
+            [cell.othersTextField setHidden:YES];
+            
+        }
+        if([chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails length]>0)
+        {
+            [cell.documentbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            _document_Str = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            
+            NSRange range = [_document_Str rangeOfString:@"~" options:NSBackwardsSearch];
+            if (range.location == NSNotFound) {
+                
+            } else {
+                NSString *filepath = [_document_Str substringFromIndex:[_document_Str rangeOfString:@"~"options:NSBackwardsSearch].location+1];
+                _document_Str = filepath;
+            }
+            
+            cell.document_attach_label.text = _document_Str;
+        }else{
+            [cell.documentbtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            cell.document_attach_label.text = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            _document_Str = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            
+        }
+
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
 
         
@@ -311,6 +398,9 @@
             
         }else if(btn.tag == 33){
             [preparationCell.othersTextField setHidden:TRUE];
+        }else if(btn.tag == 33){
+            preparationCell.document_attach_label.text = @"";
+            _document_Str = @"";
         }
         
         if(btn.tag == 3){
@@ -376,8 +466,40 @@
             
         }else if(btn.tag == 33){
             [preparationCell.othersTextField setHidden:FALSE];
-        }
-        else if(btn.tag == 3){
+        }else if(btn.tag == 44){
+            
+            UIButton *document_btn=(UIButton *)[self.view viewWithTag:btn.tag];
+            id tempCellRef=(GISPreparationMaterialCell *)document_btn.superview.superview.superview;
+          GISPreparationMaterialCell *preparationCell=(GISPreparationMaterialCell *)tempCellRef;
+            
+            if ([self.popover isPopoverVisible]) {
+                [self.popover dismissPopoverAnimated:YES];
+            } else {
+                if ([UIImagePickerController isSourceTypeAvailable:
+                     UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+                {
+                    UIImagePickerController *imagePicker =
+                    [[UIImagePickerController alloc] init];
+                    imagePicker.delegate = self;
+                    imagePicker.sourceType =
+                    UIImagePickerControllerSourceTypePhotoLibrary;
+                    imagePicker.mediaTypes = [NSArray arrayWithObjects:
+                                              (NSString *) kUTTypeImage,
+                                              nil];
+                    imagePicker.allowsEditing = NO;
+                    
+                    self.popover = [[UIPopoverController alloc]
+                                              initWithContentViewController:imagePicker];
+                    
+                    self.popover.delegate = self;
+                    
+                    [self.popover
+                     presentPopoverFromRect:document_btn.frame inView:preparationCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                }
+            }
+
+            
+        }else if(btn.tag == 3){
             _open_toPublicStr = @"true";
             UIButton *btnn=(UIButton *)[self.view viewWithTag:4];
             if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
@@ -496,11 +618,14 @@
     }else if(btn_tag == 13){
         otherServicesdata = value_str;
         UIButton *otherServicesBtn=(UIButton *)[self.view viewWithTag:13];
+         UIButton *captionBtn=(UIButton *)[self.view viewWithTag:14];
         [otherServicesBtn setTitle:otherServicesdata forState:UIControlStateNormal];
         if([otherServicesdata isEqualToString:@"VRI"]){
             _otherServices_Str = @"2";
+            captionBtn.enabled = FALSE;
         }else{
             _otherServices_Str = @"1";
+            captionBtn.enabled = TRUE;
         }
         
     }else if(btn_tag == 14){
@@ -706,6 +831,12 @@
         evevntNamedata = textField.text;
     if(textField.tag == 101)
         courseIdData = textField.text;
+    if(textField.tag == 222)
+        _blackboard_accessStr= textField.text;
+    if(textField.tag == 333)
+        _websiteStr = textField.text;
+    if(textField.tag == 444)
+        _other_Str = textField.text;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -735,11 +866,10 @@
         
         if ([[GISNetworkUtility sharedManager] checkNetworkAvailability])
         {
-            
             NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
             NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
             NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-            GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+            GISLoginDetailsObject *login_Objs=[requetId_array lastObject];
             
             UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
             UITextField *courseTextField=(UITextField *)[self.view viewWithTag:101];
@@ -747,9 +877,13 @@
             UIButton *viewingTypebtn=(UIButton *)[self.view viewWithTag:15];
             UIButton *captioningTypebtn=(UIButton *)[self.view viewWithTag:14];
             UITextField *ofUserstextField=(UITextField *)[self.view viewWithTag:666];
+            UILabel *documnet_selected_label=(UILabel *)[self.view viewWithTag:888];
+            UITextField *blackBoardTextField=(UITextField *)[self.view viewWithTag:222];
+            UITextField *webSiteField=(UITextField *)[self.view viewWithTag:333];
+            UITextField *otherMaterilaTypeTextField=(UITextField *)[self.view viewWithTag:444];
             
             
-            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0)
+            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 ||[blackBoardTextField.text length] == 0 || [webSiteField.text length] == 0 ||[otherMaterilaTypeTextField.text length] == 0 || [_re_broadcastStr length] == 0)
             {
                 if([_fields length]>0)
                     [_fields setString:@""];
@@ -766,8 +900,16 @@
                     [_fields appendFormat:@"%@%@",@"EventType",@", \n"];
                 if([_re_broadcastStr length] == 0)
                     [_fields appendFormat:@"%@%@",@"Recorded/Broadcast",@","];
+                if([documnet_selected_label.text length] == 0)
+                    [_fields appendFormat:@"%@%@",@"Document",@", \n"];
+                if([blackBoardTextField.text length] == 0)
+                    [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
+                if([webSiteField.text length] == 0)
+                    [_fields appendFormat:@"%@%@",@"Website",@", \n"];
+                if([otherMaterilaTypeTextField.text length] == 0)
+                    [_fields appendFormat:@"%@%@",@"Other MaterialType",@", \n"];
                 
-                if([login_Obj.userStatus_string isEqualToString:kInternal]){
+                if([login_Objs.userStatus_string isEqualToString:kInternal]){
                     if([_outsideAgencyStr length] == 0)
                         [_fields appendFormat:@"%@",@"Outside Agency"];
                 }
@@ -776,6 +918,8 @@
                 [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
                 return;
             }
+            
+            [self saveMaterialRequest];
             
             [_othertechvalueStr setString:@""];
             for(int i=0; i <[otherTechStr count];i++){
@@ -883,7 +1027,7 @@
                         [[GISServerManager sharedManager] saveEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
                     }
                 }else if([_otherServices_Str isEqualToString:@"1"]){
-                    if([captioningTypebtn.titleLabel.text length] == 0 || [viewingTypebtn.titleLabel.text length] == 0 || [ofUserstextField.text length] == 0)
+                    if([captionData length] == 0 || [viewingTypeData length] == 0 || [ofUserstextField.text length] == 0)
                     {
                         if([_fields length]>0)
                             [_fields setString:@""];
@@ -1059,6 +1203,17 @@
     UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];
     UITextField *ofUserstextField=(UITextField *)[self.view viewWithTag:666];
     UILabel *recordSelected=(UILabel *)[self.view viewWithTag:110];
+    UILabel *documnet_selected_label=(UILabel *)[self.view viewWithTag:888];
+    
+    UIButton *documentBtn=(UIButton *)[self.view viewWithTag: 44];
+    UIButton *blackBoardAccessBtn=(UIButton *)[self.view viewWithTag:111];
+    UIButton *websiteBtn=(UIButton *)[self.view viewWithTag:22];
+    UIButton *other_MaterialTypeBtn=(UIButton *)[self.view viewWithTag:33];
+    
+    UITextField *blackBoardTextField=(UITextField *)[self.view viewWithTag:222];
+    UITextField *webSiteField=(UITextField *)[self.view viewWithTag:333];
+    UITextField *otherMaterilaTypeTextField=(UITextField *)[self.view viewWithTag:444];
+
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
@@ -1085,7 +1240,7 @@
         }
         
         [eventNameTextField setText:[self returningstring:chooseRequest_Detailed_DetailsObj.eventName_String_chooseReqParsedDetails]];
-        evevntNamedata = eventNameTextField.text;
+        evevntNamedata = [self returningstring:chooseRequest_Detailed_DetailsObj.eventName_String_chooseReqParsedDetails];
         _eventTypeId_string = [self returningstring:chooseRequest_Detailed_DetailsObj.eventTypeID_String_chooseReqParsedDetails];
         _open_toPublicStr = [self returningstring:chooseRequest_Detailed_DetailsObj.openToPublic_String_chooseReqParsedDetails];
         _dressCode_Id_string = [self returningstring:chooseRequest_Detailed_DetailsObj.dressCodeID_String_chooseReqParsedDetails];
@@ -1093,12 +1248,16 @@
         _on_goingStr = [self returningstring:chooseRequest_Detailed_DetailsObj.onGoing_String_chooseReqParsedDetails];
         _outsideAgencyStr = [self returningstring:chooseRequest_Detailed_DetailsObj.outsideAgency_String_chooseReqParsedDetails];
         [_othertechvalueStr setString:[self returningstring:chooseRequest_Detailed_DetailsObj.otherTechnologies_String_chooseReqParsedDetails]];
+        
         [courseTextField setText:[self returningstring:chooseRequest_Detailed_DetailsObj.courseID_String_chooseReqParsedDetails]];
-        courseIdData = courseTextField.text;
+        courseIdData = [self returningstring:chooseRequest_Detailed_DetailsObj.courseID_String_chooseReqParsedDetails];
+        descriptionData = [self returningstring:chooseRequest_Detailed_DetailsObj.eventDescription_String_chooseReqParsedDetails];
         [descriptionTextView setText:[self returningstring:chooseRequest_Detailed_DetailsObj.eventDescription_String_chooseReqParsedDetails]];
         _otherServices_Str = [self returningstring:chooseRequest_Detailed_DetailsObj.OtherServiceID_String_chooseReqParsedDetails];
+        captionData = [self returningstring:chooseRequest_Detailed_DetailsObj.CaptionTypeID_String_chooseReqParsedDetails];
         [captionBtn setTitle:[self returningstring:chooseRequest_Detailed_DetailsObj.CaptionTypeID_String_chooseReqParsedDetails] forState:UIControlStateNormal];
         _broadcastType_Str = [self returningstring:chooseRequest_Detailed_DetailsObj.recBroadcastYes_String_chooseReqParsedDetails];
+        noOfUsersData = [self returningstring:chooseRequest_Detailed_DetailsObj.CapNoOfUsers_String_chooseReqParsedDetails];
         [ofUserstextField setText:[self returningstring:chooseRequest_Detailed_DetailsObj.CapNoOfUsers_String_chooseReqParsedDetails]];
         _eventdetails_viewOptions = [self returningstring:chooseRequest_Detailed_DetailsObj.CapViewOptions_String_chooseReqParsedDetails];
         _eventdetails_unitIdStr = [userDefaults valueForKey:kunitid];
@@ -1210,10 +1369,236 @@
             [webInarBtn setBackgroundImage: [UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
         }
         
+        
+        if([chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails length]>0)
+        {
+            [websiteBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            webSiteField.text = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            _websiteStr = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            
+            [webSiteField setHidden:NO];
+        }else{
+            [websiteBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            webSiteField.text = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            _websiteStr = chooseRequest_Detailed_DetailsObj.website_String_chooseReqParsedDetails;
+            
+            [webSiteField setHidden:YES];
+        }
+        
+        if([chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails length]>0)
+        {
+            [blackBoardAccessBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            blackBoardTextField.text = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            _blackboard_accessStr = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            
+            [blackBoardTextField setHidden:NO];
+        }else{
+            [blackBoardAccessBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            blackBoardTextField.text = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            _blackboard_accessStr = chooseRequest_Detailed_DetailsObj.balckboardAccess_String_chooseReqParsedDetails;
+            
+            [blackBoardTextField setHidden:YES];
+        }
+        if([chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails length]>0)
+        {
+            [other_MaterialTypeBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            otherMaterilaTypeTextField.text = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            _other_Str = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            
+            [otherMaterilaTypeTextField setHidden:NO];
+        }else{
+            [other_MaterialTypeBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            otherMaterilaTypeTextField.text = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            _other_Str = chooseRequest_Detailed_DetailsObj.other_materialType_String_chooseReqParsedDetails;
+            
+            [otherMaterilaTypeTextField setHidden:YES];
+            
+        }
+        if([chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails length]>0)
+        {
+            [documentBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            _document_Str = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            
+            NSRange range = [_document_Str rangeOfString:@"~" options:NSBackwardsSearch];
+            if (range.location == NSNotFound) {
+                
+            } else {
+                NSString *filepath = [_document_Str substringFromIndex:[_document_Str rangeOfString:@"~"options:NSBackwardsSearch].location+1];
+                _document_Str = filepath;
+            }
+            
+            documnet_selected_label.text = _document_Str;
+        }else{
+            [documentBtn  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            documnet_selected_label.text = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            _document_Str = chooseRequest_Detailed_DetailsObj.document_String_chooseReqParsedDetails;
+            
+        }
+
+        
     }
     
     [self removeLoadingView];
 }
+
+-(void)saveMaterialRequest
+{
+    
+    NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
+    NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
+    NSMutableDictionary *requestor_Dict=[[NSMutableDictionary alloc]init];
+    
+    NSMutableArray *materialDetails_Array=[[NSMutableArray alloc]init];
+    NSMutableDictionary *materialDetails_Listdict;
+    for (int i=0;i<[material_types_Array count];i++)
+    {
+        materialDetails_Listdict=[[NSMutableDictionary alloc]init];
+        if([[material_types_Array objectAtIndex:i] isEqualToString:@"1"])
+        {
+            [materialDetails_Listdict  setObject:[material_types_Array objectAtIndex:i] forKey:kPrepMaterialID];
+            
+            [materialDetails_Listdict  setObject:_document_Str forKey:kValue];
+            
+        }else if([[material_types_Array objectAtIndex:i] isEqualToString:@"2"])
+        {
+            [materialDetails_Listdict  setObject:[material_types_Array objectAtIndex:i] forKey:kPrepMaterialID];
+            
+            [materialDetails_Listdict  setObject:_blackboard_accessStr forKey:kValue];
+        }else if([[material_types_Array objectAtIndex:i] isEqualToString:@"3"])
+        {
+            [materialDetails_Listdict  setObject:[material_types_Array objectAtIndex:i] forKey:kPrepMaterialID];
+            
+            [materialDetails_Listdict  setObject:_websiteStr forKey:kValue];
+        }else if([[material_types_Array objectAtIndex:i] isEqualToString:@"4"])
+        {
+            [materialDetails_Listdict  setObject:[material_types_Array objectAtIndex:i] forKey:kPrepMaterialID];
+            
+            [materialDetails_Listdict  setObject:_other_Str forKey:kValue];
+        }
+        
+        [materialDetails_Array addObject:materialDetails_Listdict];
+    }
+    
+    
+    [requestor_Dict setValue:[self returningstring:login_Obj.requestorID_string] forKey:kRequestorId];
+    [requestor_Dict setValue:[self returningstring:login_Obj.token_string] forKey:kToken];
+    [requestor_Dict setValue:[self returningstring:appDelegate.chooseRequest_ID_String ] forKey:kRequestNo];
+    
+    [requestor_array addObject:requestor_Dict];
+    [mainDict setObject:requestor_array forKey:kORequest];
+    [mainDict setObject:materialDetails_Array forKey:kOMaterialDetails];
+    
+    [[GISServerManager sharedManager] saveMaterialTypeData:self withParams:mainDict finishAction:@selector(successmethod_materialTypeRequest:) failAction:@selector(failuremethod_materialTypeRequest:)];
+}
+
+-(void)successmethod_materialTypeRequest:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_saveMaterialType Success---%@",saveUpdateDict);
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+    
+}
+
+-(void)failuremethod_materialTypeRequest:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UILabel *documnet_selected_label=(UILabel *)[self.view viewWithTag:888];
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+        if(!img) img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        imgData= UIImageJPEGRepresentation(img,0.0);
+        [self uploadDataToServer:imgData];
+        
+        NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
+        {
+            ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+            NSLog(@"[imageRep filename] : %@", [imageRep filename]);
+            
+            imageName = [imageRep filename];
+            _document_Str = imageName;
+            [documnet_selected_label setHidden:NO];
+            documnet_selected_label.text = imageName;
+        };
+        
+        // get the asset library and fetch the asset based on the ref url (pass in block above)
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:refURL resultBlock:resultblock failureBlock:nil];
+        
+    }
+    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
+    {
+    }
+    [self.popover dismissPopoverAnimated:YES];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)uploadDataToServer:(NSData *)data{
+    
+    NSString *uploadUrl = [NSString stringWithFormat:@"http://125.62.193.235/GIS_Mobileapps/GisREST.svc/Upload"];
+    
+    NSMutableURLRequest *request= [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:uploadUrl]];
+    [request setHTTPMethod:@"POST"];
+    
+    NSMutableData *postbody = [NSMutableData data];
+    [postbody appendData:[NSData dataWithData:data]];
+    
+    [request setHTTPBody:postbody];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    [connection start];
+}
+
+- (void) connection: (NSURLConnection*) connection didReceiveResponse: (NSURLResponse*) response
+{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    responseCode = httpResponse.statusCode;
+    NSLog(@"Response code : %d", responseCode);
+    
+    [responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [responseData appendData:data];
+    NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"response string ---- %@",myString);
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+    NSLog(@"failed with error %@",error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSLog(@"connection loading completed ");
+}
+
 
 
 -(void)viewWillDisappear:(BOOL)animated

@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
-@interface GISJobAssignmentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISBaseViewController.h"
+
+@interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     IBOutlet UITableView *jobAssignment_tableView;
-    IBOutlet UIView *dashBoard_UIView;
+    IBOutlet UIView *dashBoard_UIViews;
     
     GISAppDelegate *appDelegate;
     

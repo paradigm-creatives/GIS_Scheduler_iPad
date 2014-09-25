@@ -103,6 +103,8 @@
 		8A3B1E53197CF58300963E8C /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E4C197CF58300963E8C /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A3B1E56197CFAC400963E8C /* GISNetworkUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E55197CFAC400963E8C /* GISNetworkUtility.m */; };
 		8A3B1E59197CFDF000963E8C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E58197CFDF000963E8C /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8A4135E419D2F94600707F46 /* tab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4135E319D2F94600707F46 /* tab_selected@2x.png */; };
+		8A4135E619D2F94F00707F46 /* tab_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4135E519D2F94F00707F46 /* tab_selected.png */; };
 		8A5052B519779CFD007288F5 /* GISPreparationMaterialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052B419779CFD007288F5 /* GISPreparationMaterialCell.m */; };
 		8A5052B719779D2A007288F5 /* GISPreparationMaterialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5052B619779D2A007288F5 /* GISPreparationMaterialCell.xib */; };
 		8A5052C61977D76F007288F5 /* GISDashBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5052C21977D76F007288F5 /* GISDashBoardViewController.xib */; };
@@ -557,6 +559,8 @@
 		8A3B1E55197CFAC400963E8C /* GISNetworkUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISNetworkUtility.m; sourceTree = "<group>"; };
 		8A3B1E57197CFDF000963E8C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8A3B1E58197CFDF000963E8C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		8A4135E319D2F94600707F46 /* tab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_selected@2x.png"; sourceTree = "<group>"; };
+		8A4135E519D2F94F00707F46 /* tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_selected.png; sourceTree = "<group>"; };
 		8A5052B319779CFD007288F5 /* GISPreparationMaterialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISPreparationMaterialCell.h; sourceTree = "<group>"; };
 		8A5052B419779CFD007288F5 /* GISPreparationMaterialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISPreparationMaterialCell.m; sourceTree = "<group>"; };
 		8A5052B619779D2A007288F5 /* GISPreparationMaterialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISPreparationMaterialCell.xib; sourceTree = "<group>"; };
@@ -1248,6 +1252,8 @@
 		8A325B6019CAFA8100C52278 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8A4135E519D2F94F00707F46 /* tab_selected.png */,
+				8A4135E319D2F94600707F46 /* tab_selected@2x.png */,
 				8A325B6119CAFA8100C52278 /* blackCircle.png */,
 				8A325B6219CAFA8100C52278 /* DailyCalendar.png */,
 				8A325B6319CAFA8100C52278 /* day.png */,
@@ -2118,6 +2124,7 @@
 				BA9E6B2D1977E88400609E69 /* job_details.png in Resources */,
 				BA9E6AF51977E88400609E69 /* calender.png in Resources */,
 				BA9E6B391977E88400609E69 /* logo.png in Resources */,
+				8A4135E419D2F94600707F46 /* tab_selected@2x.png in Resources */,
 				BA9E6AED1977E88400609E69 /* add.png in Resources */,
 				BA9E6B4D1977E88400609E69 /* search.png in Resources */,
 				BA59EC421977EC530083864D /* GISDashBoardListViewController.xib in Resources */,
@@ -2161,6 +2168,7 @@
 				BA9E6B081977E88400609E69 /* contact_and_billing_pressed@2x.png in Resources */,
 				BA9E6B5A1977E88400609E69 /* summary_pressed@2x.png in Resources */,
 				8AA83868198B5FF2004B6C87 /* GISDashBoardReqCell.xib in Resources */,
+				8A4135E619D2F94F00707F46 /* tab_selected.png in Resources */,
 				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
 				BA9E6B011977E88400609E69 /* comments.png in Resources */,
 				BA9E6B631977E88400609E69 /* view@2x.png in Resources */,

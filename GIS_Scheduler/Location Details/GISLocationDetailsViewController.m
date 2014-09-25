@@ -69,7 +69,7 @@
          appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
         
         _parkingArray = [[NSMutableArray alloc] init];
-        
+        _fields = [[NSMutableString alloc] init];
         _locationNames = [[NSMutableArray alloc] init];
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
@@ -705,13 +705,13 @@
             if([_generalLocationdata length]>0){
                 
                 if([_generalLocationId_string isEqualToString:@"1"]){
-                    if([_buildingNamedata length]>0){
+                    if(![_buildingNamedata isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
                         [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
                     }else{
                         if([_fields length]>0)
                             [_fields setString:@""];
                         
-                        if([_buildingNamedata length] == 0)
+                        if([_buildingNamedata isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)])
                             [_fields appendFormat:@"%@%@",@"Building Name",@", \n"];
                         
                         [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
