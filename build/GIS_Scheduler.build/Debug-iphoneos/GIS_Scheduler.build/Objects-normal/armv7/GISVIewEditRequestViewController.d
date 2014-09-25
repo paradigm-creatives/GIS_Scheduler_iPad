@@ -44,6 +44,7 @@ dependencies: \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsViewController.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Summary/GISSummaryViewController.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/View\ Edit\ Service/GISViewEditServiceViewController.h \
+  /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/View\ Edit\ Service/FFCalendars/Util/FFEventDetail\ and\ FFEditEvent\ Views\ and\ Popovers/FFEditEvent\ View\ and\ Popover/FFButtonWithDatePopover/FFDatePopoverController.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/View\ Edit\ Service/FFCalendars/Util/FFEvent/FFEvent.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/View\ Edit\ Service/FFCalendars/Util/FFImportantFilesForCalendar.h \
   /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/View\ Edit\ Service/FFCalendars/Util/FFCategories/NSDate+FFDaysCount.h \

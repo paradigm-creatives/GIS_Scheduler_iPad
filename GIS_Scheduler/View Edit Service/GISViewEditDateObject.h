@@ -20,6 +20,7 @@
 @property(nonatomic,strong)NSString *startTime_String;
 @property(nonatomic,strong)NSString *timely_String;
 @property(nonatomic,strong)NSString *typeOfService_String;
+@property(nonatomic,strong)NSString *subRole_String;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json;
 

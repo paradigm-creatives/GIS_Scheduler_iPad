@@ -259,4 +259,15 @@
 
 }
 
+-(void)clearAllSubviews{
+    
+    [viewEdit removeFromSuperview];
+    viewEdit = nil;
+    [viewDetail removeFromSuperview];
+    viewDetail = nil;
+    
+    [vlistView.view removeFromSuperview];
+    vlistView = nil;
+}
+
 @end

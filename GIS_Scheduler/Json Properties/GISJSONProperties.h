@@ -496,6 +496,7 @@
 #define kViewSchedule_SubroleID @"SubRoleID"
 #define kViewSchedule_PayTypeID @"PayTypeID"
 #define kViewSchedule_JobNotes @"JobNotes"
+#define kViewSchedule_SubRole @"SubRole"
 
 #pragma mark JobDetails End
 

@@ -117,6 +117,11 @@
             [subview removeFromSuperview];
         }
     }
+    
+    if (protocol != nil && [protocol respondsToSelector:@selector(clearAllSubviews)]) {
+        [protocol clearAllSubviews];
+    }
+
     [arrayButtonsEvents removeAllObjects];
     
     BOOL boolIsToday = [NSDate isTheSameDateTheCompA:[NSDate componentsOfCurrentDate] compB:[NSDate componentsOfDate:date]];

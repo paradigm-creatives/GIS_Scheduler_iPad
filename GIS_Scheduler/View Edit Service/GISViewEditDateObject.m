@@ -21,6 +21,7 @@
 @synthesize startTime_String;
 @synthesize timely_String;
 @synthesize typeOfService_String;
+@synthesize subRole_String;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json
 {
@@ -43,6 +44,7 @@
             startTime_String = [self returningstring:[json objectForKey:kViewSchedule_StartTime]];
             timely_String = [self returningstring:[json objectForKey:kViewSchedule_Timely]];
             typeOfService_String = [self returningstring:[json objectForKey:kViewSchedule_TypeofService]];
+            subRole_String = [self returningstring:[json objectForKey:kViewSchedule_SubRole]];
            
             
 }
