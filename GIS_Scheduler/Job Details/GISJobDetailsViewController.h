@@ -70,6 +70,12 @@
     BOOL isEdit_Button_Clicked;
     
     NSString *chooseRequestID_string;
+    
+    UITextField *numberOfServiceProviders_Field;
+    
+    NSString *numberOfServiceProviders_string;
+
+    
 }
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
 -(IBAction)createJobsButton_Pressed:(id)sender;

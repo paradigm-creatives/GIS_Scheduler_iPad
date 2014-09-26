@@ -178,7 +178,6 @@
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
-        
     }
 }
 
@@ -189,7 +188,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (tableView==createJObs_tableView) {
         GISCreateJobs_Cell *cell=(GISCreateJobs_Cell *)[tableView dequeueReusableCellWithIdentifier:@"GISCreateJobsCell"];
         if (cell==nil) {

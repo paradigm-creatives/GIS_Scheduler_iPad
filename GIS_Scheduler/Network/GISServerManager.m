@@ -541,7 +541,15 @@ static GISServerManager *singletonManager = nil;
     [self startRequest:request target:target finishAction:finishAction failAction:failAction];
 }
 
-
+- (void)createJObs_JobDetails:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_CreateJobs];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+}
 
 - (void)alert
 {

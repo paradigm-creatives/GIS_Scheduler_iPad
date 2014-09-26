@@ -25,6 +25,7 @@
     _datesArray = [[NSMutableArray alloc] init];
     _detailArray = [[NSMutableArray alloc] init];
     _jobEventsArray = [[NSMutableArray alloc] init];
+    _addNewJob_dictionary=[[NSMutableDictionary alloc]init];
     
     self.window.backgroundColor = [UIColor whiteColor];
     

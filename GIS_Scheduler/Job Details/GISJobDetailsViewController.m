@@ -153,8 +153,10 @@
         [detail_mut_array removeAllObjects];
         detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
         [self sortTheDatesAndTimes];
+        if (detail_mut_array.count>0) {
+            [createJObs_tableView reloadData];
+        }
         
-        //[createJObs_tableView reloadData];
         
     }else{
         
@@ -319,6 +321,7 @@
 
 -(IBAction)pickerButtonPressed:(id)sender
 {
+    [numberOfServiceProviders_Field resignFirstResponder];
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISJobDetailsCell *)button.superview.superview.superview.superview;
     GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)tempCellRef;
@@ -378,18 +381,18 @@
         tableViewController1.popOverArray=payType_array;
         
     }
-    else if ([sender tag]==888)
+    else if ([sender tag]==888)// Create Jobs
     {
         btnTag=888;
         tableViewController1.popOverArray=serviceProvider_Array;
     }
-    else if ([sender tag]==999)
+    else if ([sender tag]==999) // Create Jobs
     {
         btnTag=999;
         tableViewController1.popOverArray=payLevel_Array;
         
     }
-    else if ([sender tag]==1010)
+    else if ([sender tag]==1010) // Create Jobs
     {
         btnTag=1010;
         tableViewController1.popOverArray=billLevel_Array;
@@ -474,15 +477,15 @@
     {
         payType_temp_string=value_str;
     }
-    else if (btnTag==888)
+    else if (btnTag==888)// Create Jobs
     {
         typeOfServiceProviders_Answer_Label.text=value_str;
     }
-    else if (btnTag==999)
+    else if (btnTag==999) // Create Jobs
     {
         payLevel_Answer_Label.text=value_str;
     }
-    else if (btnTag==1010)
+    else if (btnTag==1010) // Create Jobs
     {
         billLevel_Answer_Label.text=value_str;
     }
@@ -585,6 +588,7 @@
     }
     else//Done Button
     {
+        if (!appDelegate.addNewJob_dictionary.count) {
         GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:selected_row];
         tempObj.jobDate_string=jobDate_temp_string;
         tempObj.startTime_string=startTime_temp_string;
@@ -632,11 +636,40 @@
         [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
         [update_eventdict setObject:jobHistory_textView.text forKey:kViewSchedule_JobNotes];
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
         //Call the Save Update JObs Service here
+     }
+     else
+     {
+         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+         [[GISServerManager sharedManager] updateJobDetails:self withParams:appDelegate.addNewJob_dictionary finishAction:@selector(successmethod_AddUpdateJob_data:) failAction:@selector(failuremethod_AddUpdateJob_data:)];
+         [appDelegate.addNewJob_dictionary removeAllObjects];
+         
+    }
     }
     
 }
+
+-(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSArray *array=response.responseJson;
+    NSDictionary *dictNew=[array lastObject];
+    NSString *success= [dictNew objectForKey:kStatusCode];
+    
+    if ([success isEqualToString:@"200"]) {
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+    }
+}
+
+-(void)failuremethod_AddUpdateJob_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
 -(void)showChangeJobHistoryView
 {
     jobChangeHistory_background_UIView.hidden=NO;
@@ -645,7 +678,7 @@
 
 -(void)successmethod_updateJobDetails_data:(GISJsonRequest *)response
 {
-    
+    [self removeLoadingView];
     NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
     [jobDetails_tableView reloadData];
     
@@ -675,9 +708,9 @@
         
         isAlljobs_Checked=YES;
         [createJobsCheckDictionary removeAllObjects];
-        //for (int i=0; i<detail_mut_array.count; i++)
+        for (int i=0; i<detail_mut_array.count; i++)
         {
-            //[createJobsCheckDictionary setObject:[NSString stringWithFormat:@"%ld",(long)i] forKey:[NSString stringWithFormat:@"%ld",(long)i]];
+            [createJobsCheckDictionary setObject:[NSString stringWithFormat:@"%ld",(long)i] forKey:[NSString stringWithFormat:@"%ld",(long)i]];
         }
         
     }
@@ -686,6 +719,7 @@
 
 -(IBAction)createJobsButton_Pressed:(id)sender
 {
+    [numberOfServiceProviders_Field resignFirstResponder];
     isAlljobs_Checked=NO;
     createJobsCheckDictionary=[[NSMutableDictionary alloc]init];
     createJobs_UIVIew.hidden=NO;
@@ -698,12 +732,122 @@
     createJobs_UIVIew.hidden=YES;
 }
 
+
 -(IBAction)doneButtonPressed_CreateJobs:(id)sender
 {
+    if (![numberOfServiceProviders_string length])
+       [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"number_of_service_providers", TABLE, nil)];
+    else if (![typeOfServiceProviders_Answer_Label.text length])
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_Type_of_service_providers", TABLE, nil)];
+    else if (![payLevel_Answer_Label.text length])
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_pay_level", TABLE, nil)];
+    else if (![billLevel_Answer_Label.text length])
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_bill_level", TABLE, nil)];
+    else if (createJobsCheckDictionary.count<1)
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_one_job", TABLE, nil)];
+    else
+    {
+        [self sendCreateJObs_data];
+    }
     
-    createJobs_UIVIew.hidden=YES;
 }
 
+-(void)sendCreateJObs_data
+{
+    NSString *typeOfService_ID_temp_String=@"";
+    NSString *payLevel_ID_temp_String=@"";
+    NSString *billLevel_ID_temp_String=@"";
+
+    
+    NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",typeOfServiceProviders_Answer_Label.text];
+    NSArray *array_typeOfService=[serviceProvider_Array filteredArrayUsingPredicate:predicate_typeOfService];
+        if (array_typeOfService.count>0) {
+        GISServiceProviderObject *obj=[array_typeOfService lastObject];
+        typeOfService_ID_temp_String=obj.id_String;
+    }
+    
+    NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",payLevel_Answer_Label.text];
+    NSArray *array_payType=[payLevel_Array filteredArrayUsingPredicate:predicate_payType];
+    if (array_payType.count>0) {
+        GISDropDownsObject *obj=[array_payType lastObject];
+        payLevel_ID_temp_String=obj.id_String;
+    }
+    
+    
+    NSPredicate *predicate_billLevel=[NSPredicate predicateWithFormat:@"value_String=%@",billLevel_Answer_Label.text];
+    NSArray *array_billLevel=[billLevel_Array filteredArrayUsingPredicate:predicate_billLevel];
+    if (array_billLevel.count>0) {
+        GISDropDownsObject *obj=[array_billLevel lastObject];
+        billLevel_ID_temp_String=obj.id_String;
+    }
+    
+    
+    NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
+    NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
+    NSMutableDictionary *requestor_Dict=[[NSMutableDictionary alloc]init];
+    
+    NSMutableArray *materialDetails_Array=[[NSMutableArray alloc]init];
+    NSMutableDictionary *materialDetails_Listdict;
+        int count=0;
+    if ([numberOfServiceProviders_string length]) {
+        count=[numberOfServiceProviders_string intValue];
+    }
+   
+    for (int i=0;i<[createJobsCheckDictionary count];i++)
+    {
+        GISDatesAndTimesObject *dobj=[detail_mut_array objectAtIndex:[[createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)i]]intValue ]];
+        for (int i=0; i<count; i++) {
+            
+            materialDetails_Listdict=[[NSMutableDictionary alloc]init];
+            
+            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.dateTime_ID_String] forKey:kDateTime_Detail_DateTimeId];
+            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.date_String] forKey:kSearchReq_Result_JobDate];
+            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.startTime_String] forKey:kSearchReq_SP_StartTime];
+            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.endTime_String] forKey:kSearchReq_SP_EndTime];
+            [materialDetails_Listdict  setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+            [materialDetails_Listdict  setObject:payLevel_ID_temp_String forKey:kPayLevelID];
+            [materialDetails_Listdict  setObject:billLevel_ID_temp_String forKey:kBillingLevelID];
+            
+            [materialDetails_Array addObject:materialDetails_Listdict];
+        }
+        
+    }
+    
+    
+    [requestor_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kLoginRequestorID];
+    [requestor_Dict setValue:[GISUtility returningstring:appDelegate.chooseRequest_ID_String ] forKey:kSearchReq_SP_RequestID];
+    
+    [requestor_array addObject:requestor_Dict];
+    [mainDict setObject:requestor_array forKey:kORequest];
+    [mainDict setObject:materialDetails_Array forKey:koJobs];
+    
+    [[GISServerManager sharedManager] createJObs_JobDetails:self withParams:mainDict finishAction:@selector(successmethod_createJObs_JobDetails:) failAction:@selector(failuremethod_createJObs_JobDetails:)];
+}
+
+-(void)successmethod_createJObs_JobDetails:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_saveMaterialType Success---%@",saveUpdateDict);
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+     createJobs_UIVIew.hidden=YES;
+}
+
+-(void)failuremethod_createJObs_JobDetails:(GISJsonRequest *)response
+{
+    createJobs_UIVIew.hidden=YES;
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
 
 
 -(void)check_uncheck_createjobsButtonPresses:(id)sender
@@ -717,6 +861,7 @@
     }
     [createJObs_tableView reloadData];
 }
+
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
@@ -734,7 +879,7 @@
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    numberOfServiceProviders_string=textField.text;
 }
 
 

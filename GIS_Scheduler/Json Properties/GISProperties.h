@@ -61,7 +61,7 @@
 #define GIS_GET_SERVICE_PROVIDERS @"ServiceProviders"
 #define GIS_UPDATE_JOBS @"UpdateJobs"
 #define GIS_SaveUpdateJobs @"SaveUpdateJobs"
-
+#define GIS_CreateJobs @"CreateJobs"
 
 
 ///iPAD

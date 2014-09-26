@@ -122,7 +122,7 @@
             cell.payType_answer_label.text=addUpdateObj.payType_string;
         if ([addUpdateObj.outOfAgency_string length])
         {
-            if ([addUpdateObj.outOfAgency_string isEqualToString:@"yes"]) {
+            if ([addUpdateObj.outOfAgency_string isEqualToString:@"1"]) {
                 cell.yes_outAgency_ImageView.image=[UIImage imageNamed:@"radio_button_filled"];
                 cell.no_outAgency_ImageView.image=[UIImage imageNamed:@"radio_button_empty"];
             }
@@ -135,7 +135,7 @@
         }
         if ([addUpdateObj.timelyandHalf_string length])
         {
-            if ([addUpdateObj.timelyandHalf_string isEqualToString:@"yes"]) {
+            if ([addUpdateObj.timelyandHalf_string isEqualToString:@"1"]) {
                 cell.yes_timelyAndHalf_ImageView.image=[UIImage imageNamed:@"radio_button_filled"];
                 cell.no_timelyAndHalf_ImageView.image=[UIImage imageNamed:@"radio_button_empty"];
             }
@@ -155,7 +155,7 @@
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISBillingPaymentInfo" owner:self options:nil] objectAtIndex:0];
         }
         if ([addUpdateObj.parking_string length])
-            cell.parking_textField.text=addUpdateObj.payType_string;
+            cell.parking_textField.text=addUpdateObj.parking_string;
         if ([addUpdateObj.mileage_string length])
             cell.mileage_textField.text=addUpdateObj.mileage_string;
         if ([addUpdateObj.amtPaid_string length])
@@ -176,7 +176,7 @@
         
         if ([addUpdateObj.timelyandHalf_BillPayment_string length])
         {
-            if ([addUpdateObj.timelyandHalf_BillPayment_string isEqualToString:@"yes"]) {
+            if ([addUpdateObj.timelyandHalf_BillPayment_string isEqualToString:@"1"]) {
                 cell.yes_timelyAndHalf_BillingPayment_ImageView.image=[UIImage imageNamed:@"radio_button_filled"];
                 cell.no_timelyAndHalf_BillingPayment_ImageView.image=[UIImage imageNamed:@"radio_button_empty"];
             }
@@ -224,7 +224,6 @@
 
 -(IBAction)closeButtonPressed:(id)sender
 {
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"changeJobHistory" object:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -251,29 +250,25 @@
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billAmount_string] forKey:kJobDetais_BillAmount];
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.amtPaid_string] forKey:kAmtPaid];
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.agencyFee_string ]forKey:kAgencyFee];
-    [addJobDict setObject:@"" forKey:kOverrideBill];
+    
+    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timelyandHalf_BillPayment_string ] forKey:kOverrideBill];
+    
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payStatus_ID_string] forKey:kPayStatus];
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.expStatus_ID_string] forKey:kExpenseStatus];
     [addJobDict setObject:@"" forKey:kViewSchedule_JobNotes];
     [addJobDict setObject:@"" forKey:kBillingLevelID];
-
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
-    [[GISServerManager sharedManager] updateJobDetails:self withParams:addJobDict finishAction:@selector(successmethod_AddUpdateJob_data:) failAction:@selector(failuremethod_AddUpdateJob_data:)];
+    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.callInTime_string] forKey:kMyJobs_CallInTime];
+    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payLevel_ID_string] forKey:kPayLevelID];
+
+    appDelegate.addNewJob_dictionary=addJobDict;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"changeJobHistory" object:nil];
+    [self performSelector:@selector(closeButtonPressed:) withObject:nil];
 }
 
 
--(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
-{
-    [self removeLoadingView];
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
-}
 
--(void)failuremethod_AddUpdateJob_data:(GISJsonRequest *)response
-{
-    [self removeLoadingView];
-    NSLog(@"Failure");
-}
 -(IBAction)pickerButtonPressed:(id)sender
 {
     [currentTextField resignFirstResponder];
@@ -306,7 +301,7 @@
     else if ([sender tag]==5)
     {
         btnTag=5;
-        tableViewController1.popOverArray=callInTime_Array;
+        tableViewController1.popOverArray=payLevel_Array;
     }
     else if ([sender tag]==6)
     {
@@ -477,21 +472,21 @@
     UIButton *button=(UIButton *)sender;
     if (button.tag==1 || button.tag==2) {
         if (button.tag==1)
-            addUpdateObj.outOfAgency_string=@"yes";
+            addUpdateObj.outOfAgency_string=@"1";
         else
-            addUpdateObj.outOfAgency_string=@"no";
+            addUpdateObj.outOfAgency_string=@"0";
     }
     else if (button.tag==3 || button.tag==4) {
         if (button.tag==3)
-            addUpdateObj.timelyandHalf_string=@"yes";
+            addUpdateObj.timelyandHalf_string=@"1";
         else
-            addUpdateObj.timelyandHalf_string=@"no";
+            addUpdateObj.timelyandHalf_string=@"0";
     }
     else if (button.tag==5 || button.tag==6) {
         if (button.tag==5)
-            addUpdateObj.timelyandHalf_BillPayment_string=@"yes";
+            addUpdateObj.timelyandHalf_BillPayment_string=@"1";
         else
-            addUpdateObj.timelyandHalf_BillPayment_string=@"no";
+            addUpdateObj.timelyandHalf_BillPayment_string=@"0";
     }
     [addUpdateJobs_tableView reloadData];
 }
