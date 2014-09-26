@@ -1218,8 +1218,8 @@
 -(IBAction)nextButtonPressed:(id)sender
 {
     NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
-    
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -526,7 +526,7 @@
     @try {
 //        if((appDelegate.isFromContacts && !appDelegate.isNewRequest) || (appDelegate.isFromContacts && appDelegate.isNewRequest) || [_isCompleteRequest isEqualToString:@"true"] || ([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]) || [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]||[_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]){
         
-    if((!appDelegate.isNewRequest)){
+    if((appDelegate.isFromContacts && !appDelegate.isNewRequest) || (appDelegate.isFromContacts && appDelegate.isNewRequest)){
         
             _parkingstring = [[NSMutableString alloc] init];
             

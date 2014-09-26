@@ -450,11 +450,9 @@
         if (appDelegate.isNewRequest)
         {
             [paramsDict setObject:@"0" forKey:@"requestNo"];
-            appDelegate.isNewRequest = YES;
         }
         else{
             [paramsDict setObject:contactBilling_Object.chooseRequest_ID_String forKey:@"requestNo"];
-            appDelegate.isNewRequest = NO;
         }
         if ([GISUtility returningstring:contactBilling_Object.unitOrDepartment_ID_String] || [contactBilling_Object.unitOrDepartment_ID_String length]>0)
             [paramsDict setObject:contactBilling_Object.unitOrDepartment_ID_String forKey:kunitid];

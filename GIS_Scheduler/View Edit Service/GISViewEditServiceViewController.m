@@ -647,8 +647,6 @@
 
 - (IBAction) dateSelected:(id)sender{
     
-    UIButton *btn=(UIButton*)sender;
-
     isDateSelected = YES;
     isServiceSelected = NO;
     
@@ -658,22 +656,10 @@
     CGRect frame = _mainView.frame;
     frame.origin.y= 121.0f;
     _mainView.frame = frame;
-    
+    [_dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_serviceProviderButton setBackgroundImage:nil  forState:UIControlStateNormal];
     [_serviceProviderButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [_dateButton setBackgroundImage:[UIImage imageNamed:@"selected.png"]  forState:UIControlStateNormal];
-    
-    NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
-                                         month:[NSDate componentsOfCurrentDate].month
-                                           day:[NSDate componentsOfCurrentDate].day];
-    
-    popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
-    [popoverControllerDate setProtocol:self];
-    
-    [popoverControllerDate presentPopoverFromRect:CGRectMake(btn.frame.origin.x+240, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)
-                                           inView:self.view
-                         permittedArrowDirections:UIPopoverArrowDirectionAny
-                                         animated:YES];
 
 }
 
@@ -719,6 +705,7 @@
     
     [_serviceProviderButton setBackgroundImage:[UIImage imageNamed:@"selected.png"]  forState:UIControlStateNormal];
     [_dateButton setBackgroundImage:nil  forState:UIControlStateNormal];
+    [_dateButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [_serviceProviderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     if(_fill_UnfillSegmentControl.selectedSegmentIndex == 0){
@@ -787,6 +774,8 @@
     
     NSLog(@"date changed %@",newDate);
     
+    _dateTextField.text = [GISUtility eventDisplayFormat:newDate];
+    
     [popoverControllerDate dismissPopoverAnimated:YES];
     
     [mainTabbar setSelectedItem:self.dayItem];
@@ -797,6 +786,24 @@
     
     [self showMonthCalendar];
    
+}
+
+- (IBAction) showDatePicker:(id)sender{
+    
+    UIButton *btn=(UIButton*)sender;
+    
+    NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
+                                         month:[NSDate componentsOfCurrentDate].month
+                                           day:[NSDate componentsOfCurrentDate].day];
+    
+    popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
+    [popoverControllerDate setProtocol:self];
+    
+    [popoverControllerDate presentPopoverFromRect:CGRectMake(btn.frame.origin.x+240, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)
+                                           inView:self.view
+                         permittedArrowDirections:UIPopoverArrowDirectionAny
+                                         animated:YES];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated

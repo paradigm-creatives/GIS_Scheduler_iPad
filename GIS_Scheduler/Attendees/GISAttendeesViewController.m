@@ -94,8 +94,6 @@ int row_count = 2;
     
     if ((appDelegate.isFromContacts && !appDelegate.isNewRequest)||([appDelegate.chooseRequest_ID_String length])) {
         
-        //NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-        //[userDefaults valueForKey:kDropDownValue];
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -107,6 +105,13 @@ int row_count = 2;
         [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
         }
     }
+    
+     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    if(appDelegate.isFromContacts){
+        attendeesObject.choose_request_String=[userDefaults valueForKey:kDropDownValue];
+        
+    }
+
 }
 
 
@@ -708,8 +713,9 @@ int row_count = 2;
 -(void)nextButtonPressed:(id)sender
 {
     [self resignCurrentTextField];
+    
+    appDelegate.isFromContacts = YES;
     if(!appDelegate.isFromContacts){
-        
         
         if([inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"] || [inCompleteTab_string isEqualToString:@"Attendees are In-Complete"]|| [inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]|| [inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
             
@@ -732,7 +738,7 @@ int row_count = 2;
 {
     @try {
         
-        appDelegate.isNewRequest = NO;
+       // appDelegate.isNewRequest = NO;
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         if ([attendeesObject.choose_request_String isEqualToString:NSLocalizedStringFromTable(@"new request", TABLE, nil)]) {
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];

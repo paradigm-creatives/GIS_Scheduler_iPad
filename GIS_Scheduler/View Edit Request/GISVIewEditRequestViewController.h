@@ -48,6 +48,17 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *jobdetailsItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *summarYItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *commentsItem;
+
+
+@property (nonatomic, retain) IBOutlet UITabBar *mainnewTabbar;
+@property (nonatomic, retain) IBOutlet UITabBarItem *contact_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *eventDetails_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *attendees_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *locationdetais_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *dates_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *summarY_newItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *comments_newItem;
+
 @property (strong, nonatomic) NSArray *requetDetails;
 
 @end
