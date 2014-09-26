@@ -126,6 +126,22 @@
     [_summarYItem setTitle:NSLocalizedStringFromTable(@"summary", TABLE, nil)];
     [_commentsItem setTitle:NSLocalizedStringFromTable(@"comments", TABLE, nil)];
     
+    [self setItemFont:_contact_newItem];
+    [self setItemFont:_eventDetails_newItem];
+    [self setItemFont:_attendees_newItem];
+    [self setItemFont:_locationdetais_newItem];
+    [self setItemFont:_dates_newItem];
+    [self setItemFont:_summarY_newItem];
+    [self setItemFont:_comments_newItem];
+    
+    [_contact_newItem setTitle:NSLocalizedStringFromTable(@"contact_billing", TABLE, nil)];
+    [_eventDetails_newItem setTitle:NSLocalizedStringFromTable(@"event_details", TABLE, nil)];
+    [_attendees_newItem setTitle:NSLocalizedStringFromTable(@"attendees", TABLE, nil)];
+    [_locationdetais_newItem setTitle:NSLocalizedStringFromTable(@"location_details", TABLE, nil)];
+    [_dates_newItem setTitle:NSLocalizedStringFromTable(@"dates_times", TABLE, nil)];
+    [_summarY_newItem setTitle:NSLocalizedStringFromTable(@"summary", TABLE, nil)];
+    [_comments_newItem setTitle:NSLocalizedStringFromTable(@"comments", TABLE, nil)];
+    
     
     [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tab_selected.png"]];
     
@@ -137,6 +153,14 @@
     _jobdetailsItem.selectedImage = [[UIImage imageNamed:@"job_details_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _summarYItem.selectedImage = [[UIImage imageNamed:@"summary_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _commentsItem.selectedImage = [[UIImage imageNamed:@"comments_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    _contact_newItem.selectedImage = [[UIImage imageNamed:@"contact_and_billing_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _eventDetails_newItem.selectedImage = [[UIImage imageNamed:@"event_details_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _attendees_newItem.selectedImage = [[UIImage imageNamed:@"attendees_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _locationdetais_newItem.selectedImage = [[UIImage imageNamed:@"location_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _dates_newItem.selectedImage = [[UIImage imageNamed:@"dates_and_times_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _summarY_newItem.selectedImage = [[UIImage imageNamed:@"summary_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _comments_newItem.selectedImage = [[UIImage imageNamed:@"comments_pressed.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIColor *titleHighlightedColor = UIColorFromRGB(0xffffff);
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -174,6 +198,10 @@
         [_requestBtn setBackgroundImage:nil forState:UIControlStateNormal];
         [_requestBtn removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
         appDelegate.chooseRequest_ID_String = @"0";
+        
+        [_mainTabbar setHidden:YES];
+        [_mainnewTabbar setHidden:NO];
+        
     }else{
         
         self.title=@"View/Edit Service Request";
@@ -181,6 +209,9 @@
         [_requestBtn setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [_requestBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
         appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
+        
+        [_mainTabbar setHidden:NO];
+        [_mainnewTabbar setHidden:YES];
     }
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
@@ -313,7 +344,8 @@
 
 -(void)tabSelcted:(NSNotification *) notification{
     
-    appDelegate.isFromContacts = NO;
+    if(!appDelegate.isFromContacts && !appDelegate.isNewRequest)
+        appDelegate.isFromContacts = NO;
     
     NSDictionary *infoDict=notification.userInfo;
     
@@ -322,9 +354,18 @@
         value =[infoDict objectForKey:@"tabValue"];
     }
     
-    UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:[value intValue]];
-    [self tabBar:self.mainTabbar didSelectItem:tabItem];
-    [self.mainTabbar setSelectedItem:tabItem];
+    if(appDelegate.isNewRequest){
+        
+        UITabBarItem *tabItem = [self.mainnewTabbar.items objectAtIndex:[value intValue]];
+        [self tabBar:self.mainnewTabbar didSelectItem:tabItem];
+        [self.mainnewTabbar setSelectedItem:tabItem];
+        
+    }else{
+        
+        UITabBarItem *tabItem = [self.mainTabbar.items objectAtIndex:[value intValue]];
+        [self tabBar:self.mainTabbar didSelectItem:tabItem];
+        [self.mainTabbar setSelectedItem:tabItem];
+    }
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [_requestBtn setTitle:[userDefaults valueForKey:kDropDownValue] forState:UIControlStateNormal];

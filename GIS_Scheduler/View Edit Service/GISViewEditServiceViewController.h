@@ -43,10 +43,12 @@
 @property (nonatomic, strong) IBOutlet UIButton *serviceProviderButton;
 @property (strong, nonatomic) NSArray *ServiceProvider_TypeArray;
 @property (nonatomic,strong) UIPopoverController *popover;
+@property (nonatomic, strong) IBOutlet UITextField *dateTextField;
 
 - (void)setArrayWithEvents:(NSMutableArray *)_arrayWithEvents;
 - (IBAction) dateSelected:(id)sender;
 - (IBAction) serviceProviderSelected:(id)sender;
 - (IBAction)showServicePopoverDetails:(id)sender;
+- (IBAction) showDatePicker:(id)sender;
 
 @end

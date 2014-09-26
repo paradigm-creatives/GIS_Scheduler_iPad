@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISViewEditServiceViewController">
             <connections>
                 <outlet property="dateButton" destination="fYX-kT-Dtv" id="now-c6-OQP"/>
+                <outlet property="dateTextField" destination="S7O-iR-tc5" id="9in-Ct-jg6"/>
                 <outlet property="dayItem" destination="A5X-Mm-3uC" id="oZj-Ib-7Ku"/>
                 <outlet property="fill_UnfillSegmentControl" destination="Hbk-hj-0dc" id="EMa-MZ-uog"/>
                 <outlet property="labelMonthAndYear" destination="uvu-ZN-CjM" id="RmV-2z-H6W"/>
@@ -26,18 +27,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="E8o-UH-sZw">
-                    <rect key="frame" x="0.0" y="28" width="1024" height="49"/>
+                    <rect key="frame" x="0.0" y="34" width="1024" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 2014" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uvu-ZN-CjM">
-                            <rect key="frame" x="341" y="0.0" width="342" height="49"/>
+                            <rect key="frame" x="341" y="0.0" width="342" height="43"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                             <color key="textColor" red="0.084257274509999994" green="0.35492285820000002" blue="0.57565369899999996" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <tabBar contentMode="scaleToFill" itemPositioning="centered" itemSpacing="54" itemWidth="30" id="Wee-oX-bOr">
-                            <rect key="frame" x="0.0" y="0.0" width="238" height="49"/>
+                            <rect key="frame" x="0.0" y="-6" width="238" height="49"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <items>
@@ -108,6 +109,28 @@
                             </subviews>
                             <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="S7O-iR-tc5">
+                            <rect key="frame" x="360" y="1" width="114" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Img-zX-PTo">
+                            <rect key="frame" x="360" y="0.0" width="114" height="28"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showDatePicker:" destination="-1" eventType="touchUpInside" id="S1g-16-Hq9"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender.png" id="wHC-Tw-C4w">
+                            <rect key="frame" x="448" y="7" width="15" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -156,6 +179,7 @@
     </objects>
     <resources>
         <image name="Day.png" width="16" height="16"/>
+        <image name="calender.png" width="15" height="17"/>
         <image name="choose_request_bg.png" width="135" height="20"/>
         <image name="month.png" width="17" height="17"/>
         <image name="selected.png" width="80" height="50"/>

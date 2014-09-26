@@ -848,6 +848,8 @@
 
 - (IBAction)nextButtonClicked:(id)sender{
     
+    appDelegate.isFromContacts = YES;
+    
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
     if([appDelegate.chooseRequest_ID_String length]>0 && ![appDelegate.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){

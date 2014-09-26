@@ -453,11 +453,9 @@
         if (appDelegate.isNewRequest)
         {
             [paramsDict setObject:@"0" forKey:@"requestNo"];
-            appDelegate.isNewRequest = YES;
         }
         else{
             [paramsDict setObject:contactBilling_Object.chooseRequest_ID_String forKey:@"requestNo"];
-            appDelegate.isNewRequest = NO;
         }
         if (contactBilling_Object.unitOrDepartment_ID_String==nil
             || ([contactBilling_Object.unitOrDepartment_ID_String isKindOfClass:[NSNull class]])){

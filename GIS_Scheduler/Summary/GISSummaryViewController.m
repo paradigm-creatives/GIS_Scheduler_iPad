@@ -19,6 +19,11 @@
 #import "GISSummaryDatesAndTimesCell.h"
 #import "GISSummaryDatesDetailViewCell.h"
 #import "GISDatesAndTimesObject.h"
+#import "GISJsonRequest.h"
+#import "GISConstants.h"
+#import "GISUtility.h"
+#import "GISJSONProperties.h"
+#import "GISServerManager.h"
 
 @interface GISSummaryViewController ()
 
@@ -361,6 +366,32 @@
     }if(section == 5){
         
         UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+        
+        UIButton *addButton1 = [[UIButton alloc] init];
+        addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        addButton1.backgroundColor=UIColorFromRGB(0x01971c);
+        [addButton1 setTitle:@"Submit to GIS" forState:UIControlStateNormal];
+        [addButton1 setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+        [addButton1.layer setCornerRadius:5.0f];
+        addButton1.titleLabel.font=[GISFonts larger];
+        [addButton1 addTarget:self
+                       action:@selector(submitButnPressed:)
+             forControlEvents:UIControlEventTouchUpInside];
+        addButton1.frame = CGRectMake(40.0, 20.0, 150.0, 30.0);
+        addButton1.enabled = YES;
+        
+        if ([_chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails isEqualToString:@"true"]) {
+            
+            if(!isCheckMark){
+                addButton1.enabled = NO;
+                addButton1.backgroundColor=[UIColor grayColor];
+            }
+        }
+        
+        [headerView addSubview:addButton1];
+
+        
+        
         UIButton *nextButton = [[UIButton alloc] init];
         nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [nextButton addTarget:self
@@ -398,6 +429,58 @@
     
     
 }
+
+-(void)submitButnPressed:(id)sender{
+    
+    @try {
+        
+        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+        GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kDateTime_requestNo];
+        [paramsDict setObject:unitObj1.token_string forKey:kToken];
+        NSString *status_ID;
+        if(!isCheckMark){
+            status_ID = @"1";
+            [paramsDict setObject:status_ID forKey:kstatusid];
+        }else{
+            //[paramsDict setObject:self.status_Id_reqForModification forKey:kstatusid];
+            [paramsDict setObject:@"6" forKey:kstatusid];
+        }
+        
+        [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
+    }
+    @catch (NSException *exception) {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get summary submit action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+}
+
+-(void)successmethod_saveUpdateRequest:(GISJsonRequest *)response
+{
+    //id json =response.responseJson;
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        isRequestSubmitted=YES;
+        [_summary_tableView reloadData];
+        [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit Successfully"];
+    }
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit failed"];
+    }
+}
+
+-(void)failuremethod_saveUpdateRequest:(GISJsonRequest *)response
+{
+    [GISUtility showAlertWithTitle:@"" andMessage:@"Error with Request Submit"];
+    NSLog(@"Failure");
+}
+
 
 - (void)didReceiveMemoryWarning
 {

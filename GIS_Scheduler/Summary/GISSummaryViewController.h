@@ -14,6 +14,8 @@
 @interface GISSummaryViewController : UIViewController
 {
     GISAppDelegate *appDelegate;
+    BOOL isCheckMark;
+    BOOL isRequestSubmitted;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;
