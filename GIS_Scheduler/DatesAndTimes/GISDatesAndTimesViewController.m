@@ -830,6 +830,12 @@
     isDelete=YES;
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
+    
+//    UIAlertController *alertController = [UIAlertController
+//                                          alertControllerWithTitle:alertTitle
+//                                          message:alertMessage
+//                                          preferredStyle:UIAlertController];
+//
 }
 
 

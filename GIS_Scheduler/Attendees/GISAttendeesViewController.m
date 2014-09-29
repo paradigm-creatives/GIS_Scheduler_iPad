@@ -38,7 +38,6 @@ int row_count = 2;
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
