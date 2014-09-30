@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
-
+#import "GISLoginDetailsObject.h"
 #import "GISChooseRequestDetailsObject.h"
 
-@interface GISSummaryViewController : UIViewController
+@interface GISSummaryViewController : UIViewController<UITextViewDelegate>
 {
     GISAppDelegate *appDelegate;
     BOOL isCheckMark;
     BOOL isRequestSubmitted;
+    GISLoginDetailsObject *loginObJ;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;
@@ -28,5 +29,7 @@
 
 @property (strong, nonatomic) NSArray *eventTypeArray;
 @property (strong, nonatomic) NSArray *dresscodeArray;
+@property (strong, nonatomic) NSArray *chooseReqArray;
+@property(nonatomic,strong)NSString *choose_req_Id_string;
 
 @end

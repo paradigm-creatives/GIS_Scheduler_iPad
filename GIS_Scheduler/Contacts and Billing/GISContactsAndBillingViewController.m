@@ -19,6 +19,7 @@
 #import "GISUtility.h"
 #import "GISEventDetailsViewController.h"
 #import "GISVIewEditRequestViewController.h"
+#import "FFDateManager.h"
 
 @interface GISContactsAndBillingViewController ()
 
@@ -577,9 +578,9 @@
             
             appDelegate.contact_billingObject = contactBilling_Object;
             
-            appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
-            appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
-            appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+            appDelegate.createdDateString = [GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]];
+            appDelegate.createdByString = contactBilling_Object.firstName_String;
+            appDelegate.statusString = @"In-Complete";
             
             [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
             

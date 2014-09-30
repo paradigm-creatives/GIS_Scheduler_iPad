@@ -201,7 +201,8 @@
         
         [_mainTabbar setHidden:YES];
         [_mainnewTabbar setHidden:NO];
-        
+        _mainnewTabbar.selectedItem = _contact_newItem;
+                
     }else{
         
         self.title=@"View/Edit Service Request";
@@ -533,7 +534,6 @@
     [self removeLoadingView];
     
 }
-
 
 - (void)didReceiveMemoryWarning
 {

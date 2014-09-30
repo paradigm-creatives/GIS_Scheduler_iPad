@@ -105,18 +105,26 @@
         
     }else if(appDelegate.isFromContacts  && appDelegate.isNewRequest){
         
-        UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
-        UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];
+        //UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
+       // UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];
         
-        if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 || [_on_goingStr length] == 0 || [_outsideAgencyStr length] == 0){
+       
+        if([_open_toPublicStr length] == 0)
             _open_toPublicStr = @"";
+        if([_dressCode_Id_string length] == 0)
             _dressCode_Id_string = @"";
+        if([_eventTypeId_string length] == 0)
             _eventTypeId_string = @"";
-            _re_broadcastStr= @"";
+        if([_on_goingStr length] == 0)
             _on_goingStr = @"";
+        if([_re_broadcastStr length] == 0)
+            _re_broadcastStr= @"";
+        if([_outsideAgencyStr length] == 0)
             _outsideAgencyStr = @"";
-            
-        }
+
+
+
+
     }
 }
 

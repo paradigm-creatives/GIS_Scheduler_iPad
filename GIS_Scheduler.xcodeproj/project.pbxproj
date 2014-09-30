@@ -166,6 +166,8 @@
 		8AA83879198B8B63004B6C87 /* GISSchedulerSPJobsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA83878198B8B63004B6C87 /* GISSchedulerSPJobsStore.m */; };
 		8AA8387C198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA8387B198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m */; };
 		8AA8387F198BB545004B6C87 /* GISSchedulerNMRequestsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */; };
+		8AA9087F19DA7B8900C03C02 /* GISSummaryRequestModificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9087D19DA7B8900C03C02 /* GISSummaryRequestModificationCell.m */; };
+		8AA9088019DA7B8900C03C02 /* GISSummaryRequestModificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AA9087E19DA7B8900C03C02 /* GISSummaryRequestModificationCell.xib */; };
 		8ABD990619D0314F00739661 /* GISServiceProviderRequestedJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABD990419D0314F00739661 /* GISServiceProviderRequestedJobsViewController.m */; };
 		8ABD990719D0314F00739661 /* GISServiceProviderRequestedJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ABD990519D0314F00739661 /* GISServiceProviderRequestedJobsViewController.xib */; };
 		8ABD990819D031CC00739661 /* GISAddUpdateJobsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0A156419BF124B00165C1A /* GISAddUpdateJobsViewController.m */; };
@@ -649,6 +651,9 @@
 		8AA8387B198BB4FB004B6C87 /* GISSchedulerNMRequestsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSchedulerNMRequestsStore.m; sourceTree = "<group>"; };
 		8AA8387D198BB545004B6C87 /* GISSchedulerNMRequestsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISSchedulerNMRequestsObject.h; sourceTree = "<group>"; };
 		8AA8387E198BB545004B6C87 /* GISSchedulerNMRequestsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSchedulerNMRequestsObject.m; sourceTree = "<group>"; };
+		8AA9087C19DA7B8900C03C02 /* GISSummaryRequestModificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISSummaryRequestModificationCell.h; sourceTree = "<group>"; };
+		8AA9087D19DA7B8900C03C02 /* GISSummaryRequestModificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISSummaryRequestModificationCell.m; sourceTree = "<group>"; };
+		8AA9087E19DA7B8900C03C02 /* GISSummaryRequestModificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISSummaryRequestModificationCell.xib; sourceTree = "<group>"; };
 		8ABD990319D0314F00739661 /* GISServiceProviderRequestedJobsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISServiceProviderRequestedJobsViewController.h; sourceTree = "<group>"; };
 		8ABD990419D0314F00739661 /* GISServiceProviderRequestedJobsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISServiceProviderRequestedJobsViewController.m; sourceTree = "<group>"; };
 		8ABD990519D0314F00739661 /* GISServiceProviderRequestedJobsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISServiceProviderRequestedJobsViewController.xib; sourceTree = "<group>"; };
@@ -1479,6 +1484,9 @@
 				8A74424119A2387300CE3B32 /* GISSummaryAttendeesCell.h */,
 				8A74424219A2387300CE3B32 /* GISSummaryAttendeesCell.m */,
 				8A74424319A2387300CE3B32 /* GISSummaryAttendeesCell.xib */,
+				8AA9087C19DA7B8900C03C02 /* GISSummaryRequestModificationCell.h */,
+				8AA9087D19DA7B8900C03C02 /* GISSummaryRequestModificationCell.m */,
+				8AA9087E19DA7B8900C03C02 /* GISSummaryRequestModificationCell.xib */,
 			);
 			path = "summary Cell";
 			sourceTree = "<group>";
@@ -2313,6 +2321,7 @@
 				BA9E6B2F1977E88400609E69 /* job_details_pressed.png in Resources */,
 				BA9E6AFE1977E88400609E69 /* choose_request_bg@2x.png in Resources */,
 				BA9E6B3D1977E88400609E69 /* logout_pressed.png in Resources */,
+				8AA9088019DA7B8900C03C02 /* GISSummaryRequestModificationCell.xib in Resources */,
 				8A3B1E03197CF43500963E8C /* custom.strings in Resources */,
 				8A5052B719779D2A007288F5 /* GISPreparationMaterialCell.xib in Resources */,
 				8A325BAF19CAFA8100C52278 /* week_clicked.png in Resources */,
@@ -2485,6 +2494,7 @@
 				8A325B7E19CAFA8100C52278 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				BA34A654197CE02D00A7083C /* Utils.m in Sources */,
 				BAB64AB019A37230005296EE /* GISJobDetailsStore.m in Sources */,
+				8AA9087F19DA7B8900C03C02 /* GISSummaryRequestModificationCell.m in Sources */,
 				8A325B9719CAFA8100C52278 /* FFHourPopoverController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
