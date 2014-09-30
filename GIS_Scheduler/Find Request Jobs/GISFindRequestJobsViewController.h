@@ -10,7 +10,7 @@
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
 #import "GISFindRequestJobsObject.h"
-
+#import "GISLoginDetailsObject.h"
 @interface GISFindRequestJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISAppDelegate *appDelegate;
@@ -22,6 +22,8 @@
     IBOutlet UITableView *findReqJobs_tableView;
     IBOutlet UILabel *requestId_label;
     IBOutlet UILabel *requestId_Answer_label;
+    
+    NSString *request_ID_String;
     
     NSMutableArray *requestorType_array;
     NSMutableArray *requestor_array;
@@ -35,8 +37,11 @@
     NSMutableArray *serviceProvider_array;
     NSMutableArray *payType_array;
     NSMutableArray *billLevel_array;
+    NSMutableArray *chooseRequest_mutArray;
     
+    GISLoginDetailsObject *login_Obj;
 }
+@property(nonatomic,strong)NSMutableString *days_MutableStr;
 -(IBAction)pickerButtonPressed:(id)sender;
 -(IBAction)search_ButtonPressed:(id)sender;
 -(IBAction)weekDays_ButtonPressed:(id)sender;

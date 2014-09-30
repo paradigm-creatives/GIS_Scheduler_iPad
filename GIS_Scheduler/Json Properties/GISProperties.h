@@ -68,5 +68,5 @@
 #define GIS_GET_SERVICE_PROVIDERS_NAMES_iPAD @"GetServiceProviders"
 #define GIS_SERVICE_PROVIDERS_NAMES_JOBDetails @"ServiceProviders"//This is to get the all service providers, this is going to be used in the Job details list view.
 #define GIS_SAVE_MATERIAL_TYPE @"SaveUpdateMaterials"
-
+#define GIS_SEARCH_REQUESTED_JOBS @"SearchRequestsJobs"
 #endif

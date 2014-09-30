@@ -1080,7 +1080,8 @@
 
 -(IBAction)saveButtonPressed:(id)sender
 {
-    @try {
+    @try
+    {
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
         NSMutableDictionary *detail_date_Dict=[[NSMutableDictionary alloc]init];
@@ -1134,7 +1135,8 @@
         
         [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
     }
-    @catch (NSException *exception) {
+    @catch (NSException *exception)
+    {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Dates and Times Detail View Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
 }

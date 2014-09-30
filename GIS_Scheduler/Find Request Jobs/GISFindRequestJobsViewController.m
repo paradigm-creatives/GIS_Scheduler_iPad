@@ -57,7 +57,13 @@
     serviceProvider_array=[[NSMutableArray alloc]init];
     payType_array=[[NSMutableArray alloc]init];
     billLevel_array=[[NSMutableArray alloc]init];
-
+    chooseRequest_mutArray=[[NSMutableArray alloc]init];
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    login_Obj=[requetId_array lastObject];
+    
+     self.days_MutableStr = [[NSMutableString alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -83,6 +89,9 @@
     
     NSString *primaryAudience_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PRIMARY_AUDIENCE;"];
     primaryAudience_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:primaryAudience_statement] mutableCopy];
+    
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
 }
 
@@ -239,10 +248,89 @@
 
 -(void)search_ButtonPressed:(id)sender
 {
+    
     appDelegate.isFromViewEditService = NO;
     GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
     detailViewController.view_string = kFindRequestJobs_Screen;
     [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    
+    [self.days_MutableStr setString:@""];
+    
+    for (int j=1; j<=7; j++) {
+        NSString *str=[findReqObj.weekDays_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)j]];
+        if ([str isEqualToString:@"Monday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"2",@","];        }
+        else if ([str isEqualToString:@"Tuesday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"3",@","];
+        }
+        else if ([str isEqualToString:@"Wednesday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"4",@","];
+        }
+        else if ([str isEqualToString:@"Thursday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"5",@","];
+        }
+        else if ([str isEqualToString:@"Friday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"6",@","];
+        }
+        else if ([str isEqualToString:@"Saturday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"7",@","];
+        }
+        else if ([str isEqualToString:@"Sunday"]) {
+            [self.days_MutableStr appendFormat:@"%@%@",@"1",@","];
+        }
+    }
+    NSRange range = [self.days_MutableStr rangeOfString:@"," options:NSBackwardsSearch];
+    if (range.location == NSNotFound) {
+    } else {
+        [self.days_MutableStr setString:[self.days_MutableStr substringToIndex:range.location]];
+    }
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_string] forKey:kRequestSDate];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestorTypeID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
+    [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
+    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.evenyType_ID_string] forKey:kChooseReqDetails_EventTypeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.primaryAudience_ID_string] forKey:kSearchRequest_PrimaryAudienceid];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.openToPublic_string] forKey:kSearchReq_SP_OpenToPublic];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_JobData_string] forKey:kJobSDate];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_JobData_string] forKey:kJobEDate];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.startTime_JobData_string] forKey:kJobSTime];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.endTime_JobData_string] forKey:kJobETime];
+    [paramsDict setObject:[GISUtility returningstring:self.days_MutableStr] forKey:kDays];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.serviceProviderType_ID_string] forKey:kSearchReq_SP_SpTypeID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kTypeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.serviceProvider_ID_string] forKey:kSPID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.payType_ID_string] forKey:kViewSchedule_PayTypeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.filled_string] forKey:kFilled];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.outAgency_string] forKey:kOutAgency];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.createdBy_string] forKey:kCreatedBy];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.timely_string] forKey:kJobDetais_Timely];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.cancelled_string] forKey:kCanceled];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.cancelDate_string] forKey:kCancelDate];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.payLevel_ID_string] forKey:kPayLevelID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.billLevel_ID_string] forKey:kBillingLevelID];
+
+    [[GISServerManager sharedManager] findRequestJObs_Search:self withParams:paramsDict finishAction:@selector(successmethod_findRequestJobs:) failAction:@selector(failuremethod_findRequestJobs:)];
+}
+
+-(void)successmethod_findRequestJobs:(GISJsonRequest *)response
+{
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [self removeLoadingView];
+}
+
+-(void)failuremethod_findRequestJobs:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
 }
 
 -(IBAction)pickerButtonPressed:(id)sender
@@ -254,7 +342,13 @@
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     
-    if([sender tag]==1)
+    if([sender tag]==1111)
+    {
+        btnTag=1111;
+        tableViewController1.view_String=[GISUtility returningstring:requestId_Answer_label.text];
+        tableViewController1.popOverArray=chooseRequest_mutArray;
+    }
+    else if([sender tag]==1)
     {
         btnTag=1;
         tableViewController1.view_String=@"datestimes";
@@ -374,15 +468,22 @@
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+115, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    if ([sender tag]==1111)
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width, 60, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    else
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+115, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
-    
-    if(btnTag==1)
+    if (btnTag==1111)
+    {
+        requestId_Answer_label.text=value_str;
+        request_ID_String=id_str;
+    }
+    else if(btnTag==1)
     {
         findReqObj.startDate_string=value_str;
     }
@@ -413,22 +514,27 @@
     else if(btnTag==8)
     {
         findReqObj.generalLocation_string=value_str;
+        findReqObj.generalLocation_ID_string=id_str;
     }
     else if(btnTag==9)
     {
         findReqObj.evenyType_string=value_str;
+        findReqObj.evenyType_ID_string=id_str;
     }
     else if(btnTag==10)
     {
         findReqObj.payLevel_string=value_str;
+        findReqObj.payLevel_ID_string=id_str;
     }
     else if(btnTag==11)
     {
         findReqObj.primaryAudience_string=value_str;
+        findReqObj.primaryAudience_ID_string=id_str;
     }
     else if(btnTag==12)
     {
         findReqObj.model_string=value_str;
+        findReqObj.primaryAudience_ID_string=id_str;
     }
     else if(btnTag==13)
     {
@@ -449,14 +555,17 @@
     else if(btnTag==17)
     {
         findReqObj.serviceProviderType_string=value_str;
+        findReqObj.serviceProviderType_ID_string=id_str;
     }
     else if(btnTag==18)
     {
         findReqObj.serviceProvider_string=value_str;
+        findReqObj.serviceProvider_ID_string=id_str;
     }
     else if(btnTag==19)
     {
         findReqObj.payType_string=value_str;
+        findReqObj.payType_ID_string=id_str;
     }
     else if(btnTag==20)
     {
@@ -465,6 +574,7 @@
     else if(btnTag==21)
     {
         findReqObj.payLevel_JobData_string=value_str;
+        findReqObj.payLevel_ID_string=id_str;
     }
     else if(btnTag==22)
     {
@@ -576,6 +686,17 @@
             findReqObj.cancelled_string=@"0";
     }
     [findReqJobs_tableView reloadData];
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    
+}
+
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 - (void)didReceiveMemoryWarning
 {

@@ -179,7 +179,7 @@
     popover.popoverContentSize = CGSizeMake(340, 150);
     if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
     {
-           if([sender tag]==111)
+        if([sender tag]==111)
         {
             btnTag=111;
             tableViewController1.view_String=[GISUtility returningstring:chooseRequest_ID_answer_Label.text];
