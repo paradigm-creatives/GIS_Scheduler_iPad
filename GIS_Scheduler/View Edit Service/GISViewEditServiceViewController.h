@@ -44,6 +44,7 @@
 @property (strong, nonatomic) NSArray *ServiceProvider_TypeArray;
 @property (nonatomic,strong) UIPopoverController *popover;
 @property (nonatomic, strong) IBOutlet UITextField *dateTextField;
+@property (nonatomic, strong) IBOutlet UIImageView *dateImageView;
 
 - (void)setArrayWithEvents:(NSMutableArray *)_arrayWithEvents;
 - (IBAction) dateSelected:(id)sender;

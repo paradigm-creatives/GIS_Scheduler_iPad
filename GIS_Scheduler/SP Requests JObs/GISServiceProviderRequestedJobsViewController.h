@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GISPopOverTableViewController.h"
+#import "GISSchedulerSPJobsStore.h"
 
 @interface GISServiceProviderRequestedJobsViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
@@ -38,6 +39,19 @@
     NSString *onGoing_str;
     NSString *recordBroadCast_str;
     
+    NSString *startDate_str;
+    NSString *endDate_str;
+    NSString *startTime_str;
+    NSString *endTime_str;
+    NSMutableString *days_str;
+    NSString *spType_ID_str;
+    NSString *noOfExpAttendID_str;
+    NSString *locationID_str;
+    NSString *eventType_ID_str;
+    NSString *SPID_str;
+    
+    NSMutableArray *daysArray;
+    
     IBOutlet UIButton *openToPublic_YES_button;
     IBOutlet UIButton *openToPublic_NO_button;
     
@@ -64,6 +78,11 @@
     IBOutlet UIImageView *sunday_ImageView;
     
     NSMutableDictionary *weekDays_dictionary_here;
+    
+    GISAppDelegate *appDelegate;
+    
+    GISSchedulerSPJobsStore *spJobsStore;
+    NSMutableArray *SPJobsArray;
     
 }
 -(IBAction)pickerButton_pressed:(id)sender;

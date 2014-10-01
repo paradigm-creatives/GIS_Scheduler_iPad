@@ -799,9 +799,9 @@
     popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
     [popoverControllerDate setProtocol:self];
     
-    [popoverControllerDate presentPopoverFromRect:CGRectMake(btn.frame.origin.x+240, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)
+    [popoverControllerDate presentPopoverFromRect:CGRectMake(btn.frame.origin.x+35, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)
                                            inView:self.view
-                         permittedArrowDirections:UIPopoverArrowDirectionAny
+                         permittedArrowDirections:UIPopoverArrowDirectionUp
                                          animated:YES];
     
 }

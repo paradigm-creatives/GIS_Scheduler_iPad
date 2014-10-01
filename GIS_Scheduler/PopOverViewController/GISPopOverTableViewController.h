@@ -21,6 +21,7 @@
     UIDatePicker *datePicker;
     
     NSDateFormatter *dateformatter;
+    
 }
 +(GISPopOverTableViewController *)sharedManager;
 @property(readwrite,nonatomic)int tagValue;
@@ -32,6 +33,7 @@
 @property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
 @property (weak,nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstraint;
+@property(nonatomic,strong)NSMutableArray *noOfAttendeesIdArray;
 
 
 @end

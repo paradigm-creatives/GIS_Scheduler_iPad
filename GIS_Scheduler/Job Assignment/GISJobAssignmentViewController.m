@@ -13,6 +13,13 @@
 #import "GISUtility.h"
 #import "GISFilterMoreViewController.h"
 #import "GISServiceProviderPopUpViewController.h"
+#import "GISJsonRequest.h"
+#import "GISStoreManager.h"
+#import "GISServerManager.h"
+#import "GISJSONProperties.h"
+#import "GISConstants.h"
+#import "GISFonts.h"
+#import "GISLoadingView.h"
 
 
 @interface GISJobAssignmentViewController ()
@@ -234,6 +241,7 @@
     else if (btnTag==222)
     {
         from_answer_Label.text=value_str;
+        startDate_str = value_str;
         if ([from_answer_Label.text length] && [to_answer_Label.text length]){
             if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:YES])
             {}
@@ -247,6 +255,7 @@
     else if (btnTag==333)
     {
         to_answer_Label.text=value_str;
+        endDate_str = value_str;
         if ([from_answer_Label.text length] && [to_answer_Label.text length]){
             if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:NO])
             {}
@@ -286,6 +295,12 @@
 
 -(IBAction)searchButton_Pressed:(id)sender
 {
+//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//    [paramsDict setObject:startDate_str forKey:kSPRequetstesJobsSearchJobsDate];
+//    [paramsDict setObject:endDate_str forKey:kSPRequetstesJobsSearchJobEDate];
+//    [paramsDict setObject:typeServiceID_str forKey:kSPRequetstesJobsSearchJobSTime];
+//    
+//    [[GISServerManager sharedManager] searchSpRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_spRequestJobsSearchRequest:) failAction:@selector(failuremethod_spRequestJobsSearchRequest:)];
     
 }
 
