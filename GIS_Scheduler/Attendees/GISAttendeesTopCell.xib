@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISAttendeesViewController"/>
@@ -153,10 +153,6 @@
                             <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="wFw-6h-U1d"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t7b-rE-xHC">
-                        <rect key="frame" x="377" y="8" width="301" height="50"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -167,9 +163,11 @@
                 <outlet property="genderPreference_answer_Label" destination="v3Z-lx-oed" id="xcx-aH-MFw"/>
                 <outlet property="preference_Label" destination="DnU-yr-a87" id="wRK-Jv-q6k"/>
                 <outlet property="preference_answer_Label" destination="ueo-gq-R9E" id="mEi-8K-L1a"/>
+                <outlet property="primaryAudience_ImageView" destination="65T-6C-Onw" id="6uM-s5-WPj"/>
                 <outlet property="primaryAudience_Label" destination="iiU-6U-WCs" id="uBR-ER-RHI"/>
-                <outlet property="primaryAudience_UIView" destination="t7b-rE-xHC" id="bRE-mb-Opp"/>
+                <outlet property="primaryAudience_TextField" destination="jVi-n1-9N1" id="YuB-DA-F6h"/>
                 <outlet property="primaryAudience_answer_Label" destination="ZqW-Fc-KfM" id="zv4-gV-Tit"/>
+                <outlet property="primaryAudience_button" destination="cEZ-sz-NDc" id="kE8-xe-NSQ"/>
                 <outlet property="serviceProvider_preference_Label" destination="Reg-Bh-RBK" id="2hg-GU-w0K"/>
             </connections>
         </tableViewCell>
@@ -177,9 +175,4 @@
     <resources>
         <image name="dropdown.png" width="9" height="5"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>

@@ -282,6 +282,7 @@
     {
         btnTag=1;
         tableViewController1.view_String=@"datestimes";
+        
     }
     else if([sender tag]==2)
     {

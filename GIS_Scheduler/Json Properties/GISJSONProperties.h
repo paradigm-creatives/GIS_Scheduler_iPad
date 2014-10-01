@@ -554,8 +554,8 @@
 #define kRPayLevelID @"RPayLevelID"
 #define kRequestReturn @"RequestReturn"
 #define kJobReturn @"JobReturn"
-
-
+#define kRPayLevelID @"RPayLevelID"
+#define kModeID @"ModeID"
 #endif
 
 

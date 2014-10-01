@@ -23,7 +23,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
     _startDate_label_.text=NSLocalizedStringFromTable(@"Start_Date", TABLE, nil);
     _endDate_label_.text=NSLocalizedStringFromTable(@"End_Date", TABLE, nil);

@@ -248,12 +248,10 @@
 
 -(void)search_ButtonPressed:(id)sender
 {
-    
     appDelegate.isFromViewEditService = NO;
     GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
     detailViewController.view_string = kFindRequestJobs_Screen;
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
     
     [self.days_MutableStr setString:@""];
     
@@ -291,12 +289,12 @@
     
     [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_string] forKey:kRequestSDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestorTypeID];
+    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestorTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
-    [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kDateTime_RequestorID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
-    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.evenyType_ID_string] forKey:kChooseReqDetails_EventTypeID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.primaryAudience_ID_string] forKey:kSearchRequest_PrimaryAudienceid];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.openToPublic_string] forKey:kSearchReq_SP_OpenToPublic];
@@ -317,13 +315,15 @@
     [paramsDict setObject:[GISUtility returningstring:findReqObj.cancelDate_string] forKey:kCancelDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.payLevel_ID_string] forKey:kPayLevelID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.billLevel_ID_string] forKey:kBillingLevelID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRPayLevelID];
+    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kModeID];
 
     [[GISServerManager sharedManager] findRequestJObs_Search:self withParams:paramsDict finishAction:@selector(successmethod_findRequestJobs:) failAction:@selector(failuremethod_findRequestJobs:)];
 }
 
 -(void)successmethod_findRequestJobs:(GISJsonRequest *)response
 {
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSLog(@"successmethod_findRequestJobs Success---%@",response.responseJson);
     [self removeLoadingView];
 }
 
@@ -351,23 +351,30 @@
     else if([sender tag]==1)
     {
         btnTag=1;
+        if ([findReqObj.startDate_string length])
+           tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.startDate_string];
         tableViewController1.view_String=@"datestimes";
     }
     else if([sender tag]==2)
     {
         btnTag=2;
         tableViewController1.view_String=@"datestimes";
+        if ([findReqObj.endDate_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.endDate_string];
     }
     else if([sender tag]==3)
     {
         btnTag=3;
         tableViewController1.view_String=@"timesdates";
+        if ([findReqObj.startTime_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.startTime_string];
     }
     else if ([sender tag]==4)
     {
         btnTag=4;
         tableViewController1.view_String=@"timesdates";
-        
+        if ([findReqObj.endTime_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.endTime_string];
     }
     else if([sender tag]==5)
     {
@@ -413,21 +420,29 @@
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"datestimes";
+        if ([findReqObj.startDate_JobData_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.startDate_JobData_string];
     }
     else if([sender tag]==14)
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"datestimes";
+        if ([findReqObj.endDate_JobData_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.endDate_JobData_string];
     }
     else if([sender tag]==15)
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"timesdates";
+        if ([findReqObj.startTime_JobData_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.startTime_JobData_string];
     }
     else if([sender tag]==16)
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"timesdates";
+        if ([findReqObj.endTime_JobData_string length])
+        tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.endTime_JobData_string];
     }
     else if([sender tag]==17)
     {
@@ -476,8 +491,7 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    
-    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
     if (btnTag==1111)
     {
         requestId_Answer_label.text=value_str;
