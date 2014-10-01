@@ -27,6 +27,7 @@
 @property (readwrite, nonatomic) BOOL isNewRequest;
 @property (readwrite, nonatomic) BOOL isAttendees;
 @property (readwrite, nonatomic) BOOL isFromViewEditService;
+@property (readwrite, nonatomic) BOOL isNoofAttendees;
 
 @property(nonatomic,strong) GISContactAndBillingObject *contact_billingObject;
 @property(nonatomic,strong) NSString *chooseRequest_ID_String;;

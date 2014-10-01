@@ -524,6 +524,7 @@
 #define kServiceProviderResult @"ServiceProvidersResult"
 
 #pragma mark ServiceProvider End
+
 #define kPayLevelID @"PayLevelID"
 #define kCancel @"Cancel"
 #define kOutToAgency @"OutToAgency"
@@ -556,6 +557,27 @@
 #define kJobReturn @"JobReturn"
 #define kRPayLevelID @"RPayLevelID"
 #define kModeID @"ModeID"
+
+
+#pragma Mark SPRequested Jobs Search Start
+
+#define kSPRequetstesJobsSearchJobsDate  @"JobSDate"
+#define kSPRequetstesJobsSearchJobEDate  @"JobEDate"
+#define kSPRequetstesJobsSearchJobSTime  @"JobSTime"
+#define kSPRequetstesJobsSearchJobETime @"JobETime"
+#define kSPRequetstesJobsSearchDays @"Days"
+#define kSPRequetstesJobsSearchSpTypeID  @"SpTypeID"
+#define kSPRequetstesJobsSearchnoOfExpAttendID  @"noOfExpAttendID"
+#define kSPRequetstesJobsSearchLocationID  @"LocationID"
+#define kSPRequetstesJobsSearchonGoing @"onGoing"
+#define kSPRequetstesJobsSearchrecordedOrBoardCast @"recordedOrBoardCast"
+#define kSPRequetstesJobsSearchOpenToPublic  @"OpenToPublic"
+#define kSPRequetstesJobsSearchEventTypeID @"EventTypeID"
+#define kSPRequetstesJobsSearchSPID @"SPID"
+
+#pragma mark SPRequested Jobs Search End
+
+
 #endif
 
 

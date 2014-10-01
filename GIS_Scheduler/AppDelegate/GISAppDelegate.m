@@ -61,6 +61,7 @@
     self.isDateView = NO;
     self.isMonthView = NO;
     self.isWeekView = NO;
+    self.isNoofAttendees = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

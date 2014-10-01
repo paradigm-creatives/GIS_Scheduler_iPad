@@ -15,6 +15,8 @@
 #import "GISJSONProperties.h"
 #import "GISConstants.h"
 #import "GISFonts.h"
+#import "GISLoadingView.h"
+#import "GISServiceProviderRequestedJobsResultsViewController.h"
 
 @interface GISServiceProviderRequestedJobsViewController ()
 
@@ -46,7 +48,8 @@
     eventType_mutArray=[[NSMutableArray alloc]init];
     generalLoaction_mutArray=[[NSMutableArray alloc]init];
     
-    serviceProviderName_mutArray=[[NSMutableArray alloc]initWithObjects:@"David, John",@"John,david",@"Swamy,pilla" , nil];
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+    serviceProviderName_mutArray = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     
     noOfAttendees_mutArray=[[NSMutableArray alloc]initWithObjects:@"2-5",@"6-15",@"16-50", @"50+" , nil];
     noOfAttendees_ID_mutArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3", @"4" , nil];
@@ -84,6 +87,12 @@
     eventType_answer_label.textColor=UIColorFromRGB(0x666666);
     noOfAttendees_answer_label.textColor=UIColorFromRGB(0x666666);
     generalLocation_answer_label.textColor=UIColorFromRGB(0x666666);
+    
+    daysArray = [[NSMutableArray alloc] init];
+    days_str = [[NSMutableString alloc] init];
+    SPJobsArray = [[NSMutableArray alloc] init];
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
 -(IBAction)pickerButton_pressed:(id)sender
@@ -93,6 +102,7 @@
     
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
+    appDelegate.isNoofAttendees = NO;
     
     if([sender tag]==111)
     {
@@ -152,6 +162,8 @@
         btnTag=999;
          tableViewController1.popOverArray=noOfAttendees_mutArray;
         tableViewController1.view_String=[GISUtility returningstring:noOfAttendees_answer_label.text];
+        tableViewController1.noOfAttendeesIdArray = noOfAttendees_ID_mutArray;
+        appDelegate.isNoofAttendees = YES;
         
     }
     else if ([sender tag]==1010)//Create Jobs View Buttons
@@ -180,11 +192,13 @@
     else if (btnTag==222)
     {
         serviceProvider_answer_label.text=value_str;
+        SPID_str = id_str;
         
     }
     else if (btnTag==333)
     {
         startDate_answer_label.text=value_str;
+        startDate_str = value_str;
         if ([startDate_answer_label.text length] && [endDate_answer_label.text length]){
             if ([GISUtility dateComparision:startDate_answer_label.text :endDate_answer_label.text:YES])
             {}
@@ -198,6 +212,7 @@
     else if (btnTag==444)
     {
         endDate_answer_label.text=value_str;
+        endDate_str = value_str;
         if ([startDate_answer_label.text length] && [endDate_answer_label.text length]){
             if ([GISUtility dateComparision:startDate_answer_label.text :endDate_answer_label.text:NO])
             {}
@@ -211,6 +226,7 @@
     else if (btnTag==555)
     {
         startTime_answer_label.text=value_str;
+        startTime_str = value_str;
         if ([startTime_answer_label.text length]&& [endTime_answer_label.text length]) {
             if([GISUtility timeComparision:startTime_answer_label.text :endTime_answer_label.text]){}
             else
@@ -223,6 +239,7 @@
     else if (btnTag==666)
     {
         endTime_answer_label.text=value_str;
+        endTime_str = value_str;
         if ([endTime_answer_label.text length]&& [endTime_answer_label.text length]) {
             if([GISUtility timeComparision:startTime_answer_label.text :endTime_answer_label.text]){}
             else
@@ -234,20 +251,24 @@
     }
     else if (btnTag==777)
     {
+        spType_ID_str = id_str;
         typeOfService_answer_label.text=value_str;
     }
     else if (btnTag==888)
     {
+        eventType_ID_str = id_str;
         eventType_answer_label.text=value_str;
         
     }
     else if (btnTag==999)
     {
+        noOfExpAttendID_str = id_str;
         noOfAttendees_answer_label.text=value_str;
         
     }
     else if (btnTag==1010)
     {
+        locationID_str = id_str;
         generalLocation_answer_label.text=value_str;
     }
 }
@@ -261,13 +282,13 @@
 {
     if ([sender tag]==1 || [sender tag]==2) {
         if ([sender tag]==1) {
-            openToPublic_str=@"yes";
+            openToPublic_str=@"1";
             [openToPublic_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [openToPublic_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
-            openToPublic_str=@"no";
+            openToPublic_str=@"0";
             [openToPublic_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [openToPublic_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
@@ -275,13 +296,13 @@
     
     if ([sender tag]==3 || [sender tag]==4) {
         if ([sender tag]==3) {
-            onGoing_str=@"yes";
+            onGoing_str=@"1";
             [onGoing_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [onGoing_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
-            onGoing_str=@"no";
+            onGoing_str=@"0";
             [onGoing_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [onGoing_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
@@ -289,13 +310,13 @@
     
     if ([sender tag]==5 || [sender tag]==6) {
         if ([sender tag]==5) {
-            recordBroadCast_str=@"yes";
+            recordBroadCast_str=@"1";
             [recordBroadCast_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [recordBroadCast_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
-            recordBroadCast_str=@"no";
+            recordBroadCast_str=@"0";
             [recordBroadCast_YES_button setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [recordBroadCast_NO_button setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
@@ -305,6 +326,90 @@
 -(IBAction)searchButton_pressed:(id)sender
 {
     
+    [days_str setString:@""];
+    
+    for(int i=0; i <[daysArray count];i++){
+        //othertechvalueStr = [[otherTechStr objectAtIndex:i] componentsJoinedByString:@","];
+        [days_str appendFormat:@"%@%@",[daysArray objectAtIndex:i],@","];
+    }
+    NSRange range = [days_str rangeOfString:@"," options:NSBackwardsSearch];
+    if (range.location == NSNotFound) {
+        //  [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,maxRange-1)];
+    } else {
+        [days_str setString:[days_str substringToIndex:range.location]];
+    }
+    
+    if([startTime_str length] == 0  )
+    {
+        startTime_str = @"";
+    }
+    if( [endTime_str length] == 0 )
+    {
+        endTime_str = @"";
+    }
+    if([startDate_str length] == 0)
+    {
+        startDate_str = @"";
+    }
+    if( [endDate_str length] == 0 )
+    {
+        endDate_str = @"";
+    }
+    if([days_str length] == 0)
+    {
+        [days_str setString:@""];
+    }
+    if( [spType_ID_str length] == 0 ){
+        
+        spType_ID_str = @"";
+    }
+    if([SPID_str length] == 0)
+    {
+        SPID_str = @"";
+    }
+    if( [noOfExpAttendID_str length] == 0 )
+    {
+        noOfExpAttendID_str = @"";
+    }
+    if([eventType_ID_str length] == 0)
+    {
+        eventType_ID_str = @"";
+    }
+    if( [locationID_str length] == 0 ){
+        
+        locationID_str = @"";
+    }
+    if([recordBroadCast_str length] == 0)
+    {
+        recordBroadCast_str = @"";
+    }
+    if( [onGoing_str length] == 0 )
+    {
+        onGoing_str = @"";
+    }
+    if([openToPublic_str length] == 0)
+    {
+        openToPublic_str = @"";
+    }
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:startDate_str forKey:kSPRequetstesJobsSearchJobsDate];
+    [paramsDict setObject:endDate_str forKey:kSPRequetstesJobsSearchJobEDate];
+    [paramsDict setObject:startTime_str forKey:kSPRequetstesJobsSearchJobSTime];
+    [paramsDict setObject:endTime_str forKey:kSPRequetstesJobsSearchJobETime];
+    [paramsDict setObject:days_str forKey:kSPRequetstesJobsSearchDays];
+    [paramsDict setObject:spType_ID_str forKey:kSPRequetstesJobsSearchSpTypeID];
+    [paramsDict setObject:SPID_str forKey:kSPRequetstesJobsSearchSPID];
+    [paramsDict setObject:noOfExpAttendID_str forKey:kSPRequetstesJobsSearchnoOfExpAttendID];
+    
+    [paramsDict setObject:eventType_ID_str forKey:kSPRequetstesJobsSearchEventTypeID];
+    [paramsDict setObject:locationID_str forKey:kSPRequetstesJobsSearchLocationID];
+    [paramsDict setObject:recordBroadCast_str forKey:kSPRequetstesJobsSearchrecordedOrBoardCast];
+    [paramsDict setObject:onGoing_str forKey:kSPRequetstesJobsSearchonGoing];
+    [paramsDict setObject:openToPublic_str forKey:kSPRequetstesJobsSearchOpenToPublic];
+    
+    [[GISServerManager sharedManager] searchSpRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_spRequestJobsSearchRequest:) failAction:@selector(failuremethod_spRequestJobsSearchRequest:)];
+    
 }
 
 -(IBAction)weekDays_ButtonPressed:(id)sender
@@ -313,59 +418,116 @@
         [weekDays_dictionary_here removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
         if ([sender tag]==1) {
             monday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==2) {
             tuesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==3) {
             wednesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==4) {
             thursday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==5) {
             friday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==6) {
             saturday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==7) {
             sunday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+            [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
     }
     else{
+        
         if ([sender tag]==1) {
             [weekDays_dictionary_here setValue:@"Monday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             monday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==2) {
             [weekDays_dictionary_here setValue:@"Tuesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             tuesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==3) {
             [weekDays_dictionary_here setValue:@"Wednesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             wednesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==4) {
             [weekDays_dictionary_here setValue:@"Thursday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             thursday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==5) {
             [weekDays_dictionary_here setValue:@"Friday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             friday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==6) {
             [weekDays_dictionary_here setValue:@"Saturday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             saturday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
         else if ([sender tag]==7) {
             [weekDays_dictionary_here setValue:@"Sunday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             sunday_ImageView.image=[UIImage imageNamed:@"checked.png"];
+            [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
     }
     
     NSLog(@"----week Day dict-->%@",[weekDays_dictionary_here description]);
 }
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+-(void)successmethod_spRequestJobsSearchRequest:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_spRequestJobsSearchRequest Success---%@",saveUpdateDict);
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
+        spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
+        SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+        
+        GISServiceProviderRequestedJobsResultsViewController *serviceProviderRequestedResult =[[GISServiceProviderRequestedJobsResultsViewController alloc]initWithNibName:@"GISServiceProviderRequestedJobsResultsViewController" bundle:nil];
+        serviceProviderRequestedResult.SPJobsArray = SPJobsArray;
+        [self.navigationController pushViewController:serviceProviderRequestedResult animated:NO];
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+    
+}
+
+-(void)failuremethod_spRequestJobsSearchRequest:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
 
 - (void)didReceiveMemoryWarning
 {

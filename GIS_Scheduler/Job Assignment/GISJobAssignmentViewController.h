@@ -32,6 +32,10 @@
     int btnTag;
     
     NSMutableArray *chooseRequest_mutArray;
+    
+    NSString *startDate_str;
+    NSString *endDate_str;
+    NSString *typeServiceID_str;
 }
 
 @property(nonatomic,strong) NSString *view_string;

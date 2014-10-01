@@ -175,6 +175,9 @@
     {
         GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
         [self.popOverDelegate sendTheSelectedPopOverData:spObj.id_String value:spObj.service_Provider_String];
+    }else if(appDelegate.isNoofAttendees){
+        
+        [self.popOverDelegate sendTheSelectedPopOverData:[_noOfAttendeesIdArray objectAtIndex:indexPath.row] value:[self.popOverArray objectAtIndex:indexPath.row]];
     }
     else
     {
