@@ -224,11 +224,6 @@
         CGRect frame1=datListView.frame;
         frame1.origin.x=0;
         datListView.frame=frame1;
-        
-//        CGRect dashBoard_tempFrame=dashBoard_UIView.frame;
-//        dashBoard_tempFrame.origin.x=130;
-//        dashBoard_UIView.frame=dashBoard_tempFrame;
-        
     }
     
     [btn setTitle:buttonTitle forState:UIControlStateNormal];

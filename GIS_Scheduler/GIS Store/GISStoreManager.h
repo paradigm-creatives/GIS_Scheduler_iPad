@@ -157,6 +157,15 @@
 - (NSMutableArray*)getTypeOfServiceObjects;
 - (void)removeTypeOfServiceObjects;
 
+
+- (BOOL)addBillLevelObject:(GISDropDownsObject *)billLevelObj;
+- (NSMutableArray *)getBillLevelObjects;
+- (void)removeBillLevelObjects;
+
+- (BOOL)addPayStatus_ExpStatusObject:(GISDropDownsObject *)payStatus_ExpStatusObj;
+- (NSMutableArray *)getPayStatus_ExpStatusObjects;
+- (void)removePayStatus_ExpStatusObjects;
+
 - (BOOL)addViewEditObject:(GISViewEditDateObject *)jobdetailsObj;
 - (NSMutableArray*)getViewEditObjects;
 - (void)removeViewEditObjects;
@@ -164,5 +173,6 @@
 - (BOOL)addServiceProviderObject:(GISServiceProviderObject *)serviceProviderObj;
 - (NSMutableArray*)getServiceProviderObjects;
 - (void)removeServiceProviderObjects;
+
 
 @end

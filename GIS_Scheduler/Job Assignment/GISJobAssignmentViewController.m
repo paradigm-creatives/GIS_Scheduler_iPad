@@ -191,7 +191,7 @@
     popover.popoverContentSize = CGSizeMake(340, 150);
     if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
     {
-           if([sender tag]==111)
+        if([sender tag]==111)
         {
             btnTag=111;
             tableViewController1.view_String=[GISUtility returningstring:chooseRequest_ID_answer_Label.text];
@@ -241,6 +241,7 @@
     if (btnTag==111)
     {
         chooseRequest_ID_answer_Label.text=value_str;
+        chooseRequestID_str = id_str;
         
     }
     else if (btnTag==222)
@@ -313,6 +314,10 @@
     {
         typeServiceID_str = @"";
     }
+    if([chooseRequestID_str length] == 0)
+    {
+        chooseRequestID_str = @"";
+    }
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
@@ -323,7 +328,7 @@
     [paramsDict setObject:startDate_str forKey:kJobAssignmentStartDate];
     [paramsDict setObject:endDate_str forKey:kJobAssignmentEndDate];
     [paramsDict setObject:typeServiceID_str forKey:kJobAssignmentSPSubRole];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+    [paramsDict setObject:chooseRequestID_str forKey:kRequestID];
     [paramsDict setObject:login_Obj.token_string forKey:keventDetails_token];
     
     [[GISServerManager sharedManager] jobAssignmentJobs:self withParams:paramsDict finishAction:@selector(successmethod_jobAssignmentRequest:) failAction:@selector(failuremethod_jobAssignmentRequest:)];

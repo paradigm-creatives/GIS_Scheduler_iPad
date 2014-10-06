@@ -56,10 +56,15 @@
 
 
 @property(nonatomic,strong)IBOutlet UILabel *primaryAudience_Label;
+@property(nonatomic,strong)IBOutlet UITextField *primaryAudience_TextField;
+@property(nonatomic,strong)IBOutlet UIImageView *primaryAudience_ImageView;
+@property(nonatomic,strong)IBOutlet UIButton *primaryAudience_button;
 @property(nonatomic,strong)IBOutlet UILabel *primaryAudience_answer_Label;
 
 @property (nonatomic, readwrite) NSInteger cellSectionNumber;
 @property (nonatomic, readwrite) NSInteger cellRowNumber;
 @property (nonatomic, retain) NSIndexPath *cellIndexpath;
+
+@property(nonatomic,strong)IBOutlet UIView *primaryAudience_UIView;
 
 @end

@@ -512,7 +512,7 @@ static GISServerManager *singletonManager = nil;
 {
     
     if (![self isNetworkAvailable]) { [self alert]; return;}
-    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_UPDATE_JOBS];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_SaveUpdateJobs];
     GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
     [request setMethodPost];
     
@@ -541,6 +541,15 @@ static GISServerManager *singletonManager = nil;
     [self startRequest:request target:target finishAction:finishAction failAction:failAction];
 }
 
+- (void)createJObs_JobDetails:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_CreateJobs];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+}
 - (void)searchSpRequestedJobs:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
 {
     if (![self isNetworkAvailable]) { [self alert]; return;}
@@ -550,6 +559,7 @@ static GISServerManager *singletonManager = nil;
     
     [self startRequest:request target:target finishAction:finishAction failAction:failAction];
 }
+
 
 - (void)jobAssignmentJobs:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
 {
@@ -561,8 +571,15 @@ static GISServerManager *singletonManager = nil;
     [self startRequest:request target:target finishAction:finishAction failAction:failAction];
 }
 
-
-
+- (void)findRequestJObs_Search:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_SEARCH_REQUESTED_JOBS];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+}
 
 - (void)alert
 {

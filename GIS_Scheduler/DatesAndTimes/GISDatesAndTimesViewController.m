@@ -178,7 +178,6 @@
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
-        
     }
 }
 
@@ -189,7 +188,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (tableView==createJObs_tableView) {
         GISCreateJobs_Cell *cell=(GISCreateJobs_Cell *)[tableView dequeueReusableCellWithIdentifier:@"GISCreateJobsCell"];
         if (cell==nil) {
@@ -326,20 +324,20 @@
     }
     else if ([sender tag]==888)//Create Jobs View Buttons
     {
-        btnTag=222;
+        btnTag=888;
         tableViewController1.view_String=@"datestimes";
         tableViewController1.dateTimeMoveUp_string=endDate_TextField.text;
     }
     else if ([sender tag]==999)//Create Jobs View Buttons
     {
-        btnTag=333;
+        btnTag=999;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=startTime_TextField.text;
         
     }
     else if ([sender tag]==1010)//Create Jobs View Buttons
     {
-        btnTag=444;
+        btnTag=1010;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=endTime_TextField.text;
         
@@ -832,6 +830,12 @@
     isDelete=YES;
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
+    
+//    UIAlertController *alertController = [UIAlertController
+//                                          alertControllerWithTitle:alertTitle
+//                                          message:alertMessage
+//                                          preferredStyle:UIAlertController];
+//
 }
 
 
@@ -1076,7 +1080,8 @@
 
 -(IBAction)saveButtonPressed:(id)sender
 {
-    @try {
+    @try
+    {
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
         NSMutableDictionary *detail_date_Dict=[[NSMutableDictionary alloc]init];
@@ -1130,7 +1135,8 @@
         
         [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
     }
-    @catch (NSException *exception) {
+    @catch (NSException *exception)
+    {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Dates and Times Detail View Save %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
 }

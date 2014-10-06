@@ -18,10 +18,16 @@
 @property(nonatomic,strong) IBOutlet UILabel *payType_Label;
 @property(nonatomic,strong) IBOutlet UILabel *timely_Label;
 @property(nonatomic,strong) IBOutlet UILabel *billAmt_Label;
+@property(nonatomic,strong) IBOutlet UIView *jobDate_UIView;
+@property(nonatomic,strong) IBOutlet UIView *startTime_UIView;
+@property(nonatomic,strong) IBOutlet UIView *endTime_UIView;
 @property(nonatomic,strong) IBOutlet UIView *typeOf_service_UIView;
 @property(nonatomic,strong) IBOutlet UIView *serviceProvider_UIView;
 @property(nonatomic,strong) IBOutlet UIView *payType_UIView;
 
+@property(nonatomic,strong) IBOutlet UILabel *jobDate_EDIT_Label;
+@property(nonatomic,strong) IBOutlet UILabel *startTime_EDIT_Label;
+@property(nonatomic,strong) IBOutlet UILabel *endTime_EDIT_Label;
 @property(nonatomic,strong) IBOutlet UILabel *typeOf_service_EDIT_Label;
 @property(nonatomic,strong) IBOutlet UILabel *service_provider_EDIT_Label;
 @property(nonatomic,strong) IBOutlet UILabel *payType_EDIT_Label;

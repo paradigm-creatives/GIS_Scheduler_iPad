@@ -37,8 +37,8 @@
     NSString *endDate_str;
     NSString *typeServiceID_str;
     NSMutableArray *typeOfservice_mutArray;
+    NSString *chooseRequestID_str;
 }
-
 
 @property(nonatomic,strong) NSString *view_string;
 

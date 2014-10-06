@@ -38,7 +38,6 @@ int row_count = 2;
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -203,9 +202,7 @@ int row_count = 2;
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesCell" owner:self options:nil] objectAtIndex:0];
         }
         cell.attendee_count_Label.text=[NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
-        cell.email_textField.delegate=self;
-        cell.firstname_textField.delegate=self;
-        cell.lastname_textField.delegate=self;
+        
         
         @try {
             GISAttendees_ListObject *attendee_ListObj_here ;
@@ -253,12 +250,34 @@ int row_count = 2;
         @catch (NSException *exception) {
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Attendeees CellFor  action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
+        
+        cell.email_textField.delegate=self;
+        cell.firstname_textField.delegate=self;
+        cell.lastname_textField.delegate=self;
+        
         return cell;
     }
     
     GISAttendeesTopCell *cell=(GISAttendeesTopCell *)[tableView dequeueReusableCellWithIdentifier:@"AttendeesCell"];
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesTopCell" owner:self options:nil] objectAtIndex:0];
+    }
+    
+    if([login_Obj.userStatus_string isEqualToString:kInternal])
+    {
+        cell.primaryAudience_Label.hidden=NO;
+        cell.primaryAudience_answer_Label.hidden=NO;
+        cell.primaryAudience_button.hidden=NO;
+        cell.primaryAudience_TextField.hidden=NO;
+        cell.primaryAudience_ImageView.hidden=NO;
+    }
+    else
+    {
+        cell.primaryAudience_Label.hidden=YES;
+        cell.primaryAudience_answer_Label.hidden=YES;
+        cell.primaryAudience_button.hidden=YES;
+        cell.primaryAudience_TextField.hidden=YES;
+        cell.primaryAudience_ImageView.hidden=YES;
     }
     if ([attendeesObject.primaryAudience_String length])
         cell.primaryAudience_answer_Label.text=attendeesObject.primaryAudience_String;
@@ -286,6 +305,7 @@ int row_count = 2;
 
 - (IBAction)createAttendee:(id)sender{
     
+    [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     row_count++;
     GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
     [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
@@ -658,6 +678,7 @@ int row_count = 2;
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    currentTextField=textField;
     // Get the cell in which the textfield is embedded
     id textFieldSuper = textField;
     while (![textFieldSuper isKindOfClass:[GISAttendeesTopCell class]]) {
@@ -693,6 +714,7 @@ int row_count = 2;
             }
         }
     }
+    [self resignCurrentTextField];
 }
 
 -(void)resignCurrentTextField
@@ -702,8 +724,9 @@ int row_count = 2;
     [currentTextField resignFirstResponder];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [currentTextField resignFirstResponder];
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [self resignCurrentTextField];
     return YES;

@@ -8,12 +8,41 @@
 
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
-@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "GISPopOverTableViewController.h"
+#import "GISAddUpdateObject.h"
+#import "GISLoginDetailsObject.h"
+@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
+    GISLoginDetailsObject *login_Obj;
     IBOutlet UITableView *addUpdateJobs_tableView;
+    
+    UIPopoverController *popover;
+    int btnTag;
+    
+    GISAddUpdateObject *addUpdateObj;
+    
+    NSMutableArray *callInTime_Array;
+    NSMutableArray *payLevel_Array;
+    NSMutableArray *typeOfserviceProvider_Array;
+    NSMutableArray *serviceProvider_ID_Array;
+    NSMutableArray *cancelled_Array;
+    NSMutableArray *payType_Array;
+    NSMutableArray *parking_Array;
+    NSMutableArray *billAmt_Array;
+    NSMutableArray *mileage_Array;
+    NSMutableArray *invoice_Array;
+    NSMutableArray *amtpaid_Array;
+    NSMutableArray *billDate_Array;
+    NSMutableArray *agencyFee_Array;
+    NSMutableArray *payStatus_Array;
+    NSMutableArray *expStatus_Array;
+    
+    UITextField *currentTextField;
 }
 -(IBAction)pickerButtonPressed:(id)sender;
 -(IBAction)closeButtonPressed:(id)sender;
 -(IBAction)saveButtonPressed:(id)sender;
+
+-(IBAction)radioButton_Pressed:(id)sender;
 @end

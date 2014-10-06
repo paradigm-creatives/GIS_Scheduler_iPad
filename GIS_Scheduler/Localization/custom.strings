@@ -178,6 +178,11 @@
 "end Date alert" = "End Date should be more than start Date";
 "time alert"="Please select between time";
 "loading" = "loading";
+"number_of_service_providers" = "Please enter number of service providers";
+"select_Type_of_service_providers" = "Please select Type of Service Providers";
+"select_pay_level" = "Please select Pay Level";
+"select_bill_level" = "Please select Bill Level";
+"select_one_job" = "Please select atleast one Dates/Times";
 
 
 

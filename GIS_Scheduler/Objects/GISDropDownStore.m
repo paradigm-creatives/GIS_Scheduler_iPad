@@ -94,6 +94,14 @@
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addPayLevelObject:dropDownObject];
                 }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kBill_Level]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addBillLevelObject:dropDownObject];
+                }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kPayStatus_ExpStatus]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addPayStatus_ExpStatusObject:dropDownObject];
+                }
                 else if ([[dropDown objectForKey:kDropDownType] isEqual:kServiceType_serviceProvider]) {
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addServiceType_ServiceProviderObject:dropDownObject];

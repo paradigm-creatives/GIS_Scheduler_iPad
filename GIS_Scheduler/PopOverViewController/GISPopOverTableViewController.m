@@ -10,7 +10,7 @@
 #import "GISDropDownsObject.h"
 #import "GISConstants.h"
 #import "GISServiceProviderObject.h"
-
+#import "GISContactsInfoObject.h"
 @interface GISPopOverTableViewController ()
 
 @end
@@ -134,7 +134,13 @@
     {
         GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
         cell.textLabel.text=dropDownObj.value_String;
-    }else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
+    }
+    else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISContactsInfoObject class]])
+    {
+        GISContactsInfoObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        cell.textLabel.text=dropDownObj.contactNo_String;
+    }
+    else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
     {
         GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
         cell.textLabel.text=spObj.service_Provider_String;
@@ -159,7 +165,13 @@
     {
         GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
         [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String value:dropDownObj.value_String];
-    }else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
+    }
+    else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISContactsInfoObject class]])
+    {
+        GISContactsInfoObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        [self.popOverDelegate sendTheSelectedPopOverData:spObj.contactTypeId_String value:spObj.contactNo_String];
+    }
+    else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
     {
         GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
         [self.popOverDelegate sendTheSelectedPopOverData:spObj.id_String value:spObj.service_Provider_String];

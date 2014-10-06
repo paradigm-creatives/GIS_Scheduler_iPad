@@ -10,7 +10,7 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
-@interface GISJobDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISJobDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
 {
     IBOutlet UITableView *jobDetails_tableView;
     
@@ -18,13 +18,18 @@
     int btnTag;
     
     NSMutableArray *serviceProvider_Array;
+    NSMutableArray *payLevel_Array;
+    NSMutableArray *billLevel_Array;
     NSMutableArray *filled_Unfilled_Array;
-        NSMutableArray *jobDetails_Array;
+    NSMutableArray *jobDetails_Array;
     
     GISAppDelegate *appDelegate;
 
     GISLoginDetailsObject *login_Obj;
     int selected_row;
+    NSString *jobDate_temp_string;
+    NSString *startTime_temp_string;
+    NSString *endTime_temp_string;
     NSString *typeOfservice_temp_string;
     NSString *serviceProvider_temp_string;
     NSString *payType_temp_string;
@@ -45,6 +50,32 @@
     BOOL isAlljobs_Checked;
     IBOutlet UIButton *alljobs_Checked_button;
     NSMutableArray *detail_mut_array;
+    
+    NSMutableArray *typeOfService_array;
+    NSMutableArray *serviceProvider_array_tableView;
+    NSMutableArray *payType_array;
+    
+    IBOutlet UILabel *jobDate_Answer_Label;
+    IBOutlet UILabel *serviceProvider_Answer_Label;
+    IBOutlet UILabel *filledUnfilled_Answer_Label;
+    IBOutlet UILabel *typeOfServiceProviders_Answer_Label;
+    IBOutlet UILabel *payLevel_Answer_Label;
+    IBOutlet UILabel *billLevel_Answer_Label;
+    
+    IBOutlet UILabel *startDate_jobHistory_Answer_Label;
+    IBOutlet UILabel *endDate_jobHistory_Answer_Label;
+    IBOutlet UITextField *user_textField;
+    IBOutlet UITextView *jobHistory_textView;
+    
+    BOOL isEdit_Button_Clicked;
+    
+    NSString *chooseRequestID_string;
+    
+    UITextField *numberOfServiceProviders_Field;
+    
+    NSString *numberOfServiceProviders_string;
+
+    
 }
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
 -(IBAction)createJobsButton_Pressed:(id)sender;
@@ -59,4 +90,6 @@
 -(IBAction)addNewJob_buttonPressed:(id)sender;
 
 -(IBAction)jobHistory_TitleButtonPressed:(id)sender;
+
+
 @end

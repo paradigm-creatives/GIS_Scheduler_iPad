@@ -178,6 +178,7 @@
     
     [nextButton setTitle:NSLocalizedStringFromTable(@"Next", TABLE, nil) forState:UIControlStateNormal];
     
+    contacts_Info_mutArray=[[NSMutableArray alloc]init];
     [unitOrDepartment_mutArray removeAllObjects];
    
     NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];
@@ -261,6 +262,7 @@
     }
     else if ([sender tag]==222)
     {
+        //73 2 1.2
         btnTag=222;
        tableViewController.popOverArray=contacts_Info_mutArray;
         [popover presentPopoverFromRect:CGRectMake(317, 167, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
@@ -300,16 +302,17 @@
         contactBilling_Object.unitOrDepartment_ID_String=id_str;
         unit_departmentID_String = id_str;
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-//        [paramsDict setObject:id_str forKey:kID];
-//        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [paramsDict setObject:id_str forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
 //        [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
         
-        if (![appDelegate.chooseRequest_ID_String isKindOfClass:[NSNull class]]|| (appDelegate.chooseRequest_ID_String!=nil)) {
-            [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
-            [paramsDict setObject:login_Obj.token_string forKey:kToken];
-             [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
-        }
-        else{
+//        if (![appDelegate.chooseRequest_ID_String isKindOfClass:[NSNull class]]|| (appDelegate.chooseRequest_ID_String!=nil)) {
+//            [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
+//            [paramsDict setObject:login_Obj.token_string forKey:kToken];
+//             [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+//        }
+//        else
+        {
             [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
         }
     }
@@ -405,7 +408,19 @@
 -(void)successmethod_BillingsData:(GISJsonRequest *)response
 {
     NSLog(@"Success---%@----",response.responseJson);
-    [self loadTableWithBuildingdata:response.responseJson];
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+        
+    }else{
+        
+        [self loadTableWithBuildingdata:response.responseJson];
+    }
 }
 
 -(void)failuremethod_BillingsData:(GISJsonRequest *)response
@@ -455,11 +470,13 @@
         else{
             [paramsDict setObject:contactBilling_Object.chooseRequest_ID_String forKey:@"requestNo"];
         }
-        if ([GISUtility returningstring:contactBilling_Object.unitOrDepartment_ID_String] || [contactBilling_Object.unitOrDepartment_ID_String length]>0)
-            [paramsDict setObject:contactBilling_Object.unitOrDepartment_ID_String forKey:kunitid];
-        else{
+        if (contactBilling_Object.unitOrDepartment_ID_String==nil
+            || ([contactBilling_Object.unitOrDepartment_ID_String isKindOfClass:[NSNull class]])){
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select Unit/Department", TABLE, nil)];
-            return;
+             return;
+       }
+        else{
+            [paramsDict setObject:contactBilling_Object.unitOrDepartment_ID_String forKey:kunitid];
         }
         
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];

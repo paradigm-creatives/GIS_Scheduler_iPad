@@ -47,6 +47,6 @@
 @property (readwrite, nonatomic) BOOL isWeekView;
 @property (readwrite, nonatomic) BOOL isMonthView;
 
-
+@property (strong, nonatomic) NSMutableDictionary *addNewJob_dictionary;
 
 @end

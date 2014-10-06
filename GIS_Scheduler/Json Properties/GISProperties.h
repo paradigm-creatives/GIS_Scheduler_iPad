@@ -60,13 +60,15 @@
 #define GIS_GET_JOB_DETAILS @"GetJobDetails"
 #define GIS_GET_SERVICE_PROVIDERS @"ServiceProviders"
 #define GIS_UPDATE_JOBS @"UpdateJobs"
-
+#define GIS_SaveUpdateJobs @"SaveUpdateJobs"
+#define GIS_CreateJobs @"CreateJobs"
 
 
 ///iPAD
 #define GIS_GET_SERVICE_PROVIDERS_NAMES_iPAD @"GetServiceProviders"
 #define GIS_SERVICE_PROVIDERS_NAMES_JOBDetails @"ServiceProviders"//This is to get the all service providers, this is going to be used in the Job details list view.
 #define GIS_SAVE_MATERIAL_TYPE @"SaveUpdateMaterials"
+#define GIS_SEARCH_REQUESTED_JOBS @"SearchRequestsJobs"
 #define GIS_SPREQUESTED_JOBS_SEARCH @"SPRequestedJobsSearch"
 #define GIS_JOB_ASSIGNMENT @"JobAssignment"
 

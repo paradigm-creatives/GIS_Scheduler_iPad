@@ -84,6 +84,8 @@
 #define kPrimary_Audience @"Primary_Audience"
 #define kSkill_Level @"Skill_Level"
 #define kPay_Level @"Pay_Level"
+#define kBill_Level @"Bill_Level"
+#define kPayStatus_ExpStatus @"PayStatus_ExpStatus"
 #define kServiceType_serviceProvider @"Serviceprovider_Type"
 #define kServiceType_Registerd_Consumers @"Registerd_Consumers"
 #define kPayType @"Pay_Type"
@@ -523,6 +525,40 @@
 
 #pragma mark ServiceProvider End
 
+#define kPayLevelID @"PayLevelID"
+#define kCancel @"Cancel"
+#define kOutToAgency @"OutToAgency"
+#define kAmtPaid @"AmtPaid"
+#define kAgencyFee @"AgencyFee"
+#define kOverrideBill @"OverrideBill"
+#define kPayStatus @"PayStatus"
+#define kExpenseStatus @"ExpenseStatus"
+#define kBillingLevelID @"BillingLevelID"
+#define koJobs @"oJobs"
+
+#define kRequestSDate @"RequestSDate"
+#define kRequestEDate @"RequestEDate"
+#define kRequestorTypeID @"RequestorTypeID"
+#define kConsumerID @"ConsumerID"
+#define kJobSDate @"JobSDate"
+#define kJobEDate @"JobEDate"
+#define kJobSTime @"JobSTime"
+#define kJobETime @"JobETime"
+#define kDays @"Days"
+#define kTypeID @"TypeID"
+#define kSPID @"SPID"
+#define kFilled @"Filled"
+#define kOutAgency @"OutAgency"
+#define kCreatedBy @"CreatedBy"
+#define kCanceled @"Canceled"
+#define kCancelDate @"CancelDate"
+#define kRPayLevelID @"RPayLevelID"
+#define kRequestReturn @"RequestReturn"
+#define kJobReturn @"JobReturn"
+#define kRPayLevelID @"RPayLevelID"
+#define kModeID @"ModeID"
+
+
 #pragma Mark SPRequested Jobs Search Start
 
 #define kSPRequetstesJobsSearchJobsDate  @"JobSDate"
@@ -548,6 +584,7 @@
 #define kJobAssignmentSPSubRole  @"SPSubRole"
 
 #pragma mark Job Assignment End
+
 
 #endif
 
