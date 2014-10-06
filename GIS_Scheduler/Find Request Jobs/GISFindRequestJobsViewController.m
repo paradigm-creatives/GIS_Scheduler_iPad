@@ -330,6 +330,7 @@
         spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
         SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
         
+        [self removeLoadingView];
         ///////////
         appDelegate.isFromViewEditService = NO;
         GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
