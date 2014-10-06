@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/SP Requests JObs/GISServiceProviderRequestedJobsViewController.m"
-            timestampString = "433776498.548906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
-            landmarkName = "-successmethod_spRequestJobsSearchRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/SP Requests JObs/GISServiceProviderRequestedJobsResultViewController.m"
             timestampString = "433776930.009215"
             startingColumnNumber = "9223372036854775807"
@@ -58,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/SP Requests JObs/GISServiceProviderRequestedJobsResultsViewController.m"
-            timestampString = "433847136.8204"
+            timestampString = "433847330.967479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-hideAndUnHideMaster:"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/SP Requests JObs/GISServiceProviderRequestedJobsResultsViewController.m"
-            timestampString = "433847330.967479"
+            filePath = "GIS_Scheduler/Job Assignment/GISJobAssignmentViewController.m"
+            timestampString = "434271260.815672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "-successmethod_jobAssignmentRequest:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Assignment/GISJobAssignmentViewController.m"
+            timestampString = "434271260.815672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "-searchButton_Pressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

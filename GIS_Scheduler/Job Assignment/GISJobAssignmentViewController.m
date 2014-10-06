@@ -46,8 +46,13 @@
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
+    typeOfservice_mutArray=[[NSMutableArray alloc]init];
+    
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
+    
+    NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+    typeOfservice_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
     
 //    //self.navigationItem.hidesBackButton = YES;
     dashBoard_UIView.hidden=YES;
@@ -209,7 +214,7 @@
         {
             btnTag=444;
             tableViewController1.view_String=[GISUtility returningstring:typeOfService_answer_Label.text];
-            tableViewController1.popOverArray=chooseRequest_mutArray;
+            tableViewController1.popOverArray=typeOfservice_mutArray;
             
         }
         NSLog(@"-----x-->%@",NSStringFromCGRect(button.frame));
@@ -269,7 +274,7 @@
     else  if (btnTag==444)
     {
         typeOfService_answer_Label.text=value_str;
-        
+        typeServiceID_str = id_str;
     }
 }
 
@@ -295,14 +300,61 @@
 
 -(IBAction)searchButton_Pressed:(id)sender
 {
-//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-//    [paramsDict setObject:startDate_str forKey:kSPRequetstesJobsSearchJobsDate];
-//    [paramsDict setObject:endDate_str forKey:kSPRequetstesJobsSearchJobEDate];
-//    [paramsDict setObject:typeServiceID_str forKey:kSPRequetstesJobsSearchJobSTime];
-//    
-//    [[GISServerManager sharedManager] searchSpRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_spRequestJobsSearchRequest:) failAction:@selector(failuremethod_spRequestJobsSearchRequest:)];
+    
+    if([startDate_str length] == 0  )
+    {
+        startDate_str = @"";
+    }
+    if( [endDate_str length] == 0 )
+    {
+        endDate_str = @"";
+    }
+    if([typeServiceID_str length] == 0)
+    {
+        typeServiceID_str = @"";
+    }
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+   
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:startDate_str forKey:kJobAssignmentStartDate];
+    [paramsDict setObject:endDate_str forKey:kJobAssignmentEndDate];
+    [paramsDict setObject:typeServiceID_str forKey:kJobAssignmentSPSubRole];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+    [paramsDict setObject:login_Obj.token_string forKey:keventDetails_token];
+    
+    [[GISServerManager sharedManager] jobAssignmentJobs:self withParams:paramsDict finishAction:@selector(successmethod_jobAssignmentRequest:) failAction:@selector(failuremethod_jobAssignmentRequest:)];
     
 }
+
+-(void)successmethod_jobAssignmentRequest:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_jobAssignmentRequest Success---%@",saveUpdateDict);
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+    
+}
+
+-(void)failuremethod_jobAssignmentRequest:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
 
 -(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender
 {
@@ -321,10 +373,18 @@
     [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+480, attendeesCell.service_Provider_button.frame.origin.y+35, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
 }
 
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

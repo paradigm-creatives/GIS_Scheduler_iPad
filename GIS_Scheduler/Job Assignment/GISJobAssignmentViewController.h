@@ -36,6 +36,7 @@
     NSString *startDate_str;
     NSString *endDate_str;
     NSString *typeServiceID_str;
+    NSMutableArray *typeOfservice_mutArray;
 }
 
 
