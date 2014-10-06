@@ -94,9 +94,9 @@
 {
     NSDictionary *dict=[notification userInfo];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    //[paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
+    [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
 
-    [paramsDict setObject:@"2701" forKey:KRequestId];
+    //[paramsDict setObject:@"2701" forKey:KRequestId];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];

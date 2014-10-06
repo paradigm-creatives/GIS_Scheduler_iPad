@@ -584,6 +584,14 @@
 
 #pragma mark SPRequested Jobs Search End
 
+#pragma Mark Job Assignment Start
+
+#define kJobAssignmentStartDate  @"StartDate"
+#define kJobAssignmentEndDate  @"EndDate"
+#define kJobAssignmentSPSubRole  @"SPSubRole"
+
+#pragma mark Job Assignment End
+
 
 #endif
 

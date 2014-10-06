@@ -408,7 +408,19 @@
 -(void)successmethod_BillingsData:(GISJsonRequest *)response
 {
     NSLog(@"Success---%@----",response.responseJson);
-    [self loadTableWithBuildingdata:response.responseJson];
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+        
+    }else{
+        
+        [self loadTableWithBuildingdata:response.responseJson];
+    }
 }
 
 -(void)failuremethod_BillingsData:(GISJsonRequest *)response

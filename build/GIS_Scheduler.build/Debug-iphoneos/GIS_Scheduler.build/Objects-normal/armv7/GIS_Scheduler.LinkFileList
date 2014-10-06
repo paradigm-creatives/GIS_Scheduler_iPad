@@ -28,6 +28,7 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISViewEditListViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISCreateJobsViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFHourAndMinLabel.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISFindRequestJobs_Cell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISSummaryDatesAndTimesCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISServiceProviderRequestedJobsResultsViewController.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/Constants.o
@@ -50,8 +51,10 @@
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISServerManager.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFDayHeaderCell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFBlueButton.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISFindRequestJobsObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFRedAndWhiteButton.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISViewEditDateObject.o
+/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISAddUpdateObject.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFWeekScrollView.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/GISCreateJobs_Cell.o
 /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphoneos/GIS_Scheduler.build/Objects-normal/armv7/FFEventDetailView.o

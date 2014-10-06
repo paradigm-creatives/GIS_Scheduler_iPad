@@ -36,6 +36,8 @@
     NSString *startDate_str;
     NSString *endDate_str;
     NSString *typeServiceID_str;
+    NSMutableArray *typeOfservice_mutArray;
+    NSString *chooseRequestID_str;
 }
 @property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;
