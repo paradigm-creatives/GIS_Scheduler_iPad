@@ -457,7 +457,14 @@
 #define kSPRequestJobs_ServiceProviderName @"ServiceProviderName"
 #define kSPRequestJobs_TotalHours @"TotalHours"
 #define kSPRequestJobs_SPRequestJobID @"SPRequestJobID"
-
+#define kSPRequestJobs_AccountName @"AccountName"
+#define kSPRequestJobs_BillAmount @"BillAmount"
+#define kSPRequestJobs_OutToAgency @"OutToAgency"
+#define kSPRequestJobs_Location @"Location"
+#define kSPRequestJobs_RequestorName @"RequestorName"
+#define kSPRequestJobs_SubRole @"SubRole"
+#define kSPRequestJobs_Timely @"Timely"
+#define kSPRequestJobs_TypeofService @"TypeofService"
 #pragma Mark ServiceProviderSPRequestJobs End
 
 #pragma Mark ServiceProviderNMRequests Start

@@ -78,7 +78,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
+
      createJobs_UIVIew.hidden=YES;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
      jobChangeHistory_background_UIView.hidden=YES;

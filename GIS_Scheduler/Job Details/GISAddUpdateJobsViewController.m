@@ -47,7 +47,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-     [addUpdateJobs_tableView reloadData];
+    [addUpdateJobs_tableView reloadData];
     self.navigationItem.hidesBackButton=YES;
     addUpdateObj=[[GISAddUpdateObject alloc]init];
     callInTime_Array=[[NSMutableArray alloc]init];
@@ -97,7 +97,6 @@
 {
     if (indexPath.section==0)
     {
-        
         GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
         if (cell==nil) {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobInfoCell" owner:self options:nil] objectAtIndex:0];
@@ -149,11 +148,11 @@
     }
     if (indexPath.section==1)
     {
-        
         GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
         if (cell==nil) {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISBillingPaymentInfo" owner:self options:nil] objectAtIndex:0];
         }
+    
         if ([addUpdateObj.parking_string length])
             cell.parking_textField.text=addUpdateObj.parking_string;
         if ([addUpdateObj.mileage_string length])
@@ -372,7 +371,6 @@
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+128, button.frame.origin.y+22, 1, 1) inView:jobCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str

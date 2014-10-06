@@ -37,7 +37,7 @@
     NSString *endDate_str;
     NSString *typeServiceID_str;
 }
-
+@property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;
 
 @property(nonatomic,readwrite) BOOL isMasterHide;

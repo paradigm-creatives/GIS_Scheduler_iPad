@@ -60,7 +60,6 @@
 {
     GISJobAssignmentViewController *a8job=[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
     [self.navigationController pushViewController:a8job animated:YES];
-    
 }
 
 -(IBAction)doneButton_Pressed:(id)sender

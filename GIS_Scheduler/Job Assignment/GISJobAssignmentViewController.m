@@ -80,6 +80,7 @@
         table_UIView.frame=new_frame;
         self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     }
+    NSLog(@"----Array is -->%@--count-->%d",[self.requested_Jobs_Array description],self.requested_Jobs_Array.count);
     
 //    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed)];
 //    
