@@ -10,6 +10,8 @@
 #import "GISJSONProperties.h"
 #import "GISDropDownsObject.h"
 #import "GISStoreManager.h"
+#import "GISDatabaseManager.h"
+#import "GISUtility.h"
 
 @implementation GISSchedulerSPJobsObject
 
@@ -37,6 +39,20 @@
             //{
             //    GisResponse_String = @" ";
            // }else{
+            
+            NSMutableArray *typeOfService_array=[[NSMutableArray alloc]init];
+            NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+            typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+            
+            NSMutableArray *serviceProvider_Array=[[NSMutableArray alloc]init];
+            NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+            serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
+            
+            NSMutableArray *payType_array=  [[NSMutableArray alloc]init];
+            NSString *payType_statement  =  [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
+            payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+            
+            
             if ([json objectForKey:kSPRequestJobs_GisResponse])
               GisResponse_String = [self returningstring:[json objectForKey:kSPRequestJobs_GisResponse]];
             if ([json objectForKey:kSPRequestJobs_EndTime])
@@ -50,13 +66,36 @@
             if ([json objectForKey:kSPRequestJobs_JobNumber])
             JobNumber_String = [self returningstring:[json objectForKey:kSPRequestJobs_JobNumber]];
             if ([json objectForKey:kSPRequestJobs_PayType])
-            PayType_id_String = [self returningstring:[json objectForKey:kSPRequestJobs_PayType]];
+            {
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[GISUtility returningstring:[json objectForKey:kSPRequestJobs_PayType]]];
+                NSArray *fileArray=[payType_array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISDropDownsObject *obj=[fileArray lastObject];
+                    PayType_String=obj.value_String;
+                }
+                //PayType_String = [self returningstring:[json objectForKey:kSPRequestJobs_PayType]];
+            }
             if ([json objectForKey:kSPRequestJobs_RequestedDate])
             RequestedDate_String = [self returningstring:[json objectForKey:kSPRequestJobs_RequestedDate]];
             if ([json objectForKey:kSPRequestJobs_StartTime])
             startTime_String = [self returningstring:[json objectForKey:kSPRequestJobs_StartTime]];
-            if ([json objectForKey:kSPRequestJobs_ServiceProviderName])
-            ServiceProviderName_String = [self returningstring:[json objectForKey:kSPRequestJobs_ServiceProviderName]];
+            if ([json objectForKey:kJobDetais_ServiceProvider])
+            {
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[GISUtility returningstring:[json objectForKey:kJobDetais_ServiceProvider]]];
+                NSArray *fileArray=[serviceProvider_Array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISServiceProviderObject *obj=[fileArray lastObject];
+                    ServiceProviderName_String=obj.service_Provider_String;
+                }
+                //ServiceProviderName_String = [self returningstring:[json objectForKey:kJobDetais_ServiceProvider]];
+            }
+            
             if ([json objectForKey:kSPRequestJobs_TotalHours])
             TotalHours_String = [self returningstring:[json objectForKey:kSPRequestJobs_TotalHours]];
             if ([json objectForKey:kSPRequestJobs_SPRequestJobID])
@@ -76,7 +115,19 @@
             if ([json objectForKey:kSPRequestJobs_Timely])
                 _timely_string = [self returningstring:[json objectForKey:kSPRequestJobs_Timely]];
             if ([json objectForKey:kSPRequestJobs_TypeofService])
-                _typeOfService_string = [self returningstring:[json objectForKey:kSPRequestJobs_TypeofService]];
+            {
+                
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[GISUtility returningstring:[json objectForKey:kSPRequestJobs_TypeofService]]];
+                NSArray *fileArray=[typeOfService_array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISDropDownsObject *obj=[fileArray lastObject];
+                    _typeOfService_string=obj.value_String;
+                }
+                //_typeOfService_string = [self returningstring:[json objectForKey:kSPRequestJobs_TypeofService]];
+            }
 
         }
         @catch (NSException *exception) {

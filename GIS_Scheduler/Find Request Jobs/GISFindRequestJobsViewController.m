@@ -43,6 +43,8 @@
     self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     
     findReqObj=[[GISFindRequestJobsObject alloc]init];
+    findReqObj.startDate_JobData_string=@"08/25/2012";
+    findReqObj.endDate_JobData_string=@"08/27/2012";
     findReqObj.weekDays_dictionary=[[NSMutableDictionary alloc]init];
     
     requestorType_array=[[NSMutableArray alloc]init];
@@ -92,6 +94,8 @@
     
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
+    
+    
     
 }
 
@@ -334,6 +338,7 @@
         ///////////
         appDelegate.isFromViewEditService = NO;
         GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+        [detailViewController.requested_Jobs_Array removeAllObjects];
         detailViewController.requested_Jobs_Array=SPJobsArray;
         detailViewController.view_string = kFindRequestJobs_Screen;
         [self.navigationController pushViewController:detailViewController animated:YES];
@@ -722,6 +727,8 @@
     }
     [findReqJobs_tableView reloadData];
 }
+
+
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {

@@ -94,9 +94,9 @@
 {
     NSDictionary *dict=[notification userInfo];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
+    //[paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
 
-    //[paramsDict setObject:@"2701" forKey:KRequestId];
+    [paramsDict setObject:@"2701" forKey:KRequestId];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
@@ -491,6 +491,8 @@
     }
     else if (btnTag==4646)
     {
+        //5,4,2,1,4 --16  (16+6=22)
+        //4 ,9, 1
         startDate_jobHistory_Answer_Label.text=value_str;
     }
     else if (btnTag==5656)

@@ -15,5 +15,6 @@
     IBOutlet UINavigationBar *navBar;
     
 }
+@property(nonatomic,strong)NSMutableArray *popOverArray;
 -(IBAction)doneButton_Pressed:(id)sender;
 @end

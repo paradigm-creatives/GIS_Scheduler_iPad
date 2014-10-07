@@ -9,11 +9,14 @@
 #import "GISServiceProviderPopUpViewController.h"
 #import "GISJobAssignmentCell.h"
 #import "GISJobAssignmentViewController.h"
+#import "GISServiceProviderObject.h"
+
 @interface GISServiceProviderPopUpViewController ()
 
 @end
 
 @implementation GISServiceProviderPopUpViewController
+@synthesize popOverArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +45,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.popOverArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,6 +54,8 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISServiceProviderCell" owner:self options:nil] objectAtIndex:0];
     }
+    GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+    cell.serviceProvider_JobAssignment_label.text=spObj.service_Provider_String;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
       return cell;
