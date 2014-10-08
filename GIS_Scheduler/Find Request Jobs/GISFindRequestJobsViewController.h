@@ -11,7 +11,9 @@
 #import "GISPopOverTableViewController.h"
 #import "GISFindRequestJobsObject.h"
 #import "GISLoginDetailsObject.h"
-@interface GISFindRequestJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISBaseViewController.h"
+
+@interface GISFindRequestJobsViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISAppDelegate *appDelegate;
     GISFindRequestJobsObject *findReqObj;

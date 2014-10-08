@@ -712,6 +712,19 @@
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
+
+
+- (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"rightSwipeHandle");
+}
+
+- (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"leftSwipeHandle");
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
