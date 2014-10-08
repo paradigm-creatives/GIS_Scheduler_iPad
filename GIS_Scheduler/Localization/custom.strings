@@ -274,4 +274,5 @@
 "Restricted"="Restricted : ";
 "select_service_provider"= "Select Service Provider";
 "updated_successfully"= "Updated Successfully";
+"no_data"= "No Data";
 "Service_Provider_RequestedJobs_Results"="Service Provider Requested Jobs - Results";

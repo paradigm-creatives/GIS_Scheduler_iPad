@@ -14,7 +14,6 @@
 #import "GISServiceProviderObject.h"
 @implementation GISJobDetailsObject
 
-
 -(GISJobDetailsObject *)initializeJObDetailsValues:(NSDictionary *)dict
 {
 

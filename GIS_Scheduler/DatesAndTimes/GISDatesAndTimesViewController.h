@@ -11,7 +11,7 @@
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
 #import "GISCreateJobsViewController.h"
-@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol,CreateJobsProtocol>
+@interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol,CreateJobsProtocol,UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
     IBOutlet UITableView *datesTimes_tableView;
@@ -106,6 +106,18 @@
     NSMutableDictionary *createJobsCheckDictionary;
     BOOL isAlljobs_Checked;
     IBOutlet UIButton *alljobs_Checked_button;
+    
+    ///////
+    NSString *numberOfServiceProviders_string;
+    IBOutlet UILabel *typeOfServiceProviders_Answer_Label;
+    IBOutlet UILabel *payLevel_Answer_Label;
+    IBOutlet UILabel *billLevel_Answer_Label;
+    
+    //NSMutableArray *serviceProvider_Array;
+    NSMutableArray *payLevel_Array;
+    NSMutableArray *billLevel_Array;
+    NSMutableArray *typeOfServiceProvider_Array;
+    
 }
 @property(nonatomic,strong) IBOutlet UIButton *cancelBtn_createJobs;
 @property(nonatomic,strong) IBOutlet UIButton *doneBtn_createJobs;

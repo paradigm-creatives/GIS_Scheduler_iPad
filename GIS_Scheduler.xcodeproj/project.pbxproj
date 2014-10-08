@@ -1684,6 +1684,7 @@
 				8A8DA6FB197924FC00EE8EFE /* Comments */,
 				BA694A4619751F6B00AC8CCC /* Contacts and Billing */,
 				8A3B1E04197CF50B00963E8C /* CustomAlertView */,
+				BA694A4C1975387300AC8CCC /* DatesAndTimes */,
 				8A5052BC1977D76F007288F5 /* DashBoard Views */,
 				8A5E2E2919753B3B00BE3C04 /* Event Details */,
 				BA1EF44719A719E900D1219E /* Find Request Jobs */,
@@ -1764,8 +1765,7 @@
 				BAF7BAB81998D11300A8F196 /* GISCreateJobs_Cell.m */,
 				BAF7BAB51998D10300A8F196 /* GISCreateJobs_Cell.xib */,
 			);
-			name = DatesAndTimes;
-			path = ../DatesAndTimes;
+			path = DatesAndTimes;
 			sourceTree = "<group>";
 		};
 		BA93BE081979408B0097426C /* Job Details */ = {
@@ -1816,7 +1816,6 @@
 				BA9E6A671977E88400609E69 /* GISAttendeesViewController.m */,
 				BA9E6A681977E88400609E69 /* GISAttendeesViewController.xib */,
 				BA9E6A631977E88400609E69 /* GISAttendeesTopCell.h */,
-				BA694A4C1975387300AC8CCC /* DatesAndTimes */,
 				BA9E6A641977E88400609E69 /* GISAttendeesTopCell.m */,
 				BA9E6A651977E88400609E69 /* GISAttendeesTopCell.xib */,
 				BA9E6A621977E88400609E69 /* GISAttendeesCell.xib */,
