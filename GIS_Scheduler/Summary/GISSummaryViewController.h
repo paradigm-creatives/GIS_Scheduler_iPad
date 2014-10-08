@@ -17,6 +17,7 @@
     BOOL isCheckMark;
     BOOL isRequestSubmitted;
     GISLoginDetailsObject *loginObJ;
+    NSString *serviceRequestData;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;
