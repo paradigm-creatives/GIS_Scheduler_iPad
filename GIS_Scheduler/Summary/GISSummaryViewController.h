@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
+#import "GISPopOverTableViewController.h"
 #import "GISChooseRequestDetailsObject.h"
 
-@interface GISSummaryViewController : UIViewController<UITextViewDelegate>
+@interface GISSummaryViewController : UIViewController<UITextViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     GISAppDelegate *appDelegate;
     BOOL isCheckMark;
     BOOL isRequestSubmitted;
     GISLoginDetailsObject *loginObJ;
     NSString *serviceRequestData;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;
@@ -32,5 +34,8 @@
 @property (strong, nonatomic) NSArray *dresscodeArray;
 @property (strong, nonatomic) NSArray *chooseReqArray;
 @property(nonatomic,strong)NSString *choose_req_Id_string;
+@property (strong, nonatomic) NSArray *serviceTypeArray;
+@property (nonatomic,strong) UIPopoverController *popover;
+
 
 @end

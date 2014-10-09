@@ -74,6 +74,8 @@
     [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestEventDetails:) failAction:@selector(failuremethod_getRequestEventDetails:)];
     
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"hi",@"hello", nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -435,21 +437,23 @@
         UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
         
         UIButton *addButton1 = [[UIButton alloc] init];
-        if(appDelegate.isNewRequest){
-            
-            addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
-            [addButton1 addTarget:self
-                          action:@selector(showPickerView:)
-                forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(144, 40.0, 155.0, 27.0);
-            addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
-            [addButton1.titleLabel setFont:[GISFonts small]];
-            [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
-            [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
-            [headerView2 addSubview:addButton1];
+        addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        }else{
+        
+//        if(appDelegate.isNewRequest){
+//            [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
+//            [addButton1 addTarget:self
+//                          action:@selector(showPopoverDetails:)
+//                forControlEvents:UIControlEventTouchUpInside];
+//            addButton1.frame = CGRectMake(274, 30.0, 155.0, 27.0);
+//            addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+//            [addButton1.titleLabel setFont:[GISFonts small]];
+//            [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+//            [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
+//            [addButton1 setTag:1];
+//            [headerView2 addSubview:addButton1];
+//
+//        }else{
             addButton1.backgroundColor=UIColorFromRGB(0x01971c);
             [addButton1 setTitle:@"Submit to GIS" forState:UIControlStateNormal];
             [addButton1 setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
@@ -471,7 +475,7 @@
             }
             
             [headerView2 addSubview:addButton1];
-        }
+        //}
 
         
         
@@ -686,6 +690,41 @@
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     NSLog(@"Failure");
 }
+
+- (IBAction)showPopoverDetails:(id)sender{
+    
+    UITableView *table = (UITableView*)[[[[[sender superview] superview] superview] superview] superview];
+    
+    GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
+    
+    tableViewController.popOverDelegate = self;
+    _popover =   [GISUtility showPopOver:(NSMutableArray *)_serviceTypeArray viewController:tableViewController];
+    
+    _popover.delegate = self;
+    
+    
+    if (_popover) {
+        [_popover dismissPopoverAnimated:YES];
+    }
+    
+    [_popover presentPopoverFromRect:CGRectMake(415, table.frame.origin.y+table.frame.size.height-30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown animated:YES];
+    
+}
+
+-(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
+{
+    //eventTypedata= value_str;
+    UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:1];
+    [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
+    //_eventTypeId_string=id_str;
+    
+    if(_popover)
+        [_popover dismissPopoverAnimated:YES];
+    
+    // [_eventDetaislTabelView reloadData];
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning
