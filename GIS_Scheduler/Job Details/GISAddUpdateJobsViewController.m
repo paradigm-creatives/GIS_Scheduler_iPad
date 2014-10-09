@@ -231,7 +231,7 @@
     NSMutableDictionary *addJobDict;
     addJobDict=[[NSMutableDictionary alloc]init];
     
-    [addJobDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:KRequestId];
+    [addJobDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kRequestID];
     [addJobDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kLoginRequestorID];
     [addJobDict setObject:@"" forKey:kSubmitForRequest_JobId];
     [addJobDict setObject:[GISUtility returningstring:addUpdateObj.jobDate_string] forKey:kEditSchedule_JobDate];
@@ -271,8 +271,8 @@
 {
     [currentTextField resignFirstResponder];
     UIButton *button=(UIButton *)sender;
-    GISAddUpdateJobCell *jobCell=(GISAddUpdateJobCell *)button.superview.superview.superview;
-    
+    GISAddUpdateJobCell *table=(GISAddUpdateJobCell *)button.superview.superview.superview;
+    //UITableView *table = (UITableView*)[[[[[sender superview] superview] superview] superview] superview];
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     
@@ -369,7 +369,7 @@
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+128, button.frame.origin.y+22, 1, 1) inView:jobCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+128, button.frame.origin.y+22, 1, 1) inView:table.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str

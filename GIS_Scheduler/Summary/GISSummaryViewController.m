@@ -72,6 +72,8 @@
     [paramsDict setObject:loginObJ.token_string forKey:kToken];
     
     [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestEventDetails:) failAction:@selector(failuremethod_getRequestEventDetails:)];
+    
+    serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -433,27 +435,43 @@
         UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
         
         UIButton *addButton1 = [[UIButton alloc] init];
-        addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        addButton1.backgroundColor=UIColorFromRGB(0x01971c);
-        [addButton1 setTitle:@"Submit to GIS" forState:UIControlStateNormal];
-        [addButton1 setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
-        [addButton1.layer setCornerRadius:5.0f];
-        addButton1.titleLabel.font=[GISFonts larger];
-        [addButton1 addTarget:self
-                       action:@selector(submitButnPressed:)
-             forControlEvents:UIControlEventTouchUpInside];
-        addButton1.frame = CGRectMake(310.0, 30.0, 150.0, 30.0);
-        addButton1.enabled = YES;
-        
-        if ([_chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails isEqualToString:@"true"]) {
+        if(appDelegate.isNewRequest){
             
-            if(!isCheckMark){
-                addButton1.enabled = NO;
-                addButton1.backgroundColor=[UIColor grayColor];
+            addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
+            [addButton1 addTarget:self
+                          action:@selector(showPickerView:)
+                forControlEvents:UIControlEventTouchUpInside];
+            addButton1.frame = CGRectMake(144, 40.0, 155.0, 27.0);
+            addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+            [addButton1.titleLabel setFont:[GISFonts small]];
+            [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+            [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
+            [headerView2 addSubview:addButton1];
+
+        }else{
+            addButton1.backgroundColor=UIColorFromRGB(0x01971c);
+            [addButton1 setTitle:@"Submit to GIS" forState:UIControlStateNormal];
+            [addButton1 setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
+            [addButton1.layer setCornerRadius:5.0f];
+            addButton1.titleLabel.font=[GISFonts larger];
+            [addButton1 addTarget:self
+                           action:@selector(submitButnPressed:)
+                 forControlEvents:UIControlEventTouchUpInside];
+            addButton1.frame = CGRectMake(310.0, 30.0, 150.0, 30.0);
+            addButton1.enabled = YES;
+            
+            
+            if ([_chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails isEqualToString:@"true"]) {
+                
+                if(!isCheckMark){
+                    addButton1.enabled = NO;
+                    addButton1.backgroundColor=[UIColor grayColor];
+                }
             }
+            
+            [headerView2 addSubview:addButton1];
         }
-        
-        [headerView2 addSubview:addButton1];
 
         
         

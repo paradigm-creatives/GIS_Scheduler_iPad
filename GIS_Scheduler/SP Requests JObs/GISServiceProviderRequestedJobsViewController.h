@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GISPopOverTableViewController.h"
 #import "GISSchedulerSPJobsStore.h"
+#import "GISBaseViewController.h"
 
-@interface GISServiceProviderRequestedJobsViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
+@interface GISServiceProviderRequestedJobsViewController : GISBaseViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     NSMutableArray *chooseRequest_mutArray;
     NSMutableArray *serviceProviderName_mutArray;

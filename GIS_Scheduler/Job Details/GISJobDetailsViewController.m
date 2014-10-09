@@ -73,24 +73,22 @@
     payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-
-     createJobs_UIVIew.hidden=YES;
+    
+    createJobs_UIVIew.hidden=YES;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
-     jobChangeHistory_background_UIView.hidden=YES;
-     jobChangeHistory_foreground_UIView.hidden=YES;
+    jobChangeHistory_background_UIView.hidden=YES;
+    jobChangeHistory_foreground_UIView.hidden=YES;
     
     [jobHistory_textView.layer setBorderWidth:0.6];
     [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [jobHistory_textView.layer setCornerRadius:10.0f];
     
-  
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+}
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
@@ -111,14 +109,13 @@
 
 -(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
 {
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSLog(@"successmethod_getJobDetails_data Success---%@",response.responseJson);
     [[GISStoreManager sharedManager]removeJobDetailsObjects];
     GISJobDetailsStore *jobDetailsStore;
     jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
     
     if(jobDetails_Array.count>0)
         [jobDetails_Array removeAllObjects];
-    
     jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
     [jobDetails_tableView reloadData];
     
@@ -128,6 +125,7 @@
     
     //[[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
     [self removeLoadingView];
 }
 
@@ -148,7 +146,7 @@
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     
-    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+    if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         
         
         [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
@@ -659,13 +657,19 @@
 -(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
 {
     [self removeLoadingView];
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSLog(@"successmethod_AddUpdateJob_data Success---%@",response.responseJson);
     NSArray *array=response.responseJson;
     NSDictionary *dictNew=[array lastObject];
-    NSString *success= [dictNew objectForKey:kStatusCode];
+    NSString *success= [[dictNew objectForKey:kStatusCode] stringValue];
     
     if ([success isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:KRequestId];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
     }
 }
 
