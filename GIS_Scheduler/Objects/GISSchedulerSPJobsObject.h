@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface GISSchedulerSPJobsObject : NSObject
+@property(nonatomic,strong) NSString *accountName_string;
+@property(nonatomic,strong) NSString *billAmount_string;
+@property(nonatomic,strong) NSString *outToAgency_string;
+@property(nonatomic,strong) NSString *location_string;
+@property(nonatomic,strong) NSString *requestorName_string;
+@property(nonatomic,strong) NSString *subRoll_string;
+@property(nonatomic,strong) NSString *timely_string;
+@property(nonatomic,strong) NSString *typeOfService_string;
+
 
 @property(nonatomic,strong)NSString *EventType_String;
 @property(nonatomic,strong)NSString *endTime_String;

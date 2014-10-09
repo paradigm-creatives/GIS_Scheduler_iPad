@@ -45,12 +45,8 @@ static GISLoadingView *loadingView = nil;
         [_alertView setMessage:message];
         [_alertView show];
     }
-    
     //the magic line below,
     //we associate the activity indicator to the alert view: (addSubview is not used)
-    
-    
-    
 }
 
 -(void)removeLoadingAlertview{
@@ -58,11 +54,8 @@ static GISLoadingView *loadingView = nil;
     {
         [_alertView dismissWithClickedButtonIndex:0 animated:YES];
         _alertView = nil;
-        
     }
-    
     // _alertView = nil;
-    
 }
 
 @end

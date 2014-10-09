@@ -491,12 +491,13 @@
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
     // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
-    
 }
+
 -(void)removeLoadingView
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
+
 -(void)successmethod_spRequestJobsSearchRequest:(GISJsonRequest *)response
 {
     NSDictionary *saveUpdateDict;
@@ -519,7 +520,6 @@
         [self removeLoadingView];
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     }
-    
 }
 
 -(void)failuremethod_spRequestJobsSearchRequest:(GISJsonRequest *)response
@@ -527,6 +527,7 @@
     [self removeLoadingView];
     NSLog(@"Failure");
 }
+
 
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {

@@ -73,25 +73,26 @@
     payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
+    
+    createJobs_UIVIew.hidden=YES;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    jobChangeHistory_background_UIView.hidden=YES;
+    jobChangeHistory_foreground_UIView.hidden=YES;
+    
+    [jobHistory_textView.layer setBorderWidth:0.6];
+    [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
+    [jobHistory_textView.layer setCornerRadius:10.0f];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
-     createJobs_UIVIew.hidden=YES;
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
-     jobChangeHistory_background_UIView.hidden=YES;
-     jobChangeHistory_foreground_UIView.hidden=YES;
-    
-    [jobHistory_textView.layer setBorderWidth:0.6];
-    [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
-    [jobHistory_textView.layer setCornerRadius:10.0f];
 }
-
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
     NSDictionary *dict=[notification userInfo];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
@@ -108,14 +109,13 @@
 
 -(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
 {
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSLog(@"successmethod_getJobDetails_data Success---%@",response.responseJson);
     [[GISStoreManager sharedManager]removeJobDetailsObjects];
     GISJobDetailsStore *jobDetailsStore;
     jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
     
     if(jobDetails_Array.count>0)
         [jobDetails_Array removeAllObjects];
-    
     jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
     [jobDetails_tableView reloadData];
     
@@ -123,15 +123,17 @@
     [paramsDict1 setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
     
-    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    //[[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    
+    [self removeLoadingView];
 }
 
 -(void)failuremethod_getJobDetails_data:(GISJsonRequest *)response
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 
@@ -144,7 +146,7 @@
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     
-    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+    if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         
         
         [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
@@ -321,14 +323,14 @@
 
 -(IBAction)pickerButtonPressed:(id)sender
 {
-    [numberOfServiceProviders_Field resignFirstResponder];
+    [noOfServiceProviders_TextField resignFirstResponder];
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISJobDetailsCell *)button.superview.superview.superview.superview;
-    GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)tempCellRef;
+//    id tempCellRef=(GISJobDetailsCell *)button.superview.superview.superview.superview;
+//    GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)tempCellRef;
     
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
-    
+    UITableView *table = (UITableView*)[[[[[sender superview] superview] superview] superview] superview];
     if([sender tag]==111)
     {
         btnTag=111;
@@ -384,7 +386,7 @@
     else if ([sender tag]==888)// Create Jobs
     {
         btnTag=888;
-        tableViewController1.popOverArray=serviceProvider_Array;
+        tableViewController1.popOverArray=typeOfService_array;
     }
     else if ([sender tag]==999) // Create Jobs
     {
@@ -418,19 +420,19 @@
     if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==1111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+36, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+36, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==1212)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+136, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+136, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==1313)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+236, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+236, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==555)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if([sender tag]==666)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if([sender tag]==777)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if(([sender tag]==4646)||([sender tag]==5656))
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+175, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+175, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         
 }
 
@@ -491,6 +493,8 @@
     }
     else if (btnTag==4646)
     {
+        //5,4,2,1,4 --16  (16+6=22)
+        //4 ,9, 1
         startDate_jobHistory_Answer_Label.text=value_str;
     }
     else if (btnTag==5656)
@@ -608,8 +612,7 @@
             GISDropDownsObject *obj=[array_typeOfService lastObject];
             typeOfService_ID_temp_String=obj.id_String;
         }
-        
-        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.serviceProvider_string];
+        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",tempObj.serviceProvider_string];
         NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
         if (array_serviceProvider.count>0) {
             GISServiceProviderObject *obj=[array_serviceProvider lastObject];
@@ -654,13 +657,19 @@
 -(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
 {
     [self removeLoadingView];
-    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    NSLog(@"successmethod_AddUpdateJob_data Success---%@",response.responseJson);
     NSArray *array=response.responseJson;
     NSDictionary *dictNew=[array lastObject];
-    NSString *success= [dictNew objectForKey:kStatusCode];
+    NSString *success= [[dictNew objectForKey:kStatusCode] stringValue];
     
     if ([success isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:KRequestId];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
     }
 }
 
@@ -719,7 +728,12 @@
 
 -(IBAction)createJobsButton_Pressed:(id)sender
 {
-    [numberOfServiceProviders_Field resignFirstResponder];
+    NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
+    [paramsDict1 setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+    [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
+    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    
+    [noOfServiceProviders_TextField resignFirstResponder];
     isAlljobs_Checked=NO;
     createJobsCheckDictionary=[[NSMutableDictionary alloc]init];
     createJobs_UIVIew.hidden=NO;
@@ -831,7 +845,7 @@
     saveUpdateDict = [responseArray lastObject];
     NSLog(@"successmethod_saveMaterialType Success---%@",saveUpdateDict);
     
-    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+    if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
         
     }else{

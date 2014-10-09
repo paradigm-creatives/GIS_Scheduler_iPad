@@ -134,7 +134,7 @@
 
         
     }
-    
+
     [btn setTitle:buttonTitle forState:UIControlStateNormal];
     [ appDelegate1.spiltViewController.view setNeedsLayout ];
     appDelegate1.spiltViewController.delegate = self;
@@ -153,8 +153,6 @@
     NSLog(@"leftSwipeHandle");
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {

@@ -71,7 +71,7 @@
     
     NSString *chooseRequestID_string;
     
-    UITextField *numberOfServiceProviders_Field;
+    //UITextField *numberOfServiceProviders_Field;
     
     NSString *numberOfServiceProviders_string;
 

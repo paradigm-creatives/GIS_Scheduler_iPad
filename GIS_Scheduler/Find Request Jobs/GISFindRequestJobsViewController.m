@@ -17,7 +17,7 @@
 #import "GISUtility.h"
 #import "GISLoadingView.h"
 #import "GISStoreManager.h"
-
+#import "GISSchedulerSPJobsStore.h"
 @interface GISFindRequestJobsViewController ()
 
 @end
@@ -43,6 +43,8 @@
     self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     
     findReqObj=[[GISFindRequestJobsObject alloc]init];
+    findReqObj.startDate_JobData_string=@"08/25/2012";
+    findReqObj.endDate_JobData_string=@"08/27/2012";
     findReqObj.weekDays_dictionary=[[NSMutableDictionary alloc]init];
     
     requestorType_array=[[NSMutableArray alloc]init];
@@ -92,6 +94,8 @@
     
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
+    
+    
     
 }
 
@@ -248,13 +252,7 @@
 
 -(void)search_ButtonPressed:(id)sender
 {
-    appDelegate.isFromViewEditService = NO;
-    GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
-    detailViewController.view_string = kFindRequestJobs_Screen;
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    
     [self.days_MutableStr setString:@""];
-    
     for (int j=1; j<=7; j++) {
         NSString *str=[findReqObj.weekDays_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)j]];
         if ([str isEqualToString:@"Monday"]) {
@@ -324,7 +322,34 @@
 -(void)successmethod_findRequestJobs:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_findRequestJobs Success---%@",response.responseJson);
-    [self removeLoadingView];
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    GISSchedulerSPJobsStore *spJobsStore;
+    NSMutableArray *SPJobsArray=[[NSMutableArray alloc]init];
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
+        spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
+        SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+        
+        [self removeLoadingView];
+        ///////////
+        appDelegate.isFromViewEditService = NO;
+        GISJobAssignmentViewController *detailViewController = (GISJobAssignmentViewController *)[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
+        [detailViewController.requested_Jobs_Array removeAllObjects];
+        detailViewController.requested_Jobs_Array=SPJobsArray;
+        detailViewController.view_string = kFindRequestJobs_Screen;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        /////////////////
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+    
 }
 
 -(void)failuremethod_findRequestJobs:(GISJsonRequest *)response
@@ -332,6 +357,7 @@
     [self removeLoadingView];
     NSLog(@"Failure");
 }
+
 
 -(IBAction)pickerButtonPressed:(id)sender
 {
@@ -701,6 +727,8 @@
     }
     [findReqJobs_tableView reloadData];
 }
+
+
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {

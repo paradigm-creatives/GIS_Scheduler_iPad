@@ -10,14 +10,14 @@
 #import "GISAppDelegate.h"
 #import "GISPopOverTableViewController.h"
 #import "GISBaseViewController.h"
-
+#import "GISLoginDetailsObject.h"
 @interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     IBOutlet UITableView *jobAssignment_tableView;
     IBOutlet UIView *dashBoard_UIViews;
     
     GISAppDelegate *appDelegate;
-    
+    GISLoginDetailsObject *login_Obj;
     IBOutlet UILabel *from_answer_Label;
     IBOutlet UILabel *to_answer_Label;
     IBOutlet UILabel *typeOfService_answer_Label;
@@ -36,10 +36,22 @@
     NSString *startDate_str;
     NSString *endDate_str;
     NSString *typeServiceID_str;
-    NSMutableArray *typeOfservice_mutArray;
     NSString *chooseRequestID_str;
+    
+    NSMutableArray *serviceProvider_Array;
+    NSMutableArray *serviceProviderType_array;
+    NSMutableArray *payType_array;
+    
+    NSMutableDictionary *ota_dictionary;
+    
+    BOOL isEdit_Button_Clicked;
+    int selected_row;
+    
+    NSString *typeOfservice_temp_string;
+    NSString *serviceProvider_temp_string;
+    NSString *payType_temp_string;
 }
-
+@property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;
 
 @property(nonatomic,readwrite) BOOL isMasterHide;

@@ -42,6 +42,7 @@
     NSMutableArray *chooseRequest_mutArray;
     
     GISLoginDetailsObject *login_Obj;
+    
 }
 @property(nonatomic,strong)NSMutableString *days_MutableStr;
 -(IBAction)pickerButtonPressed:(id)sender;
