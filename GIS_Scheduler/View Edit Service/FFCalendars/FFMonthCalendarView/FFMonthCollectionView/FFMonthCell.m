@@ -12,6 +12,7 @@
 
 #import "FFButtonWithEditAndDetailPopoversForMonthCell.h"
 #import "FFImportantFilesForCalendar.h"
+#import "GISAppDelegate.h"
 
 @interface FFMonthCell () <FFButtonWithEditAndDetailPopoversForMonthCellProtocol>
 @property (nonatomic, strong) NSMutableArray *arrayButtons;
@@ -117,6 +118,13 @@
             }
         }
     }
+    
+    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    if([appDelegate.jobEventsArray count] >0)
+        [appDelegate.jobEventsArray removeAllObjects];
+    
+    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayEvents];
 }
 
 #pragma mark - FFButtonWithEditAndDetailPopoversForMonthCell Protocol
