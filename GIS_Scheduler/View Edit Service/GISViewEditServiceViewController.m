@@ -141,6 +141,12 @@
     students_Array = [[NSMutableArray alloc] init];
 
     [_fill_UnfillSegmentControl setSelectedSegmentIndex:1];
+    
+    NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
+                                         month:[NSDate componentsOfCurrentDate].month
+                                           day:[NSDate componentsOfCurrentDate].day];
+    
+    _dateTextField.text = [GISUtility eventDisplayFormat:currentDate];
 
 }
 
@@ -795,7 +801,6 @@
     NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
                                          month:[NSDate componentsOfCurrentDate].month
                                            day:[NSDate componentsOfCurrentDate].day];
-    
     popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
     [popoverControllerDate setProtocol:self];
     
