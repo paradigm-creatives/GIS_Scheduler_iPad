@@ -120,7 +120,6 @@
 		8A5E2E2D19753B5D00BE3C04 /* GISEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2B19753B5D00BE3C04 /* GISEventDetailsViewController.m */; };
 		8A5E2E2E19753B5D00BE3C04 /* GISEventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E2C19753B5D00BE3C04 /* GISEventDetailsViewController.xib */; };
 		8A5E2E3219753C2200BE3C04 /* GISEventDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3119753C2200BE3C04 /* GISEventDetailsCell.m */; };
-		8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */; };
 		8A74422D19A1C8BD00CE3B32 /* GISSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A74422B19A1C8BD00CE3B32 /* GISSummaryViewController.m */; };
 		8A74422E19A1C8BD00CE3B32 /* GISSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A74422C19A1C8BD00CE3B32 /* GISSummaryViewController.xib */; };
 		8A74423319A1CA1300CE3B32 /* GISSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A74423119A1CA1300CE3B32 /* GISSummaryCell.m */; };
@@ -181,6 +180,8 @@
 		8AC899C119C8476D00B9532C /* GISEventLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC899C019C8476D00B9532C /* GISEventLabel.m */; };
 		8AC899C419C86A8000B9532C /* GISViewEditDateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC899C319C86A8000B9532C /* GISViewEditDateObject.m */; };
 		8AC899C719C8701C00B9532C /* GISViewEditStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC899C619C8701C00B9532C /* GISViewEditStore.m */; };
+		8ACF5C3319E6B7B3001D86A1 /* GISEventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */; };
+		8ACF5C3419E6B7B3001D86A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA3AF218196BBAF7006A1E3B /* InfoPlist.strings */; };
 		8AE7ECD819ADFB7F00E02258 /* GISViewEditServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */; };
 		8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */; };
 		8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */; };
@@ -204,7 +205,6 @@
 		BA3AF210196BBAF7006A1E3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF20F196BBAF7006A1E3B /* Foundation.framework */; };
 		BA3AF212196BBAF7006A1E3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF211196BBAF7006A1E3B /* CoreGraphics.framework */; };
 		BA3AF214196BBAF7006A1E3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF213196BBAF7006A1E3B /* UIKit.framework */; };
-		BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA3AF218196BBAF7006A1E3B /* InfoPlist.strings */; };
 		BA3AF21C196BBAF7006A1E3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3AF21B196BBAF7006A1E3B /* main.m */; };
 		BA3AF229196BBAF7006A1E3B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF228196BBAF7006A1E3B /* XCTest.framework */; };
 		BA3AF22A196BBAF7006A1E3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3AF20F196BBAF7006A1E3B /* Foundation.framework */; };
@@ -2111,7 +2111,7 @@
 		BA3AF204196BBAF7006A1E3B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Paradigm;
 				TargetAttributes = {
 					BA3AF226196BBAF7006A1E3B = {
@@ -2169,7 +2169,7 @@
 				BA0A157519BF182F00165C1A /* GISRequestServiceProvidersCell.xib in Resources */,
 				BA9E6B3F1977E88400609E69 /* radio_button_empty.png in Resources */,
 				BA9E6B5C1977E88400609E69 /* text_field_bg@2x.png in Resources */,
-				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
+				8ACF5C3419E6B7B3001D86A1 /* InfoPlist.strings in Resources */,
 				BA9E6B481977E88400609E69 /* save@2x.png in Resources */,
 				BA9E6B201977E88400609E69 /* edit_pressed@2x.png in Resources */,
 				BA9E6B001977E88400609E69 /* clock@2x.png in Resources */,
@@ -2185,7 +2185,6 @@
 				8A325BA219CAFA8100C52278 /* Day@2x.png in Resources */,
 				BA9E6B241977E88400609E69 /* event_details_pressed@2x.png in Resources */,
 				BA9E6AFA1977E88400609E69 /* check_pressed@2x.png in Resources */,
-				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
 				8A8DA6E61979026600EE8EFE /* eventdetails.png in Resources */,
 				BA9E6B3B1977E88400609E69 /* logout.png in Resources */,
 				BAFA6BF319949E6A005FE5A1 /* GISCreateJobsCell.xib in Resources */,
@@ -2196,7 +2195,6 @@
 				BA9E6B5A1977E88400609E69 /* summary_pressed@2x.png in Resources */,
 				8AA83868198B5FF2004B6C87 /* GISDashBoardReqCell.xib in Resources */,
 				8A4135E619D2F94F00707F46 /* tab_selected.png in Resources */,
-				BA3AF21A196BBAF7006A1E3B /* InfoPlist.strings in Resources */,
 				BA9E6B011977E88400609E69 /* comments.png in Resources */,
 				BA9E6B631977E88400609E69 /* view@2x.png in Resources */,
 				BA00413219C19E92003D7217 /* GISFilterMoreViewController.xib in Resources */,
@@ -2219,7 +2217,7 @@
 				8A5052C61977D76F007288F5 /* GISDashBoardViewController.xib in Resources */,
 				8A8DA6ED1979026600EE8EFE /* summary_unPressed@2x.png in Resources */,
 				8A505305197807FF007288F5 /* GISLocationDetailsCell.xib in Resources */,
-				8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */,
+				8ACF5C3319E6B7B3001D86A1 /* GISEventDetailsCell.xib in Resources */,
 				8A5052DB1977E447007288F5 /* GISLocationDetailsViewController.xib in Resources */,
 				8A325BA619CAFA8100C52278 /* month@2x.png in Resources */,
 				BAE08207197FDBA30056B3B8 /* MyriadPro-Semibold.otf in Resources */,
@@ -2229,7 +2227,6 @@
 				BA9E6AF11977E88400609E69 /* attendees.png in Resources */,
 				8A325BA319CAFA8100C52278 /* day_clicked.png in Resources */,
 				8A8DA7001979251A00EE8EFE /* GISCommentViewController.xib in Resources */,
-				8A5E2E3419753C8100BE3C04 /* GISEventDetailsCell.xib in Resources */,
 				8A8DA6E91979026600EE8EFE /* jobdetails@2x.png in Resources */,
 				8A17583719C8410400D75E98 /* GISViewEditListViewController.xib in Resources */,
 				BA9E6B301977E88400609E69 /* job_details_pressed@2x.png in Resources */,
@@ -2566,7 +2563,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2579,8 +2576,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2598,10 +2595,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "30266818-7395-4CB0-B9D4-4A13153DCC69";
+				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -2609,7 +2606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2622,8 +2619,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2635,11 +2632,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "30266818-7395-4CB0-B9D4-4A13153DCC69";
+				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -2649,8 +2646,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
@@ -2660,7 +2657,7 @@
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";
 				INFOPLIST_FILE = "GIS_Scheduler/GIS_Scheduler-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30266818-7395-4CB0-B9D4-4A13153DCC69";
+				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2672,8 +2669,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prakash Dantuluri (ZAH86A92JL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
@@ -2683,7 +2680,7 @@
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";
 				INFOPLIST_FILE = "GIS_Scheduler/GIS_Scheduler-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30266818-7395-4CB0-B9D4-4A13153DCC69";
+				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2692,7 +2689,6 @@
 		BA3AF23C196BBAF8006A1E3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GIS_Scheduler.app/GIS_Scheduler";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -2715,7 +2711,6 @@
 		BA3AF23D196BBAF8006A1E3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GIS_Scheduler.app/GIS_Scheduler";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
