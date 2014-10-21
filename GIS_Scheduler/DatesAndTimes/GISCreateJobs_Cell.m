@@ -24,10 +24,10 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    _dateLabel.font=[GISFonts small];;
-    _dayLabel.font=[GISFonts small];;
-    _dateLabel.textColor=UIColorFromRGB(0x666666);;
-    _dayLabel.textColor=UIColorFromRGB(0x666666);;
+    _dateLabel.font=[GISFonts small];
+    _dayLabel.font=[GISFonts small];
+    _dateLabel.textColor=UIColorFromRGB(0x666666);
+    _dayLabel.textColor=UIColorFromRGB(0x666666);
     _startTime_Label .font=[GISFonts normal];
     _startTime_Label.textColor=UIColorFromRGB(0x666666);
     _endTimeLabel .font=[GISFonts normal];

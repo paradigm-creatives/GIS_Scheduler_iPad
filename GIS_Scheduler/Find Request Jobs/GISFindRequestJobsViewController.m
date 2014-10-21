@@ -526,18 +526,53 @@
     else if(btnTag==1)
     {
         findReqObj.startDate_string=value_str;
+        if ([findReqObj.startDate_string length] && [findReqObj.endDate_string length]){
+            if ([GISUtility dateComparision:findReqObj.startDate_string :findReqObj.endDate_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                findReqObj.startDate_string=@"";
+            }
+        }
     }
     else if(btnTag==2)
     {
         findReqObj.endDate_string=value_str;
+        if ([findReqObj.startDate_string length] && [findReqObj.endDate_string length]){
+            if ([GISUtility dateComparision:findReqObj.startDate_string:findReqObj.endDate_string:NO])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
+                findReqObj.endDate_string=@"";
+            }
+        }
+        
     }
     else if(btnTag==3)
     {
         findReqObj.startTime_string=value_str;
+        if ([findReqObj.startTime_string length]&& [findReqObj.endTime_string length]) {
+            if([GISUtility timeComparision:findReqObj.startTime_string :findReqObj.endTime_string]){}
+            else
+            {
+                findReqObj.startTime_string=@"";
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+            }
+        }
     }
     else if(btnTag==4)
     {
         findReqObj.endTime_string=value_str;
+        if ([findReqObj.startTime_string length]&& [findReqObj.endTime_string length]) {
+            if([GISUtility timeComparision:findReqObj.startTime_string :findReqObj.endTime_string]){}
+            else
+            {
+                findReqObj.endTime_string=@"";
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+            }
+        }
     }
     else if(btnTag==5)
     {
@@ -579,14 +614,40 @@
     else if(btnTag==13)
     {
         findReqObj.startDate_JobData_string=value_str;
+        if ([findReqObj.startDate_JobData_string length] && [findReqObj.endDate_JobData_string length]){
+            if ([GISUtility dateComparision:findReqObj.startDate_JobData_string :findReqObj.endDate_JobData_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                findReqObj.startDate_JobData_string=@"";
+            }
+        }
     }
     else if(btnTag==14)
     {
         findReqObj.endDate_JobData_string=value_str;
+        if ([findReqObj.startDate_JobData_string length] && [findReqObj.endDate_JobData_string length]){
+            if ([GISUtility dateComparision:findReqObj.startDate_JobData_string:findReqObj.endDate_JobData_string:NO])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
+                findReqObj.endDate_JobData_string=@"";
+            }
+        }
     }
     else if(btnTag==15)
     {
         findReqObj.startTime_JobData_string=value_str;
+        if ([findReqObj.startTime_JobData_string length]&& [findReqObj.endTime_string length]) {
+            if([GISUtility timeComparision:findReqObj.startTime_string :findReqObj.endTime_string]){}
+            else
+            {
+                findReqObj.startTime_JobData_string=@"";
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+            }
+        }
     }
     else if(btnTag==16)
     {

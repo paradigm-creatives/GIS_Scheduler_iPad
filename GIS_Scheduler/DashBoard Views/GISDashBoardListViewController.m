@@ -78,6 +78,7 @@
     return 1;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cellHere"];
@@ -136,6 +137,7 @@
     return 50;
 }
 
+
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView* headerView;
@@ -181,12 +183,8 @@
         
         [headerView addSubview:headerLabel];
         [headerView addSubview:headerCellButton];
-        
         headerLabel.text = @"Scheduling";
-        
         if(rowsectionClicked){
-            
-            
             headerLabel.textColor = UIColorFromRGB(0xe8d3a4);
             [headerCellButton setBackgroundImage:[UIImage imageNamed:@"scheduling_pressed.png"] forState:UIControlStateNormal];
             [headerButton setBackgroundColor:UIColorFromRGB(0x00508f)];

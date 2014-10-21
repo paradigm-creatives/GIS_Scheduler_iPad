@@ -68,7 +68,7 @@
 
     _agencyFee_label.text=NSLocalizedStringFromTable(@"Agency_Fee", TABLE, nil);
 
-    _timelyAndHalf_BillingPayment_label.text=NSLocalizedStringFromTable(@"Timely_and_Half", TABLE, nil);
+    _timelyAndHalf_BillingPayment_label.text=NSLocalizedStringFromTable(@"overRideBill", TABLE, nil);
     _yes_timelyAndHalf_BillingPayment_label.text=NSLocalizedStringFromTable(@"yes", TABLE, nil);
     _no_timelyAndHalf_BillingPayment_label.text=NSLocalizedStringFromTable(@"no", TABLE, nil);
     _payStatus_label.text=NSLocalizedStringFromTable(@"Pay_Status", TABLE, nil);

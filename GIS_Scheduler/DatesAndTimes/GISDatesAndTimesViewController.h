@@ -136,7 +136,7 @@
 
 -(IBAction)saveButton_Edit_Pressed:(id)sender;
 -(IBAction)cancelButton_Edit_Pressed:(id)sender;
-
+-(IBAction)nextButtonPressed:(id)sender;
 -(IBAction)createJobsButton_Pressed:(id)sender;
 
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender;
@@ -148,4 +148,5 @@
 -(IBAction)pickerButtonPressed:(id)sender;
 
 -(IBAction)nextButtonPressed:(id)sender;
+-(void)clearDateTimes_Data;
 @end

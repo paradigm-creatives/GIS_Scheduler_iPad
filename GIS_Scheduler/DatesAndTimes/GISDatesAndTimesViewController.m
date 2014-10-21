@@ -55,15 +55,15 @@
     editALL_Label.font=[GISFonts small];
     editALL_Label.textColor=UIColorFromRGB(0x00457c);
     
-    dateLabel.font=[GISFonts small];;
-    dayLabel.font=[GISFonts small];;
-    startTime_Header_Label.font=[GISFonts small];;
-    endTime_header_Label.font=[GISFonts small];;
+    dateLabel.font=[GISFonts small];
+    dayLabel.font=[GISFonts small];
+    startTime_Header_Label.font=[GISFonts small];
+    endTime_header_Label.font=[GISFonts small];
     
-    dateLabel.textColor=UIColorFromRGB(0x00457c);;
-    dayLabel.textColor=UIColorFromRGB(0x00457c);;
-    startTime_Header_Label.textColor=UIColorFromRGB(0x00457c);;
-    endTime_header_Label.textColor=UIColorFromRGB(0x00457c);;
+    dateLabel.textColor=UIColorFromRGB(0x00457c);
+    dayLabel.textColor=UIColorFromRGB(0x00457c);
+    startTime_Header_Label.textColor=UIColorFromRGB(0x00457c);
+    endTime_header_Label.textColor=UIColorFromRGB(0x00457c);
     
     startTime_Label .font=[GISFonts normal];
     startTime_TextField.font=[GISFonts small];
@@ -190,6 +190,9 @@
     billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
     typeOfServiceProvider_Array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+    
+    [self clearDateTimes_Data];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -404,7 +407,7 @@
         endDate_TextField.text=value_str;
         if ([startDate_TextField.text length] && [endDate_TextField.text length]){
             if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text:NO])
-            {}
+            { }
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
@@ -625,7 +628,15 @@
     {
         if (!isDateTimeDataAvailable)
         {
-            [self validate];
+            if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"])
+            {
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
+                return;
+            }
+            else
+            {
+              [self validate];
+            }
         }
         else if (appDelegate.isFromContacts && !appDelegate.isNewRequest && ![startDate_TextField.text length]&& ![startDate_TextField.text length] && ![endDate_TextField.text length] && ![startTime_TextField.text length] && ![endTime_TextField.text length] )
         {
@@ -901,7 +912,14 @@
             [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
             
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
-            [self performSelector:@selector(nextButtonPressed:) withObject:nil];
+            //[self performSelector:@selector(nextButtonPressed:) withObject:nil];
+            
+            [self clearDateTimes_Data];
+            
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+            [paramsDict setObject:login_Obj.token_string forKey:kToken];
+            [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
         }
     }
     else
@@ -1102,6 +1120,7 @@
     
     [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
 }
+
 
 -(IBAction)cancelButton_Edit_Pressed:(id)sender
 {
@@ -1336,7 +1355,8 @@
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
         
-    }else{
+    }
+    else{
         
         [self removeLoadingView];
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
@@ -1394,7 +1414,21 @@
     numberOfServiceProviders_string=textField.text;
 }
 
-
+-(void)clearDateTimes_Data
+{
+    startDate_TextField.text=@"";
+    endDate_TextField.text=@"";
+    startTime_TextField.text=@"";
+    endTime_TextField.text=@"";
+    monday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    tuesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    wednesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    thursday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    friday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    saturday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    sunday_ImageView.image=[UIImage imageNamed:@"unchecked"];
+    [weekDays_dictionary_here removeAllObjects];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
