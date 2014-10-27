@@ -9,12 +9,15 @@
 #ifndef Gallaudet_Interpreting_Service_GISProperties_h
 #define Gallaudet_Interpreting_Service_GISProperties_h
 
-#define GIS_STAGE_BASE_URL @"http://182.72.216.215/GIS_M/GisREST.svc/"//@"http://125.62.193.235/GIS_M/GisREST.svc/"
+#define GIS_STAGE_BASE_URL @"http://gisapp.gallaudet.edu/GisTest/GisREST.svc/"
+//#define GIS_STAGE_BASE_URL @"http://125.62.193.235/GIS_M/GisREST.svc/"
+//#define GIS_STAGE_BASE_URL @"http://182.72.216.215/GIS_M/GisREST.svc/"
+
 #define GIS_USER_LOGIN @"SignIn"
 
 #define GIS_GET_Billing_Details @"GetBillingDetails"
 
-#define GIS_GET_DROP_DOWNS @"GetMasters"
+#define GIS_GET_DROP_DOWNS @"GetSchedulerMasters"//@"GetMasters"
 
 #define GIS_GET_EVENT_REQUEST @"GetRequestdetails"
 

@@ -30,7 +30,7 @@
 @property (readwrite, nonatomic) BOOL isNoofAttendees;
 
 @property(nonatomic,strong) GISContactAndBillingObject *contact_billingObject;
-@property(nonatomic,strong) NSString *chooseRequest_ID_String;;
+@property(nonatomic,strong) NSString *chooseRequest_ID_String;
 
 @property (strong, nonatomic) NSString *createdByString;
 @property (strong, nonatomic) NSString *createdDateString;

@@ -88,6 +88,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    startDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
+    
+    [formatter setDateFormat:@"hh:mm a"];
+    endDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
+    
+    user_textField.text=login_Obj.firstName_string;
 }
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
@@ -145,8 +153,8 @@
     NSDictionary *saveUpdateDict;
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
-    
-    if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
+    NSString *str=[NSString stringWithFormat:@"%@",[saveUpdateDict objectForKey:kStatusCode]];
+    if ([str isEqualToString:@"200"]) {
         
         
         [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
@@ -403,11 +411,13 @@
     else if([sender tag]==4646)//Job Change History Start Time
     {
         btnTag=4646;
+        
         tableViewController1.view_String=@"datestimes";
     }
     else if([sender tag]==5656)//Job Change History End Time
     {
         btnTag=5656;
+        
         tableViewController1.view_String=@"timesdates";
     }
 
@@ -728,6 +738,11 @@
 
 -(IBAction)createJobsButton_Pressed:(id)sender
 {
+    if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"]){
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;
+    }
+    else
+    {
     NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
     [paramsDict1 setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
@@ -739,6 +754,7 @@
     createJobs_UIVIew.hidden=NO;
     [createJobs_Middle_UIVIew.layer setCornerRadius:10.0f];
     [createJobs_Middle_UIVIew.layer setBorderWidth:0.3f];
+    }
 }
 
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender

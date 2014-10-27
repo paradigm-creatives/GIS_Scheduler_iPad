@@ -516,7 +516,8 @@
 
 -(void)nextButtonPressed:(id)sender{
     
-    
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
 
 -(void)submitButnPressed:(id)sender{

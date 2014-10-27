@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISDashBoardViewController">
@@ -51,7 +52,7 @@
                 <outlet property="tableHeader2_UIView" destination="a1G-iw-NCI" id="sgA-Tn-2Nn"/>
                 <outlet property="tableHeader3_UIView" destination="sTX-Le-4yc" id="XdZ-mT-BeB"/>
                 <outlet property="totalHoursSP_Label" destination="Hjk-EG-IUJ" id="hhl-Bz-kKi"/>
-                <outlet property="view" destination="m9C-ho-NXv" id="bch-MF-ISM"/>
+                <outlet property="view" destination="m9C-ho-NXv" id="O91-FJ-qzs"/>
                 <outlet property="waitingForApproval_Label" destination="xdD-XX-ph0" id="Js9-6G-zec"/>
             </connections>
         </placeholder>
@@ -581,6 +582,7 @@
                 </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
         </view>
         <view contentMode="scaleToFill" id="4g6-20-4gw" userLabel="Contacts_View">
@@ -1230,7 +1232,9 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
@@ -1252,4 +1256,9 @@
         <image name="slider.png" width="75" height="715"/>
         <image name="summary.png" width="70" height="70"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

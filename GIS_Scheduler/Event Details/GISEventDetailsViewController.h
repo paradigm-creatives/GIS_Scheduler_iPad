@@ -72,7 +72,7 @@
 @property(nonatomic,strong)NSString *outsideAgencyStr;
 
 @property (strong, nonatomic) IBOutlet UILabel *doumentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *blackBoardLabe;;
+@property (strong, nonatomic) IBOutlet UILabel *blackBoardLabe;
 @property (strong, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (strong, nonatomic) IBOutlet UILabel *otherLabel;
 @property(nonatomic,strong)NSString *document_Str;

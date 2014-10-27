@@ -228,43 +228,60 @@
 -(IBAction)saveButtonPressed:(id)sender
 {
     [currentTextField resignFirstResponder];
-    NSMutableDictionary *addJobDict;
-    addJobDict=[[NSMutableDictionary alloc]init];
-    
-    [addJobDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kRequestID];
-    [addJobDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kLoginRequestorID];
-    [addJobDict setObject:@"" forKey:kSubmitForRequest_JobId];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.jobDate_string] forKey:kEditSchedule_JobDate];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.startTime_string] forKey:kSearchReq_Result_StartTime];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.endTime_string] forKey:kSearchRequest_EndTime];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.typeOfServiceProvider_ID_string] forKey:kViewSchedule_SubroleID];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.serviceProvider_ID_string] forKey:kViewSchedule_ServiceProviderID];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kCancel];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payType_ID_string] forKey:kViewSchedule_PayTypeID];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.outOfAgency_string] forKey:kOutToAgency];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kJobDetais_Timely];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.parking_string] forKey:kChooseReqDetails_parking];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.mileage_string] forKey:kMyJobs_Mileage];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billAmount_string] forKey:kJobDetais_BillAmount];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.amtPaid_string] forKey:kAmtPaid];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.agencyFee_string ]forKey:kAgencyFee];
-    
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timelyandHalf_BillPayment_string ] forKey:kOverrideBill];
-    
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payStatus_ID_string] forKey:kPayStatus];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.expStatus_ID_string] forKey:kExpenseStatus];
-    [addJobDict setObject:@"" forKey:kViewSchedule_JobNotes];
-    [addJobDict setObject:@"" forKey:kBillingLevelID];
-    
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.callInTime_string] forKey:kMyJobs_CallInTime];
-    [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payLevel_ID_string] forKey:kPayLevelID];
-
-    appDelegate.addNewJob_dictionary=addJobDict;
-    
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"changeJobHistory" object:nil];
-    [self performSelector:@selector(closeButtonPressed:) withObject:nil];
+   if ([addUpdateObj.jobDate_string isKindOfClass:[NSNull class]] || addUpdateObj.jobDate_string == (NSString*) [NSNull null] || addUpdateObj.jobDate_string == nil) {
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Job Date"];
+    }
+    else if ([addUpdateObj.startTime_string isKindOfClass:[NSNull class]] || addUpdateObj.startTime_string == (NSString*) [NSNull null] || addUpdateObj.startTime_string == nil) {
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Start Time"];
+    }
+    else if ([addUpdateObj.endTime_string isKindOfClass:[NSNull class]] || addUpdateObj.endTime_string == (NSString*) [NSNull null] || addUpdateObj.endTime_string == nil){
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select End Time"];
+    }
+    else if ([addUpdateObj.typeOfServiceProvider_string isKindOfClass:[NSNull class]] || addUpdateObj.typeOfServiceProvider_string == (NSString*) [NSNull null] || addUpdateObj.typeOfServiceProvider_string == nil){
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Type of Service Provider"];
+    }
+    else if ([addUpdateObj.payLevel_string isKindOfClass:[NSNull class]] || addUpdateObj.payLevel_string == (NSString*) [NSNull null] || addUpdateObj.payLevel_string == nil){
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Pay Level"];
+    }
+    else
+    {
+        NSMutableDictionary *addJobDict;
+        addJobDict=[[NSMutableDictionary alloc]init];
+        
+        [addJobDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kRequestID];
+        [addJobDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kLoginRequestorID];
+        [addJobDict setObject:@"" forKey:kSubmitForRequest_JobId];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.jobDate_string] forKey:kEditSchedule_JobDate];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.startTime_string] forKey:kSearchReq_Result_StartTime];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.endTime_string] forKey:kSearchRequest_EndTime];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.typeOfServiceProvider_ID_string] forKey:kViewSchedule_SubroleID];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.serviceProvider_ID_string] forKey:kViewSchedule_ServiceProviderID];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kCancel];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payType_ID_string] forKey:kViewSchedule_PayTypeID];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.outOfAgency_string] forKey:kOutToAgency];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kJobDetais_Timely];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.parking_string] forKey:kChooseReqDetails_parking];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.mileage_string] forKey:kMyJobs_Mileage];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billAmount_string] forKey:kJobDetais_BillAmount];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.amtPaid_string] forKey:kAmtPaid];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.agencyFee_string ]forKey:kAgencyFee];
+        
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timelyandHalf_BillPayment_string ] forKey:kOverrideBill];
+        
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payStatus_ID_string] forKey:kPayStatus];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.expStatus_ID_string] forKey:kExpenseStatus];
+        [addJobDict setObject:@"" forKey:kViewSchedule_JobNotes];
+        [addJobDict setObject:@"" forKey:kBillingLevelID];
+        
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.callInTime_string] forKey:kMyJobs_CallInTime];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payLevel_ID_string] forKey:kPayLevelID];
+        
+        appDelegate.addNewJob_dictionary=addJobDict;
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"changeJobHistory" object:nil];
+        [self performSelector:@selector(closeButtonPressed:) withObject:nil];
+    }
 }
-
 
 
 -(IBAction)pickerButtonPressed:(id)sender
@@ -375,7 +392,7 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     
-    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
     
     if(btnTag==1)
     {
@@ -464,6 +481,7 @@
 {
     [popover dismissPopoverAnimated:YES];
 }
+
 -(IBAction)radioButton_Pressed:(id)sender
 {
     [currentTextField resignFirstResponder];
