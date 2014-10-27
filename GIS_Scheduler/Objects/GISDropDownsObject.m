@@ -30,12 +30,12 @@
         
         @try {
             
-            id_String = [[json objectForKey:kDropDownID] stringValue];
+            id_String = [json objectForKey:kDropDownID];//[[json objectForKey:kDropDownID] stringValue];
             if(id_String == NULL)
             {
                 id_String = @" ";
             }else{
-                 id_String = [[json objectForKey:kDropDownID] stringValue];
+                id_String = [json objectForKey:kDropDownID];//[[json objectForKey:kDropDownID] stringValue];
             }
                 
             type_String = [json objectForKey:kDropDownType] == [NSNull null]?@" ":[NSString stringWithString:[json objectForKey:kDropDownType]];
