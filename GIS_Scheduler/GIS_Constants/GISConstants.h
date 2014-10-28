@@ -29,6 +29,7 @@
 #define kRequestInfo  @"requestInfo"
 #define kNextSelected  @"nextSelected"
 #define kEventsUpdated  @"eventsUpadted"
+#define kRowSelected  @"rowSelected"
 
 #define kFindRequestJobs_Screen @"findRequestJobs_screen"
 #define kJobAssignment_Screen @"jobAssignment_screen"

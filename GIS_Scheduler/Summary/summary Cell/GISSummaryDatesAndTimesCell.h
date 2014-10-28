@@ -10,4 +10,6 @@
 
 @interface GISSummaryDatesAndTimesCell : UITableViewCell
 
+@property(nonatomic,strong)IBOutlet UIButton *edit_date_button;
+
 @end

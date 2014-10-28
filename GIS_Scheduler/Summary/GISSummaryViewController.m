@@ -175,6 +175,8 @@
         cell.firstName_ans_label.text = unitObj1.firstName_string;
         cell.lastName_ans_label.text = unitObj1.lastName_string;
         cell.email_ans_label.text = unitObj1.email_string;
+        [cell.edit_button setTag:indexPath.section];
+        [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
     }else if(indexPath.section == 1){
         
@@ -219,6 +221,8 @@
         cell.firstName_ans_label.text = _chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails;
         cell.address1_ans_label.text = _chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails;
         cell.address2_ans_label.text = _chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails;
+        [cell.edit_button setTag:indexPath.section];
+        [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
     }else if(indexPath.section == 2){
         
@@ -328,6 +332,9 @@
 
             
         }
+        
+        [cell.edit_button setTag:indexPath.section];
+        [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
     }else if(indexPath.section == 4){
         
@@ -400,6 +407,13 @@
         NSArray *datesViewArray =  [[NSBundle mainBundle] loadNibNamed:@"GISSummaryDatesAndTimesCell" owner:self options:nil];
         
         UIView *datesView = [datesViewArray lastObject];
+
+        
+        UIButton *edit_button = (UIButton *)[datesView viewWithTag:555];
+        [edit_button setTag:section];
+        [edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+
         [headerView1 addSubview:datesView];
         
         return headerView1;
@@ -429,7 +443,8 @@
         infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [infoButton setBackgroundImage:[UIImage imageNamed:@"summary_edit.png"] forState:UIControlStateNormal];
         infoButton.frame = CGRectMake(678, 0.0, 17.0, 17.0);
-        
+        [infoButton setTag:2];
+        [infoButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:infoButton];
         
     }if(section == 6){
@@ -728,6 +743,11 @@
     
 }
 
+-(IBAction)editButtonPressed:(id)sender{
+    
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",[sender tag]],@"tabValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+}
 
 
 - (void)didReceiveMemoryWarning

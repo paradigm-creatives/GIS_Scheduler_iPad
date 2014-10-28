@@ -22,5 +22,6 @@
 @property(nonatomic,strong) IBOutlet UIButton *payType_btn;
 @property(nonatomic,strong) IBOutlet UIButton *response_status_btn;
 @property(nonatomic,strong) IBOutlet UIButton *done_btn;
+@property(nonatomic,strong) IBOutlet UIButton *info_btn;
 
 @end

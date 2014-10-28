@@ -266,6 +266,44 @@
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4NZ-rV-iSe">
+                        <rect key="frame" x="308" y="194" width="19" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="p2l-pW-5I7">
+                        <rect key="frame" x="183" y="190" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                        <state key="normal" backgroundImage="radio_button_empty.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gb8-9Z-3bN">
+                        <rect key="frame" x="276" y="190" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" backgroundImage="radio_button_empty.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outside Agency :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vvG-kZ-tIv">
+                        <rect key="frame" x="22" y="194" width="142" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZW6-4V-Fe9">
+                        <rect key="frame" x="219" y="194" width="23" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -293,6 +331,11 @@
                 <outlet property="opentoPublicbtn1" destination="VzQ-Wm-cgk" id="eRt-CF-SkJ"/>
                 <outlet property="opentoPublicbtn2" destination="Wrc-zD-pbF" id="lL8-2m-eRy"/>
                 <outlet property="othertechnologies_label" destination="v6D-Z7-0k8" id="obN-HA-uUO"/>
+                <outlet property="outSideAgency_label" destination="vvG-kZ-tIv" id="zQC-uu-dJ4"/>
+                <outlet property="outSideAgencyno_label" destination="4NZ-rV-iSe" id="FEU-EO-BlK"/>
+                <outlet property="outSideAgencyyes_label" destination="ZW6-4V-Fe9" id="7DG-JZ-Gfr"/>
+                <outlet property="outsideAgency1" destination="p2l-pW-5I7" id="WRn-gQ-Ke8"/>
+                <outlet property="outsideAgency2" destination="gb8-9Z-3bN" id="Nst-MR-hDs"/>
                 <outlet property="phnConferencebtn" destination="2Le-BH-p1J" id="gqg-Ln-2D0"/>
                 <outlet property="phoneConference_label" destination="Qat-z6-4vM" id="vrn-R4-nZ4"/>
                 <outlet property="record_broadcast_label" destination="mCU-0b-pHl" id="dP7-zU-BAW"/>

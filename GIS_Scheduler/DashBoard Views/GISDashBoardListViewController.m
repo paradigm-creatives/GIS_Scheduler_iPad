@@ -49,6 +49,8 @@
     sectionhideClicked  = NO;
     rowClicked = NO;
     rowsectionClicked = NO;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(rowSelcted:) name:kRowSelected object:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -326,6 +328,13 @@
        
     }
     [_dashBoard_ListTableView reloadData];
+}
+
+-(void)rowSelcted:(NSNotification *) notification{
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    [self tableView:_dashBoard_ListTableView didSelectRowAtIndexPath:indexPath];
+    
 }
 
 - (void)didReceiveMemoryWarning

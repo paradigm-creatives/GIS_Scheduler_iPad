@@ -28,6 +28,9 @@
 @property(nonatomic,strong)IBOutlet UILabel *recordedno_label;
 @property(nonatomic,strong)IBOutlet UILabel *onGoingyes_label;
 @property(nonatomic,strong)IBOutlet UILabel *onGoingno_label;
+@property(nonatomic,strong)IBOutlet UILabel *outSideAgency_label;
+@property(nonatomic,strong)IBOutlet UILabel *outSideAgencyyes_label;
+@property(nonatomic,strong)IBOutlet UILabel *outSideAgencyno_label;
 @property(nonatomic,strong)IBOutlet UITextField *eventName_textField;
 @property(nonatomic,strong)IBOutlet UITextField *course_textField;
 
@@ -37,6 +40,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *recorded2;
 @property (strong, nonatomic) IBOutlet UIButton *onGoing1;
 @property (strong, nonatomic) IBOutlet UIButton *ongoing2;
+@property (strong, nonatomic) IBOutlet UIButton *outsideAgency1;
+@property (strong, nonatomic) IBOutlet UIButton *outsideAgency2;
 @property (strong, nonatomic) IBOutlet UIButton *fmSystembtn;
 @property (strong, nonatomic) IBOutlet UIButton *microPhonebtn;
 @property (strong, nonatomic) IBOutlet UIButton *phnConferencebtn;

@@ -251,7 +251,7 @@
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
+    popover.popoverContentSize = CGSizeMake(340, 200);
     
     if([sender tag]==111)
     {

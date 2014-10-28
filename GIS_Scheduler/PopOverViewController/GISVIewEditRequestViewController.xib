@@ -9,7 +9,6 @@
                 <outlet property="attendeesItem" destination="tIJ-Sg-zet" id="wSf-nv-43W"/>
                 <outlet property="attendees_newItem" destination="oIk-lZ-vUG" id="psw-UF-Adh"/>
                 <outlet property="commentsItem" destination="ofu-Uk-8bn" id="Yyr-fb-y51"/>
-                <outlet property="comments_newItem" destination="s1M-fu-nsx" id="PhD-Lh-9G7"/>
                 <outlet property="contactItem" destination="vC9-iw-Nlc" id="IGE-W0-B1b"/>
                 <outlet property="contact_newItem" destination="eCX-kE-7Hq" id="V7u-QF-GiY"/>
                 <outlet property="created_by_Label" destination="0UP-HX-xFv" id="RAv-Dk-kR2"/>
@@ -117,7 +116,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <tabBar contentMode="scaleToFill" id="IDR-Wx-fme">
-                                    <rect key="frame" x="0.0" y="133" width="812" height="49"/>
+                                    <rect key="frame" x="0.0" y="133" width="722" height="49"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <items>
@@ -140,7 +139,7 @@
                                     </connections>
                                 </tabBar>
                                 <tabBar contentMode="scaleToFill" id="XbG-kt-vWf">
-                                    <rect key="frame" x="0.0" y="133" width="708" height="49"/>
+                                    <rect key="frame" x="0.0" y="133" width="722" height="49"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <items>
@@ -150,7 +149,6 @@
                                         <tabBarItem tag="3" title="" image="location.png" id="Nbh-FB-YRH"/>
                                         <tabBarItem tag="4" title="" image="dates_and_times.png" id="gqw-bL-4CP"/>
                                         <tabBarItem tag="6" title="" image="summary_unPressed.png" id="zP6-Vk-We2"/>
-                                        <tabBarItem tag="7" title="" image="comments_unPressed.png" id="s1M-fu-nsx"/>
                                     </items>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">

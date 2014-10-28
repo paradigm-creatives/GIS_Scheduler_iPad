@@ -210,7 +210,14 @@
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.isMasterHide= !self.isMasterHide;
-    NSString *buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
+    
+    NSString *buttonTitle;
+    
+    if(appDelegate.isHidefromDashboard){
+       buttonTitle = @"";
+       appDelegate.isHidefromDashboard = NO;
+    }
+    buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
     if ([buttonTitle isEqualToString:@""])
     {
         dashBoard_UIView.hidden=NO;
@@ -402,8 +409,12 @@
                 spJobsObj.PayType_String=dropDownObj.value_String;
             }
         }
+        
+        [cell.info_btn setTag:indexPath.row];
 
         [cell.done_btn addTarget:self action:@selector(saveSPData:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.info_btn addTarget:self action:@selector(getRequestdataInfo:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.payType_btn addTarget:self action:@selector(showPopoverDetails_payType_btn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.payType_btn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -439,6 +450,24 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 35;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(!tableHeader1_UIView.isHidden || !tableHeader2_UIView.isHidden){
+        
+        appDelegate.isShowfromDashboard = YES;
+        appDelegate.isHidefromDashboard = YES;
+        
+        [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+        
+        GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
+        
+        appDelegate.chooseRequest_ID_String = nmReqObj.RequestID_String;
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
+        
+    }
 }
 
 -(void)pushToViewController:(int)section rowValue:(int)row{
@@ -851,6 +880,21 @@
 -(void)failuremethod_SaveSPRequests:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+}
+
+- (IBAction)getRequestdataInfo:(id)sender{
+    
+    appDelegate.isShowfromDashboard = YES;
+    appDelegate.isHidefromDashboard = YES;
+    
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    
+    GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:[sender tag]];
+    
+    appDelegate.chooseRequest_ID_String = nmReqObj.RequestID_String;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

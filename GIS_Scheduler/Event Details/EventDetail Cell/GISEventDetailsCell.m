@@ -56,8 +56,11 @@
     [_openTOpublic_label setText:NSLocalizedStringFromTable(@"open_toPublic", TABLE, nil)];
     [_dresscode_label setText:NSLocalizedStringFromTable(@"dress_Code", TABLE, nil)];
     [_record_broadcast_label setText:NSLocalizedStringFromTable(@"recorede_braoadcast", TABLE, nil)];
+    [_outSideAgency_label setText:NSLocalizedStringFromTable(@"outside_agency", TABLE, nil)];
     [_open_topublicno_label setText:NSLocalizedStringFromTable(@"no", TABLE, nil)];
     [_open_topublicyes_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
+    [_outSideAgencyno_label setText:NSLocalizedStringFromTable(@"no", TABLE, nil)];
+    [_outSideAgencyyes_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
     [_recordedno_label setText:NSLocalizedStringFromTable(@"no", TABLE, nil)];
     [_recordedyes_label setText:NSLocalizedStringFromTable(@"yes", TABLE, nil)];
     [_course_label setText:NSLocalizedStringFromTable(@"course_id", TABLE, nil)];
