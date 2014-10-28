@@ -222,10 +222,13 @@
             
             cell.specialTextview.delegate = self;
             cell.otherinfoTextview.delegate = self;
+            cell.address1Textview.delegate = self;
+            cell.address2Textview.delegate = self;
             
             cell.citytextField.delegate = self;
             cell.statetextField.delegate = self;
             cell.ziptextField.delegate = self;
+            cell.locationtextField.delegate = self;
             
             cell.locationtextField.text = _LocationName_string;
             cell.address1Textview.text = _address1_string;

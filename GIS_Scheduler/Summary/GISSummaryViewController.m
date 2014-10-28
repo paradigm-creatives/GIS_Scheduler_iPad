@@ -75,7 +75,7 @@
     
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
-    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"hi",@"hello", nil];
+    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"onhold",@"Approve",@"Reset", nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -440,20 +440,20 @@
         addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
 
         
-//        if(appDelegate.isNewRequest){
-//            [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
-//            [addButton1 addTarget:self
-//                          action:@selector(showPopoverDetails:)
-//                forControlEvents:UIControlEventTouchUpInside];
-//            addButton1.frame = CGRectMake(274, 30.0, 155.0, 27.0);
-//            addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
-//            [addButton1.titleLabel setFont:[GISFonts small]];
-//            [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
-//            [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
-//            [addButton1 setTag:1];
-//            [headerView2 addSubview:addButton1];
-//
-//        }else{
+        if(!appDelegate.isNewRequest){
+            [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
+            [addButton1 addTarget:self
+                          action:@selector(showPopoverDetails:)
+                forControlEvents:UIControlEventTouchUpInside];
+            addButton1.frame = CGRectMake(294, 30.0, 130.0, 27.0);
+            addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+            [addButton1.titleLabel setFont:[GISFonts small]];
+            [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+            [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
+            [addButton1 setTag:1111];
+            [headerView2 addSubview:addButton1];
+
+        }else{
             addButton1.backgroundColor=UIColorFromRGB(0x01971c);
             [addButton1 setTitle:@"Submit to GIS" forState:UIControlStateNormal];
             [addButton1 setTitleColor:UIColorFromRGB(0xffffff) forState:UIControlStateNormal];
@@ -475,7 +475,7 @@
             }
             
             [headerView2 addSubview:addButton1];
-        //}
+        }
 
         
         
@@ -697,10 +697,12 @@
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     
+    
     tableViewController.popOverDelegate = self;
     _popover =   [GISUtility showPopOver:(NSMutableArray *)_serviceTypeArray viewController:tableViewController];
     
     _popover.delegate = self;
+    _popover.popoverContentSize = CGSizeMake(300, 100);
     
     
     if (_popover) {
@@ -714,7 +716,7 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     //eventTypedata= value_str;
-    UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:1];
+    UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:1111];
     [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
     //_eventTypeId_string=id_str;
     

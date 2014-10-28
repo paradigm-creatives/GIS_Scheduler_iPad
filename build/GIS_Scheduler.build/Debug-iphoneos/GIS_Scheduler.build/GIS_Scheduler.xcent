@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>VYLV63448Q.com.pc.GIS</string>
+	<string>AKVHS4VB8J.com.paradigm.GISIPadScheduler</string>
 	<key>com.apple.developer.team-identifier</key>
-	<string>VYLV63448Q</string>
+	<string>AKVHS4VB8J</string>
 	<key>get-task-allow</key>
-	<true/>
+	<false/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>VYLV63448Q.com.pc.GIS</string>
+		<string>AKVHS4VB8J.com.paradigm.GISIPadScheduler</string>
 	</array>
 </dict>
 </plist>

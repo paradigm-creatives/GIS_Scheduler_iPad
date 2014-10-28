@@ -406,7 +406,7 @@
             
         }else if(btn.tag == 33){
             [preparationCell.othersTextField setHidden:TRUE];
-        }else if(btn.tag == 33){
+        }else if(btn.tag == 44){
             preparationCell.document_attach_label.text = @"";
             _document_Str = @"";
         }
@@ -892,8 +892,13 @@
             UITextField *webSiteField=(UITextField *)[self.view viewWithTag:333];
             UITextField *otherMaterilaTypeTextField=(UITextField *)[self.view viewWithTag:444];
             
+            UIButton *blackBoardAccessbtn=(UIButton *)[self.view viewWithTag:111];
+            UIButton *websitebtn=(UIButton *)[self.view viewWithTag:22];
+            UIButton *othersbtn=(UIButton *)[self.view viewWithTag:33];
+            UIButton *documentbtn=(UIButton *)[self.view viewWithTag:44];
             
-            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 ||[blackBoardTextField.text length] == 0 || [webSiteField.text length] == 0 ||[otherMaterilaTypeTextField.text length] == 0 || [_re_broadcastStr length] == 0)
+            
+            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 ||([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([webSiteField.text length] == 0 && websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]) || [_re_broadcastStr length] == 0 || documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
             {
                 if([_fields length]>0)
                     [_fields setString:@""];
@@ -928,8 +933,11 @@
                 [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
                 return;
             }
+            if(blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]||websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] || documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]){
+                
+                [self saveMaterialRequest];
+            }
             
-            [self saveMaterialRequest];
             
             [_othertechvalueStr setString:@""];
             for(int i=0; i <[otherTechStr count];i++){
