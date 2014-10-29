@@ -1134,7 +1134,7 @@
     [self removeLoadingView];
     
     appDelegate.createdDateString = _chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
-    appDelegate.createdByString = _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,_chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];

@@ -68,6 +68,8 @@
     
     SPJobsArray = [[NSMutableArray alloc] init];
     NMRequestsArray = [[NSMutableArray alloc] init];
+    NewRequestsArray = [[NSMutableArray alloc] init];
+    ModifiedRequestsArray = [[NSMutableArray alloc] init];
     
     _gisresponseArray = [[NSArray alloc] initWithObjects:@"Select",@"Assigned",@"Not Assigned",@"Need More Information", nil];
     
@@ -213,17 +215,16 @@
     
     NSString *buttonTitle;
     
-    if(appDelegate.isHidefromDashboard){
-       buttonTitle = @"";
-       appDelegate.isHidefromDashboard = NO;
-    }
     buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
+    
     if ([buttonTitle isEqualToString:@""])
     {
         dashBoard_UIView.hidden=NO;
         CGRect frame1=datListView.frame;
         frame1.origin.x=75;
         datListView.frame=frame1;
+        
+        appDelegate.isHidefromDashboard  = YES;
     }
     else
     {
@@ -231,6 +232,9 @@
         CGRect frame1=datListView.frame;
         frame1.origin.x=0;
         datListView.frame=frame1;
+        
+        appDelegate.isHidefromDashboard = NO;
+        
     }
     
     [btn setTitle:buttonTitle forState:UIControlStateNormal];
@@ -314,10 +318,10 @@
         return [SPJobsArray count];
     }
     else if(!tableHeader1_UIView.isHidden){
-        return [NMRequestsArray count];
+        return [NewRequestsArray count];
     }
     else if (!tableHeader2_UIView.isHidden){
-        return [NMRequestsArray count];
+        return [ModifiedRequestsArray count];
     }
     
     return 20;
@@ -332,7 +336,7 @@
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardCell" owner:self options:nil] objectAtIndex:0];
         }
         
-        GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
+        GISSchedulerNMRequestsObject *nmReqObj = [NewRequestsArray objectAtIndex:indexPath.row];
 
         cell.accountName_Label.text = nmReqObj.AccountName_String;
         cell.requestID_Label.text = nmReqObj.RequestID_String;
@@ -361,8 +365,7 @@
         if (cell==nil) {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISDashBoardReqCell" owner:self options:nil] objectAtIndex:0];
         }
-        
-        GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
+        GISSchedulerNMRequestsObject *nmReqObj = [ModifiedRequestsArray objectAtIndex:indexPath.row];
         
         cell.accountName_Label.text = nmReqObj.AccountName_String;
         cell.requestID_Label.text = nmReqObj.RequestID_String;
@@ -457,9 +460,8 @@
     if(!tableHeader1_UIView.isHidden || !tableHeader2_UIView.isHidden){
         
         appDelegate.isShowfromDashboard = YES;
-        appDelegate.isHidefromDashboard = YES;
         
-        [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+        [self performSelector:@selector(hideShowDashboard) withObject:nil];
         
         GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
         
@@ -562,9 +564,6 @@
                 SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
                 [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
 
-                
-                [self removeLoadingView];
-                
                 [listTableView reloadData];
             }
             else
@@ -606,8 +605,23 @@
                 nmRequestStore=[[GISSchedulerNMRequestsStore alloc]initWithJsonDictionary:response.responseJson];
                 NMRequestsArray=[[GISStoreManager sharedManager] getRequest_NMRequestObject];
                 
-                [_countLabel1 setText:[NSString stringWithFormat:@"%d",[NMRequestsArray count]]];
-                [_countLabel2 setText:[NSString stringWithFormat:@"%d",[NMRequestsArray count]]];
+                if([NewRequestsArray count]>0)
+                   [NewRequestsArray removeAllObjects];
+                if([ModifiedRequestsArray count]>0)
+                    [ModifiedRequestsArray removeAllObjects];
+                
+                for(GISSchedulerNMRequestsObject *nmReqObj in NMRequestsArray){
+                    if([nmReqObj.Tab_String isEqualToString:@"New Request"]){
+                        
+                        [NewRequestsArray addObject:nmReqObj];
+                    }else if([nmReqObj.Tab_String isEqualToString:@"Modified Request"]){
+                        
+                        [ModifiedRequestsArray addObject:nmReqObj];
+                    }
+                }
+                
+                [_countLabel1 setText:[NSString stringWithFormat:@"%d",[NewRequestsArray count]]];
+                [_countLabel2 setText:[NSString stringWithFormat:@"%d",[ModifiedRequestsArray count]]];
                 
                 [self removeLoadingView];
                 
@@ -895,6 +909,12 @@
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
     
+}
+
+-(void)hideShowDashboard
+{
+    self.isMasterHide = YES;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)didReceiveMemoryWarning

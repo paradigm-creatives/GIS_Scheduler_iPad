@@ -71,6 +71,8 @@
     GISSchedulerNMRequestsStore *nmRequestStore;
     NSMutableArray *SPJobsArray;
     NSMutableArray *NMRequestsArray;
+    NSMutableArray *NewRequestsArray;
+    NSMutableArray *ModifiedRequestsArray;
     GISAppDelegate *appDelegate;
     int btn_tag;
     int payTypeBtn_tag;

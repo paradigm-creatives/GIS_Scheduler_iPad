@@ -100,8 +100,20 @@
     
     if(!appDelegate.isNewRequest){
         
+        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+        
+        GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+        [paramsDict setObject:unitObj1.token_string forKey:kToken];
+        
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [self getEventDetailsdata];
+        
+        [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+        
+//        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+//        [self getEventDetailsdata];
         
     }else if(appDelegate.isFromContacts  && appDelegate.isNewRequest){
         
@@ -1222,7 +1234,7 @@
     [self removeLoadingView];
     
     appDelegate.createdDateString = chooseRequest_Detailed_DetailsObj.createdDate_String_chooseReqParsedDetails;
-    appDelegate.createdByString = chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequest_Detailed_DetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequest_Detailed_DetailsObj.requestStatus_String_chooseReqParsedDetails;
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
