@@ -30,11 +30,12 @@
         
         @try {
             
-            id_String = [json objectForKey:kDropDownID];//[[json objectForKey:kDropDownID] stringValue];
+            id_String = [json objectForKey:kDropDownID] ;
             if(id_String == NULL)
             {
                 id_String = @" ";
             }else{
+                 id_String = [json objectForKey:kDropDownID] ;
                 id_String = [json objectForKey:kDropDownID];//[[json objectForKey:kDropDownID] stringValue];
             }
                 

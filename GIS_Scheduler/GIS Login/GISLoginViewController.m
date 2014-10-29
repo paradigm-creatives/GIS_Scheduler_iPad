@@ -78,6 +78,12 @@
     //_userName_textfield.text=@"swamy.pilla@gmail.com";
     //_password_textfield.text=@"admin";
 
+    _userName_textfield.text=@"kbabulenjoy@gmail.com";
+    _password_textfield.text=@"babul";
+    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    _password_textfield.text=@"admin";
+    _userName_textfield.text=@"dv@gmail.com";
+    _password_textfield.text=@"admin";
     //_userName_textfield.text=@"kbabulenjoy@gmail.com";
     //_password_textfield.text=@"babul";
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";

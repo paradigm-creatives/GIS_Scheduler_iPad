@@ -924,6 +924,11 @@
             [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
             [paramsDict setObject:login_Obj.token_string forKey:kToken];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+            
+            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+            [userDefaults synchronize];
+            [userDefaults setValue:@"1234" forKey:kDropDownValue];
+            [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownID];
         }
     }
     else

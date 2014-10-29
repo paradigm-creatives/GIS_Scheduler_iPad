@@ -21,12 +21,12 @@
     if (self = [super init]) {
         
         @try {
-            contactInfoId_String = [[json objectForKey:kGetContactInfoId] stringValue];
+            contactInfoId_String =[json objectForKey:kGetContactInfoId];// [[json objectForKey:kGetContactInfoId] stringValue];
             if(contactInfoId_String == NULL)
             {
                 contactInfoId_String = @" ";
             }else{
-                contactInfoId_String = [[json objectForKey:kGetContactInfoId] stringValue];
+                contactInfoId_String =[json objectForKey:kGetContactInfoId];// [[json objectForKey:kGetContactInfoId] stringValue];
             }
             
            // contactInfoId_String = [json objectForKey:kGetContactInfoId] == NULL?@" ":[NSString stringWithString:[json objectForKey:kGetContactInfoId]];
