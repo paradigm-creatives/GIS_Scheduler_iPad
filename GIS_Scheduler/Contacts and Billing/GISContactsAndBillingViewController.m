@@ -20,6 +20,7 @@
 #import "GISEventDetailsViewController.h"
 #import "GISVIewEditRequestViewController.h"
 #import "FFDateManager.h"
+#import "GISLoadingView.h"
 
 @interface GISContactsAndBillingViewController ()
 
@@ -331,7 +332,7 @@
     chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
     [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequestDetailsObj];
     appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
-    appDelegate.createdByString = chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
     unit_departmentID_String = chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
@@ -546,6 +547,8 @@
         
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
         [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
     }
     @catch (NSException *exception) {
@@ -582,6 +585,7 @@
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
             [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
         }
+        [self removeLoadingView];
         
         if([saveUpdateDict count] > 0){
             
@@ -618,8 +622,10 @@
             
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
         }
+        
     }else{
         
+        [self removeLoadingView];
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
     }
 }
@@ -633,6 +639,18 @@
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
 }
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

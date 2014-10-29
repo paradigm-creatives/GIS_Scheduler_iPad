@@ -55,6 +55,7 @@
 
 #define GIS_SUBMIT_TIME_SHEET @"SubmitforTimeSheet"
 #define GIS_SUBMIT_FOR_REQUEST @"SubmitforRequest"
+#define GIS_SUBMIT_REQUEST @"SubmitRequest"
 #define GIS_GET_SCHEDULER_REQUESTED_JOBS @"GetSchedulerSPRequestedJobs"
 #define GIS_GET_SCHEDULER_NEW_MODIFIED_REQUESTS @"GetSchedulerNewandModifiedRequests"
 #define GIS_GET_SCHEDULER_MASTERS @"GetSchedulerMasters"

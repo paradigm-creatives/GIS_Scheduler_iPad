@@ -25,6 +25,7 @@
 #import "GISJSONProperties.h"
 #import "GISServerManager.h"
 #import "GISSummaryRequestModificationCell.h"
+#import "GISBilingDataObject.h"
 
 @interface GISSummaryViewController ()
 
@@ -75,7 +76,7 @@
     
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
-    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"onhold",@"Approve",@"Reset", nil];
+    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Approve", nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -129,9 +130,9 @@
         return datesDetailCell.frame.size.height;
     }else if(indexPath.section == 5){
         
-        GISSummaryRequestModificationCell *requestModificationCell=(GISSummaryRequestModificationCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        //GISSummaryRequestModificationCell *requestModificationCell=(GISSummaryRequestModificationCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         
-        return requestModificationCell.frame.size.height;
+        return 0;
     }
     
     return summaryCell.frame.size.height;
@@ -152,9 +153,11 @@
         
         cell.section_label.text =  NSLocalizedStringFromTable(@"contact_billing_info", TABLE, nil);
         
-        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-        GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+       // NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+       // NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+       // GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+        
+        
         
         NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
         if (chooseReqDetailedArray.count>0) {
@@ -170,11 +173,20 @@
             }
         }
         
+        GISBilingDataObject *billingdataObj;
+        NSArray *billingArray = [[GISStoreManager sharedManager] getBillingDataObject];
+        billingdataObj = [billingArray lastObject];
         
         cell.unitacNumber_ans_label .text = _chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
-        cell.firstName_ans_label.text = unitObj1.firstName_string;
-        cell.lastName_ans_label.text = unitObj1.lastName_string;
-        cell.email_ans_label.text = unitObj1.email_string;
+        cell.firstName_ans_label.text = billingdataObj.buh_firstName_String;
+        cell.lastName_ans_label.text = billingdataObj.buh_lastName_String;
+        cell.email_ans_label.text = billingdataObj.buh_email_String;
+        cell.address1_ans_label.text = billingdataObj.buh_address1_String;
+        cell.address2_ans_label.text = billingdataObj.buh_address2_String;
+        cell.zip_ans_label.text = billingdataObj.buh_zip_String;
+        cell.city_ans_label.text = billingdataObj.buh_city_String;
+        cell.requestor_ans_label.text = appDelegate.createdByString;
+        
         [cell.edit_button setTag:indexPath.section];
         [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -213,13 +225,37 @@
                 cell.email_ans_label.text = dropDownObj.value_String;
             }
         }
+        NSMutableString *otherArrayString = [[NSMutableString alloc] init];
+        [otherArrayString setString:@""];
+        
+        if([_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails length]>0){
+            NSArray *otherArray = [_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails componentsSeparatedByString:@","];
+            for(int i=0;i<[otherArray count];i++){
+                if([[otherArray objectAtIndex:i] isEqualToString:@"1"]){
+                    
+                    [otherArrayString appendString:@"FMSystem "];
+                }
+                if([[otherArray objectAtIndex:i] isEqualToString:@"2"]){
+                    
+                    [otherArrayString appendString:@"MicroPhone "];
+                }
+                if([[otherArray objectAtIndex:i] isEqualToString:@"3"]){
+                    
+                    [otherArrayString appendString:@"Phone Conferencing "];
+                }
+                if([[otherArray objectAtIndex:i] isEqualToString:@"4"]){
+                    
+                    [otherArrayString appendString:@"Webinar "];
+                }
+            }
+        }
         
         cell.requestor_ans_label.text = _chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails;
         cell.zip_ans_label.text = _chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails;
         cell.city_ans_label.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
         cell.lastName_ans_label.text = _chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails;
         cell.firstName_ans_label.text = _chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails;
-        cell.address1_ans_label.text = _chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails;
+        cell.address1_ans_label.text = otherArrayString;
         cell.address2_ans_label.text = _chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails;
         [cell.edit_button setTag:indexPath.section];
         [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -507,6 +543,7 @@
         [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
         nextButton.titleLabel.font=[GISFonts larger];
         [nextButton.layer setCornerRadius:3.0f];
+        [nextButton setTag:5588];
         [headerView2 addSubview:nextButton];
         
         return headerView2;
@@ -531,6 +568,32 @@
 
 -(void)nextButtonPressed:(id)sender{
     
+    if(!appDelegate.isNewRequest){
+        
+        UIButton *nextbutton=(UIButton *)sender;
+        
+        @try {
+            
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kDateTime_requestNo];
+            [paramsDict setObject:unitObj1.token_string forKey:kToken];
+            NSString *status_ID;
+            if([nextbutton.titleLabel.text isEqualToString:@"OnHold"]){
+                status_ID = @"5";
+                [paramsDict setObject:status_ID forKey:kstatusid];
+            }else{
+                [paramsDict setObject:@"4" forKey:kstatusid];
+            }
+            
+            [[GISServerManager sharedManager] submitViewEditRequest:self withParams:paramsDict finishAction:@selector(successmethod_submitVieweditRequest:) failAction:@selector(failuremethod_submitVieweditRequest:)];
+        }
+        @catch (NSException *exception) {
+            [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get summary submit action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+        }
+    }
     NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
@@ -692,7 +755,7 @@
         [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
         
         appDelegate.createdDateString = _chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
-        appDelegate.createdByString = _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails;
+        appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,_chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
         appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
         
         [_summary_tableView reloadData];
@@ -733,7 +796,9 @@
 {
     //eventTypedata= value_str;
     UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:1111];
+    UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
+    [nextBtn setTitle:value_str forState:UIControlStateNormal];
     //_eventTypeId_string=id_str;
     
     if(_popover)
@@ -747,6 +812,30 @@
     
     NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",[sender tag]],@"tabValue",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+}
+
+-(void)successmethod_submitVieweditRequest:(GISJsonRequest *)response
+{
+    UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Request %@ Successfully",nextBtn.titleLabel.text]];
+    }
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Request %@ failed",nextBtn.titleLabel.text]];
+    }
+}
+
+-(void)failuremethod_submitVieweditRequest:(GISJsonRequest *)response
+{
+    UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
+    [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Error with Request %@",nextBtn.titleLabel.text]];
+    NSLog(@"Failure");
 }
 
 
