@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISJobDetailsViewController"/>
@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="724" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lhS-EH-LKq" id="DSd-Pd-SJ1">
-                <rect key="frame" x="0.0" y="0.0" width="724" height="48"/>
+                <rect key="frame" x="0.0" y="0.0" width="724" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End T" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-53-ja1">
@@ -82,7 +82,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ed2-ft-ZQD" userLabel="Job Date">
-                        <rect key="frame" x="39" y="0.0" width="77" height="38"/>
+                        <rect key="frame" x="39" y="11" width="77" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAh-h1-4Sr">
                                 <rect key="frame" x="3" y="5" width="72" height="30"/>
@@ -111,7 +111,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aN7-hI-Pcs" userLabel="Start Time">
-                        <rect key="frame" x="114" y="0.0" width="77" height="38"/>
+                        <rect key="frame" x="114" y="11" width="77" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OEL-r2-NwD">
                                 <rect key="frame" x="3" y="5" width="72" height="30"/>
@@ -141,7 +141,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQi-Sb-HZV" userLabel="End Time">
-                        <rect key="frame" x="188" y="0.0" width="77" height="38"/>
+                        <rect key="frame" x="188" y="11" width="77" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BoS-SF-hJh">
                                 <rect key="frame" x="3" y="5" width="72" height="30"/>
@@ -171,7 +171,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CXn-vG-Ycs" userLabel="Type of Service">
-                        <rect key="frame" x="266" y="0.0" width="102" height="38"/>
+                        <rect key="frame" x="266" y="11" width="102" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5OU-uO-A2D">
                                 <rect key="frame" x="0.0" y="5" width="102" height="30"/>
@@ -201,7 +201,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AG-iG-MiF" userLabel="Service Provider">
-                        <rect key="frame" x="372" y="0.0" width="97" height="38"/>
+                        <rect key="frame" x="372" y="11" width="97" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kfK-Rk-mdx">
                                 <rect key="frame" x="0.0" y="5" width="97" height="30"/>
@@ -231,7 +231,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PV0-OY-PtK" userLabel="Pay Type">
-                        <rect key="frame" x="471" y="0.0" width="82" height="38"/>
+                        <rect key="frame" x="471" y="11" width="82" height="38"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="baS-R2-GPN">
                                 <rect key="frame" x="2" y="5" width="80" height="30"/>
@@ -289,7 +289,6 @@
                 <outlet property="typeOf_service_Label" destination="9vt-v9-oTK" id="dLm-iT-06S"/>
                 <outlet property="typeOf_service_UIView" destination="CXn-vG-Ycs" id="drx-5S-SQ6"/>
             </connections>
-            <point key="canvasLocation" x="502" y="334"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -299,9 +298,4 @@
         <image name="dropdown.png" width="9" height="5"/>
         <image name="edit.png" width="15" height="16"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
