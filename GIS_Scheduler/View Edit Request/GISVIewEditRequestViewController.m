@@ -206,10 +206,34 @@
     }else{
         
         self.title=@"View/Edit Service Request";
-        [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        if(appDelegate.isShowfromDashboard){
+            
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+            NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+                        
+            for (GISDropDownsObject *dropDownObj in requetDetails) {
+                if ([dropDownObj.value_String isEqualToString:appDelegate.chooseRequest_ID_String]) {
+                    
+                    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                    [dict setValue:dropDownObj.id_String forKey:@"id"];
+                    [dict setValue:dropDownObj.value_String forKey:@"value"];
+                    
+                    [_requestBtn setTitle:dropDownObj.value_String forState:UIControlStateNormal];
+                    
+                    appDelegate.chooseRequest_ID_String=dropDownObj.id_String;
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
+                }
+            }
+            
+            
+            
+        }else{
+            [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        }
         [_requestBtn setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [_requestBtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
-        appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
+        //appDelegate.chooseRequest_ID_String = _requestBtn.titleLabel.text;
         
         [_mainTabbar setHidden:NO];
         [_mainnewTabbar setHidden:YES];
@@ -312,18 +336,30 @@
 -(void)successmethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Success---%@",response.responseJson);
-    dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
-    requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
-    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
-    for (int i=0; i<requestNumbers_mutArray.count; i++) {
-        GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    
+    id array=response.responseJson;
+    NSDictionary *dictHere=[array lastObject];
+    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [self removeLoadingView];
+        
+        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+        requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
+        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+        for (int i=0; i<requestNumbers_mutArray.count; i++) {
+            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+        _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        
+    }else{
+        
+        [self removeLoadingView];
     }
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY ID DESC;"];
-    _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
 }
 
 -(void)failuremethod_chooseRequest:(GISJsonRequest *)response
@@ -531,7 +567,7 @@
     [_currentController.view removeFromSuperview];
     [_mainView addSubview:_currentController.view];
     
-    [self removeLoadingView];
+    //[self removeLoadingView];
     
 }
 

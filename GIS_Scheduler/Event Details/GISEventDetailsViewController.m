@@ -166,6 +166,15 @@
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISEventDetailsCell" owner:self options:nil]objectAtIndex:0];
         }
         
+        if([login_Obj.userStatus_string isEqualToString:kInternal]){
+            
+            [cell.outSideAgency_label setHidden:FALSE];
+            [cell.outSideAgencyno_label setHidden:FALSE];
+            [cell.outSideAgencyyes_label setHidden:FALSE];
+            [cell.outsideAgency1 setHidden:FALSE];
+            [cell.outsideAgency2 setHidden:FALSE];
+        }
+        
         [cell.opentoPublicbtn1 addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.opentoPublicbtn2 addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.recorded1 addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -176,6 +185,9 @@
         [cell.microPhonebtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.phnConferencebtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         [cell.webinarbtn addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.outsideAgency1 addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.outsideAgency2 addTarget:self action:@selector(previousVersionBtnTap:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.eventTypebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
         [cell.dressCodebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,6 +214,8 @@
         [cell.phnConferencebtn setTag:11];
         [cell.webinarbtn setTag:12];
         [cell.broadcastYesSelcted  setTag:555];
+        [cell.outsideAgency1 setTag:57];
+        [cell.outsideAgency2 setTag:58];
         
         if([_open_toPublicStr isEqualToString:@"true"]){
             
@@ -225,6 +239,14 @@
         }else if([_on_goingStr isEqualToString:@"false"]){
             [cell.ongoing2 setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
+        
+        if([_outsideAgencyStr isEqualToString:@"true"]){
+            
+            [cell.outsideAgency1 setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+        }else if([_outsideAgencyStr isEqualToString:@"false"]){
+            [cell.outsideAgency2 setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+        }
+        
         
         if([otherTechStr count] >0){
             _otherTechArray = [[NSArray alloc] initWithArray:otherTechStr];
@@ -427,6 +449,10 @@
             _on_goingStr = @" ";
         }else if(btn.tag == 8){
             _on_goingStr = @" ";
+        }else if(btn.tag == 57){
+            _outsideAgencyStr = @" ";
+        }else if(btn.tag == 58){
+            _outsideAgencyStr = @" ";
         }else if(btn.tag == 9){
             item_value = 1;
             if([otherTechStr count]>0)
@@ -555,6 +581,21 @@
         }else if(btn.tag == 8){
             _on_goingStr = @"false";
             UIButton *btnn=(UIButton *)[self.view viewWithTag:7];
+            if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+            {
+                [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            }
+        }else if(btn.tag == 57){
+            _outsideAgencyStr = @"true";
+            UIButton *btnn=(UIButton *)[self.view viewWithTag:58];
+            if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+            {
+                [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            }
+            
+        }else if(btn.tag == 58){
+            _outsideAgencyStr = @"false";
+            UIButton *btnn=(UIButton *)[self.view viewWithTag:57];
             if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
             {
                 [btnn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
@@ -915,14 +956,14 @@
                     [_fields appendFormat:@"%@%@",@"EventType",@", \n"];
                 if([_re_broadcastStr length] == 0)
                     [_fields appendFormat:@"%@%@",@"Recorded/Broadcast",@","];
-                if([documnet_selected_label.text length] == 0)
+                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
                     [_fields appendFormat:@"%@%@",@"Document",@", \n"];
-                if([blackBoardTextField.text length] == 0)
+                if(blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
                     [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
-                if([webSiteField.text length] == 0)
+                if(websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
                     [_fields appendFormat:@"%@%@",@"Website",@", \n"];
-                if([otherMaterilaTypeTextField.text length] == 0)
-                    [_fields appendFormat:@"%@%@",@"Other MaterialType",@", \n"];
+                if( othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+                    [_fields appendFormat:@"%@%@",@"Other",@", \n"];
                 
                 if([login_Objs.userStatus_string isEqualToString:kInternal]){
                     if([_outsideAgencyStr length] == 0)
@@ -1208,6 +1249,8 @@
     UIButton *recorded2=(UIButton *)[self.view viewWithTag:6];
     UIButton *onGoing1=(UIButton *)[self.view viewWithTag:7];
     UIButton *onGoing2=(UIButton *)[self.view viewWithTag:8];
+    UIButton *_outsideagency1=(UIButton *)[self.view viewWithTag:57];
+    UIButton *_outsideagency2=(UIButton *)[self.view viewWithTag:58];
     UIButton *fmSystembtn=(UIButton *)[self.view viewWithTag:9];
     UIButton *microphoneBtn=(UIButton *)[self.view viewWithTag:10];
     UIButton *phoneConferencingBtn=(UIButton *)[self.view viewWithTag:11];
@@ -1322,18 +1365,18 @@
             [recorded2  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
         }
         
-//        if([_outsideAgencyStr isEqualToString:@"true"])
-//        {
-//            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
-//            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-//        }else if([_outsideAgencyStr isEqualToString:@"false"])
-//        {
-//            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-//            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
-//        }else{
-//            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-//            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-//        }
+        if([_outsideAgencyStr isEqualToString:@"true"])
+        {
+            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+        }else if([_outsideAgencyStr isEqualToString:@"false"])
+        {
+            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+        }else{
+            [_outsideagency1  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [_outsideagency2  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+        }
         
         if([_otherServices_Str isEqualToString:@"1"]){
             [otherServicesBtn setTitle:@"Captioning" forState:UIControlStateNormal];

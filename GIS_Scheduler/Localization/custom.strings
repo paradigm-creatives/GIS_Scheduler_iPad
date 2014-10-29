@@ -54,6 +54,7 @@
 "select_choose_request"= "Select Choose Request";
 "enter_valid_details"="Please enter details in these fields : \n %@ ";
 "please_check_details"="Please check details entered";
+"outside_agency"="Outside Agency";
 
 ////////   Location Details ///////
 

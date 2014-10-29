@@ -425,6 +425,9 @@
         addUpdateObj.typeOfServiceProvider_ID_string=id_str;
         [serviceProvider_ID_Array removeAllObjects];
         NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",addUpdateObj.typeOfServiceProvider_string];
+        if ([addUpdateObj.typeOfServiceProvider_string isEqualToString:@"Any"]) {
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+        }
         serviceProvider_ID_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     }
     else if (btnTag==7)

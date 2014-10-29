@@ -62,6 +62,8 @@
     self.isMonthView = NO;
     self.isWeekView = NO;
     self.isNoofAttendees = NO;
+    self.isShowfromDashboard = NO;
+    self.isHidefromDashboard = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

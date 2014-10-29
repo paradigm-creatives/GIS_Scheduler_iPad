@@ -164,6 +164,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    if(appDelegate.isNewRequest){
+        create_Jobs_Button.hidden = YES;
+    }
+    
     createJobs_UIVIew.hidden=YES;
     createJobs=[[GISCreateJobsViewController alloc]initWithNibName:@"GISCreateJobsViewController" bundle:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
@@ -172,7 +177,6 @@
         [self.doneBtn_createJobs addTarget:self action:@selector(doneButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
     
     if(!appDelegate.isNewRequest){
-        
        
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
@@ -920,6 +924,11 @@
             [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
             [paramsDict setObject:login_Obj.token_string forKey:kToken];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+            
+            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+            [userDefaults synchronize];
+            [userDefaults setValue:@"1234" forKey:kDropDownValue];
+            [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownID];
         }
     }
     else

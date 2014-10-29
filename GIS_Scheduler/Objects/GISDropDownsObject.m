@@ -36,6 +36,7 @@
                 id_String = @" ";
             }else{
                  id_String = [json objectForKey:kDropDownID] ;
+                id_String = [json objectForKey:kDropDownID];//[[json objectForKey:kDropDownID] stringValue];
             }
                 
             type_String = [json objectForKey:kDropDownType] == [NSNull null]?@" ":[NSString stringWithString:[json objectForKey:kDropDownType]];
