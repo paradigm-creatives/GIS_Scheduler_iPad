@@ -313,32 +313,46 @@
     tableViewController1.popOverDelegate=self;
     
    [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
     
     if([sender tag]==111)
     {
         btnTag=111;
         tableViewController1.view_String=@"datestimes";
         tableViewController1.dateTimeMoveUp_string=startDate_TextField.text;
+        if (![startDate_TextField.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if ([sender tag]==222)
     {
         btnTag=222;
         tableViewController1.view_String=@"datestimes";
         tableViewController1.dateTimeMoveUp_string=endDate_TextField.text;
+        if (![endDate_TextField.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if ([sender tag]==333)
     {
         btnTag=333;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=startTime_TextField.text;
-        
+        [formatter setDateFormat:@"hh:mm a"];
+        if (![startTime_TextField.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if ([sender tag]==444)
     {
         btnTag=444;
         tableViewController1.view_String=@"timesdates";
         tableViewController1.dateTimeMoveUp_string=endTime_TextField.text;
-        
+        [formatter setDateFormat:@"hh:mm a"];
+        if (![endTime_TextField.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if ([sender tag]==888)//Create Jobs View Buttons
     {
@@ -1159,9 +1173,8 @@
     [userDefaults synchronize];
     [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
     [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
-    
-    
 }
+
 -(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
 {
     //[self removeLoadingView];
