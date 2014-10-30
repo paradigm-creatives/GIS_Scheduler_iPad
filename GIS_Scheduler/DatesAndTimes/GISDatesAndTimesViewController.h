@@ -11,9 +11,12 @@
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
 #import "GISCreateJobsViewController.h"
+#import "GISChooseRequestDetailsObject.h"
 @interface GISDatesAndTimesViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,PopOverSelected_Protocol,CreateJobsProtocol,UITextFieldDelegate>
 {
     GISAppDelegate *appDelegate;
+    GISChooseRequestDetailsObject *chooseRequestDetailsObj;
+    
     IBOutlet UITableView *datesTimes_tableView;
 
     IBOutlet UILabel *startDate_Label;

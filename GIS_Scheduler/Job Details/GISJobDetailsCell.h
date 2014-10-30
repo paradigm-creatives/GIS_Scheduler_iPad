@@ -32,6 +32,9 @@
 @property(nonatomic,strong) IBOutlet UILabel *service_provider_EDIT_Label;
 @property(nonatomic,strong) IBOutlet UILabel *payType_EDIT_Label;
 
+@property(nonatomic,strong) IBOutlet UIButton *serviceProvider_Button;
+@property(nonatomic,strong) IBOutlet UIButton *payType_Button;
+
 @property(nonatomic,strong) IBOutlet UIButton *editButton;
 @property(nonatomic,strong) IBOutlet UIButton *deleteButton;
 @property(nonatomic,strong) IBOutlet UIImageView *edit_imageView;

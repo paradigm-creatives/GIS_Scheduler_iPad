@@ -10,8 +10,10 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAppDelegate.h"
 #import "GISLoginDetailsObject.h"
+#import "GISChooseRequestDetailsObject.h"
 @interface GISJobDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
 {
+    GISChooseRequestDetailsObject *chooseRequestDetailsObj;
     IBOutlet UITableView *jobDetails_tableView;
     
     UIPopoverController *popover;
@@ -72,11 +74,13 @@
     NSString *chooseRequestID_string;
     
     //UITextField *numberOfServiceProviders_Field;
-    
-    NSString *numberOfServiceProviders_string;
 
+    NSString *numberOfServiceProviders_string;
     
+    NSString *serviceProvider_ID_string;
+    NSString *filledUnfilled_ID_string;
 }
+
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
 -(IBAction)createJobsButton_Pressed:(id)sender;
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender;

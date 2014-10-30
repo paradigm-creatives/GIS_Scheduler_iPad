@@ -77,6 +77,6 @@
 #define GIS_SEARCH_REQUESTED_JOBS @"SearchRequestsJobs"
 #define GIS_SPREQUESTED_JOBS_SEARCH @"SPRequestedJobsSearch"
 #define GIS_JOB_ASSIGNMENT @"JobAssignment"
-
+#define GIS_FILTER_JOB_DETAILS @"FilterJobDetails"
 
 #endif

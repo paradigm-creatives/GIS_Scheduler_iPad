@@ -293,6 +293,7 @@
 
 -(void)failuremethod_ContactsData:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -373,6 +374,7 @@
 
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -426,6 +428,7 @@
 
 -(void)failuremethod_BillingsData:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -455,7 +458,7 @@
 
     contactBilling_Object.chooseRequest_ID_String=[GISUtility returningstring:appDelegate.chooseRequest_ID_String];
     
-    if([contactBilling_Object.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
+    if([appDelegate.chooseRequest_ID_String length]==0){
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
         return;
     }
@@ -506,43 +509,43 @@
         }
         else{
             //anand newly added fields
-            [paramsDict setObject:chooseRequestDetailsObj.statusID_String_chooseReqParsedDetails forKey:kstatusid];
-            [paramsDict setObject:chooseRequestDetailsObj.CapNoOfUsers_String_chooseReqParsedDetails forKey:keventDetails_capnoofUsers];
-            [paramsDict setObject:chooseRequestDetailsObj.CapViewOptions_String_chooseReqParsedDetails forKey:keventDetails_captionView];
-            [paramsDict setObject:chooseRequestDetailsObj.CaptionTypeID_String_chooseReqParsedDetails forKey:keventDetails_captiontype];
-            [paramsDict setObject:chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails forKey:keventDetails_dresscodeId];
-            [paramsDict setObject:chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails forKey:keventDetails_eventDesc];
-            [paramsDict setObject:chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails forKey:keventDetails_eventName];
-            [paramsDict setObject:chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails forKey:keventDetails_eventId];
-            [paramsDict setObject:chooseRequestDetailsObj.onGoing_String_chooseReqParsedDetails forKey:keventDetails_onGoing];
-            [paramsDict setObject:chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails forKey:keventDetails_eventPublic];
-            [paramsDict setObject:chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails forKey:keventDetails_otherServices];
-            [paramsDict setObject:chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails forKey:keventDetails_Othertech];
-            [paramsDict setObject:chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails forKey:keventDetails_broadcast];
-            [paramsDict setObject:chooseRequestDetailsObj.recBroadcastYes_String_chooseReqParsedDetails forKey:keventDetails_recordBroadcastYes];
-            [paramsDict setObject:chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails forKey:keventDetails_CourseId];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.statusID_String_chooseReqParsedDetails] forKey:kstatusid];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.CapNoOfUsers_String_chooseReqParsedDetails] forKey:keventDetails_capnoofUsers];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.CapViewOptions_String_chooseReqParsedDetails] forKey:keventDetails_captionView];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.CaptionTypeID_String_chooseReqParsedDetails] forKey:keventDetails_captiontype];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails] forKey:keventDetails_dresscodeId];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails] forKey:keventDetails_eventDesc];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails] forKey:keventDetails_eventName];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails] forKey:keventDetails_eventId];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.onGoing_String_chooseReqParsedDetails] forKey:keventDetails_onGoing];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails] forKey:keventDetails_eventPublic];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails] forKey:keventDetails_otherServices];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails] forKey:keventDetails_Othertech];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails] forKey:keventDetails_broadcast];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.recBroadcastYes_String_chooseReqParsedDetails] forKey:keventDetails_recordBroadcastYes];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails] forKey:keventDetails_CourseId];
             
-            [paramsDict setObject:chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails forKey:kChooseReqDetails_reqlocationid];
-            [paramsDict setObject:chooseRequestDetailsObj.generalLocation_String_chooseReqParsedDetails forKey:kChooseReqDetails_generallocationid];
-            [paramsDict setObject:chooseRequestDetailsObj.building_Id_String_chooseReqParsedDetails forKey:kChooseReqDetails_buildingid];
-            [paramsDict setObject:chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails forKey:kChooseReqDetails_roomnunber];
-            [paramsDict setObject:chooseRequestDetailsObj.RoomName_String_chooseReqParsedDetails forKey:kChooseReqDetails_roomname];
-            [paramsDict setObject:chooseRequestDetailsObj.other_String_chooseReqParsedDetails forKey:kChooseReqDetails_other];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcamplocname];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcampaddress1];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_address2_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcampaddress2];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcampstate];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcampcity];
-            [paramsDict setObject:chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails forKey:kChooseReqDetails_offcampzip];
-            [paramsDict setObject:chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails forKey:kChooseReqDetails_closestmetro];
-            [paramsDict setObject:chooseRequestDetailsObj.parking_String_chooseReqParsedDetails forKey:kChooseReqDetails_parking];
-            [paramsDict setObject:chooseRequestDetailsObj.SpecialProtocol_String_chooseReqParsedDetails forKey:kChooseReqDetails_specialprotocol];
-            [paramsDict setObject:chooseRequestDetailsObj.otherInfo_String_chooseReqParsedDetails forKey:kChooseReqDetails_other_info];
-            [paramsDict setObject:chooseRequestDetailsObj.offLoc_ID_String_chooseReqParsedDetails forKey:kChooseReqDetails_OffCampLocID];
-            [paramsDict setObject:chooseRequestDetailsObj.transportation_String_chooseReqParsedDetails forKey:kChooseReqDetails_Transport];
-            [paramsDict setObject:chooseRequestDetailsObj.transportationYes_String_chooseReqParsedDetails forKey:kChooseReqDetails_transportnotes];
-            [paramsDict setObject:chooseRequestDetailsObj.adminComments_String_chooseReqParsedDetails forKey:kChooseReqDetails_adminComments];
-            [paramsDict setObject:chooseRequestDetailsObj.schedulerComments_String_chooseReqParsedDetails forKey:kChooseReqDetails_schedulerComments];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails] forKey:kChooseReqDetails_reqlocationid];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.generalLocation_String_chooseReqParsedDetails] forKey:kChooseReqDetails_generallocationid];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.building_Id_String_chooseReqParsedDetails] forKey:kChooseReqDetails_buildingid];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails] forKey:kChooseReqDetails_roomnunber];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.RoomName_String_chooseReqParsedDetails] forKey:kChooseReqDetails_roomname];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.other_String_chooseReqParsedDetails] forKey:kChooseReqDetails_other];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcamplocname];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcampaddress1];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_address2_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcampaddress2];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcampstate];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcampcity];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails] forKey:kChooseReqDetails_offcampzip];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails] forKey:kChooseReqDetails_closestmetro];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.parking_String_chooseReqParsedDetails] forKey:kChooseReqDetails_parking];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.SpecialProtocol_String_chooseReqParsedDetails] forKey:kChooseReqDetails_specialprotocol];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.otherInfo_String_chooseReqParsedDetails] forKey:kChooseReqDetails_other_info];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.offLoc_ID_String_chooseReqParsedDetails] forKey:kChooseReqDetails_OffCampLocID];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.transportation_String_chooseReqParsedDetails] forKey:kChooseReqDetails_Transport];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.transportationYes_String_chooseReqParsedDetails] forKey:kChooseReqDetails_transportnotes];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.adminComments_String_chooseReqParsedDetails] forKey:kChooseReqDetails_adminComments];
+            [paramsDict setObject:[GISUtility returningstring:chooseRequestDetailsObj.schedulerComments_String_chooseReqParsedDetails] forKey:kChooseReqDetails_schedulerComments];
         }
         
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -632,6 +635,7 @@
 
 -(void)failuremethod_saveUpdateRequest:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 

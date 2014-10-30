@@ -47,6 +47,7 @@
 @property(nonatomic,strong)NSMutableString *days_MutableStr;
 -(IBAction)pickerButtonPressed:(id)sender;
 -(IBAction)search_ButtonPressed:(id)sender;
+-(IBAction)clear_ButtonPressed:(id)sender;
 -(IBAction)weekDays_ButtonPressed:(id)sender;
 -(IBAction)radioButton_Pressed:(id)sender;
 @end

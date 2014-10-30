@@ -44,8 +44,11 @@
     self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     
     findReqObj=[[GISFindRequestJobsObject alloc]init];
-//    findReqObj.startDate_JobData_string=@"08/25/2012";
-//    findReqObj.endDate_JobData_string=@"08/27/2012";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    findReqObj.startDate_JobData_string=[formatter stringFromDate:[NSDate date]];//@"08/25/2012";
+    findReqObj.endDate_JobData_string=[formatter stringFromDate:[NSDate date]];//@"08/27/2012";
+    
     findReqObj.weekDays_dictionary=[[NSMutableDictionary alloc]init];
     
     requestorType_array=[[NSMutableArray alloc]init];
@@ -813,7 +816,11 @@
 {
     NSLog(@"leftSwipeHandle");
 }
-
+-(IBAction)clear_ButtonPressed:(id)sender
+{
+    findReqObj=[[GISFindRequestJobsObject alloc]init];
+    [findReqJobs_tableView reloadData];
+}
 
 - (void)didReceiveMemoryWarning
 {

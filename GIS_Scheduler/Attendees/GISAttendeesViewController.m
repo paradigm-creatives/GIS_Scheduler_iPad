@@ -508,6 +508,13 @@ int row_count = 2;
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
+    
+    
 }
 
 -(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
@@ -522,8 +529,8 @@ int row_count = 2;
     appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
-    
-    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+
     @try {
         //Expected no
         // attendeesObject.expectedNo_String=chooseRequestDetailsObj.expected_No_of_attendees_String_chooseReqParsedDetails;
@@ -601,6 +608,7 @@ int row_count = 2;
 
 -(void)failuremethod_getChooseRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -636,6 +644,7 @@ int row_count = 2;
 }
 -(void)failuremethod_get_Attendees_Details:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -931,6 +940,7 @@ int row_count = 2;
 
 -(void)failuremethod_Attendees_save_update:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     appDelegate.isFromAttendees = NO;
     NSLog(@"Failure");
 }

@@ -445,6 +445,7 @@
 
 -(void)failuremethod_getLocationRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -945,6 +946,7 @@
 
 -(void)failuremethod_eventDetailsRequest:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     appDelegate.isFromlocation  = NO;
     NSLog(@"Failure");
 }
@@ -987,6 +989,7 @@
 
 -(void)failuremethod_getoffLocationRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -1146,6 +1149,7 @@
 
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 

@@ -54,7 +54,7 @@
 
 #define kRequestNo @"RequestNo"
 #define kRequestorId @"RequestorId"
-#define kToken @"Token"
+//#define kToken @"Token"
 
 #define kORequest @"oRequest"
 #define kOMaterialDetails @"oMaterialDetails"

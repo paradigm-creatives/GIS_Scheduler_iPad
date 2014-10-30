@@ -920,7 +920,6 @@
         [self removeLoadingView];
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
     }
-    
 }
 
 -(void)saveEventDetailsData
@@ -1246,6 +1245,7 @@
 
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -1664,6 +1664,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
+    [self removeLoadingView];
     NSLog(@"failed with error %@",error);
 }
 

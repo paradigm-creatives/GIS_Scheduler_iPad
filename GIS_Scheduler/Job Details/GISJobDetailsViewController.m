@@ -26,6 +26,7 @@
 
 @interface GISJobDetailsViewController ()
 -(void)getJobDetails_Data;
+-(void)getJobDetails_Data:(NSString *)chooseRequest_idStr:(NSString*)token:(NSString *)serviceProviderID:(NSString *)jobDate:(NSString *)filledUnfilled_str;
 @end
 
 @implementation GISJobDetailsViewController
@@ -59,7 +60,7 @@
 
     payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
     billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
-    filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"a",@"b",@"c", nil];
+    filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"Filled",@"UnFilled", nil];// Keys-- Filled=1, Unfilled =2   If  not anything then 0
     
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
     serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
@@ -82,12 +83,14 @@
     [jobHistory_textView.layer setBorderWidth:0.6];
     [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [jobHistory_textView.layer setCornerRadius:10.0f];
-    [self getJobDetails_Data];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    filledUnfilled_ID_string=@"0";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     startDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
@@ -96,18 +99,22 @@
     endDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
     
     user_textField.text=login_Obj.firstName_string;
-}
-
--(void)getJobDetails_Data
-{
+    
     if (![appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"]){
         chooseRequestID_string=appDelegate.chooseRequest_ID_String;
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:[GISUtility returningstring:chooseRequestID_string] forKey:KRequestId];
-        [paramsDict setObject:login_Obj.token_string forKey:kToken];
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+        
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
     }
+}
+
+
+-(void)getJobDetails_Data:(NSString *)chooseRequest_idStr:(NSString*)token:(NSString *)serviceProviderID:(NSString *)jobDate:(NSString *)filledUnfilled_str
+{
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:chooseRequest_idStr forKey:KRequestId];
+    [paramsDict setObject:token forKey:kToken];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
 }
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
@@ -117,13 +124,46 @@
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
 
+    
     //[paramsDict setObject:@"2701" forKey:KRequestId];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
     chooseRequestID_string=appDelegate.chooseRequest_ID_String;
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
-    [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+    [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+    
+    //[[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+   
+    [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+    
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
+    
+}
+
+-(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    //[self removeLoadingView];
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeChooseRequestDetailsObjects];
+    chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
+    [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequestDetailsObj];
+    
+    appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
+    appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+    
+}
+
+-(void)failuremethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
 }
 
 -(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
@@ -336,7 +376,10 @@
     
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+    if (![appDelegate.statusString isEqualToString:@"Approved"]) {
+        cell.serviceProvider_UIView.userInteractionEnabled=NO;
+        cell.payType_UIView.userInteractionEnabled=NO;
+    }
     return cell;
 }
 
@@ -364,10 +407,12 @@
     else if([sender tag]==333)
     {
         btnTag=333;
+        tableViewController1.popOverArray=filled_Unfilled_Array;
     }
     else if([sender tag]==444)
     {
         // Search Button Action
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:serviceProvider_Answer_Label.text:jobDate_Answer_Label.text:filledUnfilled_Answer_Label.text];
     }
     else if([sender tag]==1111)//Edit JobDate
     {
@@ -472,12 +517,22 @@
     else if(btnTag==222)
     {
         serviceProvider_Answer_Label.text=value_str;
+        serviceProvider_ID_string=id_str;
     }
     else if(btnTag==333)
     {
+        filledUnfilled_Answer_Label.text=value_str;
     }
     else if(btnTag==444)
     {
+        if ([value_str isEqualToString:@"Filled"]) {
+            filledUnfilled_ID_string=@"1";
+        }
+        else
+        {
+            filledUnfilled_ID_string=@"2";
+        }
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:serviceProvider_ID_string:[GISUtility returningstring:jobDate_Answer_Label.text]:[GISUtility returningstring:filledUnfilled_ID_string]];
     }
     else if (btnTag==1111)
     {
@@ -674,10 +729,8 @@
          [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
          [[GISServerManager sharedManager] updateJobDetails:self withParams:appDelegate.addNewJob_dictionary finishAction:@selector(successmethod_AddUpdateJob_data:) failAction:@selector(failuremethod_AddUpdateJob_data:)];
          [appDelegate.addNewJob_dictionary removeAllObjects];
-         
     }
     }
-    
 }
 
 -(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
@@ -690,12 +743,15 @@
     
     if ([success isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
-        appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication] delegate];
+        /*
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:chooseRequestID_string] forKey:KRequestId];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+         */
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+        
     }
 }
 
@@ -704,6 +760,7 @@
     [self removeLoadingView];
     NSLog(@"Failure");
 }
+
 
 -(void)showChangeJobHistoryView
 {
@@ -763,6 +820,7 @@
     NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
     [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kID];
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
     
     [noOfServiceProviders_TextField resignFirstResponder];
@@ -771,6 +829,7 @@
     createJobs_UIVIew.hidden=NO;
     [createJobs_Middle_UIVIew.layer setCornerRadius:10.0f];
     [createJobs_Middle_UIVIew.layer setBorderWidth:0.3f];
+        [createJObs_tableView reloadData];
     }
 }
 
@@ -880,7 +939,8 @@
     
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
-        [self getJobDetails_Data];
+        
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
         
     }else{
         

@@ -183,7 +183,7 @@
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         if (![appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"])
         {
-             [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
         }
     }
@@ -925,10 +925,7 @@
             [paramsDict setObject:login_Obj.token_string forKey:kToken];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
             
-            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-            [userDefaults synchronize];
-            [userDefaults setValue:@"1234" forKey:kDropDownValue];
-            [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownID];
+            
         }
     }
     else
@@ -940,6 +937,7 @@
 
 -(void)failuremethod_save_Date_Time:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
     NSLog(@"Failure");
 }
 
@@ -1151,7 +1149,38 @@
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
+    
     [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
+    
+    
+}
+-(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    //[self removeLoadingView];
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    [[GISStoreManager sharedManager]removeChooseRequestDetailsObjects];
+    chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
+    [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequestDetailsObj];
+    
+    appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
+    appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+
+}
+
+-(void)failuremethod_getChooseRequestDetails:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
 }
 
 -(IBAction)saveButtonPressed:(id)sender
