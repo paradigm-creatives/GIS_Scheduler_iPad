@@ -26,6 +26,9 @@
 #import "GISServerManager.h"
 #import "GISSummaryRequestModificationCell.h"
 #import "GISBilingDataObject.h"
+#import "GISJobDetailsCell.h"
+#import "GISSummaryJobDetailsCell.h"
+#import "GISLoadingView.h"
 
 @interface GISSummaryViewController ()
 
@@ -61,7 +64,7 @@
         }
     }
 
-    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     loginObJ=[requetId_array lastObject];
@@ -83,7 +86,7 @@
 {
     [super viewWillAppear: animated];
         
-    [_summary_tableView reloadData];
+    //[_summary_tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -101,10 +104,7 @@
         return 0;
     if(section == 5)
     {
-        if ([_chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails isEqualToString:@"true"]) {
-            return 1;
-        }
-        return 0;
+        return [appDelegate.jobDetailsArray count];
     }
 
     
@@ -113,10 +113,15 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GISSummaryCell *summaryCell;
-    if(indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 3) {
+    if(indexPath.section == 0 || indexPath.section == 1) {
         
         summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return summaryCell.frame.size.height;
+        
+    }else if(indexPath.section == 3){
+        
+        summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return summaryCell.frame.size.height-50;
         
     }else if(indexPath.section == 2){
         
@@ -130,9 +135,11 @@
         return datesDetailCell.frame.size.height;
     }else if(indexPath.section == 5){
         
-        //GISSummaryRequestModificationCell *requestModificationCell=(GISSummaryRequestModificationCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        if(appDelegate.isNewRequest)
+            return 0;
         
-        return 0;
+        GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return jobDetailsCell.frame.size.height;
     }
     
     return summaryCell.frame.size.height;
@@ -407,24 +414,28 @@
 
     } if(indexPath.section == 5){
         
-        GISSummaryRequestModificationCell *cell=(GISSummaryRequestModificationCell *)[tableView dequeueReusableCellWithIdentifier:@"cell86"];
+        GISJobDetailsCell *cell=(GISJobDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell86"];
         
         if(cell==nil)
         {
-            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryRequestModificationCell" owner:self options:nil]objectAtIndex:0];
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobDetailsCell" owner:self options:nil]objectAtIndex:0];
         }
-        cell.addnotes_textView.delegate = self;
-        cell.addnotes_textView.text = @"Add Notes";
-        cell.addnotes_textView.textColor = UIColorFromRGB(0x00457c);
-        cell.request_label.textColor=UIColorFromRGB(0x00457c);
-        cell.request_label.font=[GISFonts normalBold];
-        [cell.checkButton addTarget:self action:@selector(checkMark_buttonClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        if (isCheckMark)
-            [cell.checkButton  setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
-        else{
-            [cell.checkButton  setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-        }
+        GISJobDetailsObject *temp_obj_jobDetails=[appDelegate.jobDetailsArray objectAtIndex:indexPath.row];
+        cell.job_ID_Label.text=temp_obj_jobDetails.jobNumber_string;
+        cell.job_date_Label.text=temp_obj_jobDetails.jobDate_string;
+        cell.start_time_Label.text=temp_obj_jobDetails.startTime_string;
+        cell.end_time_Label.text=temp_obj_jobDetails.endTime_string;
+        cell.typeOf_service_Label.text=temp_obj_jobDetails.typeOfService_string;
+        cell.service_provider_Label.text=temp_obj_jobDetails.serviceProvider_string;
+        cell.payType_Label.text=temp_obj_jobDetails.payType_string;
+        cell.timely_Label.text=temp_obj_jobDetails.timely_string;
+        cell.billAmt_Label.text=temp_obj_jobDetails.billAmount_string;
+        
+        cell.typeOf_service_UIView.hidden = YES;
+        cell.serviceProvider_UIView.hidden = YES;
+        cell.payType_UIView.hidden = YES;
+        
         return cell;
     }
     
@@ -451,6 +462,23 @@
 
 
         [headerView1 addSubview:datesView];
+        
+        return headerView1;
+        
+    }else  if(section == 5){
+        
+        UIView *headerView1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
+        
+        NSArray *jobDetailsViewArray =  [[NSBundle mainBundle] loadNibNamed:@"GISSummaryJobDetailsCell" owner:self options:nil];
+        
+        UIView *jobsView = [jobDetailsViewArray lastObject];
+        
+        
+        UIButton *edit_button = (UIButton *)[jobsView viewWithTag:556];
+        [edit_button setTag:section];
+        [edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView1 addSubview:jobsView];
         
         return headerView1;
         
@@ -501,7 +529,7 @@
             [addButton1.titleLabel setFont:[GISFonts small]];
             [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
             [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
-            [addButton1 setTag:1111];
+            [addButton1 setTag:11115];
             [headerView2 addSubview:addButton1];
 
         }else{
@@ -560,8 +588,12 @@
         return 50;
     if(section == 6)
         return 80;
-    if(section == 5)
-        return 30;
+    if(section == 5){
+        if(appDelegate.isNewRequest)
+            return 0;
+        
+        return 50;
+    }
 
     return 0;
 }
@@ -593,9 +625,13 @@
         @catch (NSException *exception) {
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get summary submit action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+    }else{
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
     }
-    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
 
 -(void)submitButnPressed:(id)sender{
@@ -609,13 +645,10 @@
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kDateTime_requestNo];
         [paramsDict setObject:unitObj1.token_string forKey:kToken];
         NSString *status_ID;
-        if(!isCheckMark){
-            status_ID = @"1";
-            [paramsDict setObject:status_ID forKey:kstatusid];
-        }else{
-            //[paramsDict setObject:self.status_Id_reqForModification forKey:kstatusid];
-            [paramsDict setObject:@"6" forKey:kstatusid];
-        }
+        status_ID = @"1";
+        [paramsDict setObject:status_ID forKey:kstatusid];
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
         [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
     }
@@ -633,6 +666,9 @@
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [self removeLoadingView];
+        
         isRequestSubmitted=YES;
         [_summary_tableView reloadData];
         [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit Successfully"];
@@ -662,16 +698,27 @@
 -(void)successmethod_getRequestEventDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
-    [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
-    _chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
-    [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
-    if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"In-Complete"]) {
-        isRequestSubmitted=NO;
-        //[_summaryTableView reloadData];
-    }
-    else if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"Completed"]) {
-        isRequestSubmitted=YES;
-        //[_summaryTableView reloadData];
+    
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [self removeLoadingView];
+        [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
+        _chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
+        [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
+        if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"In-Complete"]) {
+            isRequestSubmitted=NO;
+            //[_summaryTableView reloadData];
+        }
+        else if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"Completed"]) {
+            isRequestSubmitted=YES;
+            //[_summaryTableView reloadData];
+        }
+    }else{
+        [self removeLoadingView];
     }
 }
 
@@ -795,7 +842,7 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     //eventTypedata= value_str;
-    UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:1111];
+    UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:11115];
     UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
     [nextBtn setTitle:value_str forState:UIControlStateNormal];
@@ -836,6 +883,17 @@
     UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Error with Request %@",nextBtn.titleLabel.text]];
     NSLog(@"Failure");
+}
+
+-(void)addLoadViewWithLoadingText:(NSString*)title
+{
+    [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
+    // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
+    
+}
+-(void)removeLoadingView
+{
+    [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 
 

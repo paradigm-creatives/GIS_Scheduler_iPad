@@ -54,7 +54,7 @@
 
 #define kRequestNo @"RequestNo"
 #define kRequestorId @"RequestorId"
-#define kToken @"Token"
+#define kToken @"token"
 
 #define kORequest @"oRequest"
 #define kOMaterialDetails @"oMaterialDetails"
@@ -94,7 +94,6 @@
 
 
 #pragma mark posting to Contacts and Billing Start
-#define kToken @"token"
 #define kID @"id"
 
 #define kunitid @"unitid"

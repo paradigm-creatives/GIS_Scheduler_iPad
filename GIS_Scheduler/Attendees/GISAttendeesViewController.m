@@ -91,7 +91,7 @@ int row_count = 2;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if ((appDelegate.isFromContacts && !appDelegate.isNewRequest)||([appDelegate.chooseRequest_ID_String length])) {
+    if ((appDelegate.isFromContacts && !appDelegate.isNewRequest)||([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])) {
         
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];

@@ -100,6 +100,9 @@
         frame.origin.y = 64;
         _mainView.frame = frame;
         
+        [self getUpdatedEventDetails];
+
+        
     }else{
         _currentController= contactsBillingView;
     }
@@ -226,9 +229,9 @@
                 }
             }
             
-            
-            
         }else{
+            
+            appDelegate.chooseRequest_ID_String = @"";
             [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
         }
         [_requestBtn setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
@@ -241,22 +244,26 @@
     
     [[UITabBar appearance] setSelectedItem:_contactItem];
     
-    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-    login_Obj=[requetId_array lastObject];
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
-    [paramsDict setObject:login_Obj.token_string forKey:kToken];
-    [[GISStoreManager sharedManager]removeRequestNumbersObjects];
+    if(!appDelegate.isNewRequest){
+        
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+        _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        
+//        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+//        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+//        login_Obj=[requetId_array lastObject];
+//        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//        [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
+//        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+//        [[GISStoreManager sharedManager]removeRequestNumbersObjects];
+//        
+//        [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+    }
     
-    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
-       
-    [self getUpdatedEventDetails];
-    
 
 }
 
@@ -333,39 +340,39 @@
 }
 
 
--(void)successmethod_chooseRequest:(GISJsonRequest *)response
-{
-    NSLog(@"Success---%@",response.responseJson);
-    
-    id array=response.responseJson;
-    NSDictionary *dictHere=[array lastObject];
-    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
-        
-        [self removeLoadingView];
-        
-        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
-        requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
-        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
-        for (int i=0; i<requestNumbers_mutArray.count; i++) {
-            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
-            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-        }
-        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
-        _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
-        
-    }else{
-        
-        [self removeLoadingView];
-    }
-}
-
--(void)failuremethod_chooseRequest:(GISJsonRequest *)response
-{
-    NSLog(@"Failure");
-}
+//-(void)successmethod_chooseRequest:(GISJsonRequest *)response
+//{
+//    NSLog(@"Success chooseRequest Details---%@",response.responseJson);
+//    
+//    id array=response.responseJson;
+//    NSDictionary *dictHere=[array lastObject];
+//    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+//        
+//        [self removeLoadingView];
+//        
+//        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+//        requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
+//        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+//        for (int i=0; i<requestNumbers_mutArray.count; i++) {
+//            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+//            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+//            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+//            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+//            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+//        }
+//        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+//        _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+//        
+//    }else{
+//        
+//        [self removeLoadingView];
+//    }
+//}
+//
+//-(void)failuremethod_chooseRequest:(GISJsonRequest *)response
+//{
+//    NSLog(@"Failure");
+//}
 
 -(void)moveUp:(NSNotification *) notification{
     

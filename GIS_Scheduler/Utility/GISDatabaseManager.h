@@ -27,6 +27,7 @@
 -(void)insertDropDownData:(NSDictionary*)loginDict Query:(NSString *)query;
 -(NSArray *)getDropDownArray:(NSString *)query;
 -(NSArray *)geLoginArray:(NSString *)query;
+-(void)insertChooseRequestData:(NSDictionary*)loginDict Query:(NSString *)query;
 
 -(void)insertContactInfoData:(NSDictionary*)contactInfoDict;
 -(NSArray *)getContactsArray:(NSString *)query;
