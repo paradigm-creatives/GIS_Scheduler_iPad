@@ -84,7 +84,10 @@
     [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [jobHistory_textView.layer setCornerRadius:10.0f];
     
-    
+
+    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
+        [self getJobDetails_Data];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -177,6 +180,8 @@
 //        [jobDetails_Array removeAllObjects];
     jobDetails_Array=[[NSMutableArray alloc] init];
     jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
+    
+    appDelegate.jobDetailsArray = jobDetails_Array;
     
     [jobDetails_tableView reloadData];
     NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
@@ -659,6 +664,8 @@
 
 -(IBAction)nextButtonPressed:(id)sender
 {
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
 
 -(IBAction)jobHistory_TitleButtonPressed:(id)sender

@@ -169,11 +169,16 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
     
+    NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+    [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
+    [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+    
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+    
     [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
     
     [_countLabel1 setFont:[GISFonts tiny]];
@@ -263,8 +268,8 @@
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
     
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
-    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+    [paramsDict setObject:login_Obj.token_string forKey:kAttendees_token];
 
     if (sender.selectedSegmentIndex==0) {
         tableHeader1_UIView.hidden = FALSE;
@@ -353,6 +358,8 @@
             cell.status_Label.backgroundColor=[UIColor yellowColor];
         }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Orange"]) {
             cell.status_Label.backgroundColor=[UIColor orangeColor];
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"White"]) {
+            cell.status_Label.backgroundColor=[UIColor grayColor];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

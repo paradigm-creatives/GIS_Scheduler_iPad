@@ -197,11 +197,11 @@
     contactBilling_Object.lastName_String=login_Obj.lastName_string;
     contactBilling_Object.email_String=login_Obj.email_string;
     
-    
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
-    [paramsDict setObject:login_Obj.token_string forKey:kToken];
-    [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
+    //DONT DELETE IT
+//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//    [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
+//    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+//    [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
@@ -213,7 +213,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if ([appDelegate.chooseRequest_ID_String length]) {
+    if ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]) {
+        
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -273,22 +274,32 @@
 
 -(void)successmethod_ContactsData:(GISJsonRequest *)response
 {
-    GISContactsInfoStore *contactsInfoStore;
     NSLog(@"successmethod_ContactsData Success---%@",response.responseJson);
-    contactsInfoStore=[[GISContactsInfoStore alloc]initWithJsonDictionary:response.responseJson];
-    [contacts_Info_mutArray removeAllObjects];
-    contacts_Info_mutArray=[[GISStoreManager sharedManager]getContactsInfoObjects];
-    
-    //Contacts INFO DB
-    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CONTACTS_INFO];
-    for (int i=0; i<contacts_Info_mutArray.count; i++) {
-        GISContactsInfoObject *contactObj=[contacts_Info_mutArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects: contactObj.contactInfoId_String,contactObj.contactNo_String,contactObj.contactType_String,contactObj.contactTypeId_String,contactObj.contactTypeNo_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kGetContactInfoId,kGetContactNo,kGetContactType,kGetContactTypeId,kGetContactTypeNo, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertContactInfoData:dic];
+    NSDictionary *saveUpdateDict;
+    GISContactsInfoStore *contactsInfoStore;
+
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        contactsInfoStore=[[GISContactsInfoStore alloc]initWithJsonDictionary:response.responseJson];
+        [contacts_Info_mutArray removeAllObjects];
+        contacts_Info_mutArray=[[GISStoreManager sharedManager]getContactsInfoObjects];
+        
+        //Contacts INFO DB
+        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CONTACTS_INFO];
+        for (int i=0; i<contacts_Info_mutArray.count; i++) {
+            GISContactsInfoObject *contactObj=[contacts_Info_mutArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects: contactObj.contactInfoId_String,contactObj.contactNo_String,contactObj.contactType_String,contactObj.contactTypeId_String,contactObj.contactTypeNo_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kGetContactInfoId,kGetContactNo,kGetContactType,kGetContactTypeId,kGetContactTypeNo, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertContactInfoData:dic];
+        }
+        ////Contacts INFO
+    }else if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+        
     }
-    ////Contacts INFO
 }
 
 -(void)failuremethod_ContactsData:(GISJsonRequest *)response
@@ -596,7 +607,7 @@
             NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
             NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
             
-            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+            [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
             
             appDelegate.isFromContacts = YES;
             

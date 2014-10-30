@@ -42,6 +42,7 @@
 @property (strong, nonatomic) NSMutableArray *datesArray;
 @property (strong, nonatomic) NSMutableArray *detailArray;
 @property (strong, nonatomic) NSMutableArray *jobEventsArray;
+@property (strong, nonatomic) NSMutableArray *jobDetailsArray;
 @property (readwrite, nonatomic) BOOL isFromAttendees;
 @property (readwrite, nonatomic) BOOL isFromlocation;
 

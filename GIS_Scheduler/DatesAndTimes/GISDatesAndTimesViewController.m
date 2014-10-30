@@ -176,7 +176,7 @@
     [self.cancelBtn_createJobs addTarget:self action:@selector(cancelButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
         [self.doneBtn_createJobs addTarget:self action:@selector(doneButtonPressed_CreateJobs:) forControlEvents:UIControlEventTouchUpInside];
     
-    if(!appDelegate.isNewRequest){
+    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
        
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
@@ -939,7 +939,7 @@
             [paramsDict setObject:login_Obj.token_string forKey:kToken];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
             
-            
+
         }
     }
     else
@@ -1451,9 +1451,9 @@
 
 -(IBAction)nextButtonPressed:(id)sender
 {
+    
     NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
-    
 }
 
 

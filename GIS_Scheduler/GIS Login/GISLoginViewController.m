@@ -78,19 +78,19 @@
     //_userName_textfield.text=@"swamy.pilla@gmail.com";
     //_password_textfield.text=@"admin";
 
-    _userName_textfield.text=@"kbabulenjoy@gmail.com";
-    _password_textfield.text=@"babul";
-    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
-    _password_textfield.text=@"admin";
-    _userName_textfield.text=@"dv@gmail.com";
-    _password_textfield.text=@"admin";
+   // _userName_textfield.text=@"kbabulenjoy@gmail.com";
+   // _password_textfield.text=@"babul";
+    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    //_password_textfield.text=@"admin";
+    //_userName_textfield.text=@"dv@gmail.com";
+    //_password_textfield.text=@"admin";
     //_userName_textfield.text=@"kbabulenjoy@gmail.com";
     //_password_textfield.text=@"babul";
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     //_password_textfield.text=@"admin"
     
-    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
-   // _password_textfield.text=@"Ecentric@5";
+    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    _password_textfield.text=@"Ecentric@5";
     
 }
 
@@ -187,7 +187,7 @@
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
                 [self removeLoadingView];
-                
+                [[GISStoreManager sharedManager]removeLoginObjects];
                 gisStore=[[GISStore alloc]initWithJsonDictionary:(NSDictionary *)response.responseJson];
                 GISLoginDetailsObject *login_Obj;
                 ///Parse GetDropDowns start
@@ -199,6 +199,8 @@
                     [paramsDict setObject:login_Obj.token_string forKey:@"token"];
                     [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
                     
+                    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+                    
                     if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
                     {
                         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
@@ -208,6 +210,9 @@
                     }
                     
                      [[GISServerManager sharedManager] getService_provider_data:self withParams:nil finishAction:@selector(successmethod_service_Providers:) failAction:@selector(failuremethod_service_Providers:)];
+                    
+                    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+                    
                     
                     //LOGIN DB
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_LOGIN];
@@ -536,7 +541,12 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [self moveAction:YES viewHeight:-120];
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if(orientation == UIDeviceOrientationLandscapeLeft){
+        [self moveAction:YES viewHeight:120];
+    }else  if(orientation == UIDeviceOrientationLandscapeRight){
+        [self moveAction:YES viewHeight: -120];
+    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -655,6 +665,35 @@
 }
 
 -(void)failuremethod_service_Providers:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+-(void)successmethod_chooseRequest:(GISJsonRequest *)response
+{
+    NSLog(@"Success chooseRequest Details---%@",response.responseJson);
+    
+    id array=response.responseJson;
+    NSDictionary *dictHere=[array lastObject];
+    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+                
+        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+        NSArray *requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
+        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+        for (int i=0; i<requestNumbers_mutArray.count; i++) {
+            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+    }else{
+        
+        [self removeLoadingView];
+    }
+}
+
+-(void)failuremethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
 }

@@ -330,14 +330,14 @@ NSString* documentDirectory() {
             sqlite3_bind_text(addStmt, 1, [request_ID UTF8String], -1, SQLITE_TRANSIENT);
         }
         if (firstName) {
-            sqlite3_bind_text(addStmt, 2, [firstName UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(addStmt, 2, [email UTF8String], -1, SQLITE_TRANSIENT);
         }
         if (lastName)
         {
-            sqlite3_bind_text(addStmt, 3, [lastName UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(addStmt, 3, [firstName UTF8String], -1, SQLITE_TRANSIENT);
         }
         if (email) {
-            sqlite3_bind_text(addStmt, 4, [email UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(addStmt, 4, [lastName UTF8String], -1, SQLITE_TRANSIENT);
         }
         if (token)
         {
@@ -415,6 +415,50 @@ NSString* documentDirectory() {
     sqlite3_reset(addStmt);
     //[[NSNotificationCenter defaultCenter]postNotificationName:KFileUploadFinishFinalized object:nil];
 }
+
+-(void)insertChooseRequestData:(NSDictionary*)loginDict Query:(NSString *)query
+{
+    //    DLog(@"the activity feed is:%@",activityFeedDict);
+    
+    int dropdown_ID = [[loginDict objectForKey:kDropDownID] intValue];
+    NSString *dropdown_type = [loginDict objectForKey:kDropDownType];
+    NSString *dropdown_value = [loginDict objectForKey:kDropDownValue];
+    
+    NSLog(@"Table_Insert_Query:%@",query);
+    const char *insertString = [query UTF8String];
+    
+    sqlite3_stmt *addStmt;
+    if(sqlite3_prepare_v2(_subscriptionDB, insertString, -1, &addStmt, NULL) == SQLITE_OK)
+    {
+        
+        if (dropdown_ID) {
+            sqlite3_bind_int(addStmt, 1, dropdown_ID);
+        }
+        if (dropdown_type) {
+            sqlite3_bind_text(addStmt, 2, [dropdown_type UTF8String], -1, SQLITE_TRANSIENT);
+        }
+        if (dropdown_value)
+        {
+            sqlite3_bind_text(addStmt, 3, [dropdown_value UTF8String], -1, SQLITE_TRANSIENT);
+        }
+    }
+    
+    if(sqlite3_step(addStmt) != SQLITE_DONE){
+        NSLog(@"Insert Failed");
+    }
+    else{
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state != UIApplicationStateActive)
+        {
+            NSLog(@"Application Background State");
+            // [[PCLogger sharedLogger] logToSave:@"Application Background State" ofType:PC_LOG_INFO];
+            
+        }
+    }
+    sqlite3_reset(addStmt);
+    //[[NSNotificationCenter defaultCenter]postNotificationName:KFileUploadFinishFinalized object:nil];
+}
+
 
 -(void)insertServiceProviderData:(NSDictionary*)spDict Query:(NSString *)query
 {
