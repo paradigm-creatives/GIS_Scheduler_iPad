@@ -86,7 +86,8 @@
     
 
     if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
-        [self getJobDetails_Data];
+        //[self getJobDetails_Data];
+        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
     }
 }
 
