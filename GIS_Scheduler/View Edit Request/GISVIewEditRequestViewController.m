@@ -98,12 +98,20 @@
         [_topView setHidden:YES];
         CGRect frame = _mainView.frame;
         frame.origin.y = 64;
+        frame.size.height = 704;
         _mainView.frame = frame;
         
         [self getUpdatedEventDetails];
 
         
     }else{
+        
+        [_topView setHidden:NO];
+        CGRect frame = _mainView.frame;
+        frame.origin.y = 196;
+        frame.size.height = 572;
+        _mainView.frame = frame;
+
         _currentController= contactsBillingView;
     }
     

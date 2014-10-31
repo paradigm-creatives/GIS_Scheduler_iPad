@@ -39,7 +39,7 @@
         FFMonthHeaderView *view = [[FFMonthHeaderView alloc] initWithFrame:CGRectMake(0., 0., self.frame.size.width, HEADER_HEIGHT_MONTH)];
         [self addSubview:view];
         
-        collectionViewMonth = [[FFMonthCollectionView alloc] initWithFrame:CGRectMake(0., HEADER_HEIGHT_MONTH, self.frame.size.width, self.frame.size.height-HEADER_HEIGHT_MONTH) collectionViewLayout:[UICollectionViewLayout new]];
+        collectionViewMonth = [[FFMonthCollectionView alloc] initWithFrame:CGRectMake(0., HEADER_HEIGHT_MONTH, self.frame.size.width, self.frame.size.height-HEADER_HEIGHT_MONTH-28) collectionViewLayout:[UICollectionViewLayout new]];
         [collectionViewMonth setProtocol:self];
         [self addSubview:collectionViewMonth];
         

@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GISPopOverTableViewController.h"
 
 #import "FFEvent.h"
 
@@ -19,9 +20,11 @@
 - (void)removeThisView:(UIView *)view;
 @end
 
-@interface FFEditEventView : UIView
+@interface FFEditEventView : UIView<PopOverSelected_Protocol>
 
 @property (nonatomic, strong) id<FFEditEventViewProtocol> protocol;
+@property (nonatomic,strong) UIPopoverController *popover;
+@property (nonatomic,strong) UIView *backgroundView;
 
 - (id)initWithFrame:(CGRect)frame event:(FFEvent *)_event;
 

@@ -675,6 +675,11 @@
                 _payTypeArray = [[GISStoreManager sharedManager] getPayTypeObjects];
                 [self removeLoadingView];
                 
+                if([appDelegate.payTypeArray count]>0)
+                   [appDelegate.payTypeArray removeAllObjects];
+                
+                [appDelegate.payTypeArray addObjectsFromArray:_payTypeArray];
+                
                 //[listTableView reloadData];
             }
             else

@@ -27,6 +27,8 @@
     _jobEventsArray = [[NSMutableArray alloc] init];
     _addNewJob_dictionary=[[NSMutableDictionary alloc]init];
     _jobDetailsArray = [[NSMutableArray alloc] init];
+    _payTypeArray = [[NSMutableArray alloc] init];
+    _serviceTypeArray = [[NSMutableArray alloc] init];
     
     self.window.backgroundColor = [UIColor whiteColor];
     
