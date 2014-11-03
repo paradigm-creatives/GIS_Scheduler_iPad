@@ -19,5 +19,6 @@
 @synthesize dateTimeEnd;
 @synthesize payType;
 @synthesize serviceProvider;
+@synthesize eventName;
 
 @end

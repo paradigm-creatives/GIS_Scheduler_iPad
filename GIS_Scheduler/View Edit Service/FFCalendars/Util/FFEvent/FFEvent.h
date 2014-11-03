@@ -19,5 +19,6 @@
 @property (nonatomic, strong) NSDate *dateTimeEnd;
 @property (nonatomic, strong) NSString *payType;
 @property (nonatomic, strong) NSString *serviceProvider;
+@property (nonatomic, strong) NSString *eventName;
 
 @end

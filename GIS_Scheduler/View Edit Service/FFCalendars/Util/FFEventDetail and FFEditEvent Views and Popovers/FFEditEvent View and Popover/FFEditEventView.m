@@ -105,7 +105,7 @@
         [self addButtonTimeBegin];
         [self addButtonTimeEnd];
         //[self addButtonDelete];
-        //[self addEventTitle];
+        [self addEventTitle];
         [self addTypeOfService];
         [self addServiceProvider];
         //[self addtableViewGuests];
@@ -262,7 +262,7 @@
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonDate.frame.origin.y+buttonDate.frame.size.height, self.frame.size.width, BUTTON_HEIGHT)];
     [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentCenter];
-    labelEventName.text = [NSString stringWithFormat:@"Job ID %@", event.numCustomerID];
+    labelEventName.text = [NSString stringWithFormat:@"Event %@", event.numCustomerID];
     [self addSubview:labelEventName];
 }
 
@@ -284,9 +284,9 @@
 
 - (void)addTypeOfService{
     
-    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
-    [_backgroundView setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:_backgroundView];
+    _payTypeBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    [_payTypeBackgroundView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:_payTypeBackgroundView];
     
     UIButton *addButton1 = [[UIButton alloc] init];
     addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -294,13 +294,13 @@
     [addButton1 addTarget:self
                    action:@selector(showPopoverDetails:)
          forControlEvents:UIControlEventTouchUpInside];
-    addButton1.frame = CGRectMake(150, 5.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(175, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
     [addButton1 setTag:1235];
-    [_backgroundView addSubview:addButton1];
+    [_payTypeBackgroundView addSubview:addButton1];
 
     
 //    paytypeLabel = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
@@ -312,7 +312,7 @@
 
 - (void)addServiceProvider{
     
-    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,  buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+50, self.frame.size.width, BUTTON_HEIGHT)];
     [_backgroundView setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:_backgroundView];
     
@@ -322,7 +322,7 @@
     [addButton1 addTarget:self
                    action:@selector(showPopoverDetails:)
          forControlEvents:UIControlEventTouchUpInside];
-    addButton1.frame = CGRectMake(150, 5.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(175, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -434,13 +434,13 @@
     
     UIButton *btn=(UIButton*)sender;
     
+    NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+    _serviceTypeArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+    
    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     
-    tableViewController.popOverDelegate = self;
-    
-    _popover =   [GISUtility showPopOver:appDelegate.payTypeArray viewController:tableViewController];
     _popover.delegate = self;
     
     _popover.popoverContentSize = CGSizeMake(180, 210);
@@ -449,13 +449,33 @@
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];
     }
-    [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+120, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+
+    
+    tableViewController.popOverDelegate = self;
+    if([sender tag] == 1235){
+        _popover =   [GISUtility showPopOver:appDelegate.payTypeArray viewController:tableViewController];
+        isPaytype = YES;
+        
+        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+350, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+    }
+    else{
+        _popover =   [GISUtility showPopOver:_serviceTypeArray viewController:tableViewController];
+        isPaytype = NO;
+        
+        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+390, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+    }
+
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    UIButton *payTypebtnn=(UIButton *)[_backgroundView viewWithTag:1234];
-    [payTypebtnn setTitle:value_str forState:UIControlStateNormal];
+    UIButton *btn;
+    if(isPaytype){
+       btn=(UIButton *)[_payTypeBackgroundView viewWithTag:1235];
+    }else{
+       btn=(UIButton *)[_backgroundView viewWithTag:1234];
+    }
+    [btn setTitle:value_str forState:UIControlStateNormal];
     
     if (_popover) {
         [_popover dismissPopoverAnimated:YES];

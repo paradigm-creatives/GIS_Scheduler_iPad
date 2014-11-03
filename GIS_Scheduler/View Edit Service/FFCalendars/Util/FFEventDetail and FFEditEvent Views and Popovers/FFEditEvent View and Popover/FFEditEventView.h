@@ -21,10 +21,15 @@
 @end
 
 @interface FFEditEventView : UIView<PopOverSelected_Protocol>
+{
+    BOOL isPaytype;
+}
 
 @property (nonatomic, strong) id<FFEditEventViewProtocol> protocol;
 @property (nonatomic,strong) UIPopoverController *popover;
 @property (nonatomic,strong) UIView *backgroundView;
+@property (nonatomic,strong) UIView *payTypeBackgroundView;
+@property (nonatomic,strong) NSArray *serviceTypeArray;
 
 - (id)initWithFrame:(CGRect)frame event:(FFEvent *)_event;
 

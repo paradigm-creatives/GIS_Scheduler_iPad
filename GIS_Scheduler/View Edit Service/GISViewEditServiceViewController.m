@@ -698,7 +698,6 @@
         [event setServiceProvider:viewEditObject.serViceProvider_String];
         [self addNewEvent:event];
     }
-    
     [self removeLoadingView];
     
 }

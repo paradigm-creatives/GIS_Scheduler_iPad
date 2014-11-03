@@ -181,6 +181,11 @@
     
     [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
     
+    NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
+    [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+    [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
+    [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+    
     [_countLabel1 setFont:[GISFonts tiny]];
     _countLabel1.textAlignment = NSTextAlignmentCenter;
     _countLabel1.layer.cornerRadius = 10.0;
@@ -575,7 +580,8 @@
             }
             else
             {
-                [self removeLoadingView];
+                [GISUtility showAlertWithTitle:@"" andMessage:@"Request SPJobs Request failed"];
+                [listTableView reloadData];
             }
         }
         else
@@ -673,7 +679,6 @@
                 [[GISStoreManager sharedManager] removePayTypeObjects];
                 dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
                 _payTypeArray = [[GISStoreManager sharedManager] getPayTypeObjects];
-                [self removeLoadingView];
                 
                 if([appDelegate.payTypeArray count]>0)
                    [appDelegate.payTypeArray removeAllObjects];

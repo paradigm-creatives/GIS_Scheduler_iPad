@@ -50,6 +50,10 @@
     rowClicked = NO;
     rowsectionClicked = NO;
     
+    NSIndexPath* selectedCellIndexPath= [NSIndexPath indexPathForRow:0 inSection:0];
+    [self tableView:_dashBoard_ListTableView didSelectRowAtIndexPath:selectedCellIndexPath];
+    [_dashBoard_ListTableView selectRowAtIndexPath:selectedCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(rowSelcted:) name:kRowSelected object:nil];
 }
 
