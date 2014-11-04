@@ -16,6 +16,7 @@
 @required
 - (void)saveEditedEvent:(FFEvent *)eventNew ofCell:(UICollectionViewCell *)cell atIndex:(NSInteger)intIndex;
 - (void)deleteEventOfCell:(UICollectionViewCell *)cell atIndex:(NSInteger)intIndex;
+
 @end
 
 @interface FFMonthCell : UICollectionViewCell

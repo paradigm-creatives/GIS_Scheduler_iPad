@@ -293,7 +293,7 @@
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
     [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestorTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kDateTime_RequestorID];
+    [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestID];
@@ -353,7 +353,6 @@
         [self removeLoadingView];
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     }
-    
 }
 
 -(void)failuremethod_findRequestJobs:(GISJsonRequest *)response

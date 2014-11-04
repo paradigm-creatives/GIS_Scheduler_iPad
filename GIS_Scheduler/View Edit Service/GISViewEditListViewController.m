@@ -60,7 +60,8 @@
 {
     // Return the number of rows in the section.
     if(appDelegate.isMonthView)
-        return 1;
+        return [appDelegate.monthEventsArray count];
+        //return 1;
     
     return  [appDelegate.jobEventsArray count];
 }
@@ -76,6 +77,7 @@
     
     if(appDelegate.isMonthView){
         
+        _testEvent = [appDelegate.monthEventsArray objectAtIndex:indexPath.row];
         cell.jobName.text = _testEvent.stringCustomerName;
         cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
         cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
@@ -174,8 +176,8 @@
         
     }else if(appDelegate.isMonthView){
         
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
-        [[NSNotificationCenter defaultCenter]postNotificationName:SHOW_MONTH_EVENT object:nil userInfo:infoDict];
+        //NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:_testEvent,@"event",nil];
+        //[[NSNotificationCenter defaultCenter]postNotificationName:SHOW_MONTH_EVENT object:nil userInfo:infoDict];
     }
 }
 

@@ -459,7 +459,7 @@
         [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+350, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
     }
     else{
-        _popover =   [GISUtility showPopOver:_serviceTypeArray viewController:tableViewController];
+        _popover =   [GISUtility showPopOver:(NSMutableArray*) _serviceTypeArray viewController:tableViewController];
         isPaytype = NO;
         
         [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+390, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];

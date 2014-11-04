@@ -14,6 +14,7 @@
 #import "FFEditEventPopoverController.h"
 #import "GISAppDelegate.h"
 #import "GISPopOverController.h"
+#import "FFDateManager.h"
 
 @interface FFButtonWithEditAndDetailPopoversForMonthCell () <FFEventDetailPopoverControllerProtocol, FFEditEventPopoverControllerProtocol,TestEventDetailPopoverControllerProtocol>
 @property (nonatomic, strong) FFEventDetailPopoverController *popoverControllerDetails;
@@ -44,6 +45,7 @@
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         
         [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return self;
 }
@@ -138,5 +140,6 @@
         [protocol deleteEventOfButton:self];
     }
 }
+
 
 @end

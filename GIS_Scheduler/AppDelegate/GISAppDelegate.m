@@ -29,7 +29,7 @@
     _jobDetailsArray = [[NSMutableArray alloc] init];
     _payTypeArray = [[NSMutableArray alloc] init];
     _serviceTypeArray = [[NSMutableArray alloc] init];
-    
+    _monthEventsArray = [[NSMutableArray alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];

@@ -13,9 +13,11 @@
 #import "FFButtonWithEditAndDetailPopoversForMonthCell.h"
 #import "FFImportantFilesForCalendar.h"
 #import "GISAppDelegate.h"
+#import "GISPopOverController.h"
 
-@interface FFMonthCell () <FFButtonWithEditAndDetailPopoversForMonthCellProtocol>
+@interface FFMonthCell () <FFButtonWithEditAndDetailPopoversForMonthCellProtocol,TestEventDetailPopoverControllerProtocol>
 @property (nonatomic, strong) NSMutableArray *arrayButtons;
+@property (nonatomic, strong) GISPopOverController *testPopoverControllerDetails;
 @end
 
 @implementation FFMonthCell
@@ -27,6 +29,8 @@
 @synthesize arrayEvents;
 @synthesize labelDay;
 @synthesize imageViewCircle;
+@synthesize testPopoverControllerDetails;
+
 
 #pragma mark - Lifecycle
 
@@ -109,6 +113,7 @@
             
             if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
                 [button setTitle:[NSString stringWithFormat:@"%i more...", [arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             } else {
                 FFEvent *event = [arrayEvents objectAtIndex:i];
@@ -118,13 +123,6 @@
             }
         }
     }
-    
-    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-    if([appDelegate.jobEventsArray count] >0)
-        [appDelegate.jobEventsArray removeAllObjects];
-    
-    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayEvents];
 }
 
 #pragma mark - FFButtonWithEditAndDetailPopoversForMonthCell Protocol
@@ -145,6 +143,25 @@
     if (protocol != nil && [protocol respondsToSelector:@selector(deleteEventOfCell:atIndex:)]) {
         [protocol deleteEventOfCell:self atIndex:i];
     }
+}
+
+- (IBAction)showDetails:(id)sender {
+    
+    GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    if([appDelegate.monthEventsArray count] >0)
+        [appDelegate.monthEventsArray removeAllObjects];
+    
+    [appDelegate.monthEventsArray addObjectsFromArray:(NSArray *)arrayEvents];
+    
+    appDelegate.isMonthView = YES;
+    testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:[appDelegate.monthEventsArray objectAtIndex:0]];
+    [testPopoverControllerDetails setTestProtocol:self];
+    
+    [testPopoverControllerDetails presentPopoverFromRect:self.frame
+                                                  inView:[super superview]
+                                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                animated:YES];
 }
 
 @end
