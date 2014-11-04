@@ -67,6 +67,7 @@
     self.isNoofAttendees = NO;
     self.isShowfromDashboard = NO;
     self.isHidefromDashboard = NO;
+    self.isfilled = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

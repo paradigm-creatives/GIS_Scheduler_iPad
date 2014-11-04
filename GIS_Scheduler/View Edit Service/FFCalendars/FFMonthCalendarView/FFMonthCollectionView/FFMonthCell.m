@@ -155,6 +155,8 @@
     [appDelegate.monthEventsArray addObjectsFromArray:(NSArray *)arrayEvents];
     
     appDelegate.isMonthView = YES;
+    appDelegate.isoneEvent = NO;
+    
     testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:[appDelegate.monthEventsArray objectAtIndex:0]];
     [testPopoverControllerDetails setTestProtocol:self];
     

@@ -80,8 +80,10 @@
 //                         permittedArrowDirections:UIPopoverArrowDirectionAny
 //                                         animated:YES];
         
+        
         GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
         appDelegate.isMonthView = YES;
+        appDelegate.isoneEvent = YES;
         testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:event];
         [testPopoverControllerDetails setTestProtocol:self];
         

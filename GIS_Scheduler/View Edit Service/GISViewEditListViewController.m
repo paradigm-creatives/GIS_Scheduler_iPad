@@ -59,9 +59,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if(appDelegate.isMonthView)
-        return [appDelegate.monthEventsArray count];
-        //return 1;
+    if(appDelegate.isMonthView){
+        if(appDelegate.isoneEvent)
+            return 1;
+        else
+            return [appDelegate.monthEventsArray count];
+    }
     
     return  [appDelegate.jobEventsArray count];
 }
@@ -77,10 +80,14 @@
     
     if(appDelegate.isMonthView){
         
-        _testEvent = [appDelegate.monthEventsArray objectAtIndex:indexPath.row];
+        if(!appDelegate.isoneEvent){
+            _testEvent = [appDelegate.monthEventsArray objectAtIndex:indexPath.row];
+        }
         cell.jobName.text = _testEvent.stringCustomerName;
         cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
         cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
     }else{
         _eventButton = [appDelegate.jobEventsArray objectAtIndex:indexPath.row];
@@ -89,6 +96,8 @@
         cell.jobName.text = _eventButton.event.stringCustomerName;
         cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_eventButton.event.dateTimeBegin] ,[NSDate stringTimeOfDate:_eventButton.event.dateTimeEnd]];
         cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_eventButton.event.dateDay]];
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleDefault;
     }
     
     // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
