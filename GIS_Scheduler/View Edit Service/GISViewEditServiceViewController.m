@@ -630,6 +630,7 @@
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get PatTypedata action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
 }
+
 -(void)failuremethod_viewEditScheduledata:(GISJsonRequest *)response
 {
     [self removeLoadingView];
@@ -659,6 +660,7 @@
 //    CGRect frame = _mainView.frame;
 //    frame.origin.y= 121.0f;
 //    _mainView.frame = frame;
+    
     [_dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_serviceProviderButton setBackgroundImage:nil  forState:UIControlStateNormal];
     [_serviceProviderButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];

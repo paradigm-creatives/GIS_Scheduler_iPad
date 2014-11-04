@@ -447,7 +447,7 @@
 
 #define kSPRequestJobs_EventType @"EventType"
 #define kSPRequestJobs_EndTime @"EndTime"
-#define kSPRequestJobs_GisResponse @"GisResponse"
+#define kSPRequestJobs_GisResponse @"GISResponse"
 #define kSPRequestJobs_JobDate @"JobDate"
 #define kSPRequestJobs_JobID @"JobID"
 #define kSPRequestJobs_JobNumber @"JobNumber"
