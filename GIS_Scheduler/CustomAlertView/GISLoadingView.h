@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 
 @interface GISLoadingView : UIAlertView

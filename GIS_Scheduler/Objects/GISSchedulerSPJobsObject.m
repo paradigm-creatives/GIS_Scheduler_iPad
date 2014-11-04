@@ -14,7 +14,7 @@
 #import "GISUtility.h"
 
 @implementation GISSchedulerSPJobsObject
-
+@synthesize filledOrUnfilled_string;
 @synthesize GisResponse_String;
 @synthesize endTime_String;
 @synthesize ServiceProviderName_String;
@@ -52,6 +52,8 @@
             NSString *payType_statement  =  [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
             payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
             
+            if ([json objectForKey:kSPRequestJobs_TotalHours])
+                TotalHours_String = [self returningstring:[json objectForKey:kSPRequestJobs_TotalHours]];
             
             if ([json objectForKey:kSPRequestJobs_GisResponse])
               GisResponse_String = [self returningstring:[json objectForKey:kSPRequestJobs_GisResponse]];
@@ -84,6 +86,13 @@
             startTime_String = [self returningstring:[json objectForKey:kSPRequestJobs_StartTime]];
             if ([json objectForKey:kJobDetais_ServiceProvider])
             {
+                if ([[GISUtility returningstring:[json objectForKey:kJobDetais_ServiceProvider]] isEqualToString:@""]) {
+                    filledOrUnfilled_string=@"unfilled";
+                }
+                else
+                {
+                    filledOrUnfilled_string=@"filled";
+                }
                 NSPredicate *filePredicate;
                 filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[GISUtility returningstring:[json objectForKey:kJobDetais_ServiceProvider]]];
                 NSArray *fileArray=[serviceProvider_Array filteredArrayUsingPredicate:filePredicate];
