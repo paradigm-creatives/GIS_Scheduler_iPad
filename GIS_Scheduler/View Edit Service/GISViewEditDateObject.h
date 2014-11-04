@@ -21,6 +21,7 @@
 @property(nonatomic,strong)NSString *timely_String;
 @property(nonatomic,strong)NSString *typeOfService_String;
 @property(nonatomic,strong)NSString *subRole_String;
+@property(nonatomic,strong)NSString *eventName_String;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json;
 

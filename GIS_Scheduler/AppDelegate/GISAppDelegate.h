@@ -30,6 +30,7 @@
 @property (readwrite, nonatomic) BOOL isNoofAttendees;
 @property (readwrite, nonatomic) BOOL isShowfromDashboard;
 @property (readwrite, nonatomic) BOOL isHidefromDashboard;
+@property (readwrite, nonatomic) BOOL isfilled;
 
 @property(nonatomic,strong) GISContactAndBillingObject *contact_billingObject;
 @property(nonatomic,strong) NSString *chooseRequest_ID_String;
@@ -53,6 +54,7 @@
 @property (readwrite, nonatomic) BOOL isDateView;
 @property (readwrite, nonatomic) BOOL isWeekView;
 @property (readwrite, nonatomic) BOOL isMonthView;
+@property (readwrite, nonatomic) BOOL isoneEvent;
 
 @property (strong, nonatomic) NSMutableDictionary *addNewJob_dictionary;
 

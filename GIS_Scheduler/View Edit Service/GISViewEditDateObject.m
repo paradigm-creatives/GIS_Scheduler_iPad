@@ -22,6 +22,7 @@
 @synthesize timely_String;
 @synthesize typeOfService_String;
 @synthesize subRole_String;
+@synthesize eventName_String;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json
 {
@@ -45,6 +46,7 @@
             timely_String = [self returningstring:[json objectForKey:kViewSchedule_Timely]];
             typeOfService_String = [self returningstring:[json objectForKey:kViewSchedule_TypeofService]];
             subRole_String = [self returningstring:[json objectForKey:kViewSchedule_SubRole]];
+            eventName_String = [self returningstring:[json objectForKey:kViewSchedule_EventType]];
            
             
 }

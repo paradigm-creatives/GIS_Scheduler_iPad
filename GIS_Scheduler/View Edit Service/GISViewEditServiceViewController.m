@@ -514,6 +514,8 @@
         
         if (sender.selectedSegmentIndex==0) {
             
+            appDelegate.isfilled = YES;
+            
             [self addEventCalander:viewEdit_ServiceProvider_Array];
             
                 [_staff_freeLancerSegmentControl setHidden:NO];
@@ -525,9 +527,11 @@
             
         }else if(sender.selectedSegmentIndex==1)
         {
+            appDelegate.isfilled = NO;
+            
             [self addEventCalander:viewEdit_ServiceProvider_unfilledArray];
             
-            if(isServiceSelected){
+            //if(isServiceSelected){
                 
                 [_staff_freeLancerSegmentControl setHidden:YES];
                 [_staff_freeLancerButton setHidden:YES];
@@ -535,7 +539,7 @@
                 CGRect frame = _mainView.frame;
                 frame.origin.y= 121.0f;
                 _mainView.frame = frame;
-            }
+            //}
         }
     }
 }
@@ -695,6 +699,8 @@
         [event setDateTimeEnd:[NSDate dateWithHour:[[endTImestrArray objectAtIndex:0] intValue] min:[[endTImestrArray objectAtIndex:1] intValue]]];
         [event setPayType:viewEditObject.patType_String];
         [event setServiceProvider:viewEditObject.serViceProvider_String];
+        [event setServiceProviderType:viewEditObject.typeOfService_String];
+        [event setEventName:viewEditObject.eventName_String];
         [self addNewEvent:event];
     }
     [self removeLoadingView];

@@ -20,5 +20,6 @@
 @synthesize payType;
 @synthesize serviceProvider;
 @synthesize eventName;
+@synthesize serviceProviderType;
 
 @end
