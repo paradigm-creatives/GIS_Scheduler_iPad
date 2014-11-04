@@ -21,6 +21,15 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    _attendeesArray = [[NSMutableArray alloc] init];
+    _datesArray = [[NSMutableArray alloc] init];
+    _detailArray = [[NSMutableArray alloc] init];
+    _jobEventsArray = [[NSMutableArray alloc] init];
+    _addNewJob_dictionary=[[NSMutableDictionary alloc]init];
+    _jobDetailsArray = [[NSMutableArray alloc] init];
+    _payTypeArray = [[NSMutableArray alloc] init];
+    _serviceTypeArray = [[NSMutableArray alloc] init];
+    _monthEventsArray = [[NSMutableArray alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];
@@ -47,6 +56,17 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,
       [GISFonts larger], NSFontAttributeName,nil]];
+    
+    self.isLogout = NO;
+    self.isContact = NO;
+    self.isFromViewEditService = NO;
+    
+    self.isDateView = NO;
+    self.isMonthView = NO;
+    self.isWeekView = NO;
+    self.isNoofAttendees = NO;
+    self.isShowfromDashboard = NO;
+    self.isHidefromDashboard = NO;
         
     [self.window makeKeyAndVisible];
     return YES;
