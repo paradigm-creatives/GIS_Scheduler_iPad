@@ -538,10 +538,10 @@
         payType_string = id_str;
     }else if(isServiceprovider){
         btn=(UIButton *)[_ServicebackgroundView viewWithTag:1236];
-        subRole_string = id_str;
+        serviceType_string = id_str;
     }else{
        btn=(UIButton *)[_backgroundView viewWithTag:1234];
-        serviceType_string = id_str;
+        subRole_string = id_str;
     }
     [btn setTitle:value_str forState:UIControlStateNormal];
     
