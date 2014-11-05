@@ -408,6 +408,7 @@
     [paramsDict setObject:onGoing_str forKey:kSPRequetstesJobsSearchonGoing];
     [paramsDict setObject:openToPublic_str forKey:kSPRequetstesJobsSearchOpenToPublic];
     
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] searchSpRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_spRequestJobsSearchRequest:) failAction:@selector(failuremethod_spRequestJobsSearchRequest:)];
     
 }
@@ -416,68 +417,68 @@
 {
     if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]){
         [weekDays_dictionary_here removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-        if ([sender tag]==1) {
+        if ([sender tag]==2) {
             monday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==2) {
+        else if ([sender tag]==3) {
             tuesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==3) {
+        else if ([sender tag]==4) {
             wednesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==4) {
+        else if ([sender tag]==5) {
             thursday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==5) {
+        else if ([sender tag]==6) {
             friday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==6) {
+        else if ([sender tag]==7) {
             saturday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==7) {
+        else if ([sender tag]==1) {
             sunday_ImageView.image=[UIImage imageNamed:@"unchecked"];
             [daysArray removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
     }
     else{
-        
-        if ([sender tag]==1) {
+        //Sunday Start =1
+        if ([sender tag]==2) {
             [weekDays_dictionary_here setValue:@"Monday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             monday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==2) {
+        else if ([sender tag]==3) {
             [weekDays_dictionary_here setValue:@"Tuesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             tuesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==3) {
+        else if ([sender tag]==4) {
             [weekDays_dictionary_here setValue:@"Wednesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             wednesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==4) {
+        else if ([sender tag]==5) {
             [weekDays_dictionary_here setValue:@"Thursday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             thursday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==5) {
+        else if ([sender tag]==6) {
             [weekDays_dictionary_here setValue:@"Friday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             friday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==6) {
+        else if ([sender tag]==7) {
             [weekDays_dictionary_here setValue:@"Saturday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             saturday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
         }
-        else if ([sender tag]==7) {
+        else if ([sender tag]==1) {
             [weekDays_dictionary_here setValue:@"Sunday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
             sunday_ImageView.image=[UIImage imageNamed:@"checked.png"];
             [daysArray addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
@@ -517,12 +518,14 @@
         
     }else{
         
-        [self removeLoadingView];
+        
         if (responseArray.count<1) {
             [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
         }
     }
+    [self removeLoadingView];
 }
+
 
 -(void)failuremethod_spRequestJobsSearchRequest:(GISJsonRequest *)response
 {

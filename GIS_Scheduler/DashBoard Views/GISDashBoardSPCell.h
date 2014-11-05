@@ -24,4 +24,25 @@
 @property(nonatomic,strong) IBOutlet UIButton *done_btn;
 @property(nonatomic,strong) IBOutlet UIButton *info_btn;
 
+@property(nonatomic,strong) IBOutlet UIView *eventType_UIView;
+@property(nonatomic,strong) IBOutlet UIView *gisResponse_UIView;
+@property(nonatomic,strong) IBOutlet UIView *serviceProvider_UIView;
+@property(nonatomic,strong) IBOutlet UIView *payType_UIView;
+
+@property(nonatomic,strong) IBOutlet UILabel *eventType_EDIT_Label;
+@property(nonatomic,strong) IBOutlet UILabel *gisResponse_EDIT_Label;
+@property(nonatomic,strong) IBOutlet UILabel *service_provider_EDIT_Label;
+@property(nonatomic,strong) IBOutlet UILabel *payType_EDIT_Label;
+
+
+@property(nonatomic,strong) IBOutlet UIButton *eventType_Button;
+@property(nonatomic,strong) IBOutlet UIButton *payType_Button;
+@property(nonatomic,strong) IBOutlet UIButton *gisReponse_Button;
+@property(nonatomic,strong) IBOutlet UIButton *serviceProvider_Button;
+
+@property(nonatomic,strong) IBOutlet UIButton *editButton;
+@property(nonatomic,strong) IBOutlet UIButton *deleteButton;
+@property(nonatomic,strong) IBOutlet UIImageView *edit_imageView;
+@property(nonatomic,strong) IBOutlet UIImageView *delete_imageview;
+
 @end

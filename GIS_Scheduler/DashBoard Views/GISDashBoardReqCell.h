@@ -19,4 +19,7 @@
 @property(nonatomic,strong) IBOutlet UILabel *status_Label;
 @property(nonatomic,strong) IBOutlet UILabel *scheduler_Label;
 
+
+
+
 @end
