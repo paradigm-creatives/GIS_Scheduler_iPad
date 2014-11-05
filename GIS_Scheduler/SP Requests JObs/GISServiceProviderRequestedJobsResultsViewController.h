@@ -9,11 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "GISBaseViewController.h"
 #import "GISAppDelegate.h"
-
-@interface GISServiceProviderRequestedJobsResultsViewController : GISBaseViewController
+#import "GISLoginDetailsObject.h"
+#import "GISPopOverTableViewController.h"
+@interface GISServiceProviderRequestedJobsResultsViewController : GISBaseViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     
     GISAppDelegate *appDelegate;
+    BOOL isEdit_Button_Clicked;
+    GISLoginDetailsObject *login_Obj;
+    int selected_row;
+    
+    NSString *eventType_temp_string;
+    NSString *gisResponse_temp_string;
+    NSString *serviceProvider_temp_string;
+    NSString *payType_temp_string;
+   
+     NSMutableArray *gisResponse_array;
+    NSMutableArray *eventType_array;
+    NSMutableArray *serviceProvider_Array;
+    NSMutableArray *payType_array;
+    
+    UIPopoverController *popover;
+    int btnTag;
 }
 
 @property(nonatomic,strong)NSMutableArray *SPJobsArray;
@@ -21,5 +38,5 @@
 @property(nonatomic,strong)IBOutlet UIView *flipView;
 @property(nonatomic,strong)IBOutlet UITableView *jobResultsTableView;
 @property(nonatomic,strong)IBOutlet UIView *horizontalview;
-
+-(IBAction)pickerButtonPressed:(id)sender;
 @end
