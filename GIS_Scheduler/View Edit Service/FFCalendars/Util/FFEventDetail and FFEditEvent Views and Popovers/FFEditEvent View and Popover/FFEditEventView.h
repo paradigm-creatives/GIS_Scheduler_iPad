@@ -25,6 +25,9 @@
     BOOL isPaytype;
     BOOL isServiceprovider;
     GISAppDelegate *appDelegate;
+    NSString *payType_string;
+    NSString *serviceType_string;
+    NSString *subRole_string;
 }
 
 @property (nonatomic, strong) id<FFEditEventViewProtocol> protocol;

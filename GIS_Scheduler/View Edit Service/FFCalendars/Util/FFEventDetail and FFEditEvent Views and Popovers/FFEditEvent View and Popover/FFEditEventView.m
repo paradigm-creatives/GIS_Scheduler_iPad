@@ -149,9 +149,9 @@
     [update_eventdict setObject:[GISUtility getEventTime:buttonTimeBegin.dateOfButton] forKey:kJobDetais_StartTime];
     [update_eventdict setObject:[GISUtility getEventTime:buttonTimeEnd.dateOfButton] forKey:kJobDetais_EndTime];
     [update_eventdict setObject:[GISUtility eventDisplayFormat:buttonDate.dateOfButton] forKey:kJobDetais_JobDate];
-    [update_eventdict setObject:event.payType forKey:kViewSchedule_PayTypeID];
-    [update_eventdict setObject:event.serviceProvider forKey:kViewSchedule_ServiceProviderID];
-    [update_eventdict setObject:@"" forKey:kViewSchedule_SubroleID];
+    [update_eventdict setObject:payType_string forKey:kViewSchedule_PayTypeID];
+    [update_eventdict setObject:serviceType_string forKey:kViewSchedule_ServiceProviderID];
+    [update_eventdict setObject:subRole_string forKey:kViewSchedule_SubroleID];
     [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
     
@@ -226,11 +226,19 @@
 }
 
 - (void)addButtonDone {
+    NSString *btnString;
     
     buttonDone = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonDone setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
     [buttonDone.titleLabel setFont:[GISFonts large]];
-    [self customLayoutOfButton:buttonDone withTitle:@"Done" action:@selector(buttonDoneAction:) frame:CGRectMake(buttonCancel.superview.frame.size.width-80-10, buttonCancel.frame.origin.y, 80, buttonCancel.frame.size.height)];
+    
+    if(appDelegate.isfilled)
+        btnString = @"UnAssign";
+    else
+        btnString = @"Done";
+            
+        
+    [self customLayoutOfButton:buttonDone withTitle:btnString action:@selector(buttonDoneAction:) frame:CGRectMake(buttonCancel.superview.frame.size.width-80-10, buttonCancel.frame.origin.y, 80, buttonCancel.frame.size.height)];
     [buttonCancel.superview addSubview:buttonDone];
 }
 
@@ -243,7 +251,7 @@
     [searchBarCustom setHidden:TRUE];
     [self addSubview:searchBarCustom];
     
-    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0,buttonCancel.superview.frame.origin.y+buttonCancel.superview.frame.size.height+ BUTTON_HEIGHT, self.frame.size.width, BUTTON_HEIGHT)];
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(0,buttonCancel.superview.frame.origin.y+buttonCancel.superview.frame.size.height-20+ BUTTON_HEIGHT, self.frame.size.width, BUTTON_HEIGHT)];
     [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentCenter];
     [labelEventName setFont:[GISFonts large]];
@@ -253,7 +261,7 @@
 
 - (void)addButtonDate {
     
-    buttonDate = [[FFButtonWithDatePopover alloc] initWithFrame:CGRectMake(0, searchBarCustom.frame.origin.y+searchBarCustom.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT) date:event.dateDay];
+    buttonDate = [[FFButtonWithDatePopover alloc] initWithFrame:CGRectMake(0, searchBarCustom.frame.origin.y+searchBarCustom.frame.size.height-20, self.frame.size.width, BUTTON_HEIGHT) date:event.dateDay];
     [buttonDate setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [buttonDate.titleLabel setFont:[GISFonts large]];
     [self addSubview:buttonDate];
@@ -527,10 +535,13 @@
     UIButton *btn;
     if(isPaytype){
        btn=(UIButton *)[_payTypeBackgroundView viewWithTag:1235];
+        payType_string = id_str;
     }else if(isServiceprovider){
         btn=(UIButton *)[_ServicebackgroundView viewWithTag:1236];
+        subRole_string = id_str;
     }else{
        btn=(UIButton *)[_backgroundView viewWithTag:1234];
+        serviceType_string = id_str;
     }
     [btn setTitle:value_str forState:UIControlStateNormal];
     
