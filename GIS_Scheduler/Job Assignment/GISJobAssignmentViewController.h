@@ -50,6 +50,7 @@
     NSString *typeOfservice_temp_string;
     NSString *serviceProvider_temp_string;
     NSString *payType_temp_string;
+    NSMutableArray *mainArray;
 }
 @property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;

@@ -34,6 +34,7 @@
 @property(nonatomic,strong)NSString *GisResponse_id_String;
 @property(nonatomic,strong)NSString *SPRequestJobID_String;
 
+@property(nonatomic,strong)NSString *filledOrUnfilled_string;
 
 
 - (id)initWithStoreDictionary:(NSDictionary *)json;

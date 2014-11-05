@@ -184,6 +184,7 @@
 		8AC899C719C8701C00B9532C /* GISViewEditStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC899C619C8701C00B9532C /* GISViewEditStore.m */; };
 		8ACF5C3319E6B7B3001D86A1 /* GISEventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */; };
 		8ACF5C3419E6B7B3001D86A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA3AF218196BBAF7006A1E3B /* InfoPlist.strings */; };
+		8AD948AC1A08E1CE003354DC /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B1E27197CF54500963E8C /* AWSiOSSDK.framework */; };
 		8AE7ECD819ADFB7F00E02258 /* GISViewEditServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */; };
 		8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */; };
 		8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */; };
@@ -359,7 +360,6 @@
 		BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */; };
 		BADFD9C8197CEFD8003033FD /* GISLoginDetailsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9C7197CEFD8003033FD /* GISLoginDetailsObject.m */; };
 		BADFD9CB197CF003003033FD /* GISStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BADFD9CA197CF003003033FD /* GISStore.m */; };
-		BAE081F7197F92100056B3B8 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B1E27197CF54500963E8C /* AWSiOSSDK.framework */; };
 		BAE081FC197FD9900056B3B8 /* GISPopOverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */; };
 		BAE08204197FDBA30056B3B8 /* GISFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE08200197FDBA30056B3B8 /* GISFonts.m */; };
 		BAE08205197FDBA30056B3B8 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAE08201197FDBA30056B3B8 /* MyriadPro-Bold.otf */; };
@@ -929,7 +929,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE081F7197F92100056B3B8 /* AWSiOSSDK.framework in Frameworks */,
+				8AD948AC1A08E1CE003354DC /* AWSiOSSDK.framework in Frameworks */,
 				BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */,
 				BA3AF212196BBAF7006A1E3B /* CoreGraphics.framework in Frameworks */,
 				BA3AF214196BBAF7006A1E3B /* UIKit.framework in Frameworks */,
@@ -2662,6 +2662,7 @@
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
 					/Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
+					"$(PROJECT_DIR)/GIS_Scheduler/External/PCLogger/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";
@@ -2685,6 +2686,7 @@
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
 					/Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
+					"$(PROJECT_DIR)/GIS_Scheduler/External/PCLogger/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";

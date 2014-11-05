@@ -22,6 +22,9 @@
 #import "GISLoadingView.h"
 #import "GISSchedulerSPJobsObject.h"
 #import "GISSchedulerSPJobsStore.h"
+
+
+
 @interface GISJobAssignmentViewController ()
 
 @end
@@ -85,6 +88,9 @@
     serviceProviderType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
     NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
     payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+    
+    
+    mainArray=[[NSMutableArray alloc]init];
     
 }
 
@@ -331,7 +337,8 @@
         startDate_str = value_str;
         if ([from_answer_Label.text length] && [to_answer_Label.text length]){
             if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:YES])
-            {}
+            {
+            }
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
@@ -391,7 +398,12 @@
 
 -(IBAction)searchButton_Pressed:(id)sender
 {
-    
+    /*
+    if (![chooseRequestID_str length]) {
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;
+        return;
+    }
+    */
     if([startDate_str length] == 0  )
     {
         startDate_str = @"";
@@ -414,11 +426,21 @@
     [paramsDict setObject:endDate_str forKey:kJobAssignmentEndDate];
     [paramsDict setObject:typeServiceID_str forKey:kJobAssignmentSPSubRole];
     [paramsDict setObject:chooseRequestID_str forKey:kRequestID];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [paramsDict setObject:login_Obj.token_string forKey:keventDetails_token];
+    
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
     [[GISServerManager sharedManager] jobAssignmentJobs:self withParams:paramsDict finishAction:@selector(successmethod_jobAssignmentRequest:) failAction:@selector(failuremethod_jobAssignmentRequest:)];
     
 }
+
+/*
+ 
+    Service Provider if Empty i.e., We are getting like this ServiceProvider = "" -----> Unfilled
+    Service Provider if Not Empty ---> filled
+ 
+ */
 
 -(void)successmethod_jobAssignmentRequest:(GISJsonRequest *)response
 {
@@ -432,6 +454,12 @@
     GISSchedulerSPJobsStore *spJobsStore;
     spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
     self.requested_Jobs_Array=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+    [mainArray addObjectsFromArray:self.requested_Jobs_Array];
+    
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"filledOrUnfilled_string=%@",@"filled"];
+    NSArray *array=[self.requested_Jobs_Array filteredArrayUsingPredicate:predicate];
+    self.requested_Jobs_Array=[array mutableCopy];
+    
     [jobAssignment_tableView reloadData];
     [self removeLoadingView];
     
@@ -446,7 +474,23 @@
 
 -(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender
 {
-    
+    UISegmentedControl *segment=(UISegmentedControl *)sender;
+    if (segment.selectedSegmentIndex==0) {
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"filledOrUnfilled_string=%@",@"filled"];
+        NSArray *array=[mainArray filteredArrayUsingPredicate:predicate];
+        [self.requested_Jobs_Array removeAllObjects];
+        self.requested_Jobs_Array=[array mutableCopy];
+    }
+    else if (segment.selectedSegmentIndex==1) {
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"filledOrUnfilled_string=%@",@"unfilled"];
+        NSArray *array=[mainArray filteredArrayUsingPredicate:predicate];
+        [self.requested_Jobs_Array removeAllObjects];
+        self.requested_Jobs_Array=[array mutableCopy];
+    }
+    [jobAssignment_tableView reloadData];
+    if ((self.requested_Jobs_Array.count<1)) {
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+    }
 }
 
 -(IBAction)listOfServiceProviders_ButtonPressed:(id)sender
