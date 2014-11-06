@@ -30,6 +30,8 @@
     _payTypeArray = [[NSMutableArray alloc] init];
     _serviceTypeArray = [[NSMutableArray alloc] init];
     _monthEventsArray = [[NSMutableArray alloc] init];
+    _showEventsArray = [[NSMutableArray alloc] init];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.spiltViewController = [[UISplitViewController alloc] init];

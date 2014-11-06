@@ -79,7 +79,7 @@
     
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
-    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Approve", nil];
+    _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Submit to GIS Admin Approval", nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -524,7 +524,7 @@
             [addButton1 addTarget:self
                           action:@selector(showPopoverDetails:)
                 forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(294, 30.0, 130.0, 27.0);
+            addButton1.frame = CGRectMake(294, 30.0, 150.0, 27.0);
             addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
             [addButton1.titleLabel setFont:[GISFonts small]];
             [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -563,7 +563,7 @@
         [nextButton addTarget:self
                        action:@selector(nextButtonPressed:)
              forControlEvents:UIControlEventTouchUpInside];
-        nextButton.frame = CGRectMake(470.0, 30.0, 80.0, 30.0);
+        nextButton.frame = CGRectMake(470.0, 30.0, 120.0, 30.0);
         
         
         [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
@@ -617,7 +617,7 @@
                 status_ID = @"5";
                 [paramsDict setObject:status_ID forKey:kstatusid];
             }else{
-                [paramsDict setObject:@"4" forKey:kstatusid];
+                [paramsDict setObject:@"3" forKey:kstatusid];
             }
             
             [[GISServerManager sharedManager] submitViewEditRequest:self withParams:paramsDict finishAction:@selector(successmethod_submitVieweditRequest:) failAction:@selector(failuremethod_submitVieweditRequest:)];
@@ -842,12 +842,16 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     //eventTypedata= value_str;
+    
+//    CGSize stringsize = [value_str sizeWithAttributes:<#(NSDictionary *)#>:[GISFonts normal]];
+//    //or whatever font you're using
+//    [button setFrame:CGRectMake(10,0,stringsize.width, stringsize.height)];
     UIButton *serviceTypeBtn=(UIButton *)[self.view viewWithTag:11115];
     UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
     [nextBtn setTitle:value_str forState:UIControlStateNormal];
     //_eventTypeId_string=id_str;
-    
+
     if(_popover)
         [_popover dismissPopoverAnimated:YES];
     

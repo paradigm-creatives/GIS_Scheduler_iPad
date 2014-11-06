@@ -452,24 +452,28 @@
             tabNameString = @"Staff";
             
             [self addEventCalander:staff_Array];
+            [appDelegate.showEventsArray addObjectsFromArray:staff_Array];
             
         }else if (sender.selectedSegmentIndex == 1) {
             
             tabNameString = @"Freelance";
             
             [self addEventCalander:freeLancer_Array];
+            [appDelegate.showEventsArray addObjectsFromArray:freeLancer_Array];
             
         }else if (sender.selectedSegmentIndex == 2) {
             
             tabNameString = @"Agency";
             
             [self addEventCalander:serviceAgency_Array];
+            [appDelegate.showEventsArray addObjectsFromArray:serviceAgency_Array];
             
         }else if (sender.selectedSegmentIndex == 3) {
             
             tabNameString = @"Student";
             
             [self addEventCalander:students_Array];
+            [appDelegate.showEventsArray addObjectsFromArray:students_Array];
             
         }
         
@@ -613,8 +617,10 @@
                 if(_fill_UnfillSegmentControl.selectedSegmentIndex == 0){
                     
                     [self addEventCalander:viewEdit_ServiceProvider_Array];
+                    [appDelegate.showEventsArray addObjectsFromArray:viewEdit_ServiceProvider_Array];
                 }else{
                     [self addEventCalander:viewEdit_ServiceProvider_unfilledArray];
+                    [appDelegate.showEventsArray addObjectsFromArray:viewEdit_ServiceProvider_unfilledArray];
                 }
                 
             }

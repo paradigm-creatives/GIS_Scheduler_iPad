@@ -47,6 +47,7 @@
 @property (strong, nonatomic) NSMutableArray *payTypeArray;
 @property (strong, nonatomic) NSMutableArray *serviceTypeArray;
 @property (strong, nonatomic) NSMutableArray *monthEventsArray;
+@property (strong, nonatomic) NSMutableArray *showEventsArray;
 
 @property (readwrite, nonatomic) BOOL isFromAttendees;
 @property (readwrite, nonatomic) BOOL isFromlocation;

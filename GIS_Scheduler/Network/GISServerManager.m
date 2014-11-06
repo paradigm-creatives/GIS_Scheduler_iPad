@@ -522,7 +522,7 @@ static GISServerManager *singletonManager = nil;
 - (void)updateJobDetails:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
 {
     if (![self isNetworkAvailable]) { [self alert]; return;}
-    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_SaveUpdateJobs];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_UPDATE_JOBS];
     GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
     [request setMethodPost];
     
