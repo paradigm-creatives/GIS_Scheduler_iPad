@@ -126,18 +126,6 @@
 
 - (IBAction)buttonDoneAction:(id)sender {
     
-    //    [[SVProgressHUD sharedView] setTintColor:[UIColor blackColor]];
-    //    [[SVProgressHUD sharedView] setBackgroundColor:[UIColor lighterGrayCustom]];
-    
-//    FFEvent *eventNew = [FFEvent new];
-//    eventNew.stringCustomerName = labelEventName.text;
-//    eventNew.numCustomerID = searchBarCustom.numCustomerID;
-//    eventNew.dateDay = buttonDate.dateOfButton;
-//    eventNew.dateTimeBegin = buttonTimeBegin.dateOfButton;
-//    eventNew.dateTimeEnd = buttonTimeEnd.dateOfButton;
-//    eventNew.payType = paytypeLabel.text;
-//    eventNew.serviceProvider = serviceProviderTypeLabel.text;
-    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
@@ -154,6 +142,8 @@
     [update_eventdict setObject:subRole_string forKey:kViewSchedule_SubroleID];
     [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
+    if([sender tag] == 111)
+        [update_eventdict setObject:@"" forKey:kSPRequestJobs_GisResponse];
     
     [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateScheduledata:) failAction:@selector(failuremethod_updateScheduledata:)];
     
@@ -232,11 +222,15 @@
     [buttonDone setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
     [buttonDone.titleLabel setFont:[GISFonts large]];
     
-    if(appDelegate.isfilled)
+    if(appDelegate.isfilled){
         btnString = @"UnAssign";
-    else
+        [buttonDone setTag:111];
+    }
+    else{
         btnString = @"Done";
-            
+        [buttonDone setTag:222];
+    }
+    
         
     [self customLayoutOfButton:buttonDone withTitle:btnString action:@selector(buttonDoneAction:) frame:CGRectMake(buttonCancel.superview.frame.size.width-80-10, buttonCancel.frame.origin.y, 80, buttonCancel.frame.size.height)];
     [buttonCancel.superview addSubview:buttonDone];
@@ -294,8 +288,9 @@
 
 - (void)addTypeOfService{
     
-    _payTypeBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
+    _payTypeBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,  buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+45, self.frame.size.width, BUTTON_HEIGHT)];
     [_payTypeBackgroundView setBackgroundColor:[UIColor whiteColor]];
+    [_payTypeBackgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self addSubview:_payTypeBackgroundView];
     
     UIButton *addButton1 = [[UIButton alloc] init];
@@ -304,23 +299,34 @@
     if(!appDelegate.isfilled){
         [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [addButton1 setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:@selector(showPopoverDetails:)
+             forControlEvents:UIControlEventTouchUpInside];
+
     }
     else{
         [addButton1 setBackgroundImage:nil forState:UIControlStateNormal];
         [addButton1 setTitle:event.payType forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:nil
+             forControlEvents:UIControlEventTouchUpInside];
+
     }
     
-    [addButton1 addTarget:self
-                   action:@selector(showPopoverDetails:)
-         forControlEvents:UIControlEventTouchUpInside];
-    addButton1.frame = CGRectMake(175, 10.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1235];
     [_payTypeBackgroundView addSubview:addButton1];
-
     
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentLeft];
+    [labelEventName setFont:[GISFonts large]];
+    labelEventName.text = [NSString stringWithFormat:@"Paytype  "];
+
+    [_payTypeBackgroundView addSubview:labelEventName];
 //    paytypeLabel = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
 //    [paytypeLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 //    [paytypeLabel setTextAlignment:NSTextAlignmentCenter];
@@ -330,8 +336,9 @@
 
 - (void)addServiceProvider{
     
-    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,  buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+45, self.frame.size.width, BUTTON_HEIGHT)];
+    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,  buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+85, self.frame.size.width, BUTTON_HEIGHT)];
     [_backgroundView setBackgroundColor:[UIColor whiteColor]];
+    [_backgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self addSubview:_backgroundView];
     
     UIButton *addButton1 = [[UIButton alloc] init];
@@ -340,22 +347,34 @@
     if(!appDelegate.isfilled){
         [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [addButton1 setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:@selector(showPopoverDetails:)
+             forControlEvents:UIControlEventTouchUpInside];
     }
     else{
         [addButton1 setBackgroundImage:nil forState:UIControlStateNormal];
         [addButton1 setTitle:event.serviceProviderType forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:nil
+             forControlEvents:UIControlEventTouchUpInside];
     }
     
-    [addButton1 addTarget:self
-                   action:@selector(showPopoverDetails:)
-         forControlEvents:UIControlEventTouchUpInside];
-    addButton1.frame = CGRectMake(175, 10.0, 130.0, 27.0);
+    
+    addButton1.frame = CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     
     [addButton1 setTag:1234];
     [_backgroundView addSubview:addButton1];
+    
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentLeft];
+    [labelEventName setFont:[GISFonts large]];
+    labelEventName.text = [NSString stringWithFormat:@"ServiceProvider Type  "];
+    
+    [_backgroundView addSubview:labelEventName];
     
 //    serviceProviderTypeLabel = [[GISEventLabel alloc] initWithFrame:CGRectMake(0, labelEventName.frame.origin.y+labelEventName.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
 //    [serviceProviderTypeLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -366,8 +385,9 @@
 
 - (void)addProviderName{
     
-    _ServicebackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,  buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+85, self.frame.size.width, BUTTON_HEIGHT)];
+    _ServicebackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, buttonTimeEnd.frame.origin.y+buttonTimeEnd.frame.size.height+2, self.frame.size.width, BUTTON_HEIGHT)];
     [_ServicebackgroundView setBackgroundColor:[UIColor whiteColor]];
+    [_ServicebackgroundView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self addSubview:_ServicebackgroundView];
     
     UIButton *addButton1 = [[UIButton alloc] init];
@@ -376,21 +396,34 @@
     if(!appDelegate.isfilled){
         [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
         [addButton1 setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:@selector(showPopoverDetails:)
+             forControlEvents:UIControlEventTouchUpInside];
+
     }
     else{
         [addButton1 setBackgroundImage:nil forState:UIControlStateNormal];
         [addButton1 setTitle:event.serviceProvider forState:UIControlStateNormal];
+        [addButton1 addTarget:self
+                       action:nil
+             forControlEvents:UIControlEventTouchUpInside];
+
     }
     
-    [addButton1 addTarget:self
-                   action:@selector(showPopoverDetails:)
-         forControlEvents:UIControlEventTouchUpInside];
-    addButton1.frame = CGRectMake(175, 10.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1236];
     [_ServicebackgroundView addSubview:addButton1];
+    
+    labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
+    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [labelEventName setTextAlignment:NSTextAlignmentLeft];
+    [labelEventName setFont:[GISFonts large]];
+    labelEventName.text = [NSString stringWithFormat:@"ServiceProvider Name  "];
+    
+    [_ServicebackgroundView addSubview:labelEventName];
     
 }
 

@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/Util/FFEventDetail and FFEditEvent Views and Popovers/FFEditEvent View and Popover/FFEditEventView.m"
-            timestampString = "436887352.751482"
+            filePath = "GIS_Scheduler/DashBoard Views/GISDashBoardViewController.m"
+            timestampString = "436969134.938964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
-            landmarkName = "-sendTheSelectedPopOverData:value:"
+            startingLineNumber = "720"
+            endingLineNumber = "720"
+            landmarkName = "-successmethod_PatTypedata:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/Util/FFEventDetail and FFEditEvent Views and Popovers/FFEditEvent View and Popover/FFEditEventView.m"
-            timestampString = "436889363.044845"
+            filePath = "GIS_Scheduler/DashBoard Views/GISDashBoardViewController.m"
+            timestampString = "436969138.649244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
-            landmarkName = "-successmethod_updateScheduledata:"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
+            landmarkName = "-successmethod_NewModifiedRequests:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "436890410.687934"
+            filePath = "GIS_Scheduler/DashBoard Views/GISDashBoardViewController.m"
+            timestampString = "436969144.241153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "842"
-            endingLineNumber = "842"
-            landmarkName = "-sendTheSelectedPopOverData:value:"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
+            landmarkName = "-successmethod_Requestjobs:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/DashBoard Views/GISDashBoardViewController.m"
+            timestampString = "436969187.513085"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "758"
+            endingLineNumber = "758"
+            landmarkName = "-successmethod_PatTypedata:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

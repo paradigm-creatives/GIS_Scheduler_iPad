@@ -160,6 +160,8 @@
         [self buttonTodayAction:nil];
     }
     
+    isDateSelected = YES;
+    isServiceSelected = NO;
 }
 
 
@@ -204,7 +206,7 @@
         [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthFirstDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"StartDate"];
         [paramsDict setObject:[GISUtility eventDisplayFormat:[NSDate getMonthlastDate:[[FFDateManager sharedManager] currentDate]]] forKey:@"EndDate"];
     }
-    if(isServiceSelected){
+    if(isServiceSelected && _fill_UnfillSegmentControl.selectedSegmentIndex == 0){
         
         if([serviceProvider_IDString length] == 0){
             serviceProvider_IDString = @"";
@@ -518,6 +520,8 @@
         
         if (sender.selectedSegmentIndex==0) {
             
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_service_provider",TABLE, nil)];
+            
             appDelegate.isfilled = YES;
             
             [self addEventCalander:viewEdit_ServiceProvider_Array];
@@ -792,7 +796,7 @@
     
     _dateTextField.text = [GISUtility eventDisplayFormat:newDate];
     
-    [popoverControllerDate dismissPopoverAnimated:YES];
+    //[popoverControllerDate dismissPopoverAnimated:YES];
     
     [mainTabbar setSelectedItem:self.dayItem];
     
@@ -808,10 +812,20 @@
     
     UIButton *btn=(UIButton*)sender;
     
-    NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
-                                         month:[NSDate componentsOfCurrentDate].month
-                                           day:[NSDate componentsOfCurrentDate].day];
-    popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
+    
+    if ([ _dateTextField.text length]) {
+        NSDate *date = [NSDate dateWithString:_dateTextField.text];
+        popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:date];
+    }
+    else
+    {
+        NSDate *currentDate = [NSDate dateWithYear:[NSDate componentsOfCurrentDate].year
+                                             month:[NSDate componentsOfCurrentDate].month
+                                               day:[NSDate componentsOfCurrentDate].day];
+        popoverControllerDate = [[FFDatePopoverController alloc] initWithDate:currentDate];
+    }
+    
+    
     [popoverControllerDate setProtocol:self];
     
     [popoverControllerDate presentPopoverFromRect:CGRectMake(btn.frame.origin.x+35, btn.frame.origin.y, btn.frame.size.width, btn.frame.size.height)
