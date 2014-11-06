@@ -104,6 +104,13 @@
     tableViewController1.popOverDelegate=self;
     appDelegate.isNoofAttendees = NO;
     
+    
+    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
+    
+    popover.delegate = self;
+    popover.popoverContentSize = CGSizeMake(340, 220);
+    
+    
     if([sender tag]==111)
     {
         btnTag=111;
@@ -146,6 +153,7 @@
     else if ([sender tag]==777)//Create Jobs View Buttons
     {
         btnTag=777;
+        popover.popoverContentSize = CGSizeMake(340, 150);
          tableViewController1.popOverArray=typeOfservice_mutArray;
         tableViewController1.view_String=[GISUtility returningstring:typeOfService_answer_label.text];
         
@@ -160,6 +168,7 @@
     else if ([sender tag]==999)//Create Jobs View Buttons
     {
         btnTag=999;
+        popover.popoverContentSize = CGSizeMake(340, 150);
          tableViewController1.popOverArray=noOfAttendees_mutArray;
         tableViewController1.view_String=[GISUtility returningstring:noOfAttendees_answer_label.text];
         tableViewController1.noOfAttendeesIdArray = noOfAttendees_ID_mutArray;
@@ -174,11 +183,8 @@
         
     }
 
-    popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
-    popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
-    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+131, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+131, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str

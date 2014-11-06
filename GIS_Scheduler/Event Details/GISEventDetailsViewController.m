@@ -512,7 +512,7 @@
         }else if(btn.tag == 44){
             
             UIButton *document_btn=(UIButton *)[self.view viewWithTag:btn.tag];
-            id tempCellRef=(GISPreparationMaterialCell *)document_btn.superview.superview.superview;
+            id tempCellRef=(GISPreparationMaterialCell *)[GISUtility findParentTableViewCell:document_btn];//document_btn.superview.superview.superview;
           GISPreparationMaterialCell *preparationCell=(GISPreparationMaterialCell *)tempCellRef;
             
             if ([self.popover isPopoverVisible]) {

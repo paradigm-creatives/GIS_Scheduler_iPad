@@ -108,12 +108,10 @@
     
     if (selected_row==indexPath.row && isEdit_Button_Clicked) {
 
-        cell.eventType_UIView.hidden=NO;
         cell.gisResponse_UIView.hidden=NO;
         cell.serviceProvider_UIView.hidden=NO;
         cell.payType_UIView.hidden=NO;
         
-        cell.eventType_EDIT_Label.text=eventType_temp_string;
         cell.gisResponse_EDIT_Label.text=gisResponse_temp_string;
         cell.service_provider_EDIT_Label.text=serviceProvider_temp_string;
         cell.payType_EDIT_Label.text=payType_temp_string;
@@ -121,7 +119,6 @@
     }
     else
     {
-        cell.eventType_UIView.hidden=YES;
         cell.gisResponse_UIView.hidden=YES;
         cell.serviceProvider_UIView.hidden=YES;
         cell.payType_UIView.hidden=YES;
@@ -131,9 +128,7 @@
     cell.deleteButton.tag=indexPath.row;
     
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [cell.eventType_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.payType_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.gisReponse_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.serviceProvider_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -217,7 +212,6 @@
     {
         isEdit_Button_Clicked=YES;
         
-        eventType_temp_string=tempObj.EventType_String;
         
         serviceProvider_temp_string=tempObj.ServiceProviderName_String;
         payType_temp_string=tempObj.PayType_String;
@@ -232,22 +226,19 @@
     }
     else if(isEdit_Button_Clicked){
         
-        tempObj.EventType_String=eventType_temp_string;
         tempObj.ServiceProviderName_String=serviceProvider_temp_string;
         tempObj.PayType_String=payType_temp_string;
         tempObj.GisResponse_String=gisResponse_temp_string;
-        [_SPJobsArray replaceObjectAtIndex:selected_row withObject:tempObj];
         
-        
-        NSString *typeOfService_ID_temp_String=@"";
         NSString *serviceProvider_ID_temp_String=@"";
         NSString *payType_ID_temp_String=@"";
 
-        NSString *response_string;
         if ([tempObj.GisResponse_String isEqualToString:@"Submitted"])
-            response_string=@"1";
+            tempObj.GisResponse_id_String=@"1";
         else
-            response_string=@"2";
+            tempObj.GisResponse_id_String=@"2";
+        
+        [_SPJobsArray replaceObjectAtIndex:selected_row withObject:tempObj];
         
         
         NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",tempObj.ServiceProviderName_String];
@@ -267,23 +258,25 @@
         update_eventdict=[[NSMutableDictionary alloc]init];
         
         [update_eventdict setObject:[GISUtility returningstring:tempObj.JobID_String] forKey:kJobDetais_JobID];
+        [update_eventdict setObject:[GISUtility returningstring:tempObj.JobDate_String] forKey:kJobDetais_JobDate];
         [update_eventdict setObject:[GISUtility returningstring:tempObj.startTime_String] forKey:kJobDetais_StartTime];
         [update_eventdict setObject:[GISUtility returningstring:tempObj.endTime_String] forKey:kJobDetais_EndTime];
-        [update_eventdict setObject:[GISUtility returningstring:tempObj.JobDate_String] forKey:kJobDetais_JobDate];
-        [update_eventdict setObject:[GISUtility returningstring:payType_ID_temp_String] forKey:kViewSchedule_PayTypeID];
         [update_eventdict setObject:[GISUtility returningstring:serviceProvider_ID_temp_String] forKey:kViewSchedule_ServiceProviderID];
         [update_eventdict setObject:[GISUtility returningstring:@""] forKey:kViewSchedule_SubroleID];
+        [update_eventdict setObject:[GISUtility returningstring:payType_ID_temp_String] forKey:kViewSchedule_PayTypeID];
+        [update_eventdict setObject:[GISUtility returningstring:@""] forKey:kViewSchedule_JobNotes];
         [update_eventdict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kLoginRequestorID];
+        [update_eventdict setObject:[GISUtility returningstring:tempObj.GisResponse_id_String] forKey:kSPRequestJobs_GisResponse];
         
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
-        
+        [[GISServerManager sharedManager] updateJobDetails_SearchRequestedJobs:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
         
         selected_row=999999;
         isEdit_Button_Clicked=NO;
     }
     [self.jobResultsTableView reloadData];
 }
+
 -(void)successmethod_updateJobDetails_data:(GISJsonRequest *)response
 {
     [self removeLoadingView];
@@ -297,36 +290,14 @@
     NSLog(@"Failure");
 }
 
--(void)deleteButtonPressed:(id)sender
-{
-    UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    alertVIew.tag = [sender tag];
-    alertVIew.delegate = self;
-    [alertVIew show];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 1)
-    {
-        GISSchedulerSPJobsObject *jobObj = [_SPJobsArray objectAtIndex:alertView.tag];
-    }
-}
-
-
 -(IBAction)pickerButtonPressed:(id)sender
 {
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     UIButton *button=(UIButton *)sender;
-    GISDashBoardSPCell *dashBoardCell=(GISDashBoardSPCell *)button.superview.superview.superview.superview;
+    GISDashBoardSPCell *dashBoardCell=(GISDashBoardSPCell *)[GISUtility findParentTableViewCell:button];
     
-    if([sender tag]==111)
-    {
-        btnTag=111;
-        tableViewController1.popOverArray=eventType_array;
-    }
-    else if ([sender tag]==222)
+    if ([sender tag]==222)
     {
         btnTag=222;
         tableViewController1.popOverArray=serviceProvider_Array;
@@ -346,8 +317,7 @@
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
-    if([sender tag]==111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+472, button.frame.origin.y+30, 1, 1) inView:dashBoardCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
     if([sender tag]==222)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+560, button.frame.origin.y+30, 1, 1) inView:dashBoardCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if([sender tag]==333)
@@ -356,15 +326,13 @@
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+845, button.frame.origin.y+30, 1, 1) inView:dashBoardCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+
+
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {      
     
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.3];
-    if(btnTag==111)
-    {
-        eventType_temp_string=value_str;
-    }
-    else if (btnTag==222)
+    if (btnTag==222)
     {
         serviceProvider_temp_string=value_str;
     }

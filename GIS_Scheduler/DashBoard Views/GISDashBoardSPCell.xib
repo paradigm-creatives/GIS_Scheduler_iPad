@@ -99,33 +99,6 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <view hidden="YES" contentMode="scaleToFill" id="WrV-Vx-Mw0" userLabel="Event Type">
-                        <rect key="frame" x="407" y="6" width="82" height="38"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0x4-tn-5YV">
-                                <rect key="frame" x="2" y="5" width="80" height="30"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nkw-TS-ErW">
-                                <rect key="frame" x="7" y="9" width="61" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rbl-A0-Yux">
-                                <rect key="frame" x="2" y="4" width="79" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown.png" id="JS1-V9-Wvr">
-                                <rect key="frame" x="62" y="17" width="9" height="5"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
                     <view hidden="YES" contentMode="scaleToFill" id="kr4-e2-Mqa" userLabel="Service Provider">
                         <rect key="frame" x="492" y="6" width="97" height="38"/>
                         <subviews>
@@ -215,10 +188,7 @@
                 <outlet property="editButton" destination="1Cc-Ul-bAj" id="RCm-EV-o1y"/>
                 <outlet property="edit_imageView" destination="oaM-yD-AVE" id="9Fu-UP-6Ng"/>
                 <outlet property="endTime_Label" destination="Vmv-3R-FuY" id="F0l-nT-40G"/>
-                <outlet property="eventType_Button" destination="rbl-A0-Yux" id="WF6-FK-4TY"/>
-                <outlet property="eventType_EDIT_Label" destination="Nkw-TS-ErW" id="qfa-h7-fmK"/>
                 <outlet property="eventType_Label" destination="hM7-Mz-Ybg" id="0ht-DI-Cqb"/>
-                <outlet property="eventType_UIView" destination="WrV-Vx-Mw0" id="YSM-Wf-Th7"/>
                 <outlet property="gisReponse_Button" destination="C8n-Ri-Opa" id="eU1-FI-Rs9"/>
                 <outlet property="gisResponse_EDIT_Label" destination="JlF-6v-ld8" id="xre-lh-fR4"/>
                 <outlet property="gisResponse_UIView" destination="nxW-mm-3W4" id="qoA-3U-lfw"/>

@@ -34,4 +34,5 @@
 +(NSString *) getTimeData:(NSString *) timeString;
 +(NSString *)getEventTime:(NSDate *)fromdate;
 
++(UITableViewCell *)findParentTableViewCell:(UIButton *)button;
 @end
