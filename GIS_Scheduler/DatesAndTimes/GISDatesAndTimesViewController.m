@@ -1079,7 +1079,7 @@
 -(IBAction)dateButton_Edit_Pressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=555;
@@ -1090,7 +1090,7 @@
 -(IBAction)startTimeButton_Edit_Pressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=666;
@@ -1103,7 +1103,7 @@
 -(IBAction)endTimeButton_Edit_Pressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISDatesTimesDetailCell *)button.superview.superview.superview.superview;
+    id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
     GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=777;

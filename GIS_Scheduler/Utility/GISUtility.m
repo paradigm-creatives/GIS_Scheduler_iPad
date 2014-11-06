@@ -249,5 +249,20 @@
     return stringFromDate;
 }
 
-
++(UITableViewCell *)findParentTableViewCell:(UIButton *)button
+{
+    UIView *view = button.superview;
+    while (view.superview != nil)
+    {
+        if ([view isKindOfClass:[UITableViewCell class]])
+        {
+            return (UITableViewCell *)view;
+        }
+        else
+        {
+            view = view.superview;
+        }
+    }
+    return nil;
+}
 @end

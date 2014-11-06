@@ -19,7 +19,6 @@
     GISLoginDetailsObject *login_Obj;
     int selected_row;
     
-    NSString *eventType_temp_string;
     NSString *gisResponse_temp_string;
     NSString *serviceProvider_temp_string;
     NSString *payType_temp_string;

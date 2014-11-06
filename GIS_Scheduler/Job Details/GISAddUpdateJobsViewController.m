@@ -288,8 +288,8 @@
 {
     [currentTextField resignFirstResponder];
     UIButton *button=(UIButton *)sender;
-    GISAddUpdateJobCell *table=(GISAddUpdateJobCell *)button.superview.superview.superview;
-    //UITableView *table = (UITableView*)[[[[[sender superview] superview] superview] superview] superview];
+    GISAddUpdateJobCell *table=(GISAddUpdateJobCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview;
+    
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     

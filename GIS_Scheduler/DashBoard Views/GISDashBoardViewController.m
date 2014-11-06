@@ -784,7 +784,7 @@
     
     UIButton *btn=(UIButton*)sender;
     
-    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)btn.superview.superview.superview;
+    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)[GISUtility findParentTableViewCell:btn];//btn.superview.superview.superview;
     
     btn_tag = btn.tag;
     
@@ -812,7 +812,7 @@
     
     UIButton *btn=(UIButton*)sender;
     
-    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)btn.superview.superview.superview;
+    GISDashBoardSPCell *spCell=(GISDashBoardSPCell *)[GISUtility findParentTableViewCell:btn];//btn.superview.superview.superview;
     
     btn_tag = btn.tag;
     

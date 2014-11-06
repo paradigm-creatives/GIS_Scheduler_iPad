@@ -98,9 +98,6 @@
     
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
-    
-    
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -332,7 +329,8 @@
     GISSchedulerSPJobsStore *spJobsStore;
     NSMutableArray *SPJobsArray=[[NSMutableArray alloc]init];
     
-    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+    //if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"])
+    {
         
         [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
         spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
@@ -348,7 +346,9 @@
         [self.navigationController pushViewController:detailViewController animated:YES];
         /////////////////
         
-    }else{
+    }
+   // else
+    {
         
         [self removeLoadingView];
         if (responseArray.count<1) {
@@ -367,7 +367,7 @@
 -(IBAction)pickerButtonPressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISFindRequestJobs_Cell *)button.superview.superview.superview;
+    id tempCellRef=(GISFindRequestJobs_Cell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview;
     GISFindRequestJobs_Cell *findReqJobsCell=(GISFindRequestJobs_Cell *)tempCellRef;
     
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
@@ -515,7 +515,7 @@
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
     if ([sender tag]==1111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width, 60, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width, 160, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     else
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+115, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }

@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
+
+
+
 #import "GISEeventShowBackgroundView.h"
 
 @implementation GISEeventShowBackgroundView

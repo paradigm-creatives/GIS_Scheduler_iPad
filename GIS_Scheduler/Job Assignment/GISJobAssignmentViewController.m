@@ -139,6 +139,9 @@
         CGRect frame1=table_UIView.frame;
         frame1.origin.x=75;
         table_UIView.frame=frame1;
+        
+        self.navigationItem.hidesBackButton = YES;
+        
     }
     else
     {
@@ -146,6 +149,8 @@
         CGRect frame1=table_UIView.frame;
         frame1.origin.x=0;
         table_UIView.frame=frame1;
+        
+        self.navigationItem.hidesBackButton = NO;
     }
     
     [btn setTitle:buttonTitle forState:UIControlStateNormal];
@@ -189,9 +194,7 @@
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-//    cell.service_Provider_type_button.tag=indexPath.row;
-//    cell.service_Provider_button.tag=indexPath.row;
-//    cell.payType_button.tag=indexPath.row;
+
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:indexPath.row];
     cell.oTA_button.tag=indexPath.row;
     cell.edit_button.tag=indexPath.row;
@@ -222,7 +225,6 @@
     }
     else
     {
-        //check.png
         [cell.edit_button setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
     }
     
@@ -270,13 +272,10 @@
             btnTag=333;
             tableViewController1.view_String=@"datestimes";
             tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:to_answer_Label.text];
-            
         }
         else if ([sender tag]==444)
         {
-            btnTag=444;
-            //tableViewController1.view_String=[GISUtility returningstring:typeOfService_answer_Label.text];
-            tableViewController1.popOverArray=serviceProviderType_array;
+            btnTag=444;tableViewController1.popOverArray=serviceProviderType_array;
             
         }
         else if ([sender tag]==555)
@@ -291,7 +290,6 @@
             tableViewController1.popOverArray=payType_array;
             
         }
-        //NSLog(@"-----x-->%@",NSStringFromCGRect(button.frame));
         if ([sender tag]==111)
             [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+45, 148, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         else
@@ -302,7 +300,6 @@
         if ([sender tag]==555)
         {
             btnTag=555;
-            //tableViewController1.view_String=[GISUtility returningstring:typeOfService_answer_Label.text];
             tableViewController1.popOverArray=serviceProviderType_array;
             
         }
@@ -313,7 +310,7 @@
             
         }
         popover.popoverContentSize = CGSizeMake(340, 250);
-        GISJobAssignmentCell *tempCell_JobAssignment=(GISJobAssignmentCell *)button.superview.superview.superview.superview.superview;
+        GISJobAssignmentCell *tempCell_JobAssignment=(GISJobAssignmentCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview.superview;
         
         if ([sender tag]==555)
          [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+310, button.frame.origin.x+button.frame.size.width-57, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -387,8 +384,6 @@
     UIButton *button=(UIButton *)sender;
     
     GISFilterMoreViewController *tableViewController = [[GISFilterMoreViewController alloc] initWithNibName:@"GISFilterMoreViewController" bundle:nil];
-    //tableViewController.popOverDelegate=self;
-    //popover.popoverContentSize = CGSizeMake(433, 504);
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     popover.popoverContentSize = CGSizeMake(433, 504);
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+68, button.frame.origin.y+88, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
@@ -398,12 +393,7 @@
 
 -(IBAction)searchButton_Pressed:(id)sender
 {
-    /*
-    if (![chooseRequestID_str length]) {
-        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;
-        return;
-    }
-    */
+    
     if([startDate_str length] == 0  )
     {
         startDate_str = @"";
@@ -496,7 +486,7 @@
 -(IBAction)listOfServiceProviders_ButtonPressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
-    id tempCellRef=(GISJobAssignmentCell *)button.superview.superview.superview.superview.superview;
+    id tempCellRef=(GISJobAssignmentCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview.superview;
     GISJobAssignmentCell *attendeesCell=(GISJobAssignmentCell *)tempCellRef;
     
     GISServiceProviderPopUpViewController *popOverController=[[GISServiceProviderPopUpViewController alloc]initWithNibName:@"GISServiceProviderPopUpViewController" bundle:nil];
