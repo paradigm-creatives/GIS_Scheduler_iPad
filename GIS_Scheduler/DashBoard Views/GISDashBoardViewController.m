@@ -516,7 +516,7 @@
     
     if(section == 0){
         appDelegate.isFromViewEditService = NO;
-        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
     else if(section ==1){
         

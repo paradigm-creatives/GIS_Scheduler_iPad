@@ -421,22 +421,41 @@
 -(void)successmethod_getLocationRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"--%@",response.responseJson);
-    GISDropDownStore *dropDownStore;
     
-    [[GISStoreManager sharedManager] removeLocationNameObjects];
-    dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
-    _locationNames = [[GISStoreManager sharedManager] getLocationNameObjects];
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_getLocationRequestDetails Success---%@",saveUpdateDict);
     
-    NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
-    if (chooseReqDetailedArray.count>0) {
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
         
-        _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
-    }
-    
-    for (GISDropDownsObject *dropDownObj in _locationNames) {
-        if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails]) {
-            _locationName_Value_string =  dropDownObj.value_String;
+        GISDropDownStore *dropDownStore;
+        
+        [[GISStoreManager sharedManager] removeLocationNameObjects];
+        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+        _locationNames = [[GISStoreManager sharedManager] getLocationNameObjects];
+        
+        NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+        if (chooseReqDetailedArray.count>0) {
+            
+            _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
         }
+        
+        for (GISDropDownsObject *dropDownObj in _locationNames) {
+            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.reqLocation_Id_chooseReqParsedDetails]) {
+                _locationName_Value_string =  dropDownObj.value_String;
+            }
+        }
+        
+    }else{
+        
+        _locationName_Value_string = @"";
+         _LocationName_string = @"";
+         _address1_string = @"";
+        _address2_string = @"";
+         _city_string = @"";
+         _state_string = @"";
+         _zip_string = @"";
     }
     
     [_locationDetaislTabelView reloadData];
