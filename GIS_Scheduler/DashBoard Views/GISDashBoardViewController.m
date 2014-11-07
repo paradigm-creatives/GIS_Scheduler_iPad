@@ -179,6 +179,8 @@
     
     if(refresh_Index == 0){
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
         NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
         GISLoginDetailsObject *login_Obj=[requetId_array lastObject];

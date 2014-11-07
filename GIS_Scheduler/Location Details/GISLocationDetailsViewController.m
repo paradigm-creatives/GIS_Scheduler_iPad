@@ -530,7 +530,7 @@
     @try {
 //        if((appDelegate.isFromContacts && !appDelegate.isNewRequest) || (appDelegate.isFromContacts && appDelegate.isNewRequest) || [_isCompleteRequest isEqualToString:@"true"] || ([_isCompleteRequest isEqualToString:@"false"] && [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]) || [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]||[_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]){
         
-    if((appDelegate.isFromContacts && !appDelegate.isNewRequest) || (appDelegate.isFromContacts && appDelegate.isNewRequest)){
+    if(!appDelegate.isNewRequest || (appDelegate.isFromContacts && appDelegate.isNewRequest)){
         
             _parkingstring = [[NSMutableString alloc] init];
             
@@ -710,7 +710,7 @@
                 
                 if([_generalLocationId_string isEqualToString:@"1"]){
                     if(![_buildingNamedata isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
-                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
+                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_saveLocationDataRequest:) failAction:@selector(failuremethod_saveLocationDataRequest:)];
                     }else{
                         if([_fields length]>0)
                             [_fields setString:@""];
@@ -726,7 +726,7 @@
                     if([_LocationName_string length]>0 && [_address1_string length]>0
                        && [_city_string length] >0 && [_zip_string length] >0 && [_state_string length] >0){
                         
-                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
+                        [[GISServerManager sharedManager] saveLocationData:self withParams:paramsDict finishAction:@selector(successmethod_saveLocationDataRequest:) failAction:@selector(failuremethod_saveLocationDataRequest:)];
                     }else{
                         if([_fields length]>0)
                             [_fields setString:@""];
@@ -820,7 +820,11 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField.tag == 2){
+    if(textField.tag == 2 || textField.tag == 77){
+        
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        if(newLength >6)
+            return (newLength > 6) ? NO : YES;
         /*  limit to only numeric characters  */
         NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
         for (int i = 0; i < [string length]; i++) {
@@ -835,12 +839,10 @@
         }
         
         /*  limit the users input to only 9 characters  */
-        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        return (newLength > 6) ? NO : YES;
     }else{
         return YES;
     }
-    return NO;
+    return YES;
 }
 
 
@@ -912,10 +914,11 @@
         [textView resignFirstResponder];
         return NO;
     }
+    
     return YES;
 }
 
--(void)successmethod_eventDetailsRequest:(GISJsonRequest *)response
+-(void)successmethod_saveLocationDataRequest:(GISJsonRequest *)response
 {
     NSDictionary *saveUpdateDict;
     NSArray *responseArray= response.responseJson;
@@ -940,15 +943,16 @@
         
     }else{
         appDelegate.isFromlocation  = NO;
-        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_Failed",TABLE, nil)];
+        [self removeLoadingView];
     }
 }
 
--(void)failuremethod_eventDetailsRequest:(GISJsonRequest *)response
+-(void)failuremethod_saveLocationDataRequest:(GISJsonRequest *)response
 {
     [self removeLoadingView];
     appDelegate.isFromlocation  = NO;
-    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_Failed",TABLE, nil)];
 }
 
 -(void)successmethod_getoffLocationRequestDetails:(GISJsonRequest *)response

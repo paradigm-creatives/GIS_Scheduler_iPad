@@ -158,6 +158,8 @@
             [[GISServerManager sharedManager] logininForTarget:self withParams:paramsDict finishAction:@selector(successmethod_login:) failAction:@selector(failuremethod_login:)];
         }
     }else{
+        
+        [self removeLoadingView];
         [self loginFailedWithNetworkError];
     }
 }

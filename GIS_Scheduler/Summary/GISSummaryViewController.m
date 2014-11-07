@@ -381,7 +381,7 @@
 
     }else if(indexPath.section == 4){
         
-        GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell129"];
         if(summaryDatescell==nil)
         {
             summaryDatescell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryDatesDetailViewCell" owner:self options:nil]objectAtIndex:0];
@@ -395,14 +395,7 @@
         @catch (NSException *exception) {
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in SummaryView CellForRowAtIndexPath section 3--> %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
-        //cell.requestor_label.text = [NSString stringWithFormat:@"%d",(int)indexPath.row +1];
-        
-//        summarycell.firstName_label.text =  NSLocalizedStringFromTable(@"first_name", TABLE, nil);
-//        summarycell.lastName_label .text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
-//        summarycell.modeOf_communication_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
-//        summarycell.directly_utilized_label.text =  NSLocalizedStringFromTable(@"directly_utilized_Services", TABLE, nil);
-//        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
-//        
+
         summaryDatescell.date_label.text = datesAndTimesObj.date_String;
         summaryDatescell.day_label.text = datesAndTimesObj.day_String;
         summaryDatescell.startTime_label.text = datesAndTimesObj.startTime_String;
@@ -513,7 +506,7 @@
         
     }if(section == 6){
         
-        UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+        UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
         
         UIButton *addButton1 = [[UIButton alloc] init];
         addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -524,7 +517,7 @@
             [addButton1 addTarget:self
                           action:@selector(showPopoverDetails:)
                 forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(294, 30.0, 150.0, 27.0);
+            addButton1.frame = CGRectMake(294, 60.0, 150.0, 27.0);
             addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
             [addButton1.titleLabel setFont:[GISFonts small]];
             [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -541,7 +534,7 @@
             [addButton1 addTarget:self
                            action:@selector(submitButnPressed:)
                  forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(310.0, 30.0, 150.0, 30.0);
+            addButton1.frame = CGRectMake(310.0, 60.0, 150.0, 30.0);
             addButton1.enabled = YES;
             
             
@@ -563,7 +556,7 @@
         [nextButton addTarget:self
                        action:@selector(nextButtonPressed:)
              forControlEvents:UIControlEventTouchUpInside];
-        nextButton.frame = CGRectMake(470.0, 30.0, 120.0, 30.0);
+        nextButton.frame = CGRectMake(470.0, 60.0, 120.0, 30.0);
         
         
         [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
@@ -587,7 +580,7 @@
     if(section == 4)
         return 50;
     if(section == 6)
-        return 80;
+        return 100;
     if(section == 5){
         if(appDelegate.isNewRequest)
             return 0;
