@@ -394,12 +394,10 @@
 {
     [noOfServiceProviders_TextField resignFirstResponder];
     UIButton *button=(UIButton *)sender;
-//    id tempCellRef=(GISJobDetailsCell *)button.superview.superview.superview.superview;
-//    GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)tempCellRef;
-    
+
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
-    UITableView *table = (UITableView*)[[[[[sender superview] superview] superview] superview] superview];
+    GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)[GISUtility findParentTableViewCell:button];
     if([sender tag]==111)
     {
         btnTag=111;
@@ -495,18 +493,22 @@
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    //if(([sender tag]==1111)||([sender tag]==1212)||([sender tag]==1313)||([sender tag]==555)||([sender tag]==666)||([sender tag]==777))
+       // [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+24, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
     if([sender tag]==1111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+36, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+105, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==1212)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+136, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+166, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==1313)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+236, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+236, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     if([sender tag]==555)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+345, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if([sender tag]==666)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+436, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     if([sender tag]==777)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:table permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+536, button.frame.origin.y+30, 1, 1) inView:jobDetailsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
     if(([sender tag]==4646)||([sender tag]==5656))
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+175, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }

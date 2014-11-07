@@ -220,12 +220,13 @@
     
     if (selected_row==indexPath.row && isEdit_Button_Clicked) {
         cell.serviceProviderType_label.text=typeOfservice_temp_string;
+        
         cell.payType_label.text=payType_temp_string;
         [cell.edit_button setImage:[UIImage imageNamed:@"check_pressed"] forState:UIControlStateNormal];
     }
     else
     {
-        [cell.edit_button setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+        //[cell.edit_button setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
     }
     
     return cell;
@@ -313,9 +314,9 @@
         GISJobAssignmentCell *tempCell_JobAssignment=(GISJobAssignmentCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview.superview;
         
         if ([sender tag]==555)
-         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+310, button.frame.origin.x+button.frame.size.width-57, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+435, button.frame.origin.x+button.frame.size.width-57, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         else
-            [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+530, button.frame.origin.x+button.frame.size.width-57, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width+680, button.frame.origin.x+button.frame.size.width-57, 1, 1) inView:tempCell_JobAssignment.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 
@@ -370,8 +371,9 @@
     {
         payType_temp_string=value_str;
     }
-    if (btnTag==555||btnTag==777)
-        [jobAssignment_tableView reloadData];
+    //if (btnTag==555||btnTag==777)
+    
+    [jobAssignment_tableView reloadData];
 }
 
 -(void)dismissPopOverNow
@@ -497,7 +499,7 @@
 
     popover=[[UIPopoverController alloc]initWithContentViewController:popOverController];
     popover.popoverContentSize = CGSizeMake(340, 357);
-    [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+480, attendeesCell.service_Provider_button.frame.origin.y+35, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
+    [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+640, attendeesCell.service_Provider_button.frame.origin.y+35, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
 }
 
 

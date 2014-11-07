@@ -759,9 +759,9 @@
                 <outlet property="friday_ImageView_" destination="Zut-VF-28r" id="3ZP-4f-pjR"/>
                 <outlet property="friday_Label_" destination="3RH-qb-Jl5" id="ZuE-7J-kd8"/>
                 <outlet property="jobDataToSearch_label_" destination="1FM-hX-4p6" id="2WA-af-2Sc"/>
-                <outlet property="model_label_" destination="zWy-dA-XtH" id="BRj-HR-frR"/>
                 <outlet property="monday_Button_" destination="rXt-NY-Wfh" id="PLg-af-LsG"/>
                 <outlet property="monday_ImageView_" destination="OnB-fW-ZcP" id="Ytm-5E-8LT"/>
+                <outlet property="monday_Label_" destination="zWy-dA-XtH" id="NpM-3A-WzM"/>
                 <outlet property="no_filled_label_" destination="vus-eB-xCd" id="Lzg-PD-sS9"/>
                 <outlet property="no_out_label_" destination="wix-C7-jfo" id="J7d-Gs-0h4"/>
                 <outlet property="outAgency_no_ImageView" destination="quJ-bg-Hgr" id="Lua-Pa-hjp"/>

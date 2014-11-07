@@ -87,6 +87,8 @@
     [super viewWillAppear: animated];
         
     //[_summary_tableView reloadData];
+    GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
+    [appDelegate.datesArray insertObject:dobj atIndex:0];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -106,10 +108,9 @@
     {
         return [appDelegate.jobDetailsArray count];
     }
-
-    
     return 1;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GISSummaryCell *summaryCell;
@@ -380,8 +381,8 @@
         [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
     }else if(indexPath.section == 4){
-        
-        GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell1"];
+
+        GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell19"];
         if(summaryDatescell==nil)
         {
             summaryDatescell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryDatesDetailViewCell" owner:self options:nil]objectAtIndex:0];
@@ -395,23 +396,17 @@
         @catch (NSException *exception) {
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in SummaryView CellForRowAtIndexPath section 3--> %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
-        //cell.requestor_label.text = [NSString stringWithFormat:@"%d",(int)indexPath.row +1];
-        
-//        summarycell.firstName_label.text =  NSLocalizedStringFromTable(@"first_name", TABLE, nil);
-//        summarycell.lastName_label .text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
-//        summarycell.modeOf_communication_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
-//        summarycell.directly_utilized_label.text =  NSLocalizedStringFromTable(@"directly_utilized_Services", TABLE, nil);
-//        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
-//        
-        summaryDatescell.date_label.text = datesAndTimesObj.date_String;
-        summaryDatescell.day_label.text = datesAndTimesObj.day_String;
-        summaryDatescell.startTime_label.text = datesAndTimesObj.startTime_String;
-        summaryDatescell.endTime_label.text = datesAndTimesObj.endTime_String;
+ 
+        summaryDatescell.date_label.text = [GISUtility returningstring:datesAndTimesObj.date_String];
+        summaryDatescell.day_label.text = [GISUtility returningstring:datesAndTimesObj.day_String];
+        summaryDatescell.startTime_label.text =[GISUtility returningstring:datesAndTimesObj.startTime_String];
+        summaryDatescell.endTime_label.text = [GISUtility returningstring:datesAndTimesObj.endTime_String];
         
         summaryDatescell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return summaryDatescell;
 
+        
     } if(indexPath.section == 5){
         
         GISJobDetailsCell *cell=(GISJobDetailsCell *)[tableView dequeueReusableCellWithIdentifier:@"cell86"];

@@ -509,15 +509,17 @@
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"datestimes";
+        if ([findReqObj.cancelDate_string length])
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.cancelDate_string];
     }
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
     if ([sender tag]==1111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width, 160, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width-14, 120, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     else
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+115, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+130, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
@@ -702,56 +704,28 @@
 {
     if ([findReqObj.weekDays_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]){
         [findReqObj.weekDays_dictionary removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-        if ([sender tag]==1) {
-            //findReqObj.monday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==2) {
-            //findReqObj.tuesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==3) {
-            //wednesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==4) {
-            //thursday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==5) {
-            //findReqObj.friday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==6) {
-            //findReqObj.saturday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==7) {
-            //findReqObj.sunday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
     }
     else{
         if ([sender tag]==1) {
             [findReqObj.weekDays_dictionary setValue:@"Monday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.monday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==2) {
             [findReqObj.weekDays_dictionary setValue:@"Tuesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.tuesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==3) {
             [findReqObj.weekDays_dictionary setValue:@"Wednesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.wednesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==4) {
             [findReqObj.weekDays_dictionary setValue:@"Thursday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.thursday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==5) {
             [findReqObj.weekDays_dictionary setValue:@"Friday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.friday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==6) {
             [findReqObj.weekDays_dictionary setValue:@"Saturday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.saturday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==7) {
             [findReqObj.weekDays_dictionary setValue:@"Sunday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.sunday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
     }
     [findReqJobs_tableView reloadData];

@@ -47,8 +47,6 @@
     
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
-    serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     selected_row=999999;
     NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
     payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
@@ -89,11 +87,17 @@
     [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
     [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
     
+   
+    
     NSString *response_string;
     if ([spJobsObj.GisResponse_String isEqualToString:@"1"])
         response_string=@"Submitted";
     else
         response_string=@"Un submitted";
+    
+    cell.gisResponse_EDIT_Label.text=response_string;
+    cell.payType_EDIT_Label.text=spJobsObj.PayType_String;
+    
     [cell.payType_btn setTitle:spJobsObj.PayType_String forState:UIControlStateNormal];
     [cell.response_status_btn setTitle:response_string forState:UIControlStateNormal];
     
@@ -105,23 +109,19 @@
     [cell.done_btn setTag:indexPath.row];
     
     
-    
+    cell.edit_imageView.image=[UIImage imageNamed:@"check_pressed"];
+    cell.gisResponse_UIView.hidden=NO;
+    cell.payType_UIView.hidden=NO;
     if (selected_row==indexPath.row && isEdit_Button_Clicked) {
 
-        cell.gisResponse_UIView.hidden=NO;
-        cell.serviceProvider_UIView.hidden=NO;
-        cell.payType_UIView.hidden=NO;
-        
         cell.gisResponse_EDIT_Label.text=gisResponse_temp_string;
-        cell.service_provider_EDIT_Label.text=serviceProvider_temp_string;
         cell.payType_EDIT_Label.text=payType_temp_string;
-        cell.edit_imageView.image=[UIImage imageNamed:@"check_pressed"];
+
     }
     else
     {
-        cell.gisResponse_UIView.hidden=YES;
-        cell.serviceProvider_UIView.hidden=YES;
-        cell.payType_UIView.hidden=YES;
+        //cell.gisResponse_UIView.hidden=YES;
+        //cell.payType_UIView.hidden=YES;
     }
     
     cell.editButton.tag=indexPath.row;
@@ -240,13 +240,7 @@
         
         [_SPJobsArray replaceObjectAtIndex:selected_row withObject:tempObj];
         
-        
-        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",tempObj.ServiceProviderName_String];
-        NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
-        if (array_serviceProvider.count>0) {
-            GISServiceProviderObject *obj=[array_serviceProvider lastObject];
-            serviceProvider_ID_temp_String=obj.id_String;
-        }
+
         
         NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.PayType_String];
         NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
@@ -297,13 +291,7 @@
     UIButton *button=(UIButton *)sender;
     GISDashBoardSPCell *dashBoardCell=(GISDashBoardSPCell *)[GISUtility findParentTableViewCell:button];
     
-    if ([sender tag]==222)
-    {
-        btnTag=222;
-        tableViewController1.popOverArray=serviceProvider_Array;
-        
-    }
-    else if ([sender tag]==333)
+    if ([sender tag]==333)
     {
         btnTag=333;
         tableViewController1.popOverArray=payType_array;

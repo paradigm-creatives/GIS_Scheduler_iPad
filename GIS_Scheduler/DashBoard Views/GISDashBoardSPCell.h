@@ -25,11 +25,9 @@
 @property(nonatomic,strong) IBOutlet UIButton *info_btn;
 
 @property(nonatomic,strong) IBOutlet UIView *gisResponse_UIView;
-@property(nonatomic,strong) IBOutlet UIView *serviceProvider_UIView;
 @property(nonatomic,strong) IBOutlet UIView *payType_UIView;
 
 @property(nonatomic,strong) IBOutlet UILabel *gisResponse_EDIT_Label;
-@property(nonatomic,strong) IBOutlet UILabel *service_provider_EDIT_Label;
 @property(nonatomic,strong) IBOutlet UILabel *payType_EDIT_Label;
 
 
