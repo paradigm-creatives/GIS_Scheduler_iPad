@@ -215,6 +215,8 @@
     
     if ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]) {
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
@@ -225,8 +227,10 @@
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
     NSDictionary *dict=[notification userInfo];
-
+    
     contactBilling_Object.chooseRequest_String=[dict valueForKey:@"value"];
     contactBilling_Object.chooseRequest_ID_String=[dict valueForKey:@"id"];
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
@@ -330,6 +334,8 @@
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
+    
+    [self removeLoadingView];
     
     chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
     [[GISStoreManager sharedManager]addChooseRequestDetailsObject:chooseRequestDetailsObj];

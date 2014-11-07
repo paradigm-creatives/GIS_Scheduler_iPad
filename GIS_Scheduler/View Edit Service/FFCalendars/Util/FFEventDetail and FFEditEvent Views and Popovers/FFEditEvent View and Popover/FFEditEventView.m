@@ -28,6 +28,8 @@
 #import "GISUtility.h"
 #import "GISConstants.h"
 #import "FFDateManager.h"
+#import "GISDropDownsObject.h"
+#import "GISServiceProviderObject.h"
 
 //#import "SVProgressHUD.h"
 
@@ -126,6 +128,52 @@
 
 - (IBAction)buttonDoneAction:(id)sender {
     
+    if([sender tag] == 111){
+        
+        NSMutableArray *typeOfService_array=[[NSMutableArray alloc]init];
+        NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+        typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+        
+        NSMutableArray *serviceProvider_Array=[[NSMutableArray alloc]init];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+        serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
+        
+        NSMutableArray *payType_array=  [[NSMutableArray alloc]init];
+        NSString *payType_statement  =  [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
+        payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+        NSPredicate *filePredicate;
+        NSArray *fileArray;
+        filePredicate=[NSPredicate predicateWithFormat:@"value_String==%@",event.payType];
+        fileArray=[payType_array filteredArrayUsingPredicate:filePredicate];
+        
+        if([fileArray count]>0)
+        {
+            GISDropDownsObject *obj=[fileArray lastObject];
+            payType_string=obj.id_String;
+        }
+        
+        
+        filePredicate=[NSPredicate predicateWithFormat:@"service_Provider_String==%@",event.serviceProvider];
+        fileArray=[serviceProvider_Array filteredArrayUsingPredicate:filePredicate];
+        
+        if([fileArray count]>0)
+        {
+            GISServiceProviderObject *obj=[fileArray lastObject];
+            serviceType_string = obj.id_String;
+        }
+        
+        
+        filePredicate=[NSPredicate predicateWithFormat:@"value_String==%@",event.serviceProviderType];
+        fileArray=[typeOfService_array filteredArrayUsingPredicate:filePredicate];
+        
+        if([fileArray count]>0)
+        {
+            GISDropDownsObject *obj=[fileArray lastObject];
+            subRole_string=obj.id_String;
+        }
+    }
+
+    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
@@ -142,8 +190,9 @@
     [update_eventdict setObject:subRole_string forKey:kViewSchedule_SubroleID];
     [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
-    if([sender tag] == 111)
+    if([sender tag] == 111){
         [update_eventdict setObject:@"" forKey:kSPRequestJobs_GisResponse];
+    }
     
     [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateScheduledata:) failAction:@selector(failuremethod_updateScheduledata:)];
     

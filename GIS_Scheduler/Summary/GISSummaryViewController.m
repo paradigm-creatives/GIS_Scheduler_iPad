@@ -383,6 +383,7 @@
     }else if(indexPath.section == 4){
 
         GISSummaryDatesDetailViewCell *summaryDatescell=(GISSummaryDatesDetailViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell19"];
+
         if(summaryDatescell==nil)
         {
             summaryDatescell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryDatesDetailViewCell" owner:self options:nil]objectAtIndex:0];
@@ -401,6 +402,7 @@
         summaryDatescell.day_label.text = [GISUtility returningstring:datesAndTimesObj.day_String];
         summaryDatescell.startTime_label.text =[GISUtility returningstring:datesAndTimesObj.startTime_String];
         summaryDatescell.endTime_label.text = [GISUtility returningstring:datesAndTimesObj.endTime_String];
+
         
         summaryDatescell.selectionStyle=UITableViewCellSelectionStyleNone;
         
@@ -508,7 +510,7 @@
         
     }if(section == 6){
         
-        UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 90)];
+        UIView *headerView2=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
         
         UIButton *addButton1 = [[UIButton alloc] init];
         addButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -519,7 +521,7 @@
             [addButton1 addTarget:self
                           action:@selector(showPopoverDetails:)
                 forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(294, 30.0, 150.0, 27.0);
+            addButton1.frame = CGRectMake(294, 60.0, 150.0, 27.0);
             addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
             [addButton1.titleLabel setFont:[GISFonts small]];
             [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -536,7 +538,7 @@
             [addButton1 addTarget:self
                            action:@selector(submitButnPressed:)
                  forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(310.0, 30.0, 150.0, 30.0);
+            addButton1.frame = CGRectMake(310.0, 60.0, 150.0, 30.0);
             addButton1.enabled = YES;
             
             
@@ -558,7 +560,7 @@
         [nextButton addTarget:self
                        action:@selector(nextButtonPressed:)
              forControlEvents:UIControlEventTouchUpInside];
-        nextButton.frame = CGRectMake(470.0, 30.0, 120.0, 30.0);
+        nextButton.frame = CGRectMake(470.0, 60.0, 120.0, 30.0);
         
         
         [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
@@ -582,7 +584,7 @@
     if(section == 4)
         return 50;
     if(section == 6)
-        return 80;
+        return 100;
     if(section == 5){
         if(appDelegate.isNewRequest)
             return 0;

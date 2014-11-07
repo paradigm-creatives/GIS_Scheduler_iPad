@@ -459,9 +459,9 @@
         }else if(btn.tag == 8){
             _on_goingStr = @" ";
         }else if(btn.tag == 57){
-            _outsideAgencyStr = @" ";
+            _outsideAgencyStr = @"";
         }else if(btn.tag == 58){
-            _outsideAgencyStr = @" ";
+            _outsideAgencyStr = @"";
         }else if(btn.tag == 9){
             item_value = 1;
             if([otherTechStr count]>0)
@@ -947,7 +947,7 @@
             UIButton *documentbtn=(UIButton *)[self.view viewWithTag:44];
             
             
-            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 ||([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([webSiteField.text length] == 0 && websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]) || [_re_broadcastStr length] == 0 || (documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] && [documnet_selected_label.text length]==0))
+            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 || [_outsideAgencyStr length] == 0 || blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] || [_re_broadcastStr length] == 0 || documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
             {
                 if([_fields length]>0)
                     [_fields setString:@""];
@@ -964,22 +964,22 @@
                     [_fields appendFormat:@"%@%@",@"EventType",@", \n"];
                 if([_re_broadcastStr length] == 0)
                     [_fields appendFormat:@"%@%@",@"Recorded/Broadcast",@","];
-                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_empty.png"])
-                    [_fields appendFormat:@"%@%@",@"Document",@", \n"];
-                if([blackBoardTextField.text length] == 0)
-                    [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
-                if([webSiteField.text length] == 0)
-                    [_fields appendFormat:@"%@%@",@"Website",@", \n"];
-                if([otherMaterilaTypeTextField.text length] == 0)
-                    [_fields appendFormat:@"%@%@",@"Other",@", \n"];
-//                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+//                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_empty.png"])
 //                    [_fields appendFormat:@"%@%@",@"Document",@", \n"];
-//                if(blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+//                if([blackBoardTextField.text length] == 0)
 //                    [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
-//                if(websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+//                if([webSiteField.text length] == 0)
 //                    [_fields appendFormat:@"%@%@",@"Website",@", \n"];
-//                if( othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+//                if([otherMaterilaTypeTextField.text length] == 0)
 //                    [_fields appendFormat:@"%@%@",@"Other",@", \n"];
+                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] && [documnet_selected_label.text length]==0)
+                    [_fields appendFormat:@"%@%@",@"Document",@", \n"];
+                if([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+                    [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
+                if([webSiteField.text length] == 0 && websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+                    [_fields appendFormat:@"%@%@",@"Website",@", \n"];
+                if([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+                    [_fields appendFormat:@"%@%@",@"Other",@", \n"];
                 
                 if([login_Objs.userStatus_string isEqualToString:kInternal]){
                     if([_outsideAgencyStr length] == 0)
