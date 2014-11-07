@@ -80,6 +80,7 @@
     NSString *pay_type_ID_String;
     NSString *gis_response_data;
     NSString *gisresponse_ID_String;
+    int refresh_Index;
     
     BOOL pay_type;
     
@@ -96,6 +97,7 @@
 @property(nonatomic,strong) IBOutlet UILabel *countLabel1;
 @property(nonatomic,strong) IBOutlet UILabel *countLabel2;
 @property(nonatomic,strong) IBOutlet UILabel *countLabel3;
+@property(nonatomic,strong) IBOutlet UIRefreshControl *refreshControl;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;
 

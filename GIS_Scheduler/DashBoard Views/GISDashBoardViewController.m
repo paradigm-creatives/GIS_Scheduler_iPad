@@ -75,6 +75,18 @@
     
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
     
+    refresh_Index = 0;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor whiteColor];
+    self.refreshControl.tintColor = [UIColor grayColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(RefreshData)
+                  forControlEvents:UIControlEventValueChanged];
+    
+     [listTableView addSubview:self.refreshControl];
+
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -165,26 +177,35 @@
     payTypeSP_Label.textColor=UIColorFromRGB(0x00457c);
     gisResponseSP_Label.textColor=UIColorFromRGB(0x00457c);
     
-    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
-    
-    NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
-    [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
-    [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
-    
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
-    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-    
-    [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
-    
-    NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
-    [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
-    [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
-    [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+    if(refresh_Index == 0){
+        
+        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+        GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+        
+        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+        [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
+        [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
+        
+        //[self performSelector:@selector(getNewModifiedRequestsdata:) withObject:paramsDicts afterDelay:10.0];
+        
+        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+        
+        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+        
+        
+        NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
+        [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+        [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
+        [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+        
+        refresh_Index ++;
+        
+    }
     
     [_countLabel1 setFont:[GISFonts tiny]];
     _countLabel1.textAlignment = NSTextAlignmentCenter;
@@ -285,8 +306,9 @@
         frame.origin.x = 0;
         listTableView.frame = frame;
         
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+        //[self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        //[[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+        [listTableView reloadData];
 
     }
     else if(sender.selectedSegmentIndex==1)
@@ -299,9 +321,10 @@
         frame.origin.x = 20;
         listTableView.frame = frame;
         
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        //[self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
-        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+        //[[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDict finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+        [listTableView reloadData];
     
     }
     else if(sender.selectedSegmentIndex==2)
@@ -314,11 +337,12 @@
         frame.origin.x = 0;
         listTableView.frame = frame;
         
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        //[self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
-        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+        //[[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
         
-        [[GISServerManager sharedManager] getPayTypedata:self withParams:paramsDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+        //[[GISServerManager sharedManager] getPayTypedata:self withParams:paramsDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+        [listTableView reloadData];
     }
 }
 
@@ -577,17 +601,35 @@
                 [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
 
                 [listTableView reloadData];
+                
+                //[self removeLoadingView];
+
             }
             else
             {
+                //[self removeLoadingView];
                 [GISUtility showAlertWithTitle:@"" andMessage:@"Request SPJobs Request failed"];
                 [listTableView reloadData];
             }
         }
         else
         {
-            [self removeLoadingView];
+            //[self removeLoadingView];
         }
+        
+        if (self.refreshControl) {
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MMM d, h:mm a"];
+            NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+            NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                        forKey:NSForegroundColorAttributeName];
+            NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+            self.refreshControl.attributedTitle = attributedTitle;
+            
+            [self.refreshControl endRefreshing];
+        }
+
     }
     @catch (NSException *exception)
     {
@@ -603,7 +645,7 @@
 -(void)successmethod_NewModifiedRequests:(GISJsonRequest *)response
 {
     
-    NSLog(@"successmethod_getRequestJobs Success---%@",response.responseJson);
+    NSLog(@"successmethod_NewModifiedRequests Success---%@",response.responseJson);
     @try {
         if ([response.responseJson isKindOfClass:[NSArray class]])
         {
@@ -639,6 +681,7 @@
                 [self removeLoadingView];
                 
                 [listTableView reloadData];
+                
             }
             else
             {
@@ -649,6 +692,19 @@
         {
             [self removeLoadingView];
         }
+        
+        if (self.refreshControl) {
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MMM d, h:mm a"];
+            NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+            NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
+            NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+            self.refreshControl.attributedTitle = attributedTitle;
+            
+            [self.refreshControl endRefreshing];
+        }
+
     }
     @catch (NSException *exception)
     {
@@ -689,12 +745,12 @@
             }
             else
             {
-                [self removeLoadingView];
+                //[self removeLoadingView];
             }
         }
         else
         {
-            [self removeLoadingView];
+            //[self removeLoadingView];
         }
     }
     @catch (NSException *exception)
@@ -932,6 +988,45 @@
 {
     self.isMasterHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+}
+
+-(void)getNewModifiedRequestsdata:(NSMutableDictionary *)paramsDicts{
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+
+}
+
+-(void)RefreshData{
+    
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
+    if(!tableHeader2_UIView.isHidden || !tableHeader1_UIView.isHidden){
+        
+        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+        [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
+        [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
+        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+
+    }
+    else if (!tableHeader3_UIView.isHidden){
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+        
+        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+        
+        NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
+        [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+        [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
+        [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+
+    }
+
 }
 
 - (void)didReceiveMemoryWarning

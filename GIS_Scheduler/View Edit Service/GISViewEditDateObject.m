@@ -8,6 +8,9 @@
 
 #import "GISViewEditDateObject.h"
 #import "GISJSONProperties.h"
+#import "GISDatabaseManager.h"
+#import "GISDropDownsObject.h"
+#import "GISServiceProviderObject.h"
 
 @implementation GISViewEditDateObject
 
@@ -29,22 +32,67 @@
     if (self = [super init]) {
         
         @try {
-            //GisResponse_String = [self returningstring:[[json objectForKey:kSPRequestJobs_GisResponse] stringValue]];
-            // if(GisResponse_String == NULL)
-            //{
-            //    GisResponse_String = @" ";
-            // }else{
+            
+            NSMutableArray *typeOfService_array=[[NSMutableArray alloc]init];
+            NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+            typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+            
+            NSMutableArray *serviceProvider_Array=[[NSMutableArray alloc]init];
+            NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+            serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
+            
+            NSMutableArray *payType_array=  [[NSMutableArray alloc]init];
+            NSString *payType_statement  =  [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
+            payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+         
             billAmount_String = [self returningstring:[json objectForKey:kViewSchedule_BillAmount]];
             endTime_String = [json objectForKey:kViewSchedule_EndTime] == NULL?@" ":[NSString stringWithString:[json objectForKey:kViewSchedule_EndTime]];
             jobDate_String = [self returningstring:[json objectForKey:kViewSchedule_JobDate]];
             jobId_String = [self returningstring:[json objectForKey:kViewSchedule_JobID]];
             jobNumber_String = [self returningstring:[json objectForKey:kViewSchedule_JobNumber]];
-            patType_String = [self returningstring:[json objectForKey:kViewSchedule_PayType]];
             
-            serViceProvider_String = [self returningstring:[json objectForKey:kViewSchedule_ServiceProvider]];
+            if([json objectForKey:kViewSchedule_PayType]){
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[self returningstring:[json objectForKey:kViewSchedule_PayType]]];
+                NSArray *fileArray=[payType_array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISDropDownsObject *obj=[fileArray lastObject];
+                    patType_String=obj.value_String;
+                }
+            }
+            
+            //patType_String = [self returningstring:[json objectForKey:kViewSchedule_PayType]];
+            
+            if ([json objectForKey:kViewSchedule_ServiceProvider]) {
+                
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[self returningstring:[json objectForKey:kViewSchedule_ServiceProvider]]];
+                NSArray *fileArray=[serviceProvider_Array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISServiceProviderObject *obj=[fileArray lastObject];
+                    serViceProvider_String=obj.service_Provider_String;
+                }
+            }
+
+            if ([json objectForKey:kViewSchedule_TypeofService]) {
+                NSPredicate *filePredicate;
+                filePredicate=[NSPredicate predicateWithFormat:@"id_String==%@",[self returningstring:[json objectForKey:kViewSchedule_TypeofService]]];
+                NSArray *fileArray=[typeOfService_array filteredArrayUsingPredicate:filePredicate];
+                
+                if([fileArray count]>0)
+                {
+                    GISDropDownsObject *obj=[fileArray lastObject];
+                    typeOfService_String=obj.value_String;
+                }
+            }
+            //serViceProvider_String = [self returningstring:[json objectForKey:kViewSchedule_ServiceProvider]];
             startTime_String = [self returningstring:[json objectForKey:kViewSchedule_StartTime]];
             timely_String = [self returningstring:[json objectForKey:kViewSchedule_Timely]];
-            typeOfService_String = [self returningstring:[json objectForKey:kViewSchedule_TypeofService]];
+            //typeOfService_String = [self returningstring:[json objectForKey:kViewSchedule_TypeofService]];
             subRole_String = [self returningstring:[json objectForKey:kViewSchedule_SubRole]];
             eventName_String = [self returningstring:[json objectForKey:kViewSchedule_EventType]];
            
