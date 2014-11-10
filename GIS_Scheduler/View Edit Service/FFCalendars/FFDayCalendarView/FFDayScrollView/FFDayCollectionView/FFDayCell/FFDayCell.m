@@ -189,6 +189,25 @@
 
 - (IBAction)buttonAction:(id)sender {
     
+    NSMutableArray *btnArray = [[NSMutableArray alloc] init];
+    for(FFBlueButton *btn in arrayButtonsEvents)
+    {
+        NSLog(@"btn evevnt %@ \n button event %@",[self eventDisplayFormat:btn.event.dateDay],[self eventDisplayFormat:button.event.dateDay]);
+        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
+            
+            NSLog(@"btn evevnt dateTimeBegin %@ \n button event dateTimeBegin %@",[self getTimeformdate:btn.event.dateTimeBegin],[self getTimeformdate:button.event.dateTimeBegin]);
+            
+            NSLog(@"btn evevnt dateTimeEnd %@ \n button event dateTimeEnd %@",[self getTimeformdate:btn.event.dateTimeEnd],[self getTimeformdate:button.event.dateTimeEnd]);
+            
+            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
+                
+                [btnArray addObject:btn];
+                
+            }
+        }
+    }
+
+    
     GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     button = (FFBlueButton *)sender;
@@ -197,7 +216,7 @@
         if([appDelegate.jobEventsArray count] >0)
            [appDelegate.jobEventsArray removeAllObjects];
         
-        [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayButtonsEvents];
+        [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)btnArray];
         [protocol showViewDetailsWithEvent:button.event cell:self];
         
     }
@@ -221,6 +240,25 @@
     NSString *stringFromDate = [myDateFormatter stringFromDate:dateIncremented];
     
     return stringFromDate;
+}
+
+-(NSString *)getTimeformdate:(NSDate *)localdate{
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSString *dateStr = [dateFormat stringFromDate:localdate];
+    NSDate *myDate = [dateFormat dateFromString:dateStr];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    NSLocale *curentLocale = [NSLocale currentLocale];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
+    
+    NSString *timeString = [dateFormatter stringFromDate:myDate];
+    
+    return [timeString uppercaseString];
 }
 
 //#pragma mark - FFEventDetailPopoverController Protocol

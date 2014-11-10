@@ -172,41 +172,29 @@
 //                                              inView:self
 //                            permittedArrowDirections:UIPopoverArrowDirectionLeft
 //                                            animated:YES];
-//    NSMutableArray *btnArray = [[NSMutableArray alloc] init];
-//    for(FFBlueButton *btn in arrayButtonsEvents)
-//    {
-//        NSLog(@"btn evevnt %@ \n button event %@",[self eventDisplayFormat:btn.event.dateDay],[self eventDisplayFormat:button.event.dateDay]);
-//        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
-//            
-//             NSLog(@"btn evevnt dateTimeBegin %@ \n button event dateTimeBegin %@",[self getTimeformdate:btn.event.dateTimeBegin],[self getTimeformdate:button.event.dateTimeBegin]);
-//            
-//            NSLog(@"btn evevnt dateTimeEnd %@ \n button event dateTimeEnd %@",[self getTimeformdate:btn.event.dateTimeEnd],[self getTimeformdate:button.event.dateTimeEnd]);
-//            
-//            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
-//                
-//                [btnArray addObject:btn];
-//                
-//            }
-//        }
-//    }
-//    
-//    NSLog(@"appdelegate.showevevntsarray %d",[btnArray count]);
-////    NSPredicate *datePredicate;
-////    NSPredicate *filePredicate;
-////    datePredicate=[NSPredicate predicateWithFormat:@"(dateDay==%@)",[self eventDisplayFormat:button.event.dateDay]];
-////    
-////    filePredicate=[NSPredicate predicateWithFormat:@"(dateTimeBegin CONTAINS[cd] %@) || (dateTimeEnd CONTAINS[cd] %@)", [self getTimeformdate:button.event.dateTimeBegin], [self getTimeformdate:button.event.dateTimeEnd]];
-////    
-////    NSLog(@"event date valueee %@ \n  startTime %@ \n End Time %@",button.event.dateDay, button.event.dateTimeBegin,button.event.dateTimeEnd);
-////    NSArray *fileArray;
-////    
-////    fileArray=[arrayButtonsEvents filteredArrayUsingPredicate:filePredicate];
+    NSMutableArray *btnArray = [[NSMutableArray alloc] init];
+    for(FFBlueButton *btn in arrayButtonsEvents)
+    {
+        NSLog(@"btn evevnt %@ \n button event %@",[self eventDisplayFormat:btn.event.dateDay],[self eventDisplayFormat:button.event.dateDay]);
+        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
+            
+             NSLog(@"btn evevnt dateTimeBegin %@ \n button event dateTimeBegin %@",[self getTimeformdate:btn.event.dateTimeBegin],[self getTimeformdate:button.event.dateTimeBegin]);
+            
+            NSLog(@"btn evevnt dateTimeEnd %@ \n button event dateTimeEnd %@",[self getTimeformdate:btn.event.dateTimeEnd],[self getTimeformdate:button.event.dateTimeEnd]);
+            
+            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
+
+                [btnArray addObject:btn];
+                
+            }
+        }
+    }
     
     if([appDelegate.jobEventsArray count] >0)
         [appDelegate.jobEventsArray removeAllObjects];
     
     testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
-    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)arrayButtonsEvents];
+    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)btnArray];
     
     [testPopoverControllerDetails setTestProtocol:self];
     
