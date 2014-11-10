@@ -12,7 +12,7 @@
 #import "GISDatabaseManager.h"
 #import "GISUtility.h"
 #import "GISFilterMoreViewController.h"
-#import "GISServiceProviderPopUpViewController.h"
+
 #import "GISJsonRequest.h"
 #import "GISStoreManager.h"
 #import "GISServerManager.h"
@@ -220,7 +220,7 @@
     
     if (selected_row==indexPath.row && isEdit_Button_Clicked) {
         cell.serviceProviderType_label.text=typeOfservice_temp_string;
-        
+        cell.serviceProvider_label.text=serviceProvider_temp_string;
         cell.payType_label.text=payType_temp_string;
         [cell.edit_button setImage:[UIImage imageNamed:@"check_pressed"] forState:UIControlStateNormal];
     }
@@ -371,9 +371,8 @@
     {
         payType_temp_string=value_str;
     }
-    //if (btnTag==555||btnTag==777)
-    
-    [jobAssignment_tableView reloadData];
+    if (btnTag==555||btnTag==777)
+      [jobAssignment_tableView reloadData];
 }
 
 -(void)dismissPopOverNow
@@ -493,6 +492,8 @@
     
     GISServiceProviderPopUpViewController *popOverController=[[GISServiceProviderPopUpViewController alloc]initWithNibName:@"GISServiceProviderPopUpViewController" bundle:nil];
     
+    popOverController.delegate_list=self;
+    
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",[GISUtility returningstring:typeOfservice_temp_string]];
     serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     popOverController.popOverArray=serviceProvider_Array;
@@ -506,6 +507,7 @@
 -(void)editButtonPressed:(id)sender
 {
     NSLog(@"tag--%d",[sender tag]);
+
     if(!isEdit_Button_Clicked)
     {
         isEdit_Button_Clicked=YES;
@@ -518,58 +520,69 @@
     }
     else if(isEdit_Button_Clicked){
         
-         GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
-
-         obj.typeOfService_string=typeOfservice_temp_string;
-         obj.ServiceProviderName_String=serviceProvider_temp_string;
-         obj.PayType_String=payType_temp_string;
-         [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
-         //Call the Save Update JObs Service here
-        
-        NSString *typeOfService_ID_temp_String=@"";
-        NSString *serviceProvider_ID_temp_String=@"";
-        NSString *payType_ID_temp_String=@"";
-        
-        NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",obj.typeOfService_string];
-        NSArray *array_typeOfService=[serviceProviderType_array filteredArrayUsingPredicate:predicate_typeOfService];
-        if (array_typeOfService.count>0) {
-            GISDropDownsObject *obj=[array_typeOfService lastObject];
-            typeOfService_ID_temp_String=obj.id_String;
+        if (selected_row==[sender tag])
+        {
+            GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+            
+            obj.typeOfService_string=typeOfservice_temp_string;
+            obj.ServiceProviderName_String=serviceProvider_temp_string;
+            obj.PayType_String=payType_temp_string;
+            [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
+            //Call the Save Update JObs Service here
+            
+            NSString *typeOfService_ID_temp_String=@"";
+            NSString *serviceProvider_ID_temp_String=@"";
+            NSString *payType_ID_temp_String=@"";
+            
+            NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",obj.typeOfService_string];
+            NSArray *array_typeOfService=[serviceProviderType_array filteredArrayUsingPredicate:predicate_typeOfService];
+            if (array_typeOfService.count>0) {
+                GISDropDownsObject *obj=[array_typeOfService lastObject];
+                typeOfService_ID_temp_String=obj.id_String;
+            }
+            
+            NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",obj.ServiceProviderName_String];
+            NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
+            if (array_serviceProvider.count>0) {
+                GISServiceProviderObject *obj=[array_serviceProvider lastObject];
+                serviceProvider_ID_temp_String=obj.id_String;
+            }
+            
+            NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",obj.PayType_String];
+            NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
+            if (array_payType.count>0) {
+                GISDropDownsObject *obj=[array_payType lastObject];
+                payType_ID_temp_String=obj.id_String;
+            }
+            
+            NSMutableDictionary *update_eventdict;
+            update_eventdict=[[NSMutableDictionary alloc]init];
+            
+            [update_eventdict setObject:obj.JobID_String forKey:kJobDetais_JobID];
+            [update_eventdict setObject:obj.startTime_String forKey:kJobDetais_StartTime];
+            [update_eventdict setObject:obj.endTime_String forKey:kJobDetais_EndTime];
+            [update_eventdict setObject:obj.JobDate_String forKey:kJobDetais_JobDate];
+            [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
+            [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
+            [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+            [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+            [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
+            selected_row=999999;
+            isEdit_Button_Clicked=NO;
         }
-        
-        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",obj.ServiceProviderName_String];
-        NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
-        if (array_serviceProvider.count>0) {
-            GISServiceProviderObject *obj=[array_serviceProvider lastObject];
-            serviceProvider_ID_temp_String=obj.id_String;
+        else
+        {
+            isEdit_Button_Clicked=YES;
+            selected_row=[sender tag];
+            GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+            
+            typeOfservice_temp_string=obj.typeOfService_string;
+            serviceProvider_temp_string=obj.ServiceProviderName_String;
+            payType_temp_string=obj.PayType_String;
         }
-        
-        NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",obj.PayType_String];
-        NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
-        if (array_payType.count>0) {
-            GISDropDownsObject *obj=[array_payType lastObject];
-            payType_ID_temp_String=obj.id_String;
-        }
-        
-        NSMutableDictionary *update_eventdict;
-        update_eventdict=[[NSMutableDictionary alloc]init];
-        
-        [update_eventdict setObject:obj.JobID_String forKey:kJobDetais_JobID];
-        [update_eventdict setObject:obj.startTime_String forKey:kJobDetais_StartTime];
-        [update_eventdict setObject:obj.endTime_String forKey:kJobDetais_EndTime];
-        [update_eventdict setObject:obj.JobDate_String forKey:kJobDetais_JobDate];
-        [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
-        [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
-        [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
-        [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
-        [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
-        
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
-        
-        
-        selected_row=999999;
-        isEdit_Button_Clicked=NO;
     }
     [jobAssignment_tableView reloadData];
 }
@@ -597,6 +610,15 @@
     NSLog(@"Failure");
 }
 
+//This method call when we select the service provider from the table view
+-(void)sendServiceProviderName:(NSString *)name_str :(NSString *)id_str
+{
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
+    NSLog(@"Failure---%@---%@",name_str,id_str);
+    serviceProvider_temp_string=name_str;
+    [jobAssignment_tableView reloadData];
+    
+}
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];

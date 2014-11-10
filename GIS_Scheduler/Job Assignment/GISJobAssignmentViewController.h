@@ -11,7 +11,8 @@
 #import "GISPopOverTableViewController.h"
 #import "GISBaseViewController.h"
 #import "GISLoginDetailsObject.h"
-@interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol>
+#import "GISServiceProviderPopUpViewController.h"
+@interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,ListOfServiceProvidersProtocol>
 {
     IBOutlet UITableView *jobAssignment_tableView;
     IBOutlet UIView *dashBoard_UIViews;

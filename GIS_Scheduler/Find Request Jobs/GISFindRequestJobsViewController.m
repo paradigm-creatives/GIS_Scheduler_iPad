@@ -69,6 +69,14 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
     
+    
+    
+    NSString *registeredConsumers_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REGISTERED_CONSUMERS;"];
+    registeredConsumers_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:registeredConsumers_statement] mutableCopy];
+    NSString *requestor_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REQUESTORS;"];
+    requestor_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requestor_statement] mutableCopy];
+    
+    
      self.days_MutableStr = [[NSMutableString alloc] init];
 }
 
@@ -288,12 +296,12 @@
     
     [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_string] forKey:kRequestSDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
-    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestorTypeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.requestorType_ID_string] forKey:kRequestorTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
     [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestID];
+    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.evenyType_ID_string] forKey:kChooseReqDetails_EventTypeID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.primaryAudience_ID_string] forKey:kSearchRequest_PrimaryAudienceid];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.openToPublic_string] forKey:kSearchReq_SP_OpenToPublic];
@@ -583,14 +591,17 @@
     }
     else if(btnTag==5)
     {
+        findReqObj.requestorType_ID_string=id_str;
         findReqObj.requestorType_string=value_str;
     }
     else if(btnTag==6)
     {
+        findReqObj.requestor_ID_string=id_str;
         findReqObj.requestor_string=value_str;
     }
     else if(btnTag==7)
     {
+        findReqObj.registeredConsumers_ID_string=id_str;
         findReqObj.registeredConsumers_string=value_str;
     }
     else if(btnTag==8)

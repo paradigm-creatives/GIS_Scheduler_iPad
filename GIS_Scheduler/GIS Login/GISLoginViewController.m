@@ -242,6 +242,7 @@
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_TYPE_SERVICE_PROVIDER];
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REGISTERED_CONSUMERS];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTORS];
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PRIMARY_AUDIENCE];
                     
@@ -317,9 +318,18 @@
     NSMutableArray *serviceType_serviceProviderArray=[[GISStoreManager sharedManager] getServiceType_ServiceProviderObjects];
     
     NSMutableArray *registeredConsumersArray=[[GISStoreManager sharedManager] getRegisteredConsumersObjects];
+    NSMutableArray *requestorsArray=[[GISStoreManager sharedManager] getRequestorsObjects];
     
     NSMutableArray *primaryAudienceArray=[[GISStoreManager sharedManager] getPrimaryAudienceObjects];
     
+    
+    for (int i=0; i<requestorsArray.count; i++) {
+        GISDropDownsObject *bObj=[requestorsArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTORS(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
     for (int i=0; i<registeredConsumersArray.count; i++) {
         GISDropDownsObject *bObj=[registeredConsumersArray objectAtIndex:i];
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];

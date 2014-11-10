@@ -56,6 +56,8 @@
 
 @property (nonatomic, retain) NSMutableArray *billLevel_Array;
 @property (nonatomic, retain) NSMutableArray *payStatus_ExpStatus_Array;
+@property (nonatomic, retain) NSMutableArray *requestors_Array;
+
 @end
 
 
@@ -115,7 +117,7 @@ static GISStoreManager *singletonManager = nil;
         _viewEditArray = [[NSMutableArray alloc]init];
         _serviceProviderArray = [[NSMutableArray alloc]init];
 
-        
+        _requestors_Array = [[NSMutableArray alloc]init];
         
     }
     return self;
@@ -224,6 +226,27 @@ static GISStoreManager *singletonManager = nil;
     [_eventTypeArray removeAllObjects];
 }
 #pragma mark EventType END
+
+
+- (BOOL)addRequestorsObject:(GISDropDownsObject *)requestorsObj
+{
+    BOOL isAdded = FALSE;
+    if (requestorsObj != nil) {
+        [_requestors_Array addObject:requestorsObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getRequestorsObjects
+{
+    return [_requestors_Array count]?_requestors_Array:nil;
+}
+- (void)removeRequestorsObjects
+{
+    [_requestors_Array removeAllObjects];
+}
+
 
 #pragma mark Unit/Department Start
 - (BOOL)addUnitOrDepartmentObject:(GISDropDownsObject *)unitOrDepartmentObj

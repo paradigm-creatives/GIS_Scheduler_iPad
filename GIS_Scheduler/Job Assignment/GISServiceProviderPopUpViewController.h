@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ListOfServiceProvidersProtocol <NSObject>
+
+-(void)sendServiceProviderName:(NSString *)name_str:(NSString*)id_str;
+
+@end
 @interface GISServiceProviderPopUpViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITableView *serviceProvider_tableView;
@@ -15,6 +20,7 @@
     IBOutlet UINavigationBar *navBar;
     
 }
+@property(nonatomic,strong)id <ListOfServiceProvidersProtocol> delegate_list;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
 -(IBAction)doneButton_Pressed:(id)sender;
 @end
