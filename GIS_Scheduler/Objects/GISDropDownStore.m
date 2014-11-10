@@ -126,6 +126,18 @@
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addRequestorsObject:dropDownObject];
                 }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kMode]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addMode_jobAssisgnMentObject:dropDownObject];
+                }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kCreated_By]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addCreated_ByObject:dropDownObject];
+                }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kRequestor_Type]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addRequestor_TypeObject:dropDownObject];
+                }
 
             }
         }

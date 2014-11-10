@@ -11,8 +11,6 @@
 #import "GISConstants.h"
 #import "GISDatabaseManager.h"
 #import "GISUtility.h"
-#import "GISFilterMoreViewController.h"
-
 #import "GISJsonRequest.h"
 #import "GISStoreManager.h"
 #import "GISServerManager.h"
@@ -59,20 +57,8 @@
     NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
-//    //self.navigationItem.hidesBackButton = YES;
     dashBoard_UIView.hidden=YES;
-//    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
-//    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-//    [rightRecognizer setNumberOfTouchesRequired:1];
-//    
-//    //add the your gestureRecognizer , where to detect the touch..
-//    [self.view addGestureRecognizer:rightRecognizer];
-//    
-//    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-//    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [leftRecognizer setNumberOfTouchesRequired:1];
-//    
-//    [self.view addGestureRecognizer:leftRecognizer];
+
     
     self.title=NSLocalizedStringFromTable(@"Jobs_Assignment", TABLE, nil);
     CGRect frame1=table_UIView.frame;
@@ -247,6 +233,8 @@
 
 -(IBAction)pickerButton_pressed:(id)sender
 {
+    
+    
     UIButton *button=(UIButton *)sender;
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
@@ -298,6 +286,12 @@
     }
     else
     {
+        if (selected_row==999999) {
+            
+            [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please click on tick button to view the list"];
+            return;
+        }
+        
         if ([sender tag]==555)
         {
             btnTag=555;
@@ -385,11 +379,13 @@
     UIButton *button=(UIButton *)sender;
     
     GISFilterMoreViewController *tableViewController = [[GISFilterMoreViewController alloc] initWithNibName:@"GISFilterMoreViewController" bundle:nil];
+    tableViewController.delegate_filter=self;
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     popover.popoverContentSize = CGSizeMake(433, 504);
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+68, button.frame.origin.y+88, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 
 }
+
 
 
 -(IBAction)searchButton_Pressed:(id)sender
@@ -495,12 +491,18 @@
     popOverController.delegate_list=self;
     
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",[GISUtility returningstring:typeOfservice_temp_string]];
+    if ([typeOfservice_temp_string isEqualToString:@"Any"]||[sender tag]==1919) {
+        spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+    }
     serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     popOverController.popOverArray=serviceProvider_Array;
 
     popover=[[UIPopoverController alloc]initWithContentViewController:popOverController];
     popover.popoverContentSize = CGSizeMake(340, 357);
-    [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+640, attendeesCell.service_Provider_button.frame.origin.y+35, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
+    if ([sender tag]==1919)
+        [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+660, attendeesCell.service_Provider_button.frame.origin.y+30, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
+    else
+        [popover presentPopoverFromRect:CGRectMake(attendeesCell.service_Provider_button.frame.origin.x+640, attendeesCell.service_Provider_button.frame.origin.y+30, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:(UIPopoverArrowDirectionAny) animated:YES];
 }
 
 
@@ -508,6 +510,7 @@
 {
     NSLog(@"tag--%d",[sender tag]);
 
+    
     if(!isEdit_Button_Clicked)
     {
         isEdit_Button_Clicked=YES;
@@ -609,12 +612,16 @@
     [self removeLoadingView];
     NSLog(@"Failure");
 }
+-(void)sendFilterMoreValues:(NSMutableDictionary *)dict
+{
+    [self dismissPopOverNow];
+    NSLog(@"sendFilterMoreValues-->%@",[dict description]);
+}
 
 //This method call when we select the service provider from the table view
 -(void)sendServiceProviderName:(NSString *)name_str :(NSString *)id_str
 {
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
-    NSLog(@"Failure---%@---%@",name_str,id_str);
     serviceProvider_temp_string=name_str;
     [jobAssignment_tableView reloadData];
     

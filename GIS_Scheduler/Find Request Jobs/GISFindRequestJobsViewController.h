@@ -40,6 +40,7 @@
     NSMutableArray *payType_array;
     NSMutableArray *billLevel_array;
     NSMutableArray *chooseRequest_mutArray;
+    NSMutableArray *createdBy_mutArray;
     
     GISLoginDetailsObject *login_Obj;
     

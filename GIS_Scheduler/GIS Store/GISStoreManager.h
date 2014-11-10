@@ -178,4 +178,15 @@
 - (NSMutableArray*)getRequestorsObjects;
 - (void)removeRequestorsObjects;
 
+- (BOOL)addCreated_ByObject:(GISDropDownsObject *)created_ByObj;
+- (NSMutableArray*)getCreated_ByObjects;
+- (void)removeCreated_ByObjects;
+
+- (BOOL)addMode_jobAssisgnMentObject:(GISDropDownsObject *)mode_jobAssisgnMentObj;
+- (NSMutableArray*)getMode_jobAssisgnMentObjects;
+- (void)removeMode_jobAssisgnMentObjects;
+
+- (BOOL)addRequestor_TypeObject:(GISDropDownsObject *)requestor_TypeObj;
+- (NSMutableArray*)getRequestor_TypeObjects;
+- (void)removeRequestor_TypeObjects;
 @end

@@ -57,6 +57,9 @@
 @property (nonatomic, retain) NSMutableArray *billLevel_Array;
 @property (nonatomic, retain) NSMutableArray *payStatus_ExpStatus_Array;
 @property (nonatomic, retain) NSMutableArray *requestors_Array;
+@property (nonatomic, retain) NSMutableArray *created_By_Array;
+@property (nonatomic, retain) NSMutableArray *mode_Array_jobAssisgnMent;
+@property (nonatomic, retain) NSMutableArray *requestor_Type_Array;
 
 @end
 
@@ -118,7 +121,9 @@ static GISStoreManager *singletonManager = nil;
         _serviceProviderArray = [[NSMutableArray alloc]init];
 
         _requestors_Array = [[NSMutableArray alloc]init];
-        
+        _created_By_Array = [[NSMutableArray alloc]init];
+        _mode_Array_jobAssisgnMent = [[NSMutableArray alloc]init];
+        _requestor_Type_Array= [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -247,6 +252,63 @@ static GISStoreManager *singletonManager = nil;
     [_requestors_Array removeAllObjects];
 }
 
+- (BOOL)addCreated_ByObject:(GISDropDownsObject *)created_ByObj
+{
+    BOOL isAdded = FALSE;
+    if (created_ByObj != nil) {
+        [_created_By_Array addObject:created_ByObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getCreated_ByObjects
+{
+    return [_created_By_Array count]?_created_By_Array:nil;
+}
+- (void)removeCreated_ByObjects
+{
+    [_created_By_Array removeAllObjects];
+}
+
+- (BOOL)addRequestor_TypeObject:(GISDropDownsObject *)requestor_TypeObj
+{
+    BOOL isAdded = FALSE;
+    if (requestor_TypeObj != nil) {
+        [_requestor_Type_Array addObject:requestor_TypeObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getRequestor_TypeObjects
+{
+    return [_requestor_Type_Array count]?_requestor_Type_Array:nil;
+}
+- (void)removeRequestor_TypeObjects
+{
+    [_requestor_Type_Array removeAllObjects];
+}
+
+
+- (BOOL)addMode_jobAssisgnMentObject:(GISDropDownsObject *)mode_jobAssisgnMentObj
+{
+    BOOL isAdded = FALSE;
+    if (mode_jobAssisgnMentObj != nil) {
+        [_mode_Array_jobAssisgnMent addObject:mode_jobAssisgnMentObj];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getMode_jobAssisgnMentObjects
+{
+    return [_mode_Array_jobAssisgnMent count]?_mode_Array_jobAssisgnMent:nil;
+}
+- (void)removeMode_jobAssisgnMentObjects
+{
+    [_mode_Array_jobAssisgnMent removeAllObjects];
+}
 
 #pragma mark Unit/Department Start
 - (BOOL)addUnitOrDepartmentObject:(GISDropDownsObject *)unitOrDepartmentObj
