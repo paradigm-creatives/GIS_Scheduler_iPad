@@ -43,6 +43,7 @@
 @property(nonatomic,strong)NSString *payType_ID_string;
 @property(nonatomic,strong)NSString *outAgency_string;
 @property(nonatomic,strong)NSString *createdBy_string;
+@property(nonatomic,strong)NSString *createdBy_ID_string;
 @property(nonatomic,strong)NSString *timely_string;
 @property(nonatomic,strong)NSString *cancelled_string;
 @property(nonatomic,strong)NSString *payLevel_JobData_string;

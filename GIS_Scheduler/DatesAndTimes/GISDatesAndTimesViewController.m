@@ -866,7 +866,7 @@
                 [detail_Listdict  setObject:[GISUtility returningstring:gisList.dateTime_ID_String] forKey:kDateTime_datetimeID];
             
             [detail_Listdict  setObject:[GISUtility returningstring:gisList.dateTime_ID_String] forKey:kDateTime_datetimeID];
-            [detail_Listdict  setObject:[GISUtility returningstring:@"chooseReqID"] forKey:kDateTime_requestNo];
+            [detail_Listdict  setObject:[GISUtility returningstring:[GISUtility returningstring:appDelegate.chooseRequest_ID_String]] forKey:kDateTime_requestNo];
             
             
             NSDateFormatter  *dateFormatter = [[NSDateFormatter alloc] init];
@@ -901,11 +901,6 @@
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
     
-//    UIAlertController *alertController = [UIAlertController
-//                                          alertControllerWithTitle:alertTitle
-//                                          message:alertMessage
-//                                          preferredStyle:UIAlertController];
-//
 }
 
 
@@ -1070,6 +1065,8 @@
 
 -(void)deleteButtonPressed:(id)sender
 {
+    [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
+    
     UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     alertVIew.tag = [sender tag];
     alertVIew.delegate = self;
@@ -1130,16 +1127,63 @@
 
 -(IBAction)saveButton_Edit_Pressed:(id)sender
 {
-    GISDatesAndTimesObject *tempObj=[detail_mut_array objectAtIndex:[sender tag]];
+    GISDatesAndTimesObject *gisList=[detail_mut_array objectAtIndex:[sender tag]];
     
-    tempObj.date_String=date_temp_string;
-    tempObj.startTime_String=startTime_temp_string;
-    tempObj.endTime_String=endTime_temp_string;
-    tempObj.day_String=day_temp_string;
+    gisList.date_String=date_temp_string;
+    gisList.startTime_String=startTime_temp_string;
+    gisList.endTime_String=endTime_temp_string;
+    gisList.day_String=day_temp_string;
     
-    [detail_mut_array replaceObjectAtIndex:[sender tag] withObject:tempObj];
+    //[detail_mut_array replaceObjectAtIndex:[sender tag] withObject:gisList];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
+    NSMutableDictionary *detail_date_Dict=[[NSMutableDictionary alloc]init];
+    NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
+    NSMutableArray *detail_date_list_Array=[[NSMutableArray alloc]init];
+    NSMutableDictionary *detail_Listdict;
+    //if (detail_mut_array.count>0)
+    {
+        //for (int i=0;i<[detail_mut_array count];i++)
+        {
+            // GISDatesAndTimesObject *gisList = [detail_mut_array objectAtIndex:i];
+            detail_Listdict=[[NSMutableDictionary alloc]init];
+            
+            [detail_Listdict  setObject:[GISUtility returningstring:gisList.dateTime_ID_String] forKey:kDateTime_datetimeID];
+            [detail_Listdict  setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kDateTime_requestNo];
+            
+            
+            NSDateFormatter  *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+            NSString *strVisitDate = [NSString stringWithFormat:@"%@", date_temp_string];
+            NSDate *visitDate = [dateFormatter dateFromString:strVisitDate];
+            strVisitDate = [dateFormatter stringFromDate:visitDate];
+            //Here you can set any date Format as per your need
+            [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+            strVisitDate = [dateFormatter stringFromDate:visitDate];
+            [detail_Listdict  setObject:[GISUtility returningstring:strVisitDate] forKey:kDateTime_date];
+            
+            
+            
+            [detail_Listdict  setObject:[GISUtility returningstring:startTime_temp_string] forKey:kDateTime_starttime];
+            [detail_Listdict  setObject:[GISUtility returningstring:endTime_temp_string] forKey:kDateTime_endtime];
+            [detail_date_list_Array addObject:detail_Listdict];
+        }
+        
+    }
+    
+    [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
+    [detail_date_Dict setValue:[GISUtility returningstring:login_Obj.token_string] forKey:kDateTime_token];
+    [requestor_array addObject:detail_date_Dict];
+    
+    [mainDict setObject:requestor_array forKey:kDateTime_oDatetime];
+    [mainDict setObject:detail_date_list_Array forKey:kDateTime_oRequest];
     
     [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
+    [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
+    NSLog(@"--------main Dict-->%@",mainDict);
+    isDelete=NO;
+    
+   
 }
 
 
@@ -1485,5 +1529,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

@@ -64,6 +64,7 @@
     payType_array=[[NSMutableArray alloc]init];
     billLevel_array=[[NSMutableArray alloc]init];
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
+    createdBy_mutArray=[[NSMutableArray alloc]init];
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
@@ -75,6 +76,14 @@
     registeredConsumers_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:registeredConsumers_statement] mutableCopy];
     NSString *requestor_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REQUESTORS;"];
     requestor_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requestor_statement] mutableCopy];
+    
+    NSString *createdBy_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CREATED_BY;"];
+    createdBy_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:createdBy_statement] mutableCopy];
+    NSString *mode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_MODE_JOBASSIGNMENT;"];
+    model_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:mode_statement] mutableCopy];
+    NSString *requestorType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REQUESTOR_TYPE;"];
+    requestorType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requestorType_statement] mutableCopy];
+    
     
     
      self.days_MutableStr = [[NSMutableString alloc] init];
@@ -491,6 +500,12 @@
     else if([sender tag]==18)
     {
         btnTag=[sender tag];
+        [serviceProvider_array removeAllObjects];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",findReqObj.serviceProviderType_string];
+        if ([findReqObj.serviceProviderType_string isEqualToString:@"Any"]) {
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+        }
+        serviceProvider_array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
         tableViewController1.popOverArray=serviceProvider_array;
     }
     else if([sender tag]==19)
@@ -501,7 +516,8 @@
     else if([sender tag]==20)
     {
         btnTag=[sender tag];
-        tableViewController1.view_String=@"datestimes";
+        //tableViewController1.view_String=@"datestimes";
+        tableViewController1.popOverArray=createdBy_mutArray;
     }
     else if([sender tag]==21)
     {
@@ -532,7 +548,7 @@
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
-    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.3];
     if (btnTag==1111)
     {
         requestId_Answer_label.text=value_str;
@@ -689,6 +705,7 @@
     else if(btnTag==20)
     {
         findReqObj.createdBy_string=value_str;
+        findReqObj.createdBy_ID_string=value_str;
     }
     else if(btnTag==21)
     {

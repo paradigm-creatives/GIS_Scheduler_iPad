@@ -243,6 +243,9 @@
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REGISTERED_CONSUMERS];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTORS];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CREATED_BY];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_MODE_JOBASSIGNMENT];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTOR_TYPE];
                     
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PRIMARY_AUDIENCE];
                     
@@ -297,6 +300,11 @@
     [[GISStoreManager sharedManager] removeRegisteredConsumersObjects];
     [[GISStoreManager sharedManager] removePrimaryAudienceObjects];
     ///
+    [[GISStoreManager sharedManager] removeCreated_ByObjects];
+    [[GISStoreManager sharedManager] removeMode_jobAssisgnMentObjects];
+    [[GISStoreManager sharedManager] removeRequestor_TypeObjects];
+    [[GISStoreManager sharedManager] removeRequestorsObjects];
+    
     
     dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
     
@@ -321,7 +329,32 @@
     NSMutableArray *requestorsArray=[[GISStoreManager sharedManager] getRequestorsObjects];
     
     NSMutableArray *primaryAudienceArray=[[GISStoreManager sharedManager] getPrimaryAudienceObjects];
+    NSMutableArray *createdByArray=[[GISStoreManager sharedManager] getCreated_ByObjects];
+    NSMutableArray *mode_jobAsignmentArray=[[GISStoreManager sharedManager] getMode_jobAssisgnMentObjects];
+    NSMutableArray *requestorTypeArray=[[GISStoreManager sharedManager] getRequestor_TypeObjects];
     
+    for (int i=0; i<requestorTypeArray.count; i++) {
+        GISDropDownsObject *bObj=[requestorTypeArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTOR_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    
+    for (int i=0; i<createdByArray.count; i++) {
+        GISDropDownsObject *bObj=[createdByArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CREATED_BY(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    for (int i=0; i<mode_jobAsignmentArray.count; i++) {
+        GISDropDownsObject *bObj=[mode_jobAsignmentArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_JOBASSIGNMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
     
     for (int i=0; i<requestorsArray.count; i++) {
         GISDropDownsObject *bObj=[requestorsArray objectAtIndex:i];

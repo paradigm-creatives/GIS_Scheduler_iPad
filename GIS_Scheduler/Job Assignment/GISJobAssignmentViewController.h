@@ -12,7 +12,8 @@
 #import "GISBaseViewController.h"
 #import "GISLoginDetailsObject.h"
 #import "GISServiceProviderPopUpViewController.h"
-@interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,ListOfServiceProvidersProtocol>
+#import "GISFilterMoreViewController.h"
+@interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,ListOfServiceProvidersProtocol,FilterMore_Protocol>
 {
     IBOutlet UITableView *jobAssignment_tableView;
     IBOutlet UIView *dashBoard_UIViews;

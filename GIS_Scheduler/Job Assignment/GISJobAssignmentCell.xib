@@ -84,7 +84,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-n4-XcB" userLabel="Sp">
-                                <rect key="frame" x="568" y="2" width="109" height="38"/>
+                                <rect key="frame" x="568" y="2" width="125" height="38"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qLN-XZ-hWx">
                                         <rect key="frame" x="2" y="5" width="85" height="30"/>
@@ -98,13 +98,23 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" tag="666" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbM-wL-bnN">
-                                        <rect key="frame" x="2" y="4" width="107" height="30"/>
+                                        <rect key="frame" x="2" y="4" width="87" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="listOfServiceProviders_ButtonPressed:" destination="-1" eventType="touchUpInside" id="GJ4-dy-JaY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1919" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-zR-QYC">
+                                        <rect key="frame" x="85" y="4" width="40" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="listOfServiceProviders_ButtonPressed:" destination="-1" eventType="touchUpInside" id="OBg-9k-Dfq"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropdown.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bwh-wn-Jna">
