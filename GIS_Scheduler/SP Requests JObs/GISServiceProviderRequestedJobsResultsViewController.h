@@ -25,7 +25,6 @@
    
      NSMutableArray *gisResponse_array;
     NSMutableArray *eventType_array;
-    NSMutableArray *serviceProvider_Array;
     NSMutableArray *payType_array;
     
     UIPopoverController *popover;

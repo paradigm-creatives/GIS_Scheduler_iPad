@@ -174,5 +174,8 @@
 - (NSMutableArray*)getServiceProviderObjects;
 - (void)removeServiceProviderObjects;
 
+- (BOOL)addRequestorsObject:(GISDropDownsObject *)requestorsObj;
+- (NSMutableArray*)getRequestorsObjects;
+- (void)removeRequestorsObjects;
 
 @end

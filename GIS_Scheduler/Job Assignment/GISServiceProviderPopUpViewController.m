@@ -63,8 +63,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GISJobAssignmentViewController *a8job=[[GISJobAssignmentViewController alloc]initWithNibName:@"GISJobAssignmentViewController" bundle:nil];
-    [self.navigationController pushViewController:a8job animated:YES];
+    GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+    [_delegate_list sendServiceProviderName:spObj.service_Provider_String :spObj.id_String];
 }
 
 -(IBAction)doneButton_Pressed:(id)sender

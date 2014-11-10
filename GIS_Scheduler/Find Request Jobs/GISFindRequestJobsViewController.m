@@ -69,6 +69,14 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
     
+    
+    
+    NSString *registeredConsumers_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REGISTERED_CONSUMERS;"];
+    registeredConsumers_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:registeredConsumers_statement] mutableCopy];
+    NSString *requestor_statement = [[NSString alloc]initWithFormat:@"select * from TBL_REQUESTORS;"];
+    requestor_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requestor_statement] mutableCopy];
+    
+    
      self.days_MutableStr = [[NSMutableString alloc] init];
 }
 
@@ -288,12 +296,12 @@
     
     [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_string] forKey:kRequestSDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
-    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestorTypeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.requestorType_ID_string] forKey:kRequestorTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
     [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRequestID];
+    [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.evenyType_ID_string] forKey:kChooseReqDetails_EventTypeID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.primaryAudience_ID_string] forKey:kSearchRequest_PrimaryAudienceid];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.openToPublic_string] forKey:kSearchReq_SP_OpenToPublic];
@@ -509,15 +517,17 @@
     {
         btnTag=[sender tag];
         tableViewController1.view_String=@"datestimes";
+        if ([findReqObj.cancelDate_string length])
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:findReqObj.cancelDate_string];
     }
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 210);
     if ([sender tag]==1111)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width, 160, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width-14, 120, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     else
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+115, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+130, button.frame.origin.y+24, 1, 1) inView:findReqJobsCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
@@ -581,14 +591,17 @@
     }
     else if(btnTag==5)
     {
+        findReqObj.requestorType_ID_string=id_str;
         findReqObj.requestorType_string=value_str;
     }
     else if(btnTag==6)
     {
+        findReqObj.requestor_ID_string=id_str;
         findReqObj.requestor_string=value_str;
     }
     else if(btnTag==7)
     {
+        findReqObj.registeredConsumers_ID_string=id_str;
         findReqObj.registeredConsumers_string=value_str;
     }
     else if(btnTag==8)
@@ -702,56 +715,28 @@
 {
     if ([findReqObj.weekDays_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]){
         [findReqObj.weekDays_dictionary removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-        if ([sender tag]==1) {
-            //findReqObj.monday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==2) {
-            //findReqObj.tuesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==3) {
-            //wednesday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==4) {
-            //thursday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==5) {
-            //findReqObj.friday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==6) {
-            //findReqObj.saturday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
-        else if ([sender tag]==7) {
-            //findReqObj.sunday_ImageView.image=[UIImage imageNamed:@"unchecked"];
-        }
     }
     else{
         if ([sender tag]==1) {
             [findReqObj.weekDays_dictionary setValue:@"Monday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.monday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==2) {
             [findReqObj.weekDays_dictionary setValue:@"Tuesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.tuesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==3) {
             [findReqObj.weekDays_dictionary setValue:@"Wednesday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.wednesday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==4) {
             [findReqObj.weekDays_dictionary setValue:@"Thursday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.thursday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==5) {
             [findReqObj.weekDays_dictionary setValue:@"Friday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.friday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==6) {
             [findReqObj.weekDays_dictionary setValue:@"Saturday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.saturday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
         else if ([sender tag]==7) {
             [findReqObj.weekDays_dictionary setValue:@"Sunday" forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
-            //findReqObj.sunday_ImageView.image=[UIImage imageNamed:@"checked.png"];
         }
     }
     [findReqJobs_tableView reloadData];

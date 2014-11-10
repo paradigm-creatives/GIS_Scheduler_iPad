@@ -118,6 +118,14 @@
                     dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
                     [[GISStoreManager sharedManager]addTypeOfServiceObject:dropDownObject];
                 }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kServiceType_Registerd_Consumers]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addRegisteredConsumersObject:dropDownObject];
+                }
+                else if ([[dropDown objectForKey:kDropDownType] isEqual:kRequestors]) {
+                    dropDownObject=[[GISDropDownsObject alloc]initWithStoreDictionary:dropDown];
+                    [[GISStoreManager sharedManager]addRequestorsObject:dropDownObject];
+                }
 
             }
         }

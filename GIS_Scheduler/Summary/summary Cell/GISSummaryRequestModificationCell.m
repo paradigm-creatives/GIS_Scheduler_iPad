@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Paradigm. All rights reserved.
 //
 
+
 #import "GISSummaryRequestModificationCell.h"
 
 @implementation GISSummaryRequestModificationCell

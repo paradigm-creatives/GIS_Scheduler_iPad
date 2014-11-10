@@ -99,33 +99,6 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <view hidden="YES" contentMode="scaleToFill" id="kr4-e2-Mqa" userLabel="Service Provider">
-                        <rect key="frame" x="492" y="6" width="97" height="38"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="FPO-SY-GnX">
-                                <rect key="frame" x="0.0" y="5" width="97" height="30"/>
-                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4hv-yF-cSa">
-                                <rect key="frame" x="7" y="9" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JB3-P5-rBc">
-                                <rect key="frame" x="12" y="4" width="82" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown.png" id="hld-m2-8DF">
-                                <rect key="frame" x="78" y="17" width="9" height="5"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
                     <view hidden="YES" contentMode="scaleToFill" id="R2A-cx-x1a" userLabel="Pay Type">
                         <rect key="frame" x="672" y="6" width="97" height="38"/>
                         <subviews>
@@ -201,9 +174,6 @@
                 <outlet property="requestedDate_Label" destination="aBg-S3-Wcu" id="Lmi-xK-bxd"/>
                 <outlet property="response_status_btn" destination="R9k-3M-HTb" id="2aH-e3-zKR"/>
                 <outlet property="serviceProviderName_Label" destination="iNw-M0-Acr" id="QpK-EY-z7b"/>
-                <outlet property="serviceProvider_Button" destination="JB3-P5-rBc" id="E2g-2F-J2j"/>
-                <outlet property="serviceProvider_UIView" destination="kr4-e2-Mqa" id="TGY-gj-1YB"/>
-                <outlet property="service_provider_EDIT_Label" destination="4hv-yF-cSa" id="IPR-Ml-wZm"/>
                 <outlet property="startTime_Label" destination="Z63-Cf-YSa" id="og3-rO-vqO"/>
                 <outlet property="totalHours_Label" destination="M0a-CB-Y8r" id="ZPM-TB-fQt"/>
             </connections>
