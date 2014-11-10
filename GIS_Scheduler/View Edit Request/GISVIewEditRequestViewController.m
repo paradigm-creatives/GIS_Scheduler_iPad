@@ -286,7 +286,12 @@
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    
+    if(appDelegate.isNewRequest && item.tag == 6)
+        appDelegate.isFromContacts = NO;
+    
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor yellowColor]];
+    
     UIViewController *selectedTabView=nil;
     
     selectedTabView= [_viewControllers objectAtIndex:item.tag];
@@ -397,14 +402,15 @@
 
 -(void)tabSelcted:(NSNotification *) notification{
     
-    if(!appDelegate.isFromContacts && !appDelegate.isNewRequest)
-        appDelegate.isFromContacts = NO;
-    
     NSDictionary *infoDict=notification.userInfo;
     
     NSString *value;
+    
     if(infoDict != nil){
         value =[infoDict objectForKey:@"tabValue"];
+        appDelegate.isFromContacts = [[infoDict objectForKey:@"isFromContacts"] boolValue];
+    }else{
+        appDelegate.isFromContacts = NO;
     }
     
     if(appDelegate.isNewRequest){

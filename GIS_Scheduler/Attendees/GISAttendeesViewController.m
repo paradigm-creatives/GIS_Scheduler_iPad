@@ -923,7 +923,7 @@ int row_count = 2;
         [appDelegate.attendeesArray addObjectsFromArray:attendeesObject.attendeesList_mutArray];
         appDelegate.isFromAttendees = YES;
         
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"tabValue",nil];
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"3",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setValue:appDelegate.chooseRequest_ID_String forKey:kDropDownValue];

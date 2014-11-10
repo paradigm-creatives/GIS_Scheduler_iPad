@@ -19,6 +19,7 @@
     BOOL isRequestSubmitted;
     GISLoginDetailsObject *loginObJ;
     NSString *serviceRequestData;
+    int row_value;
     
 }
 

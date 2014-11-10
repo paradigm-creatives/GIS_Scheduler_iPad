@@ -954,10 +954,11 @@
         appDelegate.isFromlocation  = YES;
         GISDatesAndTimesViewController *datesAndTimesViewController;
         [self removeLoadingView];
+        appDelegate.isFromContacts = YES;
         
         datesAndTimesViewController =[[GISDatesAndTimesViewController alloc]initWithNibName:@"GISDatesAndTimesViewController" bundle:nil];
         
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"tabValue",nil];
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"4",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
         
     }else{

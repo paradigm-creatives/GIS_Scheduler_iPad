@@ -17,11 +17,13 @@
 @property(nonatomic,strong)IBOutlet UILabel *other_services_label;
 @property(nonatomic,strong)IBOutlet UILabel *attendee_label;
 @property(nonatomic,strong)IBOutlet UILabel *attendee_count_label;
+@property(nonatomic,strong)IBOutlet UILabel *email_label;
 
 @property(nonatomic,strong)IBOutlet UILabel *modeOf_communication_ans_label;
 @property(nonatomic,strong)IBOutlet UILabel *directly_utilized_ans_label;
 @property(nonatomic,strong)IBOutlet UILabel *firstName_ans_label;
 @property(nonatomic,strong)IBOutlet UILabel *lastName_ans_label;
 @property(nonatomic,strong)IBOutlet UILabel *other_services_ans_label;
+@property(nonatomic,strong)IBOutlet UILabel *email_ans_label;
 
 @end

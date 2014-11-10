@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -97,6 +97,20 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qpT-Bj-5lm">
+                        <rect key="frame" x="343" y="119" width="161" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XpH-v4-3Ml">
+                        <rect key="frame" x="512" y="116" width="160" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -104,6 +118,8 @@
                 <outlet property="attendee_label" destination="UNA-Sr-jsJ" id="Zmh-xZ-fKE"/>
                 <outlet property="directly_utilized_ans_label" destination="BWG-GC-bZF" id="Slb-n1-lun"/>
                 <outlet property="directly_utilized_label" destination="dmt-vu-dju" id="pN9-uA-70t"/>
+                <outlet property="email_ans_label" destination="XpH-v4-3Ml" id="pVY-Sp-dbA"/>
+                <outlet property="email_label" destination="qpT-Bj-5lm" id="Hdd-VA-99t"/>
                 <outlet property="firstName_ans_label" destination="hiV-S0-g9J" id="nx7-F5-9Y0"/>
                 <outlet property="firstName_label" destination="D8a-ts-dhP" id="gAF-Jf-t7w"/>
                 <outlet property="lastName_ans_label" destination="lqF-E4-X2T" id="lUa-qx-6fT"/>
