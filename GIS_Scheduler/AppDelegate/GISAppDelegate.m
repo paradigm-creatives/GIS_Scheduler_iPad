@@ -70,6 +70,7 @@
     self.isShowfromDashboard = NO;
     self.isHidefromDashboard = NO;
     self.isfilled = NO;
+    self.islatestEvent = NO;
         
     [self.window makeKeyAndVisible];
     return YES;

@@ -237,6 +237,10 @@
                 }
             }
             
+            if([_requestBtn.titleLabel.text length] == 0)
+                [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+
+            
         }else{
             
             appDelegate.chooseRequest_ID_String = @"";

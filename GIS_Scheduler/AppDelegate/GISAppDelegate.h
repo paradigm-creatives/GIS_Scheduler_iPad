@@ -56,6 +56,8 @@
 @property (readwrite, nonatomic) BOOL isWeekView;
 @property (readwrite, nonatomic) BOOL isMonthView;
 @property (readwrite, nonatomic) BOOL isoneEvent;
+@property (readwrite, nonatomic) BOOL islatestEvent;
+
 
 @property (strong, nonatomic) NSMutableDictionary *addNewJob_dictionary;
 

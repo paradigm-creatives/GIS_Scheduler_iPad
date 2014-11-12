@@ -947,7 +947,7 @@
             UIButton *documentbtn=(UIButton *)[self.view viewWithTag:44];
             
             
-            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 || [_outsideAgencyStr length] == 0 || blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] || [_re_broadcastStr length] == 0 || documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 || [_outsideAgencyStr length] == 0 ||([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([webSiteField.text length] == 0 &&websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]) || [_re_broadcastStr length] == 0 || (documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]&& [documnet_selected_label.text length]==0))
             {
                 if([_fields length]>0)
                     [_fields setString:@""];
@@ -1527,6 +1527,18 @@
 
 -(void)saveMaterialRequest
 {
+    if([_document_Str length] == 0){
+        _document_Str = @"";
+    }
+    if([_websiteStr length] == 0){
+        _websiteStr = @"";
+    }
+    if([_other_Str length] == 0){
+        _other_Str = @"";
+    }
+    if([_blackboard_accessStr length] == 0){
+        _blackboard_accessStr = @"";
+    }
     
     NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
     NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
