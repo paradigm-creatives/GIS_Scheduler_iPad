@@ -25,6 +25,7 @@
                 <outlet property="eventType_Label" destination="gws-PH-1qC" id="N2A-mi-qNC"/>
                 <outlet property="eventtypeSP_Label" destination="Qhz-32-zMA" id="E2K-jg-Xxt"/>
                 <outlet property="gisResponseSP_Label" destination="ZDR-kC-7DM" id="9XF-wR-DZv"/>
+                <outlet property="grayRequestLabel" destination="Nat-H9-6Ri" id="CxS-Ve-DTF"/>
                 <outlet property="inProgress_Label" destination="kwC-lM-eY7" id="Wox-1H-asz"/>
                 <outlet property="incompleteRequest_Label" destination="vbc-tS-jxt" id="zW5-Vk-3zG"/>
                 <outlet property="jobDateSP_Label" destination="YQh-5f-YhV" id="KcK-aW-84p"/>

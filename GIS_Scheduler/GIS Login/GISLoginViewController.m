@@ -721,9 +721,7 @@
     id array=response.responseJson;
     NSDictionary *dictHere=[array lastObject];
     if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
-        
-        [self removeLoadingView];
-                
+                        
         dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
         NSArray *requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];

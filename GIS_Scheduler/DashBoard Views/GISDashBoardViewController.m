@@ -229,6 +229,8 @@
     _countLabel3.layer.masksToBounds = YES;
     [_countLabel3 setTextColor:[UIColor blackColor]];
     _countLabel3.userInteractionEnabled = YES;
+    
+    [_grayRequestLabel setBackgroundColor:[UIColor grayColor]];
 
 }
 
@@ -391,6 +393,8 @@
             cell.status_Label.backgroundColor=[UIColor orangeColor];
         }else if ([nmReqObj.RequestStatus_String isEqualToString:@"White"]) {
             cell.status_Label.backgroundColor=[UIColor grayColor];
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Red"]) {
+            cell.status_Label.backgroundColor=[UIColor redColor];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

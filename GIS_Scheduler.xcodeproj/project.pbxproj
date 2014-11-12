@@ -2122,6 +2122,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Paradigm;
 				TargetAttributes = {
+					BA3AF20B196BBAF7006A1E3B = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					BA3AF226196BBAF7006A1E3B = {
 						TestTargetID = BA3AF20B196BBAF7006A1E3B;
 					};

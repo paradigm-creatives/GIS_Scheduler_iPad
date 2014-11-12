@@ -98,6 +98,7 @@
 @property(nonatomic,strong) IBOutlet UILabel *countLabel2;
 @property(nonatomic,strong) IBOutlet UILabel *countLabel3;
 @property(nonatomic,strong) IBOutlet UIRefreshControl *refreshControl;
+@property(nonatomic,strong) IBOutlet UILabel *grayRequestLabel;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;
 

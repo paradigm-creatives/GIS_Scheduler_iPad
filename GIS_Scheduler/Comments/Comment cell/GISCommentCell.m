@@ -32,7 +32,6 @@
     [_scheduler_label setFont:[GISFonts large]];
     
     [_accountsAdministration_label setText:NSLocalizedStringFromTable(@"account_administration", TABLE, nil)];
-    [_noComments_label setText:NSLocalizedStringFromTable(@"no_comments", TABLE, nil)];
     [_scheduler_label setText:NSLocalizedStringFromTable(@"scheduler", TABLE, nil)];
 
 }
