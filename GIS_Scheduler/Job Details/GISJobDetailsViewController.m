@@ -667,7 +667,8 @@
 
 -(IBAction)nextButtonPressed:(id)sender
 {
-    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
+    appDelegate.isFromContacts = YES;
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
 

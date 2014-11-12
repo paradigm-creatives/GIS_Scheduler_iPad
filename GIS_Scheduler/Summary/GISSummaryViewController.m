@@ -87,8 +87,25 @@
     [super viewWillAppear: animated];
         
     //[_summary_tableView reloadData];
+    
+    if(!appDelegate.isFromContacts){
+        
+        if([appDelegate.datesArray count]>0)
+            [appDelegate.datesArray removeAllObjects];
+        
+        if([appDelegate.attendeesArray count]>0)
+            [appDelegate.attendeesArray removeAllObjects];
+        
+        if([appDelegate.jobDetailsArray count]>0)
+            [appDelegate.jobDetailsArray removeAllObjects];
+        
+        row_value = 0;
+    }
+    
+    row_value = 1;
     GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
     [appDelegate.datesArray insertObject:dobj atIndex:0];
+    [_summary_tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -108,7 +125,7 @@
     {
         return [appDelegate.jobDetailsArray count];
     }
-    return 1;
+    return row_value;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -185,20 +202,27 @@
         NSArray *billingArray = [[GISStoreManager sharedManager] getBillingDataObject];
         billingdataObj = [billingArray lastObject];
         
-        cell.unitacNumber_ans_label .text = _chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
-        cell.firstName_ans_label.text = billingdataObj.buh_firstName_String;
-        cell.lastName_ans_label.text = billingdataObj.buh_lastName_String;
-        cell.email_ans_label.text = billingdataObj.buh_email_String;
-        cell.address1_ans_label.text = billingdataObj.buh_address1_String;
-        cell.address2_ans_label.text = billingdataObj.buh_address2_String;
-        cell.zip_ans_label.text = billingdataObj.buh_zip_String;
-        cell.city_ans_label.text = billingdataObj.buh_city_String;
-        cell.requestor_ans_label.text = appDelegate.createdByString;
+        if(appDelegate.isFromContacts){
+            
+            cell.unitacNumber_ans_label .text = _chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
+            cell.firstName_ans_label.text = billingdataObj.buh_firstName_String;
+            cell.lastName_ans_label.text = billingdataObj.buh_lastName_String;
+            cell.email_ans_label.text = billingdataObj.buh_email_String;
+            cell.address1_ans_label.text = billingdataObj.buh_address1_String;
+            cell.address2_ans_label.text = billingdataObj.buh_address2_String;
+            cell.zip_ans_label.text = billingdataObj.buh_zip_String;
+            cell.city_ans_label.text = billingdataObj.buh_city_String;
+            cell.requestor_ans_label.text = appDelegate.createdByString;
+        }
         
         [cell.edit_button setTag:indexPath.section];
         [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
     }else if(indexPath.section == 1){
+        
+        NSString *openToPublicStr;
+        NSString *recorededORBroadcastStr;
+        NSString *otherServicesStr;
         
         cell.section_label.text =  NSLocalizedStringFromTable(@"event_details", TABLE, nil);
         cell.requestor_label.text =  NSLocalizedStringFromTable(@"event_name", TABLE, nil);
@@ -212,59 +236,80 @@
         cell.city_label.text =  NSLocalizedStringFromTable(@"description", TABLE, nil);
         cell.state_label.hidden = YES;
         
-        NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
-        if (chooseReqDetailedArray.count>0) {
-            _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
-        }
-        NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
-        NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
         
-        _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
-        _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
-        
-        for (GISDropDownsObject *dropDownObj in _eventTypeArray) {
-            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails]) {
-                cell.unitacNumber_ans_label.text = dropDownObj.value_String;
+        if(appDelegate.isFromContacts){
+            NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+            if (chooseReqDetailedArray.count>0) {
+                _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
             }
-        }
-        
-        for (GISDropDownsObject *dropDownObj in _dresscodeArray) {
-            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails]) {
-                cell.email_ans_label.text = dropDownObj.value_String;
-            }
-        }
-        NSMutableString *otherArrayString = [[NSMutableString alloc] init];
-        [otherArrayString setString:@""];
-        
-        if([_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails length]>0){
-            NSArray *otherArray = [_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails componentsSeparatedByString:@","];
-            for(int i=0;i<[otherArray count];i++){
-                if([[otherArray objectAtIndex:i] isEqualToString:@"1"]){
-                    
-                    [otherArrayString appendString:@"FMSystem "];
-                }
-                if([[otherArray objectAtIndex:i] isEqualToString:@"2"]){
-                    
-                    [otherArrayString appendString:@"MicroPhone "];
-                }
-                if([[otherArray objectAtIndex:i] isEqualToString:@"3"]){
-                    
-                    [otherArrayString appendString:@"Phone Conferencing "];
-                }
-                if([[otherArray objectAtIndex:i] isEqualToString:@"4"]){
-                    
-                    [otherArrayString appendString:@"Webinar "];
+            NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
+            NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
+            
+            _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
+            _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
+            
+            for (GISDropDownsObject *dropDownObj in _eventTypeArray) {
+                if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.eventTypeID_String_chooseReqParsedDetails]) {
+                    cell.unitacNumber_ans_label.text = dropDownObj.value_String;
                 }
             }
+            
+            for (GISDropDownsObject *dropDownObj in _dresscodeArray) {
+                if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.dressCodeID_String_chooseReqParsedDetails]) {
+                    cell.email_ans_label.text = dropDownObj.value_String;
+                }
+            }
+            NSMutableString *otherArrayString = [[NSMutableString alloc] init];
+            [otherArrayString setString:@""];
+            
+            if([_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails length]>0){
+                NSArray *otherArray = [_chooseRequestDetailsObj.otherTechnologies_String_chooseReqParsedDetails componentsSeparatedByString:@","];
+                
+                for(int i=0;i<[otherArray count];i++){
+                    if([[otherArray objectAtIndex:i] isEqualToString:@"1"]){
+                        
+                        [otherArrayString appendString:@"FMSystem "];
+                    }
+                    if([[otherArray objectAtIndex:i] isEqualToString:@"2"]){
+                        
+                        [otherArrayString appendString:@"MicroPhone "];
+                    }
+                    if([[otherArray objectAtIndex:i] isEqualToString:@"3"]){
+                        
+                        [otherArrayString appendString:@"Phone Conferencing "];
+                    }
+                    if([[otherArray objectAtIndex:i] isEqualToString:@"4"]){
+                        
+                        [otherArrayString appendString:@"Webinar "];
+                    }
+                }
+            }
+            
+            if([_chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails isEqualToString:@"true"])
+                recorededORBroadcastStr = @"Yes";
+            else if([_chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails isEqualToString:@"false"])
+                recorededORBroadcastStr = @"NO";
+
+            if([_chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails isEqualToString:@"true"])
+                openToPublicStr = @"Yes";
+            else if([_chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails isEqualToString:@"false"])
+                openToPublicStr = @"No";
+            
+            if([_chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails isEqualToString:@"1"]){
+                
+                otherServicesStr = @"Captioning";
+            }else if([_chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails isEqualToString:@"2"]){
+                otherServicesStr = @"VRI";
+            }
+            
+            cell.requestor_ans_label.text = _chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails;
+            cell.zip_ans_label.text = recorededORBroadcastStr;
+            cell.city_ans_label.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
+            cell.lastName_ans_label.text = _chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails;
+            cell.firstName_ans_label.text = openToPublicStr;
+            cell.address1_ans_label.text = otherArrayString;
+            cell.address2_ans_label.text = otherServicesStr;
         }
-        
-        cell.requestor_ans_label.text = _chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails;
-        cell.zip_ans_label.text = _chooseRequestDetailsObj.recBroadcast_String_chooseReqParsedDetails;
-        cell.city_ans_label.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
-        cell.lastName_ans_label.text = _chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails;
-        cell.firstName_ans_label.text = _chooseRequestDetailsObj.openToPublic_String_chooseReqParsedDetails;
-        cell.address1_ans_label.text = otherArrayString;
-        cell.address2_ans_label.text = _chooseRequestDetailsObj.OtherServiceID_String_chooseReqParsedDetails;
         [cell.edit_button setTag:indexPath.section];
         [cell.edit_button addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -290,15 +335,17 @@
         summarycell.lastName_label .text =  NSLocalizedStringFromTable(@"last_name", TABLE, nil);
         summarycell.modeOf_communication_label.text =  NSLocalizedStringFromTable(@"mode_of_communication", TABLE, nil);
         summarycell.directly_utilized_label.text =  NSLocalizedStringFromTable(@"directly_utilized_Services", TABLE, nil);
-        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
+        summarycell.email_label.text =  NSLocalizedStringFromTable(@"service_Needed", TABLE, nil);
+        summarycell.other_services_label.text =  NSLocalizedStringFromTable(@"email", TABLE, nil);
         
         summarycell.firstName_ans_label.text = attendeesObj.firstname_String;
         summarycell.lastName_ans_label.text = attendeesObj.lastname_String;
         summarycell.modeOf_communication_ans_label.text = attendeesObj.modeOf_String;
         summarycell.directly_utilized_ans_label.text = attendeesObj.directly_utilzed_String;
-        summarycell.other_services_ans_label.text = attendeesObj.servicesNeeded_String;
+        summarycell.email_ans_label.text = attendeesObj.servicesNeeded_String;
+        summarycell.other_services_ans_label.text = attendeesObj.email_String;
         
-        summarycell.attendee_count_label.text = [NSString stringWithFormat:@"%d" ,indexPath.row];
+        summarycell.attendee_count_label.text = [NSString stringWithFormat:@"%d" ,indexPath.row+1];
         
         summarycell.selectionStyle=UITableViewCellSelectionStyleNone;
      
@@ -340,11 +387,13 @@
             cell.lastName_label.text = @"Room Name :";
             cell.email_label.text = @"Other :";
             
-            cell.requestor_ans_label.text = _chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails;
-            cell.unitacNumber_ans_label.text = _buildingNameString;
-            cell.firstName_ans_label.text = _generalLocationValue_string;
-            cell.lastName_ans_label.text = _chooseRequestDetailsObj.RoomName_String_chooseReqParsedDetails;
-            cell.email_ans_label.text = _chooseRequestDetailsObj.other_String_chooseReqParsedDetails;
+            if(appDelegate.isFromContacts){
+                cell.requestor_ans_label.text = _chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails;
+                cell.unitacNumber_ans_label.text = _buildingNameString;
+                cell.firstName_ans_label.text = _generalLocationValue_string;
+                cell.lastName_ans_label.text = _chooseRequestDetailsObj.RoomName_String_chooseReqParsedDetails;
+                cell.email_ans_label.text = _chooseRequestDetailsObj.other_String_chooseReqParsedDetails;
+            }
             
             cell.address1_label.hidden = YES;
             cell.address2_label.hidden = YES;
@@ -362,12 +411,14 @@
             cell.email_label.text = @"State :";
             cell.address1_label.text = @"Zip :";
             
-            cell.requestor_ans_label.text = _chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails;
-            cell.unitacNumber_ans_label.text = _generalLocationValue_string;
-            cell.firstName_ans_label.text = _chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails;
-            cell.lastName_ans_label.text = _chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails;
-            cell.email_ans_label.text = _chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails;
-            cell.address1_ans_label.text = _chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails;
+            if(appDelegate.isFromContacts){
+                cell.requestor_ans_label.text = _chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails;
+                cell.unitacNumber_ans_label.text = _generalLocationValue_string;
+                cell.firstName_ans_label.text = _chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails;
+                cell.lastName_ans_label.text = _chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails;
+                cell.email_ans_label.text = _chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails;
+                cell.address1_ans_label.text = _chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails;
+            }
             
             cell.address2_label.hidden = YES;
             cell.city_label.hidden = YES;
@@ -517,6 +568,7 @@
 
         
         if(!appDelegate.isNewRequest){
+            
             [addButton1 setBackgroundImage:[UIImage imageNamed:@"choose_request_bg.png"] forState:UIControlStateNormal];
             [addButton1 addTarget:self
                           action:@selector(showPopoverDetails:)
@@ -528,6 +580,23 @@
             [addButton1 setTitle:serviceRequestData forState:UIControlStateNormal];
             [addButton1 setTag:11115];
             [headerView2 addSubview:addButton1];
+            
+            UIButton *nextButton = [[UIButton alloc] init];
+            nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [nextButton addTarget:self
+                           action:@selector(nextButtonPressed:)
+                 forControlEvents:UIControlEventTouchUpInside];
+            nextButton.frame = CGRectMake(470.0, 60.0, 120.0, 30.0);
+            
+            
+            [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
+            [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+            nextButton.titleLabel.font=[GISFonts larger];
+            [nextButton.layer setCornerRadius:3.0f];
+            [nextButton setTag:5588];
+            [nextButton setEnabled:FALSE];
+            nextButton.backgroundColor=[UIColor grayColor];
+            [headerView2 addSubview:nextButton];
 
         }else{
             addButton1.backgroundColor=UIColorFromRGB(0x01971c);
@@ -538,7 +607,7 @@
             [addButton1 addTarget:self
                            action:@selector(submitButnPressed:)
                  forControlEvents:UIControlEventTouchUpInside];
-            addButton1.frame = CGRectMake(310.0, 60.0, 150.0, 30.0);
+            addButton1.frame = CGRectMake(350.0, 60.0, 150.0, 30.0);
             addButton1.enabled = YES;
             
             
@@ -552,24 +621,6 @@
             
             [headerView2 addSubview:addButton1];
         }
-
-        
-        
-        UIButton *nextButton = [[UIButton alloc] init];
-        nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [nextButton addTarget:self
-                       action:@selector(nextButtonPressed:)
-             forControlEvents:UIControlEventTouchUpInside];
-        nextButton.frame = CGRectMake(470.0, 60.0, 120.0, 30.0);
-        
-        
-        [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
-        nextButton.backgroundColor=UIColorFromRGB(0x00457c);
-        [nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
-        nextButton.titleLabel.font=[GISFonts larger];
-        [nextButton.layer setCornerRadius:3.0f];
-        [nextButton setTag:5588];
-        [headerView2 addSubview:nextButton];
         
         return headerView2;
     }
@@ -623,10 +674,10 @@
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get summary submit action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
         
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",nil];
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
     }else{
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
     }
 }
@@ -847,6 +898,9 @@
     UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [serviceTypeBtn setTitle:value_str forState:UIControlStateNormal];
     [nextBtn setTitle:value_str forState:UIControlStateNormal];
+    [nextBtn setEnabled:YES];
+    nextBtn.backgroundColor=UIColorFromRGB(0x00457c);
+
     //_eventTypeId_string=id_str;
 
     if(_popover)

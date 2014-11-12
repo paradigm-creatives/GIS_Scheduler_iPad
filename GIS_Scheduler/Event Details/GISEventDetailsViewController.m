@@ -313,7 +313,7 @@
         }
         
         [cell.captionTypebtn setTitle:captionData forState:UIControlStateNormal];
-        [cell.viewingTypebtn setTitle:_eventdetails_viewOptions forState:UIControlStateNormal];
+        [cell.viewingTypebtn setTitle:viewingTypeData forState:UIControlStateNormal];
         
         [cell.documentbtn setTag:44];
         [cell.blackboardAccessbtn setTag:111];
@@ -964,14 +964,7 @@
                     [_fields appendFormat:@"%@%@",@"EventType",@", \n"];
                 if([_re_broadcastStr length] == 0)
                     [_fields appendFormat:@"%@%@",@"Recorded/Broadcast",@","];
-//                if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_empty.png"])
-//                    [_fields appendFormat:@"%@%@",@"Document",@", \n"];
-//                if([blackBoardTextField.text length] == 0)
-//                    [_fields appendFormat:@"%@%@",@"Blackboard Access",@", \n"];
-//                if([webSiteField.text length] == 0)
-//                    [_fields appendFormat:@"%@%@",@"Website",@", \n"];
-//                if([otherMaterilaTypeTextField.text length] == 0)
-//                    [_fields appendFormat:@"%@%@",@"Other",@", \n"];
+
                 if(documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] && [documnet_selected_label.text length]==0)
                     [_fields appendFormat:@"%@%@",@"Document",@", \n"];
                 if([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
@@ -1087,11 +1080,13 @@
             if([_otherServices_Str length] > 0)
             {
                 if([_otherServices_Str isEqualToString:@"2"]){
-                    if([viewingTypebtn.titleLabel.text length] == 0 || [ofUserstextField.text length] == 0)
+                    if([viewingTypebtn.titleLabel.text isEqualToString:
+                        NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)] || [ofUserstextField.text length] == 0)
                     {
                         if([_fields length]>0)
                             [_fields setString:@""];
-                        if([viewingTypebtn.titleLabel.text length] == 0)
+                        if([viewingTypebtn.titleLabel.text isEqualToString:
+                            NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)])
                             [_fields appendFormat:@"%@%@",@"Viewing Type",@", \n"];
                         if([ofUserstextField.text length] == 0)
                             [_fields appendFormat:@"%@%@",@"No Of Users",@", \n"];
@@ -1102,16 +1097,20 @@
                         [[GISServerManager sharedManager] saveEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_eventDetailsRequest:) failAction:@selector(failuremethod_eventDetailsRequest:)];
                     }
                 }else if([_otherServices_Str isEqualToString:@"1"]){
-                    if([captionData length] == 0 || [viewingTypeData length] == 0 || [ofUserstextField.text length] == 0)
+                    if([viewingTypebtn.titleLabel.text isEqualToString:
+                        NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]
+                       || [captioningTypebtn.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]
+                       || [ofUserstextField.text length] == 0)
                     {
                         if([_fields length]>0)
                             [_fields setString:@""];
                         
-                        if([viewingTypebtn.titleLabel.text length] == 0)
+                        if([viewingTypebtn.titleLabel.text isEqualToString:
+                            NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)])
                             [_fields appendFormat:@"%@%@",@"Viewing Type",@", \n"];
                         if([ofUserstextField.text length] == 0)
                             [_fields appendFormat:@"%@%@",@"No Of Users",@", \n"];
-                        if([captioningTypebtn.titleLabel.text length] == 0)
+                        if([captioningTypebtn.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)])
                             [_fields appendFormat:@"%@%@",@"Captioning Type",@","];
                         
                         [self removeLoadingView];
@@ -1159,7 +1158,7 @@
         [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownValue] forKey:kDropDownValue];
         [userDefaults setValue:[saveUpdateDict valueForKey:kDropDownID] forKey:kDropDownID];
         
-         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"tabValue",nil];
+         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"2",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 
       
