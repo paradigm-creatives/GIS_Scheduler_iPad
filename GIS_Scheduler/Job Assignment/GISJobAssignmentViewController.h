@@ -53,6 +53,15 @@
     NSString *serviceProvider_temp_string;
     NSString *payType_temp_string;
     NSMutableArray *mainArray;
+    
+    NSString *eventType_ID_string;
+    NSString *serviceProvider_ID_string;
+    NSString *registeredConsumers_ID_string;
+    NSString *unitAccount_ID_string;
+    NSString *typeOfAct_ID_string;
+    NSString *onGoing_ID_string;
+    
+    UISegmentedControl *segment;
 }
 @property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;

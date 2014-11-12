@@ -18,7 +18,6 @@
 @interface GISFilterMoreViewController : UIViewController<UIPopoverControllerDelegate,PopOverSelected_Protocol>
 {
     IBOutlet UILabel *eventType_AnswerLabel;
-    IBOutlet UILabel *serviceProvider_TYpe_AnswerLabel;
     IBOutlet UILabel *serviceProvider_AnswerLabel;
     IBOutlet UILabel *registeredConsumers_AnswerLabel;
     IBOutlet UILabel *unitAccount_AnswerLabel;
@@ -32,17 +31,13 @@
     IBOutlet UIButton *internal_btn;
     IBOutlet UIButton *yes_btn_OnGoing;
     IBOutlet UIButton *no_btn_OnGoing;
-    IBOutlet UIButton *no_btn_restricted;
-    IBOutlet UIButton *yes_btn_restricted;
     
     UIPopoverController *popover;
     int btnTag;
     
     NSString *typeOfAct_string;
     NSString *onGoing_string;
-    NSString *restricted_string;
     NSString *eventType_ID_string;
-    NSString *serviceProviderType_ID_string;
     NSString *serviceProvider_ID_string;
     NSString *registeredCOnsumers_ID_string;
     NSString *unitAccount_ID_string;

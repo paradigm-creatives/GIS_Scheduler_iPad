@@ -327,14 +327,14 @@
     {
         from_answer_Label.text=value_str;
         startDate_str = value_str;
-        if ([from_answer_Label.text length] && [to_answer_Label.text length]){
-            if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:YES])
-            {
-            }
+        if ([startDate_str length] && [endDate_str length]){
+            if ([GISUtility dateComparision:startDate_str :endDate_str:YES])
+            {}
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
                 from_answer_Label.text=@"";
+                startDate_str=@"";
             }
         }
     }
@@ -342,13 +342,14 @@
     {
         to_answer_Label.text=value_str;
         endDate_str = value_str;
-        if ([from_answer_Label.text length] && [to_answer_Label.text length]){
-            if ([GISUtility dateComparision:from_answer_Label.text :to_answer_Label.text:NO])
-            {}
+        if ([startDate_str length] && [endDate_str length]){
+            if ([GISUtility dateComparision:startDate_str :endDate_str:NO])
+            { }
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
                 to_answer_Label.text=@"";
+                endDate_str=@"";
             }
         }
     }
@@ -381,7 +382,7 @@
     GISFilterMoreViewController *tableViewController = [[GISFilterMoreViewController alloc] initWithNibName:@"GISFilterMoreViewController" bundle:nil];
     tableViewController.delegate_filter=self;
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
-    popover.popoverContentSize = CGSizeMake(433, 504);
+    popover.popoverContentSize = CGSizeMake(433, 400);
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+68, button.frame.origin.y+88, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 
 }
@@ -415,9 +416,13 @@
     [paramsDict setObject:chooseRequestID_str forKey:kRequestID];
     [paramsDict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [paramsDict setObject:login_Obj.token_string forKey:keventDetails_token];
-    
+    [paramsDict setObject:[GISUtility returningstring:eventType_ID_string] forKey:kViewSchedule_EventType];
+    [paramsDict setObject:[GISUtility returningstring:serviceProvider_ID_string] forKey:kServiceProvider];
+    [paramsDict setObject:[GISUtility returningstring:registeredConsumers_ID_string] forKey:kRegisteredConsumers];
+    [paramsDict setObject:[GISUtility returningstring:unitAccount_ID_string] forKey:kUnitNumber];
+    [paramsDict setObject:[GISUtility returningstring:typeOfAct_ID_string] forKey:kAccountType];
+    [paramsDict setObject:[GISUtility returningstring:onGoing_ID_string] forKey:kSPRequetstesJobsSearchonGoing];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    
     [[GISServerManager sharedManager] jobAssignmentJobs:self withParams:paramsDict finishAction:@selector(successmethod_jobAssignmentRequest:) failAction:@selector(failuremethod_jobAssignmentRequest:)];
     
 }
@@ -437,17 +442,20 @@
     saveUpdateDict = [responseArray lastObject];
     NSLog(@"successmethod_jobAssignmentRequest Success---%@",saveUpdateDict);
     
-    [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
-    GISSchedulerSPJobsStore *spJobsStore;
-    spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
-    self.requested_Jobs_Array=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
-    [mainArray addObjectsFromArray:self.requested_Jobs_Array];
+    if (responseArray.count<1) {
+         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+         [self.requested_Jobs_Array removeAllObjects];
+         [mainArray removeAllObjects];
+        [jobAssignment_tableView reloadData];
+    }else {
+        [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
+        GISSchedulerSPJobsStore *spJobsStore;
+        spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
+        self.requested_Jobs_Array=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
+        [mainArray addObjectsFromArray:self.requested_Jobs_Array];
+        [self segmentSelected];
+    }
     
-    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"filledOrUnfilled_string=%@",@"filled"];
-    NSArray *array=[self.requested_Jobs_Array filteredArrayUsingPredicate:predicate];
-    self.requested_Jobs_Array=[array mutableCopy];
-    
-    [jobAssignment_tableView reloadData];
     [self removeLoadingView];
     
 }
@@ -461,7 +469,12 @@
 
 -(IBAction)segment_filled_Unfilled_ValueChanged:(id)sender
 {
-    UISegmentedControl *segment=(UISegmentedControl *)sender;
+    segment=(UISegmentedControl *)sender;
+    [self segmentSelected];
+}
+
+-(void)segmentSelected
+{
     if (segment.selectedSegmentIndex==0) {
         NSPredicate *predicate=[NSPredicate predicateWithFormat:@"filledOrUnfilled_string=%@",@"filled"];
         NSArray *array=[mainArray filteredArrayUsingPredicate:predicate];
@@ -479,7 +492,6 @@
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
     }
 }
-
 -(IBAction)listOfServiceProviders_ButtonPressed:(id)sender
 {
     UIButton *button=(UIButton *)sender;
@@ -616,6 +628,16 @@
 {
     [self dismissPopOverNow];
     NSLog(@"sendFilterMoreValues-->%@",[dict description]);
+    
+    if (dict.count) {
+        eventType_ID_string=[dict objectForKey:@"1"];
+        serviceProvider_ID_string=[dict objectForKey:@"2"];
+        registeredConsumers_ID_string=[dict objectForKey:@"3"];
+        unitAccount_ID_string=[dict objectForKey:@"4"];
+        typeOfAct_ID_string=[dict objectForKey:@"5"];
+        onGoing_ID_string=[dict objectForKey:@"6"];
+        [self performSelector:@selector(searchButton_Pressed:) withObject:nil];
+    }
 }
 
 //This method call when we select the service provider from the table view

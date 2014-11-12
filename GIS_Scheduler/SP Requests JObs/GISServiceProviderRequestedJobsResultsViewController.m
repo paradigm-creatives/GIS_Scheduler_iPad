@@ -87,8 +87,6 @@
     [cell.serviceProviderName_Label setText:spJobsObj.ServiceProviderName_String];
     [cell.requestedDate_Label setText:spJobsObj.RequestedDate_String];
     
-   
-    
     NSString *response_string;
     if ([spJobsObj.GisResponse_String isEqualToString:@"1"])
         response_string=@"Submitted";
@@ -108,7 +106,6 @@
     [cell.response_status_btn setTag:indexPath.row];
     [cell.done_btn setTag:indexPath.row];
     
-    
     cell.edit_imageView.image=[UIImage imageNamed:@"check_pressed"];
     cell.gisResponse_UIView.hidden=NO;
     cell.payType_UIView.hidden=NO;
@@ -116,7 +113,6 @@
 
         cell.gisResponse_EDIT_Label.text=gisResponse_temp_string;
         cell.payType_EDIT_Label.text=payType_temp_string;
-
     }
     else
     {

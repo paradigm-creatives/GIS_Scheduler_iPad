@@ -58,20 +58,9 @@
         btnTag=111;
         tableViewController1.popOverArray=eventType_array;
     }
-    else if([sender tag]==222)
-    {
-        btnTag=222;
-        tableViewController1.popOverArray=serviceProviderType_array;
-    }
     else if([sender tag]==333)
     {
         btnTag=333;
-        [serviceProvider_array removeAllObjects];
-        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",serviceProvider_TYpe_AnswerLabel.text];
-        if ([serviceProvider_TYpe_AnswerLabel.text isEqualToString:@"Any"]) {
-            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
-        }
-        serviceProvider_array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
         tableViewController1.popOverArray=serviceProvider_array;
     }
     else if ([sender tag]==444)
@@ -101,11 +90,6 @@
         eventType_AnswerLabel.text=value_str;
         eventType_ID_string=id_str;
     
-    }
-    else if(btnTag==222)
-    {
-        serviceProvider_TYpe_AnswerLabel.text=value_str;
-        serviceProviderType_ID_string=id_str;
     }
     else if(btnTag==333)
     {
@@ -156,21 +140,6 @@
             [no_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
     }
-    
-    if ([sender tag]==1010 || [sender tag]==1111) {
-        if ([sender tag]==1010) {
-            restricted_string=@"1";
-            [no_btn_restricted setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [yes_btn_restricted setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            restricted_string=@"0";
-            [yes_btn_restricted setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [no_btn_restricted setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
-        }
-    }
-    
 }
 
 -(IBAction)apply_Cancel_ButtonPressed:(id)sender
@@ -179,13 +148,11 @@
     if ([sender tag]==1) {
         
         [dict setObject:[GISUtility returningstring:eventType_ID_string] forKey:@"1"];
-        [dict setObject:[GISUtility returningstring:serviceProviderType_ID_string] forKey:@"2"];
-        [dict setObject:[GISUtility returningstring:serviceProvider_ID_string] forKey:@"3"];
-        [dict setObject:[GISUtility returningstring:registeredCOnsumers_ID_string] forKey:@"4"];
-        [dict setObject:[GISUtility returningstring:unitAccount_ID_string] forKey:@"5"];
-        [dict setObject:[GISUtility returningstring:typeOfAct_string] forKey:@"6"];
-        [dict setObject:[GISUtility returningstring:onGoing_string] forKey:@"7"];
-        [dict setObject:[GISUtility returningstring:restricted_string] forKey:@"8"];
+        [dict setObject:[GISUtility returningstring:serviceProvider_ID_string] forKey:@"2"];
+        [dict setObject:[GISUtility returningstring:registeredCOnsumers_ID_string] forKey:@"3"];
+        [dict setObject:[GISUtility returningstring:unitAccount_ID_string] forKey:@"4"];
+        [dict setObject:[GISUtility returningstring:typeOfAct_string] forKey:@"5"];
+        [dict setObject:[GISUtility returningstring:onGoing_string] forKey:@"6"];
         [_delegate_filter sendFilterMoreValues:dict];
     }
     else
@@ -193,6 +160,7 @@
         [_delegate_filter sendFilterMoreValues:dict];
     }
 }
+
 -(void)dismissPopOverNow
 {
     [popover dismissPopoverAnimated:YES];

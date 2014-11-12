@@ -306,11 +306,7 @@
 - (void)addCalendars {
     
     CGRect frame = CGRectMake(0., 0., self.mainView.frame.size.width, self.mainView.frame.size.height);
-    
-    //    viewCalendarYear = [[FFYearCalendarView alloc] initWithFrame:frame];
-    //    [viewCalendarYear setProtocol:self];
-    //    [self.mainView addSubview:viewCalendarYear];
-    
+
     viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:frame];
     [viewCalendarMonth setProtocol:self];
     [viewCalendarMonth setDictEvents:dictEvents];
