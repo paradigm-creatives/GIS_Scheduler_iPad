@@ -179,6 +179,7 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
     }
+    cell.tag=indexPath.row;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:indexPath.row];
@@ -238,6 +239,8 @@
     UIButton *button=(UIButton *)sender;
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
+    GISJobAssignmentCell *cell=(GISJobAssignmentCell *)[GISUtility findParentTableViewCell:button];
+    selected_row=cell.tag;
     
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     popover.delegate = self;
@@ -361,13 +364,20 @@
     else  if (btnTag==555)
     {
         typeOfservice_temp_string=value_str;
+        GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+        obj.typeOfService_string=typeOfservice_temp_string;
+        [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
+        
     }
     else  if (btnTag==777)
     {
         payType_temp_string=value_str;
+        GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+        obj.PayType_String=payType_temp_string;
+        [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
     }
     if (btnTag==555||btnTag==777)
-      [jobAssignment_tableView reloadData];
+       [jobAssignment_tableView reloadData];
 }
 
 -(void)dismissPopOverNow
@@ -497,13 +507,15 @@
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISJobAssignmentCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview.superview;
     GISJobAssignmentCell *attendeesCell=(GISJobAssignmentCell *)tempCellRef;
-    
+    selected_row=attendeesCell.tag;
     GISServiceProviderPopUpViewController *popOverController=[[GISServiceProviderPopUpViewController alloc]initWithNibName:@"GISServiceProviderPopUpViewController" bundle:nil];
     
     popOverController.delegate_list=self;
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",[GISUtility returningstring:typeOfservice_temp_string]];
-    if ([typeOfservice_temp_string isEqualToString:@"Any"]||[sender tag]==1919) {
+    GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+    
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",[GISUtility returningstring:obj.typeOfService_string]];
+    if ([obj.typeOfService_string isEqualToString:@"Any"]||[sender tag]==1919) {
         spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
     }
     serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
@@ -520,9 +532,59 @@
 
 -(void)editButtonPressed:(id)sender
 {
+    
+    GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:[sender tag]];
+    obj.typeOfService_string=typeOfservice_temp_string;
+    obj.ServiceProviderName_String=serviceProvider_temp_string;
+    obj.PayType_String=payType_temp_string;
+    [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
+    //Call the Save Update JObs Service here
+    
+    NSString *typeOfService_ID_temp_String=@"";
+    NSString *serviceProvider_ID_temp_String=@"";
+    NSString *payType_ID_temp_String=@"";
+    
+    NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",obj.typeOfService_string];
+    NSArray *array_typeOfService=[serviceProviderType_array filteredArrayUsingPredicate:predicate_typeOfService];
+    if (array_typeOfService.count>0) {
+        GISDropDownsObject *obj=[array_typeOfService lastObject];
+        typeOfService_ID_temp_String=obj.id_String;
+    }
+    
+    NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",obj.ServiceProviderName_String];
+    NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
+    if (array_serviceProvider.count>0) {
+        GISServiceProviderObject *obj=[array_serviceProvider lastObject];
+        serviceProvider_ID_temp_String=obj.id_String;
+    }
+    
+    NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",obj.PayType_String];
+    NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
+    if (array_payType.count>0) {
+        GISDropDownsObject *obj=[array_payType lastObject];
+        payType_ID_temp_String=obj.id_String;
+    }
+    
+    NSMutableDictionary *update_eventdict;
+    update_eventdict=[[NSMutableDictionary alloc]init];
+    
+    [update_eventdict setObject:obj.JobID_String forKey:kJobDetais_JobID];
+    [update_eventdict setObject:obj.startTime_String forKey:kJobDetais_StartTime];
+    [update_eventdict setObject:obj.endTime_String forKey:kJobDetais_EndTime];
+    [update_eventdict setObject:obj.JobDate_String forKey:kJobDetais_JobDate];
+    [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
+    [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
+    [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+    [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+    [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
+}
+/*
+{
     NSLog(@"tag--%d",[sender tag]);
 
-    
     if(!isEdit_Button_Clicked)
     {
         isEdit_Button_Clicked=YES;
@@ -600,7 +662,7 @@
         }
     }
     [jobAssignment_tableView reloadData];
-}
+*/
 
 
 -(void)successmethod_updateJobDetails_data:(GISJsonRequest *)response
@@ -645,6 +707,9 @@
 {
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
     serviceProvider_temp_string=name_str;
+    GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
+    obj.ServiceProviderName_String=serviceProvider_temp_string;
+    [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
     [jobAssignment_tableView reloadData];
     
 }
