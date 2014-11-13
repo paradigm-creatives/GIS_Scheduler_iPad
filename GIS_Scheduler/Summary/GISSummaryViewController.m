@@ -207,7 +207,7 @@
         NSArray *billingArray = [[GISStoreManager sharedManager] getBillingDataObject];
         billingdataObj = [billingArray lastObject];
         
-        if([appDelegate.chooseRequest_ID_String length] > 0){
+        if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
             
             cell.unitacNumber_ans_label .text = _chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails;
             cell.firstName_ans_label.text = billingdataObj.buh_firstName_String;
@@ -242,7 +242,7 @@
         cell.state_label.hidden = YES;
         
         
-        if([appDelegate.chooseRequest_ID_String length] > 0){
+        if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
             NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
             if (chooseReqDetailedArray.count>0) {
                 _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
@@ -392,7 +392,7 @@
             cell.lastName_label.text = @"Room Name :";
             cell.email_label.text = @"Other :";
             
-            if([appDelegate.chooseRequest_ID_String length] > 0){
+            if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
                 cell.requestor_ans_label.text = _chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails;
                 cell.unitacNumber_ans_label.text = _buildingNameString;
                 cell.firstName_ans_label.text = _generalLocationValue_string;
@@ -416,7 +416,7 @@
             cell.email_label.text = @"State :";
             cell.address1_label.text = @"Zip :";
             
-            if([appDelegate.chooseRequest_ID_String length] > 0){
+            if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
                 cell.requestor_ans_label.text = _chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails;
                 cell.unitacNumber_ans_label.text = _generalLocationValue_string;
                 cell.firstName_ans_label.text = _chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails;

@@ -626,6 +626,7 @@ int row_count = 2;
     [attendeesObject.attendeesList_mutArray removeAllObjects];
     store =[[GISAttendeesDetailsStore alloc]initWithStoreDictionary:response.responseJson];
     attendeesObject.attendeesList_mutArray= [[GISStoreManager sharedManager]getAttendees_Details_Objects];
+    [appDelegate.attendeesArray addObjectsFromArray:attendeesObject.attendeesList_mutArray];
     
     
     if (attendeesObject.attendeesList_mutArray.count==0) {
