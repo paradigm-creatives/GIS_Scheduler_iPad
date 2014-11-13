@@ -179,11 +179,8 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
     }
-<<<<<<< HEAD
     cell.tag=indexPath.row;
-=======
-    
->>>>>>> c9556ebd29e46c12ce873806d3d5983921aab87e
+
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.tag=indexPath.row;
     
