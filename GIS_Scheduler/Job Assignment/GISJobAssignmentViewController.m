@@ -179,8 +179,10 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobAssignmentCell" owner:self options:nil] objectAtIndex:0];
     }
+    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-
+    cell.tag=indexPath.row;
+    
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:indexPath.row];
     cell.oTA_button.tag=indexPath.row;
     cell.edit_button.tag=indexPath.row;
@@ -238,6 +240,7 @@
     UIButton *button=(UIButton *)sender;
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
+    
     
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     popover.delegate = self;
