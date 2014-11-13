@@ -538,7 +538,6 @@
     obj.ServiceProviderName_String=serviceProvider_temp_string;
     obj.PayType_String=payType_temp_string;
     [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
-    //Call the Save Update JObs Service here
     
     NSString *typeOfService_ID_temp_String=@"";
     NSString *serviceProvider_ID_temp_String=@"";
