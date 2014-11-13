@@ -535,7 +535,9 @@
 #define kServiceProviderSPType  @"SpType"
 #define kServiceProvider @"ServiceProvider"
 #define kServiceProviderResult @"ServiceProvidersResult"
-
+#define kRegisteredConsumers @"RegisteredConsumers"
+#define kUnitNumber @"UnitNumber"
+#define kAccountType @"AccountType"
 #pragma mark ServiceProvider End
 
 #define kPayLevelID @"PayLevelID"

@@ -338,17 +338,19 @@ int row_count = 2;
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController];
     
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
+    popover.popoverContentSize = CGSizeMake(340, 200);
     
     if([sender tag]==111)
     {
         btnTag=111;
+        popover.popoverContentSize = CGSizeMake(340, 150);
         tableViewController.view_String=attendeesCell.expectedNo_answer_Label.text;
         tableViewController.popOverArray=expectedNo_mutArray;
     }
     else if ([sender tag]==222)
     {
         btnTag=222;
+        popover.popoverContentSize = CGSizeMake(340, 150);
         tableViewController.view_String=attendeesCell.genderPreference_answer_Label.text;
         tableViewController.popOverArray=genderPreference_mutArray;
     }
@@ -370,22 +372,24 @@ int row_count = 2;
             btnTag=555;
             tableViewController.view_String=attendeesCell.modeOf_answer_Label.text;
             tableViewController.popOverArray=modeofcommunication_mutArray;
-            [popover presentPopoverFromRect:CGRectMake(attendeesCell.modeOf_Button.frame.origin.x+135, attendeesCell.modeOf_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.modeOf_Button.frame.origin.x+135, attendeesCell.modeOf_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
         else if ([sender tag]==666)
         {
             btnTag=666;
+            popover.popoverContentSize = CGSizeMake(340, 150);
             tableViewController.view_String=attendeesCell.directly_utilized_services_answer_Label.text;
             tableViewController.popOverArray=directly_utilizedServices_mutArray;
-            [popover presentPopoverFromRect:CGRectMake(attendeesCell.directly_utilized_services_Button.frame.origin.x+135, attendeesCell.directly_utilized_services_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.directly_utilized_services_Button.frame.origin.x+135, attendeesCell.directly_utilized_services_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
         else if ([sender tag]==777)
         {
             btnTag=777;
             tableViewController.view_String=attendeesCell.servicesNeeded_answer_Label.text;
             tableViewController.popOverArray=servicesNeeded_mutArray;
-            [popover presentPopoverFromRect:CGRectMake(attendeesCell.servicesNeeded_Button.frame.origin.x+135, attendeesCell.servicesNeeded_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            [popover presentPopoverFromRect:CGRectMake(attendeesCell.servicesNeeded_Button.frame.origin.x+135, attendeesCell.servicesNeeded_Button.frame.origin.y+20, 1, 1) inView:attendeesCell.contentView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
+        
         
     }
     else
