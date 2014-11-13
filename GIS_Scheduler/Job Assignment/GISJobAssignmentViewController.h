@@ -62,6 +62,8 @@
     NSString *onGoing_ID_string;
     
     UISegmentedControl *segment;
+    
+    
 }
 @property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;
