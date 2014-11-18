@@ -34,4 +34,7 @@
 #define kFindRequestJobs_Screen @"findRequestJobs_screen"
 #define kJobAssignment_Screen @"jobAssignment_screen"
 
+#define kEmail @"Email"
+#define kPassword @"Password"
+
 #endif

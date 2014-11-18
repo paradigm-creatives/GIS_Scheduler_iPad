@@ -207,7 +207,8 @@
         [cell.oTA_imageView setImage:[UIImage imageNamed:@"unchecked.png"]];
     
     
-    if (selected_row==indexPath.row && isEdit_Button_Clicked) {
+    if (selected_row==indexPath.row && isEdit_Button_Clicked)
+    {
         cell.serviceProviderType_label.text=typeOfservice_temp_string;
         cell.serviceProvider_label.text=serviceProvider_temp_string;
         cell.payType_label.text=payType_temp_string;
@@ -427,7 +428,7 @@
     [paramsDict setObject:endDate_str forKey:kJobAssignmentEndDate];
     [paramsDict setObject:typeServiceID_str forKey:kJobAssignmentSPSubRole];
     [paramsDict setObject:chooseRequestID_str forKey:kRequestID];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+    [paramsDict setObject:@"" forKey:kLoginRequestorID];
     [paramsDict setObject:login_Obj.token_string forKey:keventDetails_token];
     [paramsDict setObject:[GISUtility returningstring:eventType_ID_string] forKey:kViewSchedule_EventType];
     [paramsDict setObject:[GISUtility returningstring:serviceProvider_ID_string] forKey:kServiceProvider];
@@ -459,8 +460,12 @@
          [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
          [self.requested_Jobs_Array removeAllObjects];
          [mainArray removeAllObjects];
-        [jobAssignment_tableView reloadData];
+        
     }else {
+        
+        if([mainArray count]>0)
+            [mainArray removeAllObjects];
+        
         [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
         GISSchedulerSPJobsStore *spJobsStore;
         spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
@@ -468,6 +473,8 @@
         [mainArray addObjectsFromArray:self.requested_Jobs_Array];
         [self segmentSelected];
     }
+    
+    [jobAssignment_tableView reloadData];
     
     [self removeLoadingView];
     
@@ -537,9 +544,10 @@
 {
     
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:[sender tag]];
-    obj.typeOfService_string=typeOfservice_temp_string;
-    obj.ServiceProviderName_String=serviceProvider_temp_string;
-    obj.PayType_String=payType_temp_string;
+    
+//    obj.typeOfService_string=typeOfservice_temp_string;
+//    obj.ServiceProviderName_String=serviceProvider_temp_string;
+//    obj.PayType_String=payType_temp_string;
     [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
     
     NSString *typeOfService_ID_temp_String=@"";

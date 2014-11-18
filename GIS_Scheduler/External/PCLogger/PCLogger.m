@@ -14,6 +14,8 @@
 
 
 #define kLogBucketName @"AmazonLogBucketName"
+#define ACCESS_KEY     @"AKIAJ5E4ZRPJYFKHNGZA"
+#define SECRET_KEY     @"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"
 
 @interface PCLogger(Private)
 
@@ -185,40 +187,41 @@ static PCLogger *manager = nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
                    , ^(void) {
                        // do some time consuming things here
-    NSString *infoString = [self stringOfLogType:logType];
-
-    
-    //#ifdef DEBUG
-    
-    //NSLog(@"%@",str);
-    
-    //Getting the previous content which is present in projectname09.15.2011 sothat we can append the new string
-    
-    NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
-    [dateFormat1 setDateFormat:@"MMMM dd,yyyy hh:mm a"];
-    NSString *dateString1 = [dateFormat1 stringFromDate:date];
-    [dateFormat1 release];
-   
-    NSString *content = [[NSString alloc] initWithFormat:@"\n%@\t%@\t%@",dateString1,infoString,str];
-    
-    //#endif
-    
-    
-     if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
-//    
-    //append text to file (you'll probably want to add a newline every write)
-      NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-      [file seekToEndOfFile];
-      [file writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
-      [file closeFile];
-      [content release];
+                       NSString *infoString = [self stringOfLogType:logType];
+                       
+                       
+                       //#ifdef DEBUG
+                       
+                       //NSLog(@"%@",str);
+                       
+                       //Getting the previous content which is present in projectname09.15.2011 sothat we can append the new string
+                       
+                       NSDate *date = [NSDate date];
+                       NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+                       [dateFormat1 setDateFormat:@"MMMM dd,yyyy hh:mm a"];
+                       NSString *dateString1 = [dateFormat1 stringFromDate:date];
+                       [dateFormat1 release];
+                       
+                       NSString *content = [[NSString alloc] initWithFormat:@"\n%@\t%@\t%@",dateString1,infoString,str];
+                       
+                       //#endif
+                       
+                       
+                       if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+                           [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+                       
+                       NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+                       [file seekToEndOfFile];
+                       [file writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+                       [file closeFile];
+                       [content release];
+                       
+                       dispatch_sync(dispatch_get_main_queue(), ^{
+                           [self performSelectorOnMainThread:@selector(uploadFileToS3) withObject:nil waitUntilDone:YES];
+                       });
+                       
                    });
-
     
-//    NSString *strFileData=[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-//    NSLog(@"str file data i s :%@",strFileData);
     
 }
 
@@ -261,28 +264,35 @@ static PCLogger *manager = nil;
     id name = [[NSBundle mainBundle] objectForInfoDictionaryKey:kLogBucketName];
     NSString *bucketName = nil;
     if ((name != nil) && [name isKindOfClass:[NSString class]]) {
-     
+        
         bucketName = (NSString *)name;
-          NSLog(@"bucket name is %@",bucketName);
+        // NSLog(@"bucket name is %@",bucketName);
     } else {
         PCLogDebug(@"Bucket name couldn't be parsed");
     }
     // TODO: add name of identifier for device
+    
     @try {
         NSString *amazonPath = [NSString stringWithFormat:@"%@_v%@_%@",[UIDevice currentDevice].name,[[[NSBundle mainBundle] infoDictionary ] objectForKey: @"CFBundleVersion"],[self getUUID]];
-        S3PutObjectRequest *pop = [[[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"logs/iOS/%@/%@.log", dateString1, amazonPath] inBucket:bucketName]autorelease];
-        pop.data = [NSData dataWithContentsOfFile:file];
-        pop.contentType = @"text/plain";
         
-        [[AmazonClientManager s3] putObject:pop];
+        AmazonS3Client *s3 = [[[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY withSecretKey:SECRET_KEY] autorelease];
+        S3CreateBucketRequest *cbr = [[[S3CreateBucketRequest alloc] initWithName:bucketName] autorelease];
+        [s3 createBucket:cbr];
         
+        S3PutObjectRequest *por = [[[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"logs/iOS/%@/%@.log", dateString1, amazonPath] inBucket:bucketName] autorelease];
         
-        //NSLog(@"file is %@",file);
+        por.contentType = @"text/plain";
+        por.cannedACL   = [S3CannedACL publicRead];
+        por.data = [NSData dataWithContentsOfFile:file];
+        
+        [s3 putObject:por];
+        
         [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
     }
-    @catch (NSException *exception) {
-        //NSLog(@"exception is %@",[exception description]);
+    @catch ( AmazonServiceException *exception ) {
+        NSLog( @"Upload Failed, Reason: %@", exception );
     }
+    
 }
 
 

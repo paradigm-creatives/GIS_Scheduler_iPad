@@ -43,6 +43,10 @@
     serviceProvider_array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
     serviceProviderType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+    NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];
+    unitAccount_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:unitIDorDep_statement] mutableCopy];
+    
+    
     
 }
 

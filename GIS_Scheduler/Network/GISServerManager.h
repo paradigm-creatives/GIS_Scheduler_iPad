@@ -114,4 +114,6 @@
 - (void)filterJobsDetails:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
 - (void)updateJobDetails_SearchRequestedJobs:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
+- (void)getViewScheduleService_provider_data:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 @end

@@ -66,8 +66,9 @@
     agencyFee_Array=[[NSMutableArray alloc]init];
     payStatus_Array=[[NSMutableArray alloc]init];
     expStatus_Array=[[NSMutableArray alloc]init];
+    billLevel_Array=[[NSMutableArray alloc]init];
     
-    payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
+    //payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
 
     
     NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
@@ -81,6 +82,7 @@
     payStatus_Array=[[GISStoreManager sharedManager]getPayStatus_ExpStatusObjects];
     expStatus_Array=[[GISStoreManager sharedManager]getPayStatus_ExpStatusObjects];
     payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
+    billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -111,6 +113,8 @@
             cell.callInTime_answer_label.text=addUpdateObj.callInTime_string;
         if ([addUpdateObj.payLevel_string length])
             cell.payLevel_answer_label.text=addUpdateObj.payLevel_string;
+        if ([addUpdateObj.billLevel_string length])
+            cell.billLevel_answer_label.text=addUpdateObj.billLevel_string;
         if ([addUpdateObj.typeOfServiceProvider_string length])
             cell.typeOfServiceProvider_answer_label.text=addUpdateObj.typeOfServiceProvider_string;
         if ([addUpdateObj.serviceProvider_string length])
@@ -319,6 +323,11 @@
         btnTag=5;
         tableViewController1.popOverArray=payLevel_Array;
     }
+    else if ([sender tag]==55)
+    {
+        btnTag=55;
+        tableViewController1.popOverArray=billLevel_Array;
+    }
     else if ([sender tag]==6)
     {
         btnTag=6;
@@ -418,6 +427,11 @@
     {
         addUpdateObj.payLevel_string=value_str;
         addUpdateObj.payLevel_ID_string=id_str;
+    }
+    else if (btnTag==55)
+    {
+        addUpdateObj.billLevel_string=value_str;
+        addUpdateObj.billLevel_ID_string=id_str;
     }
     else if (btnTag==6)
     {

@@ -80,6 +80,7 @@
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Submit to GIS Admin Approval", nil];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -108,8 +109,6 @@
     }
     
     row_value = 1;
-    GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
-    [appDelegate.datesArray insertObject:dobj atIndex:0];
     [_summary_tableView reloadData];
 }
 
@@ -425,10 +424,10 @@
                 cell.address1_ans_label.text = _chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails;
             }
             
-            cell.address2_label.hidden = YES;
-            cell.city_label.hidden = YES;
-            cell.state_label.hidden = YES;
-            cell.zip_label.hidden = YES;
+            cell.address2_label.hidden = NO;
+            cell.city_label.hidden = NO;
+            cell.state_label.hidden = NO;
+            cell.zip_label.hidden = NO;
 
             
         }
@@ -725,6 +724,8 @@
         isRequestSubmitted=YES;
         [_summary_tableView reloadData];
         [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit Successfully"];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
         
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
         NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];

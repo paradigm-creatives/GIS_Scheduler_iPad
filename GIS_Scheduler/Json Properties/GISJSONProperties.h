@@ -535,6 +535,7 @@
 #define kServiceProviderSPType  @"SpType"
 #define kServiceProvider @"ServiceProvider"
 #define kServiceProviderResult @"ServiceProvidersResult"
+#define kViewScheduleServiceProviderResult @"SchedulerServiceProvidersResult"
 #define kRegisteredConsumers @"RegisteredConsumers"
 #define kUnitNumber @"UnitNumber"
 #define kAccountType @"AccountType"
@@ -572,6 +573,7 @@
 #define kJobReturn @"JobReturn"
 #define kRPayLevelID @"RPayLevelID"
 #define kModeID @"ModeID"
+#define kPrimaryAudianceID @"PrimaryAudienceid"
 
 
 #pragma Mark SPRequested Jobs Search Start

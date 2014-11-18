@@ -189,15 +189,12 @@
 
 - (IBAction)buttonAction:(id)sender {
     
+    button = (FFBlueButton *)sender;
+    
     NSMutableArray *btnArray = [[NSMutableArray alloc] init];
     for(FFBlueButton *btn in arrayButtonsEvents)
     {
-        NSLog(@"btn evevnt %@ \n button event %@",[self eventDisplayFormat:btn.event.dateDay],[self eventDisplayFormat:button.event.dateDay]);
         if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
-            
-            NSLog(@"btn evevnt dateTimeBegin %@ \n button event dateTimeBegin %@",[self getTimeformdate:btn.event.dateTimeBegin],[self getTimeformdate:button.event.dateTimeBegin]);
-            
-            NSLog(@"btn evevnt dateTimeEnd %@ \n button event dateTimeEnd %@",[self getTimeformdate:btn.event.dateTimeEnd],[self getTimeformdate:button.event.dateTimeEnd]);
             
             if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
                 
@@ -209,8 +206,6 @@
 
     
     GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-    button = (FFBlueButton *)sender;
     
     if (protocol != nil && [protocol respondsToSelector:@selector(showViewDetailsWithEvent:cell:)]) {
         if([appDelegate.jobEventsArray count] >0)
@@ -251,14 +246,26 @@
     NSDate *myDate = [dateFormat dateFromString:dateStr];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
+//    [dateFormatter setDateFormat:@"hh:mm a"];
     [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
     NSLocale *curentLocale = [NSLocale currentLocale];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
+//    
+//    NSString *timeString = [dateFormatter stringFromDate:myDate];
     
-    NSString *timeString = [dateFormatter stringFromDate:myDate];
+    dateFormatter.dateFormat = @"HH:mm";
+    NSString *pmamDateString = [dateFormatter stringFromDate:myDate];
     
-    return [timeString uppercaseString];
+    NSString *hourString;
+    
+    NSRange newRange = [pmamDateString rangeOfString:@":"];
+    if(newRange.location != NSNotFound) {
+        hourString = [pmamDateString substringToIndex:newRange.location];
+    }
+
+
+    
+    return hourString;
 }
 
 //#pragma mark - FFEventDetailPopoverController Protocol

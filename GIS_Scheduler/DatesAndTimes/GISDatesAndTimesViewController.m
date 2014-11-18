@@ -924,6 +924,9 @@
                 [appDelegate.datesArray removeAllObjects];
             [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
             
+            GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
+            [appDelegate.datesArray insertObject:dobj atIndex:0];
+            
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
             //[self performSelector:@selector(nextButtonPressed:) withObject:nil];
             
@@ -980,6 +983,9 @@
         if([appDelegate.datesArray count]>0)
             [appDelegate.datesArray removeAllObjects];
         [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
+        
+        GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
+        [appDelegate.datesArray insertObject:dobj atIndex:0];
         
         [createJObs_tableView reloadData];
     }

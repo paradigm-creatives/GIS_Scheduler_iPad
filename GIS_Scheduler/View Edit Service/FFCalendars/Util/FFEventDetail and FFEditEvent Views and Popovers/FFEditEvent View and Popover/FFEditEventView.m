@@ -173,6 +173,15 @@
         }
     }
 
+    if([payType_string length] == 0)
+        payType_string = @"";
+    
+    if([serviceType_string length] == 0)
+        serviceType_string = @"";
+    
+    if([subRole_string length] == 0)
+        subRole_string = @"";
+    
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
@@ -362,17 +371,17 @@
 
     }
     
-    addButton1.frame = CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1235];
+    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_payTypeBackgroundView addSubview:addButton1];
     
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
-    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentLeft];
-    [labelEventName setFont:[GISFonts large]];
+    [labelEventName setFont:[GISFonts normal]];
     labelEventName.text = [NSString stringWithFormat:@"Paytype  "];
 
     [_payTypeBackgroundView addSubview:labelEventName];
@@ -409,18 +418,18 @@
     }
     
     
-    addButton1.frame = CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
+    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     [addButton1 setTag:1234];
     [_backgroundView addSubview:addButton1];
     
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
-    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentLeft];
-    [labelEventName setFont:[GISFonts large]];
+    [labelEventName setFont:[GISFonts normal]];
     labelEventName.text = [NSString stringWithFormat:@"ServiceProvider Type  "];
     
     [_backgroundView addSubview:labelEventName];
@@ -459,17 +468,17 @@
 
     }
     
-    addButton1.frame = CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width+30, 10.0, 130.0, 27.0);
+    addButton1.frame = CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1236];
+    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_ServicebackgroundView addSubview:addButton1];
     
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
-    [labelEventName setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [labelEventName setTextAlignment:NSTextAlignmentLeft];
-    [labelEventName setFont:[GISFonts large]];
+    [labelEventName setFont:[GISFonts normal]];
     labelEventName.text = [NSString stringWithFormat:@"ServiceProvider Name  "];
     
     [_ServicebackgroundView addSubview:labelEventName];
@@ -572,11 +581,12 @@
 - (IBAction)showPopoverDetails:(id)sender {
     
     UIButton *btn=(UIButton*)sender;
+    NSString *typeString = @"SchedulerServiceProvider";
     
     NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
     _serviceTypeArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",typeString];
     NSArray *serviceProviderName_Array = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
     
     GISPopOverTableViewController *tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
@@ -596,18 +606,18 @@
         _popover =   [GISUtility showPopOver:appDelegate.payTypeArray viewController:tableViewController];
         isPaytype = YES;
         isServiceprovider = NO;
-        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+350, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+360, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
     }else if([sender tag] == 1236){
         _popover =   [GISUtility showPopOver:(NSMutableArray *)serviceProviderName_Array viewController:tableViewController];
         isPaytype = NO;
         isServiceprovider = YES;
-        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+430, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+330, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
     }
     else{
         _popover =   [GISUtility showPopOver:(NSMutableArray*) _serviceTypeArray viewController:tableViewController];
         isPaytype = NO;
         isServiceprovider = NO;
-        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+390, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
+        [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+66, btn.frame.origin.y+400, 1, 1) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown  animated:YES];
     }
 
 }

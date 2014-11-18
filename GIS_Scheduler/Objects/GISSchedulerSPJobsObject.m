@@ -55,8 +55,22 @@
             if ([json objectForKey:kSPRequestJobs_TotalHours])
                 TotalHours_String = [self returningstring:[json objectForKey:kSPRequestJobs_TotalHours]];
             
+            
+            
             if ([json objectForKey:kSPRequestJobs_GisResponse])
+            {
               GisResponse_String = [self returningstring:[json objectForKey:kSPRequestJobs_GisResponse]];
+                if ([GisResponse_String isEqualToString:@"0"])
+                    GisResponse_String=@"Select";
+                else if ([GisResponse_String isEqualToString:@"1"])
+                    GisResponse_String=@"Assigned";
+                else if ([GisResponse_String isEqualToString:@"2"])
+                    GisResponse_String=@"Not Assigned";
+                else if ([GisResponse_String isEqualToString:@"3"])
+                    GisResponse_String=@"Need More Information";
+                else
+                    GisResponse_String=@"Select";
+            }
             if ([json objectForKey:kSPRequestJobs_EndTime])
             endTime_String = [json objectForKey:kSPRequestJobs_EndTime] == NULL?@" ":[NSString stringWithString:[json objectForKey:kSPRequestJobs_EndTime]];
             if ([json objectForKey:kSPRequestJobs_EventType])

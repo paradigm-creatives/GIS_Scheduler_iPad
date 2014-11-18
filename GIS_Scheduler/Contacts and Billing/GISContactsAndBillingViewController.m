@@ -615,19 +615,13 @@
             
             [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
             
-                GISEventDetailsViewController *eventViewController;
-                
-                if([login_Obj.userStatus_string isEqualToString:kInternal]){
-                    
-                    eventViewController =[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
-                }
-                else{
-                    eventViewController =[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
-                }
+            GISEventDetailsViewController *eventViewController;
             
-                NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
-                [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
-                
+            eventViewController =[[GISEventDetailsViewController alloc]initWithNibName:@"GISEventDetailsViewController" bundle:nil];
+            
+            NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
+            [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+            
         }else{
             
             [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];

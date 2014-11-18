@@ -39,6 +39,9 @@
 @property(nonatomic,strong)IBOutlet UILabel *payType_label;
 @property(nonatomic,strong)IBOutlet UILabel *payType_answer_label;
 
+@property(nonatomic,strong)IBOutlet UILabel *billLevel_label;
+@property(nonatomic,strong)IBOutlet UILabel *billLevel_answer_label;
+
 @property(nonatomic,strong)IBOutlet UILabel *outAgency_label;
 @property(nonatomic,strong)IBOutlet UILabel *yes_outAgency_label;
 @property(nonatomic,strong)IBOutlet UILabel *no_outAgency_label;

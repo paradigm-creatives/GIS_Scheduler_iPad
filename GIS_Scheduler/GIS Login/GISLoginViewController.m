@@ -128,6 +128,11 @@
         userName_String=_userName_textfield.text;
         password_String=_password_textfield.text;
         
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [userDefaults synchronize];
+        [userDefaults setValue:userName_String forKey:kEmail];
+        [userDefaults setValue:password_String forKey:kPassword];
+        
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         if(appDelegate.isLogout){
             [[GISDatabaseManager sharedDataManager] reloadTheDatabaseFile];
@@ -173,7 +178,8 @@
 
 -(void)successmethod_login:(GISJsonRequest *)response
 {
-        NSLog(@"Success---%@",response.responseJson);
+     @try {
+        NSLog(@"successmethod_login---%@",response.responseJson);
         if ([response.responseJson isKindOfClass:[NSArray class]])
         {
             id array=response.responseJson;
@@ -202,16 +208,18 @@
                     [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
                     
                     [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
-                    
-                    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
-                    {
-                        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-                        [paramsDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
-                        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-                        [[GISServerManager sharedManager] getMastersData_Schedulers:self withParams:paramsDict finishAction:@selector(successmethod_dropDown_schedulers:) failAction:@selector(failuremethod_dropDown_schedulers:)];
-                    }
+//                    
+//                    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
+//                    {
+//                        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//                        [paramsDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+//                        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+//                        [[GISServerManager sharedManager] getMastersData_Schedulers:self withParams:paramsDict finishAction:@selector(successmethod_dropDown_schedulers:) failAction:@selector(failuremethod_dropDown_schedulers:)];
+//                    }
                     
                      [[GISServerManager sharedManager] getService_provider_data:self withParams:nil finishAction:@selector(successmethod_service_Providers:) failAction:@selector(failuremethod_service_Providers:)];
+                    
+                    [[GISServerManager sharedManager] getViewScheduleService_provider_data:self withParams:nil finishAction:@selector(successmethod_ViewSchedule_service_Providers:) failAction:@selector(failuremethod_ViewSchedule_service_Providers:)];
                     
                     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
                     
@@ -268,6 +276,12 @@
                 return;
             }
         }
+     }
+    @catch (NSException *exception)
+    {
+        [self removeLoadingView];
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in Login action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
 }
 
 -(void)failuremethod_login:(GISJsonRequest *)response
@@ -281,7 +295,7 @@
 
 -(void)successmethod_dropDown:(GISJsonRequest *)response
 {
-    NSLog(@"Success---%@",response.responseJson);
+    NSLog(@"successmethod_dropDown---%@",response.responseJson);
     
     [[GISStoreManager sharedManager] removeBuildingNameObjects];
     [[GISStoreManager sharedManager] removeDressCodeObjects];
@@ -304,8 +318,10 @@
     [[GISStoreManager sharedManager] removeMode_jobAssisgnMentObjects];
     [[GISStoreManager sharedManager] removeRequestor_TypeObjects];
     [[GISStoreManager sharedManager] removeRequestorsObjects];
+    [[GISStoreManager sharedManager] removePayTypeObjects];
+    [[GISStoreManager sharedManager] removeTypeOfServiceObjects];
     
-    
+
     dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
     
     NSMutableArray *buildingArray=[[GISStoreManager sharedManager] getBuildingNameObjects];
@@ -332,6 +348,9 @@
     NSMutableArray *createdByArray=[[GISStoreManager sharedManager] getCreated_ByObjects];
     NSMutableArray *mode_jobAsignmentArray=[[GISStoreManager sharedManager] getMode_jobAssisgnMentObjects];
     NSMutableArray *requestorTypeArray=[[GISStoreManager sharedManager] getRequestor_TypeObjects];
+    NSMutableArray *payTypeArray=[[GISStoreManager sharedManager] getPayTypeObjects];
+    NSMutableArray *typeOfServiceArray=[[GISStoreManager sharedManager] getTypeOfServiceObjects];
+
     
     for (int i=0; i<requestorTypeArray.count; i++) {
         GISDropDownsObject *bObj=[requestorTypeArray objectAtIndex:i];
@@ -476,6 +495,28 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_NEEDED(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
+    
+    GISDropDownsObject *tobj=[[GISDropDownsObject alloc]init];
+    tobj.id_String=@"1000";
+    tobj.value_String=@"Any";
+    tobj.type_String=@"Serviceprovider_Type";
+    [typeOfServiceArray addObject:tobj];
+    for (int i=0; i<payTypeArray.count; i++) {
+        GISDropDownsObject *bObj=[payTypeArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+    
+    for (int i=0; i<typeOfServiceArray.count; i++) {
+        GISDropDownsObject *bObj=[typeOfServiceArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+    }
+
         
     ///
 //    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -497,7 +538,7 @@
 
 -(void)successmethod_dropDown_schedulers:(GISJsonRequest *)response
 {
-    NSLog(@"Success---%@",response.responseJson);
+    NSLog(@"successmethod_dropDown_schedulers---%@",response.responseJson);
     
     [[GISStoreManager sharedManager] removePayTypeObjects];
     [[GISStoreManager sharedManager] removeTypeOfServiceObjects];
@@ -524,6 +565,7 @@
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
         [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
     }
+    
 }
 
 -(void)failuremethod_dropDown_schedulers:(GISJsonRequest *)response
@@ -533,7 +575,7 @@
 
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
 {
-    NSLog(@"successmethod_getViewSchedule Success---%@",response.responseJson);
+    NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
     @try {
         if ([response.responseJson isKindOfClass:[NSArray class]])
         {
@@ -714,6 +756,42 @@
     NSLog(@"Failure");
 }
 
+-(void)successmethod_ViewSchedule_service_Providers:(GISJsonRequest *)response{
+    
+    NSLog(@"successmethod_ViewSchedule_service_Providers---%@",response.responseJson);
+    
+    // NSDictionary *saveUpdateDict;
+    // NSArray *responseArray= response.responseJson;
+    // saveUpdateDict = [responseArray lastObject];
+    
+    //if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+    
+    
+    [[GISStoreManager sharedManager] removeServiceProviderObjects];
+    ///
+    serviceProviderStore= [[GISServiceProviderStore alloc] initWithJsonDictionary:response.responseJson];
+    
+    NSMutableArray *serviceProviderArray=[[GISStoreManager sharedManager] getServiceProviderObjects];
+    
+    for (int i=0; i<serviceProviderArray.count; i++) {
+        GISServiceProviderObject *bObj=[serviceProviderArray objectAtIndex:i];
+        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.spType_String,bObj.service_Provider_String, nil];
+        NSArray *keysArray1 = [NSArray arrayWithObjects: kServiceProviderID, kServiceProviderType,kServiceProviderSPType,kServiceProvider, nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+        [[GISDatabaseManager sharedDataManager] insertServiceProviderData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROVIDER_INFO(ID,TYPE,SPTYPE,SERVICE_PROVIDER) VALUES (?,?,?,?)"]];
+    }
+    
+    // }
+    
+}
+
+-(void)failuremethod_ViewSchedule_service_Providers:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
+
+
 -(void)successmethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Success chooseRequest Details---%@",response.responseJson);
@@ -725,13 +803,24 @@
         dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
         NSArray *requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+        
+        dispatch_queue_t requestQueue = dispatch_queue_create("ChooseRequest Queue",NULL);
         for (int i=0; i<requestNumbers_mutArray.count; i++) {
-            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
-            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-            [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+            dispatch_async(requestQueue, ^{
+                GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+                NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+                NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+                [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                });
+                
+            });
         }
+        
+        [self removeLoadingView];
     }else{
         
         [self removeLoadingView];

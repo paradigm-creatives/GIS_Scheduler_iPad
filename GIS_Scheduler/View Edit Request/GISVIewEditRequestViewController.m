@@ -223,7 +223,7 @@
             NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
                         
             for (GISDropDownsObject *dropDownObj in requetDetails) {
-                if ([dropDownObj.value_String isEqualToString:appDelegate.chooseRequest_ID_String]) {
+                if ([dropDownObj.value_String isEqualToString:appDelegate.chooseRequest_Value_String]) {
                     
                     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
                     [dict setValue:dropDownObj.id_String forKey:@"id"];
@@ -262,15 +262,6 @@
         NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
         _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
-//        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-//        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-//        login_Obj=[requetId_array lastObject];
-//        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-//        [paramsDict setObject:login_Obj.requestorID_string forKey:kID];
-//        [paramsDict setObject:login_Obj.token_string forKey:kToken];
-//        [[GISStoreManager sharedManager]removeRequestNumbersObjects];
-//        
-//        [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
     }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];

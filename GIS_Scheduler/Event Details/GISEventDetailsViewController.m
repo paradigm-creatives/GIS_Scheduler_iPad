@@ -90,6 +90,15 @@
     
      material_types_Array=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
+    GISBilingDataObject *billingDataObj;
+    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
+    billingDataObj=[billingArray lastObject];
+    
+    NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
+    if(newRange.location != NSNotFound) {
+        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -112,15 +121,8 @@
         
         [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
         
-//        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-//        [self getEventDetailsdata];
-        
     }else{
         
-        //UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
-       // UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];
-        
-       
         if([_open_toPublicStr length] == 0)
             _open_toPublicStr = @"";
         if([_dressCode_Id_string length] == 0)
@@ -174,8 +176,8 @@
         {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISEventDetailsCell" owner:self options:nil]objectAtIndex:0];
         }
-        
-        if([login_Obj.userStatus_string isEqualToString:kInternal]){
+
+        if([unitString isEqualToString:@"gallaudet.edu"]){
             
             [cell.outSideAgency_label setHidden:FALSE];
             [cell.outSideAgencyno_label setHidden:FALSE];
@@ -904,6 +906,31 @@
     return YES;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(textField.tag == 666){
+        /*  limit to only numeric characters  */
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        for (int i = 0; i < [string length]; i++) {
+            unichar c = [string characterAtIndex:i];
+            if ([myCharSet characterIsMember:c]) {
+                return YES;
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"please enter Numbers Only", TABLE, nil) delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                [alert show];
+                return NO;
+            }
+        }
+        
+        /*  limit the users input to only 9 characters  */
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength > 9) ? NO : YES;
+    }else{
+        return YES;
+    }
+    return NO;
+}
+
 - (IBAction)nextButtonClicked:(id)sender{
     
     appDelegate.isFromContacts = YES;
@@ -974,7 +1001,7 @@
                 if([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
                     [_fields appendFormat:@"%@%@",@"Other",@", \n"];
                 
-                if([login_Objs.userStatus_string isEqualToString:kInternal]){
+                if([unitString isEqualToString:@"gallaudet.edu"]){
                     if([_outsideAgencyStr length] == 0)
                         [_fields appendFormat:@"%@",@"Outside Agency"];
                 }
@@ -1243,12 +1270,6 @@
         
         [self removeLoadingView];
         
-        appDelegate.createdDateString = chooseRequest_Detailed_DetailsObj.createdDate_String_chooseReqParsedDetails;
-        appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequest_Detailed_DetailsObj.reqLastName_String_chooseReqParsedDetails];
-        appDelegate.statusString = chooseRequest_Detailed_DetailsObj.requestStatus_String_chooseReqParsedDetails;
-        
-        [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
-        
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setValue:chooseRequest_Detailed_DetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];
         [self getEventDetailsdata];
@@ -1300,6 +1321,12 @@
     UITextField *blackBoardTextField=(UITextField *)[self.view viewWithTag:222];
     UITextField *webSiteField=(UITextField *)[self.view viewWithTag:333];
     UITextField *otherMaterilaTypeTextField=(UITextField *)[self.view viewWithTag:444];
+    
+    appDelegate.createdDateString = chooseRequest_Detailed_DetailsObj.createdDate_String_chooseReqParsedDetails;
+    appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequest_Detailed_DetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequest_Detailed_DetailsObj.reqLastName_String_chooseReqParsedDetails];
+    appDelegate.statusString = chooseRequest_Detailed_DetailsObj.requestStatus_String_chooseReqParsedDetails;
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
 
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];

@@ -2,7 +2,6 @@
 <Bucket
    type = "1"
    version = "2.0">
-
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -10,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437477850.391394"
+            filePath = "GIS_Scheduler/GIS Login/GISLoginViewController.m"
+            timestampString = "437994529.458915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "907"
-            endingLineNumber = "907"
-            landmarkName = "-nextButtonClicked:"
+            startingLineNumber = "759"
+            endingLineNumber = "759"
+            landmarkName = "-successmethod_ViewSchedule_service_Providers:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437477873.755112"
+            filePath = "GIS_Scheduler/Objects/GISServiceProviderStore.m"
+            timestampString = "437994939.75335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "922"
-            endingLineNumber = "922"
-            landmarkName = "-saveEventDetailsData"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "-initWithJsonDictionary:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437477897.555156"
+            filePath = "GIS_Scheduler/Objects/GISServiceProviderStore.m"
+            timestampString = "437994945.227471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1528"
-            endingLineNumber = "1528"
-            landmarkName = "-saveMaterialRequest"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "-parseJoDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437478368.950811"
+            filePath = "GIS_Scheduler/Objects/GISServiceProviderStore.m"
+            timestampString = "437995102.258738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1572"
-            endingLineNumber = "1572"
-            landmarkName = "-saveMaterialRequest"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-parseJoDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437478368.950811"
+            filePath = "GIS_Scheduler/GIS Store/GISStoreManager.m"
+            timestampString = "437995345.687798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1549"
-            endingLineNumber = "1549"
-            landmarkName = "-saveMaterialRequest"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
+            landmarkName = "-addServiceProviderObject:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "437478447.940632"
+            filePath = "GIS_Scheduler/Objects/GISServiceProviderObject.m"
+            timestampString = "437995366.727375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1579"
-            endingLineNumber = "1579"
-            landmarkName = "-saveMaterialRequest"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-initWithStoreDictionary:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Location Details/GISLocationDetailsViewController.m"
-            timestampString = "437478625.422631"
+            filePath = "GIS_Scheduler/View Edit Service/GISViewEditServiceViewController.m"
+            timestampString = "437995739.759241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
-            landmarkName = "-nextButtonPressed:"
+            startingLineNumber = "738"
+            endingLineNumber = "738"
+            landmarkName = "-showServicePopoverDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,189 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Location Details/GISLocationDetailsViewController.m"
-            timestampString = "437478696.987227"
+            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/Util/FFEventDetail and FFEditEvent Views and Popovers/FFEditEvent View and Popover/FFEditEventView.m"
+            timestampString = "437997005.599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "542"
-            endingLineNumber = "542"
-            landmarkName = "-nextButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Location Details/GISLocationDetailsViewController.m"
-            timestampString = "437478701.123252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
-            landmarkName = "-saveLocationsData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "437480387.159892"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "437480387.159892"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "437480387.159892"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "437480286.23055"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/View Edit Request/GISVIewEditRequestViewController.m"
-            timestampString = "437480751.946951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
-            landmarkName = "-tabSelcted:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/View Edit Request/GISVIewEditRequestViewController.m"
-            timestampString = "437480882.97918"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
-            landmarkName = "-tabSelcted:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/View Edit Request/GISVIewEditRequestViewController.m"
-            timestampString = "437480909.557812"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
-            landmarkName = "-tabBar:didSelectItem:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "437481627.162979"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Attendees/GISAttendeesViewController.m"
-            timestampString = "437469127.223382"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "-pickerButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Utility/GISUtility.m"
-            timestampString = "437475165.154438"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "+dateComparision:::"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
+            landmarkName = "-showPopoverDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

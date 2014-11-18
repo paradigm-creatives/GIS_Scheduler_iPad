@@ -22,8 +22,8 @@
 // to devices securely.
 // http://aws.amazon.com/articles/Mobile/4611615499399490
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#define ACCESS_KEY_ID                @"AKIAI4YV3SP5L54WJBCA"
-#define SECRET_KEY                   @"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"
+#define ACCESS_KEY_ID                @"AKIAJ5E4ZRPJYFKHNGZA"//"AKIAI4YV3SP5L54WJBCA"
+#define SECRET_KEY                   @"Cp/9MKnlB7RxkJNwmbdHHeythHeYTdcHl+4WqMru"//"4egtZjmtGdIKeoBnNXeLzL5JYG0N9gkYZP6+r29W"
 #define CREDENTIALS_ALERT_MESSAGE    @"Please update the Constants.h file with your credentials or Token Vending Machine URL."
 
 

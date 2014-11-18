@@ -12,7 +12,6 @@
 #import "GISLoginViewController.h"
 #import "GISConstants.h"
 #import "GISFonts.h"
-
 #import "GISAttendeesViewController.h"
 
 @implementation GISAppDelegate
@@ -36,18 +35,32 @@
     
     self.spiltViewController = [[UISplitViewController alloc] init];
     
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *email = [userDefaults valueForKey:kEmail];
+    NSString *password = [userDefaults valueForKey:kPassword];
+
+    
     self.detailViewController = (GISDashBoardViewController *)[[GISDashBoardViewController alloc]initWithNibName:@"GISDashBoardViewController" bundle:nil];
     GISDashBoardListViewController *masterViewController = [[GISDashBoardListViewController alloc]initWithNibName:@"GISDashBoardListViewController" bundle:nil];
-    //GISAttendeesViewController *detailViewController = [[GISAttendeesViewController alloc]initWithNibName:@"GISAttendeesViewController" bundle:nil];
+
     
     UINavigationController *masterView=[[UINavigationController alloc]initWithRootViewController:masterViewController];
     UINavigationController *detailView=[[UINavigationController alloc]initWithRootViewController:self.detailViewController];
     
     GISLoginViewController *loginViewController = [[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
-    
+
     self.spiltViewController.delegate = self;
     self.spiltViewController.viewControllers = [NSArray arrayWithObjects:masterView,detailView,nil];
-    [self.window setRootViewController:loginViewController];
+    if([email length]>0 && [password length]>0){
+        
+        [self.window setRootViewController:self.spiltViewController];
+
+        
+    }else{
+
+        [self.window setRootViewController:loginViewController];
+
+    }
     
     [self.navigationcontroller.navigationBar setTranslucent:NO];
     

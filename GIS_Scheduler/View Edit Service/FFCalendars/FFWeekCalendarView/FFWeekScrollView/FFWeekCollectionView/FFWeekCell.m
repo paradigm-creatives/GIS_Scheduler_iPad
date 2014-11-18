@@ -165,22 +165,10 @@
     GISAppDelegate *appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     appDelegate.isWeekView = YES;
     
-//    popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:button.event];
-//    [popoverControllerDetails setProtocol:self];
-//    
-//    [popoverControllerDetails presentPopoverFromRect:button.frame
-//                                              inView:self
-//                            permittedArrowDirections:UIPopoverArrowDirectionLeft
-//                                            animated:YES];
     NSMutableArray *btnArray = [[NSMutableArray alloc] init];
     for(FFBlueButton *btn in arrayButtonsEvents)
     {
-        NSLog(@"btn evevnt %@ \n button event %@",[self eventDisplayFormat:btn.event.dateDay],[self eventDisplayFormat:button.event.dateDay]);
         if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
-            
-             NSLog(@"btn evevnt dateTimeBegin %@ \n button event dateTimeBegin %@",[self getTimeformdate:btn.event.dateTimeBegin],[self getTimeformdate:button.event.dateTimeBegin]);
-            
-            NSLog(@"btn evevnt dateTimeEnd %@ \n button event dateTimeEnd %@",[self getTimeformdate:btn.event.dateTimeEnd],[self getTimeformdate:button.event.dateTimeEnd]);
             
             if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
 
@@ -286,14 +274,25 @@
     NSDate *myDate = [dateFormat dateFromString:dateStr];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
+    //[dateFormatter setDateFormat:@"hh:mm a"];
     [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
     NSLocale *curentLocale = [NSLocale currentLocale];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
     
-    NSString *timeString = [dateFormatter stringFromDate:myDate];
+    //NSString *timeString = [dateFormatter stringFromDate:myDate];
     
-    return [timeString uppercaseString];
+    dateFormatter.dateFormat = @"HH:mm";
+    NSString *pmamDateString = [dateFormatter stringFromDate:myDate];
+    
+    NSString *hourString;
+    
+    NSRange newRange = [pmamDateString rangeOfString:@":"];
+    if(newRange.location != NSNotFound) {
+        hourString = [pmamDateString substringToIndex:newRange.location];
+    }
+
+    
+    return hourString;
 }
 
 @end

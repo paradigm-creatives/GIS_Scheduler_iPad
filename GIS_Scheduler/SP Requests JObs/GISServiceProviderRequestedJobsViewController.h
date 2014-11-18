@@ -84,6 +84,7 @@
     
     GISSchedulerSPJobsStore *spJobsStore;
     NSMutableArray *SPJobsArray;
+    NSString * ChooserequestID;
     
 }
 -(IBAction)pickerButton_pressed:(id)sender;

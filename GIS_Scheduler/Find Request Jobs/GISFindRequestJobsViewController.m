@@ -300,6 +300,9 @@
         [self.days_MutableStr setString:[self.days_MutableStr substringToIndex:range.location]];
     }
     
+    if([findReqObj.registeredConsumers_ID_string length]==0)
+        findReqObj.registeredConsumers_ID_string = @"";
+    
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     
@@ -307,8 +310,8 @@
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_string] forKey:kRequestEDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.requestorType_ID_string] forKey:kRequestorTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:KGetRequestDetails_UnitID];
-    [paramsDict setObject:[GISUtility returningstring:login_Obj.requestorID_string] forKey:kDateTime_RequestorID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kConsumerID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.requestor_ID_string] forKey:kDateTime_RequestorID];
+    [paramsDict setObject:findReqObj.registeredConsumers_ID_string forKey:kConsumerID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.generalLocation_ID_string] forKey:kSearchRequest_LocationID];
     [paramsDict setObject:[GISUtility returningstring:request_ID_String] forKey:kRequestID];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.evenyType_ID_string] forKey:kChooseReqDetails_EventTypeID];
@@ -329,10 +332,12 @@
     [paramsDict setObject:[GISUtility returningstring:findReqObj.timely_string] forKey:kJobDetais_Timely];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.cancelled_string] forKey:kCanceled];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.cancelDate_string] forKey:kCancelDate];
-    [paramsDict setObject:[GISUtility returningstring:findReqObj.payLevel_ID_string] forKey:kPayLevelID];
-    [paramsDict setObject:[GISUtility returningstring:findReqObj.billLevel_ID_string] forKey:kBillingLevelID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kRPayLevelID];
-    [paramsDict setObject:[GISUtility returningstring:@""] forKey:kModeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.payLevel_JobData_ID_string] forKey:kPayLevelID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.billinglevel_ID_string] forKey:kBillingLevelID];
+    [paramsDict setObject:[GISUtility returningstring:[GISUtility returningstring:findReqObj.payLevel_ID_string]] forKey:kRPayLevelID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.model_ID_string] forKey:kModeID];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.primaryAudience_ID_string] forKey:kPrimaryAudianceID];
+    
 
     [[GISServerManager sharedManager] findRequestJObs_Search:self withParams:paramsDict finishAction:@selector(successmethod_findRequestJobs:) failAction:@selector(failuremethod_findRequestJobs:)];
 }
@@ -501,8 +506,16 @@
     {
         btnTag=[sender tag];
         [serviceProvider_array removeAllObjects];
-        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",findReqObj.serviceProviderType_string];
-        if ([findReqObj.serviceProviderType_string isEqualToString:@"Any"]) {
+        
+        NSString *spCode_statement;
+        
+        if([findReqObj.serviceProviderType_string length] >0){
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",findReqObj.serviceProviderType_string];
+            if ([findReqObj.serviceProviderType_string isEqualToString:@"Any"]) {
+                spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+            }
+        }else{
+            
             spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
         }
         serviceProvider_array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
@@ -643,7 +656,7 @@
     else if(btnTag==12)
     {
         findReqObj.model_string=value_str;
-        findReqObj.primaryAudience_ID_string=id_str;
+        findReqObj.model_ID_string=id_str;
     }
     else if(btnTag==13)
     {
@@ -710,11 +723,12 @@
     else if(btnTag==21)
     {
         findReqObj.payLevel_JobData_string=value_str;
-        findReqObj.payLevel_ID_string=id_str;
+        findReqObj.payLevel_JobData_ID_string=id_str;
     }
     else if(btnTag==22)
     {
-        findReqObj.billLevel_string=value_str;
+        findReqObj.billLevel_string = value_str;
+        findReqObj.billinglevel_ID_string = id_str;
     }
     else if(btnTag==23)
     {

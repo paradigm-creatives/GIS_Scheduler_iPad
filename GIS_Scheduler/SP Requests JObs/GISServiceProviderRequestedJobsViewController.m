@@ -193,6 +193,7 @@
     if (btnTag==111)
     {
         chooseRequest_ID_answer_label.text=value_str;
+        ChooserequestID  = id_str;
         
     }
     else if (btnTag==222)
@@ -398,6 +399,11 @@
         openToPublic_str = @"";
     }
     
+    if([ChooserequestID length] == 0)
+    {
+        ChooserequestID = @"";
+    }
+    
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:startDate_str forKey:kSPRequetstesJobsSearchJobsDate];
     [paramsDict setObject:endDate_str forKey:kSPRequetstesJobsSearchJobEDate];
@@ -413,6 +419,7 @@
     [paramsDict setObject:recordBroadCast_str forKey:kSPRequetstesJobsSearchrecordedOrBoardCast];
     [paramsDict setObject:onGoing_str forKey:kSPRequetstesJobsSearchonGoing];
     [paramsDict setObject:openToPublic_str forKey:kSPRequetstesJobsSearchOpenToPublic];
+    [paramsDict setObject:ChooserequestID forKey:kRequestID];
     
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] searchSpRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_spRequestJobsSearchRequest:) failAction:@selector(failuremethod_spRequestJobsSearchRequest:)];

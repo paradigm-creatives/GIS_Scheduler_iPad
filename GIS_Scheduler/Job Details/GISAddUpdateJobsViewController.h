@@ -24,6 +24,7 @@
     
     NSMutableArray *callInTime_Array;
     NSMutableArray *payLevel_Array;
+    NSMutableArray *billLevel_Array;
     NSMutableArray *typeOfserviceProvider_Array;
     NSMutableArray *serviceProvider_ID_Array;
     NSMutableArray *cancelled_Array;

@@ -302,6 +302,8 @@
     if(alertView.tag == LOGOUT_TAG && buttonIndex == 1)
     {
         appDelegate.isLogout = YES;
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kEmail];
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kPassword];
         [[GISDatabaseManager sharedDataManager] reloadTheDatabaseFile];
         GISLoginViewController *loginView_controller=[[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
          appDelegate.window.rootViewController=loginView_controller;

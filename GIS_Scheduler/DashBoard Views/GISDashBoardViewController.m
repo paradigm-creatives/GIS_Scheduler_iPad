@@ -179,31 +179,34 @@
     
     if(refresh_Index == 0){
         
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
         NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
         GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
         
-        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
-        [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
-        [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
-        
-        //[self performSelector:@selector(getNewModifiedRequestsdata:) withObject:paramsDicts afterDelay:10.0];
-        
-        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
-        
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
-        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-        
-        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
-        
-        
-        NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
-        [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
-        [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
-        [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+        if(login_Obj != nil){
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            
+            NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+            [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
+            [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
+            
+            //[self performSelector:@selector(getNewModifiedRequestsdata:) withObject:paramsDicts afterDelay:10.0];
+            
+            [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+            
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+            [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+            
+            [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+            
+            
+            NSMutableDictionary *payTypeDict=[[NSMutableDictionary alloc]init];
+            [payTypeDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
+            [payTypeDict setObject:login_Obj.token_string forKey:kAttendees_token];
+            [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
+        }
         
         refresh_Index ++;
         
@@ -395,6 +398,8 @@
             cell.status_Label.backgroundColor=[UIColor grayColor];
         }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Red"]) {
             cell.status_Label.backgroundColor=[UIColor redColor];
+        }else if ([nmReqObj.RequestStatus_String isEqualToString:@"Green"]) {
+            cell.status_Label.backgroundColor=[UIColor greenColor];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -507,7 +512,7 @@
         
         GISSchedulerNMRequestsObject *nmReqObj = [NMRequestsArray objectAtIndex:indexPath.row];
         
-        appDelegate.chooseRequest_ID_String = nmReqObj.RequestID_String;
+        appDelegate.chooseRequest_Value_String = nmReqObj.RequestID_String;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
         

@@ -251,6 +251,17 @@ static GISServerManager *singletonManager = nil;
     
 }
 
+- (void)getViewScheduleService_provider_data:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_GET_VIEWSCHEDULE_SERVICEPROVIDERS_INFO];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodGet];
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+    
+}
+
 
 ///////////////// Save Request Methods ////////////////////
 

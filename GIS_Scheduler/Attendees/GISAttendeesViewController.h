@@ -52,6 +52,8 @@
     GISVIewEditRequestViewController *viewEditSchedule_obj;
     NSString *isCompleteRequest;
     NSString * inCompleteTab_string;
+    NSString *unitString;
+
 }
 
 @property (nonatomic,strong) UIPopoverController *popover_controller;

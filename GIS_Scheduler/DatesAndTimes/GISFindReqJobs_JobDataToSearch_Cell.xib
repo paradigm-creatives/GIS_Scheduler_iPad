@@ -772,7 +772,6 @@
                 <outlet property="payLevel_JobDate_Answer_label_" destination="F0U-gR-ZWm" id="FId-us-eyc"/>
                 <outlet property="payLevel_JobDate_label_" destination="DZU-Zc-yS0" id="vQX-5y-v1k"/>
                 <outlet property="payType_Answer_label_" destination="yDq-PO-g01" id="9WL-Uo-KcF"/>
-                <outlet property="payType_label_" destination="DZU-Zc-yS0" id="wlF-Hx-3Bf"/>
                 <outlet property="saturday_Button_" destination="AOE-qB-JYg" id="Fyo-fB-2t0"/>
                 <outlet property="saturday_ImageView_" destination="hJ7-NC-xrf" id="nU3-6M-jHY"/>
                 <outlet property="saturday_Label_" destination="EpZ-Tj-Pgw" id="g66-7Z-ugd"/>

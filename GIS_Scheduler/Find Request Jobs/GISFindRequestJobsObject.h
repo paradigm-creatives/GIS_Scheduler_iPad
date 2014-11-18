@@ -50,6 +50,7 @@
 @property(nonatomic,strong)NSString *payLevel_JobData_ID_string;
 @property(nonatomic,strong)NSString *billLevel_string;
 @property(nonatomic,strong)NSString *billLevel_ID_string;
+@property(nonatomic,strong)NSString *billinglevel_ID_string;
 @property(nonatomic,strong)NSString *cancelDate_string;
 @property(nonatomic,strong)NSString *_string;
 

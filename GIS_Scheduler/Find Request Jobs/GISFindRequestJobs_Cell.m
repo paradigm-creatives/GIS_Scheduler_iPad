@@ -59,6 +59,8 @@
     _unTimely_Cancelled_label_.text=NSLocalizedStringFromTable(@"untimely", TABLE, nil);
     _unTimely_timely_label_.text=NSLocalizedStringFromTable(@"untimely", TABLE, nil);
     _timely_Cancelled_label_.text=NSLocalizedStringFromTable(@"Timely", TABLE, nil);
+    
+    _payLevel_JobDate_label_.text=NSLocalizedStringFromTable(@"Pay_Level", TABLE, nil);
 }
 
 @end

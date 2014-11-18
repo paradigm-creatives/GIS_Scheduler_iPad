@@ -30,8 +30,10 @@
 @property(nonatomic,strong)NSString *timelyandHalf_BillPayment_string;
 @property(nonatomic,strong)NSString *payStatus_string;
 @property(nonatomic,strong)NSString *expStatus_string;
+@property(nonatomic,strong)NSString *billLevel_string;
 
 
+@property(nonatomic,strong)NSString *billLevel_ID_string;
 @property(nonatomic,strong)NSString *callInTime_ID_string;
 @property(nonatomic,strong)NSString *payLevel_ID_string;
 @property(nonatomic,strong)NSString *typeOfServiceProvider_ID_string;

@@ -28,6 +28,8 @@
         if ([json isKindOfClass:[NSDictionary class]]) {
             
             NSArray *jsonArray =    [json objectForKey:kServiceProviderResult];
+            if([jsonArray count] == 0)
+                jsonArray =    [json objectForKey:kViewScheduleServiceProviderResult];
             
             for (id jsonObj in jsonArray) {
                 

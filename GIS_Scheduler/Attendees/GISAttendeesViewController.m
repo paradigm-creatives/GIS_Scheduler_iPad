@@ -76,6 +76,16 @@ int row_count = 2;
     NSString *loginStr = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
     login_Obj=[login_array lastObject];
+    
+    GISBilingDataObject *billingDataObj;
+    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
+    billingDataObj=[billingArray lastObject];
+    
+    NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
+    if(newRange.location != NSNotFound) {
+        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -263,7 +273,7 @@ int row_count = 2;
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesTopCell" owner:self options:nil] objectAtIndex:0];
     }
     
-    if([login_Obj.userStatus_string isEqualToString:kInternal])
+    if([unitString isEqualToString:@"gallaudet.edu"])
     {
         cell.primaryAudience_Label.hidden=NO;
         cell.primaryAudience_answer_Label.hidden=NO;
@@ -788,7 +798,7 @@ int row_count = 2;
             [self removeLoadingView];
             return;
         }
-        else if([login_Obj.userStatus_string isEqualToString:kInternal])
+        else if([unitString isEqualToString:@"gallaudet.edu"])
         {
             if([attendeesObject.primaryAudience_String length]<1)
             {
@@ -891,7 +901,7 @@ int row_count = 2;
         NSLog(@"------------%@",appDelegate.chooseRequest_ID_String);
               [attendeesDict setValue:[GISUtility returningstring:appDelegate.chooseRequest_ID_String ] forKey:kAttendees_RequestNo];
         
-        if([login_Obj.userStatus_string isEqualToString:kInternal])
+        if([unitString isEqualToString:@"gallaudet.edu"])
             [attendeesDict setValue:[GISUtility returningstring:attendeesObject.primaryAudience_ID_String] forKey:kAttendees_PrimaryAudience];
         
         [attendees_array addObject:attendeesDict];
