@@ -226,6 +226,11 @@
 
 - (void)showPopoverEventDetailWithEvent:(FFEvent *)_event{
     
+    if(popoverControllerDetails.isPopoverVisible || popoverControllerDetails != nil){
+        [popoverControllerDetails dismissPopoverAnimated:YES];
+        popoverControllerDetails = nil;
+        
+    }
     popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:_event];
     [popoverControllerDetails setProtocol:self];
     

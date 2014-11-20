@@ -23,6 +23,7 @@
 #import "GISDatesTimesDetailStore.h"
 #import "PCLogger.h"
 #import "GISServerManager.h"
+#import "GISFonts.h"
 
 @interface GISJobDetailsViewController ()
 -(void)getJobDetails_Data;
@@ -183,14 +184,18 @@
     jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
     
     appDelegate.jobDetailsArray = jobDetails_Array;
-    
+
     [jobDetails_tableView reloadData];
+    
     NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
     [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kID];
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
     
     //[[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    //GISJobDetailsObject *dobj=[[GISJobDetailsObject alloc]init];
+    //[appDelegate.jobDetailsArray insertObject:dobj atIndex:0];
     
     [self removeLoadingView];
 }
@@ -627,7 +632,17 @@
         //selected_row=999999;
         isEdit_Button_Clicked=NO;
     }
-    [jobDetails_tableView reloadData];
+    
+    rowValue = [sender tag];
+    
+    NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
+    NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:[sender tag]];
+    
+    [jobDetails_tableView beginUpdates];
+    [jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [jobDetails_tableView endUpdates];
+    
+    //[jobDetails_tableView reloadData];
 }
 
 
@@ -644,14 +659,30 @@
     if(buttonIndex == 1)
     {
         GISJobDetailsObject *jobObj = [jobDetails_Array objectAtIndex:alertView.tag];
-        if([jobObj.jobID_string length])
+        if([jobObj.jobID_string length] == 0)
         {
             currentObjTag_toDelete=alertView.tag;
         }
         else
         {
-            [jobDetails_Array removeObjectAtIndex:alertView.tag];
-            [jobDetails_tableView reloadData];
+            NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
+            NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:alertView.tag];
+            GISJobDetailsCell *cell = (GISJobDetailsCell *)[jobDetails_tableView cellForRowAtIndexPath:selectedIndexPath];
+            
+            cell.job_ID_Label.font = [GISFonts smalltextBold];
+            cell.job_date_Label.font = [GISFonts smallBold];
+            cell.start_time_Label.font = [GISFonts smalltextBold];
+            cell.end_time_Label.font = [GISFonts smalltextBold];
+            cell.typeOf_service_Label.font = [GISFonts smalltextBold];
+            cell.service_provider_Label.font = [GISFonts smalltextBold];
+            cell.payType_Label.font = [GISFonts smalltextBold];
+            cell.timely_Label.font = [GISFonts smalltextBold];
+            cell.billAmt_Label.font = [GISFonts smalltextBold];
+            cell.billAmt_Label.textColor = [UIColor blackColor];
+            cell.job_ID_Label.textColor = [UIColor blackColor];
+
+            //[jobDetails_Array removeObjectAtIndex:alertView.tag];
+            //[jobDetails_tableView reloadData];
         }
     }
 }
@@ -688,94 +719,65 @@
     else//Done Button
     {
         if (!appDelegate.addNewJob_dictionary.count) {
-        GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:selected_row];
-        tempObj.jobDate_string=jobDate_temp_string;
-        tempObj.startTime_string=startTime_temp_string;
-        tempObj.endTime_string=endTime_temp_string;
-        tempObj.typeOfService_string=typeOfservice_temp_string;
-        tempObj.serviceProvider_string=serviceProvider_temp_string;
-        tempObj.payType_string=payType_temp_string;
-        [jobDetails_Array replaceObjectAtIndex:selected_row withObject:tempObj];
-
-        NSString *typeOfService_ID_temp_String=@"";
-        NSString *serviceProvider_ID_temp_String=@"";
-        NSString *payType_ID_temp_String=@"";
-        
-        NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.typeOfService_string];
-        NSArray *array_typeOfService=[typeOfService_array filteredArrayUsingPredicate:predicate_typeOfService];
-        if (array_typeOfService.count>0) {
-            GISDropDownsObject *obj=[array_typeOfService lastObject];
-            typeOfService_ID_temp_String=obj.id_String;
-        }
+            GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:selected_row];
+            tempObj.jobDate_string=jobDate_temp_string;
+            tempObj.startTime_string=startTime_temp_string;
+            tempObj.endTime_string=endTime_temp_string;
+            tempObj.typeOfService_string=typeOfservice_temp_string;
+            tempObj.serviceProvider_string=serviceProvider_temp_string;
+            tempObj.payType_string=payType_temp_string;
+            [jobDetails_Array replaceObjectAtIndex:selected_row withObject:tempObj];
             
-        NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",tempObj.serviceProvider_string];
-        NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
-        if (array_serviceProvider.count>0) {
-            GISServiceProviderObject *obj=[array_serviceProvider lastObject];
-            serviceProvider_ID_temp_String=obj.id_String;
+            NSString *typeOfService_ID_temp_String=@"";
+            NSString *serviceProvider_ID_temp_String=@"";
+            NSString *payType_ID_temp_String=@"";
+            
+            NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.typeOfService_string];
+            NSArray *array_typeOfService=[typeOfService_array filteredArrayUsingPredicate:predicate_typeOfService];
+            if (array_typeOfService.count>0) {
+                GISDropDownsObject *obj=[array_typeOfService lastObject];
+                typeOfService_ID_temp_String=obj.id_String;
+            }
+            
+            NSPredicate *predicate_serviceProvider=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",tempObj.serviceProvider_string];
+            NSArray *array_serviceProvider=[serviceProvider_Array filteredArrayUsingPredicate:predicate_serviceProvider];
+            if (array_serviceProvider.count>0) {
+                GISServiceProviderObject *obj=[array_serviceProvider lastObject];
+                serviceProvider_ID_temp_String=obj.id_String;
+            }
+            
+            NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.payType_string];
+            NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
+            if (array_payType.count>0) {
+                GISDropDownsObject *obj=[array_payType lastObject];
+                payType_ID_temp_String=obj.id_String;
+            }
+            
+            NSMutableDictionary *update_eventdict;
+            update_eventdict=[[NSMutableDictionary alloc]init];
+            
+            [update_eventdict setObject:tempObj.jobID_string forKey:kJobDetais_JobID];
+            [update_eventdict setObject:tempObj.startTime_string forKey:kJobDetais_StartTime];
+            [update_eventdict setObject:tempObj.endTime_string forKey:kJobDetais_EndTime];
+            [update_eventdict setObject:tempObj.jobDate_string forKey:kJobDetais_JobDate];
+            [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
+            [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
+            [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+            [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
+            [update_eventdict setObject:jobHistory_textView.text forKey:kViewSchedule_JobNotes];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
+            //Call the Save Update JObs Service here
         }
-        
-        NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",tempObj.payType_string];
-        NSArray *array_payType=[payType_array filteredArrayUsingPredicate:predicate_payType];
-        if (array_payType.count>0) {
-            GISDropDownsObject *obj=[array_payType lastObject];
-            payType_ID_temp_String=obj.id_String;
+        else
+        {
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [[GISServerManager sharedManager] addNewJobDetails:self withParams:appDelegate.addNewJob_dictionary finishAction:@selector(successmethod_AddNewJob_data:) failAction:@selector(failuremethod_AddNewJob_data:)];
+            [appDelegate.addNewJob_dictionary removeAllObjects];
         }
-        
-        NSMutableDictionary *update_eventdict;
-        update_eventdict=[[NSMutableDictionary alloc]init];
-        
-        [update_eventdict setObject:tempObj.jobID_string forKey:kJobDetais_JobID];
-        [update_eventdict setObject:tempObj.startTime_string forKey:kJobDetais_StartTime];
-        [update_eventdict setObject:tempObj.endTime_string forKey:kJobDetais_EndTime];
-        [update_eventdict setObject:tempObj.jobDate_string forKey:kJobDetais_JobDate];
-        [update_eventdict setObject:payType_ID_temp_String forKey:kViewSchedule_PayTypeID];
-        [update_eventdict setObject:serviceProvider_ID_temp_String forKey:kViewSchedule_ServiceProviderID];
-        [update_eventdict setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
-        [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
-        [update_eventdict setObject:jobHistory_textView.text forKey:kViewSchedule_JobNotes];
-        
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateJobDetails_data:) failAction:@selector(failuremethod_updateJobDetails_data:)];
-        //Call the Save Update JObs Service here
-     }
-     else
-     {
-         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-         [[GISServerManager sharedManager] updateJobDetails:self withParams:appDelegate.addNewJob_dictionary finishAction:@selector(successmethod_AddUpdateJob_data:) failAction:@selector(failuremethod_AddUpdateJob_data:)];
-         [appDelegate.addNewJob_dictionary removeAllObjects];
-    }
     }
 }
-
--(void)successmethod_AddUpdateJob_data:(GISJsonRequest *)response
-{
-    [self removeLoadingView];
-    NSLog(@"successmethod_AddUpdateJob_data Success---%@",response.responseJson);
-    NSArray *array=response.responseJson;
-    NSDictionary *dictNew=[array lastObject];
-    NSString *success= [[dictNew objectForKey:kStatusCode] stringValue];
-    
-    if ([success isEqualToString:@"200"]) {
-        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
-        /*
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:[GISUtility returningstring:chooseRequestID_string] forKey:KRequestId];
-        [paramsDict setObject:login_Obj.token_string forKey:kToken];
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
-         */
-        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
-        
-    }
-}
-
--(void)failuremethod_AddUpdateJob_data:(GISJsonRequest *)response
-{
-    [self removeLoadingView];
-    NSLog(@"Failure");
-}
-
 
 -(void)showChangeJobHistoryView
 {
@@ -787,10 +789,29 @@
 {
     [self removeLoadingView];
     NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
-    [jobDetails_tableView reloadData];
+    
+    NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
+    NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:rowValue];
+
+    [jobDetails_tableView beginUpdates];
+    [jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [jobDetails_tableView endUpdates];
     
 }
 -(void)failuremethod_updateJobDetails_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+}
+
+-(void)successmethod_AddNewJob_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"successmethod_AddNewJob_data Success---%@",response.responseJson);
+     [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+    
+}
+-(void)failuremethod_AddNewJob_data:(GISJsonRequest *)response
 {
     [self removeLoadingView];
     NSLog(@"Failure");

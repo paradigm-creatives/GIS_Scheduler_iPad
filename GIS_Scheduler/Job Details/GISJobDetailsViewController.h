@@ -18,6 +18,7 @@
     
     UIPopoverController *popover;
     int btnTag;
+    int rowValue;
     
     NSMutableArray *serviceProvider_Array;
     NSMutableArray *payLevel_Array;

@@ -24,9 +24,7 @@ int Count = 0;
     vlistView.testEvent = eventInit;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_WEEK_EVENT object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_MONTH_EVENT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTestEventDetails:) name:SHOW_WEEK_EVENT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMonthEventDetails:) name:SHOW_MONTH_EVENT object:nil];
     
     vlistView.preferredContentSize = CGSizeMake(300, 250);
     
@@ -46,22 +44,6 @@ int Count = 0;
         [self dismissPopoverAnimated:YES];
         
         if ([testProtocol respondsToSelector:@selector(showPopoverEventDetailWithEvent:)]) {
-            [testProtocol showPopoverEventDetailWithEvent:event];
-        }
-        
-    }
-}
-
-- (void)showMonthEventDetails:(NSNotification *)notification {
-    
-    NSDictionary *infoDict=notification.userInfo;
-    
-    if(infoDict != nil){
-        FFEvent *event = [infoDict objectForKey:@"event"];
-        
-        [self dismissPopoverAnimated:YES];
-        
-        if ([testProtocol respondsToSelector:@selector(showPopoverEventDetailWithEvent:)]) {
             
             if(Count < 1){
                 [testProtocol showPopoverEventDetailWithEvent:event];
@@ -69,14 +51,40 @@ int Count = 0;
             }
             else{
                 Count = 0;
-                [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_MONTH_EVENT object:nil];
+                [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_WEEK_EVENT object:nil];
                 return;
             }
-            
+
         }
         
     }
 }
+
+//- (void)showMonthEventDetails:(NSNotification *)notification {
+//    
+//    NSDictionary *infoDict=notification.userInfo;
+//    
+//    if(infoDict != nil){
+//        FFEvent *event = [infoDict objectForKey:@"event"];
+//        
+//        [self dismissPopoverAnimated:YES];
+//        
+//        if ([testProtocol respondsToSelector:@selector(showPopoverEventDetailWithEvent:)]) {
+//            
+//            if(Count < 1){
+//                [testProtocol showPopoverEventDetailWithEvent:event];
+//                Count ++;
+//            }
+//            else{
+//                Count = 0;
+//                [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_MONTH_EVENT object:nil];
+//                return;
+//            }
+//            
+//        }
+//        
+//    }
+//}
 
 
 @end

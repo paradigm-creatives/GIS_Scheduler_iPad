@@ -241,6 +241,7 @@
     rowsectionClicked = NO;
     
     [_dashBoard_ListTableView reloadData];
+    
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.contentView.backgroundColor = UIColorFromRGB(0x00508f);
     
