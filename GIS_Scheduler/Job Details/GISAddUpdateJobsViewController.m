@@ -247,6 +247,9 @@
     else if ([addUpdateObj.payLevel_string isKindOfClass:[NSNull class]] || addUpdateObj.payLevel_string == (NSString*) [NSNull null] || addUpdateObj.payLevel_string == nil){
         [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Pay Level"];
     }
+    else if ([addUpdateObj.billLevel_string isKindOfClass:[NSNull class]] || addUpdateObj.billLevel_string == (NSString*) [NSNull null] || addUpdateObj.billLevel_string == nil){
+        [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Bill Level"];
+    }
     else
     {
         NSMutableDictionary *addJobDict;

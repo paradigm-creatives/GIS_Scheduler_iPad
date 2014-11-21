@@ -32,6 +32,7 @@
     NSString *serviceProvider_String;
     NSString *serviceProvider_IDString;
     NSString *tabNameString;
+    NSString *typeString;
 }
 
 @property (nonatomic, strong) id <FFCalendarViewControllerProtocol> protocol;

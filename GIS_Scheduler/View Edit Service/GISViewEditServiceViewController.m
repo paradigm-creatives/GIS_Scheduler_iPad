@@ -125,8 +125,9 @@
     [_staff_freeLancerButton.titleLabel setFont:[GISFonts normal]];
     
     tabNameString = @"Staff";
+    typeString = @"SchedulerServiceProvider";
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@' AND TYPE = '%@'",tabNameString,typeString];
     _ServiceProvider_TypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEvent:) name:DATE_CHANGED_UPDATE_EVENT object:nil];
@@ -475,7 +476,8 @@
             
         }
         
-        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
+        //NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@'",tabNameString];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SPTYPE = '%@' AND TYPE = '%@'",tabNameString,typeString];
         _ServiceProvider_TypeArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
         
         [_staff_freeLancerButton setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];

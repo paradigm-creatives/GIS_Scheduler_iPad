@@ -205,6 +205,18 @@
         UIImageView *labelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 110, 50)];
         labelImageView.image = [UIImage imageNamed:@"logo.png"] ;
         [headerView addSubview:labelImageView];
+        
+        UILabel* headerLabel = [[UILabel alloc] init];
+        headerLabel.frame = CGRectMake(222, 55, 125, 20);
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.font = [GISFonts large];
+        [headerLabel setTextAlignment:NSTextAlignmentLeft];
+        headerLabel.textColor = [UIColor whiteColor];
+        NSString *versionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        headerLabel.text = [NSString stringWithFormat:@"Version  %@",versionNumber];
+        
+        [headerView addSubview:headerLabel];
+        
     }else{
         
         [headerView setBackgroundColor:UIColorFromRGB(0x00457c)];
