@@ -81,7 +81,7 @@
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 210);
+    popover.popoverContentSize = CGSizeMake(340, 180);
     [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+button.frame.size.width-14, button.frame.origin.y+24, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
 }

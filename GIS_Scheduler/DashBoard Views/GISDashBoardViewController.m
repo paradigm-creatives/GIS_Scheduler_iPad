@@ -27,6 +27,7 @@
 #import "GISViewEditServiceViewController.h"
 #import "GISJobAssignmentViewController.h"
 #import "GISFindRequestJobsViewController.h"
+#import "GISDatabaseConstants.h"
 
 
 @interface GISDashBoardViewController ()
@@ -1015,6 +1016,11 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
     
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+    
     if(!tableHeader2_UIView.isHidden || !tableHeader1_UIView.isHidden){
         
         NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
@@ -1039,6 +1045,46 @@
     }
 
 }
+
+-(void)successmethod_chooseRequest:(GISJsonRequest *)response
+{
+    NSLog(@"Success chooseRequest Details---%@",response.responseJson);
+    
+    id array=response.responseJson;
+    NSDictionary *dictHere=[array lastObject];
+    
+    GISDropDownStore *dropDownStore;
+    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [[GISStoreManager sharedManager]removeRequestNumbersObjects];
+        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+        NSArray *requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
+        
+        
+        [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_CHOOSE_REQUEST"];
+        
+        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
+        
+        for (int i=0; i<requestNumbers_mutArray.count; i++) {
+            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        [self removeLoadingView];
+    }else{
+        
+        [self removeLoadingView];
+    }
+}
+
+-(void)failuremethod_chooseRequest:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+}
+
 
 - (void)didReceiveMemoryWarning
 {
