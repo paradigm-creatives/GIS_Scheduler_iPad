@@ -44,6 +44,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.hidesBackButton = YES;
+    
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -136,7 +137,8 @@
         frame1.origin.x=0;
         table_UIView.frame=frame1;
         
-        self.navigationItem.hidesBackButton = NO;
+        if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
+            self.navigationItem.hidesBackButton = NO;
     }
     
     [btn setTitle:buttonTitle forState:UIControlStateNormal];
@@ -217,6 +219,12 @@
     else
     {
         //[cell.edit_button setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+    }
+    
+    if (![appDelegate.statusString isEqualToString:@"Approved"]) {
+        
+        cell.payType_button.userInteractionEnabled = NO;
+        cell.service_Provider_button.userInteractionEnabled = NO;
     }
     
     return cell;

@@ -202,27 +202,6 @@
                 NSMutableArray *loginArray=  [[GISStoreManager sharedManager]getLoginObjects];
                 if (loginArray.count>0) {
                     login_Obj=[loginArray objectAtIndex:0];
-                    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-                    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
-                    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-                    [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
-                    
-                    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
-//                    
-//                    if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
-//                    {
-//                        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-//                        [paramsDict setObject:login_Obj.requestorID_string forKey:KRequestorId];
-//                        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-//                        [[GISServerManager sharedManager] getMastersData_Schedulers:self withParams:paramsDict finishAction:@selector(successmethod_dropDown_schedulers:) failAction:@selector(failuremethod_dropDown_schedulers:)];
-//                    }
-                    
-                     [[GISServerManager sharedManager] getService_provider_data:self withParams:nil finishAction:@selector(successmethod_service_Providers:) failAction:@selector(failuremethod_service_Providers:)];
-                    
-                    [[GISServerManager sharedManager] getViewScheduleService_provider_data:self withParams:nil finishAction:@selector(successmethod_ViewSchedule_service_Providers:) failAction:@selector(failuremethod_ViewSchedule_service_Providers:)];
-                    
-                    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-                    
                     
                     //LOGIN DB
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_LOGIN];
@@ -232,36 +211,76 @@
                     [[GISDatabaseManager sharedDataManager] insertLoginData:dic];
                     ////LOGIN
                     
-                    ///DROPDOWN
+                    ///DELETE TABELS
+                    
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_BUILDING_NAME"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_DRESS_CODE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_EVENT_TYPE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_GENERAL_LOCATION"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_UNIT_DEPARTMENT"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_CLOSEST_METRO"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_MODE_OF_COMMUNICATION"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_PROV_GENDER_PREFERENCE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_NEEDED"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SKILL_LEVEL"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_PAY_LEVEL"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_TYPE_SERVICE_PROVIDER"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_REGISTERED_CONSUMERS"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_REQUESTORS"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_CREATED_BY"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_MODE_JOBASSIGNMENT"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_REQUESTOR_TYPE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_PRIMARY_AUDIENCE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_PAY_TYPE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_TYPE_OF_SERVICE"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_PROVIDER_INFO"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SCHEDULE_SERVICE_PROVIDER_INFO"];
+                    
+                    
+                    ///DELETE TABELS
+                
+                    ///CREATE TABELS
+                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_BUILDING_NAME];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_DRESS_CODE];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_EVENT_TYPE];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_GENERAL_LOCATION];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_UNIT_DEPARTMENT];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CLOSEST_METRO];
-                    //
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_MODE_OF_COMMUNICATION];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_PROV_GENDER_PREFERENCE];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_NEEDED];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SKILL_LEVEL];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PAY_LEVEL];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_TYPE_SERVICE_PROVIDER];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REGISTERED_CONSUMERS];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTORS];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CREATED_BY];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_MODE_JOBASSIGNMENT];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTOR_TYPE];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PRIMARY_AUDIENCE];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PAY_TYPE];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_TYPE_OF_SERVICE];
-                    
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_PROVIDER_INFO];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SCHEDULE_SERVICE_PROVIDER_INFO];
+                    
+                    
+                    ///CREATE TABELS
+                    
+                    
+                    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+                    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+                    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+                    
+                    [[GISServerManager sharedManager] getDropDownData:self withParams:paramsDict finishAction:@selector(successmethod_dropDown:) failAction:@selector(failuremethod_dropDown:)];
+                    
+                    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+            
+                    [[GISServerManager sharedManager] getService_provider_data:self withParams:nil finishAction:@selector(successmethod_service_Providers:) failAction:@selector(failuremethod_service_Providers:)];
+                    
+                    [[GISServerManager sharedManager] getViewScheduleService_provider_data:self withParams:nil finishAction:@selector(successmethod_ViewSchedule_service_Providers:) failAction:@selector(failuremethod_ViewSchedule_service_Providers:)];
+                    
+                    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
                 }
 
                 
@@ -778,7 +797,7 @@
         NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.spType_String,bObj.service_Provider_String, nil];
         NSArray *keysArray1 = [NSArray arrayWithObjects: kServiceProviderID, kServiceProviderType,kServiceProviderSPType,kServiceProvider, nil];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertServiceProviderData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROVIDER_INFO(ID,TYPE,SPTYPE,SERVICE_PROVIDER) VALUES (?,?,?,?)"]];
+        [[GISDatabaseManager sharedDataManager] insertServiceProviderData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SCHEDULE_SERVICE_PROVIDER_INFO(ID,TYPE,SPTYPE,SERVICE_PROVIDER) VALUES (?,?,?,?)"]];
     }
     
     // }

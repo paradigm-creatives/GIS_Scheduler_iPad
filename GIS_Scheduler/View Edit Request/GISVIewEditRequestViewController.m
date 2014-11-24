@@ -179,7 +179,7 @@
                                                        nil] forState:UIControlStateSelected];
     
     
-    self.navigationItem.title = @"View/Edit Service Request";
+    self.navigationItem.title = @"View/Edit Schedule";
     
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
     self.created_by_value_Label.textColor=UIColorFromRGB(0x00457c);

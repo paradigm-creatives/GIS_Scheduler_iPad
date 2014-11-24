@@ -376,7 +376,12 @@
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1235];
-    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    if (![appDelegate.statusString isEqualToString:@"Approved"]) {
+        
+        addButton1.userInteractionEnabled = NO;
+    }else{
+        addButton1.userInteractionEnabled = YES;
+    }
     [_payTypeBackgroundView addSubview:addButton1];
     
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_payTypeBackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];
@@ -417,12 +422,10 @@
              forControlEvents:UIControlEventTouchUpInside];
     }
     
-    
     addButton1.frame = CGRectMake(_backgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
-    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     [addButton1 setTag:1234];
     [_backgroundView addSubview:addButton1];
@@ -468,12 +471,18 @@
 
     }
     
+    if (![appDelegate.statusString isEqualToString:@"Approved"]) {
+        
+        addButton1.userInteractionEnabled = NO;
+    }else{
+        addButton1.userInteractionEnabled = YES;
+    }
+    
     addButton1.frame = CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
     addButton1 .contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addButton1.titleLabel setFont:[GISFonts small]];
     [addButton1 setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
     [addButton1 setTag:1236];
-    [addButton1 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_ServicebackgroundView addSubview:addButton1];
     
     labelEventName = [[GISEventLabel alloc] initWithFrame:CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width, 10.0, 160.0, 27.0)];

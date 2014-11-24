@@ -407,6 +407,8 @@
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     GISJobDetailsCell *jobDetailsCell=(GISJobDetailsCell *)[GISUtility findParentTableViewCell:button];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
     if([sender tag]==111)
     {
         btnTag=111;
@@ -436,11 +438,21 @@
     {
         btnTag=1212;
         tableViewController1.view_String=@"timesdates";
+        [formatter setDateFormat:@"hh:mm a"];
+        tableViewController1.dateTimeMoveUp_string=jobDetailsCell.startTime_EDIT_Label.text;
+        if (![jobDetailsCell.startTime_EDIT_Label.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if([sender tag]==1313)//Edit end time
     {
         btnTag=1313;
         tableViewController1.view_String=@"timesdates";
+        [formatter setDateFormat:@"hh:mm a"];
+        tableViewController1.dateTimeMoveUp_string=jobDetailsCell.endTime_EDIT_Label.text;
+        if (![jobDetailsCell.endTime_EDIT_Label.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if ([sender tag]==555)
     {
@@ -558,10 +570,31 @@
     else if (btnTag==1212)
     {
         startTime_temp_string=value_str;
+        
+        if ([startTime_temp_string length] && [endTime_temp_string length]){
+            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                startTime_temp_string=@"";
+            }
+        }
+
     }
     else if (btnTag==1313)
     {
         endTime_temp_string=value_str;
+        
+        if ([startTime_temp_string length] && [endTime_temp_string length]){
+            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                startTime_temp_string=@"";
+            }
+        }
     }
     else if (btnTag==555)
     {

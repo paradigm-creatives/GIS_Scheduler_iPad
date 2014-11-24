@@ -365,6 +365,7 @@
         [detailViewController.requested_Jobs_Array removeAllObjects];
         detailViewController.requested_Jobs_Array=SPJobsArray;
         detailViewController.view_string = kFindRequestJobs_Screen;
+        self.navigationItem.title = @"Back";
         [self.navigationController pushViewController:detailViewController animated:YES];
         /////////////////
         

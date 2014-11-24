@@ -25,6 +25,7 @@
 #import <AssetsLibrary/ALAsset.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "GISProperties.h"
 #import "GISJSONProperties.h"
 
 #define RECORDED_TYPE 9632
@@ -1566,6 +1567,9 @@
     if([_blackboard_accessStr length] == 0){
         _blackboard_accessStr = @"";
     }
+    if([newValueString length] == 0){
+        newValueString = @"";
+    }
     
     NSMutableDictionary *mainDict=[[NSMutableDictionary alloc]init];
     NSMutableArray *requestor_array=[[NSMutableArray alloc]init];
@@ -1606,6 +1610,7 @@
     [requestor_Dict setValue:[self returningstring:login_Obj.requestorID_string] forKey:kRequestorId];
     [requestor_Dict setValue:[self returningstring:login_Obj.token_string] forKey:kToken];
     [requestor_Dict setValue:[self returningstring:appDelegate.chooseRequest_ID_String ] forKey:kRequestNo];
+    [requestor_Dict setValue:newValueString forKey:kNewValue];
     
     [requestor_array addObject:requestor_Dict];
     [mainDict setObject:requestor_array forKey:kORequest];
@@ -1681,7 +1686,7 @@
 
 -(void)uploadDataToServer:(NSData *)data{
     
-    NSString *uploadUrl = [NSString stringWithFormat:@"http://125.62.193.235/GIS_Mobileapps/GisREST.svc/Upload"];
+    NSString *uploadUrl = [NSString stringWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_UPLOAD];
     
     NSMutableURLRequest *request= [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:uploadUrl]];
@@ -1707,9 +1712,14 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
     [responseData appendData:data];
-    NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"response string ---- %@",myString);
+    NSError* error;
+    NSArray* responseArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    NSDictionary *saveUpdateDict;
+    saveUpdateDict = [responseArray lastObject];
+    newValueString = [saveUpdateDict objectForKey:kNewValue];
+    if (error) NSLog(@"%@",error.localizedDescription);
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

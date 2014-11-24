@@ -111,6 +111,7 @@
 #define kStatusCode @"StatusCode"
 #define kStatus @"Status"
 #define kInComplete @"6"
+#define kNewValue @"NewValue"
 #pragma mark posting to Contacts and Billing End
 
 #pragma mark - BillingsData start

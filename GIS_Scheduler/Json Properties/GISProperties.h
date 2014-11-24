@@ -80,4 +80,6 @@
 #define GIS_JOB_ASSIGNMENT @"JobAssignment"
 #define GIS_FILTER_JOB_DETAILS @"FilterJobDetails"
 
+#define GIS_UPLOAD @"Upload"
+
 #endif

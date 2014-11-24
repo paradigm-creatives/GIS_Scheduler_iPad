@@ -38,6 +38,7 @@
     NSInteger responseCode;
     NSMutableData *responseData;
     NSString *unitString;
+    NSString *newValueString;
 
     
 }
