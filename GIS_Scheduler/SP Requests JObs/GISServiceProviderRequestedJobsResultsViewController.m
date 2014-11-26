@@ -354,6 +354,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(IBAction)pickerButtonPressed:(id)sender

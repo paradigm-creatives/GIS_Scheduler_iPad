@@ -225,6 +225,9 @@
         
         cell.payType_button.userInteractionEnabled = NO;
         cell.service_Provider_button.userInteractionEnabled = NO;
+        
+        [cell.payType_button setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.service_Provider_button setBackgroundColor:[UIColor lightGrayColor]];
     }
     
     return cell;
@@ -492,6 +495,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -703,6 +707,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 -(void)sendFilterMoreValues:(NSMutableDictionary *)dict
 {

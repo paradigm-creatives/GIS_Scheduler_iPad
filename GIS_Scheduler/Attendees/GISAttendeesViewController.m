@@ -543,6 +543,9 @@ int row_count = 2;
     appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
     
+    isCompleteRequest = chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+    inCompleteTab_string = chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
+    
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
 
     @try {
@@ -624,6 +627,7 @@ int row_count = 2;
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -661,6 +665,7 @@ int row_count = 2;
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)add_AttendeeListObj_ForStoring_Data
@@ -690,7 +695,7 @@ int row_count = 2;
     id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
     GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
     if (attendeeCellHere.cellSectionNumber == 1){
-        if (attendeeCellHere.cellRowNumber==1&&textField.tag==111&&textField.tag==222) {
+        if (attendeeCellHere.cellRowNumber==1&&textField.tag==111) {
             [GISUtility moveemailView:YES viewHeight:0 view:self.view];
         }
         else{
@@ -958,6 +963,7 @@ int row_count = 2;
     [self removeLoadingView];
     appDelegate.isFromAttendees = NO;
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

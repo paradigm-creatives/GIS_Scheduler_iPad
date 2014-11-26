@@ -975,7 +975,7 @@
             UIButton *documentbtn=(UIButton *)[self.view viewWithTag:44];
             
             
-            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0 || [_outsideAgencyStr length] == 0 ||([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([webSiteField.text length] == 0 &&websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]) || [_re_broadcastStr length] == 0 || (documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]&& [documnet_selected_label.text length]==0))
+            if([eventNameTextField.text length] == 0 || [descriptionTextView.text length] == 0 || [_open_toPublicStr length] == 0 || [_dressCode_Id_string length] == 0 || [_eventTypeId_string length] == 0 || [_re_broadcastStr length] == 0  ||([blackBoardTextField.text length] == 0 && blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([webSiteField.text length] == 0 &&websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])|| ([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]) || [_re_broadcastStr length] == 0 || (documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]&& [documnet_selected_label.text length]==0))
             {
                 if([_fields length]>0)
                     [_fields setString:@""];
@@ -1011,6 +1011,16 @@
                 [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
                 return;
             }
+            
+            if([_outsideAgencyStr length] == 0){
+                if([unitString isEqualToString:@"gallaudet.edu"])
+                    [_fields setString:@"Outside Agency"];
+                
+                [self removeLoadingView];
+                [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
+                return;
+            }
+            
             if(blackBoardAccessbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]||websitebtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]|| othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"] || documentbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"]){
                 
                 [self saveMaterialRequest];
@@ -1203,6 +1213,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -1240,6 +1251,8 @@
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
+    NSDictionary *dict=[notification userInfo];
+    
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     
@@ -1247,6 +1260,11 @@
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict setObject:unitObj1.token_string forKey:kToken];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
     
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
@@ -1283,6 +1301,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -1641,6 +1660,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

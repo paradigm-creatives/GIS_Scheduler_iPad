@@ -647,6 +647,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

@@ -92,6 +92,9 @@
     _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     _password_textfield.text=@"Ecentric@5";
     
+    _userName_textfield.text=@"dean@gmail.com";
+    _password_textfield.text=@"admin";
+    
 }
 
 -(void)addRightView:(UITextField *) textField{
@@ -282,7 +285,8 @@
                     
                     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
                 }
-
+                UINavigationController *detaiViewController = (UINavigationController*)appDelegate.spiltViewController.viewControllers[1];
+                [detaiViewController popToRootViewControllerAnimated:YES];
                 
                 [self.view.window setRootViewController:appDelegate.spiltViewController];
                 
@@ -290,8 +294,12 @@
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"400"]) {
                 [self removeLoadingView];
                 [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:NSLocalizedStringFromTable(@"login_requestFail",TABLE, nil)] ofType:PC_LOG_INFO];
-                UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis_title", TABLE, nil)  message:NSLocalizedStringFromTable(@"enter_valid_username_password", TABLE, nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"alert_ok", TABLE, nil) otherButtonTitles:Nil, nil];
+                UIAlertView *email_alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis_title", TABLE, nil)  message:NSLocalizedStringFromTable(@"login_requestFail", TABLE, nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"alert_ok", TABLE, nil) otherButtonTitles:Nil, nil];
                 [email_alert show];
+                
+                [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kEmail];
+                [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kPassword];
+                
                 return;
             }
         }
@@ -552,7 +560,10 @@
 /** The folowing method calls when the login success, we are calling the Drop Drowns data, this is the failure response */
 -(void)failuremethod_dropDown:(GISJsonRequest *)response
 {
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     NSLog(@"Failure");
+    
 }
 
 -(void)successmethod_dropDown_schedulers:(GISJsonRequest *)response
@@ -590,6 +601,8 @@
 -(void)failuremethod_dropDown_schedulers:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)successmethod_getRequestDetails:(GISJsonRequest *)response
@@ -627,6 +640,8 @@
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
@@ -647,7 +662,8 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    //UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation == UIDeviceOrientationLandscapeLeft){
         [self moveAction:YES viewHeight:120];
     }else  if(orientation == UIDeviceOrientationLandscapeRight){
@@ -773,6 +789,8 @@
 -(void)failuremethod_service_Providers:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)successmethod_ViewSchedule_service_Providers:(GISJsonRequest *)response{
@@ -807,6 +825,8 @@
 -(void)failuremethod_ViewSchedule_service_Providers:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -849,8 +869,9 @@
 -(void)failuremethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
-
 
 - (void)didReceiveMemoryWarning
 {

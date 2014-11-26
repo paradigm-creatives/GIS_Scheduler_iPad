@@ -951,6 +951,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)successmethod_get_Date_Time:(GISJsonRequest *)response
@@ -991,7 +992,7 @@
     }
     else if(responseArray.count<1)
     {
-        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+        //[GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
     }
     else{
         
@@ -1244,6 +1245,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(IBAction)saveButtonPressed:(id)sender
@@ -1470,6 +1472,7 @@
     createJobs_UIVIew.hidden=YES;
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 

@@ -119,13 +119,13 @@
     
     if ([sender tag]==666 || [sender tag]==777) {
         if ([sender tag]==666) {
-            typeOfAct_string=@"1";
+            typeOfAct_string=@"2";
             [internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
-            typeOfAct_string=@"0";
+            typeOfAct_string=@"1";
             [external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
             [internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }

@@ -216,6 +216,7 @@
             cell.address2_ans_label.text = billingdataObj.buh_address2_String;
             cell.zip_ans_label.text = billingdataObj.buh_zip_String;
             cell.city_ans_label.text = billingdataObj.buh_city_String;
+            cell.state_ans_label.text = billingdataObj.buh_state_String;
             cell.requestor_ans_label.text = appDelegate.createdByString;
         }
         
@@ -747,6 +748,7 @@
 {
     [GISUtility showAlertWithTitle:@"" andMessage:@"Error with Request Submit"];
     NSLog(@"Failure");
+    [self removeLoadingView];
 }
 
 -(void)successmethod_getRequestEventDetails:(GISJsonRequest *)response
@@ -779,6 +781,9 @@
 -(void)failuremethod_getRequestEventDetails:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)checkMark_buttonClicked
@@ -869,6 +874,7 @@
 {
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     NSLog(@"Failure");
+    [self removeLoadingView];
 }
 
 - (IBAction)showPopoverDetails:(id)sender{
@@ -925,9 +931,7 @@
 }
 
 -(void)successmethod_submitVieweditRequest:(GISJsonRequest *)response
-{
-    UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
-    
+{    
     NSDictionary *saveUpdateDict;
     
     NSArray *responseArray= response.responseJson;
@@ -946,6 +950,7 @@
     UIButton *nextBtn=(UIButton *)[self.view viewWithTag:5588];
     [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Error with Request %@",nextBtn.titleLabel.text]];
     NSLog(@"Failure");
+    [self removeLoadingView];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

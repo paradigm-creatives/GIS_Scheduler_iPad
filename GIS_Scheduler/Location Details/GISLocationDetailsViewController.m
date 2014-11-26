@@ -466,6 +466,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 - (IBAction)tickBtnTap:(id)sender
@@ -1015,6 +1016,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void) getLocationDetails{
@@ -1140,6 +1142,7 @@
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
+    NSDictionary *dict=[notification userInfo];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
@@ -1147,6 +1150,11 @@
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
     [paramsDict setObject:unitObj1.token_string forKey:kToken];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
     
     [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
     
@@ -1175,6 +1183,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

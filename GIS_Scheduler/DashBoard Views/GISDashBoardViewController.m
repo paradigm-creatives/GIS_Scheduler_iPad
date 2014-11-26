@@ -357,6 +357,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(!tableHeader3_UIView.isHidden){
+        GISSchedulerSPJobsObject *spJob_object;
+        if([SPJobsArray count] == 1){
+            spJob_object = [SPJobsArray lastObject];
+            if([spJob_object.JobID_String length] == 0)
+                return 0;
+            else
+                [SPJobsArray count];
+        }
         return [SPJobsArray count];
     }
     else if(!tableHeader1_UIView.isHidden){
@@ -607,11 +615,20 @@
             
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
+                GISSchedulerSPJobsObject *spJob_object;
                 [[GISStoreManager sharedManager] removeRequestJobs_SPJobsObject];
                 spJobsStore=[[GISSchedulerSPJobsStore alloc]initWithJsonDictionary:response.responseJson];
                 SPJobsArray=[[GISStoreManager sharedManager] getRequestJobs_SPJobsObject];
-                [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
-
+                if([SPJobsArray count] == 1){
+                    spJob_object = [SPJobsArray lastObject];
+                    
+                    if([spJob_object.JobID_String length] > 1){
+                      [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
+                    }
+                }else if([SPJobsArray count] > 1){
+                    [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
+                }
+                
                 [listTableView reloadData];
                 
                 //[self removeLoadingView];
@@ -652,6 +669,11 @@
 -(void)failuremethod_Requestjobs:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    
+    if(self.refreshControl)
+        [self.refreshControl endRefreshing];
 }
 
 -(void)successmethod_NewModifiedRequests:(GISJsonRequest *)response
@@ -705,28 +727,34 @@
             [self removeLoadingView];
         }
         
-        if (self.refreshControl) {
-            
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"MMM d, h:mm a"];
-            NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-            NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
-            NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-            self.refreshControl.attributedTitle = attributedTitle;
-            
-            [self.refreshControl endRefreshing];
-        }
-
     }
     @catch (NSException *exception)
     {
         [self removeLoadingView];
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Request JObs action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
     }
+    
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
 }
 -(void)failuremethod_NewModifiedRequests:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    
+    if (self.refreshControl) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 -(void)successmethod_PatTypedata:(GISJsonRequest *)response
@@ -774,6 +802,8 @@
 -(void)failuremethod_PatTypedata:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -979,6 +1009,8 @@
 -(void)failuremethod_SaveSPRequests:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 - (IBAction)getRequestdataInfo:(id)sender{
@@ -1016,13 +1048,13 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
     
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
-    [paramsDict setObject:login_Obj.token_string forKey:@"token"];
-    [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
-    
     if(!tableHeader2_UIView.isHidden || !tableHeader1_UIView.isHidden){
         
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+        [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+        [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
+
         NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
         [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
         [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
@@ -1083,6 +1115,8 @@
 -(void)failuremethod_chooseRequest:(GISJsonRequest *)response
 {
     NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 

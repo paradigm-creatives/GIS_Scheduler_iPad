@@ -379,8 +379,10 @@
     if (![appDelegate.statusString isEqualToString:@"Approved"]) {
         
         addButton1.userInteractionEnabled = NO;
+        [addButton1 setBackgroundColor:[UIColor lightGrayColor]];
     }else{
         addButton1.userInteractionEnabled = YES;
+        [addButton1 setBackgroundColor:[UIColor clearColor]];
     }
     [_payTypeBackgroundView addSubview:addButton1];
     
@@ -474,8 +476,10 @@
     if (![appDelegate.statusString isEqualToString:@"Approved"]) {
         
         addButton1.userInteractionEnabled = NO;
+        [addButton1 setBackgroundColor:[UIColor lightGrayColor]];
     }else{
         addButton1.userInteractionEnabled = YES;
+        [addButton1 setBackgroundColor:[UIColor clearColor]];
     }
     
     addButton1.frame = CGRectMake(_ServicebackgroundView.frame.size.width/2-addButton1.frame.size.width+25, 10.0, 130.0, 27.0);
@@ -579,6 +583,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

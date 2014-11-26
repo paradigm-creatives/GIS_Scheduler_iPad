@@ -169,6 +169,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
@@ -204,6 +205,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
@@ -394,6 +396,8 @@
     if (![appDelegate.statusString isEqualToString:@"Approved"]) {
         cell.serviceProvider_UIView.userInteractionEnabled=NO;
         cell.payType_UIView.userInteractionEnabled=NO;
+        [cell.serviceProvider_Button setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.payType_Button setBackgroundColor:[UIColor lightGrayColor]];
     }
     return cell;
 }
@@ -835,6 +839,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)successmethod_AddNewJob_data:(GISJsonRequest *)response
@@ -848,6 +853,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)hideKeyBoard
@@ -1024,8 +1030,8 @@
     createJobs_UIVIew.hidden=YES;
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
-
 
 -(void)check_uncheck_createjobsButtonPresses:(id)sender
 {

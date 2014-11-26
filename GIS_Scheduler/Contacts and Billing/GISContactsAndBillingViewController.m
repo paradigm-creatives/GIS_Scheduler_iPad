@@ -203,7 +203,11 @@
 //    [paramsDict setObject:login_Obj.token_string forKey:kToken];
 //    [[GISServerManager sharedManager] getContactsData:self withParams:paramsDict finishAction:@selector(successmethod_ContactsData:) failAction:@selector(failuremethod_ContactsData:)];
     
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kDropDownID];
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kDropDownValue];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -221,6 +225,7 @@
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+        
     }
     
 }
@@ -238,6 +243,11 @@
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
 }
 
 - (IBAction)chooseRequestDropDown:(id)sender{
@@ -310,6 +320,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)sendTheSelectedPopOverData:(NSString *)id_str  value:(NSString *)value_str
@@ -383,6 +394,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 
@@ -425,6 +437,8 @@
     saveUpdateDict = [responseArray lastObject];
     if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
         
+        [self removeLoadingView];
+        
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
         
     }else{
@@ -437,6 +451,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)loadTableWithBuildingdata:(id)sender
@@ -462,6 +477,8 @@
 
 - (IBAction)nextButtonPressed:(id)sender
 {
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
 
     contactBilling_Object.chooseRequest_ID_String=[GISUtility returningstring:appDelegate.chooseRequest_ID_String];
     
@@ -476,7 +493,11 @@
         
         if (appDelegate.isNewRequest)
         {
-            [paramsDict setObject:@"0" forKey:@"requestNo"];
+            NSString *requestNo = [userDefaults valueForKey:kDropDownValue];
+            if([requestNo length] > 0)
+                [paramsDict setObject:[userDefaults valueForKey:kDropDownID] forKey:@"requestNo"];
+            else
+                [paramsDict setObject:@"0" forKey:@"requestNo"];
         }
         else{
             [paramsDict setObject:contactBilling_Object.chooseRequest_ID_String forKey:@"requestNo"];
@@ -490,8 +511,6 @@
             [paramsDict setObject:contactBilling_Object.unitOrDepartment_ID_String forKey:kunitid];
         }
         
-        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-        [userDefaults synchronize];
         [userDefaults setValue:unit_departmentID_String forKey:kunitid];
         [userDefaults setValue:contactBilling_Object.chooseRequest_String forKey:kRequestNo];
         [paramsDict setObject:login_Obj.requestorID_string forKey:krequestorid];
@@ -638,6 +657,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

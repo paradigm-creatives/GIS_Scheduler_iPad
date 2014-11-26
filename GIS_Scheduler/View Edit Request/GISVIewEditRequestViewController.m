@@ -348,41 +348,6 @@
     [_popover presentPopoverFromRect:CGRectMake(btn.frame.origin.x+btn.frame.size.width-15, btn.frame.origin.y+15, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
-
-//-(void)successmethod_chooseRequest:(GISJsonRequest *)response
-//{
-//    NSLog(@"Success chooseRequest Details---%@",response.responseJson);
-//    
-//    id array=response.responseJson;
-//    NSDictionary *dictHere=[array lastObject];
-//    if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
-//        
-//        [self removeLoadingView];
-//        
-//        dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
-//        requestNumbers_mutArray=[[GISStoreManager sharedManager]getRequestNumbersObjects];
-//        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CHOOSE_REQUEST];
-//        for (int i=0; i<requestNumbers_mutArray.count; i++) {
-//            GISDropDownsObject *bObj=[requestNumbers_mutArray objectAtIndex:i];
-//            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-//            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-//            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-//            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-//        }
-//        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
-//        _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
-//        
-//    }else{
-//        
-//        [self removeLoadingView];
-//    }
-//}
-//
-//-(void)failuremethod_chooseRequest:(GISJsonRequest *)response
-//{
-//    NSLog(@"Failure");
-//}
-
 -(void)moveUp:(NSNotification *) notification{
     
     NSDictionary *infoDict=notification.userInfo;
@@ -535,6 +500,7 @@
 {
     [self removeLoadingView];
     NSLog(@"Failure");
+     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
