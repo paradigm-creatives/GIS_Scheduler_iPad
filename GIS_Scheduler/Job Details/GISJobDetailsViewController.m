@@ -417,6 +417,10 @@
     {
         btnTag=111;
         tableViewController1.view_String=@"datestimes";
+        tableViewController1.dateTimeMoveUp_string=jobDate_Answer_Label.text;
+        if (![jobDate_Answer_Label.text length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
     }
     else if([sender tag]==222)
     {
@@ -580,7 +584,7 @@
             {}
             else
             {
-                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Time alert", TABLE, nil)];
                 startTime_temp_string=@"";
             }
         }
@@ -595,7 +599,7 @@
             {}
             else
             {
-                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Time alert", TABLE, nil)];
                 startTime_temp_string=@"";
             }
         }

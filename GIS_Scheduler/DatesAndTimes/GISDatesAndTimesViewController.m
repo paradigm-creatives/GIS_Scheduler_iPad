@@ -486,24 +486,24 @@
         else if (btnTag==666)
         {
             startTime_temp_string=value_str;
-            if ([startTime_TextField.text length]&& [endTime_TextField.text length]) {
-                if([GISUtility timeComparision:startTime_TextField.text :endTime_TextField.text]){}
+            if ([startTime_temp_string length] && [endTime_temp_string length]) {
+                if([GISUtility timeComparision:startTime_temp_string :endTime_temp_string]){}
                 else
                 {
-                    startTime_TextField.text=@"";
-                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+                    startTime_temp_string=@"";
+                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Time alert", TABLE, nil)];
                 }
             }
         }
         else if (btnTag==777)
         {
             endTime_temp_string=value_str;
-            if ([startTime_TextField.text length]&& [endTime_TextField.text length]) {
-                if([GISUtility timeComparision:startTime_TextField.text :endTime_TextField.text]){}
+            if ([startTime_temp_string length]&& [endTime_temp_string length]) {
+                if([GISUtility timeComparision:startTime_temp_string :endTime_temp_string]){}
                 else
                 {
-                    endTime_TextField.text=@"";
-                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"time alert", TABLE, nil)];
+                    endTime_temp_string=@"";
+                    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Time alert", TABLE, nil)];
                 }
             }
         }
@@ -1505,8 +1505,10 @@
 -(IBAction)nextButtonPressed:(id)sender
 {
     appDelegate.isFromContacts = YES;
-    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
-    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+    
+    [self performSelector:@selector(createDateTimeButtonPressed:) withObject:nil];
+    //    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
+//    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
 }
 
 

@@ -177,6 +177,8 @@
 "jobs found"= "Jobs Found";
 "start Date alert"= "Start Date should be less than end Date";
 "end Date alert" = "End Date should be more than start Date";
+"start Time alert"= "Start Time should be less than end Time";
+"end Time alert" = "End Time should be more than start Time";
 "time alert"="Please select between time";
 "loading" = "loading";
 "number_of_service_providers" = "Please enter number of service providers";

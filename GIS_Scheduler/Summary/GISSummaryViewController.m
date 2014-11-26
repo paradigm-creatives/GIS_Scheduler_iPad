@@ -740,6 +740,7 @@
     }
     if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
         
+        [self removeLoadingView];
         [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit failed"];
     }
 }

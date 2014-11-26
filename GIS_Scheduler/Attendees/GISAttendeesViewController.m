@@ -76,15 +76,6 @@ int row_count = 2;
     NSString *loginStr = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
     login_Obj=[login_array lastObject];
-    
-    GISBilingDataObject *billingDataObj;
-    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
-    billingDataObj=[billingArray lastObject];
-    
-    NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
-    if(newRange.location != NSNotFound) {
-        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
-    }
 
 }
 
@@ -119,6 +110,15 @@ int row_count = 2;
     if(appDelegate.isFromContacts){
         attendeesObject.choose_request_String=[userDefaults valueForKey:kDropDownValue];
         
+    }
+    
+    GISBilingDataObject *billingDataObj;
+    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
+    billingDataObj=[billingArray lastObject];
+    
+    NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
+    if(newRange.location != NSNotFound) {
+        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
     }
 
 }
@@ -206,6 +206,14 @@ int row_count = 2;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GISBilingDataObject *billingDataObj;
+    NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
+    billingDataObj=[billingArray lastObject];
+    
+    NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
+    if(newRange.location != NSNotFound) {
+        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+    }
     if (indexPath.section==1) {
         GISAttendeesTopCell *cell=(GISAttendeesTopCell *)[tableView dequeueReusableCellWithIdentifier:@"AttendeesCell"];
         if (cell==nil) {

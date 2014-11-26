@@ -88,6 +88,7 @@
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [self getLocationDetails];
         
+        
     }
     
 }
@@ -1044,7 +1045,8 @@
                 }
             }
             
-            if([_generalLocationId_string length] == 0)
+            
+            if([_chooseRequestDetailsObj.generalLocation_String_chooseReqParsedDetails length] == 0)
                 _generalLocationId_string = @"";
             
             NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -1056,7 +1058,6 @@
             [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
             
             [[GISServerManager sharedManager] getLocation_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_getLocationRequestDetails:) failAction:@selector(failuremethod_getLocationRequestDetails:)];
-            
             
             
             for (GISDropDownsObject *dropDownObj in _closestMetroArray) {
@@ -1072,6 +1073,10 @@
                     _buildingname_Id_string = dropDownObj.id_String;
                 }
             }
+            
+            if([_chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails length] == 0)
+                _closestMetrodata = @"";
+
             
             _LocationName_string =[self returningstring:_chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails];
             _address1_string = [self returningstring:_chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails];

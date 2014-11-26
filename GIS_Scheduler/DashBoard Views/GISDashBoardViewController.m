@@ -515,6 +515,9 @@
 {
     if(!tableHeader1_UIView.isHidden || !tableHeader2_UIView.isHidden){
         
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+        NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        
         appDelegate.isShowfromDashboard = YES;
         
         [self performSelector:@selector(hideShowDashboard) withObject:nil];
@@ -523,6 +526,40 @@
         
         appDelegate.chooseRequest_Value_String = nmReqObj.RequestID_String;
         
+        
+        if ([nmReqObj.RequestStatus_String isEqualToString:@"SkyBlue"]) {
+            
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            
+            for (GISDropDownsObject *dropDownObj in requetDetails) {
+                if ([dropDownObj.value_String isEqualToString:nmReqObj.RequestID_String]) {
+                    
+                    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                    [dict setValue:dropDownObj.id_String forKey:@"id"];
+                    [dict setValue:dropDownObj.value_String forKey:@"value"];
+                    
+                    [paramsDict setObject:dropDownObj.id_String forKey:kDateTime_requestNo];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
+                }
+            }
+
+            
+            
+            [paramsDict setObject:unitObj1.token_string forKey:kToken];
+            
+            NSString *status_ID;
+            status_ID = @"2";
+            [paramsDict setObject:status_ID forKey:kstatusid];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            
+            [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
+            
+        }
+    
         [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
         
     }
@@ -1118,6 +1155,34 @@
     [self removeLoadingView];
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
+
+-(void)successmethod_saveUpdateRequest:(GISJsonRequest *)response
+{
+    //id json =response.responseJson;
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [self removeLoadingView];
+        
+    }
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:@"" andMessage:@"Request Submit failed"];
+    }
+}
+
+-(void)failuremethod_saveUpdateRequest:(GISJsonRequest *)response
+{
+    [GISUtility showAlertWithTitle:@"" andMessage:@"Error with Request Submit"];
+    NSLog(@"Failure");
+    [self removeLoadingView];
+}
+
 
 
 - (void)didReceiveMemoryWarning

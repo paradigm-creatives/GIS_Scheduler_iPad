@@ -175,6 +175,7 @@
 -(void)loginFailedWithNetworkError
 {
     //    [self showAlertWithTitle:@"Cellular Data is Turned Off" andMessage:@"Turn on cellular data or use Wi-Fi to access data."];
+    [self removeLoadingView];
     
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"network_connection",TABLE, nil)];
 }
