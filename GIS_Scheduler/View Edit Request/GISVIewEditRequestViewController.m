@@ -93,6 +93,8 @@
     
     if(appDelegate.isFromViewEditService){
         
+        self.navigationItem.title = @"View/Edit Schedule";
+        
         _currentController= serviceView;
 
         [_topView setHidden:YES];
@@ -179,8 +181,6 @@
                                                        nil] forState:UIControlStateSelected];
     
     
-    self.navigationItem.title = @"View/Edit Schedule";
-    
     self.requestID_Label.textColor=UIColorFromRGB(0x00457c);
     self.created_by_value_Label.textColor=UIColorFromRGB(0x00457c);
     self.created_date_value_Label.textColor=UIColorFromRGB(0x00457c);
@@ -216,7 +216,6 @@
                 
     }else{
         
-        self.title=@"View/Edit Service Request";
         if(appDelegate.isShowfromDashboard){
             
             NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];

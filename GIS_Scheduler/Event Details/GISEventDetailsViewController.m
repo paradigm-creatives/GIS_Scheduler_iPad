@@ -1012,10 +1012,9 @@
                 return;
             }
             
-            if([_outsideAgencyStr length] == 0){
-                if([unitString isEqualToString:@"gallaudet.edu"])
-                    [_fields setString:@"Outside Agency"];
+            if([unitString isEqualToString:@"gallaudet.edu"] && [_outsideAgencyStr length] == 0){
                 
+                [_fields setString:@"Outside Agency"];
                 [self removeLoadingView];
                 [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"enter_valid_details",TABLE, nil),_fields]];
                 return;

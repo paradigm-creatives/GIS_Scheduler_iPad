@@ -662,6 +662,10 @@
             {
                 [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)];
                 return;
+            }else{
+                
+                NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
             }
             //[self pushToDatesAndTimes_DetailView];
         }
@@ -1506,9 +1510,17 @@
 {
     appDelegate.isFromContacts = YES;
     
-    [self performSelector:@selector(createDateTimeButtonPressed:) withObject:nil];
-    //    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
-//    [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+     if([detail_mut_array count] > 0){
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        
+     }else{
+    
+         [self performSelector:@selector(createDateTimeButtonPressed:) withObject:nil];
+         
+     }
+    
 }
 
 

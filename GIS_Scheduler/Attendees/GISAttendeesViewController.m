@@ -703,7 +703,7 @@ int row_count = 2;
     id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
     GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
     if (attendeeCellHere.cellSectionNumber == 1){
-        if (attendeeCellHere.cellRowNumber==1&&textField.tag==111) {
+        if (attendeeCellHere.cellRowNumber==1&&textField.tag==222) {
             [GISUtility moveemailView:YES viewHeight:0 view:self.view];
         }
         else{

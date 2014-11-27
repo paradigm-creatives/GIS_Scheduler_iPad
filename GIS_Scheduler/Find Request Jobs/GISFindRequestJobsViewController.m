@@ -838,6 +838,7 @@
 -(IBAction)clear_ButtonPressed:(id)sender
 {
     findReqObj=[[GISFindRequestJobsObject alloc]init];
+    findReqObj.weekDays_dictionary=[[NSMutableDictionary alloc]init];
     [findReqJobs_tableView reloadData];
 }
 

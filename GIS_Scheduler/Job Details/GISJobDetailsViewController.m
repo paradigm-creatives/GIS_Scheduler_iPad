@@ -393,11 +393,19 @@
     
     [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    
     if (![appDelegate.statusString isEqualToString:@"Approved"]) {
         cell.serviceProvider_UIView.userInteractionEnabled=NO;
         cell.payType_UIView.userInteractionEnabled=NO;
         [cell.serviceProvider_Button setBackgroundColor:[UIColor lightGrayColor]];
         [cell.payType_Button setBackgroundColor:[UIColor lightGrayColor]];
+    }else{
+        
+        cell.serviceProvider_UIView.userInteractionEnabled=YES;
+        cell.payType_UIView.userInteractionEnabled=YES;
+        [cell.serviceProvider_Button setBackgroundColor:[UIColor clearColor]];
+        [cell.payType_Button setBackgroundColor:[UIColor clearColor]];
     }
     return cell;
 }

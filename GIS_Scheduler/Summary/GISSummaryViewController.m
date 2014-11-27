@@ -29,6 +29,9 @@
 #import "GISJobDetailsCell.h"
 #import "GISSummaryJobDetailsCell.h"
 #import "GISLoadingView.h"
+#import "GISAttendeesDetailsStore.h"
+#import "GISDatesTimesDetailStore.h"
+#import "GISJobDetailsStore.h"
 
 @interface GISSummaryViewController ()
 
@@ -80,7 +83,7 @@
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Submit to GIS Admin Approval", nil];
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -88,6 +91,8 @@
     [super viewWillAppear: animated];
         
     //[_summary_tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
     NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
     if (chooseReqDetailedArray.count>0) {
@@ -106,10 +111,20 @@
             [appDelegate.jobDetailsArray removeAllObjects];
         
         row_value = 0;
+        
+    }else{
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+        [paramsDict setObject:loginObJ.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+
     }
     
     row_value = 1;
+    
     [_summary_tableView reloadData];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -412,17 +427,22 @@
             cell.requestor_label.text = @"Store Location :";
             cell.unitacNumber_label.text = @"General Location :";
             cell.firstName_label.text = @"Address1 :";
-            cell.lastName_label.text = @"City :";
-            cell.email_label.text = @"State :";
+            cell.lastName_label.text = @"Address2 :";
+            cell.email_label.text = @"City :";
             cell.address1_label.text = @"Zip :";
+            cell.zip_label.text = @"State :";
+            cell.address2_label.text = @"Closest Metro :";
+            
             
             if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
                 cell.requestor_ans_label.text = _chooseRequestDetailsObj.offCamp_LocationName_String_chooseReqParsedDetails;
                 cell.unitacNumber_ans_label.text = _generalLocationValue_string;
                 cell.firstName_ans_label.text = _chooseRequestDetailsObj.offCamp_address1_String_chooseReqParsedDetails;
-                cell.lastName_ans_label.text = _chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails;
-                cell.email_ans_label.text = _chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails;
+                cell.lastName_ans_label.text = _chooseRequestDetailsObj.offCamp_address2_String_chooseReqParsedDetails;
+                cell.email_ans_label.text = _chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails;
                 cell.address1_ans_label.text = _chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails;
+                cell.zip_ans_label.text = _chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails;
+                 cell.address2_ans_label.text = _chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails;
             }
             
             cell.address2_label.hidden = NO;
@@ -857,6 +877,7 @@
     saveUpdateDict = [responseArray lastObject];
     
     if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
         [[GISStoreManager sharedManager] removeChooseRequestDetailsObjects];
         _chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
         [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
@@ -865,8 +886,16 @@
         appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,_chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
         appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
         
-        [_summary_tableView reloadData];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+        
+        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+        [paramsDicts setObject:_chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails forKey:kID];
+        [paramsDicts setObject:loginObJ.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDicts finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
+
     }else{
+        
+        [self removeLoadingView];
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     }
 }
@@ -876,6 +905,46 @@
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
     NSLog(@"Failure");
     [self removeLoadingView];
+}
+
+-(void)successmethod_BillingsData:(GISJsonRequest *)response
+{
+    NSLog(@"Success---%@----",response.responseJson);
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+        
+    }else{
+        
+        [self loadTableWithBuildingdata:response.responseJson];
+    }
+}
+
+-(void)failuremethod_BillingsData:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+}
+
+-(void)loadTableWithBuildingdata:(id)sender
+{
+    [[GISStoreManager sharedManager]removeBillingDataObjects];
+    GISBilingDataObject *billingDataObj=[[GISBilingDataObject alloc]initWithStoreBillingDataDictionary:sender];
+    [[GISStoreManager sharedManager]addBillingDataObject:billingDataObj];
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    
+    [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+    [paramsDict setObject:loginObJ.token_string forKey:kToken];
+    
+    [[GISServerManager sharedManager] getAttendees_Details_Data:self withParams:paramsDict finishAction:@selector(successmethod_get_Attendees_Details:) failAction:@selector(failuremethod_get_Attendees_Details:)];
+    
 }
 
 - (IBAction)showPopoverDetails:(id)sender{
@@ -952,6 +1021,157 @@
     [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Error with Request %@",nextBtn.titleLabel.text]];
     NSLog(@"Failure");
     [self removeLoadingView];
+}
+
+-(void)selectedChooseRequestNumber:(NSNotification*)notification
+{
+    NSDictionary *dict=[notification userInfo];
+
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+    [paramsDict setObject:loginObJ.token_string forKey:kToken];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults synchronize];
+    [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
+    [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
+    
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    
+    [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+    
+}
+
+-(void)successmethod_get_Attendees_Details:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    GISAttendeesDetailsStore *store;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        NSLog(@"successmethod_get_Attendees_Details Success---%@",response.responseJson);
+        [[GISStoreManager sharedManager]removeAttendees_Details_Objects];
+        store =[[GISAttendeesDetailsStore alloc]initWithStoreDictionary:response.responseJson];
+        NSArray *attendeesList_mutArray= [[GISStoreManager sharedManager]getAttendees_Details_Objects];
+        
+        if([appDelegate.attendeesArray count]>0)
+            [appDelegate.attendeesArray removeAllObjects];
+        [appDelegate.attendeesArray addObjectsFromArray:attendeesList_mutArray];
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:[userDefaults valueForKey:kDropDownID] forKey:kID];
+        [paramsDict setObject:loginObJ.token_string forKey:kToken];
+        
+        [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+
+}
+-(void)failuremethod_get_Attendees_Details:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+}
+
+-(void)successmethod_get_Date_Time:(GISJsonRequest *)response
+{
+    NSLog(@"successmethod_get_Date_Time Success---%@",response.responseJson);
+    
+    NSDictionary *saveUpdateDict;
+    GISDatesTimesDetailStore *store;
+
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
+        store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
+        NSArray *detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
+    
+        if([appDelegate.datesArray count]>0)
+            [appDelegate.datesArray removeAllObjects];
+        [appDelegate.datesArray addObjectsFromArray:detail_mut_array];
+        
+        GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
+        [appDelegate.datesArray insertObject:dobj atIndex:0];
+        
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:KRequestId];
+        [paramsDict setObject:loginObJ.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+    }
+    else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+}
+
+
+-(void)failuremethod_get_Date_Time:(GISJsonRequest *)response
+{
+    NSLog(@"Failure");
+    [self removeLoadingView];
+    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    
+}
+
+-(void)successmethod_getJobDetails_data:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    NSMutableArray *jobDetails_Array = [[NSMutableArray alloc] init];
+    
+    if([responseArray count]>0){
+        saveUpdateDict = [responseArray lastObject];
+        
+        if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+            
+            NSLog(@"successmethod_getJobDetails_data Success---%@",response.responseJson);
+            [[GISStoreManager sharedManager]removeJobDetailsObjects];
+            GISJobDetailsStore *jobDetailsStore;
+            jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
+           [jobDetails_Array addObjectsFromArray:[[GISStoreManager sharedManager]getJobDetailsObjects]];
+            
+            if([appDelegate.jobDetailsArray count]>0)
+                [appDelegate.jobDetailsArray removeAllObjects];
+            
+            [appDelegate.jobDetailsArray addObjectsFromArray:jobDetails_Array];
+            
+            GISJobDetailsObject *dobj=[[GISJobDetailsObject alloc]init];
+            [appDelegate.jobDetailsArray insertObject:dobj atIndex:0];
+            
+            [self removeLoadingView];
+            [_summary_tableView reloadData];
+            
+        }
+        else{
+            
+            [self removeLoadingView];
+            [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+        }
+    }else{
+        [self removeLoadingView];
+        [_summary_tableView reloadData];
+    }
+}
+
+-(void)failuremethod_getJobDetails_data:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
