@@ -30,6 +30,8 @@
 
 @implementation GISDatesAndTimesViewController
 
+@synthesize createDateTimes_mutArray,detail_mut_array;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -411,7 +413,7 @@
     {
         startDate_TextField.text=value_str;
         if ([startDate_TextField.text length] && [endDate_TextField.text length]){
-            if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text:YES])
+            if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text :YES])
             {}
             else
             {
@@ -424,7 +426,7 @@
     {
         endDate_TextField.text=value_str;
         if ([startDate_TextField.text length] && [endDate_TextField.text length]){
-            if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text:NO])
+            if ([GISUtility dateComparision:startDate_TextField.text :endDate_TextField.text :NO])
             { }
             else
             {
@@ -781,7 +783,7 @@
             NSString *dayString= [dateFormatter stringFromDate:visitDate];
             
             NSLog(@"d*********************   DayString----%@", dayString);
-            BOOL isFound;
+            //BOOL isFound;
             for (int i=1; i<=7; i++)
             {
                 if ([weekDays_dictionary_here objectForKey:[NSString stringWithFormat:@"%d",i]])
@@ -1089,9 +1091,9 @@
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    //GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=555;
-    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"datestimes" :tempObj.date_String :tempCell.date_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"datestimes" :date_temp_string :tempCell.date_edit_button_detailView.frame :btnTag];
     [popOver_temp presentPopoverFromRect:CGRectMake(100,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
@@ -1100,9 +1102,9 @@
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    //GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=666;
-    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :tempObj.startTime_String :tempCell.startTime_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp= [self showPopOver:tempCell:@"timesdates" :startTime_temp_string :tempCell.startTime_edit_button_detailView.frame :btnTag];
     
     [popOver_temp presentPopoverFromRect:CGRectMake(200,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
@@ -1113,13 +1115,13 @@
     UIButton *button=(UIButton *)sender;
     id tempCellRef=(GISDatesTimesDetailCell *)[GISUtility findParentTableViewCell:button];//button.superview.superview.superview.superview;
     GISDatesTimesDetailCell *tempCell=(GISDatesTimesDetailCell *)tempCellRef;
-    GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
+    //GISDatesAndTimesObject *tempObj= [detail_mut_array objectAtIndex:[sender tag]];
     btnTag=777;
-    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :tempObj.endTime_String :tempCell.endTime_edit_button_detailView.frame :btnTag];
+    UIPopoverController *popOver_temp=[self showPopOver:tempCell:@"timesdates" :endTime_temp_string :tempCell.endTime_edit_button_detailView.frame :btnTag];
     [popOver_temp presentPopoverFromRect:CGRectMake(315,308, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
--(UIPopoverController *)showPopOver:(GISDatesTimesDetailCell *)cell:(NSString *)view_str:(NSString *)moveUp_str:(CGRect)frameTemp:(int)tag
+-(UIPopoverController *)showPopOver:(GISDatesTimesDetailCell *)cell :(NSString *)view_str :(NSString *)moveUp_str :(CGRect)frameTemp :(int)tag
 {
     tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;

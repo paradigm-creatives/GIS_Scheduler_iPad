@@ -29,8 +29,11 @@
 @property (strong, nonatomic) NSString *buildingNameString;
 @property (strong, nonatomic) NSArray *buildingNameArray;
 @property (strong, nonatomic) NSArray *generalLocationArray;
+@property (strong, nonatomic) NSArray *closestMetroArray;
 @property (strong, nonatomic) NSString *generalLocationId_string;
 @property (strong, nonatomic) NSString *generalLocationValue_string;
+@property (strong, nonatomic) NSString *closestMetroId_string;
+@property (strong, nonatomic) NSString *closestMetroValue_string;
 
 @property (strong, nonatomic) NSArray *eventTypeArray;
 @property (strong, nonatomic) NSArray *dresscodeArray;

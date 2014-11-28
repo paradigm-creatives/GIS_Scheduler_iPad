@@ -10,7 +10,7 @@
 
 @protocol ListOfServiceProvidersProtocol <NSObject>
 
--(void)sendServiceProviderName:(NSString *)name_str:(NSString*)id_str;
+-(void)sendServiceProviderName:(NSString *)name_str :(NSString*)id_str;
 
 @end
 @interface GISServiceProviderPopUpViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>

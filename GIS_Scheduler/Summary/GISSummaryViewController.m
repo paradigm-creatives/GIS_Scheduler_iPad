@@ -67,18 +67,17 @@
         }
     }
 
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     loginObJ=[requetId_array lastObject];
-    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    if ([_choose_req_Id_string length]==0) {
-        _choose_req_Id_string=@"";
-    }
-    [paramsDict setObject:_choose_req_Id_string forKey:kID];
-    [paramsDict setObject:loginObJ.token_string forKey:kToken];
-    
-    [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestEventDetails:) failAction:@selector(failuremethod_getRequestEventDetails:)];
+//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+//    if ([_choose_req_Id_string length]==0) {
+//        _choose_req_Id_string=@"";
+//    }
+//    [paramsDict setObject:_choose_req_Id_string forKey:kID];
+//    [paramsDict setObject:loginObJ.token_string forKey:kToken];
+//    
+//    [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestEventDetails:) failAction:@selector(failuremethod_getRequestEventDetails:)];
     
     serviceRequestData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
@@ -99,7 +98,16 @@
         _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
     }
     
-    if([appDelegate.chooseRequest_ID_String length] == 0 || [appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+        [paramsDict setObject:loginObJ.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+
+    }else{
         
         if([appDelegate.datesArray count]>0)
             [appDelegate.datesArray removeAllObjects];
@@ -111,14 +119,6 @@
             [appDelegate.jobDetailsArray removeAllObjects];
         
         row_value = 0;
-        
-    }else{
-        
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
-        [paramsDict setObject:loginObJ.token_string forKey:kToken];
-        [[GISServerManager sharedManager] getEventDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
-
     }
     
     row_value = 1;
@@ -394,8 +394,16 @@
                 _generalLocationValue_string = dropDownObj.value_String;
             }
         }
-
         
+        NSString *closestMetro_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CLOSEST_METRO  ORDER BY ID DESC;"];
+        _closestMetroArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:closestMetro_statement];
+        
+        for (GISDropDownsObject *dropDownObj in _closestMetroArray) {
+            if ([dropDownObj.id_String isEqualToString:_chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails]) {
+                _closestMetroId_string=dropDownObj.id_String;
+                _closestMetroValue_string = dropDownObj.value_String;
+            }
+        }
         
         cell.section_label.text =  NSLocalizedStringFromTable(@"location_Details", TABLE, nil);
         
@@ -442,7 +450,7 @@
                 cell.email_ans_label.text = _chooseRequestDetailsObj.offCamp_city_String_chooseReqParsedDetails;
                 cell.address1_ans_label.text = _chooseRequestDetailsObj.offCamp_zip_String_chooseReqParsedDetails;
                 cell.zip_ans_label.text = _chooseRequestDetailsObj.offCamp_state_String_chooseReqParsedDetails;
-                 cell.address2_ans_label.text = _chooseRequestDetailsObj.ClosestMetro_String_chooseReqParsedDetails;
+                 cell.address2_ans_label.text = _closestMetroValue_string;
             }
             
             cell.address2_label.hidden = NO;
@@ -1107,7 +1115,6 @@
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:KRequestId];
         [paramsDict setObject:loginObJ.token_string forKey:kToken];
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
     }
     else{
@@ -1171,7 +1178,6 @@
     [self removeLoadingView];
     NSLog(@"Failure");
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
@@ -1185,6 +1191,12 @@
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

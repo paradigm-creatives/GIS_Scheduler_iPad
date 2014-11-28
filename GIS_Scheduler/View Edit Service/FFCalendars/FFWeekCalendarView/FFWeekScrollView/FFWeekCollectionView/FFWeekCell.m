@@ -170,7 +170,12 @@
     {
         if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
             
-            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
+            int btnStartTime = [self getTimeformdate:btn.event.dateTimeBegin].intValue;
+            int btnEndTime = [self getTimeformdate:btn.event.dateTimeEnd].intValue;
+            int buttonStartTime = [self getTimeformdate:button.event.dateTimeBegin].intValue;
+            int buttonEndTime = [self getTimeformdate:button.event.dateTimeEnd].intValue;
+            
+            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]]) || (btnStartTime > buttonStartTime && btnEndTime < buttonEndTime)){
 
                 [btnArray addObject:btn];
                 

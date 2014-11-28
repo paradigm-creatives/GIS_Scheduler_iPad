@@ -156,7 +156,7 @@
 
 
 
-+(BOOL)dateComparision:(NSString *)startTime:(NSString *)endTime:(BOOL)isStartTimeComaprsion
++(BOOL)dateComparision:(NSString *)startTime :(NSString *)endTime :(BOOL)isStartTimeComaprsion
 {
     if (isStartTimeComaprsion) {
         if ([endTime compare:startTime] == NSOrderedDescending || [endTime compare:startTime]==NSOrderedSame)
@@ -175,7 +175,7 @@
     return NO;
 }
 
-+(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime
++(BOOL)timeComparision:(NSString *)startTime :(NSString *)endTime
 {
     NSDateFormatter *timeformatter=[[NSDateFormatter alloc]init];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];

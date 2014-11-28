@@ -378,184 +378,186 @@
     NSMutableArray *requestorTypeArray=[[GISStoreManager sharedManager] getRequestor_TypeObjects];
     NSMutableArray *payTypeArray=[[GISStoreManager sharedManager] getPayTypeObjects];
     NSMutableArray *typeOfServiceArray=[[GISStoreManager sharedManager] getTypeOfServiceObjects];
-
     
-    for (int i=0; i<requestorTypeArray.count; i++) {
-        GISDropDownsObject *bObj=[requestorTypeArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTOR_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
+    dispatch_queue_t requestQueue = dispatch_queue_create("dropDown Queue",NULL);
     
-    for (int i=0; i<createdByArray.count; i++) {
-        GISDropDownsObject *bObj=[createdByArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CREATED_BY(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    for (int i=0; i<mode_jobAsignmentArray.count; i++) {
-        GISDropDownsObject *bObj=[mode_jobAsignmentArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_JOBASSIGNMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<requestorsArray.count; i++) {
-        GISDropDownsObject *bObj=[requestorsArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTORS(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    for (int i=0; i<registeredConsumersArray.count; i++) {
-        GISDropDownsObject *bObj=[registeredConsumersArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REGISTERED_CONSUMERS(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<primaryAudienceArray.count; i++) {
-        GISDropDownsObject *bObj=[primaryAudienceArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PRIMARY_AUDIENCE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<serviceType_serviceProviderArray.count; i++) {
-        GISDropDownsObject *bObj=[serviceType_serviceProviderArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_TYPE_SERVICE_PROVIDER(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<skillLevel_Array.count; i++) {
-        GISDropDownsObject *bObj=[skillLevel_Array objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SKILL_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-
-    for (int i=0; i<payLevelArray.count; i++) {
-        GISDropDownsObject *bObj=[payLevelArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<buildingArray.count; i++) {
-        GISDropDownsObject *bObj=[buildingArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_BUILDING_NAME(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<locationCodesArray.count; i++) {
-        GISDropDownsObject *bObj=[locationCodesArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_GENERAL_LOCATION(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<eventTypesArray.count; i++) {
-        GISDropDownsObject *bObj=[eventTypesArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_EVENT_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<dressCodesArray.count; i++) {
-        GISDropDownsObject *bObj=[dressCodesArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_DRESS_CODE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<unitOrDepartmentArray.count; i++) {
-        GISDropDownsObject *bObj=[unitOrDepartmentArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_UNIT_DEPARTMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<closestMetroArray.count; i++) {
-        GISDropDownsObject *bObj=[closestMetroArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CLOSEST_METRO(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-
-    //
-    for (int i=0; i<modeOfCommunicationArray.count; i++) {
-        GISDropDownsObject *bObj=[modeOfCommunicationArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_OF_COMMUNICATION(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<serviceProvGenderPrefArray.count; i++) {
-        GISDropDownsObject *bObj=[serviceProvGenderPrefArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROV_GENDER_PREFERENCE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<serviceNeededArray.count; i++) {
-        GISDropDownsObject *bObj=[serviceNeededArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_NEEDED(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    GISDropDownsObject *tobj=[[GISDropDownsObject alloc]init];
-    tobj.id_String=@"1000";
-    tobj.value_String=@"Any";
-    tobj.type_String=@"Serviceprovider_Type";
-    [typeOfServiceArray addObject:tobj];
-    for (int i=0; i<payTypeArray.count; i++) {
-        GISDropDownsObject *bObj=[payTypeArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-    
-    for (int i=0; i<typeOfServiceArray.count; i++) {
-        GISDropDownsObject *bObj=[typeOfServiceArray objectAtIndex:i];
-        NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-        NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-        [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-    }
-
+    dispatch_async(requestQueue, ^{
         
-    ///
-//    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-//    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-//    GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
-//    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-//    [paramsDict setObject:unitObj1.requestorID_string forKey:kLocationrequestorid];
-//    [paramsDict setObject:unitObj1.token_string forKey:kToken];
-    
-    //[[GISServerManager sharedManager] getviewSchedule:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
-    
+        for (int i=0; i<requestorTypeArray.count; i++) {
+            GISDropDownsObject *bObj=[requestorTypeArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTOR_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<createdByArray.count; i++) {
+            GISDropDownsObject *bObj=[createdByArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CREATED_BY(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        for (int i=0; i<mode_jobAsignmentArray.count; i++) {
+            GISDropDownsObject *bObj=[mode_jobAsignmentArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_JOBASSIGNMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<requestorsArray.count; i++) {
+            GISDropDownsObject *bObj=[requestorsArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REQUESTORS(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        for (int i=0; i<registeredConsumersArray.count; i++) {
+            GISDropDownsObject *bObj=[registeredConsumersArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_REGISTERED_CONSUMERS(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<primaryAudienceArray.count; i++) {
+            GISDropDownsObject *bObj=[primaryAudienceArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PRIMARY_AUDIENCE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<serviceType_serviceProviderArray.count; i++) {
+            GISDropDownsObject *bObj=[serviceType_serviceProviderArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_TYPE_SERVICE_PROVIDER(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<skillLevel_Array.count; i++) {
+            GISDropDownsObject *bObj=[skillLevel_Array objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SKILL_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        
+        for (int i=0; i<payLevelArray.count; i++) {
+            GISDropDownsObject *bObj=[payLevelArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<buildingArray.count; i++) {
+            GISDropDownsObject *bObj=[buildingArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_BUILDING_NAME(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<locationCodesArray.count; i++) {
+            GISDropDownsObject *bObj=[locationCodesArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_GENERAL_LOCATION(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<eventTypesArray.count; i++) {
+            GISDropDownsObject *bObj=[eventTypesArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_EVENT_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<dressCodesArray.count; i++) {
+            GISDropDownsObject *bObj=[dressCodesArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_DRESS_CODE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<unitOrDepartmentArray.count; i++) {
+            GISDropDownsObject *bObj=[unitOrDepartmentArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_UNIT_DEPARTMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<closestMetroArray.count; i++) {
+            GISDropDownsObject *bObj=[closestMetroArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CLOSEST_METRO(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        //
+        for (int i=0; i<modeOfCommunicationArray.count; i++) {
+            GISDropDownsObject *bObj=[modeOfCommunicationArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_MODE_OF_COMMUNICATION(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<serviceProvGenderPrefArray.count; i++) {
+            GISDropDownsObject *bObj=[serviceProvGenderPrefArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_PROV_GENDER_PREFERENCE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<serviceNeededArray.count; i++) {
+            GISDropDownsObject *bObj=[serviceNeededArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_NEEDED(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        GISDropDownsObject *tobj=[[GISDropDownsObject alloc]init];
+        tobj.id_String=@"1000";
+        tobj.value_String=@"Any";
+        tobj.type_String=@"Serviceprovider_Type";
+        [typeOfServiceArray addObject:tobj];
+        for (int i=0; i<payTypeArray.count; i++) {
+            GISDropDownsObject *bObj=[payTypeArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        for (int i=0; i<typeOfServiceArray.count; i++) {
+            GISDropDownsObject *bObj=[typeOfServiceArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_TYPE_OF_SERVICE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            
+            [self removeLoadingView];
+            NSLog(@"Successfully inserted");
+        });
+        
+    });
+
 }
 
 /** The folowing method calls when the login success, we are calling the Drop Drowns data, this is the failure response */
@@ -616,7 +618,7 @@
             id array=response.responseJson;
             NSDictionary *dictHere=[array lastObject];
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
-                [self removeLoadingView];
+                //[self removeLoadingView];
 //                GISEditScheduleStore *store;
 //                [[GISStoreManager sharedManager]removeViewSchedule_Objects];
 //                store =[[GISEditScheduleStore alloc]initWithStoreDictionary:response.responseJson];
@@ -860,7 +862,7 @@
             });
         }
         
-        [self removeLoadingView];
+        //[self removeLoadingView];
     }else{
         
         [self removeLoadingView];

@@ -834,6 +834,12 @@
     
 }
 
+- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+
+    
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];

@@ -28,8 +28,8 @@
 +(void)moveemailView:(BOOL)ismove viewHeight:(int)viewUpHeight view:(UIView *)currentView;
 +(NSString *)returningstring:(id)string;
 +(UIPopoverController *)showPopOver:(NSMutableArray *)localArray viewController:(GISPopOverTableViewController*)tableViewController;
-+(BOOL)dateComparision:(NSString *)startTime:(NSString *)endTime:(BOOL)isStartTimeComaprsion;
-+(BOOL)timeComparision:(NSString *)startTime:(NSString *)endTime;
++(BOOL)dateComparision:(NSString *)startTime :(NSString *)endTime :(BOOL)isStartTimeComaprsion;
++(BOOL)timeComparision:(NSString *)startTime :(NSString *)endTime;
 + (NSString *)eventDisplayFormat:(NSDate *)fromdate;
 +(NSString *) getTimeData:(NSString *) timeString;
 +(NSString *)getEventTime:(NSDate *)fromdate;

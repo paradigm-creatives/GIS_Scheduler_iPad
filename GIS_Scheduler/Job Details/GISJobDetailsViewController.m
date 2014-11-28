@@ -27,10 +27,12 @@
 
 @interface GISJobDetailsViewController ()
 -(void)getJobDetails_Data;
--(void)getJobDetails_Data:(NSString *)chooseRequest_idStr:(NSString*)token:(NSString *)serviceProviderID:(NSString *)jobDate:(NSString *)filledUnfilled_str;
+-(void)getJobDetails_Data:(NSString *)chooseRequest_idStr :(NSString*)token :(NSString *)serviceProviderID :(NSString *)jobDate :(NSString *)filledUnfilled_str;
 @end
 
 @implementation GISJobDetailsViewController
+
+@synthesize detail_mut_array;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,7 +79,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
     
     createJobs_UIVIew.hidden=YES;
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
     jobChangeHistory_background_UIView.hidden=YES;
     jobChangeHistory_foreground_UIView.hidden=YES;
     
@@ -95,6 +97,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
     filledUnfilled_ID_string=@"0";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
@@ -103,9 +108,9 @@
     [formatter setDateFormat:@"hh:mm a"];
     endDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
     
-    user_textField.text=login_Obj.firstName_string;
+    user_textField.text=login_Obj.email_string;
     
-    if (![appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"]){
+    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
         chooseRequestID_string=appDelegate.chooseRequest_ID_String;
         
         [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
@@ -113,7 +118,7 @@
 }
 
 
--(void)getJobDetails_Data:(NSString *)chooseRequest_idStr:(NSString*)token:(NSString *)serviceProviderID:(NSString *)jobDate:(NSString *)filledUnfilled_str
+-(void)getJobDetails_Data:(NSString *)chooseRequest_idStr :(NSString*)token :(NSString *)serviceProviderID :(NSString *)jobDate :(NSString *)filledUnfilled_str
 {
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:chooseRequest_idStr forKey:KRequestId];
@@ -124,7 +129,6 @@
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
     NSDictionary *dict=[notification userInfo];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
@@ -193,7 +197,6 @@
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
     
     //[[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
     //GISJobDetailsObject *dobj=[[GISJobDetailsObject alloc]init];
     //[appDelegate.jobDetailsArray insertObject:dobj atIndex:0];
@@ -206,7 +209,6 @@
     [self removeLoadingView];
     NSLog(@"Failure");
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
 }
 
 
@@ -1080,6 +1082,7 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     NSLog(@"textViewShouldBeginEditing:");
+    textView.text = @"";
     [GISUtility moveemailView:YES viewHeight:-150 view:self.view];
     return YES;
 }
@@ -1090,6 +1093,12 @@
 {
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [textView resignFirstResponder];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
 }
 
 

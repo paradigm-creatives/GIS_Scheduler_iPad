@@ -30,8 +30,8 @@
         else if([json isKindOfClass:[NSArray class]])
         {
             for (id jsonObj in (NSArray *)json) {
-                GISJobDetailsObject *jobDetailsObj=[[GISJobDetailsObject alloc] init];
-                jobDetailsObj=[jobDetailsObj initializeJObDetailsValues:jsonObj];
+                GISJobDetailsObject *jobDetailsObjs=[[GISJobDetailsObject alloc] init];
+                jobDetailsObj=[jobDetailsObjs initializeJObDetailsValues:jsonObj];
                 [[GISStoreManager sharedManager]addJobDetailsObject:jobDetailsObj];
                 
             }

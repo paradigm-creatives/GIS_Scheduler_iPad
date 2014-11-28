@@ -18,6 +18,9 @@
 @end
 
 @interface FFWeekCell : UICollectionViewCell
+{
+    BOOL isInsideTime;
+}
 
 @property (nonatomic, strong) id<FFWeekCellProtocol>protocol;
 @property (nonatomic, strong) NSDate *date;

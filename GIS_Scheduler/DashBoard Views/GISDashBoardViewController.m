@@ -599,6 +599,8 @@
         
         [self.navigationController popViewControllerAnimated:NO];
         
+        appDelegate.isNewRequest = NO;
+        
         if (row==0) {
             
             appDelegate.isFromViewEditService = NO;
@@ -625,6 +627,7 @@
         [self.navigationController popViewControllerAnimated:NO];
         
         appDelegate.isFromViewEditService = NO;
+        appDelegate.isNewRequest = NO;
         
         if (row==0) {
             

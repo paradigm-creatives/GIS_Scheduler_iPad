@@ -216,6 +216,12 @@
                 
     }else{
         
+        if(appDelegate.isFromViewEditService){
+            self.navigationItem.title = @"View/Edit Schedule";
+        }else{
+            self.navigationItem.title = @"View/Edit Service Request";
+        }
+        
         if(appDelegate.isShowfromDashboard){
             
             NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];

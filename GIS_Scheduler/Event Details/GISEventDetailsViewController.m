@@ -1752,8 +1752,6 @@
     NSLog(@"connection loading completed ");
 }
 
-
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];

@@ -23,7 +23,7 @@
     NSDateFormatter *dateformatter;
     
 }
-+(GISPopOverTableViewController *)sharedManager;
+//+(GISPopOverTableViewController *)sharedManager;
 @property(readwrite,nonatomic)int tagValue;
 @property(nonatomic,strong)NSString *view_String;
 @property(nonatomic,strong)NSString *value_String;
