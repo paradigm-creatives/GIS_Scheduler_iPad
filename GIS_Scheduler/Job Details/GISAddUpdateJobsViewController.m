@@ -266,7 +266,7 @@
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kCancel];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payType_ID_string] forKey:kViewSchedule_PayTypeID];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.outOfAgency_string] forKey:kOutToAgency];
-        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kJobDetais_Timely];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timelyandHalf_string] forKey:kJobDetais_Timely];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.parking_string] forKey:kChooseReqDetails_parking];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.mileage_string] forKey:kMyJobs_Mileage];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billAmount_string] forKey:kJobDetais_BillAmount];
@@ -412,19 +412,59 @@
     }
     else if(btnTag==2)
     {
-        addUpdateObj.startTime_string=value_str;
+        startTime_temp_string = value_str;
+        
+        if ([startTime_temp_string length] && [endTime_temp_string length]){
+            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Time alert", TABLE, nil)];
+                startTime_temp_string=@"";
+            }
+        }
+        
+        addUpdateObj.startTime_string = startTime_temp_string;
+
     }
     else if(btnTag==3)
     {
-        addUpdateObj.endTime_string=value_str;
+        endTime_temp_string = value_str;
+       
+        if ([startTime_temp_string length] && [endTime_temp_string length]){
+            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Time alert", TABLE, nil)];
+                endTime_temp_string=@"";
+            }
+        }
+        
+        addUpdateObj.endTime_string = endTime_temp_string;
+
+
+
     }
     else if(btnTag==4)
     {
-        addUpdateObj.callInTime_string=value_str;
+        callIntime_temp_string = value_str;
+        
+        if ([endTime_temp_string length] && [callIntime_temp_string length]){
+            if ([GISUtility dateComparision:endTime_temp_string :callIntime_temp_string:YES])
+            {}
+            else
+            {
+                [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"call_in_time_alert", TABLE, nil)];
+                callIntime_temp_string=@"";
+            }
+        }
+
+        addUpdateObj.callInTime_string = callIntime_temp_string;
         if ([addUpdateObj.callInTime_string isEqualToString:@"Timely"])
-            addUpdateObj.callInTime_ID_string=@"T";
+            addUpdateObj.callInTime_ID_string=@"1";
         else
-            addUpdateObj.callInTime_ID_string=@"U";
+            addUpdateObj.callInTime_ID_string=@"0";
     }
     else if (btnTag==5)
     {

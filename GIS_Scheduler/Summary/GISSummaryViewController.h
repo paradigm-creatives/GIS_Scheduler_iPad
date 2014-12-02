@@ -21,7 +21,7 @@
     NSString *serviceRequestData;
     int row_value;
     NSString *nextString;
-    
+    BOOL isSubmitClicked;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;

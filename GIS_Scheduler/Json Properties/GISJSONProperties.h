@@ -526,6 +526,7 @@
 #define kViewSchedule_JobNotes @"JobNotes"
 #define kViewSchedule_SubRole @"SubRole"
 #define kViewSchedule_EventType @"EventType"
+#define kViewSchedule_RequestApproved @"RequestApproved"
 
 #pragma mark JobDetails End
 

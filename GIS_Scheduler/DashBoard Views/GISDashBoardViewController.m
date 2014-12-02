@@ -178,7 +178,7 @@
     payTypeSP_Label.textColor=UIColorFromRGB(0x00457c);
     gisResponseSP_Label.textColor=UIColorFromRGB(0x00457c);
     
-    if(refresh_Index == 0){
+    if(!appDelegate.isRefreshIndex){
         
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
         NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
@@ -188,11 +188,14 @@
             
             [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
             
+            if([NewRequestsArray count]>0)
+                [NewRequestsArray removeAllObjects];
+            
+            [listTableView reloadData];
+            
             NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
             [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
             [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
-            
-            //[self performSelector:@selector(getNewModifiedRequestsdata:) withObject:paramsDicts afterDelay:10.0];
             
             [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
             
@@ -209,8 +212,7 @@
             [[GISServerManager sharedManager] getPayTypedata:self withParams:payTypeDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
         }
         
-        refresh_Index ++;
-        
+        appDelegate.isRefreshIndex = YES;
     }
     
     [_countLabel1 setFont:[GISFonts tiny]];
@@ -547,7 +549,8 @@
             }
 
             
-            
+            [paramsDict setObject:unitObj1.requestorID_string forKey:krequestorid];
+
             [paramsDict setObject:unitObj1.token_string forKey:kToken];
             
             NSString *status_ID;
@@ -559,8 +562,18 @@
             [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
             
         }
+        
+        NSDictionary *infoDict;
+        
+        if([nmReqObj.RequestStatus_String isEqualToString:@"White"]){
+            
+             infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"isWhieColor",nil];
+        }else{
+            
+            infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"isWhieColor",nil];
+        }
     
-        [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil userInfo:infoDict];
         
     }
 }
@@ -730,6 +743,9 @@
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
                 [[GISStoreManager sharedManager] removeRequest_NMRequestObject];
+                
+                if([NMRequestsArray count]>0)
+                    [NMRequestsArray removeAllObjects];
 
                 nmRequestStore=[[GISSchedulerNMRequestsStore alloc]initWithJsonDictionary:response.responseJson];
                 NMRequestsArray=[[GISStoreManager sharedManager] getRequest_NMRequestObject];
@@ -1072,14 +1088,6 @@
 {
     self.isMasterHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
-}
-
--(void)getNewModifiedRequestsdata:(NSMutableDictionary *)paramsDicts{
-    
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    
-    [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
-
 }
 
 -(void)RefreshData{

@@ -38,6 +38,9 @@
     NSMutableArray *agencyFee_Array;
     NSMutableArray *payStatus_Array;
     NSMutableArray *expStatus_Array;
+    NSString *startTime_temp_string;
+    NSString *endTime_temp_string;
+    NSString *callIntime_temp_string;
     
     UITextField *currentTextField;
 }

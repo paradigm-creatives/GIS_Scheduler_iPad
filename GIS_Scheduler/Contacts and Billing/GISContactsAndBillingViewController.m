@@ -629,7 +629,7 @@
             appDelegate.contact_billingObject = contactBilling_Object;
             
             appDelegate.createdDateString = [GISUtility eventDisplayFormat:[[FFDateManager sharedManager] currentDate]];
-            appDelegate.createdByString = contactBilling_Object.firstName_String;
+            appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@",contactBilling_Object.firstName_String,contactBilling_Object.lastName_String];
             appDelegate.statusString = @"In-Complete";
             
             [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];

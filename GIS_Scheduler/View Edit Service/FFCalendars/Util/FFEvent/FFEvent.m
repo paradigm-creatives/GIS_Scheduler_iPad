@@ -21,5 +21,6 @@
 @synthesize serviceProvider;
 @synthesize eventName;
 @synthesize serviceProviderType;
+@synthesize requestApproved;
 
 @end

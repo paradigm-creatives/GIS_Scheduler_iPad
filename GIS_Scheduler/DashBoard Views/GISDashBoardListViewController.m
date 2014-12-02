@@ -357,8 +357,27 @@
 
 -(void)rowSelcted:(NSNotification *) notification{
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-    [self tableView:_dashBoard_ListTableView didSelectRowAtIndexPath:indexPath];
+    NSDictionary *infoDict=notification.userInfo;
+    
+    BOOL isWhiteColorSelcted;
+    
+    if(infoDict != nil){
+        isWhiteColorSelcted = [[infoDict objectForKey:@"isWhieColor"] boolValue];
+    }else{
+        isWhiteColorSelcted = NO;
+    }
+    
+    if(isWhiteColorSelcted){
+
+    
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        [self tableView:_dashBoard_ListTableView didSelectRowAtIndexPath:indexPath];
+        
+    }else{
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+        [self tableView:_dashBoard_ListTableView didSelectRowAtIndexPath:indexPath];
+    }
     
 }
 

@@ -17,6 +17,7 @@
 @property(nonatomic,strong) NSString *subRoll_string;
 @property(nonatomic,strong) NSString *timely_string;
 @property(nonatomic,strong) NSString *typeOfService_string;
+@property(nonatomic,strong) NSString *requestApproved_string;
 
 
 @property(nonatomic,strong)NSString *EventType_String;

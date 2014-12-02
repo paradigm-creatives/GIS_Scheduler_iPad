@@ -708,7 +708,7 @@
 
 - (void)showBroadcastAlertView{
     
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"type Of Record Broadcast?:", TABLE, nil) message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"type_Of_Record_Broadcast", TABLE, nil) message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     _alertCustomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 210, 110)];
     
     UIButton *addButton = [[UIButton alloc] init];

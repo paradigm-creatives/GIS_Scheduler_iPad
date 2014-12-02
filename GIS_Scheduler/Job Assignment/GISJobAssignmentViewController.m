@@ -221,21 +221,21 @@
         //[cell.edit_button setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
     }
     
-//    if (![appDelegate.statusString isEqualToString:@"Approved"]) {
-//        
-//        cell.payType_button.userInteractionEnabled = NO;
-//        cell.service_Provider_button.userInteractionEnabled = NO;
-//        
-//        [cell.payType_button setBackgroundColor:[UIColor lightGrayColor]];
-//        [cell.service_Provider_button setBackgroundColor:[UIColor lightGrayColor]];
-//    }else{
-//        
-//        cell.payType_button.userInteractionEnabled = YES;
-//        cell.service_Provider_button.userInteractionEnabled = YES;
-//        
-//        [cell.payType_button setBackgroundColor:[UIColor clearColor]];
-//        [cell.service_Provider_button setBackgroundColor:[UIColor clearColor]];
-//    }
+    if ([obj.requestApproved_string isEqualToString:@"0"]) {
+        
+        cell.payType_button.userInteractionEnabled = NO;
+        cell.service_Provider_button.userInteractionEnabled = NO;
+        
+        [cell.payType_button setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.service_Provider_button setBackgroundColor:[UIColor lightGrayColor]];
+    }else{
+        
+        cell.payType_button.userInteractionEnabled = YES;
+        cell.service_Provider_button.userInteractionEnabled = YES;
+        
+        [cell.payType_button setBackgroundColor:[UIColor clearColor]];
+        [cell.service_Provider_button setBackgroundColor:[UIColor clearColor]];
+    }
     
     return cell;
 }

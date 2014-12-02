@@ -710,6 +710,7 @@
         [event setServiceProvider:viewEditObject.serViceProvider_String];
         [event setServiceProviderType:viewEditObject.typeOfService_String];
         [event setEventName:viewEditObject.eventName_String];
+        [event setRequestApproved:viewEditObject.requestApproved_String];
         [self addNewEvent:event];
     }
     [self removeLoadingView];

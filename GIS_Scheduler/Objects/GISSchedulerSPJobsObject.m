@@ -28,6 +28,7 @@
 @synthesize EventType_String;
 @synthesize PayType_id_String;
 @synthesize SPRequestJobID_String;
+@synthesize requestApproved_string;
 
 - (id)initWithStoreDictionary:(NSDictionary *)json
 {
@@ -151,6 +152,8 @@
                 }
                 //_typeOfService_string = [self returningstring:[json objectForKey:kSPRequestJobs_TypeofService]];
             }
+             if ([json objectForKey:kViewSchedule_RequestApproved])
+                 requestApproved_string = [self returningstring:[json objectForKey:kViewSchedule_RequestApproved]];
 
         }
         @catch (NSException *exception) {

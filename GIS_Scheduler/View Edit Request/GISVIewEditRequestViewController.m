@@ -213,6 +213,27 @@
         [_mainTabbar setHidden:YES];
         [_mainnewTabbar setHidden:NO];
         _mainnewTabbar.selectedItem = _contact_newItem;
+        
+        if(appDelegate.isShowfromDashboard){
+            
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+            NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+            
+            for (GISDropDownsObject *dropDownObj in requetDetails) {
+                if ([dropDownObj.value_String isEqualToString:appDelegate.chooseRequest_Value_String]) {
+                    
+                    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                    [dict setValue:dropDownObj.id_String forKey:@"id"];
+                    [dict setValue:dropDownObj.value_String forKey:@"value"];
+                    
+                    [_requestBtn setTitle:dropDownObj.value_String forState:UIControlStateNormal];
+                    
+                    appDelegate.chooseRequest_ID_String=dropDownObj.id_String;
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
+                }
+            }
+        }
                 
     }else{
         

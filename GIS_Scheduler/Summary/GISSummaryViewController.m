@@ -88,8 +88,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
-        
-    //[_summary_tableView reloadData];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
@@ -98,7 +96,8 @@
         _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
     }
     
-    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
+    if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+        
         
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
 
@@ -641,6 +640,7 @@
                            action:@selector(submitButnPressed:)
                  forControlEvents:UIControlEventTouchUpInside];
             addButton1.frame = CGRectMake(350.0, 60.0, 150.0, 30.0);
+            [addButton1 setTag:11116];
             addButton1.enabled = YES;
             
             
@@ -687,6 +687,8 @@
         
         @try {
             
+            isSubmitClicked = YES;
+            
             NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
             NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
             GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
@@ -698,7 +700,7 @@
                 status_ID = @"5";
                 [paramsDict setObject:status_ID forKey:kstatusid];
             }else{
-                [paramsDict setObject:@"3" forKey:kstatusid];
+                [paramsDict setObject:@"1" forKey:kstatusid];
             }
             
             [[GISServerManager sharedManager] submitViewEditRequest:self withParams:paramsDict finishAction:@selector(successmethod_submitVieweditRequest:) failAction:@selector(failuremethod_submitVieweditRequest:)];
@@ -712,6 +714,7 @@
     }else{
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        isSubmitClicked = NO;
     }
 }
 
@@ -719,19 +722,21 @@
     
     @try {
         
-        NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-        NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-        GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kDateTime_requestNo];
-        [paramsDict setObject:unitObj1.token_string forKey:kToken];
-        NSString *status_ID;
-        status_ID = @"1";
-        [paramsDict setObject:status_ID forKey:kstatusid];
-        
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-        
-        [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
+        if([sender tag] == 11116){
+            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            GISLoginDetailsObject *unitObj1=[requetId_array lastObject];
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kDateTime_requestNo];
+            [paramsDict setObject:unitObj1.token_string forKey:kToken];
+            NSString *status_ID;
+            status_ID = @"1";
+            [paramsDict setObject:status_ID forKey:kstatusid];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            
+            [[GISServerManager sharedManager] saveUpdateRequestData:self withParams:paramsDict finishAction:@selector(successmethod_saveUpdateRequest:) failAction:@selector(failuremethod_saveUpdateRequest:)];
+        }
     }
     @catch (NSException *exception) {
         [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get summary submit action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];

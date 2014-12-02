@@ -55,6 +55,7 @@
 "enter_valid_details"="Please enter details in these fields : \n %@ ";
 "please_check_details"="Please check details entered";
 "outside_agency"="Outside Agency";
+"type_Of_Record_Broadcast" = "Type of Record Broadcast?";
 
 ////////   Location Details ///////
 
@@ -179,6 +180,7 @@
 "end Date alert" = "End Date should be more than start Date";
 "start Time alert"= "Start Time should be less than end Time";
 "end Time alert" = "End Time should be more than start Time";
+"call_in_time_alert" = "Call In Time should be more than start Time";
 "time alert"="Please select between time";
 "loading" = "loading";
 "number_of_service_providers" = "Please enter number of service providers";
@@ -230,8 +232,10 @@
 "Canceled" = "Canceled :";
 "Timely" = "Timely";
 "untimely" = "untimely";
+"un_timely" = "UnTimely";
 "Bill_Level" = "Bill Level :";
 "Cancel_Date" = "Cancel Date :";
+
 
 //Navigation Titles
 "Find_Requests_Jobs"= "Find Requests/Jobs - Result";

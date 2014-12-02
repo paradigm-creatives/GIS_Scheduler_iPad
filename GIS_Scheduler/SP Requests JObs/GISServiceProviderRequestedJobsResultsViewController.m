@@ -141,6 +141,20 @@
     [cell.gisReponse_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.serviceProvider_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
+//    if ([spJobsObj.requestApproved_string isEqualToString:@"0"]) {
+//        cell.serviceProvider_Button.userInteractionEnabled=NO;
+//        cell.payType_btn.userInteractionEnabled=NO;
+//        [cell.serviceProvider_Button setBackgroundColor:[UIColor lightGrayColor]];
+//        [cell.payType_Button setBackgroundColor:[UIColor lightGrayColor]];
+//    }else{
+//        
+//        cell.serviceProvider_Button.userInteractionEnabled=YES;
+//        cell.payType_btn.userInteractionEnabled=YES;
+//        [cell.serviceProvider_Button setBackgroundColor:[UIColor clearColor]];
+//        [cell.payType_Button setBackgroundColor:[UIColor clearColor]];
+//    }
+
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     

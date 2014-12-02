@@ -84,7 +84,8 @@
     self.isHidefromDashboard = NO;
     self.isfilled = NO;
     self.islatestEvent = NO;
-        
+    self.isRefreshIndex = NO;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

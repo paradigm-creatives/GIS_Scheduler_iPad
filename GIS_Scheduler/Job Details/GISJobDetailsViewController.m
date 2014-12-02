@@ -61,20 +61,9 @@
     serviceProvider_array_tableView=[[NSMutableArray alloc]init];
     payType_array=[[NSMutableArray alloc]init];
 
-    payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
-    billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"Filled",@"UnFilled", nil];// Keys-- Filled=1, Unfilled =2   If  not anything then 0
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
-    serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
-     selected_row=999999;
-    
-    
-    NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
-    typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
-    
-    NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
-    payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+    selected_row=999999;
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
     
@@ -99,6 +88,18 @@
     [super viewWillAppear:YES];
     
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
+    
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+    serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
+    NSString *typeOfService_statement = [[NSString alloc]initWithFormat:@"select * from TBL_TYPE_OF_SERVICE  ORDER BY ID DESC;"];
+    typeOfService_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:typeOfService_statement] mutableCopy];
+    
+    NSString *payType_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE"];
+    payType_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:payType_statement] mutableCopy];
+    
+    payLevel_Array=[[GISStoreManager sharedManager]getPayLevelObjects];
+    
+    billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     
     filledUnfilled_ID_string=@"0";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -716,8 +717,7 @@
         }
         else
         {
-            NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
-            NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:alertView.tag];
+            NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:alertView.tag inSection:0];
             GISJobDetailsCell *cell = (GISJobDetailsCell *)[jobDetails_tableView cellForRowAtIndexPath:selectedIndexPath];
             
             cell.job_ID_Label.font = [GISFonts smalltextBold];
@@ -860,7 +860,7 @@
 {
     [self removeLoadingView];
     NSLog(@"successmethod_AddNewJob_data Success---%@",response.responseJson);
-     [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+     [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
     
 }
 -(void)failuremethod_AddNewJob_data:(GISJsonRequest *)response
@@ -954,8 +954,8 @@
     NSString *billLevel_ID_temp_String=@"";
 
     
-    NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"service_Provider_String=%@",typeOfServiceProviders_Answer_Label.text];
-    NSArray *array_typeOfService=[serviceProvider_Array filteredArrayUsingPredicate:predicate_typeOfService];
+    NSPredicate *predicate_typeOfService=[NSPredicate predicateWithFormat:@"value_String=%@",typeOfServiceProviders_Answer_Label.text];
+    NSArray *array_typeOfService=[typeOfService_array filteredArrayUsingPredicate:predicate_typeOfService];
         if (array_typeOfService.count>0) {
         GISServiceProviderObject *obj=[array_typeOfService lastObject];
         typeOfService_ID_temp_String=obj.id_String;
@@ -1024,12 +1024,13 @@
     NSDictionary *saveUpdateDict;
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
-    NSLog(@"successmethod_saveMaterialType Success---%@",saveUpdateDict);
+    NSLog(@"successmethod_createJObs_JobDetails Success---%@",saveUpdateDict);
     
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
+        
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
         
-        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
         
     }else{
         

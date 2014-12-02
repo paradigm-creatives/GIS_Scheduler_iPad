@@ -198,6 +198,8 @@
                 
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
                 
+                appDelegate.isRefreshIndex = NO;
+                
                 [self removeLoadingView];
                 [[GISStoreManager sharedManager]removeLoginObjects];
                 gisStore=[[GISStore alloc]initWithJsonDictionary:(NSDictionary *)response.responseJson];

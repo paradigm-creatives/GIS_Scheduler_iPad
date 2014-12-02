@@ -31,6 +31,8 @@
 @property (readwrite, nonatomic) BOOL isShowfromDashboard;
 @property (readwrite, nonatomic) BOOL isHidefromDashboard;
 @property (readwrite, nonatomic) BOOL isfilled;
+@property (readwrite, nonatomic) BOOL isRefreshIndex;
+
 
 @property(nonatomic,strong) GISContactAndBillingObject *contact_billingObject;
 @property(nonatomic,strong) NSString *chooseRequest_ID_String;

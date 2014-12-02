@@ -241,7 +241,7 @@
     
     [popoverControllerDetails presentPopoverFromRect:button.frame
                                               inView:self
-                            permittedArrowDirections:UIPopoverArrowDirectionLeft
+                            permittedArrowDirections:UIPopoverArrowDirectionAny
                                             animated:YES];
 
 }

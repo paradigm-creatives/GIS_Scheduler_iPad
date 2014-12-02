@@ -21,5 +21,7 @@
 @property (nonatomic, strong) NSString *serviceProvider;
 @property (nonatomic, strong) NSString *serviceProviderType;
 @property (nonatomic, strong) NSString *eventName;
+@property (nonatomic, strong) NSString *requestApproved;
+
 
 @end
