@@ -89,8 +89,8 @@
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     //_password_textfield.text=@"admin"
     
-    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
-    _password_textfield.text=@"Ecentric@5";
+    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    //_password_textfield.text=@"Ecentric@5";
     
     _userName_textfield.text=@"dean@gmail.com";
     _password_textfield.text=@"admin";
@@ -200,7 +200,7 @@
                 
                 appDelegate.isRefreshIndex = NO;
                 
-                [self removeLoadingView];
+                //[self removeLoadingView];
                 [[GISStoreManager sharedManager]removeLoginObjects];
                 gisStore=[[GISStore alloc]initWithJsonDictionary:(NSDictionary *)response.responseJson];
                 GISLoginDetailsObject *login_Obj;
@@ -288,10 +288,6 @@
                     
                     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
                 }
-                UINavigationController *detaiViewController = (UINavigationController*)appDelegate.spiltViewController.viewControllers[1];
-                [detaiViewController popToRootViewControllerAnimated:YES];
-                
-                [self.view.window setRootViewController:appDelegate.spiltViewController];
                 
             }
             if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"400"]) {
@@ -488,13 +484,6 @@
             [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_DRESS_CODE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
         }
         
-        for (int i=0; i<unitOrDepartmentArray.count; i++) {
-            GISDropDownsObject *bObj=[unitOrDepartmentArray objectAtIndex:i];
-            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
-            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
-            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_UNIT_DEPARTMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
-        }
         
         for (int i=0; i<closestMetroArray.count; i++) {
             GISDropDownsObject *bObj=[closestMetroArray objectAtIndex:i];
@@ -529,6 +518,15 @@
             [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_SERVICE_NEEDED(ID,TYPE,VALUE) VALUES (?,?,?)"]];
         }
         
+        for (int i=0; i<unitOrDepartmentArray.count; i++) {
+            GISDropDownsObject *bObj=[unitOrDepartmentArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_UNIT_DEPARTMENT(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+
+        
         GISDropDownsObject *tobj=[[GISDropDownsObject alloc]init];
         tobj.id_String=@"1000";
         tobj.value_String=@"Any";
@@ -555,6 +553,10 @@
             // Update the UI
             
             [self removeLoadingView];
+            UINavigationController *detaiViewController = (UINavigationController*)appDelegate.spiltViewController.viewControllers[1];
+            [detaiViewController popToRootViewControllerAnimated:YES];
+            
+            [self.view.window setRootViewController:appDelegate.spiltViewController];
             NSLog(@"Successfully inserted");
         });
         

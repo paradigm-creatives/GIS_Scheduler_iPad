@@ -83,6 +83,8 @@
     
     _serviceTypeArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Submit to GIS Admin Approval", nil];
     
+    _serviceTypeSaveArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Save", nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -687,6 +689,12 @@
         
         @try {
             
+            if([appDelegate.jobDetailsArray count] == 0){
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_cannnot_submitted",TABLE, nil)];
+                return;
+            }
+            
+            
             isSubmitClicked = YES;
             
             NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -801,11 +809,9 @@
         [[GISStoreManager sharedManager]addChooseRequestDetailsObject:_chooseRequestDetailsObj];
         if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"In-Complete"]) {
             isRequestSubmitted=NO;
-            //[_summaryTableView reloadData];
         }
         else if ([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"Completed"]) {
             isRequestSubmitted=YES;
-            //[_summaryTableView reloadData];
         }
     }else{
         [self removeLoadingView];
@@ -968,7 +974,11 @@
     
     
     tableViewController.popOverDelegate = self;
-    _popover =   [GISUtility showPopOver:(NSMutableArray *)_serviceTypeArray viewController:tableViewController];
+    
+    if([appDelegate.statusString isEqualToString:@"Approved"])
+        _popover =   [GISUtility showPopOver:(NSMutableArray *)_serviceTypeSaveArray viewController:tableViewController];
+    else
+         _popover =   [GISUtility showPopOver:(NSMutableArray *)_serviceTypeArray viewController:tableViewController];
     
     _popover.delegate = self;
     _popover.popoverContentSize = CGSizeMake(300, 100);
@@ -1020,6 +1030,7 @@
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
         [GISUtility showAlertWithTitle:@"" andMessage:[NSString stringWithFormat:@"Request %@ Successfully",nextString]];
     }
     if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
@@ -1144,6 +1155,9 @@
     NSArray *responseArray= response.responseJson;
     NSMutableArray *jobDetails_Array = [[NSMutableArray alloc] init];
     
+    if([appDelegate.jobDetailsArray count]>0)
+        [appDelegate.jobDetailsArray removeAllObjects];
+    
     if([responseArray count]>0){
         saveUpdateDict = [responseArray lastObject];
         
@@ -1154,9 +1168,6 @@
             GISJobDetailsStore *jobDetailsStore;
             jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
            [jobDetails_Array addObjectsFromArray:[[GISStoreManager sharedManager]getJobDetailsObjects]];
-            
-            if([appDelegate.jobDetailsArray count]>0)
-                [appDelegate.jobDetailsArray removeAllObjects];
             
             [appDelegate.jobDetailsArray addObjectsFromArray:jobDetails_Array];
             

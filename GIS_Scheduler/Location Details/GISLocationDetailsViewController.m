@@ -64,8 +64,6 @@
         _locationName_Value_string = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
         _closestMetrodata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
         
-        _generalLocationId_string = @"1";
-        
          appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
         
         _parkingArray = [[NSMutableArray alloc] init];
@@ -83,8 +81,11 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
-        
+    _generalLocationId_string = @"1";
+
+    
+    if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+    
         [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -142,6 +143,12 @@
                 cell=[[[NSBundle mainBundle]loadNibNamed:@"GISLocationDetailsCell" owner:self options:nil]objectAtIndex:0];
             }
             
+            NSMutableArray *chooseReqDetailedArray=[[GISStoreManager sharedManager]getChooseRequestDetailsObjects];
+            if (chooseReqDetailedArray.count>0) {
+                
+                _chooseRequestDetailsObj=[chooseReqDetailedArray lastObject];
+            }
+
             
             [cell.buildingNamebtn setTitle:_buildingNamedata forState:UIControlStateNormal];
             [cell.buildingNamebtn setTitleColor:UIColorFromRGB(0x616161) forState:UIControlStateNormal];
@@ -151,9 +158,9 @@
             cell.specialProtocoltextView.delegate = self;
             
             cell.roomNametextField.text = _room_name_string;
-            cell.roomnotextField.text = _room_no_string;
+            cell.roomnotextField.text = _chooseRequestDetailsObj.RoomNunber_String_chooseReqParsedDetails;
             cell.othertextField.text = _other_string;
-            cell.specialProtocoltextView.text = _specialProtocol_string;
+            cell.specialProtocoltextView.text = _chooseRequestDetailsObj.SpecialProtocol_String_chooseReqParsedDetails;
             
             [cell.nextButton addTarget:self action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [cell.buildingNamebtn addTarget:self action:@selector(showPopoverDetails:) forControlEvents:UIControlEventTouchUpInside];
@@ -883,7 +890,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"textViewDidBeginEditing:");
     
-    if(textView.tag == 569 || textView.tag == 555)
+    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 595)
     {
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
@@ -899,7 +906,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView{
     NSLog(@"textViewDidEndEditing:");
     
-    if(textView.tag == 569 || textView.tag == 555)
+    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 595)
     {
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
@@ -1053,7 +1060,8 @@
             
             
             if([_chooseRequestDetailsObj.generalLocation_String_chooseReqParsedDetails length] == 0)
-                _generalLocationId_string = @"";
+                _generalLocationId_string = @"1";
+            
             
             NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
             NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];

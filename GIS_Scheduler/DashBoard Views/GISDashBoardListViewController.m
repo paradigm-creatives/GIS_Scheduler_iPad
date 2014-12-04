@@ -300,7 +300,7 @@
     }
    else
    {
-       
+            
        UINavigationController *navController=(UINavigationController *)[appDelegate.spiltViewController.viewControllers lastObject];
        
        for(UIViewController *viewcontroller in navController.viewControllers)

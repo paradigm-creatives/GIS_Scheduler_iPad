@@ -12,7 +12,7 @@
 #import "GISChooseRequestDetailsObject.h"
 #import "GISLoginDetailsObject.h"
 
-@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
+@interface GISEventDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 {
     NSString *eventTypedata;

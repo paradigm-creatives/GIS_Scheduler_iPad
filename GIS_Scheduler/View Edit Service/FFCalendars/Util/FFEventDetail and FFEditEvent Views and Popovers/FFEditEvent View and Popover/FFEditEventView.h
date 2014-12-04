@@ -20,7 +20,7 @@
 - (void)removeThisView:(UIView *)view;
 @end
 
-@interface FFEditEventView : UIView<PopOverSelected_Protocol>
+@interface FFEditEventView : UIView<PopOverSelected_Protocol,UIPopoverControllerDelegate>
 {
     BOOL isPaytype;
     BOOL isServiceprovider;

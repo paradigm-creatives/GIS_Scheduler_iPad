@@ -50,7 +50,6 @@
                         <color key="backgroundColor" red="0.84674228279999997" green="0.89082785909999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
-                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
                 </subviews>
             </tableViewCellContentView>

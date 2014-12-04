@@ -95,6 +95,8 @@
     [findReqJobs_tableView reloadData];
     self.navigationItem.hidesBackButton=YES;
     
+    self.navigationItem.title = NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
+    
     NSString *generalLocation_statement = [[NSString alloc]initWithFormat:@"select * from TBL_GENERAL_LOCATION  ORDER BY ID DESC;"];
     generalLocation_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:generalLocation_statement] mutableCopy];
     

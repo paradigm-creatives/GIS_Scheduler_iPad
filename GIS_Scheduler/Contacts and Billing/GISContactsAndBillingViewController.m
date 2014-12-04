@@ -346,6 +346,9 @@
 {
     NSLog(@"successmethod_getRequestDetails Success---%@",response.responseJson);
     
+    NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];
+    unitOrDepartment_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:unitIDorDep_statement] mutableCopy];
+    
     [self removeLoadingView];
     
     chooseRequestDetailsObj=[[GISChooseRequestDetailsObject alloc]initWithStoreChooseRequestDetailsDictionary:response.responseJson];
@@ -515,7 +518,8 @@
         [userDefaults setValue:contactBilling_Object.chooseRequest_String forKey:kRequestNo];
         [paramsDict setObject:login_Obj.requestorID_string forKey:krequestorid];
         
-        if (appDelegate.isNewRequest)
+        //if (appDelegate.isNewRequest)
+        if ([appDelegate.chooseRequest_ID_String length] > 0 && [appDelegate.chooseRequest_ID_String isEqualToString:@"0"])
         {
             [paramsDict setObject:kInComplete forKey:kstatusid];
             [paramsDict setObject:@"" forKey:keventDetails_capnoofUsers];

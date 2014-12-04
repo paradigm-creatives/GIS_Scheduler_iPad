@@ -2668,7 +2668,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
-					/Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
 					"$(PROJECT_DIR)/GIS_Scheduler/External/PCLogger/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2692,7 +2691,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
-					/Users/hanuman/Desktop/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
 					"$(PROJECT_DIR)/GIS_Scheduler/External/PCLogger/Amazon",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

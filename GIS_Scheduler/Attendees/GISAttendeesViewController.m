@@ -116,9 +116,17 @@ int row_count = 2;
     NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
     billingDataObj=[billingArray lastObject];
     
+    NSString *mailStr;
     NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
     if(newRange.location != NSNotFound) {
-        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+        mailStr = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+    }
+    
+    if([mailStr length]>0){
+        NSRange nRange = [mailStr rangeOfString:@"."];
+        if(nRange.location != NSNotFound) {
+            unitString = [mailStr substringFromIndex:nRange.location];
+        }
     }
 
 }
@@ -210,10 +218,19 @@ int row_count = 2;
     NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
     billingDataObj=[billingArray lastObject];
     
+    NSString *mailStr;
     NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
     if(newRange.location != NSNotFound) {
-        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+        mailStr = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
     }
+    
+    if([mailStr length]>0){
+        NSRange nRange = [mailStr rangeOfString:@"."];
+        if(nRange.location != NSNotFound) {
+            unitString = [mailStr substringFromIndex:nRange.location];
+        }
+    }
+    
     if (indexPath.section==1) {
         GISAttendeesTopCell *cell=(GISAttendeesTopCell *)[tableView dequeueReusableCellWithIdentifier:@"AttendeesCell"];
         if (cell==nil) {
@@ -281,7 +298,7 @@ int row_count = 2;
         cell=[[[NSBundle mainBundle]loadNibNamed:@"GISAttendeesTopCell" owner:self options:nil] objectAtIndex:0];
     }
     
-    if([unitString isEqualToString:@"gallaudet.edu"])
+    if([unitString isEqualToString:@".edu"])
     {
         cell.primaryAudience_Label.hidden=NO;
         cell.primaryAudience_answer_Label.hidden=NO;
@@ -704,10 +721,10 @@ int row_count = 2;
     GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
     if (attendeeCellHere.cellSectionNumber == 1){
         if (attendeeCellHere.cellRowNumber==1&&textField.tag==222) {
-            [GISUtility moveemailView:YES viewHeight:0 view:self.view];
+            //[GISUtility moveemailView:YES viewHeight:0 view:self.view];
         }
         else{
-            [GISUtility moveemailView:YES viewHeight:-(attendeeCellHere.cellRowNumber*attendeeCellHere.frame.size.height+40) view:self.view];
+            //[GISUtility moveemailView:YES viewHeight:-(attendeeCellHere.cellRowNumber*attendeeCellHere.frame.size.height+40) view:self.view];
         }
     }
     return YES;
@@ -722,6 +739,10 @@ int row_count = 2;
         textFieldSuper = [textFieldSuper superview];
     }
     //[GISUtility moveemailView:YES viewHeight:195 view:_currentView];
+    
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+
 }
 
 
@@ -732,8 +753,11 @@ int row_count = 2;
     if (attendeeCellHere.cellSectionNumber == 1)
     {
         if (textField.tag==333) {
-            [GISUtility moveemailView:NO viewHeight:0 view:self.view];
+            //[GISUtility moveemailView:NO viewHeight:0 view:self.view];
         }
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+
         GISAttendees_ListObject *attendees_ListObject_here = [attendeesObject.attendeesList_mutArray objectAtIndex:attendeeCellHere.cellRowNumber];
         attendees_ListObject_here.email_String=attendeeCellHere.email_textField.text;
         attendees_ListObject_here.firstname_String=attendeeCellHere.firstname_textField.text;
@@ -811,7 +835,7 @@ int row_count = 2;
             [self removeLoadingView];
             return;
         }
-        else if([unitString isEqualToString:@"gallaudet.edu"])
+        else if([unitString isEqualToString:@".edu"])
         {
             if([attendeesObject.primaryAudience_String length]<1)
             {
@@ -914,7 +938,7 @@ int row_count = 2;
         NSLog(@"------------%@",appDelegate.chooseRequest_ID_String);
               [attendeesDict setValue:[GISUtility returningstring:appDelegate.chooseRequest_ID_String ] forKey:kAttendees_RequestNo];
         
-        if([unitString isEqualToString:@"gallaudet.edu"])
+        if([unitString isEqualToString:@".edu"])
             [attendeesDict setValue:[GISUtility returningstring:attendeesObject.primaryAudience_ID_String] forKey:kAttendees_PrimaryAudience];
         
         [attendees_array addObject:attendeesDict];

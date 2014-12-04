@@ -154,6 +154,10 @@
             }
              if ([json objectForKey:kViewSchedule_RequestApproved])
                  requestApproved_string = [self returningstring:[json objectForKey:kViewSchedule_RequestApproved]];
+            
+            if ([json objectForKey:kSPRequestJobs_ServiceProviderName])
+                ServiceProviderName_String = [self returningstring:[json objectForKey:kSPRequestJobs_ServiceProviderName]];
+            
 
         }
         @catch (NSException *exception) {

@@ -26,7 +26,7 @@
 #import "GISFonts.h"
 
 @interface GISJobDetailsViewController ()
--(void)getJobDetails_Data;
+//-(void)getJobDetails_Data;
 -(void)getJobDetails_Data:(NSString *)chooseRequest_idStr :(NSString*)token :(NSString *)serviceProviderID :(NSString *)jobDate :(NSString *)filledUnfilled_str;
 @end
 

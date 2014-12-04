@@ -48,7 +48,7 @@
     [_buildingName_label setText:NSLocalizedStringFromTable(@"building_name", TABLE, nil)];
     [_roomName_label setText:NSLocalizedStringFromTable(@"room_name", TABLE, nil)];
     [_roomNo_label setText:NSLocalizedStringFromTable(@"room_no", TABLE, nil)];
-    [_other_label setText:NSLocalizedStringFromTable(@"other", TABLE, nil)];
+    [_other_label setText:NSLocalizedStringFromTable(@"other_info", TABLE, nil)];
     [_socialProtocol_label setText:NSLocalizedStringFromTable(@"social_protocol", TABLE, nil)];
     [_metroNearby_label setText:NSLocalizedStringFromTable(@"metro_nearby", TABLE, nil)];
     [_parking_label setText:NSLocalizedStringFromTable(@"parking", TABLE, nil)];

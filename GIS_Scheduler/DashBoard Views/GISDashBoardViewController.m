@@ -678,7 +678,7 @@
                     if([spJob_object.JobID_String length] > 1){
                       [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
                     }
-                }else if([SPJobsArray count] > 1){
+                }else{
                     [_countLabel3 setText:[NSString stringWithFormat:@"%d",[SPJobsArray count]]];
                 }
                 
@@ -1045,6 +1045,18 @@
                 [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
                 
                 [self removeLoadingView];
+                
+                NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+                NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+                GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+
+                
+                NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+                [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
+                [paramsDict setObject:login_Obj.token_string forKey:@"token"];
+                
+                [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+
             }
             else
             {

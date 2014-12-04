@@ -40,6 +40,7 @@
 @property (strong, nonatomic) NSArray *chooseReqArray;
 @property(nonatomic,strong)NSString *choose_req_Id_string;
 @property (strong, nonatomic) NSArray *serviceTypeArray;
+@property (strong, nonatomic) NSArray *serviceTypeSaveArray;
 @property (nonatomic,strong) UIPopoverController *popover;
 
 

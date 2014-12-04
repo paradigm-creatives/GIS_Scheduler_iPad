@@ -95,9 +95,17 @@
     NSMutableArray *billingArray=[[GISStoreManager sharedManager]getBillingDataObject];
     billingDataObj=[billingArray lastObject];
     
+    NSString *mailStr;
     NSRange newRange = [billingDataObj.buh_email_String rangeOfString:@"@"];
     if(newRange.location != NSNotFound) {
-        unitString = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+        mailStr = [billingDataObj.buh_email_String substringFromIndex:newRange.location+1];
+    }
+    
+    if([mailStr length]>0){
+        NSRange nRange = [mailStr rangeOfString:@"."];
+        if(nRange.location != NSNotFound) {
+            unitString = [mailStr substringFromIndex:nRange.location];
+        }
     }
     
 }
@@ -108,8 +116,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
-        
+    if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+            
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
         NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
         
@@ -178,7 +186,7 @@
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISEventDetailsCell" owner:self options:nil]objectAtIndex:0];
         }
 
-        if([unitString isEqualToString:@"gallaudet.edu"]){
+        if([unitString isEqualToString:@".edu"]){
             
             [cell.outSideAgency_label setHidden:FALSE];
             [cell.outSideAgencyno_label setHidden:FALSE];
@@ -831,7 +839,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"textViewDidBeginEditing:");
-    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-120",@"yValue",nil];
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-360",@"yValue",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
 }
 
@@ -877,16 +885,19 @@
     if(textField.tag == 666){
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-290",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }else{
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Get the cell in which the textfield is embedded
-    if(textField.tag == 666){
-        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
-    }
+    
     
     if(textField.tag == 100)
         evevntNamedata = textField.text;
@@ -954,9 +965,9 @@
         if ([[GISNetworkUtility sharedManager] checkNetworkAvailability])
         {
             NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-            NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
-            NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
-            GISLoginDetailsObject *login_Objs=[requetId_array lastObject];
+            //NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+            //NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+            //GISLoginDetailsObject *login_Objs=[requetId_array lastObject];
             
             UITextField *eventNameTextField=(UITextField *)[self.view viewWithTag:100];
             UITextField *courseTextField=(UITextField *)[self.view viewWithTag:101];
@@ -1002,7 +1013,7 @@
                 if([otherMaterilaTypeTextField.text length] == 0 && othersbtn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
                     [_fields appendFormat:@"%@%@",@"Other",@", \n"];
                 
-                if([unitString isEqualToString:@"gallaudet.edu"]){
+                if([unitString isEqualToString:@".edu"]){
                     if([_outsideAgencyStr length] == 0)
                         [_fields appendFormat:@"%@",@"Outside Agency"];
                 }
@@ -1012,7 +1023,7 @@
                 return;
             }
             
-            if([unitString isEqualToString:@"gallaudet.edu"] && [_outsideAgencyStr length] == 0){
+            if([unitString isEqualToString:@".edu"] && [_outsideAgencyStr length] == 0){
                 
                 [_fields setString:@"Outside Agency"];
                 [self removeLoadingView];

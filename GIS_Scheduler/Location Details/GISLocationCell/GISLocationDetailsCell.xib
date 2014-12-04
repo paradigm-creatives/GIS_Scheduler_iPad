@@ -53,7 +53,7 @@
                         </connections>
                     </textField>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuJ-7G-Kxy">
-                        <rect key="frame" x="377" y="114" width="87" height="18"/>
+                        <rect key="frame" x="344" y="114" width="120" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +75,7 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-xq-ac6">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="595" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-xq-ac6">
                         <rect key="frame" x="150" y="161" width="185" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.84674228279999997" green="0.89082785909999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,8 +205,9 @@
                 <outlet property="roomName_label" destination="wah-NE-M9r" id="5Na-JH-CGc"/>
                 <outlet property="roomNametextField" destination="cxv-rd-UfJ" id="QrF-H7-gIT"/>
                 <outlet property="roomNo_label" destination="L6f-4T-Eli" id="Fkf-pr-xCS"/>
+                <outlet property="roomnotextField" destination="3pS-Q0-KHy" id="uHZ-WW-Vmg"/>
                 <outlet property="socialProtocol_label" destination="EWL-cU-FPG" id="BD0-B9-KfL"/>
-                <outlet property="specialProtocoltextView" destination="EVk-xq-ac6" id="jbl-1s-T9A"/>
+                <outlet property="specialProtocoltextView" destination="EVk-xq-ac6" id="uyh-cl-GO3"/>
                 <outlet property="street_label" destination="QYP-P3-9Nt" id="boF-Oj-Akp"/>
                 <outlet property="streetonCampusBtn" destination="JEs-QD-Yc1" id="wDL-Z1-3yv"/>
                 <outlet property="unknown_label" destination="VOu-Wo-bwd" id="wY7-Mr-Yxq"/>

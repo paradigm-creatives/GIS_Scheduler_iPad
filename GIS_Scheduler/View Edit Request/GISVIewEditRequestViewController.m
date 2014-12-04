@@ -205,16 +205,14 @@
     if(appDelegate.isNewRequest){
         
         self.title=@"Add Service Request";
-        [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
         [_requestBtn setBackgroundImage:nil forState:UIControlStateNormal];
         [_requestBtn removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
-        appDelegate.chooseRequest_ID_String = @"0";
         
         [_mainTabbar setHidden:YES];
         [_mainnewTabbar setHidden:NO];
         _mainnewTabbar.selectedItem = _contact_newItem;
         
-        if(appDelegate.isShowfromDashboard){
+        if(appDelegate.isShowfromDashboard ){
             
             NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
             NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
@@ -232,7 +230,14 @@
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
                 }
+                
+                appDelegate.isShowfromDashboard = NO;
             }
+        }else{
+            
+            appDelegate.chooseRequest_ID_String = @"0";
+            [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
+
         }
                 
     }else{
@@ -265,6 +270,8 @@
             
             if([_requestBtn.titleLabel.text length] == 0)
                 [_requestBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+            
+            appDelegate.isShowfromDashboard = NO;
 
             
         }else{

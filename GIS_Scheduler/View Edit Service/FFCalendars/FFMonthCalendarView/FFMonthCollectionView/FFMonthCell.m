@@ -166,4 +166,8 @@
                                                 animated:YES];
 }
 
+- (void)showPopoverEventDetailWithEvent:(FFEvent *)_event{
+    
+}
+
 @end

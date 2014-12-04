@@ -64,7 +64,7 @@
 "room_no"     = "Room No :";
 "room_name" = "Room Name :";
 "other" = "Other";
-"social_protocol" = "Social Protocol :";
+"social_protocol" = "Special Protocol :";
 "metro_nearby"="Metro Nearby :";
 "parking" = "Parking :";
 "garage" = "Garage";
@@ -180,7 +180,7 @@
 "end Date alert" = "End Date should be more than start Date";
 "start Time alert"= "Start Time should be less than end Time";
 "end Time alert" = "End Time should be more than start Time";
-"call_in_time_alert" = "Call In Time should be more than start Time";
+"call_in_time_alert" = "Call In Time should be more than end Time";
 "time alert"="Please select between time";
 "loading" = "loading";
 "number_of_service_providers" = "Please enter number of service providers";
@@ -235,6 +235,7 @@
 "un_timely" = "UnTimely";
 "Bill_Level" = "Bill Level :";
 "Cancel_Date" = "Cancel Date :";
+"request_cannnot_submitted" = "Request cannot be submitted for approval, since jobs are not created";
 
 
 //Navigation Titles
