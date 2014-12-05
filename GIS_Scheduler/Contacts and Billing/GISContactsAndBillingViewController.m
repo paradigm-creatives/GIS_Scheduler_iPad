@@ -326,6 +326,9 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str  value:(NSString *)value_str
 {
     if (btnTag==111){
+        
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        
         unitOrDep_Answer_Label.text=value_str;
         contactBilling_Object.unitOrDepartment_ID_String=id_str;
         unit_departmentID_String = id_str;
@@ -333,6 +336,11 @@
         [paramsDict setObject:id_str forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
         [[GISServerManager sharedManager] getBillingsData:self withParams:paramsDict finishAction:@selector(successmethod_BillingsData:) failAction:@selector(failuremethod_BillingsData:)];
+        
+        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+        [paramsDicts setObject:id_str forKey:kID];
+        [paramsDicts setObject:login_Obj.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getEventTypebyUnitId:self withParams:paramsDict finishAction:@selector(successmethod_getEventTypeByUnitID:) failAction:@selector(failuremethod_getEventTypeByUnitID:)];
     }
     else
     {
@@ -667,6 +675,69 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+}
+
+-(void)successmethod_getEventTypeByUnitID:(GISJsonRequest *)response
+{
+    id json =response.responseJson;
+    
+    NSDictionary *saveUpdateDict;
+    
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    if (![[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"400"]) {
+        
+        if ([json isKindOfClass:[NSDictionary class]]) {
+            
+            saveUpdateDict=response.responseJson;
+            NSLog(@"successmethod_getEventTypeByUnitID Success---%@",response.responseJson);
+        } else if ([json isKindOfClass:[NSArray class]]) {
+            
+            NSArray *jsonData  = response.responseJson;
+            saveUpdateDict=[jsonData objectAtIndex:0];
+            NSLog(@"successmethod_getEventTypeByUnitID Success---%@",response.responseJson);
+        }
+        
+        [self removeLoadingView];
+        
+        if([saveUpdateDict count] > 0){
+            
+            GISDropDownStore *dropDownStore;
+            
+            [[GISStoreManager sharedManager] removeEventTypeObjects];
+            
+            dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
+            NSMutableArray *eventTypesArray=[[GISStoreManager sharedManager] getEventTypeObjects];
+            
+            [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_EVENT_TYPE"];
+            [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_EVENT_TYPE];
+            
+            for (int i=0; i<eventTypesArray.count; i++) {
+                GISDropDownsObject *bObj=[eventTypesArray objectAtIndex:i];
+                NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+                NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+                [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_EVENT_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+            }
+        
+        }else{
+            
+            [self removeLoadingView];
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
+        }
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_check_details",TABLE, nil)];
+    }
+}
+
+-(void)failuremethod_getEventTypeByUnitID:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
 
 -(void)addLoadViewWithLoadingText:(NSString*)title

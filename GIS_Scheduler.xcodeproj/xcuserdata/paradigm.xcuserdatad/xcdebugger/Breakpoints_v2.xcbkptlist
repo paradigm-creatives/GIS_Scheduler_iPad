@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
-            timestampString = "439473947.277822"
+            filePath = "GIS_Scheduler/Contacts and Billing/GISContactsAndBillingViewController.m"
+            timestampString = "439475953.949744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "-successmethod_getChooseRequestDetails:"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "-sendTheSelectedPopOverData:value:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,45 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
-            timestampString = "439473952.375334"
+            filePath = "GIS_Scheduler/Contacts and Billing/GISContactsAndBillingViewController.m"
+            timestampString = "439475953.949744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-selectedChooseRequestNumber:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/DatesAndTimes/GISDatesAndTimesViewController.m"
-            timestampString = "439474020.219714"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1215"
-            endingLineNumber = "1215"
-            landmarkName = "-selectedChooseRequestNumber:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/DatesAndTimes/GISDatesAndTimesViewController.m"
-            timestampString = "439474026.687313"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1235"
-            endingLineNumber = "1235"
-            landmarkName = "-successmethod_getChooseRequestDetails:"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
+            landmarkName = "-successmethod_getEventTypeByUnitID:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

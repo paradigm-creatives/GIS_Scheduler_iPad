@@ -61,6 +61,7 @@
 #define GIS_GET_SCHEDULER_MASTERS @"GetSchedulerMasters"
 #define GIS_SAVE_SPREQUESTED_JOBS @"SaveSPRequestedJobs"
 #define GIS_GET_VIEW_EDIT_SCHEDULE @"ViewEditSchedule"
+#define GIS_GET_EVENT_TYPE_BY_UNITID @"GetEventTypeByUnitID"
 
 
 #define GIS_GET_JOB_DETAILS @"GetJobDetails"
