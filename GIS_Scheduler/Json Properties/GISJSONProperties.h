@@ -504,6 +504,8 @@
 #define kJobDetais_StatusCode @"StatusCode"
 #define kJobDetais_Timely @"Timely"
 #define kJobDetais_TypeofService @"TypeofService"
+#define kJobDetais_FilledUnFilled @"FilledUnFilled"
+#define kJobDetais_Slots @"Slots"
 
 
 #pragma mark JobDetails End

@@ -22,6 +22,7 @@
 @property(nonatomic,strong)NSString *statusCode_string;
 @property(nonatomic,strong)NSString *timely_string;
 @property(nonatomic,strong)NSString *typeOfService_string;
+@property(nonatomic,strong)NSString *slots_string;
 @property(nonatomic,readwrite)BOOL isEdit_Bool;
 
 -(GISJobDetailsObject *)initializeJObDetailsValues:(NSDictionary *)dict;

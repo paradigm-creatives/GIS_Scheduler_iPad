@@ -131,6 +131,8 @@
     NSArray *arrayEvents = array;
     GISEeventShowBackgroundView *view;
     
+    int i=0;
+    
     if (arrayEvents) {
         
         for (FFEvent *event in arrayEvents) {
@@ -151,37 +153,87 @@
                 }
             }
             
-            FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70., yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
-            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            //[_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
-            [_button setEvent:event];
+            FFEvent *nextEvent;
+        
+            if([arrayEvents count]>i+1)
+                nextEvent= [arrayEvents objectAtIndex:i+1];
             
-            view = [[GISEeventShowBackgroundView alloc] initWithFrame:CGRectMake(70, _button.frame.origin.y,  30, _button.frame.size.height)];
-            [view setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
+            if(nextEvent != nil){
+                
+                if(([[self getTimeformdate:event.dateTimeBegin] isEqualToString:[self getTimeformdate:nextEvent.dateTimeBegin]]) || ([[self getTimeformdate:event.dateTimeEnd] isEqualToString:[self getTimeformdate:nextEvent.dateTimeEnd]])){
+                    
+                    FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70.+i*10, yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
+                    [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    //[_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+                    [_button setEvent:event];
+                    
+                    view = [[GISEeventShowBackgroundView alloc] initWithFrame:CGRectMake(70 +i*35, _button.frame.origin.y,  30, _button.frame.size.height)];
+                    [view setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
+                    
+                    [self addSubview:view];
+                    
+                    GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80 +i*35, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+                    [label1 setBackgroundColor:[UIColor clearColor]];
+                    label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
+                    [self addSubview:label1];
+                    
+                    GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80 +i*35, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+                    [label2 setBackgroundColor:[UIColor clearColor]];
+                    label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
+                    [self addSubview:label2];
+                    
+                    GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80+i*35, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+                    [label3 setBackgroundColor:[UIColor clearColor]];
+                    label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
+                    [self addSubview:label3];
+                    
+                    [self bringSubviewToFront:_button];
+                    
+                    
+                    [arrayButtonsEvents addObject:_button];
+                    
+                    [self addSubview:_button];
+                }
+                else{
+                    
+                    FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70., yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
+                    [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    //[_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+                    [_button setEvent:event];
+                    
+                    view = [[GISEeventShowBackgroundView alloc] initWithFrame:CGRectMake(70 , _button.frame.origin.y,  30, _button.frame.size.height)];
+                    [view setBackgroundColor:[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
+                    
+                    [self addSubview:view];
+                    
+                    GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80 , _button.frame.origin.y, _button.frame.size.width, 20.0f)];
+                    [label1 setBackgroundColor:[UIColor clearColor]];
+                    label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
+                    [self addSubview:label1];
+                    
+                    GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
+                    [label2 setBackgroundColor:[UIColor clearColor]];
+                    label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
+                    [self addSubview:label2];
+                    
+                    GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
+                    [label3 setBackgroundColor:[UIColor clearColor]];
+                    label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
+                    [self addSubview:label3];
+                    
+                    [self bringSubviewToFront:_button];
+                    
+                    
+                    [arrayButtonsEvents addObject:_button];
+                    
+                    [self addSubview:_button];
+                }
+            }
             
-            [self addSubview:view];
             
-            GISEventLabel *label1 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, _button.frame.origin.y, _button.frame.size.width, 20.0f)];
-            [label1 setBackgroundColor:[UIColor clearColor]];
-            label1.text = [NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName];
-            [self addSubview:label1];
-            
-            GISEventLabel *label2 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label1.frame.origin.y+25.0f, _button.frame.size.width, 20.0f)];
-            [label2 setBackgroundColor:[UIColor clearColor]];
-            label2.text = [NSString stringWithFormat:@"%@ to %@",[NSDate stringTimeOfDate:event.dateTimeBegin], [NSDate stringTimeOfDate:event.dateTimeEnd]];
-            [self addSubview:label2];
-            
-            GISEventLabel *label3 = [[GISEventLabel alloc] initWithFrame:CGRectMake(80, label2.frame.origin.y+25.0f, _button.frame.size.width+10, 20.0f)];
-            [label3 setBackgroundColor:[UIColor clearColor]];
-            label3.text = [NSString stringWithFormat:@"Requested On %@",[self eventDisplayFormat:event.dateDay]];
-            [self addSubview:label3];
-            
-            [self bringSubviewToFront:_button];
-
-            
-            [arrayButtonsEvents addObject:_button];
-            [self addSubview:_button];
+            i++;
         }
+        
     }
 }
 

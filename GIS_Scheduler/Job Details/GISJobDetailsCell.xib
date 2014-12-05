@@ -19,7 +19,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vt-v9-oTK">
-                        <rect key="frame" x="261" y="8" width="99" height="21"/>
+                        <rect key="frame" x="241" y="8" width="99" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -31,6 +31,12 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBS-au-88S">
                         <rect key="frame" x="477" y="8" width="76" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHP-NQ-Fpc">
+                        <rect key="frame" x="345" y="10" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IH-Iw-stT">
@@ -281,6 +287,7 @@
                 <outlet property="serviceProvider_UIView" destination="2AG-iG-MiF" id="FSM-xq-bcJ"/>
                 <outlet property="service_provider_EDIT_Label" destination="9TS-79-uxb" id="BxM-BW-gcN"/>
                 <outlet property="service_provider_Label" destination="Rcr-DC-MYO" id="emN-9Z-y1Q"/>
+                <outlet property="slots_Label" destination="fHP-NQ-Fpc" id="BmU-bf-EUi"/>
                 <outlet property="startTime_EDIT_Label" destination="GgO-LS-AGH" id="5G3-dz-PuE"/>
                 <outlet property="startTime_UIView" destination="aN7-hI-Pcs" id="ZLK-K9-FJe"/>
                 <outlet property="start_time_Label" destination="jGK-PX-2kv" id="MIr-9c-eFm"/>

@@ -96,6 +96,8 @@
         }
     }
     
+    gobj.slots_string=[GISUtility returningstring:[dict objectForKey:kJobDetais_Slots]];
+    
     return gobj;
 }
 

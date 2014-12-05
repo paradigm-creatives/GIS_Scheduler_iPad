@@ -132,7 +132,7 @@
 {
     NSDictionary *dict=[notification userInfo];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-    [paramsDict setObject:[dict valueForKey:@"id"] forKey:KRequestId];
+    [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
 
     
     //[paramsDict setObject:@"2701" forKey:KRequestId];
@@ -141,7 +141,7 @@
     chooseRequestID_string=appDelegate.chooseRequest_ID_String;
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
-    [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+    [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
     
     //[[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
    
@@ -166,6 +166,7 @@
     appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
     appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
     
 }
@@ -363,6 +364,7 @@
         cell.payType_Label.text=temp_obj_jobDetails.payType_string;
         cell.timely_Label.text=temp_obj_jobDetails.timely_string;
         cell.billAmt_Label.text=temp_obj_jobDetails.billAmount_string;
+        cell.slots_Label.text=temp_obj_jobDetails.slots_string;
     }
 
     if (selected_row==indexPath.row && isEdit_Button_Clicked) {
@@ -1095,6 +1097,64 @@
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [textView resignFirstResponder];
 }
+
+-(IBAction)searchButtonPressed:(id)sender{
+    
+    NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
+    [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kSearchReq_Result_RequestId];
+    [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
+    [paramsDict1 setObject:jobDate_Answer_Label.text forKey:kJobDetais_JobDate];
+    [paramsDict1 setObject:serviceProvider_Answer_Label.text forKey:kJobDetais_ServiceProvider];
+    [paramsDict1 setObject:filledUnfilled_Answer_Label.text forKey:kJobDetais_FilledUnFilled];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] filterJobsDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_filter_JobDetails:) failAction:@selector(failuremethod_filter_JobDetails:)];
+
+}
+
+-(void)successmethod_filter_JobDetails:(GISJsonRequest *)response
+{
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSLog(@"successmethod_filter_JobDetails Success---%@",saveUpdateDict);
+    
+    if (responseArray.count<1) {
+        
+        [self removeLoadingView];
+
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+        return;
+    }
+    
+    if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
+        
+        [self removeLoadingView];
+        [[GISStoreManager sharedManager]removeJobDetailsObjects];
+        GISJobDetailsStore *jobDetailsStore;
+        jobDetailsStore=[[GISJobDetailsStore alloc]initWithJsonDictionary:response.responseJson];
+        
+        jobDetails_Array=[[NSMutableArray alloc] init];
+        jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
+        
+        [jobDetails_tableView reloadData];
+
+        
+    }else{
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+    }
+    createJobs_UIVIew.hidden=YES;
+}
+
+-(void)failuremethod_filter_JobDetails:(GISJsonRequest *)response
+{
+    createJobs_UIVIew.hidden=YES;
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+}
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
