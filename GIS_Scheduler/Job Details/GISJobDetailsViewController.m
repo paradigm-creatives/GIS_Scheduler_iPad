@@ -81,6 +81,8 @@
         //[self getJobDetails_Data];
         [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
     }
+    
+    createJobdate_Array = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -116,6 +118,9 @@
         
         [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
     }
+    
+    if([createJobdate_Array count]>0)
+       [createJobdate_Array removeAllObjects];
 }
 
 
@@ -990,24 +995,29 @@
         count=[numberOfServiceProviders_string intValue];
     }
    
-    for (int i=0;i<[createJobsCheckDictionary count];i++)
+    for (int i=0;i<[createJobdate_Array count];i++)
     {
-        GISDatesAndTimesObject *dobj=[detail_mut_array objectAtIndex:[[createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)i]]intValue ]];
-        for (int i=0; i<count; i++) {
+        if([[createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%@",[createJobdate_Array objectAtIndex:i]]] length]>0){
             
-            materialDetails_Listdict=[[NSMutableDictionary alloc]init];
+            GISDatesAndTimesObject *dobj=[detail_mut_array objectAtIndex:[[createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%@", [createJobdate_Array objectAtIndex:i]]]intValue]];
             
-            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.dateTime_ID_String] forKey:kDateTime_Detail_DateTimeId];
-            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.date_String] forKey:kSearchReq_Result_JobDate];
-            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.startTime_String] forKey:kSearchReq_SP_StartTime];
-            [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.endTime_String] forKey:kSearchReq_SP_EndTime];
-            [materialDetails_Listdict  setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
-            [materialDetails_Listdict  setObject:payLevel_ID_temp_String forKey:kPayLevelID];
-            [materialDetails_Listdict  setObject:billLevel_ID_temp_String forKey:kBillingLevelID];
+            NSLog(@"dict value %@",[createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%@",[createJobdate_Array objectAtIndex:i]]] );
             
-            [materialDetails_Array addObject:materialDetails_Listdict];
+            for (int j=0; j<count; j++) {
+                
+                materialDetails_Listdict=[[NSMutableDictionary alloc]init];
+                
+                [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.dateTime_ID_String] forKey:kDateTime_Detail_DateTimeId];
+                [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.date_String] forKey:kSearchReq_Result_JobDate];
+                [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.startTime_String] forKey:kSearchReq_SP_StartTime];
+                [materialDetails_Listdict  setObject:[GISUtility returningstring:dobj.endTime_String] forKey:kSearchReq_SP_EndTime];
+                [materialDetails_Listdict  setObject:typeOfService_ID_temp_String forKey:kViewSchedule_SubroleID];
+                [materialDetails_Listdict  setObject:payLevel_ID_temp_String forKey:kPayLevelID];
+                [materialDetails_Listdict  setObject:billLevel_ID_temp_String forKey:kBillingLevelID];
+                
+                [materialDetails_Array addObject:materialDetails_Listdict];
+            }
         }
-        
     }
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -1052,12 +1062,17 @@
 
 -(void)check_uncheck_createjobsButtonPresses:(id)sender
 {
+    if(createJobsCheckDictionary == nil){
+        [createJobdate_Array removeAllObjects];
+    }
     if ([createJobsCheckDictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]]) {
         [createJobsCheckDictionary removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
+        [createJobdate_Array removeObject:[NSString stringWithFormat:@"%d",[sender tag]]];
     }
     else
     {
         [createJobsCheckDictionary setObject:[NSString stringWithFormat:@"%ld",(long)[sender tag]] forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
+        [createJobdate_Array addObject:[NSString stringWithFormat:@"%d",[sender tag]]];
     }
     [createJObs_tableView reloadData];
 }

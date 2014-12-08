@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Contacts and Billing/GISContactsAndBillingViewController.m"
-            timestampString = "439475953.949744"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439718304.748817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
-            landmarkName = "-sendTheSelectedPopOverData:value:"
+            startingLineNumber = "1063"
+            endingLineNumber = "1063"
+            landmarkName = "-check_uncheck_createjobsButtonPresses:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Contacts and Billing/GISContactsAndBillingViewController.m"
-            timestampString = "439475953.949744"
+            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
+            timestampString = "439723015.516912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
-            landmarkName = "-successmethod_getEventTypeByUnitID:"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

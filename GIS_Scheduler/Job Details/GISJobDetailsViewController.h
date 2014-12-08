@@ -39,7 +39,7 @@
     NSString *payType_temp_string;
     BOOL isDelete;
     int currentObjTag_toDelete;
-    int currentObjTag_Deleted;
+    int currentObjTagCreated;
     IBOutlet UIView *jobChangeHistory_background_UIView;
      IBOutlet UIView *jobChangeHistory_foreground_UIView;
     
@@ -82,6 +82,7 @@
     
     NSString *serviceProvider_ID_string;
     NSString *filledUnfilled_ID_string;
+    NSMutableArray *createJobdate_Array;
 }
 
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
