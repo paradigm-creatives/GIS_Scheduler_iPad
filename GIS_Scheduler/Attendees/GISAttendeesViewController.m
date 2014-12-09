@@ -831,17 +831,17 @@ int row_count = 2;
         }
         else if([attendeesObject.expectedNo_ID_String length]<1)
         {
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_no_of_expected_attendees", TABLE, nil)];
-            [self removeLoadingView];
-            return;
+           // [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_no_of_expected_attendees", TABLE, nil)];
+            //[self removeLoadingView];
+            //return;
         }
         else if([unitString isEqualToString:@".edu"])
         {
             if([attendeesObject.primaryAudience_String length]<1)
             {
-                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_primary_audience", TABLE, nil)];
-                [self removeLoadingView];
-                return;
+                //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_primary_audience", TABLE, nil)];
+               // [self removeLoadingView];
+               // return;
             }
         }
         
@@ -864,21 +864,23 @@ int row_count = 2;
                 if (isValidate_Mandatory) {
                     max_count++;
                     if (([gisList.firstname_String length]==0) || ([gisList.lastname_String length]==0) || ([gisList.email_String length]==0)){
-                        [self removeLoadingView];
+                       // [self removeLoadingView];
                         
                         if(([gisList.firstname_String length]==0)&&([gisList.lastname_String length]==0)&&([gisList.email_String length]==0))
                         {
-                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"provide atleast 2 attendees", TABLE, nil)];
-                            return;
+                            //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"provide atleast 2 attendees", TABLE, nil)];
+                           // return;
                         }
-                        if([gisList.firstname_String length]==0)
-                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_first_name", TABLE, nil)];
-                        else if([gisList.lastname_String length]==0)
-                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_last_name", TABLE, nil)];
-                        else if([gisList.email_String length]==0)
-                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_email", TABLE, nil)];
+                        if([gisList.firstname_String length]==0){
+                            //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_first_name", TABLE, nil)];
+                        }else if([gisList.lastname_String length]==0){
+                           // [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_last_name", TABLE, nil)];
+                        }
+                         else if([gisList.email_String length]==0){
+                            //[GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_enter_email", TABLE, nil)];
+                         }
                         
-                        return;
+                        //return;
                     }
                     if ([gisList.email_String length])
                     {
@@ -887,9 +889,9 @@ int row_count = 2;
                         if ([emailTest evaluateWithObject:gisList.email_String] != YES)
                         {
                             [self resignCurrentTextField];
-                            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_Enter_Valid_Email", TABLE, nil)];
-                            [self removeLoadingView];
-                            return;
+                           // [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"please_Enter_Valid_Email", TABLE, nil)];
+                            //[self removeLoadingView];
+                           // return;
                         }
                     }
                 }
