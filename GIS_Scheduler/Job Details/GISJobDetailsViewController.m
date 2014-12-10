@@ -203,10 +203,13 @@
             if([appDelegate.jobDetailsArray count]>0)
                 [appDelegate.jobDetailsArray removeAllObjects];
             
-            jobDetails_Array=[[NSMutableArray alloc] init];
-            jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
+            if([jobDetails_Array count]>0)
+                [jobDetails_Array removeAllObjects];
+
             
-            appDelegate.jobDetailsArray = jobDetails_Array;
+                [jobDetails_Array addObjectsFromArray:[[GISStoreManager sharedManager]getJobDetailsObjects]];
+            
+            [appDelegate.jobDetailsArray addObjectsFromArray:jobDetails_Array];
             
             [jobDetails_tableView reloadData];
             

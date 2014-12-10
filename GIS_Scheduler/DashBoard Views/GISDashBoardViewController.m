@@ -1114,12 +1114,6 @@
         [paramsDict setObject:login_Obj.requestorID_string forKey:@"id"];
         [paramsDict setObject:login_Obj.token_string forKey:@"token"];
         [[GISServerManager sharedManager] getRequestNumbersData:self withParams:paramsDict finishAction:@selector(successmethod_chooseRequest:) failAction:@selector(failuremethod_chooseRequest:)];
-
-        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
-        [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
-        [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
-        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
-
     }
     else if (!tableHeader3_UIView.isHidden){
         
@@ -1145,6 +1139,10 @@
     id array=response.responseJson;
     NSDictionary *dictHere=[array lastObject];
     
+    NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
+    NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
+    GISLoginDetailsObject *login_Obj=[requetId_array lastObject];
+    
     GISDropDownStore *dropDownStore;
     if ([[dictHere objectForKey:kStatusCode] isEqualToString:@"200"]) {
         
@@ -1165,7 +1163,11 @@
             [[GISDatabaseManager sharedDataManager] insertChooseRequestData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_CHOOSE_REQUEST(ID,TYPE,VALUE) VALUES (?,?,?)"]];
         }
         
-        [self removeLoadingView];
+        NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
+        [paramsDicts setObject:login_Obj.requestorID_string forKey:KRequestorId];
+        [paramsDicts setObject:login_Obj.token_string forKey:kAttendees_token];
+        [[GISServerManager sharedManager] getSchedulerNewandModifiedRequests:self withParams:paramsDicts finishAction:@selector(successmethod_NewModifiedRequests:) failAction:@selector(failuremethod_NewModifiedRequests:)];
+
     }else{
         
         [self removeLoadingView];
