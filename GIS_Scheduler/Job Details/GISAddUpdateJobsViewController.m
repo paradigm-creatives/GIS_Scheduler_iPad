@@ -123,6 +123,16 @@
             cell.cancelled_answer_label.text=addUpdateObj.cancelled_string;
         if ([addUpdateObj.payType_string length])
             cell.payType_answer_label.text=addUpdateObj.payType_string;
+        
+        if ([addUpdateObj.timely_string length]){
+            cell.timely_answer_label.text=addUpdateObj.timely_string;
+        }else{
+            addUpdateObj.timely_string = @"UnTimely";
+            addUpdateObj.timely_ID_string = @"U";
+            cell.timely_answer_label.text=addUpdateObj.timely_string;
+        }
+        
+
         if ([addUpdateObj.outOfAgency_string length])
         {
             if ([addUpdateObj.outOfAgency_string isEqualToString:@"1"]) {
@@ -266,7 +276,7 @@
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.cancelled_ID_string] forKey:kCancel];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payType_ID_string] forKey:kViewSchedule_PayTypeID];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.outOfAgency_string] forKey:kOutToAgency];
-        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timelyandHalf_string] forKey:kJobDetais_Timely];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.timely_ID_string] forKey:kJobDetais_Timely];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.parking_string] forKey:kChooseReqDetails_parking];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.mileage_string] forKey:kMyJobs_Mileage];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billAmount_string] forKey:kJobDetais_BillAmount];
@@ -300,26 +310,52 @@
     GISPopOverTableViewController *tableViewController1 = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController1.popOverDelegate=self;
     
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    
     if([sender tag]==1)
     {
         btnTag=1;
+        
         tableViewController1.view_String=@"datestimes";
+        tableViewController1.dateTimeMoveUp_string = startDate_temp_String;
+        if (![startDate_temp_String length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
         
     }
     else if([sender tag]==2)
     {
         btnTag=2;
         tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=startTime_temp_string;
+        [formatter setDateFormat:@"hh:mm a"];
+        if (![startTime_temp_string length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
+
     }
     else if([sender tag]==3)
     {
         btnTag=3;
         tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=endTime_temp_string;
+        [formatter setDateFormat:@"hh:mm a"];
+        if (![endTime_temp_string length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
+
     }
     else if([sender tag]==4)
     {
         btnTag=4;
         tableViewController1.view_String=@"timesdates";
+        tableViewController1.dateTimeMoveUp_string=callIntime_temp_string;
+        [formatter setDateFormat:@"hh:mm a"];
+        if (![callIntime_temp_string length]) {
+            tableViewController1.dateTimeMoveUp_string=[formatter stringFromDate:[NSDate date]];
+        }
+
     }
     else if ([sender tag]==5)
     {
@@ -393,6 +429,11 @@
         btnTag=18;
         tableViewController1.popOverArray=expStatus_Array;
     }
+    else if([sender tag]==118)
+    {
+        btnTag=118;
+        tableViewController1.popOverArray=cancelled_Array;
+    }
     
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
@@ -404,18 +445,19 @@
 -(void)sendTheSelectedPopOverData:(NSString *)id_str value:(NSString *)value_str
 {
     
-    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:1.0];
     
     if(btnTag==1)
     {
         addUpdateObj.jobDate_string=value_str;
+        startDate_temp_String = value_str;
     }
     else if(btnTag==2)
     {
         startTime_temp_string = value_str;
         
         if ([startTime_temp_string length] && [endTime_temp_string length]){
-            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            if ([GISUtility timeComparision :startTime_temp_string :endTime_temp_string])
             {}
             else
             {
@@ -432,7 +474,7 @@
         endTime_temp_string = value_str;
        
         if ([startTime_temp_string length] && [endTime_temp_string length]){
-            if ([GISUtility dateComparision:startTime_temp_string :endTime_temp_string:YES])
+            if ([GISUtility timeComparision :startTime_temp_string :endTime_temp_string])
             {}
             else
             {
@@ -451,7 +493,7 @@
         callIntime_temp_string = value_str;
         
         if ([endTime_temp_string length] && [callIntime_temp_string length]){
-            if ([GISUtility dateComparision:endTime_temp_string :callIntime_temp_string:YES])
+            if ([GISUtility timeComparision :endTime_temp_string :callIntime_temp_string])
             {}
             else
             {
@@ -533,6 +575,14 @@
     {
         addUpdateObj.expStatus_string=value_str;
         addUpdateObj.expStatus_ID_string=id_str;
+    }
+    else if(btnTag == 118)
+    {
+        addUpdateObj.timely_string=value_str;
+        if([value_str isEqualToString:@"Timely"])
+            addUpdateObj.timely_ID_string=@"T";
+        else
+            addUpdateObj.timely_ID_string=@"U";
     }
     [addUpdateJobs_tableView reloadData];
 }

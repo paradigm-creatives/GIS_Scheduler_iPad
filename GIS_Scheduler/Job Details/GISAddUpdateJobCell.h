@@ -49,6 +49,7 @@
 @property(nonatomic,strong)IBOutlet UILabel *timelyAndHalf_label;
 @property(nonatomic,strong)IBOutlet UILabel *yes_timelyAndHalf_label;
 @property(nonatomic,strong)IBOutlet UILabel *no_timelyAndHalf_label;
+@property(nonatomic,strong)IBOutlet UILabel *timely_answer_label;
 
 
 @property(nonatomic,strong)IBOutlet UILabel *billingPaymentInfo_label;

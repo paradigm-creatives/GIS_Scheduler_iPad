@@ -890,7 +890,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"textViewDidBeginEditing:");
     
-    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 595)
+    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 5)
     {
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
@@ -906,7 +906,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView{
     NSLog(@"textViewDidEndEditing:");
     
-    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 595)
+    if(textView.tag == 569 || textView.tag == 555 || textView.tag == 5)
     {
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];

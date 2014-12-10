@@ -861,7 +861,7 @@
     NSRange replacementTextRange = [text rangeOfCharacterFromSet:doneButtonCharacterSet];
     NSUInteger location = replacementTextRange.location;
     
-    if (textView.text.length + text.length > 140){
+    if (textView.text.length + text.length > 540){
         if (location != NSNotFound){
             [textView resignFirstResponder];
         }
@@ -885,7 +885,7 @@
     if(textField.tag == 666){
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-290",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
-    }else{
+    }else if(textField.tag != 100 && textField.tag != 101){
         
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"-210",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
@@ -894,9 +894,11 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // Get the cell in which the textfield is embedded
-    NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
+    if(textField.tag != 100 && textField.tag != 101){
+        // Get the cell in which the textfield is embedded
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"0",@"yValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kMoveUp object:nil userInfo:infoDict];
+    }
     
     
     if(textField.tag == 100)

@@ -31,7 +31,7 @@
 @property(nonatomic,strong)NSString *payStatus_string;
 @property(nonatomic,strong)NSString *expStatus_string;
 @property(nonatomic,strong)NSString *billLevel_string;
-
+@property(nonatomic,strong)NSString *timely_string;
 
 @property(nonatomic,strong)NSString *billLevel_ID_string;
 @property(nonatomic,strong)NSString *callInTime_ID_string;
@@ -48,6 +48,7 @@
 @property(nonatomic,strong)NSString *agencyFee_ID_string;
 @property(nonatomic,strong)NSString *payStatus_ID_string;
 @property(nonatomic,strong)NSString *expStatus_ID_string;
+@property(nonatomic,strong)NSString *timely_ID_string;
 
 
 @end

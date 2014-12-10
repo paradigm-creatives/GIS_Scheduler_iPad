@@ -31,14 +31,6 @@
                         <rect key="frame" x="277" y="336" width="28" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radio_button_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bc1-gw-w6a">
-                        <rect key="frame" x="566" y="336" width="28" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radio_button_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="sdy-WX-U8P">
-                        <rect key="frame" x="663" y="336" width="28" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Out Agency :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGH-wM-Ygc">
                         <rect key="frame" x="28" y="340" width="138" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -83,50 +75,13 @@
                             <action selector="radioButton_Pressed:" destination="-1" eventType="touchUpInside" id="Hab-KE-v2r"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timely and 1/2 :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGD-8m-XAE">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timely :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGD-8m-XAE">
                         <rect key="frame" x="414" y="340" width="138" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UnTimely" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YV2-XZ-oxf">
-                        <rect key="frame" x="691" y="340" width="68" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timely" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-52-YkU">
-                        <rect key="frame" x="596" y="341" width="51" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krL-fm-EH7">
-                        <rect key="frame" x="663" y="336" width="67" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="radioButton_Pressed:" destination="-1" eventType="touchUpInside" id="3sD-kV-e7i"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA1-em-o9z">
-                        <rect key="frame" x="563" y="336" width="65" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="radioButton_Pressed:" destination="-1" eventType="touchUpInside" id="7Vc-BQ-jEN"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Job Date :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OV-RN-2W2">
                         <rect key="frame" x="79" y="70" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -467,6 +422,33 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropdown.png" translatesAutoresizingMaskIntoConstraints="NO" id="Em0-Ul-RZT">
                         <rect key="frame" x="692" y="130" width="9" height="5"/>
                     </imageView>
+                    <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xDO-qT-qYg">
+                        <rect key="frame" x="564" y="335" width="149" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" tag="118" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLc-Rg-6hj">
+                        <rect key="frame" x="564" y="335" width="149" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="bgC-re-d0M"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropdown.png" translatesAutoresizingMaskIntoConstraints="NO" id="IPj-JO-O9U">
+                        <rect key="frame" x="692" y="347" width="9" height="5"/>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-iL-96f">
+                        <rect key="frame" x="574" y="341" width="113" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -483,8 +465,6 @@
                 <outlet property="jobInfo_label" destination="TjA-Pt-gwW" id="seR-9O-wHG"/>
                 <outlet property="no_outAgency_ImageView" destination="ax7-JM-LmX" id="fq3-zK-vig"/>
                 <outlet property="no_outAgency_label" destination="Xel-Od-cU5" id="8mr-EZ-mSl"/>
-                <outlet property="no_timelyAndHalf_ImageView" destination="sdy-WX-U8P" id="gy1-CZ-o5S"/>
-                <outlet property="no_timelyAndHalf_label" destination="YV2-XZ-oxf" id="oNW-JL-RVL"/>
                 <outlet property="outAgency_label" destination="yGH-wM-Ygc" id="SNg-09-cKy"/>
                 <outlet property="payLevel_answer_label" destination="Uaz-Gx-yLh" id="oZG-ep-F4m"/>
                 <outlet property="payLevel_label" destination="Lta-sT-e2a" id="Xvp-0Q-xRz"/>
@@ -495,12 +475,11 @@
                 <outlet property="startTime_answer_label" destination="YYR-hD-B2z" id="9Vz-rc-s9X"/>
                 <outlet property="startTime_label" destination="Cog-gc-Sfi" id="f12-DA-i3G"/>
                 <outlet property="timelyAndHalf_label" destination="BGD-8m-XAE" id="oXq-d8-CsT"/>
+                <outlet property="timely_answer_label" destination="vvG-iL-96f" id="30I-vH-1EJ"/>
                 <outlet property="typeOfServiceProvider_answer_label" destination="ILD-tt-ikA" id="ECI-xc-WzU"/>
                 <outlet property="typeOfServiceProvider_label" destination="GJ3-yy-Ecc" id="3NS-CU-tCv"/>
                 <outlet property="yes_outAgency_ImageView" destination="9za-SK-a27" id="7IE-Cn-ru6"/>
                 <outlet property="yes_outAgency_label" destination="WHN-OZ-50U" id="HSX-cn-vVh"/>
-                <outlet property="yes_timelyAndHalf_ImageView" destination="Bc1-gw-w6a" id="duh-AC-KBd"/>
-                <outlet property="yes_timelyAndHalf_label" destination="ed2-52-YkU" id="cEy-Hb-UU3"/>
             </connections>
         </tableViewCell>
     </objects>
