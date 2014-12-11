@@ -34,6 +34,8 @@
     // Do any additional setup after loading the view from its nib.
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.filteredArray = [[NSMutableArray alloc] init];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -85,6 +87,25 @@
     
     if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
         popOverTableView.scrollEnabled=NO;
+        popOverSearchBar.hidden = YES;
+        CGRect frame =  self.popOverView.frame;
+        frame.origin.y = 0;
+        frame.size.height = 210;
+        self.popOverTableView.frame = frame;
+        [self.popOverView addSubview:datePicker];
+    }else{
+        
+        [datePicker removeFromSuperview];
+    }
+    if(!([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]] || [[self.popOverArray lastObject] isKindOfClass:[GISContactsInfoObject class]] ||
+       [[self.popOverArray lastObject] isKindOfClass:[GISServiceProviderObject class]]))
+    {
+        popOverSearchBar.hidden = YES;
+        CGRect frame =  self.popOverView.frame;
+        frame.origin.y = 0;
+        frame.size.height = 90;
+        self.popOverView.frame = frame;
+        
     }
 }
 
@@ -107,11 +128,15 @@
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectio
+{
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+	{
+        return [self.filteredArray count];
+    }
     
     if ([self.view_String isEqualToString:@"datestimes"]||[self.view_String isEqualToString:@"timesdates"]) {
-        return 1;
+        return 0;
     }
     return [self.popOverArray count];
 }
@@ -144,7 +169,16 @@
     }
     else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
     {
-        GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        GISServiceProviderObject *spObj;
+        
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            spObj = [self.filteredArray objectAtIndex:[indexPath row]];
+        }else{
+            
+            spObj=[self.popOverArray objectAtIndex:indexPath.row];
+            
+        }
         cell.textLabel.text=spObj.service_Provider_String;
     }
     else
@@ -187,6 +221,59 @@
     }
     
 }
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    [self.filteredArray removeAllObjects];
+
+	
+    if([[self.popOverArray lastObject] isKindOfClass:[GISServiceProviderObject class]])
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"service_Provider_String contains[c] %@",searchText];
+        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+        
+        self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
+    }
+    if([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]])
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"value4_String contains[c] %@",searchText];
+        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+        
+        self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
+
+    }
+    else if([[self.popOverArray lastObject] isKindOfClass:[GISContactsInfoObject class]])
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"contactNo_String contains[c] %@",searchText];
+        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+        
+        self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
+    }
+
+}
+
+
+#pragma mark - UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    // Tells the table data source to reload when scope bar selection changes
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
 
 
 - (void)didReceiveMemoryWarning

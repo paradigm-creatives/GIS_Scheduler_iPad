@@ -12,7 +12,7 @@
 @protocol PopOverSelected_Protocol <NSObject>
 -(void)sendTheSelectedPopOverData: (NSString *)id_str value:(NSString *)value_str;
 @end
-@interface GISPopOverTableViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface GISPopOverTableViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
 {
     IBOutlet UITableView *popOverTableView;
 
@@ -22,6 +22,8 @@
     
     NSDateFormatter *dateformatter;
     
+    IBOutlet UISearchBar *popOverSearchBar;
+    
 }
 //+(GISPopOverTableViewController *)sharedManager;
 @property(readwrite,nonatomic)int tagValue;
@@ -29,11 +31,13 @@
 @property(nonatomic,strong)NSString *value_String;
 @property(nonatomic,strong)NSString *dateTimeMoveUp_string;
 @property(nonatomic,strong) IBOutlet UITableView *popOverTableView;
+@property(nonatomic,strong) IBOutlet UITableView *popOver_TableView;
 
 @property(nonatomic,strong) id <PopOverSelected_Protocol> popOverDelegate;
 @property(nonatomic,strong)NSMutableArray *popOverArray;
 @property (weak,nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstraint;
 @property(nonatomic,strong)NSMutableArray *noOfAttendeesIdArray;
-
+@property (strong,nonatomic) NSMutableArray *filteredArray;
+@property(nonatomic,strong) IBOutlet UIView *popOverView;
 
 @end
