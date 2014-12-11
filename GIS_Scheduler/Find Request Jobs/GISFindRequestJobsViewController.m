@@ -141,16 +141,47 @@
         cell.endDate_Answer_label_.text=[GISUtility returningstring:findReqObj.endDate_string];
         cell.startTime_Answer_label_.text=[GISUtility returningstring:findReqObj.startTime_string];
         cell.endTime_Answer_label_.text=[GISUtility returningstring:findReqObj.endTime_string];
-        cell.requestorType_Answer_label_.text=[GISUtility returningstring:findReqObj.requestorType_string];
-        cell.requestor_Answer_label_.text=[GISUtility returningstring:findReqObj.requestor_string];
-        cell.registeredConsumer_Answer_label_.text=[GISUtility returningstring:findReqObj.registeredConsumers_string];
-        cell.generalLocation_Answer_label_.text=[GISUtility returningstring:findReqObj.generalLocation_string];
-        cell.eventType_Answer_label_.text=[GISUtility returningstring:findReqObj.evenyType_string];
-        cell.payLevel_Answer_label_.text=[GISUtility returningstring:findReqObj.payLevel_string];
-        cell.primaryAudience_Answer_label_.text=[GISUtility returningstring:findReqObj.primaryAudience_string];
-        cell.model_Answer_label_.text=[GISUtility returningstring:findReqObj.model_string];
         
+        if ([findReqObj.requestorType_string length])
+            cell.requestorType_Answer_label_.text = [GISUtility returningstring:findReqObj.requestorType_string];
+        else
+            cell.requestorType_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
         
+        if ([findReqObj.requestor_string length])
+            cell.requestor_Answer_label_.text=[GISUtility returningstring:findReqObj.requestor_string];
+        else
+            cell.requestor_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        if ([findReqObj.registeredConsumers_string length])
+            cell.registeredConsumer_Answer_label_.text = [GISUtility returningstring:findReqObj.registeredConsumers_string];
+        else
+            cell.registeredConsumer_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        if ([findReqObj.generalLocation_string length])
+            cell.generalLocation_Answer_label_.text = [GISUtility returningstring:findReqObj.generalLocation_string];
+        else
+           cell.generalLocation_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        if ([findReqObj.evenyType_string length])
+            cell.eventType_Answer_label_.text = [GISUtility returningstring:findReqObj.evenyType_string];
+        else
+            cell.eventType_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+
+        if ([findReqObj.payLevel_string length])
+            cell.payLevel_Answer_label_.text = [GISUtility returningstring:findReqObj.payLevel_string];
+        else
+            cell.payLevel_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
+        if ([findReqObj.primaryAudience_string length])
+            cell.primaryAudience_Answer_label_.text = [GISUtility returningstring:findReqObj.primaryAudience_string];
+        else
+            cell.primaryAudience_Answer_label_.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+
+        if ([findReqObj.model_string length])
+            cell.model_Answer_label_.text = [GISUtility returningstring:findReqObj.model_string];
+        else
+            cell.model_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+
         
         if ([findReqObj.openToPublic_string length])
         {
@@ -177,14 +208,42 @@
     cell.endDate_JobData_Answer_label_.text=[GISUtility returningstring:findReqObj.endDate_JobData_string];
     cell.startTime_JobData_Answer_label_.text=[GISUtility returningstring:findReqObj.startTime_JobData_string];
     cell.endTime_JobData_Answer_label_.text=[GISUtility returningstring:findReqObj.endTime_JobData_string];
-    cell.serviceProviderType_Answer_label_.text=[GISUtility returningstring:findReqObj.serviceProviderType_string];
-    cell.serviceProvider_Answer_label_.text=[GISUtility returningstring:findReqObj.serviceProvider_string];
-    cell.payType_Answer_label_.text=[GISUtility returningstring:findReqObj.payType_string];
-    cell.createdBy_Answer_label_.text=[GISUtility returningstring:findReqObj.createdBy_string];
-    cell.payLevel_JobDate_Answer_label_.text=[GISUtility returningstring:findReqObj.payLevel_JobData_string];
-    cell.billLevel_Answer_label_.text=[GISUtility returningstring:findReqObj.billLevel_string];
+    
+    if ([findReqObj.serviceProviderType_string length])
+        cell.serviceProviderType_Answer_label_.text = [GISUtility returningstring:findReqObj.serviceProviderType_string];
+    else
+        cell.serviceProviderType_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    if ([findReqObj.serviceProvider_string length])
+        cell.serviceProvider_Answer_label_.text = [GISUtility returningstring:findReqObj.serviceProvider_string];
+
+    else
+        cell.serviceProvider_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    if ([findReqObj.payType_string length])
+        cell.payType_Answer_label_.text = [GISUtility returningstring:findReqObj.payType_string];
+    else
+        cell.payType_Answer_label_.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    if ([findReqObj.createdBy_string length])
+        cell.createdBy_Answer_label_.text = [GISUtility returningstring:findReqObj.createdBy_string];
+    else
+        cell.createdBy_Answer_label_.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    if ([findReqObj.payLevel_JobData_string length])
+         cell.payLevel_JobDate_Answer_label_.text = [GISUtility returningstring:findReqObj.payLevel_JobData_string];
+    else
+         cell.payLevel_JobDate_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+
+    if ([findReqObj.billLevel_string length])
+        cell.billLevel_Answer_label_.text = [GISUtility returningstring:findReqObj.billLevel_string];
+    else
+        cell.billLevel_Answer_label_.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+
     cell.cancelDate_Answer_label_.text=[GISUtility returningstring:findReqObj.cancelDate_string];
+    
     for (int j=1; j<=7; j++) {
+        
         NSString *str=[findReqObj.weekDays_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)j]];
         if ([str isEqualToString:@"Monday"]) {
             cell.monday_ImageView_.image=[UIImage imageNamed:@"checked.png"];

@@ -6,48 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m"
-            timestampString = "439908076.953403"
+            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
+            timestampString = "439986482.678925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "-saveButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m"
-            timestampString = "439908076.953403"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "-saveButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m"
-            timestampString = "439908076.953403"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "-saveButtonPressed:"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439908697.655435"
+            timestampString = "439986535.593648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "893"
-            endingLineNumber = "893"
-            landmarkName = "-successmethod_getRequestDetails:"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439908715.351984"
+            timestampString = "439986715.983773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "932"
-            endingLineNumber = "932"
-            landmarkName = "-successmethod_BillingsData:"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,13 +58,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439908731.417837"
+            timestampString = "439986758.887745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "968"
-            endingLineNumber = "968"
-            landmarkName = "-loadTableWithBuildingdata:"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GISSummaryViewController tableView:cellForRowAtIndexPath:]"
+                  moduleName = "GIS_Scheduler"
+                  urlString = "file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Summary/GISSummaryViewController.m"
+                  timestampString = "439992768.280596"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "377"
+                  endingLineNumber = "377"
+                  offsetFromSymbolStart = "15582">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GISSummaryViewController tableView:cellForRowAtIndexPath:]"
+                  moduleName = "GIS_Scheduler"
+                  urlString = "file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Summary/GISSummaryViewController.m"
+                  timestampString = "439992768.28091"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "377"
+                  endingLineNumber = "377"
+                  offsetFromSymbolStart = "16069">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,23 +104,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439908742.919083"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1072"
-            endingLineNumber = "1072"
-            landmarkName = "-successmethod_get_Attendees_Details:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909065.828551"
+            timestampString = "439987706.829754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1115"
@@ -138,12 +120,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909065.828551"
+            timestampString = "439987416.549478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1159"
-            endingLineNumber = "1159"
-            landmarkName = "-successmethod_getJobDetails_data:"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,12 +136,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909065.828551"
+            timestampString = "439987520.362998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1203"
-            endingLineNumber = "1203"
-            landmarkName = "-failuremethod_getJobDetails_data:"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
+            landmarkName = "-successmethod_getRequestEventDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,12 +152,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909065.828551"
+            timestampString = "439987532.135988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1199"
-            endingLineNumber = "1199"
-            landmarkName = "-failuremethod_getJobDetails_data:"
+            startingLineNumber = "893"
+            endingLineNumber = "893"
+            landmarkName = "-successmethod_getRequestDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,12 +168,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909335.799813"
+            timestampString = "439987551.792024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "732"
-            endingLineNumber = "732"
-            landmarkName = "-submitButnPressed:"
+            startingLineNumber = "932"
+            endingLineNumber = "932"
+            landmarkName = "-successmethod_BillingsData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -202,12 +184,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Summary/GISSummaryViewController.m"
-            timestampString = "439909358.551658"
+            timestampString = "439987638.776458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "757"
-            endingLineNumber = "757"
-            landmarkName = "-successmethod_saveUpdateRequest:"
+            startingLineNumber = "1072"
+            endingLineNumber = "1072"
+            landmarkName = "-successmethod_get_Attendees_Details:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,12 +200,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
-            timestampString = "439912245.250442"
+            timestampString = "439990905.361669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "1250"
+            endingLineNumber = "1250"
+            landmarkName = "-successmethod_deleteJobs:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439990905.361669"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "766"
+            endingLineNumber = "766"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439989081.911929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439991176.431793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439991249.216016"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-getJobDetails_Data:::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439991565.813434"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "-successmethod_getJobDetails_data:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/Job Details/GISJobDetailsViewController.m"
+            timestampString = "439992762.961578"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1258"
+            endingLineNumber = "1258"
+            landmarkName = "-successmethod_deleteJobs:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

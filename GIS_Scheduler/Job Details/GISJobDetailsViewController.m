@@ -116,12 +116,20 @@
     if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
         chooseRequestID_string=appDelegate.chooseRequest_ID_String;
         
-        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
 
     }
     
     if([createJobdate_Array count]>0)
        [createJobdate_Array removeAllObjects];
+    
+    billLevel_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    typeOfServiceProviders_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    payLevel_Answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    serviceProvider_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    filledUnfilled_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+   
 }
 
 
@@ -746,23 +754,17 @@
         }
         else
         {
-            NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:alertView.tag inSection:0];
-            GISJobDetailsCell *cell = (GISJobDetailsCell *)[jobDetails_tableView cellForRowAtIndexPath:selectedIndexPath];
+            NSMutableDictionary *delete_eventdict;
+            delete_eventdict=[[NSMutableDictionary alloc]init];
             
-            cell.job_ID_Label.font = [GISFonts smalltextBold];
-            cell.job_date_Label.font = [GISFonts smallBold];
-            cell.start_time_Label.font = [GISFonts smalltextBold];
-            cell.end_time_Label.font = [GISFonts smalltextBold];
-            cell.typeOf_service_Label.font = [GISFonts smalltextBold];
-            cell.service_provider_Label.font = [GISFonts smalltextBold];
-            cell.payType_Label.font = [GISFonts smalltextBold];
-            cell.timely_Label.font = [GISFonts smalltextBold];
-            cell.billAmt_Label.font = [GISFonts smalltextBold];
-            cell.billAmt_Label.textColor = [UIColor blackColor];
-            cell.job_ID_Label.textColor = [UIColor blackColor];
-
-            //[jobDetails_Array removeObjectAtIndex:alertView.tag];
-            //[jobDetails_tableView reloadData];
+            GISJobDetailsObject *tempObj=[jobDetails_Array objectAtIndex:alertView.tag];
+            
+            [delete_eventdict setObject:tempObj.jobID_string forKey:kJobDetais_JobID];
+            [delete_eventdict setObject:@"true" forKey:kJobDetais_deleteJob];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [[GISServerManager sharedManager] deleteJobs:self withParams:delete_eventdict finishAction:@selector(successmethod_deleteJobs:) failAction:@selector(failuremethod_deleteJobs:)];
+            
         }
     }
 }
@@ -933,6 +935,12 @@
 
 -(IBAction)createJobsButton_Pressed:(id)sender
 {
+    billLevel_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    typeOfServiceProviders_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    payLevel_Answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    noOfServiceProviders_TextField.text = @"";
+    
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"]){
         [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_choose_request", TABLE, nil)]; return;
@@ -1233,6 +1241,28 @@
 }
 
 -(void)failuremethod_getRequestDetails:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+}
+
+-(void)successmethod_deleteJobs:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+     NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
+    
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSString *respnseCode = [[saveUpdateDict objectForKey:kStatusCode] stringValue];
+    if ([respnseCode isEqualToString:@"200"]) {
+        
+        [self getJobDetails_Data :[GISUtility returningstring:appDelegate.chooseRequest_ID_String] :login_Obj.token_string:@"":@"":@""];
+
+    }
+}
+-(void)failuremethod_deleteJobs:(GISJsonRequest *)response
 {
     [self removeLoadingView];
     NSLog(@"Failure");

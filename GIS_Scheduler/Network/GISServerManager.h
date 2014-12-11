@@ -121,4 +121,6 @@
 
 - (void)getEventTypebyUnitId:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
 
+- (void)deleteJobs:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction;
+
 @end

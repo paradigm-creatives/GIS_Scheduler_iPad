@@ -93,10 +93,9 @@
     }
     NSLog(@"----Array is -->%@--count-->%d",[self.requested_Jobs_Array description],self.requested_Jobs_Array.count);
     
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed)];
-//    
-//    self.navigationItem.hidesBackButton = YES;
-//    self.navigationItem.leftBarButtonItem = item;
+    chooseRequest_ID_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    typeOfService_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
 }
 
 -(void)backButtonPressed

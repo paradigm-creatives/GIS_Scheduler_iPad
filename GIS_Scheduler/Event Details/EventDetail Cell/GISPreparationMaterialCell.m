@@ -49,6 +49,10 @@
     [_captionTypebtn.titleLabel setFont:[GISFonts small]];
     [_viewingTypebtn.titleLabel setFont:[GISFonts small]];
     
+    [_otherServicesbtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+    [_captionTypebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+    [_viewingTypebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+    
     [_othertechnologies_label setText:NSLocalizedStringFromTable(@"other_technologies", TABLE, nil)];
     [_otherservicesneeded_label setText:NSLocalizedStringFromTable(@"other_servicesNeeded", TABLE, nil)];
     [_other_label setText:NSLocalizedStringFromTable(@"other", TABLE, nil)];

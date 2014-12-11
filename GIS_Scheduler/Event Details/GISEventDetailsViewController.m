@@ -65,13 +65,6 @@
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     _eventdetails_unitIdStr = [userDefaults valueForKey:kunitid];
     
-    
-    NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
-    NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
-    
-    _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
-    _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
-    
     _otherServicesArray = [[NSArray alloc] initWithObjects:@"Captioning",@"VRI", nil];
     _viewingTypeArray = [[NSArray alloc] initWithObjects:@"Individuals", nil];
     _captionTypeArray = [[NSArray alloc] initWithObjects:@"Onsite", nil];
@@ -116,6 +109,12 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
+    NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
+    NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
+    
+    _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
+    _dresscodeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:dressCode_statement];
+    
     if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
             
         NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
@@ -144,7 +143,6 @@
             _re_broadcastStr= @"";
         if([_outsideAgencyStr length] == 0)
             _outsideAgencyStr = @"";
-
     }
 }
 
@@ -323,6 +321,7 @@
             
         }
         
+        [cell.otherServicesbtn setTitle:otherServicesdata forState:UIControlStateNormal];
         [cell.captionTypebtn setTitle:captionData forState:UIControlStateNormal];
         [cell.viewingTypebtn setTitle:viewingTypeData forState:UIControlStateNormal];
         

@@ -506,7 +506,7 @@
 #define kJobDetais_TypeofService @"TypeofService"
 #define kJobDetais_FilledUnFilled @"FilledUnFilled"
 #define kJobDetais_Slots @"Slots"
-
+#define kJobDetais_deleteJob @"Deletejob"
 
 #pragma mark JobDetails End
 

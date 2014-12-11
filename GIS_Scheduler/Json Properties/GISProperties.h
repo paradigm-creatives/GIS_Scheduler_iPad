@@ -70,6 +70,7 @@
 #define GIS_UPDATE_JOBS @"UpdateJobs"
 #define GIS_SaveUpdateJobs @"SaveUpdateJobs"
 #define GIS_CreateJobs @"CreateJobs"
+#define GIS_DeleteJobs @"DeleteJob"
 
 
 ///iPAD

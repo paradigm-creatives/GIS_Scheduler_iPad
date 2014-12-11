@@ -11,7 +11,7 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAddUpdateObject.h"
 #import "GISLoginDetailsObject.h"
-@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate>
+@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
 {
     GISAppDelegate *appDelegate;
     GISLoginDetailsObject *login_Obj;
@@ -19,6 +19,7 @@
     
     UIPopoverController *popover;
     int btnTag;
+    BOOL history_Clicked;
     
     GISAddUpdateObject *addUpdateObj;
     
@@ -44,6 +45,7 @@
     NSString *startDate_temp_String;
     
     UITextField *currentTextField;
+    
 }
 -(IBAction)pickerButtonPressed:(id)sender;
 -(IBAction)closeButtonPressed:(id)sender;

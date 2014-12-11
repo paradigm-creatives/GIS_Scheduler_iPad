@@ -108,6 +108,8 @@
 @property(nonatomic,strong)IBOutlet UIImageView *no_timelyAndHalf_ImageView;
 @property(nonatomic,strong)IBOutlet UIImageView *yes_timelyAndHalf_BillingPayment_ImageView;
 @property(nonatomic,strong)IBOutlet UIImageView *no_timelyAndHalf_BillingPayment_ImageView;
+@property(nonatomic,strong)IBOutlet UITextView *history_textView;
+@property(nonatomic,strong)IBOutlet UIButton *addHistoryButton;
 
 
 

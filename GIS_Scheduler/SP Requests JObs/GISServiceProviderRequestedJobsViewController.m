@@ -95,6 +95,18 @@
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    
+    chooseRequest_ID_answer_label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    typeOfService_answer_label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    eventType_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    noOfAttendees_answer_label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    generalLocation_answer_label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    serviceProvider_answer_label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+}
+
 -(IBAction)pickerButton_pressed:(id)sender
 {
     

@@ -42,6 +42,7 @@
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
+    history_Clicked = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -87,7 +88,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -97,9 +98,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GISAddUpdateJobCell *cell;
+    
     if (indexPath.section==0)
     {
-        GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
+        cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
         if (cell==nil) {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISJobInfoCell" owner:self options:nil] objectAtIndex:0];
         }
@@ -109,20 +112,41 @@
             cell.startTime_answer_label.text=addUpdateObj.startTime_string;
         if ([addUpdateObj.endTime_string length])
             cell.endTime_answer_label.text=addUpdateObj.endTime_string;
+        
         if ([addUpdateObj.callInTime_string length])
             cell.callInTime_answer_label.text=addUpdateObj.callInTime_string;
+        else
+            cell.callInTime_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.payLevel_string length])
             cell.payLevel_answer_label.text=addUpdateObj.payLevel_string;
+        else
+            cell.payLevel_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.billLevel_string length])
             cell.billLevel_answer_label.text=addUpdateObj.billLevel_string;
+        else
+            cell.billLevel_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.typeOfServiceProvider_string length])
             cell.typeOfServiceProvider_answer_label.text=addUpdateObj.typeOfServiceProvider_string;
+        else
+            cell.typeOfServiceProvider_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.serviceProvider_string length])
             cell.serviceProviderId_answer_label.text=addUpdateObj.serviceProvider_string;
+        else
+            cell.serviceProviderId_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.cancelled_string length])
             cell.cancelled_answer_label.text=addUpdateObj.cancelled_string;
+        else
+            cell.cancelled_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.payType_string length])
             cell.payType_answer_label.text=addUpdateObj.payType_string;
+        else
+            cell.payType_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
         
         if ([addUpdateObj.timely_string length]){
             cell.timely_answer_label.text=addUpdateObj.timely_string;
@@ -179,13 +203,22 @@
             cell.billAmt_textField.text=addUpdateObj.billAmount_string;
         if ([addUpdateObj.invoice_string length])
             cell.invoice_textField.text=addUpdateObj.invoice_string;
+        
         if ([addUpdateObj.billdate_string length])
             cell.billDate_answer_label.text=addUpdateObj.billdate_string;
+        else
+            cell.billDate_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         
         if ([addUpdateObj.payStatus_string length])
             cell.payStatus_answer_label.text=addUpdateObj.payStatus_string;
+        else
+            cell.payStatus_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+        
         if ([addUpdateObj.expStatus_string length])
             cell.expStatus_answer_label.text=addUpdateObj.expStatus_string;
+        else
+            cell.expStatus_answer_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
         
         if ([addUpdateObj.timelyandHalf_BillPayment_string length])
         {
@@ -208,13 +241,17 @@
         if (cell==nil) {
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISNotesHistoryCell" owner:self options:nil] objectAtIndex:0];
         }
+        
+        cell.history_textView.delegate = self;
+        [cell.addHistoryButton addTarget:self action:@selector(addHistory_Clicked) forControlEvents:UIControlEventTouchUpInside];
+        
         return cell;
     }
     
-    GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
-    if (cell==nil) {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"GISRequestServiceProvidersCell" owner:self options:nil] objectAtIndex:0];
-    }
+//    GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[tableView dequeueReusableCellWithIdentifier:@"GISAddUpdateJobCell"];
+//    if (cell==nil) {
+//        cell=[[[NSBundle mainBundle]loadNibNamed:@"GISRequestServiceProvidersCell" owner:self options:nil] objectAtIndex:0];
+//    }
     return cell;
 }
 
@@ -223,24 +260,34 @@
 {
     
     GISAddUpdateJobCell *cell=(GISAddUpdateJobCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    
     if (indexPath.section==0) {
         return cell.frame.size.height;
     }
     else if (indexPath.section==1)
         return 393;
-    else if (indexPath.section==2)
-        return 106;
+    else if (indexPath.section==2){
+        
+        if(history_Clicked){
+            return 296;
+        }
+        else{
+            return 100;
+        }
+    }
 
     return 150;
 }
 
 -(IBAction)closeButtonPressed:(id)sender
 {
+    history_Clicked = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)saveButtonPressed:(id)sender
 {
+    history_Clicked = NO;
     [currentTextField resignFirstResponder];
    if ([addUpdateObj.jobDate_string isKindOfClass:[NSNull class]] || addUpdateObj.jobDate_string == (NSString*) [NSNull null] || addUpdateObj.jobDate_string == nil) {
         [GISUtility showAlertWithTitle:@"GIS" andMessage:@"Please select Job Date"];
@@ -649,6 +696,83 @@
 -(void)removeLoadingView
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldBeginEditing:");
+    
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing:");
+    
+    [self moveAction:YES viewHeight:-300];
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldEndEditing:");
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    NSLog(@"textViewDidEndEditing:");
+    
+    [self moveAction:YES viewHeight:0];
+    
+    [textView resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSCharacterSet *doneButtonCharacterSet = [NSCharacterSet newlineCharacterSet];
+    NSRange replacementTextRange = [text rangeOfCharacterFromSet:doneButtonCharacterSet];
+    NSUInteger location = replacementTextRange.location;
+    
+    if (textView.text.length + text.length > 540){
+        if (location != NSNotFound){
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    else if (location != NSNotFound){
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+-(void)moveAction:(BOOL)isMove viewHeight:(int)viewHeight{
+    
+    if(isMove)
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:1.0];
+        
+        CGRect frame=self.view.frame;
+        frame.origin.x=viewHeight;
+        self.view.frame=frame;
+        [UIView commitAnimations];
+    }
+    else
+    {
+        [UIView beginAnimations: @"anim" context: nil];
+        [UIView setAnimationBeginsFromCurrentState: YES];
+        [UIView setAnimationDuration:0.2];
+        CGRect frame=self.view.frame;
+        frame.origin.x=0;
+        self.view.frame=frame;
+        
+        [UIView commitAnimations];
+    }
+    
+}
+
+-(void) addHistory_Clicked{
+    
+    history_Clicked = YES;
+    
+    [addUpdateJobs_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

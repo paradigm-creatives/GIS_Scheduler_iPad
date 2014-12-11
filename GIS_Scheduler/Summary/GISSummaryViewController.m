@@ -1074,11 +1074,12 @@
     NSDictionary *saveUpdateDict;
     GISAttendeesDetailsStore *store;
     NSArray *responseArray= response.responseJson;
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+
     
     if([responseArray count]>0){
         
         saveUpdateDict = [responseArray lastObject];
-        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         
         if ([[saveUpdateDict objectForKey:kStatusCode] isEqualToString:@"200"]) {
             
@@ -1090,18 +1091,18 @@
             if([appDelegate.attendeesArray count]>0)
                 [appDelegate.attendeesArray removeAllObjects];
             [appDelegate.attendeesArray addObjectsFromArray:attendeesList_mutArray];
-            
-            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-            [paramsDict setObject:[userDefaults valueForKey:kDropDownID] forKey:kID];
-            [paramsDict setObject:loginObJ.token_string forKey:kToken];
-            
-            [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
-            
         }
     }else{
         
-        [self removeLoadingView];
+        //[self removeLoadingView];
     }
+    
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:[userDefaults valueForKey:kDropDownID] forKey:kID];
+    [paramsDict setObject:loginObJ.token_string forKey:kToken];
+    
+    [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
+
 
 }
 -(void)failuremethod_get_Attendees_Details:(GISJsonRequest *)response

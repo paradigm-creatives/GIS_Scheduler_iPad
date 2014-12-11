@@ -50,6 +50,9 @@
     [_eventTypebtn.titleLabel setFont:[GISFonts small]];
     [_dressCodebtn.titleLabel setFont:[GISFonts small]];
     
+    [_eventTypebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+    [_dressCodebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
+    
     [_eventName_label setText:NSLocalizedStringFromTable(@"event_name", TABLE, nil)];
     [_eventType_label setText:NSLocalizedStringFromTable(@"event_type", TABLE, nil)];
     [_ongoing_label setText:NSLocalizedStringFromTable(@"on_going", TABLE, nil)];

@@ -252,10 +252,21 @@ int row_count = 2;
             cell.email_textField.text=attendee_ListObj_here.email_String;
             cell.firstname_textField.text=attendee_ListObj_here.firstname_String;
             cell.lastname_textField.text=attendee_ListObj_here.lastname_String;
-            cell.modeOf_answer_Label.text=attendee_ListObj_here.modeOf_String;
-            cell.directly_utilized_services_answer_Label.text=attendee_ListObj_here.directly_utilzed_String;
-            cell.servicesNeeded_answer_Label.text=attendee_ListObj_here.servicesNeeded_String;
             
+            if ([attendee_ListObj_here.modeOf_String length])
+                cell.modeOf_answer_Label.text = attendee_ListObj_here.modeOf_String;
+            else
+                cell.modeOf_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+            
+            if ([attendee_ListObj_here.directly_utilzed_String length])
+                cell.directly_utilized_services_answer_Label.text=attendee_ListObj_here.directly_utilzed_String;
+            else
+                cell.directly_utilized_services_answer_Label.text =NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+            
+            if ([attendee_ListObj_here.servicesNeeded_String length])
+                cell.servicesNeeded_answer_Label.text=attendee_ListObj_here.servicesNeeded_String;
+            else
+                cell.servicesNeeded_answer_Label.text=NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
             
             cell.cellSectionNumber = indexPath.section;
             cell.cellRowNumber = indexPath.row;
@@ -317,22 +328,23 @@ int row_count = 2;
     if ([attendeesObject.primaryAudience_String length])
         cell.primaryAudience_answer_Label.text=attendeesObject.primaryAudience_String;
     else
-        cell.primaryAudience_answer_Label.text=@"";
+        cell.primaryAudience_answer_Label.text=NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     if ([attendeesObject.expectedNo_String length])
         cell.expectedNo_answer_Label.text=attendeesObject.expectedNo_String;
     else
-        cell.expectedNo_answer_Label.text=@"";
+        cell.expectedNo_answer_Label.text=NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     if ([attendeesObject.genderPreference_String length])
         cell.genderPreference_answer_Label.text=attendeesObject.genderPreference_String;
     else
-        cell.genderPreference_answer_Label.text=@"";
+        cell.genderPreference_answer_Label.text=NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     if ([attendeesObject.preference_String length])
         cell.preference_answer_Label.text=attendeesObject.preference_String;
     else
-        cell.preference_answer_Label.text=@"";
+        cell.preference_answer_Label.text=NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
     
     return cell;
 }
