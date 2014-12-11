@@ -717,6 +717,11 @@
         //[jobDetails_Array replaceObjectAtIndex:[sender tag] withObject:tempObj];
         //Call the Save Update JObs Service here
         */
+        if([payType_temp_string length] == 0 && [serviceProvider_temp_string length]>0){
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"select_pay_type", TABLE, nil)];
+            return;
+        }
+        
         [self showChangeJobHistoryView];
         //selected_row=999999;
         isEdit_Button_Clicked=NO;

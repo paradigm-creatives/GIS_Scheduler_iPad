@@ -188,6 +188,7 @@
 "select_pay_level" = "Please select Pay Level";
 "select_bill_level" = "Please select Bill Level";
 "select_one_job" = "Please select atleast one Dates/Times";
+"select_pay_type" = "Please select Pay Type";
 
 
 
@@ -228,7 +229,7 @@
 "Pay_Type" = "Pay Type :";
 "OutORAgency" = "Out/Agency :";
 "Created_By" = "Created_By :";
-"Timely" = "Timely :";
+"Timely_label" = "Timely :";
 "Canceled" = "Canceled :";
 "Timely" = "Timely";
 "untimely" = "untimely";

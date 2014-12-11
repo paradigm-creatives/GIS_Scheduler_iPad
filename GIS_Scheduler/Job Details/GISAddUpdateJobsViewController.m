@@ -265,7 +265,7 @@
         return cell.frame.size.height;
     }
     else if (indexPath.section==1)
-        return 393;
+        return 360;
     else if (indexPath.section==2){
         
         if(history_Clicked){

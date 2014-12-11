@@ -350,7 +350,6 @@ cCpResource GIS_Scheduler/Images/job_details_pressed.png build/Debug-iphonesimul
 cCpResource GIS_Scheduler/Images/choose_request_bg@2x.png build/Debug-iphonesimulator/GIS_Scheduler.app/choose_request_bg@2x.png
 cCpResource GIS_Scheduler/Images/logout_pressed.png build/Debug-iphonesimulator/GIS_Scheduler.app/logout_pressed.png
 cCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Summary/summary\ Cell/GISSummaryRequestModificationCell.xib
-cCopyStringsFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings
 cCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Event\ Details/EventDetail\ Cell/GISPreparationMaterialCell.xib
 cCpResource GIS_Scheduler/View\ Edit\ Service/FFCalendars/Util/Images/week_clicked.png build/Debug-iphonesimulator/GIS_Scheduler.app/week_clicked.png
 cCpResource GIS_Scheduler/Images/edit@2x.png build/Debug-iphonesimulator/GIS_Scheduler.app/edit@2x.png
@@ -363,6 +362,7 @@ cCpResource GIS_Scheduler/Images/text_field_bg_with_btn@2x.png build/Debug-iphon
 cCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Attendees/GISAttendeesCell.xib
 cCpResource GIS_Scheduler/Images/dates_and_times_pressed.png build/Debug-iphonesimulator/GIS_Scheduler.app/dates_and_times_pressed.png
 cCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/DashBoard\ Views/GISDashBoardSPCell.xib
+cCopyStringsFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings
 cCompileAssetCatalog /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Images.xcassets
 cProcessInfoPlistFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/Info.plist /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/GIS_Scheduler-Info.plist
 cGenerateDSYMFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler
@@ -3774,9 +3774,9 @@ t1418292460
 s5245
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobCell.m
-c00000000548821DA0000000000000EFE
-t1418207706
-s3838
+c0000000054898CC00000000000000F04
+t1418300608
+s3844
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.h
 c0000000054896ED300000000000006C4
@@ -3784,8 +3784,8 @@ t1418292947
 s1732
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m
-c0000000054896FC500000000000072BD
-t1418293189
+c000000005489917C00000000000072BD
+t1418301820
 s29373
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.xib
@@ -3804,9 +3804,9 @@ t1412579436
 s220
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISBillingPaymentInfo.xib
-c000000005489669A0000000000008099
-t1418290842
-s32921
+c0000000054898DA6000000000000809A
+t1418300838
+s32922
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobDetailsCell.h
 c0000000054817CE200000000000007F3
@@ -3849,9 +3849,9 @@ t1418021916
 s3473
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobDetailsViewController.m
-c0000000054898A39000000000000DA8D
-t1418299961
-s55949
+c000000005489936E000000000000DB84
+t1418302318
+s56196
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobDetailsViewController.xib
 c000000005489669A00000000000136C3
@@ -3859,8 +3859,8 @@ t1418290842
 s79555
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobInfoCell.xib
-c000000005489669A000000000000D073
-t1418290842
+c0000000054898D76000000000000D073
+t1418300790
 s53363
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISNotesHistoryCell.xib
@@ -3969,9 +3969,9 @@ t1405926231
 s7974
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Localization/custom.strings
-c00000000547EFDFC0000000000002462
-t1417608700
-s9314
+c00000000548993E80000000000002496
+t1418302440
+s9366
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Location Details/GISLocationCell/GISLocationDetailsCell.h
 c0000000053E1D76C00000000000006C4
@@ -5099,11 +5099,11 @@ t1405317047
 s344
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app
-t1418299965
+t1418302442
 s7548
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM
-t1418299436
+t1418302324
 s102
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/DailyCalendar.png
@@ -5131,8 +5131,8 @@ t1417690926
 s1792
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISBillingPaymentInfo.nib
-t1418290847
-s14415
+t1418300840
+s14418
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISCommentCell.nib
 t1417690924
@@ -5227,8 +5227,8 @@ t1418290846
 s15951
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISJobInfoCell.nib
-t1418290846
-s22162
+t1418300794
+s22164
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISLocationDetailsCell.nib
 t1418191354
@@ -5323,8 +5323,8 @@ t1417690925
 s6489
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler
-t1418299965
-s4395512
+t1418302323
+s4391416
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/Info.plist
 t1417690927
@@ -5507,8 +5507,8 @@ t1417690921
 s2110
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings
-t1417690925
-s9299
+t1418302442
+s9380
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/dashboard.png
 t1417690922
@@ -6119,11 +6119,11 @@ t1417690900
 s62452
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o
-t1418292865
-s159340
+t1418300791
+s159348
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o
-t1418295934
+t1418301821
 s172644
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateObject.o
@@ -6307,8 +6307,8 @@ t1417772264
 s11944
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o
-t1418299964
-s268100
+t1418302323
+s268756
 
 N/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJsonRequest.o
 t1417690901
@@ -7152,7 +7152,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesd68b9dbcc139ba41^670d9ebcc139ba41^---0#1#1#--18"Check dependencies36"A8255E8B-8F1E-45AA-8082-424C71F18C7E-
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies51c02e6acb39ba41^cf2e2f6acb39ba41^---0#1#1#--18"Check dependencies36"FB159A7C-C44B-4130-8DA0-7D4947D2A96F-
 
 CCompileAssetCatalog /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Images.xcassets
 s439383726.357545
@@ -8521,8 +8521,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection168"Compil
 b1A9811EB-3B87-414F-9922-A907E360E3EB
 
 CCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s439985665.053423
-e439985665.498941
+s439993591.366712
+e439993591.565924
 r1
 xCompileC
 xbuild/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o
@@ -8534,12 +8534,12 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobCell.m
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobCell.h
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/GIS_Constants/GISConstants.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection117"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobCell.m235"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compilerddd30d01a639ba41^c3bc7f01a639ba41^---0#0#1#-19%DVTDocumentLocation2@118"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISAddUpdateJobCell.m0000000000000000^4166"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o36"41143AD8-4269-41B6-8128-FA1DEEDE2401-
-b2FB45F8A-D598-47E8-927F-CB0AE8FA0727
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection117"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobCell.m235"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler390c5ef7c439ba41^8ae790f7c439ba41^---0#0#1#-19%DVTDocumentLocation2@118"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISAddUpdateJobCell.m0000000000000000^4166"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobCell.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobCell.o36"2EE93575-DACF-4D3F-A728-0950C875C915-
+b3B9BDF71-8875-48BF-A9C7-2BC447CF3994
 
 CCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s439988733.934796
-e439988734.377356
+s439994620.566404
+e439994621.041757
 r1
 xCompileC
 xbuild/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o
@@ -8582,8 +8582,8 @@ d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Net
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISRequest.h
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISRequestError.h
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Utility/GISUtility.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection128"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m257"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compilera46eeffdb139ba41^8db860feb139ba41^---0#0#1#-19%DVTDocumentLocation2@129"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISAddUpdateJobsViewController.m0000000000000000^4232"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o36"D5BC467D-C5A1-4CB6-8830-BD7229D2308E-
-bAB52F8F3-89DD-4E6B-AAB6-6B02C10CE1C6
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection128"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISAddUpdateJobsViewController.m257"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler0f2a91fcc839ba41^5feb0afdc839ba41^---0#0#1#-19%DVTDocumentLocation2@129"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISAddUpdateJobsViewController.m0000000000000000^4232"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateJobsViewController.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateJobsViewController.o36"0B14FD5F-E957-4AEC-90B8-A17843CCB7AD-
+b2F57885B-6A43-4428-83FA-B46004D2945D
 
 CCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISAddUpdateObject.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISAddUpdateObject.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s439900788.949512
@@ -9838,8 +9838,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection116"Compil
 b11DDED89-07D5-499E-B1CE-D6F2C322C60A
 
 CCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s439992764.646828
-e439992765.004601
+s439995123.069063
+e439995123.424911
 r1
 xCompileC
 xbuild/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o
@@ -9888,8 +9888,8 @@ d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Dat
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/PCLogger.h
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/UncaughtExceptionHandler.h
 d/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Fonts/GISFonts.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection125"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobDetailsViewController.m251"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler73b9a5bcc139ba41^b62e01bdc139ba41^---0#0#1#-19%DVTDocumentLocation2@126"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISJobDetailsViewController.m0000000000000000^4214"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o36"A4D7A8A4-C312-4864-ABED-F861675A7C0A-
-bF6BC4DF6-32BD-4241-8B1B-5258F818FEC6
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection125"Compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobDetailsViewController.m251"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compilerfad411f3ca39ba41^20d16cf3ca39ba41^---0#0#1#-19%DVTDocumentLocation2@126"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISJobDetailsViewController.m0000000000000000^4214"CompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/paradigm/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-generated-files.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-own-target-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-all-target-headers.hmap -iquote /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/GIS_Scheduler-project-headers.hmap -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources/i386 -I/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/DerivedSources -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -include /var/folders/g_/dsp18q4s2nv7ty64sb8xy7sh0000gp/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/GIS_Scheduler-Prefix-hcupdgyszdrvrlcjdnrwuvkwredg/GIS_Scheduler-Prefix.pch -MMD -MT dependencies -MF /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.d --serialize-diagnostics /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.dia -c /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsViewController.m -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJobDetailsViewController.o36"07AFE8AF-7CAD-475D-9867-DC6862682C3E-
+b69D8CD51-00B1-4728-9FBB-3387591B22C3
 
 CCompileC build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GISJsonRequest.o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Network/GISJsonRequest.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s439383701.068589
@@ -12024,13 +12024,13 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection132"Compil
 b1A9811EB-3B87-414F-9922-A907E360E3EB
 
 CCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib
-s439983646.059926
-e439983647.736473
+s439993640.284330
+e439993640.553828
 r1
 xCompileXIB
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISBillingPaymentInfo.xib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection123"Compiling /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISBillingPaymentInfo.xib63"CompileXIB GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib596c0f1e9e39ba41^e389bc1f9e39ba41^---0#0#1#-19%DVTDocumentLocation2@122"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISBillingPaymentInfo.xib0000000000000000^882"CompileXIB GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    export XCODE_DEVELOPER_USR_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin/..    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/ibtool --errors --warnings --notices --minimum-deployment-target 7.0 --output-format human-readable-text --compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISBillingPaymentInfo.nib /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib36"5EB3610F-9AC5-4817-B403-A347AF713854-
-b737E64E4-015C-4D99-BB83-7DD64EACEC09
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection123"Compiling /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISBillingPaymentInfo.xib63"CompileXIB GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib43e44828c539ba41^fe9b8f28c539ba41^---0#0#1#-19%DVTDocumentLocation2@122"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISBillingPaymentInfo.xib0000000000000000^882"CompileXIB GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    export XCODE_DEVELOPER_USR_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin/..    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/ibtool --errors --warnings --notices --minimum-deployment-target 7.0 --output-format human-readable-text --compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISBillingPaymentInfo.nib /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISBillingPaymentInfo.xib36"E6D30908-E9CC-499F-99E0-332D98761597-
+bCEF63F05-0754-4E6E-AA4C-A3E97F5CB362
 
 CCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobDetailsCell.xib
 s439983643.503449
@@ -12051,13 +12051,13 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection129"Compil
 b737E64E4-015C-4D99-BB83-7DD64EACEC09
 
 CCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobInfoCell.xib
-s439983643.510232
-e439983646.059646
+s439993592.003950
+e439993594.075358
 r1
 xCompileXIB
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobInfoCell.xib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection116"Compiling /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobInfoCell.xib56"CompileXIB GIS_Scheduler/Job\ Details/GISJobInfoCell.xiba6b4821b9e39ba41^51850f1e9e39ba41^---0#0#1#-19%DVTDocumentLocation2@115"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISJobInfoCell.xib0000000000000000^861"CompileXIB GIS_Scheduler/Job\ Details/GISJobInfoCell.xib    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    export XCODE_DEVELOPER_USR_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin/..    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/ibtool --errors --warnings --notices --minimum-deployment-target 7.0 --output-format human-readable-text --compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISJobInfoCell.nib /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobInfoCell.xib36"B77EB88F-0417-47A7-896A-DF9B6554F720-
-b737E64E4-015C-4D99-BB83-7DD64EACEC09
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection116"Compiling /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job Details/GISJobInfoCell.xib56"CompileXIB GIS_Scheduler/Job\ Details/GISJobInfoCell.xibeb1a01f8c439ba41^8f5413fac439ba41^---0#0#1#-19%DVTDocumentLocation2@115"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job%20Details/GISJobInfoCell.xib0000000000000000^861"CompileXIB GIS_Scheduler/Job\ Details/GISJobInfoCell.xib    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    export XCODE_DEVELOPER_USR_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin/..    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/ibtool --errors --warnings --notices --minimum-deployment-target 7.0 --output-format human-readable-text --compile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GISJobInfoCell.nib /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISJobInfoCell.xib36"F0FC1525-6FF6-4AB0-92CE-7218FE80B61B-
+b3B9BDF71-8875-48BF-A9C7-2BC447CF3994
 
 CCompileXIB /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Job\ Details/GISNotesHistoryCell.xib
 s439985763.876062
@@ -12231,14 +12231,14 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection140"Compil
 b1A9811EB-3B87-414F-9922-A907E360E3EB
 
 CCopyStringsFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings
-s439383725.888484
-e439383725.891441
+s439995242.266221
+e439995242.272373
 r1
 xCopyStringsFile
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings
 xGIS_Scheduler/Localization/custom.strings
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection46"Copy GIS_Scheduler/Localization/custom.strings118"CopyStringsFile build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.stringsdf87e3ad7630ba41^c571e4ad7630ba41^---0#0#1#-19%DVTDocumentLocation2@110"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Localization/custom.strings0000000000000000^626"CopyStringsFile build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding binary --outdir /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app -- GIS_Scheduler/Localization/custom.strings36"06798EDF-1876-4992-B16F-E02B65B820A0-
-b1A9811EB-3B87-414F-9922-A907E360E3EB
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection46"Copy GIS_Scheduler/Localization/custom.strings118"CopyStringsFile build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings113a446acb39ba41^f1bb456acb39ba41^---0#0#1#-19%DVTDocumentLocation2@110"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/Localization/custom.strings0000000000000000^626"CopyStringsFile build/Debug-iphonesimulator/GIS_Scheduler.app/custom.strings GIS_Scheduler/Localization/custom.strings    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding binary --outdir /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app -- GIS_Scheduler/Localization/custom.strings36"950374AE-85F9-42A0-961D-326B182D6EE7-
+b530F5B5E-BD62-427D-B4E7-ECCB39690221
 
 CCopyStringsFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/en.lproj/InfoPlist.strings GIS_Scheduler/en.lproj/InfoPlist.strings
 s439383720.993414
@@ -13811,18 +13811,18 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"Copy bu
 b1A9811EB-3B87-414F-9922-A907E360E3EB
 
 CGenerateDSYMFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler
-s439992765.520835
-e439992766.088272
+s439995124.005782
+e439995124.610745
 r1
 xGenerateDSYMFile
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection121"Generate /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM127"GenerateDSYMFile build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Schedulerf06e85bdc139ba41^b1a616bec139ba41^---0#0#1#-19%DVTDocumentLocation2@120"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM/0000000000000000^730"GenerateDSYMFile build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM36"F8934881-1057-4D08-A7FB-FDBF2215C541-
-bF6BC4DF6-32BD-4241-8B1B-5258F818FEC6
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection121"Generate /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM127"GenerateDSYMFile build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Schedulerc98e01f4ca39ba41^c45a9cf4ca39ba41^---0#0#1#-19%DVTDocumentLocation2@120"file:///Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM/0000000000000000^730"GenerateDSYMFile build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app.dSYM36"E1A758F3-14EB-49D6-9880-323A0D240166-
+b69D8CD51-00B1-4728-9FBB-3387591B22C3
 
 CLd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler normal i386
-s439992765.012236
-e439992765.466993
+s439995123.433175
+e439995123.965175
 r1
 xLd
 x/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler
@@ -13997,6 +13997,7 @@ d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/D
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/Frameworks/CoreText.framework/CoreText
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/libsystem_override.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/libcache_sim.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/libcommonCrypto_sim.dylib
@@ -14019,7 +14020,6 @@ d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/D
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/libsystem_sim_configuration.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/libsystem_sim_asl.dylib
 d/usr/lib/libSystem.B.dylib
-d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/system/host/libdyld.dylib
 d/usr/lib/system/libcache.dylib
 d/usr/lib/system/libcommonCrypto.dylib
@@ -14046,8 +14046,8 @@ d/usr/lib/system/libsystem_pthread.dylib
 d/usr/lib/system/libsystem_sandbox.dylib
 d/usr/lib/system/libunc.dylib
 d/usr/lib/system/libunwind.dylib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection126"Link /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler74"Ld build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler normal i386c83f03bdc139ba41^508d77bdc139ba41^---0#0#1#--1657"Ld build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler normal i386    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export IPHONEOS_DEPLOYMENT_TARGET=7.0    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch i386 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -L/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -filelist /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GIS_Scheduler.LinkFileList -Xlinker -objc_abi_version -Xlinker 2 -fobjc-arc -fobjc-link-runtime -Xlinker -no_implicit_dylibs -mios-simulator-version-min=7.0 -framework AWSiOSSDK -lsqlite3 -framework CoreGraphics -framework UIKit -framework Foundation -Xlinker -dependency_info -Xlinker /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GIS_Scheduler_dependency_info.dat -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler36"197AD265-20C9-4907-8355-7A4C85D640A0-
-bF6BC4DF6-32BD-4241-8B1B-5258F818FEC6
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection126"Link /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler74"Ld build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler normal i38605fc6ef3ca39ba41^4c16f7f3ca39ba41^---0#0#1#--1657"Ld build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler normal i386    cd /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad    export IPHONEOS_DEPLOYMENT_TARGET=7.0    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch i386 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -L/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator -F/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon -filelist /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GIS_Scheduler.LinkFileList -Xlinker -objc_abi_version -Xlinker 2 -fobjc-arc -fobjc-link-runtime -Xlinker -no_implicit_dylibs -mios-simulator-version-min=7.0 -framework AWSiOSSDK -lsqlite3 -framework CoreGraphics -framework UIKit -framework Foundation -Xlinker -dependency_info -Xlinker /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/GIS_Scheduler.build/Debug-iphonesimulator/GIS_Scheduler.build/Objects-normal/i386/GIS_Scheduler_dependency_info.dat -o /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/GIS_Scheduler36"F0D91F33-5ACD-4644-865E-4D2EA5164157-
+b69D8CD51-00B1-4728-9FBB-3387591B22C3
 
 CProcessInfoPlistFile /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/build/Debug-iphonesimulator/GIS_Scheduler.app/Info.plist /Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/GIS_Scheduler-Info.plist
 s439383727.247796

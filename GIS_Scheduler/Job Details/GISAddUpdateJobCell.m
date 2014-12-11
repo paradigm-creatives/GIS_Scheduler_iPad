@@ -48,7 +48,7 @@
     _outAgency_label.text=NSLocalizedStringFromTable(@"Out_Agency", TABLE, nil);
     _yes_outAgency_label.text=NSLocalizedStringFromTable(@"yes", TABLE, nil);
     _no_outAgency_label.text=NSLocalizedStringFromTable(@"no", TABLE, nil);
-    _timelyAndHalf_label.text=NSLocalizedStringFromTable(@"Timely", TABLE, nil);
+    _timelyAndHalf_label.text=NSLocalizedStringFromTable(@"Timely_label", TABLE, nil);
     _yes_timelyAndHalf_label.text=NSLocalizedStringFromTable(@"yes", TABLE, nil);
     _no_timelyAndHalf_label.text=NSLocalizedStringFromTable(@"no", TABLE, nil);
     _billingPaymentInfo_label.text=NSLocalizedStringFromTable(@"BillOrPayment_Info", TABLE, nil);
