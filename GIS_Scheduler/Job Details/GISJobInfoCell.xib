@@ -470,8 +470,10 @@
                 <outlet property="payLevel_label" destination="Lta-sT-e2a" id="Xvp-0Q-xRz"/>
                 <outlet property="payType_answer_label" destination="R8N-9X-XP5" id="872-hK-40B"/>
                 <outlet property="payType_label" destination="lxF-gA-j79" id="vhZ-f3-EG8"/>
+                <outlet property="serviceProviderIdButton" destination="L4j-BS-gjz" id="wAI-pn-Del"/>
                 <outlet property="serviceProviderId_answer_label" destination="xAz-k9-YKV" id="7S9-uP-TDI"/>
                 <outlet property="serviceProviderId_label" destination="yJF-AJ-Kq3" id="I3s-v8-AK4"/>
+                <outlet property="serviceProviderIdtextField" destination="HTr-OZ-EBB" id="YyJ-xn-uO4"/>
                 <outlet property="startTime_answer_label" destination="YYR-hD-B2z" id="9Vz-rc-s9X"/>
                 <outlet property="startTime_label" destination="Cog-gc-Sfi" id="f12-DA-i3G"/>
                 <outlet property="timelyAndHalf_label" destination="BGD-8m-XAE" id="oXq-d8-CsT"/>

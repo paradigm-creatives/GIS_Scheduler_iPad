@@ -110,6 +110,8 @@
 @property(nonatomic,strong)IBOutlet UIImageView *no_timelyAndHalf_BillingPayment_ImageView;
 @property(nonatomic,strong)IBOutlet UITextView *history_textView;
 @property(nonatomic,strong)IBOutlet UIButton *addHistoryButton;
+@property(nonatomic,strong)IBOutlet UIButton *serviceProviderIdButton;
+@property(nonatomic,strong)IBOutlet UITextField *serviceProviderIdtextField;
 
 
 

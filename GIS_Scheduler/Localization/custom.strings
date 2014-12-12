@@ -164,6 +164,7 @@
 "endTime" = "End Time";
 "create_dates_times_Btn" = "Create Dates/Times";
 "create_jobs_btn" = "Create Jobs";
+"create_dates_times_Alert" = "The Selected Dates/Times has some booking Conflicts.";
 
 /////Alert Msgs
 "successfully_saved" = "Successfully Saved";

@@ -11,6 +11,9 @@
 #import "GISConstants.h"
 #import "GISServiceProviderObject.h"
 #import "GISContactsInfoObject.h"
+#import "GISDatabaseManager.h"
+#import "GISJSONProperties.h"
+
 @interface GISPopOverTableViewController ()
 
 @end
@@ -90,21 +93,36 @@
         popOverSearchBar.hidden = YES;
         CGRect frame =  self.popOverView.frame;
         frame.origin.y = 0;
-        frame.size.height = 210;
-        self.popOverTableView.frame = frame;
+        frame.size.height = 250;
+        self.popOverView.frame = frame;
+        [self.popOver_TableView removeFromSuperview];
         [self.popOverView addSubview:datePicker];
     }else{
         
         [datePicker removeFromSuperview];
-    }
-    if(!([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]] || [[self.popOverArray lastObject] isKindOfClass:[GISContactsInfoObject class]] ||
-       [[self.popOverArray lastObject] isKindOfClass:[GISServiceProviderObject class]]))
-    {
-        popOverSearchBar.hidden = YES;
-        CGRect frame =  self.popOverView.frame;
-        frame.origin.y = 0;
-        frame.size.height = 90;
-        self.popOverView.frame = frame;
+        
+        if(!([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]] || [[self.popOverArray lastObject] isKindOfClass:[GISContactsInfoObject class]] ||
+             [[self.popOverArray lastObject] isKindOfClass:[GISServiceProviderObject class]]))
+        {
+            popOverSearchBar.hidden = YES;
+            CGRect frame =  self.popOverView.frame;
+            frame.origin.y = 0;
+            frame.size.height = 90;
+            self.popOverView.frame = frame;
+            
+        }
+        if([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]]){
+            GISDropDownsObject *dropDownObject = [self.popOverArray lastObject];
+            if ([dropDownObject.type_String isEqual:kServiceType_serviceProvider] || [dropDownObject.type_String isEqual:kPay_Level] || [dropDownObject.type_String isEqual:kBill_Level]) {
+                
+                popOverSearchBar.hidden = YES;
+                CGRect frame =  self.popOverView.frame;
+                frame.origin.y = 0;
+                frame.size.height = 210;
+                self.popOverView.frame = frame;
+
+            }
+        }
         
     }
 }
@@ -159,13 +177,26 @@
 
     if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
     {
-        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        GISDropDownsObject *dropDownObj;
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            dropDownObj=[self.filteredArray objectAtIndex:indexPath.row];
+        }else{
+            
+            dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        }
         cell.textLabel.text=dropDownObj.value_String;
     }
     else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISContactsInfoObject class]])
     {
-        GISContactsInfoObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
-        cell.textLabel.text=dropDownObj.contactNo_String;
+        GISContactsInfoObject *contactInfoObj;
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            contactInfoObj=[self.filteredArray objectAtIndex:indexPath.row];
+        }else{
+            contactInfoObj=[self.popOverArray objectAtIndex:indexPath.row];
+        }
+        cell.textLabel.text=contactInfoObj.contactNo_String;
     }
     else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
     {
@@ -199,18 +230,42 @@
 {
     if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISDropDownsObject class]])
     {
-        GISDropDownsObject *dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        GISDropDownsObject *dropDownObj;
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            dropDownObj=[self.filteredArray objectAtIndex:indexPath.row];
+        }else{
+            
+            dropDownObj=[self.popOverArray objectAtIndex:indexPath.row];
+        }
         [self.popOverDelegate sendTheSelectedPopOverData:dropDownObj.id_String value:dropDownObj.value_String];
     }
     else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISContactsInfoObject class]])
     {
-        GISContactsInfoObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
-        [self.popOverDelegate sendTheSelectedPopOverData:spObj.contactTypeId_String value:spObj.contactNo_String];
+        GISContactsInfoObject *contactInfoObj;
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            contactInfoObj = [self.filteredArray  objectAtIndex:indexPath.row];
+        }else{
+            
+            contactInfoObj = [self.popOverArray objectAtIndex:indexPath.row];
+        }
+        
+        [self.popOverDelegate sendTheSelectedPopOverData:contactInfoObj.contactTypeId_String value:contactInfoObj.contactNo_String];
     }
     else if([[self.popOverArray objectAtIndex:indexPath.row] isKindOfClass:[GISServiceProviderObject class]])
     {
-        GISServiceProviderObject *spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        GISServiceProviderObject *spObj;
+        if(tableView ==  self.searchDisplayController.searchResultsTableView) {
+            
+            spObj=[self.filteredArray objectAtIndex:indexPath.row];
+            
+        }else{
+            spObj=[self.popOverArray objectAtIndex:indexPath.row];
+        }
+        
         [self.popOverDelegate sendTheSelectedPopOverData:spObj.id_String value:spObj.service_Provider_String];
+        
     }else if(appDelegate.isNoofAttendees){
         
         [self.popOverDelegate sendTheSelectedPopOverData:[_noOfAttendeesIdArray objectAtIndex:indexPath.row] value:[self.popOverArray objectAtIndex:indexPath.row]];
@@ -229,25 +284,138 @@
 	
     if([[self.popOverArray lastObject] isKindOfClass:[GISServiceProviderObject class]])
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"service_Provider_String contains[c] %@",searchText];
-        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE SERVICE_PROVIDER like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+        NSArray *tempArray = [[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement];
         
         self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
+
+        
     }
     if([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]])
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"value4_String contains[c] %@",searchText];
-        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+        NSArray *tempArray;
+        GISDropDownsObject *dropDownObject = [self.popOverArray lastObject];
+        
+        if ([dropDownObject.type_String  isEqual:kBuildingNames]) {
+            
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_BUILDING_NAME WHERE VALUE like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kDressCode]) {
+   
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE WHERE VALUE like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kLocationCode]) {
+      
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_GENERAL_LOCATION WHERE VALUE like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kEventType]) {
+
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE WHERE VALUE like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kunitOrDep]) {
+    
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT WHERE VALUE like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kRequestNumbers]) {
+
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+           tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        //
+        else if ([dropDownObject.type_String isEqual:kMode_of_Communication]) {
+            
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_MODE_OF_COMMUNICATION WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+            
+        }
+        else if ([dropDownObject.type_String isEqual:kServiceProvider_GenderPref]) {
+       
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROV_GENDER_PREFERENCE WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kService_Needed]) {
+
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_NEEDED WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kClosest_metro]) {
+
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CLOSEST_METRO WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kLocationName]) {
+
+        }
+        else if ([dropDownObject.type_String isEqual:kPrimary_Audience]) {
+ 
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PRIMARY_AUDIENCE WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kSkill_Level]) {
+     
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SKILL_LEVEL WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kPay_Level]) {
+
+//            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_LEVEL WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+//            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kBill_Level]) {
+            
+        }
+        else if ([dropDownObject.type_String isEqual:kPayStatus_ExpStatus]) {
+      
+        }
+        else if ([dropDownObject.type_String isEqual:kServiceType_serviceProvider]) {
+            
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_TYPE_SERVICE_PROVIDER WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+   
+        }
+        else if ([dropDownObject.type_String isEqual:kRequest_Number_Search]) {
+      
+        }
+        else if ([dropDownObject.type_String isEqual:kPayType]) {
+        
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_TYPE WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+        }
+        else if ([dropDownObject.type_String isEqual:kTypeOfService]) {
+
+        }
+        else if ([dropDownObject.type_String isEqual:kServiceType_Registerd_Consumers]) {
+    
+        }
+        else if ([dropDownObject.type_String isEqual:kRequestors]) {
+       
+        }
+        else if ([dropDownObject.type_String isEqual:kMode]) {
+           
+        }
+        else if ([dropDownObject.type_String isEqual:kCreated_By]) {
+          
+        }
+        else if ([dropDownObject.type_String isEqual:kRequestor_Type]) {
+           
+        }
         
         self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
 
     }
     else if([[self.popOverArray lastObject] isKindOfClass:[GISContactsInfoObject class]])
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"contactNo_String contains[c] %@",searchText];
-        NSArray *tempArray = [self.popOverArray filteredArrayUsingPredicate:predicate];
+
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CONTACTS_INFO WHERE CONTACT_NO like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+        NSArray *tempArray = [[GISDatabaseManager sharedDataManager] getContactsArray:spCode_statement];
         
         self.filteredArray = [NSMutableArray arrayWithArray:tempArray];
+        
     }
 
 }

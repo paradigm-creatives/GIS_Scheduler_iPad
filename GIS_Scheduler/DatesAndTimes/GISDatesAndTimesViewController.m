@@ -738,6 +738,31 @@
         [df setDateFormat:@"MM/dd/yyyy"];//OLD
         NSDate *startDate = [df dateFromString:startDate_TextField.text]; // your start date
         NSDate *endDate =[df dateFromString:endDate_TextField.text];// [NSDate date]; // your end date
+        
+        [df setDateFormat:@"hh:mm a"];
+        
+        NSDate *startTime = [df dateFromString:startTime_TextField.text]; // your start time
+        NSDate *endTime =[df dateFromString:endTime_TextField.text];// [NSDate date]; // your end time
+        
+        for(int i = 0; i < [detail_mut_array count] ;i++){
+            GISDatesAndTimesObject *date_obj_here = [detail_mut_array  objectAtIndex:i];
+            [df setDateFormat:@"MM/dd/yyyy"];
+            NSDate *startDate1 = [df dateFromString:date_obj_here.date_String];
+            NSDate *endDate1 = [df dateFromString:date_obj_here.date_String];
+            [df setDateFormat:@"hh:mm a"];
+            
+            NSDate *startTime1 = [df dateFromString:date_obj_here.startTime_String];
+            NSDate *endTime1 =[df dateFromString:date_obj_here.endTime_String];
+            
+            if (([startDate1 compare:startDate] == NSOrderedSame) && ([endDate1 compare:endDate] == NSOrderedSame) && ([startTime1 compare:startTime] == NSOrderedSame) && ([endTime1 compare:endTime] == NSOrderedSame) ) {
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"create_dates_times_Alert",TABLE, nil)];
+                return;
+            }
+            
+        }
+
+        
         NSDateComponents *dayDifference = [[NSDateComponents alloc] init];
         
         NSMutableArray *dates = [[NSMutableArray alloc] init] ;

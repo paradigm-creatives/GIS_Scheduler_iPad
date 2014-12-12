@@ -281,9 +281,11 @@
                 <outlet property="jobDate_UIView" destination="Ed2-ft-ZQD" id="DgB-0i-3NF"/>
                 <outlet property="job_ID_Label" destination="B5W-yk-qui" id="qVc-Zh-lNM"/>
                 <outlet property="job_date_Label" destination="Emk-SN-lQk" id="c3y-1e-RUu"/>
+                <outlet property="payTypeTextField" destination="baS-R2-GPN" id="f6H-he-rYo"/>
                 <outlet property="payType_EDIT_Label" destination="AMd-rR-PIp" id="aez-ou-AOc"/>
                 <outlet property="payType_Label" destination="YBS-au-88S" id="bsg-Xm-IF3"/>
                 <outlet property="payType_UIView" destination="PV0-OY-PtK" id="K0M-bs-8cs"/>
+                <outlet property="serviceProviderTextField" destination="kfK-Rk-mdx" id="kcW-Ha-RSy"/>
                 <outlet property="serviceProvider_UIView" destination="2AG-iG-MiF" id="FSM-xq-bcJ"/>
                 <outlet property="service_provider_EDIT_Label" destination="9TS-79-uxb" id="BxM-BW-gcN"/>
                 <outlet property="service_provider_Label" destination="Rcr-DC-MYO" id="emN-9Z-y1Q"/>

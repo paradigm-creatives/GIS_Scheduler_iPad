@@ -83,6 +83,7 @@
     NSString *serviceProvider_ID_string;
     NSString *filledUnfilled_ID_string;
     NSMutableArray *createJobdate_Array;
+    NSString *serviceProvider_selectedString;
 }
 
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;

@@ -156,6 +156,17 @@
             cell.timely_answer_label.text=addUpdateObj.timely_string;
         }
         
+        if (![appDelegate.statusString isEqualToString:@"Approved"]) {
+            cell.serviceProviderIdButton.userInteractionEnabled=NO;
+            cell.serviceProviderIdtextField.userInteractionEnabled=NO;
+            [cell.serviceProviderIdtextField setBackgroundColor:[UIColor lightGrayColor]];
+        }else{
+            
+            cell.serviceProviderIdButton.userInteractionEnabled=YES;
+            cell.serviceProviderIdtextField.userInteractionEnabled=YES;
+            [cell.serviceProviderIdtextField setBackgroundColor:[UIColor clearColor]];
+        }
+        
 
         if ([addUpdateObj.outOfAgency_string length])
         {

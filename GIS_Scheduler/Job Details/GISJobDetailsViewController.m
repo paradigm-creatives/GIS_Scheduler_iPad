@@ -67,6 +67,8 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(craeteJobPressed:) name:@"createNewJob" object:nil];
+    
     createJobs_UIVIew.hidden=YES;
     
     jobChangeHistory_background_UIView.hidden=YES;
@@ -103,7 +105,7 @@
     
     billLevel_Array=[[GISStoreManager sharedManager]getBillLevelObjects];
     
-    filledUnfilled_ID_string=@"0";
+    //filledUnfilled_ID_string=@"0";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     startDate_jobHistory_Answer_Label.text= [formatter stringFromDate:[NSDate date]];
@@ -129,7 +131,6 @@
     
     serviceProvider_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     filledUnfilled_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
-   
 }
 
 
@@ -438,14 +439,14 @@
     if (![appDelegate.statusString isEqualToString:@"Approved"]) {
         cell.serviceProvider_UIView.userInteractionEnabled=NO;
         cell.payType_UIView.userInteractionEnabled=NO;
-        [cell.serviceProvider_Button setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.payType_Button setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.serviceProviderTextField setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.payTypeTextField setBackgroundColor:[UIColor lightGrayColor]];
     }else{
         
         cell.serviceProvider_UIView.userInteractionEnabled=YES;
         cell.payType_UIView.userInteractionEnabled=YES;
-        [cell.serviceProvider_Button setBackgroundColor:[UIColor clearColor]];
-        [cell.payType_Button setBackgroundColor:[UIColor clearColor]];
+        [cell.serviceProviderTextField setBackgroundColor:[UIColor clearColor]];
+        [cell.payTypeTextField setBackgroundColor:[UIColor clearColor]];
     }
     return cell;
 }
@@ -518,7 +519,7 @@
     else if ([sender tag]==666)
     {
         btnTag=666;
-        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",typeOfservice_temp_string];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",typeOfservice_temp_string,[NSString stringWithFormat:@"%d",0]];
         if ([typeOfservice_temp_string isEqualToString:@"Any"]) {
             spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
         }
@@ -603,10 +604,20 @@
     {
         serviceProvider_Answer_Label.text=value_str;
         serviceProvider_ID_string=id_str;
+        if([id_str isEqualToString:@"0"])
+            serviceProvider_ID_string = @"";
     }
     else if(btnTag==333)
     {
         filledUnfilled_Answer_Label.text=value_str;
+        
+        if ([value_str isEqualToString:@"Filled"]) {
+            filledUnfilled_ID_string=@"1";
+        }
+        else
+        {
+            filledUnfilled_ID_string=@"2";
+        }
     }
     else if(btnTag==444)
     {
@@ -659,6 +670,9 @@
     else if (btnTag==666)
     {
         serviceProvider_temp_string=value_str;
+        
+        if([id_str isEqualToString:@"0"])
+            serviceProvider_temp_string = @"";
     }
     else if (btnTag==777)
     {
@@ -868,6 +882,7 @@
 
 -(void)showChangeJobHistoryView
 {
+    //jobHistory_textView.text = @"";
     jobChangeHistory_background_UIView.hidden=NO;
     jobChangeHistory_foreground_UIView.hidden=NO;
 }
@@ -992,6 +1007,11 @@
         [self sendCreateJObs_data];
     }
     
+}
+
+-(IBAction)craeteJobPressed:(id)sender{
+    
+    [self sendCreateJObs_data];
 }
 
 -(void)sendCreateJObs_data
@@ -1158,18 +1178,24 @@
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    jobHistory_textView.text = @"Job History Notes";
     [GISUtility moveemailView:NO viewHeight:0 view:self.view];
     [textView resignFirstResponder];
 }
 
 -(IBAction)searchButtonPressed:(id)sender{
     
+    if([serviceProvider_ID_string length] == 0)
+        serviceProvider_ID_string = @"";
+    if([filledUnfilled_ID_string length] == 0)
+        filledUnfilled_ID_string = @"";
+    
     NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
     [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kSearchReq_Result_RequestId];
     [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
     [paramsDict1 setObject:jobDate_Answer_Label.text forKey:kJobDetais_JobDate];
-    [paramsDict1 setObject:serviceProvider_Answer_Label.text forKey:kJobDetais_ServiceProvider];
-    [paramsDict1 setObject:filledUnfilled_Answer_Label.text forKey:kJobDetais_FilledUnFilled];
+    [paramsDict1 setObject:serviceProvider_ID_string forKey:kJobDetais_ServiceProvider];
+    [paramsDict1 setObject:filledUnfilled_ID_string forKey:kJobDetais_FilledUnFilled];
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     [[GISServerManager sharedManager] filterJobsDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_filter_JobDetails:) failAction:@selector(failuremethod_filter_JobDetails:)];
 
@@ -1182,11 +1208,22 @@
     saveUpdateDict = [responseArray lastObject];
     NSLog(@"successmethod_filter_JobDetails Success---%@",saveUpdateDict);
     
+    serviceProvider_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    filledUnfilled_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    jobDate_Answer_Label.text = @"";
+    serviceProvider_ID_string = @"";
+    filledUnfilled_ID_string = @"";
+    
+    
     if (responseArray.count<1) {
+        
+        if([jobDetails_Array count] >0)
+           [jobDetails_Array removeAllObjects];
+        [jobDetails_tableView reloadData];
         
         [self removeLoadingView];
 
-        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+        //[GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
         return;
     }
     
@@ -1280,6 +1317,8 @@
 {
     [super viewWillDisappear:YES];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"changeJobHistory" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"createNewJob" object:nil];
 }
 
 

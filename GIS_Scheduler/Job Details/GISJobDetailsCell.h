@@ -40,4 +40,6 @@
 @property(nonatomic,strong) IBOutlet UIButton *deleteButton;
 @property(nonatomic,strong) IBOutlet UIImageView *edit_imageView;
 @property(nonatomic,strong) IBOutlet UIImageView *delete_imageview;
+@property(nonatomic,strong) IBOutlet UITextField *payTypeTextField;
+@property(nonatomic,strong) IBOutlet UITextField *serviceProviderTextField;
 @end
