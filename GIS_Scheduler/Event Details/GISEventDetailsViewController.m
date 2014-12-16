@@ -65,9 +65,9 @@
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     _eventdetails_unitIdStr = [userDefaults valueForKey:kunitid];
     
-    _otherServicesArray = [[NSArray alloc] initWithObjects:@"Captioning",@"VRI", nil];
-    _viewingTypeArray = [[NSArray alloc] initWithObjects:@"Individuals", nil];
-    _captionTypeArray = [[NSArray alloc] initWithObjects:@"Onsite", nil];
+    _otherServicesArray = [[NSArray alloc] initWithObjects:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil),@"Captioning",@"VRI", nil];
+    _viewingTypeArray = [[NSArray alloc] initWithObjects:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil),@"Individuals", nil];
+    _captionTypeArray = [[NSArray alloc] initWithObjects:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil),@"Onsite", nil];
     
     eventTypedata = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     dresscodeData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
@@ -650,7 +650,7 @@
         _popover =   [GISUtility showPopOver:(NSMutableArray *)_dresscodeArray viewController:tableViewController];
     }else if(btn.tag == 13){
         _popover =   [GISUtility showPopOver:(NSMutableArray *)_otherServicesArray viewController:tableViewController];
-        _popover.popoverContentSize = CGSizeMake(300, 80);
+        _popover.popoverContentSize = CGSizeMake(300, 120);
     }else if(btn.tag == 14){
         _popover =   [GISUtility showPopOver:(NSMutableArray *)_captionTypeArray viewController:tableViewController];
         _popover.popoverContentSize = CGSizeMake(300, 80);
@@ -691,6 +691,16 @@
         if([otherServicesdata isEqualToString:@"VRI"]){
             _otherServices_Str = @"2";
             captionBtn.enabled = FALSE;
+        }else if([otherServicesdata isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
+            _otherServices_Str = @"0";
+            captionData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+            viewingTypeData = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+            
+            UIButton *captionBtn=(UIButton *)[self.view viewWithTag:14];
+            [captionBtn setTitle:captionData forState:UIControlStateNormal];
+            UIButton *viewTypeBtn=(UIButton *)[self.view viewWithTag:15];
+            [viewTypeBtn setTitle:viewingTypeData forState:UIControlStateNormal];
+
         }else{
             _otherServices_Str = @"1";
             captionBtn.enabled = TRUE;
@@ -1097,7 +1107,7 @@
             [paramsDict setObject:[self returningstring:chooseRequest_Detailed_DetailsObj.transportation_String_chooseReqParsedDetails] forKey:kChooseReqDetails_Transport];
             [paramsDict setObject:[self returningstring:chooseRequest_Detailed_DetailsObj.transportationYes_String_chooseReqParsedDetails] forKey:kChooseReqDetails_transportnotes];
             
-            if([_otherServices_Str length]>0){
+            if([_otherServices_Str length]>0 && ![_otherServices_Str isEqualToString:@"0"]){
                 [paramsDict setObject:_otherServices_Str forKey:keventDetails_otherServices];
                 if(![_otherServices_Str isEqualToString:@"2"]){
                     
@@ -1112,7 +1122,7 @@
                 [paramsDict setObject:@"" forKey:keventDetails_otherServices];
                 [paramsDict setObject:@"" forKey:keventDetails_captiontype];
             }
-            if([_eventdetails_viewOptions length]>0){
+            if([_eventdetails_viewOptions length]>0 && ![_eventdetails_viewOptions  isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
                 [paramsDict setObject:_eventdetails_viewOptions forKey:keventDetails_captionView];
             }
             else{
@@ -1126,7 +1136,7 @@
             else
                 [paramsDict setObject:@"" forKey:keventDetails_recordBroadcastYes];
             
-            if([_otherServices_Str length] > 0)
+            if([_otherServices_Str length] > 0 &&  ![_otherServices_Str isEqualToString:@"0"])
             {
                 if([_otherServices_Str isEqualToString:@"2"]){
                     if([viewingTypebtn.titleLabel.text isEqualToString:
@@ -1400,7 +1410,12 @@
         [descriptionTextView setText:[self returningstring:chooseRequest_Detailed_DetailsObj.eventDescription_String_chooseReqParsedDetails]];
         _otherServices_Str = [self returningstring:chooseRequest_Detailed_DetailsObj.OtherServiceID_String_chooseReqParsedDetails];
         captionData = [self returningstring:chooseRequest_Detailed_DetailsObj.CaptionTypeID_String_chooseReqParsedDetails];
-        [captionBtn setTitle:[self returningstring:chooseRequest_Detailed_DetailsObj.CaptionTypeID_String_chooseReqParsedDetails] forState:UIControlStateNormal];
+        
+        if([captionData length] > 0){
+            [captionBtn setTitle:[self returningstring:chooseRequest_Detailed_DetailsObj.CaptionTypeID_String_chooseReqParsedDetails] forState:UIControlStateNormal];
+        }else{
+            [captionBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        }
         _broadcastType_Str = [self returningstring:chooseRequest_Detailed_DetailsObj.recBroadcastYes_String_chooseReqParsedDetails];
         noOfUsersData = [self returningstring:chooseRequest_Detailed_DetailsObj.CapNoOfUsers_String_chooseReqParsedDetails];
         [ofUserstextField setText:[self returningstring:chooseRequest_Detailed_DetailsObj.CapNoOfUsers_String_chooseReqParsedDetails]];
@@ -1469,12 +1484,15 @@
             [otherServicesBtn setTitle:@"VRI" forState:UIControlStateNormal];
             captionBtn.enabled = FALSE;
         }else{
-            [otherServicesBtn setTitle:@"" forState:UIControlStateNormal];
+            [otherServicesBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
             captionBtn.enabled = TRUE;
             
         }
         
-        [viewTypeBtn setTitle:_eventdetails_viewOptions forState:UIControlStateNormal];
+        if([_eventdetails_viewOptions length] == 0)
+            [viewTypeBtn setTitle:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil) forState:UIControlStateNormal];
+        else
+            [viewTypeBtn setTitle:_eventdetails_viewOptions forState:UIControlStateNormal];
         
         if([_othertechvalueStr length] >0){
             _otherTechArray = [[NSArray alloc] initWithArray:[_othertechvalueStr componentsSeparatedByString:@","]];

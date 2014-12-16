@@ -107,13 +107,13 @@
             popOverSearchBar.hidden = YES;
             CGRect frame =  self.popOverView.frame;
             frame.origin.y = 0;
-            frame.size.height = 90;
+            frame.size.height = 210;
             self.popOverView.frame = frame;
             
         }
         if([[self.popOverArray lastObject] isKindOfClass:[GISDropDownsObject class]]){
             GISDropDownsObject *dropDownObject = [self.popOverArray lastObject];
-            if ([dropDownObject.type_String isEqual:kServiceType_serviceProvider] || [dropDownObject.type_String isEqual:kPay_Level] || [dropDownObject.type_String isEqual:kBill_Level]) {
+            if ([dropDownObject.type_String isEqual:kServiceType_serviceProvider]) {
                 
                 popOverSearchBar.hidden = YES;
                 CGRect frame =  self.popOverView.frame;
@@ -363,11 +363,13 @@
         }
         else if ([dropDownObject.type_String isEqual:kPay_Level]) {
 
-//            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_LEVEL WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
-//            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PAY_LEVEL WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         }
         else if ([dropDownObject.type_String isEqual:kBill_Level]) {
             
+            NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_BILL_LEVEL WHERE VALUE  like '%@'",[NSString stringWithFormat:@"%%%@%%",searchText]];
+            tempArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         }
         else if ([dropDownObject.type_String isEqual:kPayStatus_ExpStatus]) {
       

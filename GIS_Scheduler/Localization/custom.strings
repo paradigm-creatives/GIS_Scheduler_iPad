@@ -128,7 +128,7 @@
 
 
 ////////--------- Attendees ---------////////
-"select_no_of_expected_attendees"= "Select No of expected attendees";
+"select_no_of_expected_attendees"= "Select No of expected attendees :";
 "gender_Preference"="Gender Preference :";
 "attendees_List"="Attendees List";
 "service_Provider" = "Service Provider";
@@ -190,6 +190,10 @@
 "select_bill_level" = "Please select Bill Level";
 "select_one_job" = "Please select atleast one Dates/Times";
 "select_pay_type" = "Please select Pay Type";
+"date_time_successed" = "Date & time created successfully";
+"date_time_deleted" = "Date & time deleted successfully";
+"jobs_successed" = "Jobs Inserted successfully";
+"jobs_deleted" = "Jobs Deleted successfully";
 
 
 
@@ -248,7 +252,7 @@
 "Job_Date"="Job Date :";
 "Call_In_Time"="Call In Time :";
 "Type_of_Service_Provider"="Type of Service Provider :";
-"Service_Provider_ID"="Service Provider ID :";
+"Service_Provider_ID"="Service Provider :";
 "Out_Agency"="Out Agency :";
 "Timely_and_Half"="Timely and 1/2 :";
 "BillOrPayment_Info"="Bill/PaymentInfo";

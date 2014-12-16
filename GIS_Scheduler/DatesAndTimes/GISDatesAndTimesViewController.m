@@ -947,7 +947,7 @@
         {
             [detail_mut_array removeObjectAtIndex:currentObjTag_toDelete];
             [datesTimes_tableView reloadData];
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_deleted", TABLE, nil)];
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"date_time_deleted", TABLE, nil)];
         }
         else
         {
@@ -958,7 +958,7 @@
             GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
             [appDelegate.datesArray insertObject:dobj atIndex:0];
             
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"successfully_saved", TABLE, nil)];
+            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"date_time_successed", TABLE, nil)];
             //[self performSelector:@selector(nextButtonPressed:) withObject:nil];
             
             [self clearDateTimes_Data];
@@ -1484,7 +1484,7 @@
     NSDictionary *saveUpdateDict;
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
-    NSLog(@"successmethod_saveMaterialType Success---%@",saveUpdateDict);
+    NSLog(@"successmethod_createJObs_JobDetails Success---%@",saveUpdateDict);
     
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
         [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];

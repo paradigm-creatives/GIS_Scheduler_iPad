@@ -782,8 +782,11 @@
 -(void) addHistory_Clicked{
     
     history_Clicked = YES;
-    
     [addUpdateJobs_tableView reloadData];
+    
+    [addUpdateJobs_tableView setContentOffset:(CGPoint){0, addUpdateJobs_tableView.contentSize.height - addUpdateJobs_tableView.bounds.size.height} animated:YES];
+
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -230,6 +230,7 @@
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_NEEDED"];
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SKILL_LEVEL"];
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_PAY_LEVEL"];
+                    [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_BILL_LEVEL"];
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SERVICE_TYPE_SERVICE_PROVIDER"];
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_REGISTERED_CONSUMERS"];
                     [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_REQUESTORS"];
@@ -258,6 +259,7 @@
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_NEEDED];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SKILL_LEVEL];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_PAY_LEVEL];
+                    [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_BILL_LEVEL];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_SERVICE_TYPE_SERVICE_PROVIDER];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REGISTERED_CONSUMERS];
                     [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_REQUESTORS];
@@ -336,6 +338,7 @@
     [[GISStoreManager sharedManager] removeClosestmetroObjects];
     [[GISStoreManager sharedManager] removeSkillLevelObjects];
     [[GISStoreManager sharedManager] removePayLevelObjects];
+    [[GISStoreManager sharedManager] removeBillLevelObjects];
     [[GISStoreManager sharedManager] removeServiceType_ServiceProviderObjects];
     [[GISStoreManager sharedManager] removeRegisteredConsumersObjects];
     [[GISStoreManager sharedManager] removePrimaryAudienceObjects];
@@ -364,6 +367,7 @@
     
     NSMutableArray *skillLevel_Array=[[GISStoreManager sharedManager] getSkillLevelObjects];
     NSMutableArray *payLevelArray=[[GISStoreManager sharedManager] getPayLevelObjects];
+    NSMutableArray *billLevelArray=[[GISStoreManager sharedManager] getBillLevelObjects];
     
     NSMutableArray *serviceType_serviceProviderArray=[[GISStoreManager sharedManager] getServiceType_ServiceProviderObjects];
     
@@ -451,6 +455,15 @@
             NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
             [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_PAY_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
         }
+        
+        for (int i=0; i<billLevelArray.count; i++) {
+            GISDropDownsObject *bObj=[billLevelArray objectAtIndex:i];
+            NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
+            NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
+            [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_BILL_LEVEL(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+        }
+        
         
         for (int i=0; i<buildingArray.count; i++) {
             GISDropDownsObject *bObj=[buildingArray objectAtIndex:i];
