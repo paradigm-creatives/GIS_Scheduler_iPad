@@ -349,7 +349,7 @@
         
         //[self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         
-        //[[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
+        [[GISServerManager sharedManager] getSchedulerRequestedJobs:self withParams:paramsDict finishAction:@selector(successmethod_Requestjobs:) failAction:@selector(failuremethod_Requestjobs:)];
         
         //[[GISServerManager sharedManager] getPayTypedata:self withParams:paramsDict finishAction:@selector(successmethod_PatTypedata:) failAction:@selector(failuremethod_PatTypedata:)];
         [listTableView reloadData];
@@ -521,6 +521,7 @@
         NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
         appDelegate.isShowfromDashboard = YES;
+        appDelegate.isShowfromSPRequestedJobs = NO;
         
         [self performSelector:@selector(hideShowDashboard) withObject:nil];
         
@@ -1085,6 +1086,7 @@
     
     appDelegate.isShowfromDashboard = YES;
     appDelegate.isHidefromDashboard = YES;
+    appDelegate.isShowfromSPRequestedJobs = NO;
     
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
     

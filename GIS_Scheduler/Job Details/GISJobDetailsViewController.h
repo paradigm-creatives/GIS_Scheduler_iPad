@@ -71,6 +71,8 @@
     IBOutlet UILabel *endDate_jobHistory_Answer_Label;
     IBOutlet UITextField *user_textField;
     IBOutlet UITextView *jobHistory_textView;
+    IBOutlet UIButton *next_button;
+    IBOutlet UIButton *create_job_button;
     
     BOOL isEdit_Button_Clicked;
     

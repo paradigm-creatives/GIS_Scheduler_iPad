@@ -1351,7 +1351,7 @@
     UITextField *courseTextField=(UITextField *)[self.view viewWithTag:101];
     UITextView *descriptionTextView=(UITextView *)[self.view viewWithTag:102];
     UITextField *ofUserstextField=(UITextField *)[self.view viewWithTag:666];
-    UILabel *recordSelected=(UILabel *)[self.view viewWithTag:110];
+    UILabel *recordSelected=(UILabel *)[self.view viewWithTag:555];
     UILabel *documnet_selected_label=(UILabel *)[self.view viewWithTag:888];
     
     UIButton *documentBtn=(UIButton *)[self.view viewWithTag: 44];

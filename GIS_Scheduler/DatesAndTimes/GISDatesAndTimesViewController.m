@@ -142,6 +142,11 @@
     [create_DateTime_Button setTitle:NSLocalizedStringFromTable(@"create_dates_times_Btn", TABLE, nil) forState:UIControlStateNormal];
     [create_Jobs_Button setTitle:NSLocalizedStringFromTable(@"create_jobs_btn", TABLE, nil) forState:UIControlStateNormal];
     [next_Button setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
+    
+    [create_DateTime_Button setBackgroundColor:UIColorFromRGB(0x00457c)];
+    [create_Jobs_Button setBackgroundColor:UIColorFromRGB(0x00457c)];
+    [create_DateTime_Button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+    [create_Jobs_Button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
     ////
     
     weekDays_dictionary_here= [[NSMutableDictionary alloc]init];
@@ -398,7 +403,7 @@
     popover.delegate = self;
     popover.popoverContentSize = CGSizeMake(340, 150);
     if([sender tag]==1111 || [sender tag]==1212 || [sender tag]==1313)
-        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     else if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
@@ -1487,7 +1492,7 @@
     NSLog(@"successmethod_createJObs_JobDetails Success---%@",saveUpdateDict);
     
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
-        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"successfully_saved",TABLE, nil)];
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_successed",TABLE, nil)];
         
     }
     else{

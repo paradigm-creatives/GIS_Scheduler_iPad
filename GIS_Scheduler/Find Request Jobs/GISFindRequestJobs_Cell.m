@@ -9,6 +9,8 @@
 
 #import "GISFindRequestJobs_Cell.h"
 #import "GISConstants.h"
+#import "GISFonts.h"
+
 @implementation GISFindRequestJobs_Cell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -61,6 +63,14 @@
     _timely_Cancelled_label_.text=NSLocalizedStringFromTable(@"Timely", TABLE, nil);
     
     _payLevel_JobDate_label_.text=NSLocalizedStringFromTable(@"Pay_Level", TABLE, nil);
+    
+    [_clear_button_.layer setCornerRadius:3.0f];
+    [[_clear_button_ layer] setMasksToBounds:YES];
+    _clear_button_.titleLabel.font=[GISFonts larger];
+    
+    [_search_button_.layer setCornerRadius:3.0f];
+    [[_search_button_ layer] setMasksToBounds:YES];
+    _search_button_.titleLabel.font=[GISFonts larger];
 }
 
 @end

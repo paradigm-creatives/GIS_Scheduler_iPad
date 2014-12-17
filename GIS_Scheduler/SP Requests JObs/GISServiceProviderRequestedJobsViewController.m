@@ -88,6 +88,10 @@
     noOfAttendees_answer_label.textColor=UIColorFromRGB(0x666666);
     generalLocation_answer_label.textColor=UIColorFromRGB(0x666666);
     
+    [search_button.layer setCornerRadius:3.0f];
+    [[search_button layer] setMasksToBounds:YES];
+    search_button.titleLabel.font=[GISFonts larger];
+    
     daysArray = [[NSMutableArray alloc] init];
     days_str = [[NSMutableString alloc] init];
     SPJobsArray = [[NSMutableArray alloc] init];

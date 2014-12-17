@@ -83,7 +83,7 @@
                         <rect key="frame" x="879" y="19" width="16" height="16"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1Cc-Ul-bAj">
-                        <rect key="frame" x="873" y="10" width="23" height="29"/>
+                        <rect key="frame" x="875" y="10" width="23" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

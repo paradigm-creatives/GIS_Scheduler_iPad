@@ -21,6 +21,7 @@
                 <outlet property="recordBroadCast_NO_button" destination="QqS-v3-xBl" id="zGk-HL-y5B"/>
                 <outlet property="recordBroadCast_YES_button" destination="o1I-wj-Wpa" id="G67-qd-fQT"/>
                 <outlet property="saturday_ImageView" destination="hlx-sm-iNI" id="pzN-8G-9Ba"/>
+                <outlet property="search_button" destination="74P-Kf-dLa" id="lEi-41-EcW"/>
                 <outlet property="serviceProvider_answer_label" destination="ezh-Om-wKa" id="Xje-ba-tAC"/>
                 <outlet property="startDate_answer_label" destination="XdZ-XT-AvX" id="1s5-sx-tz5"/>
                 <outlet property="startTime_answer_label" destination="svd-SN-PtP" id="JR7-oR-MeK"/>

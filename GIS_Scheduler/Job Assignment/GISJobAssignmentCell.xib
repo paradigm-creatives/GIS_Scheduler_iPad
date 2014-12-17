@@ -195,13 +195,17 @@
                 <outlet property="payType_UIView" destination="GzC-zk-Lq7" id="4Ef-6r-pda"/>
                 <outlet property="payType_button" destination="8Ni-Uc-QK6" id="vTZ-Wf-iA6"/>
                 <outlet property="payType_label" destination="gmB-f1-N5b" id="Y2i-mB-Llb"/>
+                <outlet property="payType_textfield" destination="aXu-6b-9hO" id="GJ2-uF-E32"/>
                 <outlet property="requestor_label" destination="B3q-uQ-S3Y" id="iO2-ak-NU8"/>
+                <outlet property="restore_button" destination="afq-Mb-Rig" id="Wbg-YN-Ebh"/>
                 <outlet property="serviceProviderType_UIView" destination="VjT-xi-Kk3" id="qaL-De-RSN"/>
                 <outlet property="serviceProviderType_label" destination="r9L-S5-uxC" id="2Gr-XB-oM5"/>
                 <outlet property="serviceProvider_UIView" destination="wkA-n4-XcB" id="bOl-R6-sLH"/>
                 <outlet property="serviceProvider_label" destination="3Ma-bE-SWz" id="H1x-bk-JJR"/>
                 <outlet property="service_Provider_button" destination="UbM-wL-bnN" id="UXf-bM-iGT"/>
+                <outlet property="service_Provider_textfield" destination="qLN-XZ-hWx" id="inJ-W1-MHZ"/>
                 <outlet property="service_Provider_type_button" destination="fuA-Jp-sGS" id="lVM-xk-XwI"/>
+                <outlet property="service_Provider_type_textfield" destination="dmB-U1-IXK" id="GKV-HP-bEl"/>
                 <outlet property="startTime_label" destination="p9J-PI-Gyt" id="q8T-au-PK7"/>
             </connections>
         </tableViewCell>

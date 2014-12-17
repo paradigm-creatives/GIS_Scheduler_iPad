@@ -194,7 +194,7 @@ int row_count = 2;
         [nextButton addTarget:self
                        action:@selector(nextButtonPressed:)
              forControlEvents:UIControlEventTouchUpInside];
-        nextButton.frame = CGRectMake(headerView.frame.size.width/2-35, 40.0, 80.0, 30.0);
+        nextButton.frame = CGRectMake(518.0, 40.0, 80.0, 30.0);
         
         [nextButton setTitle:NSLocalizedStringFromTable(@"next",TABLE, nil) forState:UIControlStateNormal];
         nextButton.backgroundColor=UIColorFromRGB(0x00457c);

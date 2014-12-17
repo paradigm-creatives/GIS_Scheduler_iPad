@@ -58,6 +58,10 @@
     [_unknown_label setText:NSLocalizedStringFromTable(@"unknown", TABLE, nil)];
     [_generalLocation_label setText:NSLocalizedStringFromTable(@"general_location", TABLE, nil)];
     
+    [_nextButton.layer setCornerRadius:3.0f];
+    [[_nextButton layer] setMasksToBounds:YES];
+    [_nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+    _nextButton.titleLabel.font=[GISFonts larger];
 
 }
 

@@ -486,8 +486,8 @@
             [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in SummaryView CellForRowAtIndexPath section 3--> %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
         }
  
-        summaryDatescell.date_label.text = [GISUtility returningstring:datesAndTimesObj.date_String];
-        summaryDatescell.day_label.text = [GISUtility returningstring:datesAndTimesObj.day_String];
+        summaryDatescell.date_label.text = [GISUtility returningstring:datesAndTimesObj.day_String];
+        summaryDatescell.day_label.text = [GISUtility returningstring:datesAndTimesObj.date_String];
         summaryDatescell.startTime_label.text =[GISUtility returningstring:datesAndTimesObj.startTime_String];
         summaryDatescell.endTime_label.text = [GISUtility returningstring:datesAndTimesObj.endTime_String];
 
@@ -520,6 +520,10 @@
         cell.typeOf_service_UIView.hidden = YES;
         cell.serviceProvider_UIView.hidden = YES;
         cell.payType_UIView.hidden = YES;
+        cell.editButton.hidden = YES;
+        cell.edit_imageView.hidden = YES;
+        [cell.deleteButton addTarget:self action:@selector(deleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.deleteButton setTag:indexPath.row];
         
         return cell;
     }
@@ -1202,6 +1206,74 @@
     NSLog(@"Failure");
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
+
+-(void)deleteButtonPressed:(id)sender
+{
+    UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"do you want to delete", TABLE, nil) delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alertVIew.tag = [sender tag];
+    alertVIew.delegate = self;
+    [alertVIew show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        GISJobDetailsObject *jobObj = [appDelegate.jobDetailsArray objectAtIndex:alertView.tag];
+        if([jobObj.jobID_string length] == 0)
+        {
+        }
+        else
+        {
+            NSMutableDictionary *delete_eventdict;
+            delete_eventdict=[[NSMutableDictionary alloc]init];
+            
+            GISJobDetailsObject *tempObj=[appDelegate.jobDetailsArray objectAtIndex:alertView.tag];
+            
+            [delete_eventdict setObject:tempObj.jobID_string forKey:kJobDetais_JobID];
+            [delete_eventdict setObject:@"true" forKey:kJobDetais_deleteJob];
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            [[GISServerManager sharedManager] deleteJobs:self withParams:delete_eventdict finishAction:@selector(successmethod_deleteJobs:) failAction:@selector(failuremethod_deleteJobs:)];
+            
+        }
+    }
+}
+
+-(void)successmethod_deleteJobs:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
+    
+    NSDictionary *saveUpdateDict;
+    NSArray *responseArray= response.responseJson;
+    saveUpdateDict = [responseArray lastObject];
+    NSString *respnseCode = [[saveUpdateDict objectForKey:kStatusCode] stringValue];
+    if ([respnseCode isEqualToString:@"200"]) {
+        
+        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_deleted",TABLE, nil)];
+        
+        [self getJobDetails_Data :[GISUtility returningstring:appDelegate.chooseRequest_ID_String] :loginObJ.token_string:@"":@"":@""];
+        
+    }
+}
+-(void)failuremethod_deleteJobs:(GISJsonRequest *)response
+{
+    [self removeLoadingView];
+    NSLog(@"Failure");
+    [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
+}
+
+-(void)getJobDetails_Data:(NSString *)chooseRequest_idStr :(NSString*)token :(NSString *)serviceProviderID :(NSString *)jobDate :(NSString *)filledUnfilled_str
+{
+    NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+    [paramsDict setObject:chooseRequest_idStr forKey:KRequestId];
+    [paramsDict setObject:token forKey:kToken];
+    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+    [[GISServerManager sharedManager] getJobDetails_data:self withParams:paramsDict finishAction:@selector(successmethod_getJobDetails_data:) failAction:@selector(failuremethod_getJobDetails_data:)];
+}
+
+
 
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {

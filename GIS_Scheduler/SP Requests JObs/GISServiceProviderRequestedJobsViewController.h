@@ -69,6 +69,7 @@
     IBOutlet UIButton *friday_Button;
     IBOutlet UIButton *saturday_Button;
     IBOutlet UIButton *sunday_Button;
+    IBOutlet UIButton *search_button;
     
     IBOutlet UIImageView *monday_ImageView;
     IBOutlet UIImageView *tuesday_ImageView;

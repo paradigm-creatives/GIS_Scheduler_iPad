@@ -21,6 +21,7 @@
 #import "GISServiceProviderObject.h"
 #import "GISDropDownsObject.h"
 #import "GISJSONProperties.h"
+#import "GISVIewEditRequestViewController.h"
 
 @interface GISServiceProviderRequestedJobsResultsViewController ()
 
@@ -65,6 +66,8 @@
     NSString *loginStr = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];
     NSArray  *login_array = [[GISDatabaseManager sharedDataManager] geLoginArray:loginStr];
     login_Obj=[login_array lastObject];
+    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
 }
 
@@ -135,7 +138,8 @@
     cell.editButton.tag=indexPath.row;
     cell.deleteButton.tag=indexPath.row;
     
-    [cell.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.done_btn addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(restoreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.payType_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [cell.gisReponse_Button addTarget:self action:@selector(pickerButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -231,6 +235,9 @@
 //    tempObj.ServiceProviderName_String=serviceProvider_temp_string;
 //    tempObj.PayType_String=payType_temp_string;
 //    tempObj.GisResponse_String=gisResponse_temp_string;
+    
+    selected_row= [sender tag];
+
     
     NSString *serviceProvider_ID_temp_String=@"";
     NSString *payType_ID_temp_String=@"";
@@ -445,11 +452,38 @@
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
+-(IBAction)restoreButtonPressed:(id)sender{
+    
+    NSString *requestValuestr;
+    
+    GISSchedulerSPJobsObject *spJobsObj = [_SPJobsArray objectAtIndex:[sender tag]];
+    
+    NSRange range = [spJobsObj.JobNumber_String rangeOfString:@"-" options:NSBackwardsSearch];
+    if (range.location == NSNotFound) {
+       
+    } else {
+        requestValuestr = [spJobsObj.JobNumber_String substringToIndex:range.location];
+    }
+    
+    appDelegate.chooseRequest_Value_String = requestValuestr;
+    appDelegate.isShowfromDashboard = YES;
+    appDelegate.isShowfromSPRequestedJobs = YES;
+    [self performSelector:@selector(hideShowDashboard) withObject:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil userInfo:nil];
+}
+
+
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {
     [[GISLoadingView sharedDataManager] addLoadingAlertView:title];
     // _loadingView = [LoadingView loadingViewInView:self.navigationController.view andWithText:title];
     
+}
+
+-(void)hideShowDashboard
+{
+    self.isMasterHide = YES;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 -(void)removeLoadingView

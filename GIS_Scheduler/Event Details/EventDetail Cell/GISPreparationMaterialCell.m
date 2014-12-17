@@ -53,7 +53,7 @@
     [_captionTypebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     [_viewingTypebtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     
-    [_othertechnologies_label setText:NSLocalizedStringFromTable(@"other_technologies", TABLE, nil)];
+    [_othertechnologies_label setText:NSLocalizedStringFromTable(@"preparation_material_label", TABLE, nil)];
     [_otherservicesneeded_label setText:NSLocalizedStringFromTable(@"other_servicesNeeded", TABLE, nil)];
     [_other_label setText:NSLocalizedStringFromTable(@"other", TABLE, nil)];
     [_document_label setText:NSLocalizedStringFromTable(@"document", TABLE, nil)];
@@ -68,6 +68,10 @@
     [_otherServices_label setText:NSLocalizedStringFromTable(@"other_services", TABLE, nil)];
     
     [_nextButton setTitle:NSLocalizedStringFromTable(@"next", TABLE, nil) forState:UIControlStateNormal];
+    [_nextButton.layer setCornerRadius:3.0f];
+    [[_nextButton layer] setMasksToBounds:YES];
+    [_nextButton setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+    _nextButton.titleLabel.font=[GISFonts larger];
    
 }
 

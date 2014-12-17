@@ -88,8 +88,11 @@
         segment_UIView.hidden=YES;
         CGRect new_frame=table_UIView.frame;
         new_frame.origin.y=90;
+        new_frame.size.height=650;
         table_UIView.frame=new_frame;
         self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
+    }else{
+        
     }
     NSLog(@"----Array is -->%@--count-->%d",[self.requested_Jobs_Array description],self.requested_Jobs_Array.count);
     
@@ -225,16 +228,18 @@
         cell.payType_button.userInteractionEnabled = NO;
         cell.service_Provider_button.userInteractionEnabled = NO;
         
-        [cell.payType_button setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.service_Provider_button setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.payType_textfield setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.service_Provider_textfield setBackgroundColor:[UIColor lightGrayColor]];
     }else{
         
         cell.payType_button.userInteractionEnabled = YES;
         cell.service_Provider_button.userInteractionEnabled = YES;
         
-        [cell.payType_button setBackgroundColor:[UIColor clearColor]];
-        [cell.service_Provider_button setBackgroundColor:[UIColor clearColor]];
+        [cell.payType_textfield setBackgroundColor:[UIColor clearColor]];
+        [cell.service_Provider_textfield setBackgroundColor:[UIColor clearColor]];
     }
+    [cell.restore_button setTag:indexPath.row];
+    [cell.restore_button addTarget:self action:@selector(restoreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
@@ -741,6 +746,32 @@
     [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
     [jobAssignment_tableView reloadData];
     
+}
+
+-(IBAction)restoreButtonPressed:(id)sender{
+    
+    NSString *requestValuestr;
+    
+    GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:[sender tag]];
+    
+    NSRange range = [obj.JobNumber_String rangeOfString:@"-" options:NSBackwardsSearch];
+    if (range.location == NSNotFound) {
+        
+    } else {
+        requestValuestr = [obj.JobNumber_String substringToIndex:range.location];
+    }
+    
+    appDelegate.chooseRequest_Value_String = requestValuestr;
+    appDelegate.isShowfromDashboard = YES;
+    appDelegate.isShowfromSPRequestedJobs = YES;
+    [self performSelector:@selector(hideShowDashboard) withObject:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kRowSelected object:nil userInfo:nil];
+}
+
+-(void)hideShowDashboard
+{
+    self.isMasterHide = YES;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 -(void)addLoadViewWithLoadingText:(NSString*)title
 {

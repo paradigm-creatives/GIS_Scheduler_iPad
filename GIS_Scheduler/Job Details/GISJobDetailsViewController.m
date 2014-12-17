@@ -79,9 +79,11 @@
     [jobHistory_textView.layer setCornerRadius:10.0f];
     
 
-    if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
-        //[self getJobDetails_Data];
-        [self getJobDetails_Data:[GISUtility returningstring:chooseRequestID_string]:login_Obj.token_string:@"":@"":@""];
+    if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+        
+        chooseRequestID_string=appDelegate.chooseRequest_ID_String;
+        
+        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
     }
     
     createJobdate_Array = [[NSMutableArray alloc] init];
@@ -131,6 +133,15 @@
     
     serviceProvider_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     filledUnfilled_Answer_Label.text =  NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    
+    [next_button.layer setCornerRadius:3.0f];
+    [[next_button layer] setMasksToBounds:YES];
+    [next_button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+    
+    [create_job_button.layer setCornerRadius:3.0f];
+    [[create_job_button layer] setMasksToBounds:YES];
+    [create_job_button setTitleColor:UIColorFromRGB(0xe8d4a2) forState:UIControlStateNormal];
+
 }
 
 
@@ -397,6 +408,7 @@
         cell.dayLabel.text=detailObj.day_String;
         cell.startTime_Label.text=detailObj.startTime_String;
         cell.endTimeLabel.text=detailObj.endTime_String;
+        
         return cell;
     }
     
@@ -1397,8 +1409,6 @@
     NSLog(@"Failure");
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
 }
-
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {

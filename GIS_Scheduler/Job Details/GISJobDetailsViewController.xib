@@ -12,6 +12,7 @@
                 <outlet property="createJObs_tableView" destination="fj2-qm-M0n" id="L56-5Y-7Wo"/>
                 <outlet property="createJobs_Middle_UIVIew" destination="Sw2-hl-n9y" id="4fk-45-HtX"/>
                 <outlet property="createJobs_UIVIew" destination="CI0-TG-lTe" id="bxb-mJ-vqb"/>
+                <outlet property="create_job_button" destination="bPk-br-tpI" id="fNs-Aa-Cus"/>
                 <outlet property="endDate_jobHistory_Answer_Label" destination="xvP-Xd-Fu6" id="4Az-xM-ZAz"/>
                 <outlet property="filledUnfilled_Answer_Label" destination="78b-3r-rRs" id="DLw-9y-wGC"/>
                 <outlet property="jobChangeHistory_background_UIView" destination="UOg-ZE-sOs" id="MXp-KC-Zx6"/>
@@ -19,6 +20,7 @@
                 <outlet property="jobDate_Answer_Label" destination="gVF-EM-ylR" id="vQs-q5-Kg0"/>
                 <outlet property="jobDetails_tableView" destination="19L-al-f3O" id="cAx-6E-7b1"/>
                 <outlet property="jobHistory_textView" destination="hoW-le-2v2" id="yxU-4t-sU8"/>
+                <outlet property="next_button" destination="DBW-hm-XE4" id="rz3-Mr-upl"/>
                 <outlet property="noOfServiceProviders_TextField" destination="5fk-lh-usp" id="6sI-US-820"/>
                 <outlet property="payLevel_Answer_Label" destination="sg8-UJ-VNm" id="MQC-Em-mJd"/>
                 <outlet property="payLevel_Label" destination="POw-UE-gHF" id="2qK-IP-Thj"/>
@@ -293,7 +295,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bPk-br-tpI">
-                    <rect key="frame" x="526" y="418" width="163" height="30"/>
+                    <rect key="frame" x="515" y="446" width="135" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.27058823529999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -306,7 +308,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DBW-hm-XE4">
-                    <rect key="frame" x="588" y="472" width="106" height="30"/>
+                    <rect key="frame" x="518" y="488" width="78" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.27058823529999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>

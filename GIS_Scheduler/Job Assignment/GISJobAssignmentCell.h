@@ -27,10 +27,17 @@
 @property(nonatomic,strong)IBOutlet UIButton *payType_button;
 @property(nonatomic,strong)IBOutlet UIButton *oTA_button;
 @property(nonatomic,strong)IBOutlet UIImageView *oTA_imageView;
+@property(nonatomic,strong)IBOutlet UIButton *restore_button;
+
+@property(nonatomic,strong)IBOutlet UITextField *service_Provider_type_textfield;
+@property(nonatomic,strong)IBOutlet UITextField *service_Provider_textfield;
+@property(nonatomic,strong)IBOutlet UITextField *payType_textfield;
 
 @property(nonatomic,strong)IBOutlet UIView *serviceProviderType_UIView;
 @property(nonatomic,strong)IBOutlet UIView *serviceProvider_UIView;
 @property(nonatomic,strong)IBOutlet UIView *payType_UIView;
+
+
 
 @property(nonatomic,strong)IBOutlet UIButton *edit_button;
 

@@ -36,6 +36,7 @@
 "micro_phone" = "Microphone";
 "phone_conferencing" = "Phone Conferencing";
 "webinar" = "Webinar";
+"preparation_material_label" = "Preparation Material :";
 "preparation_material" = "Preparation Material";
 "document"     = "Document";
 "blackboard_access" = "Blackboard Access";

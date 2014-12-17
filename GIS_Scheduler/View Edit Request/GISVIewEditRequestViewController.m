@@ -301,6 +301,14 @@
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
+    
+    if(appDelegate.isShowfromSPRequestedJobs){
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"5"],@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        
+        appDelegate.isShowfromSPRequestedJobs = NO;
+    }
 
 }
 

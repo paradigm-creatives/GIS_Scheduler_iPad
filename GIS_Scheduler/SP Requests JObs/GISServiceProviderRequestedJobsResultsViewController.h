@@ -38,4 +38,5 @@
 @property(nonatomic,strong)IBOutlet UITableView *jobResultsTableView;
 @property(nonatomic,strong)IBOutlet UIView *horizontalview;
 -(IBAction)pickerButtonPressed:(id)sender;
+-(IBAction)restoreButtonPressed:(id)sender;
 @end

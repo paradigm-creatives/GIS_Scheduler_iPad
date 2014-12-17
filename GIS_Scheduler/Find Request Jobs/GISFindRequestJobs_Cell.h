@@ -116,6 +116,7 @@
 @property(nonatomic,strong) IBOutlet UIImageView *canceled_no_ImageView;
 
 @property(nonatomic,strong) IBOutlet UIButton *search_button_;
+@property(nonatomic,strong) IBOutlet UIButton *clear_button_;
 
 
 @property(nonatomic,strong) IBOutlet UILabel *startDate_Answer_label_;

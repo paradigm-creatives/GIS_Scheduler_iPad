@@ -744,6 +744,7 @@
                 <outlet property="canceled_yes_ImageView" destination="Qu4-6e-ZPx" id="F52-1x-qrf"/>
                 <outlet property="canceled_yes_button_" destination="s6x-LM-U8H" id="4Aa-MG-UgN"/>
                 <outlet property="cancelled_label_" destination="bCV-2H-D3R" id="Z8Z-E6-GiX"/>
+                <outlet property="clear_button_" destination="Ddu-T1-0nC" id="2ya-Sb-Mmm"/>
                 <outlet property="createdBy_Answer_label_" destination="PzB-XY-CbW" id="wE7-U2-rdc"/>
                 <outlet property="createdBy_label_" destination="W3n-d0-ema" id="391-Kq-YZc"/>
                 <outlet property="endDate_JobData_Answer_label_" destination="tMW-JK-QSg" id="lZy-Sw-bEh"/>
@@ -775,6 +776,7 @@
                 <outlet property="saturday_Button_" destination="AOE-qB-JYg" id="Fyo-fB-2t0"/>
                 <outlet property="saturday_ImageView_" destination="hJ7-NC-xrf" id="nU3-6M-jHY"/>
                 <outlet property="saturday_Label_" destination="EpZ-Tj-Pgw" id="g66-7Z-ugd"/>
+                <outlet property="search_button_" destination="mOY-vf-8pi" id="f51-BT-psn"/>
                 <outlet property="serviceProviderType_Answer_label_" destination="VJ8-Ta-qP1" id="QyV-Xd-9rA"/>
                 <outlet property="serviceProviderType_label_" destination="bm9-np-971" id="caT-nr-ZN5"/>
                 <outlet property="serviceProvider_Answer_label_" destination="pWc-Pj-vww" id="rqU-sP-68L"/>
