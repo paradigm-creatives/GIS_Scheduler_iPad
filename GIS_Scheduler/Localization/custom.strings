@@ -192,9 +192,11 @@
 "select_one_job" = "Please select atleast one Dates/Times";
 "select_pay_type" = "Please select Pay Type";
 "date_time_successed" = "Date & time created successfully";
+"date_time_updated" = "Date & time updated successfully";
 "date_time_deleted" = "Date & time deleted successfully";
 "jobs_successed" = "Jobs Inserted successfully";
 "jobs_deleted" = "Jobs Deleted successfully";
+"jobs_updated" = "Jobs Updated successfully";
 
 
 

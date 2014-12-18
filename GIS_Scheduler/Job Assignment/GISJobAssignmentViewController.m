@@ -189,6 +189,7 @@
     cell.tag=indexPath.row;
     
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:indexPath.row];
+    
     cell.oTA_button.tag=indexPath.row;
     cell.edit_button.tag=indexPath.row;
     [cell.oTA_button addTarget:self action:@selector(OTA_Button_pressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -204,6 +205,9 @@
     cell.location_label.text=obj.location_string;
     cell.account_label.text=obj.accountName_string;
     cell.requestor_label.text=obj.requestorName_string;
+    
+    if([obj.ServiceProviderName_String length] == 0)
+        cell.serviceProvider_label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
     if ([ota_dictionary objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]])
         [cell.oTA_imageView setImage:[UIImage imageNamed:@"checked.png"]];
@@ -547,7 +551,7 @@
     
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
     
-    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",[GISUtility returningstring:obj.typeOfService_string]];
+    NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",[GISUtility returningstring:obj.typeOfService_string],[NSString stringWithFormat:@"%d",0]];
     if ([obj.typeOfService_string isEqualToString:@"Any"]||[sender tag]==1919) {
         spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
     }
@@ -589,6 +593,8 @@
     if (array_serviceProvider.count>0) {
         GISServiceProviderObject *obj=[array_serviceProvider lastObject];
         serviceProvider_ID_temp_String=obj.id_String;
+        if([obj.id_String isEqualToString:@"0"])
+            serviceProvider_ID_temp_String = @"";
     }
     
     NSPredicate *predicate_payType=[NSPredicate predicateWithFormat:@"value_String=%@",obj.PayType_String];

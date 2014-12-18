@@ -581,7 +581,7 @@
         addUpdateObj.typeOfServiceProvider_string=value_str;
         addUpdateObj.typeOfServiceProvider_ID_string=id_str;
         [serviceProvider_ID_Array removeAllObjects];
-        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",addUpdateObj.typeOfServiceProvider_string];
+        NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",addUpdateObj.typeOfServiceProvider_string,[NSString stringWithFormat:@"%d",0]];
         if ([addUpdateObj.typeOfServiceProvider_string isEqualToString:@"Any"]) {
             spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
         }
@@ -591,6 +591,9 @@
     {
         addUpdateObj.serviceProvider_string=value_str;
         addUpdateObj.serviceProvider_ID_string=id_str;
+        
+        if([id_str isEqualToString:@"0"])
+            addUpdateObj.serviceProvider_string = @"";
     }
     else if(btnTag==8)
     {

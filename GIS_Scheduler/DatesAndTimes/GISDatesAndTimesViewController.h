@@ -121,6 +121,8 @@
     NSMutableArray *billLevel_Array;
     NSMutableArray *typeOfServiceProvider_Array;
     
+    BOOL isUpdated;
+    
 }
 @property(nonatomic,strong) IBOutlet UIButton *cancelBtn_createJobs;
 @property(nonatomic,strong) IBOutlet UIButton *doneBtn_createJobs;

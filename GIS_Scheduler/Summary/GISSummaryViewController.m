@@ -85,6 +85,8 @@
     
     _serviceTypeSaveArray  = [[NSArray alloc] initWithObjects:@"OnHold",@"Save", nil];
     
+    detail_mut_array = [[NSMutableArray alloc] init];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -154,15 +156,24 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GISSummaryCell *summaryCell;
-    if(indexPath.section == 0 || indexPath.section == 1) {
+    if(indexPath.section == 1) {
         
         summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return summaryCell.frame.size.height;
         
+    }else if(indexPath.section == 0){
+        
+        summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return summaryCell.frame.size.height - 70;
+
+    
     }else if(indexPath.section == 3){
         
         summaryCell=(GISSummaryCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return summaryCell.frame.size.height-50;
+        if ([_generalLocationId_string isEqualToString:@"1"])
+            return summaryCell.frame.size.height-120;
+        
+        return summaryCell.frame.size.height-100;
         
     }else if(indexPath.section == 2){
         
@@ -197,6 +208,8 @@
             cell=[[[NSBundle mainBundle]loadNibNamed:@"GISSummaryCell" owner:self options:nil]objectAtIndex:0];
         }
     }
+    
+    cell.descriptionTextview.hidden = TRUE;
     if(indexPath.section == 0){
         
         cell.section_label.text =  NSLocalizedStringFromTable(@"contact_billing_info", TABLE, nil);
@@ -248,6 +261,9 @@
         NSString *recorededORBroadcastStr;
         NSString *otherServicesStr;
         
+        cell.descriptionTextview.hidden = FALSE;
+        cell.descriptionTextview.editable = NO;
+        
         cell.section_label.text =  NSLocalizedStringFromTable(@"event_details", TABLE, nil);
         cell.requestor_label.text =  NSLocalizedStringFromTable(@"event_name", TABLE, nil);
         cell.unitacNumber_label.text =  NSLocalizedStringFromTable(@"event_type", TABLE, nil);
@@ -292,15 +308,15 @@
                 for(int i=0;i<[otherArray count];i++){
                     if([[otherArray objectAtIndex:i] isEqualToString:@"1"]){
                         
-                        [otherArrayString appendString:@"FMSystem "];
+                        [otherArrayString appendString:@"FMSystem,"];
                     }
                     if([[otherArray objectAtIndex:i] isEqualToString:@"2"]){
                         
-                        [otherArrayString appendString:@"MicroPhone "];
+                        [otherArrayString appendString:@"MicroPhone,"];
                     }
                     if([[otherArray objectAtIndex:i] isEqualToString:@"3"]){
                         
-                        [otherArrayString appendString:@"Phone Conferencing "];
+                        [otherArrayString appendString:@"Phone Conferencing,"];
                     }
                     if([[otherArray objectAtIndex:i] isEqualToString:@"4"]){
                         
@@ -328,7 +344,7 @@
             
             cell.requestor_ans_label.text = _chooseRequestDetailsObj.eventName_String_chooseReqParsedDetails;
             cell.zip_ans_label.text = recorededORBroadcastStr;
-            cell.city_ans_label.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
+            cell.descriptionTextview.text = _chooseRequestDetailsObj.eventDescription_String_chooseReqParsedDetails;
             cell.lastName_ans_label.text = _chooseRequestDetailsObj.courseID_String_chooseReqParsedDetails;
             cell.firstName_ans_label.text = openToPublicStr;
             cell.address1_ans_label.text = otherArrayString;
@@ -1098,6 +1114,8 @@
         }
     }else{
         
+        if([appDelegate.attendeesArray count]>0)
+            [appDelegate.attendeesArray removeAllObjects];
         //[self removeLoadingView];
     }
     
@@ -1130,7 +1148,9 @@
         
         [[GISStoreManager sharedManager]removeDateTimes_detail_Objects];
         store=[[GISDatesTimesDetailStore alloc]initWithStoreDictionary:response.responseJson];
-        NSArray *detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
+        detail_mut_array= [[GISStoreManager sharedManager]getDateTimes_detail_Objects];
+        
+        [self sortTheDatesAndTimes];
     
         if([appDelegate.datesArray count]>0)
             [appDelegate.datesArray removeAllObjects];
@@ -1284,6 +1304,47 @@
 -(void)removeLoadingView
 {
     [[GISLoadingView sharedDataManager] removeLoadingAlertview];
+}
+
+-(void)sortTheDatesAndTimes
+{
+    [self deleteDuplicates];
+    NSDateFormatter *date_formatter=[[NSDateFormatter alloc]init];
+    [date_formatter setDateFormat:@"MM/dd/yyyy"];
+    NSArray *sortedArray;
+    sortedArray = [detail_mut_array sortedArrayUsingComparator:^NSComparisonResult(GISDatesAndTimesObject *a,GISDatesAndTimesObject *b) {
+        
+        NSDate *first = [date_formatter dateFromString:a.date_String];
+        NSDate *second = [date_formatter dateFromString:b.date_String];
+        return [first compare:second];
+    }];
+    [detail_mut_array removeAllObjects];
+    detail_mut_array = [sortedArray mutableCopy];
+}
+
+-(void)deleteDuplicates
+{
+    int count=[detail_mut_array count];
+    NSMutableArray *duplicates=[[NSMutableArray alloc]init];
+    for(int i=0 ;i<count;i++)
+    {
+        for (int j=i+1; j<count; j++)
+        {
+            GISDatesAndTimesObject *obj1=[detail_mut_array objectAtIndex:i];
+            GISDatesAndTimesObject *obj2=[detail_mut_array objectAtIndex:j];
+            if ([obj1.date_String isEqualToString:obj2.date_String])
+            {
+                if ([obj1.startTime_String isEqualToString:obj2.startTime_String])
+                {
+                    if ([obj1.endTime_String isEqualToString:obj2.endTime_String])
+                    {
+                        [duplicates addObject:obj1];
+                    }
+                }
+            }
+        }
+    }
+    [detail_mut_array removeObjectsInArray:duplicates];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

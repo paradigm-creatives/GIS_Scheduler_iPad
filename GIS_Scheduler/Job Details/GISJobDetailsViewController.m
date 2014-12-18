@@ -981,6 +981,8 @@
     [self removeLoadingView];
     NSLog(@"successmethod_updateScheduledata Success---%@",response.responseJson);
     
+    [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_updated",TABLE, nil)];
+    
     NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
     NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:rowValue];
 

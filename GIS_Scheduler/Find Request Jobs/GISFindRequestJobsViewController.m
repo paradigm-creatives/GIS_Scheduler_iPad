@@ -573,7 +573,7 @@
         NSString *spCode_statement;
         
         if([findReqObj.serviceProviderType_string length] >0){
-            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@'",findReqObj.serviceProviderType_string];
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",findReqObj.serviceProviderType_string,[NSString stringWithFormat:@"%d",0]];
             if ([findReqObj.serviceProviderType_string isEqualToString:@"Any"]) {
                 spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
             }
@@ -772,6 +772,9 @@
     {
         findReqObj.serviceProvider_string=value_str;
         findReqObj.serviceProvider_ID_string=id_str;
+        
+        if([id_str isEqualToString:@"0"])
+            findReqObj.serviceProvider_ID_string = @"";
     }
     else if(btnTag==19)
     {

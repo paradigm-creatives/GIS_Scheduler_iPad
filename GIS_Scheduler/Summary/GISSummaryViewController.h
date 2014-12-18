@@ -22,6 +22,7 @@
     int row_value;
     NSString *nextString;
     BOOL isSubmitClicked;
+    NSMutableArray *detail_mut_array;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *summary_tableView;

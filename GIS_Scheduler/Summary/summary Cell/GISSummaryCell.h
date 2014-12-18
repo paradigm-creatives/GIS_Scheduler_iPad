@@ -35,5 +35,5 @@
 @property(nonatomic,strong)IBOutlet UILabel *section_ans_label;
 
 @property(nonatomic,strong)IBOutlet UIButton *edit_button;
-
+@property(nonatomic,strong)IBOutlet UITextView *descriptionTextview;
 @end

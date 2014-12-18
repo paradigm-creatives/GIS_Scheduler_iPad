@@ -166,6 +166,7 @@
     selected_row=999999;
     tableViewController = [[GISPopOverTableViewController alloc] initWithNibName:@"GISPopOverTableViewController" bundle:nil];
     tableViewController.popOverDelegate=self;
+    isUpdated = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -934,6 +935,7 @@
     NSLog(@"--------main Dict-->%@",mainDict);
     
     isDelete=YES;
+    isUpdated = NO;
     
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
     
@@ -963,7 +965,12 @@
             GISDatesAndTimesObject *dobj=[[GISDatesAndTimesObject alloc]init];
             [appDelegate.datesArray insertObject:dobj atIndex:0];
             
-            [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"date_time_successed", TABLE, nil)];
+            if(isUpdated){
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"date_time_updated", TABLE, nil)];
+            }else{
+                [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"date_time_successed", TABLE, nil)];
+            }
             //[self performSelector:@selector(nextButtonPressed:) withObject:nil];
             
             [self clearDateTimes_Data];
@@ -1220,6 +1227,7 @@
     
     [mainDict setObject:requestor_array forKey:kDateTime_oDatetime];
     [mainDict setObject:detail_date_list_Array forKey:kDateTime_oRequest];
+    isUpdated = YES;
     
     [self performSelector:@selector(cancelButton_Edit_Pressed:) withObject:nil];
     [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
@@ -1338,6 +1346,7 @@
         
         NSLog(@"--------main Dict-->%@",mainDict);
         isDelete=NO;
+        isUpdated = NO;
         
         [[GISServerManager sharedManager] saveDateTimeData:self withParams:mainDict finishAction:@selector(successmethod_save_Date_Time:) failAction:@selector(failuremethod_save_Date_Time:)];
     }

@@ -92,8 +92,8 @@
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     //_password_textfield.text=@"Ecentric@5";
     
-    _userName_textfield.text=@"dean@gmail.com";
-    _password_textfield.text=@"admin";
+    //_userName_textfield.text=@"dean@gmail.com";
+    //_password_textfield.text=@"admin";
     
 }
 
