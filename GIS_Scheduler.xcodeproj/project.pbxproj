@@ -1443,7 +1443,6 @@
 		8A5E2E231974F9CE00BE3C04 /* View Edit Request */ = {
 			isa = PBXGroup;
 			children = (
-				BAE081F8197FD9900056B3B8 /* PopOverViewController */,
 				8A5E2E241974F9F000BE3C04 /* GISVIewEditRequestViewController.h */,
 				8A5E2E251974F9F000BE3C04 /* GISVIewEditRequestViewController.m */,
 				8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */,
@@ -1714,6 +1713,7 @@
 				8A74422919A1C89700CE3B32 /* Summary */,
 				8A9B25A3197676C1002F1AC0 /* Utility */,
 				8A5E2E231974F9CE00BE3C04 /* View Edit Request */,
+				BAE081F8197FD9900056B3B8 /* PopOverViewController */,
 				BA3AF216196BBAF7006A1E3B /* Supporting Files */,
 			);
 			path = GIS_Scheduler;
@@ -2046,8 +2046,7 @@
 				BAE081F9197FD9900056B3B8 /* GISPopOverTableViewController.h */,
 				BAE081FA197FD9900056B3B8 /* GISPopOverTableViewController.m */,
 			);
-			name = PopOverViewController;
-			path = ../PopOverViewController;
+			path = PopOverViewController;
 			sourceTree = "<group>";
 		};
 		BAE081FE197FDBA30056B3B8 /* Fonts */ = {
