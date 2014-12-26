@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GIS_Scheduler/Event Details/GISEventDetailsViewController.m"
-            timestampString = "440602705.63204"
+            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFWeekCalendarView/FFWeekScrollView/FFWeekCollectionView/FFWeekCell.m"
+            timestampString = "441295709.163454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1178"
-            endingLineNumber = "1178"
-            landmarkName = "-saveEventDetailsData"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "-addButtonsWithArray:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GIS_Scheduler/View Edit Service/FFCalendars/FFWeekCalendarView/FFWeekScrollView/FFWeekCollectionView/FFWeekCell.m"
+            timestampString = "441296338.524057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "-showDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
