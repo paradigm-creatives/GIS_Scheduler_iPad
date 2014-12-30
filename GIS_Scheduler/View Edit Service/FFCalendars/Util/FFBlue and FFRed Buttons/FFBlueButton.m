@@ -9,6 +9,7 @@
 //
 
 #import "FFBlueButton.h"
+#import "GISFonts.h"
 
 @implementation FFBlueButton
 
@@ -25,12 +26,12 @@
         // Initialization code
         
         [self setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-        [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         
         self.titleLabel.numberOfLines = 0;
         [self setBackgroundColor:[UIColor clearColor]];//[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.titleLabel setFont:[GISFonts normalBold]];
+        [self setTitleColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0] forState:UIControlStateNormal];
         
         [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     }

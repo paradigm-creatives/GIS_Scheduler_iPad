@@ -17,7 +17,7 @@
 - (void)deleteEventOfCell:(UICollectionViewCell *)cell atIndex:(NSInteger)intIndex;
 @end
 
-@interface FFWeekCell : UICollectionViewCell
+@interface FFWeekCell : UICollectionViewCell<UIPopoverControllerDelegate>
 {
     BOOL isInsideTime;
 }

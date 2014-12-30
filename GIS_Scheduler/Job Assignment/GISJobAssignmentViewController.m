@@ -571,6 +571,7 @@
 {
     
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:[sender tag]];
+    selected_row=[sender tag];
     
 //    obj.typeOfService_string=typeOfservice_temp_string;
 //    obj.ServiceProviderName_String=serviceProvider_temp_string;
