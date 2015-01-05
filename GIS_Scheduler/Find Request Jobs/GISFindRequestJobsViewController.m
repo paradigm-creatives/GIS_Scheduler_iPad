@@ -115,7 +115,7 @@
     NSString *primaryAudience_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PRIMARY_AUDIENCE;"];
     primaryAudience_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:primaryAudience_statement] mutableCopy];
     
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
 }
 
@@ -575,7 +575,7 @@
         if([findReqObj.serviceProviderType_string length] >0){
             spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",findReqObj.serviceProviderType_string,[NSString stringWithFormat:@"%d",0]];
             if ([findReqObj.serviceProviderType_string isEqualToString:@"Any"]) {
-                spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+                spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR TYPE = '%@' OR ID = '%@'",@"Interpreter",@"Captioner",[NSString stringWithFormat:@"%d",0]];
             }
         }else{
             

@@ -583,7 +583,7 @@
         [serviceProvider_ID_Array removeAllObjects];
         NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",addUpdateObj.typeOfServiceProvider_string,[NSString stringWithFormat:@"%d",0]];
         if ([addUpdateObj.typeOfServiceProvider_string isEqualToString:@"Any"]) {
-            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR TYPE = '%@' OR ID = '%@'",@"Interpreter",@"Captioner",[NSString stringWithFormat:@"%d",0]];
         }
         serviceProvider_ID_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     }

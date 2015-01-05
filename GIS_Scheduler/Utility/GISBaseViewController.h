@@ -12,6 +12,7 @@
 {
     IBOutlet UIView *datListView;
     IBOutlet UIView *dashBoard_UIView;
+    BOOL isHide;
 }
 
 -(void)createCustomNavigationBar:(NSString *)title;

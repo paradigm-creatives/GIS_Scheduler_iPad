@@ -152,7 +152,7 @@
                     <rect key="frame" x="0.0" y="65" width="75" height="712"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider.png" id="laK-0k-UJ6">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider_left.png" id="laK-0k-UJ6">
                             <rect key="frame" x="0.0" y="0.0" width="75" height="712"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -204,7 +204,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="hideAndUnHideMaster:" destination="-1" eventType="touchUpInside" id="h52-UL-Tzy"/>
+                                <action selector="hideButtonPressed:" destination="-1" eventType="touchUpInside" id="4la-BK-rIn"/>
                             </connections>
                         </button>
                     </subviews>
@@ -223,6 +223,6 @@
         <image name="logout.png" width="25" height="20"/>
         <image name="requests_jobs.png" width="25" height="25"/>
         <image name="scheduling.png" width="25" height="25"/>
-        <image name="slider.png" width="75" height="715"/>
+        <image name="slider_left.png" width="75" height="715"/>
     </resources>
 </document>

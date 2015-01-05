@@ -89,6 +89,17 @@
         
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
+    }else if(appDelegate.isWeekView){
+        
+        _testEvent = [appDelegate.jobEventsArray objectAtIndex:indexPath.row];
+        [_eventArray addObject:_testEvent];
+        
+        cell.jobName.text = _testEvent.stringCustomerName;
+        cell.eventTime.text =[NSString stringWithFormat:@"JobTime %@ to %@ ", [NSDate stringTimeOfDate:_testEvent.dateTimeBegin] ,[NSDate stringTimeOfDate:_testEvent.dateTimeEnd]];
+        cell.eventTitle.text = [NSString stringWithFormat:@"Requested On %@", [NSDate stringDayOfDate:_testEvent.dateDay]];
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleDefault;
+        
     }else{
         _eventButton = [appDelegate.jobEventsArray objectAtIndex:indexPath.row];
         [_eventArray addObject:_eventButton.event];

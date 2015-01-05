@@ -113,16 +113,24 @@
     
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.isMasterHide= !self.isMasterHide;
+    self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  ";//@""== Unhide   @"  "==Hide
-    if ([buttonTitle isEqualToString:@""])
+    if (isHide)
     {
         dashBoard_UIView.hidden=NO;
+        CGRect frame1=datListView.frame;
+        frame1.origin.x=75;
+        datListView.frame=frame1;
         
-        
+        dashBoard_UIView.hidden=NO;
     }
     else
     {
+        dashBoard_UIView.hidden=YES;
+        CGRect frame1=datListView.frame;
+        frame1.origin.x=0;
+        datListView.frame=frame1;
+        
         dashBoard_UIView.hidden=YES;
         
     }
@@ -137,12 +145,14 @@
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
+    isHide = NO;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
+    isHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 

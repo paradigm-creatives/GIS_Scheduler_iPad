@@ -24,6 +24,7 @@
 #define GIS_GET_EVENT_REQUEST @"GetRequestdetails"
 
 #define GIS_GET_REQUEST_NUMBERS @"GetRequestNumbers"
+#define GIS_GET_SP_JOBS_REQUEST_NUMBERS @"GetSPandJobsRequestNumbers"
 #define GIS_SAVE_UPDATE_REQUEST @"SaveUpdateRequest"
 #define GIS_GET_CHOOSE_REQUEST_DETAILS @"GetRequestdetails"
 

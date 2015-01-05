@@ -292,7 +292,7 @@
     
     if(!appDelegate.isNewRequest){
         
-        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY VALUE DESC;"];
         _requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
     }

@@ -28,7 +28,7 @@
                     <rect key="frame" x="0.0" y="70" width="75" height="698"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider.png" id="pAW-h1-cVy">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider_left.png" id="pAW-h1-cVy">
                             <rect key="frame" x="0.0" y="0.0" width="75" height="698"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -80,7 +80,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="hideAndUnHideMaster:" destination="-1" eventType="touchUpInside" id="hmf-jX-tIw"/>
+                                <action selector="hideButtonPressed:" destination="-1" eventType="touchUpInside" id="x7Z-f2-TC4"/>
                             </connections>
                         </button>
                     </subviews>
@@ -440,6 +440,6 @@
         <image name="requests_jobs.png" width="25" height="25"/>
         <image name="scheduling.png" width="25" height="25"/>
         <image name="search.png" width="19" height="19"/>
-        <image name="slider.png" width="75" height="715"/>
+        <image name="slider_left.png" width="75" height="715"/>
     </resources>
 </document>

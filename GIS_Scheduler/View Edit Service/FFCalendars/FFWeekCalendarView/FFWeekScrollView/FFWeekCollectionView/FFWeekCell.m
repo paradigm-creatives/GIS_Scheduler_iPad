@@ -19,11 +19,13 @@
 #import "GISAppDelegate.h"
 #import "GISEventLabel.h"
 #import "GISFonts.h"
+#import "PCLogger.h"
 
 @interface FFWeekCell () <FFEventDetailPopoverControllerProtocol, FFEditEventPopoverControllerProtocol, TestEventDetailPopoverControllerProtocol>
 @property (nonatomic, strong) NSMutableArray *arrayLabelsHourAndMin;
 @property (nonatomic, strong) NSMutableArray *arrayButtonsEvents;
 @property (nonatomic, strong) NSMutableArray *repeatedArray;
+@property (nonatomic, strong) NSMutableArray *eventsArray;
 @property (nonatomic, strong) FFEventDetailPopoverController *popoverControllerDetails;
 @property (nonatomic, strong) GISPopOverController *testPopoverControllerDetails;
 @property (nonatomic, strong) FFEditEventPopoverController *popoverControllerEditar;
@@ -41,6 +43,7 @@
 @synthesize button;
 @synthesize testPopoverControllerDetails;
 @synthesize repeatedArray;
+@synthesize eventsArray;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -52,6 +55,7 @@
         
         arrayLabelsHourAndMin = [NSMutableArray new];
         arrayButtonsEvents = [NSMutableArray new];
+        eventsArray = [NSMutableArray new];
         
         [self addLines];
     }
@@ -110,18 +114,33 @@
         int count=0;
         NSArray *arrayEvents = array;
         repeatedArray = [[NSMutableArray alloc] init];
-        
+        NSMutableArray *repeatedCountArray = [[NSMutableArray alloc] init];
         
         for (FFEvent *event in array) {
             
             FFEvent *nextEvent;
+            FFEvent *lastEvent;
             
             if([arrayEvents count]>i+1)
                 nextEvent= [arrayEvents objectAtIndex:i+1];
             
+            if([arrayEvents count]>i+1 && i>1)
+                lastEvent= [arrayEvents objectAtIndex:i-1];
+            
             CGFloat yTimeBegin;
             CGFloat yTimeEnd;
             FFBlueButton *_labelbutton;
+            
+//            NSPredicate *filePredicate=[NSPredicate predicateWithFormat:@"dateDay==%@ ",event.dateDay];
+//            NSArray *dateArray=[arrayEvents filteredArrayUsingPredicate:filePredicate];
+//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin > %@ AND dateTimeEnd < %@", event.dateTimeBegin, event.dateTimeEnd];
+//            NSArray *fileArray=[dateArray filteredArrayUsingPredicate:predicate];
+//            
+//            
+//            if([fileArray count]>0)
+//            {
+//                
+//            }
             
             for (FFHourAndMinLabel *label in arrayLabelsHourAndMin) {
                 NSDateComponents *compLabel = [NSDate componentsOfDate:label.dateHourAndMin];
@@ -138,16 +157,17 @@
             
             if(nextEvent != nil){
                 
-                FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
+                FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
                 [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
                 [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
                 [_button setEvent:event];
                 
                 [arrayButtonsEvents addObject:_button];
+                [eventsArray addObject:_button.event];
                 [self addSubview:_button];
                 
-                view = [[UIView alloc] initWithFrame:CGRectMake(0, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
+                view = [[UIView alloc] initWithFrame:CGRectMake(_button.frame.origin.x-2, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
                 [view setBackgroundColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0]];
                 
                 [self addSubview:view];
@@ -159,44 +179,79 @@
                 [_labelbutton setEvent:event];
                 [self addSubview:_labelbutton];
                 
-                [self bringSubviewToFront:_button];
-                
-                if(([[self getTimeformdate:event.dateTimeBegin] isEqualToString:[self getTimeformdate:nextEvent.dateTimeBegin]]) || ([[self getTimeformdate:event.dateTimeEnd] isEqualToString:[self getTimeformdate:nextEvent.dateTimeEnd]])){
+                if(([[self getCorrectTimeformdate:event.dateTimeBegin] isEqualToString:[self getCorrectTimeformdate:nextEvent.dateTimeBegin]]) || ([[self getCorrectTimeformdate:event.dateTimeEnd] isEqualToString:[self getCorrectTimeformdate:nextEvent.dateTimeEnd]])){
                     
                     count ++;
                     
                     if(count >1){
                         
                         [_labelbutton setHidden:FALSE];
-                        [_button setHidden:TRUE];
-                        [_labelbutton setTitle:[NSString stringWithFormat:@"%d more",count-1] forState:UIControlStateNormal];
 
-                        
                     }else{
                         
                         [_labelbutton setHidden:TRUE];
-                        [_button setHidden:FALSE];
                     }
+                    
+                    [repeatedCountArray addObject:_labelbutton];
+                    
+                    if([repeatedCountArray count])
+                       [_labelbutton setTitle:@"" forState:UIControlStateNormal];
+                    
+                    [_labelbutton setTitle:[NSString stringWithFormat:@"%d more",[repeatedCountArray count]-1] forState:UIControlStateNormal];
+
                     
                 }else if([[self eventDisplayFormat:event.dateDay] isEqualToString:[self eventDisplayFormat:nextEvent.dateDay]]){
                     
-                    int btnStartTime = [self getTimeformdate:event.dateTimeBegin].intValue;
-                    int btnEndTime = [self getTimeformdate:event.dateTimeEnd].intValue;
-                    int buttonStartTime = [self getTimeformdate:nextEvent.dateTimeBegin].intValue;
-                    int buttonEndTime = [self getTimeformdate:nextEvent.dateTimeEnd].intValue;
+                    
+                    NSString *btnStartTime = [self getCorrectTimeformdate:event.dateTimeBegin];
+                    NSString *btnEndTime = [self getCorrectTimeformdate:event.dateTimeEnd];
+                    NSString *buttonStartTime = [self getCorrectTimeformdate:nextEvent.dateTimeBegin];
+                    NSString *buttonEndTime = [self getCorrectTimeformdate:nextEvent.dateTimeEnd];
+                    
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"hh:mm a"];
+                    
+                    NSDate *date1= [formatter dateFromString:btnStartTime];
+                    NSDate *date2 = [formatter dateFromString:buttonStartTime];
+                    
+                    NSDate *endTime1= [formatter dateFromString:btnEndTime];
+                    NSDate *endTime2 = [formatter dateFromString:buttonEndTime];
 
                     
-                    if(btnStartTime > buttonStartTime && btnEndTime < buttonEndTime){
-                        
-                        [_button setHidden:FALSE];
+                    NSComparisonResult result = [date1 compare:date2];
+                    NSComparisonResult endTimeresult = [endTime1 compare:endTime2];
+                    if(result == NSOrderedDescending || endTimeresult == NSOrderedDescending)
+                    {
                         CGRect frame  = _button.frame;
-                        frame.origin.x = _button.frame.origin.x+6;
+                        frame.origin.x = _button.frame.origin.x+12;
                         _button.frame = frame;
+                        
+                        CGRect viewFrame  = view.frame;
+                        viewFrame.origin.x = _button.frame.origin.x-2;
+                        view.frame = viewFrame;
+                        
+                        [self bringSubviewToFront:_button];
+
                     }
-                    
+                    else if(result == NSOrderedAscending || endTimeresult == NSOrderedAscending)
+                    {
+                        CGRect frame  = _button.frame;
+                        frame.origin.x = _button.frame.origin.x+12;
+                        _button.frame = frame;
+                        
+                        CGRect viewFrame  = view.frame;
+                        viewFrame.origin.x = _button.frame.origin.x-2;
+                        view.frame = viewFrame;
+                        
+                        [self bringSubviewToFront:_button];
+                    }
+                    else
+                    {
+                        
+                    }
+
                 }else{
                    
-                    [_button setHidden:TRUE];
                     count = 0;
                 }
             }else{
@@ -206,16 +261,17 @@
                 if(repeatedArray)
                    [repeatedArray removeAllObjects];
                 
-                FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
+                FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
                 [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
                 [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
                 [_button setEvent:event];
                 
                 [arrayButtonsEvents addObject:_button];
+                [eventsArray addObject:_button.event];
                 [self addSubview:_button];
                 
-                view = [[UIView alloc] initWithFrame:CGRectMake(0, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
+                view = [[UIView alloc] initWithFrame:CGRectMake(_button.frame.origin.x-2, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
                 [view setBackgroundColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0]];
                 
                 [self addSubview:view];
@@ -227,6 +283,7 @@
         count = 0;
         i++;
     }
+    
 }
 
 #pragma mark - Button Action
@@ -240,49 +297,91 @@
     appDelegate.isWeekView = YES;
     
     NSMutableArray *btnArray = [[NSMutableArray alloc] init];
-    for(FFBlueButton *btn in arrayButtonsEvents)
+    
+    NSPredicate *filePredicate=[NSPredicate predicateWithFormat:@"dateDay==%@ ",button.event.dateDay];
+    NSArray *dateArray=[eventsArray filteredArrayUsingPredicate:filePredicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin >= %@ AND dateTimeEnd <= %@", button.event.dateTimeBegin, button.event.dateTimeEnd];
+    NSArray *fileArray=[dateArray filteredArrayUsingPredicate:predicate];
+    
+    
+    if([fileArray count]>0)
     {
-        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
-            
-            int btnStartTime = [self getTimeformdate:btn.event.dateTimeBegin].intValue;
-            int btnEndTime = [self getTimeformdate:btn.event.dateTimeEnd].intValue;
-            int buttonStartTime = [self getTimeformdate:button.event.dateTimeBegin].intValue;
-            int buttonEndTime = [self getTimeformdate:button.event.dateTimeEnd].intValue;
-            
-            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]]) || (btnStartTime > buttonStartTime && btnEndTime < buttonEndTime)){
-
-                [btnArray addObject:btn];
-                
-            }
-        }
+        [btnArray addObjectsFromArray:(NSArray *)fileArray];
     }
+   
+//    for(FFBlueButton *btn in arrayButtonsEvents)
+//    {
+//        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
+//            
+//            int btnStartTime = [self getTimeformdate:btn.event.dateTimeBegin].intValue;
+//            int btnEndTime = [self getTimeformdate:btn.event.dateTimeEnd].intValue;
+//            int buttonStartTime = [self getTimeformdate:button.event.dateTimeBegin].intValue;
+//            int buttonEndTime = [self getTimeformdate:button.event.dateTimeEnd].intValue;
+//            
+//            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]]) || (btnStartTime > buttonStartTime && btnEndTime < buttonEndTime)){
+//
+//                [btnArray addObject:btn];
+//                
+//            }
+//        }
+//    }
     
     if([appDelegate.jobEventsArray count] >0)
         [appDelegate.jobEventsArray removeAllObjects];
     
-    testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
-    [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)btnArray];
+    if(testPopoverControllerDetails.isPopoverVisible || testPopoverControllerDetails != nil){
+        [testPopoverControllerDetails dismissPopoverAnimated:YES];
+        testPopoverControllerDetails = nil;
+        
+    }
     
-    [testPopoverControllerDetails setTestProtocol:self];
-    [testPopoverControllerDetails setDelegate:self];
-    
-    [testPopoverControllerDetails presentPopoverFromRect:button.frame
-                                              inView:self
-                            permittedArrowDirections:UIPopoverArrowDirectionAny
-                                            animated:YES];
-}
+    @try {
+        
+        testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
+        [appDelegate.jobEventsArray addObjectsFromArray:(NSArray *)btnArray];
+        
+        [testPopoverControllerDetails setTestProtocol:self];
+        [testPopoverControllerDetails setDelegate:self];
+        
+        [testPopoverControllerDetails presentPopoverFromRect:button.frame
+                                                      inView:self
+                                    permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                    animated:YES];
+
+    }
+    @catch (NSException *exception)
+    {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Select Event in WeekCell action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+   }
 
 #pragma mark - FFEventDetailPopoverController Protocol
 
 - (void)showPopoverEditWithEvent:(FFEvent *)_event {
     
-    popoverControllerEditar = [[FFEditEventPopoverController alloc] initWithEvent:_event];
-    [popoverControllerEditar setProtocol:self];
+    if(popoverControllerEditar.isPopoverVisible || popoverControllerEditar != nil){
+        [popoverControllerEditar dismissPopoverAnimated:YES];
+        popoverControllerEditar = nil;
+        
+    }
     
-    [popoverControllerEditar presentPopoverFromRect:button.frame
-                                             inView:self
-                           permittedArrowDirections:UIPopoverArrowDirectionAny
-                                           animated:YES];
+    @try {
+        popoverControllerEditar = [[FFEditEventPopoverController alloc] initWithEvent:_event];
+        [popoverControllerEditar setProtocol:self];
+        [popoverControllerEditar setDelegate:self];
+        
+        
+        [popoverControllerEditar presentPopoverFromRect:button.frame
+                                                 inView:self
+                               permittedArrowDirections:UIPopoverArrowDirectionAny
+                                               animated:YES];
+    }
+    @catch (NSException *exception)
+    {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Select EditEvent in WeekCell action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
+    
+    
 }
 
 
@@ -311,13 +410,23 @@
         popoverControllerDetails = nil;
         
     }
-    popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:_event];
-    [popoverControllerDetails setProtocol:self];
     
-    [popoverControllerDetails presentPopoverFromRect:button.frame
-                                              inView:self
-                            permittedArrowDirections:UIPopoverArrowDirectionAny
-                                            animated:YES];
+    @try {
+        popoverControllerDetails = [[FFEventDetailPopoverController alloc] initWithEvent:_event];
+        [popoverControllerDetails setProtocol:self];
+        [popoverControllerDetails setDelegate:self];
+        
+        if(button){
+            [popoverControllerDetails presentPopoverFromRect:button.frame
+                                                      inView:self
+                                    permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                    animated:YES];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        [[PCLogger sharedLogger] logToSave:[NSString stringWithFormat:@"Exception in get Select FFEventDetailPopoverController in WeekCell action %@",exception.callStackSymbols] ofType:PC_LOG_FATAL];
+    }
 
 }
 
@@ -380,6 +489,29 @@
     return hourString;
 }
 
+-(NSString *)getCorrectTimeformdate:(NSDate *)localdate{
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSString *dateStr = [dateFormat stringFromDate:localdate];
+    NSDate *myDate = [dateFormat dateFromString:dateStr];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setDateFormat:@"hh:mm a"];
+    [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
+    NSLocale *curentLocale = [NSLocale currentLocale];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[curentLocale localeIdentifier]]];
+    
+    //NSString *timeString = [dateFormatter stringFromDate:myDate];
+    
+    dateFormatter.dateFormat = @"hh:mm a";
+    NSString *timeString = [dateFormatter stringFromDate:myDate];
+    
+    return timeString;
+}
+
+
 - (IBAction)showDetails:(id)sender {
     
     button = (FFBlueButton *)sender;
@@ -393,17 +525,28 @@
     if([repeatedArray count] >0)
         [repeatedArray removeAllObjects];
     
-    for(FFBlueButton *btn in arrayButtonsEvents)
+    NSPredicate *filePredicate=[NSPredicate predicateWithFormat:@"dateDay==%@ ",button.event.dateDay];
+    NSArray *dateArray=[eventsArray filteredArrayUsingPredicate:filePredicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin = %@ AND dateTimeEnd <= %@", button.event.dateTimeBegin, button.event.dateTimeEnd];
+    NSArray *fileArray=[dateArray filteredArrayUsingPredicate:predicate];
+    
+    
+    if([fileArray count]>0)
     {
-        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
-            
-            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
-                
-                [repeatedArray addObject:btn];
-                
-            }
-        }
+        [repeatedArray addObjectsFromArray:(NSArray *)fileArray];
     }
+    
+//    for(FFBlueButton *btn in arrayButtonsEvents)
+//    {
+//        if([[self eventDisplayFormat:btn.event.dateDay] isEqualToString:[self eventDisplayFormat:button.event.dateDay]]){
+//            
+//            if(([[self getTimeformdate:btn.event.dateTimeBegin] isEqualToString:[self getTimeformdate:button.event.dateTimeBegin]]) || ([[self getTimeformdate:btn.event.dateTimeEnd] isEqualToString:[self getTimeformdate:button.event.dateTimeEnd]])){
+//                
+//                [repeatedArray addObject:btn];
+//                
+//            }
+//        }
+//    }
 
     
     testPopoverControllerDetails = [[GISPopOverController alloc] initWithEvent:button.event];
@@ -415,13 +558,17 @@
                                                   inView:self
                                 permittedArrowDirections:UIPopoverArrowDirectionAny
                                                 animated:YES];
+    [testPopoverControllerDetails setDelegate:self];
 
 }
 
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
     
-    if(button)
+    if(button){
         [button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
+    }
+    if(popoverController)
+        popoverController = nil;
     
     return YES;
 }

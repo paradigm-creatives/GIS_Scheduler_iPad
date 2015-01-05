@@ -28,6 +28,7 @@
     GISDropDownStore *dropDownStore;
     GISSchedulerSPJobsStore *spJobsStore;
     GISServiceProviderStore *serviceProviderStore;
+    GISLoginDetailsObject *login_Obj;
 }
 
 @property (nonatomic,strong) IBOutlet UITextField *userName_textfield;

@@ -189,6 +189,8 @@
 		8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */; };
 		8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */; };
 		8AE9B41A197E6308004D9157 /* dashboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE9B419197E6308004D9157 /* dashboard_pressed.png */; };
+		8AFB612E1A5ABE4A00F34B25 /* slider_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB612C1A5ABE4A00F34B25 /* slider_left.png */; };
+		8AFB612F1A5ABE4A00F34B25 /* slider_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB612D1A5ABE4A00F34B25 /* slider_left@2x.png */; };
 		BA00413219C19E92003D7217 /* GISFilterMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */; };
 		BA0A156719BF124B00165C1A /* GISAddUpdateJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A156519BF124B00165C1A /* GISAddUpdateJobsViewController.xib */; };
 		BA0A156D19BF17D200165C1A /* GISAddUpdateJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0A156C19BF17D200165C1A /* GISAddUpdateJobCell.m */; };
@@ -686,6 +688,8 @@
 		8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISViewEditServiceViewController.xib; sourceTree = "<group>"; };
 		8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GISVIewEditRequestViewController.xib; path = ../PopOverViewController/GISVIewEditRequestViewController.xib; sourceTree = "<group>"; };
 		8AE9B419197E6308004D9157 /* dashboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard_pressed.png; sourceTree = "<group>"; };
+		8AFB612C1A5ABE4A00F34B25 /* slider_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_left.png; sourceTree = "<group>"; };
+		8AFB612D1A5ABE4A00F34B25 /* slider_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider_left@2x.png"; sourceTree = "<group>"; };
 		BA00412E19C19E92003D7217 /* GISFilterMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISFilterMoreViewController.h; sourceTree = "<group>"; };
 		BA00412F19C19E92003D7217 /* GISFilterMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISFilterMoreViewController.m; sourceTree = "<group>"; };
 		BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GISFilterMoreViewController.xib; sourceTree = "<group>"; };
@@ -1836,6 +1840,8 @@
 		BA9E6A691977E88400609E69 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8AFB612C1A5ABE4A00F34B25 /* slider_left.png */,
+				8AFB612D1A5ABE4A00F34B25 /* slider_left@2x.png */,
 				8AE9B419197E6308004D9157 /* dashboard_pressed.png */,
 				8A8DA6CE1979026600EE8EFE /* attendees_unPressed.png */,
 				8A8DA6CF1979026600EE8EFE /* attendees_unPressed@2x.png */,
@@ -2203,6 +2209,7 @@
 				8A8DA6E61979026600EE8EFE /* eventdetails.png in Resources */,
 				BA9E6B3B1977E88400609E69 /* logout.png in Resources */,
 				BAFA6BF319949E6A005FE5A1 /* GISCreateJobsCell.xib in Resources */,
+				8AFB612E1A5ABE4A00F34B25 /* slider_left.png in Resources */,
 				BA9E6AF71977E88400609E69 /* check.png in Resources */,
 				BA9E6B351977E88400609E69 /* login_password.png in Resources */,
 				BA9E6B451977E88400609E69 /* requests_jobs_pressed.png in Resources */,
@@ -2242,6 +2249,7 @@
 				BA9E6AF11977E88400609E69 /* attendees.png in Resources */,
 				8A325BA319CAFA8100C52278 /* day_clicked.png in Resources */,
 				8A8DA7001979251A00EE8EFE /* GISCommentViewController.xib in Resources */,
+				8AFB612F1A5ABE4A00F34B25 /* slider_left@2x.png in Resources */,
 				8A8DA6E91979026600EE8EFE /* jobdetails@2x.png in Resources */,
 				8A17583719C8410400D75E98 /* GISViewEditListViewController.xib in Resources */,
 				BA9E6B301977E88400609E69 /* job_details_pressed@2x.png in Resources */,

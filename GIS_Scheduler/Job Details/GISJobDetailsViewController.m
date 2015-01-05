@@ -548,7 +548,7 @@
         btnTag=666;
         NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",typeOfservice_temp_string,[NSString stringWithFormat:@"%d",0]];
         if ([typeOfservice_temp_string isEqualToString:@"Any"]) {
-            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+            spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR TYPE = '%@' OR ID = '%@'",@"Interpreter",@"Captioner",[NSString stringWithFormat:@"%d",0]];
         }
         serviceProvider_array_tableView = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
         tableViewController1.popOverArray=serviceProvider_array_tableView;

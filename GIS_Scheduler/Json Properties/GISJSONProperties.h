@@ -76,6 +76,8 @@
 #define kEventType  @"Event_Type"
 #define kunitOrDep  @"Unit_Department"
 #define kRequestNumbers  @"Request_Numbers"
+#define kJob_RequestNumbers  @"Jobs_Request_Numbers"
+#define kJob_SPRequestNumbers  @"SP_Request_Numbers"
 #define kRequest_Number_Search  @"Request_Number"//This is for search unfilled and search request jobs
 #define kMode_of_Communication  @"Mode_of_Communication"
 #define kService_Needed  @"Service_Needed"

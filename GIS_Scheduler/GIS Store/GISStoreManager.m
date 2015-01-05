@@ -60,6 +60,8 @@
 @property (nonatomic, retain) NSMutableArray *created_By_Array;
 @property (nonatomic, retain) NSMutableArray *mode_Array_jobAssisgnMent;
 @property (nonatomic, retain) NSMutableArray *requestor_Type_Array;
+@property (nonatomic, retain) NSMutableArray *search_requests_Array;
+@property (nonatomic, retain) NSMutableArray *spJobs_requests_Array;
 
 @end
 
@@ -124,7 +126,11 @@ static GISStoreManager *singletonManager = nil;
         _created_By_Array = [[NSMutableArray alloc]init];
         _mode_Array_jobAssisgnMent = [[NSMutableArray alloc]init];
         _requestor_Type_Array= [[NSMutableArray alloc]init];
+        _search_requests_Array= [[NSMutableArray alloc]init];
+        _spJobs_requests_Array = [[NSMutableArray alloc]init];
+        
     }
+    
     return self;
 }
 
@@ -373,6 +379,45 @@ static GISStoreManager *singletonManager = nil;
 {
     [_requestNumbersArray removeAllObjects];
 }
+
+- (BOOL)addSearchRequestNumbersObject:(GISDropDownsObject *)requestNumbersObject
+{
+    BOOL isAdded = FALSE;
+    if (requestNumbersObject != nil) {
+        [_search_requests_Array addObject:requestNumbersObject];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getSearchRequestNumbersObjects
+{
+    return [_search_requests_Array count]?_search_requests_Array:nil;
+}
+- (void)removeSearchRequestNumbersObjects
+{
+    [_search_requests_Array removeAllObjects];
+}
+
+- (BOOL)addSPjobRequestNumbersObject:(GISDropDownsObject *)requestNumbersObject
+{
+    BOOL isAdded = FALSE;
+    if (requestNumbersObject != nil) {
+        [_spJobs_requests_Array addObject:requestNumbersObject];
+        isAdded = TRUE;
+    }
+    return isAdded;
+}
+
+- (NSMutableArray*)getSPjobRequestNumbersObjects
+{
+    return [_spJobs_requests_Array count]?_spJobs_requests_Array:nil;
+}
+- (void)removeSPjobRequestNumbersObjects
+{
+    [_spJobs_requests_Array removeAllObjects];
+}
+
 #pragma mark RequestNumbers END
 
 #pragma mark GetRequest Details Start

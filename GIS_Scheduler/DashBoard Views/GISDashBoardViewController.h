@@ -101,5 +101,6 @@
 @property(nonatomic,strong) IBOutlet UILabel *grayRequestLabel;
 
 -(void)pushToViewController:(int)section rowValue:(int)row;
+- (IBAction)hideButtonPressed:(id)sender;
 
 @end

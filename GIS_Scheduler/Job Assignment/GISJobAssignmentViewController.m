@@ -55,7 +55,7 @@
     ota_dictionary=[[NSMutableDictionary alloc]init];
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
     
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY ID DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
     dashBoard_UIView.hidden=YES;
@@ -114,15 +114,22 @@
     return self.isMasterHide;
 }
 
+- (IBAction)hideButtonPressed:(id)sender{
+    
+    isHide = NO;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    
+}
+
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.isMasterHide= !self.isMasterHide;
+    self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
-    if ([buttonTitle isEqualToString:@""])
+    if (isHide)
     {
         dashBoard_UIView.hidden=NO;
         CGRect frame1=table_UIView.frame;
@@ -153,12 +160,14 @@
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
+    isHide = NO;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
+    isHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
@@ -553,7 +562,7 @@
     
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR ID = '%@'",[GISUtility returningstring:obj.typeOfService_string],[NSString stringWithFormat:@"%d",0]];
     if ([obj.typeOfService_string isEqualToString:@"Any"]||[sender tag]==1919) {
-        spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
+        spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO WHERE TYPE = '%@' OR TYPE = '%@' OR ID = '%@'",@"Interpreter",@"Captioner",[NSString stringWithFormat:@"%d",0]];
     }
     serviceProvider_Array = [[[GISDatabaseManager sharedDataManager] getServiceProviderArray:spCode_statement] mutableCopy];
     popOverController.popOverArray=serviceProvider_Array;

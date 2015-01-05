@@ -199,6 +199,17 @@ static GISServerManager *singletonManager = nil;
     
     [self startRequest:request target:target finishAction:finishAction failAction:failAction];
 }
+
+- (void)getSearchRequestNumbersData:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
+{
+    if (![self isNetworkAvailable]) { [self alert]; return;}
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@",GIS_STAGE_BASE_URL,GIS_GET_SP_JOBS_REQUEST_NUMBERS];
+    GISJsonRequest *request = [[GISJsonRequest alloc] initWithURL:url andParams:params];
+    [request setMethodPost];
+    
+    [self startRequest:request target:target finishAction:finishAction failAction:failAction];
+}
+
 - (void)getChooseRequestDetailsData:(id)target withParams:(NSMutableDictionary *)params finishAction:(SEL)finishAction failAction:(SEL)failAction
 {
     if (![self isNetworkAvailable]) { [self alert]; return;}

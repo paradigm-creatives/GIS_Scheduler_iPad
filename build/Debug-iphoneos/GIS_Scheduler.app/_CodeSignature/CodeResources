@@ -102,7 +102,7 @@
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		k7NQQNB6LyaHWnSJW1cBrB8/A/I=
+		Q+BNg5/6riS+azYIgWRjdO+hzJE=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
@@ -142,7 +142,7 @@
 		</data>
 		<key>GISJobAssignmentViewController.nib</key>
 		<data>
-		aPqWyUyEHwpXJg6tNxZvBh7jdk4=
+		OptHqg5L2GkhgdX04eJknuVteBE=
 		</data>
 		<key>GISJobDetailsCell.nib</key>
 		<data>
@@ -198,7 +198,7 @@
 		</data>
 		<key>GISServiceProviderRequestedJobsResultsViewController.nib</key>
 		<data>
-		Xe9/hpw1TNStjoeOiAoTIgSagng=
+		Ap1IqAl4xB/4Q2UWAayXSFdl6W8=
 		</data>
 		<key>GISServiceProviderRequestedJobsViewController.nib</key>
 		<data>
@@ -234,7 +234,7 @@
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		oRUjVF5u0UHyJ8L2g8EHj7ZkOeI=
+		foiyjqLEvthHYvpMHAdoy8xN/DA=
 		</data>
 		<key>GISViewEditListVIewCell.nib</key>
 		<data>
@@ -246,7 +246,7 @@
 		</data>
 		<key>GISViewEditServiceViewController.nib</key>
 		<data>
-		WnJdzstR52a2XMPzu4P5Toq+Hc8=
+		A6us93NewTaldzqDSuJypSlu8NA=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -779,6 +779,14 @@
 		<key>slider@2x.png</key>
 		<data>
 		6yKuFUvABLMkL+Z4yKffxSdKUNI=
+		</data>
+		<key>slider_left.png</key>
+		<data>
+		3qOfcpZxOUkADKjYI4aI7+QapZI=
+		</data>
+		<key>slider_left@2x.png</key>
+		<data>
+		V21YCgP0Tz2Spdqv4R2YqfsiVAs=
 		</data>
 		<key>summary.png</key>
 		<data>
@@ -981,7 +989,7 @@
 		</data>
 		<key>GISDashBoardViewController.nib</key>
 		<data>
-		k7NQQNB6LyaHWnSJW1cBrB8/A/I=
+		Q+BNg5/6riS+azYIgWRjdO+hzJE=
 		</data>
 		<key>GISDatesAndTimesViewController.nib</key>
 		<data>
@@ -1021,7 +1029,7 @@
 		</data>
 		<key>GISJobAssignmentViewController.nib</key>
 		<data>
-		aPqWyUyEHwpXJg6tNxZvBh7jdk4=
+		OptHqg5L2GkhgdX04eJknuVteBE=
 		</data>
 		<key>GISJobDetailsCell.nib</key>
 		<data>
@@ -1077,7 +1085,7 @@
 		</data>
 		<key>GISServiceProviderRequestedJobsResultsViewController.nib</key>
 		<data>
-		Xe9/hpw1TNStjoeOiAoTIgSagng=
+		Ap1IqAl4xB/4Q2UWAayXSFdl6W8=
 		</data>
 		<key>GISServiceProviderRequestedJobsViewController.nib</key>
 		<data>
@@ -1113,7 +1121,7 @@
 		</data>
 		<key>GISVIewEditRequestViewController.nib</key>
 		<data>
-		oRUjVF5u0UHyJ8L2g8EHj7ZkOeI=
+		foiyjqLEvthHYvpMHAdoy8xN/DA=
 		</data>
 		<key>GISViewEditListVIewCell.nib</key>
 		<data>
@@ -1125,7 +1133,7 @@
 		</data>
 		<key>GISViewEditServiceViewController.nib</key>
 		<data>
-		WnJdzstR52a2XMPzu4P5Toq+Hc8=
+		A6us93NewTaldzqDSuJypSlu8NA=
 		</data>
 		<key>Locationdetails.png</key>
 		<data>
@@ -1658,6 +1666,14 @@
 		<key>slider@2x.png</key>
 		<data>
 		6yKuFUvABLMkL+Z4yKffxSdKUNI=
+		</data>
+		<key>slider_left.png</key>
+		<data>
+		3qOfcpZxOUkADKjYI4aI7+QapZI=
+		</data>
+		<key>slider_left@2x.png</key>
+		<data>
+		V21YCgP0Tz2Spdqv4R2YqfsiVAs=
 		</data>
 		<key>summary.png</key>
 		<data>

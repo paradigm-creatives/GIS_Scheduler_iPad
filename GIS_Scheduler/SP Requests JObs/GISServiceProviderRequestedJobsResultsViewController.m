@@ -176,15 +176,23 @@
     return self.isMasterHide;
 }
 
+- (IBAction)hideButtonPressed:(id)sender{
+    
+    isHide = NO;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    
+}
+
+
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
     datListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.isMasterHide= !self.isMasterHide;
+    self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
-    if ([buttonTitle isEqualToString:@""])
+    if (isHide)
     {
         _flipView.hidden=NO;
         CGRect frame1=_flipView.frame;
@@ -443,12 +451,14 @@
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"rightSwipeHandle");
+    isHide = NO;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 
 - (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
 {
     NSLog(@"leftSwipeHandle");
+    isHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 

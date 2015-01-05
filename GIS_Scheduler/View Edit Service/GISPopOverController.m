@@ -22,7 +22,7 @@ int Count = 0;
         
     GISViewEditListViewController *vlistView=[[GISViewEditListViewController alloc]initWithNibName:@"GISViewEditListViewController" bundle:nil];
     vlistView.testEvent = eventInit;
-    
+    Count = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_WEEK_EVENT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTestEventDetails:) name:SHOW_WEEK_EVENT object:nil];
     
@@ -45,12 +45,12 @@ int Count = 0;
         
         if ([testProtocol respondsToSelector:@selector(showPopoverEventDetailWithEvent:)]) {
             
-            if(Count < 1){
+            if(Count == 0){
                 [testProtocol showPopoverEventDetailWithEvent:event];
                 Count ++;
             }
             else{
-                Count = 0;
+                //Count = 0;
                 [[NSNotificationCenter defaultCenter] removeObserver:self name:SHOW_WEEK_EVENT object:nil];
                 return;
             }

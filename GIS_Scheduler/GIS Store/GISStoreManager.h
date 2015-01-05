@@ -189,4 +189,12 @@
 - (BOOL)addRequestor_TypeObject:(GISDropDownsObject *)requestor_TypeObj;
 - (NSMutableArray*)getRequestor_TypeObjects;
 - (void)removeRequestor_TypeObjects;
+
+- (BOOL)addSearchRequestNumbersObject:(GISDropDownsObject *)requestNumbersObject;
+- (NSMutableArray*)getSearchRequestNumbersObjects;
+- (void)removeSearchRequestNumbersObjects;
+
+- (BOOL)addSPjobRequestNumbersObject:(GISDropDownsObject *)requestNumbersObject;
+- (NSMutableArray*)getSPjobRequestNumbersObjects;
+- (void)removeSPjobRequestNumbersObjects;
 @end
