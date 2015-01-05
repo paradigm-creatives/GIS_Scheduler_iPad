@@ -73,7 +73,7 @@
                     GisResponse_String=@"Select";
             }
             if ([json objectForKey:kSPRequestJobs_EndTime])
-            endTime_String = [json objectForKey:kSPRequestJobs_EndTime] == NULL?@" ":[NSString stringWithString:[json objectForKey:kSPRequestJobs_EndTime]];
+            endTime_String = [self returningstring:[json objectForKey:kSPRequestJobs_EndTime]];
             if ([json objectForKey:kSPRequestJobs_EventType])
             EventType_String = [self returningstring:[json objectForKey:kSPRequestJobs_EventType]];
             if ([json objectForKey:kSPRequestJobs_JobDate])
