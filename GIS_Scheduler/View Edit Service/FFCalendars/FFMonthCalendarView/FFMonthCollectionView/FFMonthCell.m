@@ -112,7 +112,7 @@
             [arrayButtons addObject:button];
             
             if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
-                [button setTitle:[NSString stringWithFormat:@"%i more...", [arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@"%i more...", [arrayEvents count] - maxNumOfButtons+1] forState:UIControlStateNormal];
                 [button addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
                 break;
             } else {

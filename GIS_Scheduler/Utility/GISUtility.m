@@ -158,8 +158,14 @@
 
 +(BOOL)dateComparision:(NSString *)startTime :(NSString *)endTime :(BOOL)isStartTimeComaprsion
 {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/yyyy"];
+    NSDate *startDate = [dateFormat dateFromString:startTime];
+    NSDate *endDate = [dateFormat dateFromString:endTime];
+    
     if (isStartTimeComaprsion) {
-        if ([endTime compare:startTime] == NSOrderedDescending || [endTime compare:startTime]==NSOrderedSame)
+        
+        if ([endDate compare:startDate] == NSOrderedDescending || [endDate compare:startDate]==NSOrderedSame)
         {
             NSLog(@" Good");
             return YES;
@@ -167,7 +173,7 @@
         return NO;
     }
     
-    if ([startTime compare:endTime] == NSOrderedAscending || [startTime compare:endTime]==NSOrderedSame)
+    if ([startDate compare:endDate] == NSOrderedAscending || [startDate compare:endDate]==NSOrderedSame)
     {
         NSLog(@" Good");
         return YES;

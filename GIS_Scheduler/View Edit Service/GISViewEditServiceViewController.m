@@ -148,6 +148,8 @@
                                            day:[NSDate componentsOfCurrentDate].day];
     
     _dateTextField.text = [GISUtility eventDisplayFormat:currentDate];
+    
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 
 }
 
@@ -832,6 +834,13 @@
                                            inView:self.view
                          permittedArrowDirections:UIPopoverArrowDirectionUp
                                          animated:YES];
+    
+}
+
+- (IBAction)hideButtonPressed:(id)sender{
+    
+    isHide = NO;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
     
 }
 

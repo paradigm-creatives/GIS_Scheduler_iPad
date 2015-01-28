@@ -115,7 +115,7 @@
     NSString *primaryAudience_statement = [[NSString alloc]initWithFormat:@"select * from TBL_PRIMARY_AUDIENCE;"];
     primaryAudience_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:primaryAudience_statement] mutableCopy];
     
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY VALUE DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
 }
 

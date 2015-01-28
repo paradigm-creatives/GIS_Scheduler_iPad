@@ -31,7 +31,7 @@
         self.titleLabel.numberOfLines = 0;
         [self setBackgroundColor:[UIColor clearColor]];//[UIColor colorWithRed:49./255. green:181./255. blue:247./255. alpha:0.5]];
         [self.titleLabel setFont:[GISFonts normalBold]];
-        [self setTitleColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0] forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];//[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0] forState:UIControlStateNormal];
         
         [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     }

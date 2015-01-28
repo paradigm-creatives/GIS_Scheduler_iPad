@@ -1110,7 +1110,8 @@
 
 -(void)hideShowDashboard
 {
-    self.isMasterHide = YES;
+    isHide = NO;
+    
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
 

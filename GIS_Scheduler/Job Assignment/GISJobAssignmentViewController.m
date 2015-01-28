@@ -55,7 +55,7 @@
     ota_dictionary=[[NSMutableDictionary alloc]init];
     chooseRequest_mutArray=[[NSMutableArray alloc]init];
     
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY ID DESC;"];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SEARCH_CHOOSE_REQUEST ORDER BY VALUE DESC;"];
     chooseRequest_mutArray = [[[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement] mutableCopy];
     
     dashBoard_UIView.hidden=YES;

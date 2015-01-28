@@ -46,7 +46,7 @@
         
         [_locationDetaislTabelView setContentSize:CGSizeMake(1024, 940)];
         
-        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY ID DESC;"];
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY VALUE DESC;"];
         _chooseReqArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
         NSString *generalLocation_statement = [[NSString alloc]initWithFormat:@"select * from TBL_GENERAL_LOCATION  ORDER BY ID DESC;"];

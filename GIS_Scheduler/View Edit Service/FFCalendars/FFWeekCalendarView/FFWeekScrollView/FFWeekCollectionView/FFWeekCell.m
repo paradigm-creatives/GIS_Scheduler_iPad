@@ -111,21 +111,20 @@
     if (array) {
         
         int i = 0;
-        int count=0;
         NSArray *arrayEvents = array;
         repeatedArray = [[NSMutableArray alloc] init];
         NSMutableArray *repeatedCountArray = [[NSMutableArray alloc] init];
         
         for (FFEvent *event in array) {
             
-            FFEvent *nextEvent;
+            //FFEvent *nextEvent;
             FFEvent *lastEvent;
             
-            if([arrayEvents count]>i+1)
-                nextEvent= [arrayEvents objectAtIndex:i+1];
+            //if([arrayEvents count]>i+1)
+                //nextEvent= [arrayEvents objectAtIndex:i+1];
             
-            if([arrayEvents count]>i+1 && i>1)
-                lastEvent= [arrayEvents objectAtIndex:i-1];
+            //if([arrayEvents count]>i+1 && i>1)
+                //lastEvent= [arrayEvents objectAtIndex:i-1];
             
             CGFloat yTimeBegin;
             CGFloat yTimeEnd;
@@ -155,12 +154,23 @@
                 }
             }
             
-            if(nextEvent != nil){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin == %@ AND dateTimeEnd == %@", event.dateTimeBegin, event.dateTimeEnd];
+            NSArray *fileArray=[arrayEvents filteredArrayUsingPredicate:predicate];
+            
+            
+            if([fileArray count]>0)
+            {
+                [repeatedCountArray addObjectsFromArray:(NSArray *)fileArray];
+            }
+
+            
+            if(i == 0){
                 
                 FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
                 [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
                 [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
+                [_button.titleLabel setFont:[GISFonts small]];
                 [_button setEvent:event];
                 
                 [arrayButtonsEvents addObject:_button];
@@ -172,116 +182,140 @@
                 
                 [self addSubview:view];
                 
-                _labelbutton = [[FFBlueButton alloc] initWithFrame:CGRectMake(40, yTimeEnd-25, self.frame.size.width-88, 15)];
+                _labelbutton = [[FFBlueButton alloc] initWithFrame:CGRectMake(40, yTimeEnd-25, self.frame.size.width-68, 15)];
                 [_labelbutton setBackgroundColor:[UIColor  clearColor]];
-                [_labelbutton.titleLabel setFont:[GISFonts smallBold]];
+                [_labelbutton.titleLabel setFont:[GISFonts normalBold]];
                 [_labelbutton.titleLabel setTextColor:[UIColor blackColor]];
                 [_labelbutton setEvent:event];
                 [self addSubview:_labelbutton];
+
                 
-                if(([[self getCorrectTimeformdate:event.dateTimeBegin] isEqualToString:[self getCorrectTimeformdate:nextEvent.dateTimeBegin]]) || ([[self getCorrectTimeformdate:event.dateTimeEnd] isEqualToString:[self getCorrectTimeformdate:nextEvent.dateTimeEnd]])){
-                    
-                    count ++;
-                    
-                    if(count >1){
-                        
-                        [_labelbutton setHidden:FALSE];
-
-                    }else{
-                        
-                        [_labelbutton setHidden:TRUE];
-                    }
-                    
-                    [repeatedCountArray addObject:_labelbutton];
-                    
-                    if([repeatedCountArray count])
-                       [_labelbutton setTitle:@"" forState:UIControlStateNormal];
-                    
-                    [_labelbutton setTitle:[NSString stringWithFormat:@"%d more",[repeatedCountArray count]-1] forState:UIControlStateNormal];
-
-                    
-                }else if([[self eventDisplayFormat:event.dateDay] isEqualToString:[self eventDisplayFormat:nextEvent.dateDay]]){
-                    
-                    
-                    NSString *btnStartTime = [self getCorrectTimeformdate:event.dateTimeBegin];
-                    NSString *btnEndTime = [self getCorrectTimeformdate:event.dateTimeEnd];
-                    NSString *buttonStartTime = [self getCorrectTimeformdate:nextEvent.dateTimeBegin];
-                    NSString *buttonEndTime = [self getCorrectTimeformdate:nextEvent.dateTimeEnd];
-                    
-                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                    [formatter setDateFormat:@"hh:mm a"];
-                    
-                    NSDate *date1= [formatter dateFromString:btnStartTime];
-                    NSDate *date2 = [formatter dateFromString:buttonStartTime];
-                    
-                    NSDate *endTime1= [formatter dateFromString:btnEndTime];
-                    NSDate *endTime2 = [formatter dateFromString:buttonEndTime];
-
-                    
-                    NSComparisonResult result = [date1 compare:date2];
-                    NSComparisonResult endTimeresult = [endTime1 compare:endTime2];
-                    if(result == NSOrderedDescending || endTimeresult == NSOrderedDescending)
-                    {
-                        CGRect frame  = _button.frame;
-                        frame.origin.x = _button.frame.origin.x+12;
-                        _button.frame = frame;
-                        
-                        CGRect viewFrame  = view.frame;
-                        viewFrame.origin.x = _button.frame.origin.x-2;
-                        view.frame = viewFrame;
-                        
-                        [self bringSubviewToFront:_button];
-
-                    }
-                    else if(result == NSOrderedAscending || endTimeresult == NSOrderedAscending)
-                    {
-                        CGRect frame  = _button.frame;
-                        frame.origin.x = _button.frame.origin.x+12;
-                        _button.frame = frame;
-                        
-                        CGRect viewFrame  = view.frame;
-                        viewFrame.origin.x = _button.frame.origin.x-2;
-                        view.frame = viewFrame;
-                        
-                        [self bringSubviewToFront:_button];
-                    }
-                    else
-                    {
-                        
-                    }
-
-                }else{
-                   
-                    count = 0;
-                }
             }else{
                 
-                count = 0;
-                [_labelbutton setHidden:TRUE];
-                if(repeatedArray)
-                   [repeatedArray removeAllObjects];
+                if([arrayEvents count])
+                    lastEvent= [arrayEvents objectAtIndex:i-1];
                 
-                FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
-                [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-                [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
-                [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
-                [_button setEvent:event];
-                
-                [arrayButtonsEvents addObject:_button];
-                [eventsArray addObject:_button.event];
-                [self addSubview:_button];
-                
-                view = [[UIView alloc] initWithFrame:CGRectMake(_button.frame.origin.x-2, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
-                [view setBackgroundColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0]];
-                
-                [self addSubview:view];
-                
-                [self bringSubviewToFront:_button];
+                if(lastEvent != nil){
+                    
+                    FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
+                    [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
+                    [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
+                    [_button.titleLabel setFont:[GISFonts small]];
+                    [_button setEvent:event];
+                    
+                    [arrayButtonsEvents addObject:_button];
+                    [eventsArray addObject:_button.event];
+                    [self addSubview:_button];
+                    
+                    view = [[UIView alloc] initWithFrame:CGRectMake(_button.frame.origin.x-2, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
+                    [view setBackgroundColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0]];
+                    
+                    [self addSubview:view];
+                    
+                    _labelbutton = [[FFBlueButton alloc] initWithFrame:CGRectMake(40, yTimeEnd-25, self.frame.size.width-68, 15)];
+                    [_labelbutton setBackgroundColor:[UIColor  clearColor]];
+                    [_labelbutton.titleLabel setFont:[GISFonts normalBold]];
+                    [_labelbutton.titleLabel setTextColor:[UIColor blackColor]];
+                    [_labelbutton setTitle:[NSString stringWithFormat:@"%d more",[repeatedCountArray count]-1] forState:UIControlStateNormal];
+                    [_labelbutton setEvent:event];
+                    [self addSubview:_labelbutton];
+                    
+                    if(([[self getCorrectTimeformdate:event.dateTimeBegin] isEqualToString:[self getCorrectTimeformdate:lastEvent.dateTimeBegin]]) || ([[self getCorrectTimeformdate:event.dateTimeEnd] isEqualToString:[self getCorrectTimeformdate:lastEvent.dateTimeEnd]])){
+                        
+                        [_button setHidden:TRUE];
+                        [view setHidden:TRUE];
+                        [_labelbutton setHidden:FALSE];
+                        i++;
+                        
+                        
+                    }else if([[self eventDisplayFormat:event.dateDay] isEqualToString:[self eventDisplayFormat:lastEvent.dateDay]]){
+                        
+                        i= 0;
+                        
+                        if(repeatedArray)
+                            [repeatedArray removeAllObjects];
+                        
+                        FFBlueButton *lastButton = [arrayButtonsEvents objectAtIndex:i-1];
+                        
+                        [_button setHidden:FALSE];
+                        [view setHidden:FALSE];
+                        [_labelbutton setHidden:TRUE];
+                        
+                        NSString *btnStartTime = [self getCorrectTimeformdate:event.dateTimeBegin];
+                        NSString *btnEndTime = [self getCorrectTimeformdate:event.dateTimeEnd];
+                        NSString *buttonStartTime = [self getCorrectTimeformdate:lastEvent.dateTimeBegin];
+                        NSString *buttonEndTime = [self getCorrectTimeformdate:lastEvent.dateTimeEnd];
+                        
+                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                        [formatter setDateFormat:@"hh:mm a"];
+                        
+                        NSDate *date1= [formatter dateFromString:btnStartTime];
+                        NSDate *date2 = [formatter dateFromString:buttonStartTime];
+                        
+                        NSDate *endTime1= [formatter dateFromString:btnEndTime];
+                        NSDate *endTime2 = [formatter dateFromString:buttonEndTime];
+                        
+                        
+                        NSComparisonResult result = [date1 compare:date2];
+                        NSComparisonResult endTimeresult = [endTime1 compare:endTime2];
+                        if(result == NSOrderedDescending || endTimeresult == NSOrderedDescending)
+                        {
+                            CGRect frame  = lastButton.frame;
+                            frame.origin.x = lastButton.frame.origin.x+12;
+                            _button.frame = frame;
+                            
+                            CGRect viewFrame  = view.frame;
+                            viewFrame.origin.x = _button.frame.origin.x-2;
+                            view.frame = viewFrame;
+                            
+                            [self bringSubviewToFront:_button];
+                            
+                        }
+                        else if(result == NSOrderedAscending || endTimeresult == NSOrderedAscending)
+                        {
+                            CGRect frame  = lastButton.frame;
+                            frame.origin.x = lastButton.frame.origin.x+i*12;
+                            _button.frame = frame;
+                            
+                            CGRect viewFrame  = view.frame;
+                            viewFrame.origin.x = _button.frame.origin.x-2;
+                            view.frame = viewFrame;
+                            
+                            [self bringSubviewToFront:_button];
+                        }
+                        else
+                        {
+                            
+                        }
+                        
+                    }
+                }else{
+                    
+                    [_labelbutton setHidden:TRUE];
+                    if(repeatedArray)
+                        [repeatedArray removeAllObjects];
+                    
+                    FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0+i*12, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
+                    [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [_button setBackgroundColor:[UIColor colorWithRed:179./255. green:255./255. blue:255./255. alpha:0.5]];
+                    [_button setTitle:[NSString stringWithFormat:@"%@ %@",@"JobID", event.stringCustomerName] forState:UIControlStateNormal];
+                    [_button.titleLabel setFont:[GISFonts small]];
+                    [_button setEvent:event];
+                    
+                    [arrayButtonsEvents addObject:_button];
+                    [eventsArray addObject:_button.event];
+                    [self addSubview:_button];
+                    
+                    view = [[UIView alloc] initWithFrame:CGRectMake(_button.frame.origin.x-2, _button.frame.origin.y, 2.0f, _button.frame.size.height)];
+                    [view setBackgroundColor:[UIColor colorWithRed:28./255. green:195./255. blue:255./255. alpha:5.0]];
+                    
+                    [self addSubview:view];
+                    
+                    [self bringSubviewToFront:_button];
+                }
             }
-            
         }
-        count = 0;
-        i++;
     }
     
 }
@@ -300,7 +334,7 @@
     
     NSPredicate *filePredicate=[NSPredicate predicateWithFormat:@"dateDay==%@ ",button.event.dateDay];
     NSArray *dateArray=[eventsArray filteredArrayUsingPredicate:filePredicate];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin >= %@ AND dateTimeEnd <= %@", button.event.dateTimeBegin, button.event.dateTimeEnd];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateTimeBegin == %@ AND dateTimeEnd == %@", button.event.dateTimeBegin, button.event.dateTimeEnd];
     NSArray *fileArray=[dateArray filteredArrayUsingPredicate:predicate];
     
     

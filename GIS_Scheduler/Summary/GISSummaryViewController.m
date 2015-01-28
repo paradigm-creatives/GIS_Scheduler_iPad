@@ -55,7 +55,7 @@
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY ID DESC;"];
+    NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST  ORDER BY VALUE DESC;"];
     
     _chooseReqArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
     
