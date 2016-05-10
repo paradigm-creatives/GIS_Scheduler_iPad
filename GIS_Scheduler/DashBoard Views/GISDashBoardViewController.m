@@ -50,18 +50,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
-    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [rightRecognizer setNumberOfTouchesRequired:1];
-    
-    //add the your gestureRecognizer , where to detect the touch..
-    [datListView addGestureRecognizer:rightRecognizer];
-    
-    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [leftRecognizer setNumberOfTouchesRequired:1];
-    
-    [datListView addGestureRecognizer:leftRecognizer];
+//    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
+//    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+//    [rightRecognizer setNumberOfTouchesRequired:1];
+//    
+//    //add the your gestureRecognizer , where to detect the touch..
+//    [self.view addGestureRecognizer:rightRecognizer];
+//    
+//    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+//    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [leftRecognizer setNumberOfTouchesRequired:1];
+//    
+//    [self.view addGestureRecognizer:leftRecognizer];
     
     self.isMasterHide= YES;
     
@@ -253,7 +253,7 @@
 
 }
 
-- (IBAction)hideAndUnHideMaster:(id)sender
+/*- (IBAction)hideAndUnHideMaster:(id)sender
 {
     datListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     
@@ -306,7 +306,7 @@
     isHide = YES;
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 }
-
+*/
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender {
     
     NSString *requetId_String = [[NSString alloc]initWithFormat:@"select * from TBL_LOGIN;"];

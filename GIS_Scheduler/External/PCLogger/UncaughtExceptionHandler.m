@@ -119,7 +119,7 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 
 void HandleException(NSException *exception)
 {
-    [[PCLogger sharedLogger] uploadFileToS3];
+    //[[PCLogger sharedLogger] uploadFileToS3];
 
 	int32_t exceptionCount = OSAtomicIncrement32(&UncaughtExceptionCount);
 	if (exceptionCount > UncaughtExceptionMaximum)

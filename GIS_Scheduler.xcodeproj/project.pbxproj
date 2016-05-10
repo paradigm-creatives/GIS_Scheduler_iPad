@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1796C1E81CDB5EA200445499 /* libIQKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1796C1E21CDB5EA200445499 /* libIQKeyboardManager.a */; };
 		8A0EE3861994A1B00004CF0A /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		8A15B4CB197D0A4C008B4129 /* GISLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */; };
 		8A15B4CD197D0CAC008B4129 /* PCAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E2B197CF54500963E8C /* PCAvailability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -91,7 +92,6 @@
 		8A3B1E00197CF3DD00963E8C /* GISDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1DFF197CF3DD00963E8C /* GISDatabaseManager.m */; };
 		8A3B1E03197CF43500963E8C /* custom.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A3B1E02197CF43500963E8C /* custom.strings */; };
 		8A3B1E32197CF54500963E8C /* GISLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E21197CF54500963E8C /* GISLoadingView.m */; };
-		8A3B1E33197CF54500963E8C /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E26197CF54500963E8C /* AmazonClientManager.m */; };
 		8A3B1E35197CF54500963E8C /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E29197CF54500963E8C /* Constants.m */; };
 		8A3B1E39197CF54500963E8C /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E31197CF54500963E8C /* UncaughtExceptionHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8A3B1E4D197CF58300963E8C /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3B1E40197CF58300963E8C /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -184,13 +184,13 @@
 		8AC899C719C8701C00B9532C /* GISViewEditStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC899C619C8701C00B9532C /* GISViewEditStore.m */; };
 		8ACF5C3319E6B7B3001D86A1 /* GISEventDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E2E3319753C8100BE3C04 /* GISEventDetailsCell.xib */; };
 		8ACF5C3419E6B7B3001D86A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA3AF218196BBAF7006A1E3B /* InfoPlist.strings */; };
-		8AD948AC1A08E1CE003354DC /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B1E27197CF54500963E8C /* AWSiOSSDK.framework */; };
 		8AE7ECD819ADFB7F00E02258 /* GISViewEditServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD619ADFB7F00E02258 /* GISViewEditServiceViewController.m */; };
 		8AE7ECD919ADFB7F00E02258 /* GISViewEditServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7ECD719ADFB7F00E02258 /* GISViewEditServiceViewController.xib */; };
 		8AE7EDBA19AE168400E02258 /* GISVIewEditRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE7EDB919AE168400E02258 /* GISVIewEditRequestViewController.xib */; };
 		8AE9B41A197E6308004D9157 /* dashboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AE9B419197E6308004D9157 /* dashboard_pressed.png */; };
 		8AFB612E1A5ABE4A00F34B25 /* slider_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB612C1A5ABE4A00F34B25 /* slider_left.png */; };
 		8AFB612F1A5ABE4A00F34B25 /* slider_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB612D1A5ABE4A00F34B25 /* slider_left@2x.png */; };
+		985E9D7D28DC94B2DC1B1FB9 /* libPods-GIS_Scheduler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046E7D184FB54B800579C7D5 /* libPods-GIS_Scheduler.a */; };
 		BA00413219C19E92003D7217 /* GISFilterMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA00413019C19E92003D7217 /* GISFilterMoreViewController.xib */; };
 		BA0A156719BF124B00165C1A /* GISAddUpdateJobsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0A156519BF124B00165C1A /* GISAddUpdateJobsViewController.xib */; };
 		BA0A156D19BF17D200165C1A /* GISAddUpdateJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0A156C19BF17D200165C1A /* GISAddUpdateJobCell.m */; };
@@ -392,6 +392,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		046E7D184FB54B800579C7D5 /* libPods-GIS_Scheduler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GIS_Scheduler.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1796C1DD1CDB5EA200445499 /* libAWSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSCore.a; path = "Pods/../build/Debug-iphoneos/libAWSCore.a"; sourceTree = "<group>"; };
+		1796C1DE1CDB5EA200445499 /* libAWSS3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSS3.a; path = "Pods/../build/Debug-iphoneos/libAWSS3.a"; sourceTree = "<group>"; };
+		1796C1DF1CDB5EA200445499 /* libAWSSimpleDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSSimpleDB.a; path = "Pods/../build/Debug-iphoneos/libAWSSimpleDB.a"; sourceTree = "<group>"; };
+		1796C1E01CDB5EA200445499 /* libAWSSNS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSSNS.a; path = "Pods/../build/Debug-iphoneos/libAWSSNS.a"; sourceTree = "<group>"; };
+		1796C1E11CDB5EA200445499 /* libAWSSQS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSSQS.a; path = "Pods/../build/Debug-iphoneos/libAWSSQS.a"; sourceTree = "<group>"; };
+		1796C1E21CDB5EA200445499 /* libIQKeyboardManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIQKeyboardManager.a; path = "Pods/../build/Debug-iphoneos/libIQKeyboardManager.a"; sourceTree = "<group>"; };
+		3391DE7AF442CA6E4A038C96 /* Pods-GIS_Scheduler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIS_Scheduler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GIS_Scheduler/Pods-GIS_Scheduler.debug.xcconfig"; sourceTree = "<group>"; };
+		7F0FD58164CA920534E7E109 /* Pods-GIS_Scheduler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIS_Scheduler.release.xcconfig"; path = "Pods/Target Support Files/Pods-GIS_Scheduler/Pods-GIS_Scheduler.release.xcconfig"; sourceTree = "<group>"; };
 		8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISLoginViewController.m; sourceTree = "<group>"; };
 		8A15B4CF197D23B1008B4129 /* GISDropDownsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GISDropDownsObject.m; sourceTree = "<group>"; };
 		8A15B4D0197D23B1008B4129 /* GISDropDownsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GISDropDownsObject.h; sourceTree = "<group>"; };
@@ -933,11 +942,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AD948AC1A08E1CE003354DC /* AWSiOSSDK.framework in Frameworks */,
+				1796C1E81CDB5EA200445499 /* libIQKeyboardManager.a in Frameworks */,
 				BADFD9C5197CEF7B003033FD /* libsqlite3.dylib in Frameworks */,
 				BA3AF212196BBAF7006A1E3B /* CoreGraphics.framework in Frameworks */,
 				BA3AF214196BBAF7006A1E3B /* UIKit.framework in Frameworks */,
 				BA3AF210196BBAF7006A1E3B /* Foundation.framework in Frameworks */,
+				985E9D7D28DC94B2DC1B1FB9 /* libPods-GIS_Scheduler.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +964,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19E5F90E99E56D7EE49FD014 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3391DE7AF442CA6E4A038C96 /* Pods-GIS_Scheduler.debug.xcconfig */,
+				7F0FD58164CA920534E7E109 /* Pods-GIS_Scheduler.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8A232EE41973ACC100E2BEDF /* GIS Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1659,6 +1678,7 @@
 				BA3AF22E196BBAF8006A1E3B /* GIS_SchedulerTests */,
 				BA3AF20E196BBAF7006A1E3B /* Frameworks */,
 				BA3AF20D196BBAF7006A1E3B /* Products */,
+				19E5F90E99E56D7EE49FD014 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1674,12 +1694,19 @@
 		BA3AF20E196BBAF7006A1E3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1796C1DD1CDB5EA200445499 /* libAWSCore.a */,
+				1796C1DE1CDB5EA200445499 /* libAWSS3.a */,
+				1796C1DF1CDB5EA200445499 /* libAWSSimpleDB.a */,
+				1796C1E01CDB5EA200445499 /* libAWSSNS.a */,
+				1796C1E11CDB5EA200445499 /* libAWSSQS.a */,
+				1796C1E21CDB5EA200445499 /* libIQKeyboardManager.a */,
 				BA05F308199B6452002E6859 /* CoreData.framework */,
 				BADFD9C4197CEF7B003033FD /* libsqlite3.dylib */,
 				BA3AF20F196BBAF7006A1E3B /* Foundation.framework */,
 				BA3AF211196BBAF7006A1E3B /* CoreGraphics.framework */,
 				BA3AF213196BBAF7006A1E3B /* UIKit.framework */,
 				BA3AF228196BBAF7006A1E3B /* XCTest.framework */,
+				046E7D184FB54B800579C7D5 /* libPods-GIS_Scheduler.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2087,9 +2114,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA3AF238196BBAF8006A1E3B /* Build configuration list for PBXNativeTarget "GIS_Scheduler" */;
 			buildPhases = (
+				DADF68C1F8C5AA33E028EDEB /* Check Pods Manifest.lock */,
 				BA3AF208196BBAF7006A1E3B /* Sources */,
 				BA3AF209196BBAF7006A1E3B /* Frameworks */,
 				BA3AF20A196BBAF7006A1E3B /* Resources */,
+				FB6886032ADC676E9D56E04B /* Embed Pods Frameworks */,
+				30E99D49CAD38D910F59B7AC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2128,6 +2158,7 @@
 				ORGANIZATIONNAME = Paradigm;
 				TargetAttributes = {
 					BA3AF20B196BBAF7006A1E3B = {
+						DevelopmentTeam = 2992NHSMPW;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2388,6 +2419,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		30E99D49CAD38D910F59B7AC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GIS_Scheduler/Pods-GIS_Scheduler-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DADF68C1F8C5AA33E028EDEB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FB6886032ADC676E9D56E04B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GIS_Scheduler/Pods-GIS_Scheduler-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA3AF208196BBAF7006A1E3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2411,7 +2490,6 @@
 				BA59EC411977EC530083864D /* GISDashBoardListViewController.m in Sources */,
 				8A325B8E19CAFA8100C52278 /* NSDate+FFDaysCount.m in Sources */,
 				BA5D30DF19C2F4A300726AD4 /* GISServiceProviderPopUpViewController.m in Sources */,
-				8A3B1E33197CF54500963E8C /* AmazonClientManager.m in Sources */,
 				8AC899BE19C845D100B9532C /* GISPopOverController.m in Sources */,
 				8A3B1E39197CF54500963E8C /* UncaughtExceptionHandler.m in Sources */,
 				8A3B1E52197CF58300963E8C /* SBJsonBase.m in Sources */,
@@ -2600,8 +2678,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2619,7 +2697,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
@@ -2643,8 +2721,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2656,7 +2734,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2666,12 +2744,14 @@
 		};
 		BA3AF239196BBAF8006A1E3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3391DE7AF442CA6E4A038C96 /* Pods-GIS_Scheduler.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
@@ -2680,8 +2760,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";
 				INFOPLIST_FILE = "GIS_Scheduler/GIS_Scheduler-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp115;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2689,12 +2774,14 @@
 		};
 		BA3AF23A196BBAF8006A1E3B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F0FD58164CA920534E7E109 /* Pods-GIS_Scheduler.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: NEUV LLC (AKVHS4VB8J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/paradigm/Desktop/GIS_IPad_Scheduler/GIS_Scheduler_iPad/GIS_Scheduler/External/PCLogger/Amazon,
@@ -2703,8 +2790,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GIS_Scheduler/GIS_Scheduler-Prefix.pch";
 				INFOPLIST_FILE = "GIS_Scheduler/GIS_Scheduler-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp115;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60dc2de2-efe6-4b0e-a4d1-2fb6f6e9ffcb";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};

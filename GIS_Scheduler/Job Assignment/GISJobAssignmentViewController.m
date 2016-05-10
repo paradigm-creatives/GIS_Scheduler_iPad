@@ -129,47 +129,78 @@
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
-    if (isHide)
-    {
-        dashBoard_UIView.hidden=NO;
-        CGRect frame1=table_UIView.frame;
-        frame1.origin.x=75;
-        table_UIView.frame=frame1;
-        
-        self.navigationItem.hidesBackButton = YES;
-        
-    }
-    else
-    {
-        dashBoard_UIView.hidden=YES;
-        CGRect frame1=table_UIView.frame;
-        frame1.origin.x=0;
-        table_UIView.frame=frame1;
-        
-        if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
-            self.navigationItem.hidesBackButton = NO;
-    }
-    
     [btn setTitle:buttonTitle forState:UIControlStateNormal];
-    [appDelegate1.spiltViewController.view setNeedsLayout ];
-    appDelegate1.spiltViewController.delegate = self;
-    
-    [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    if(IS_OS_8_OR_LATER){
+        if(isHide){
+            [UIView animateWithDuration:1.0f animations:^{
+                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            } completion:^(BOOL finished) {
+                isHide = YES;
+                dashBoard_UIView.hidden=NO;
+                CGRect frame1=table_UIView.frame;
+                frame1.origin.x=75;
+                table_UIView.frame=frame1;
+                self.navigationItem.hidesBackButton = YES;            }];
+            
+        }else{
+            [UIView animateWithDuration:1.0f animations:^{
+                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+            } completion:^(BOOL finished) {
+                isHide = NO;
+                dashBoard_UIView.hidden=YES;
+                CGRect frame1=table_UIView.frame;
+                frame1.origin.x=0;
+                table_UIView.frame=frame1;
+                
+                if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
+                    self.navigationItem.hidesBackButton = NO;
+                
+            }];
+            
+        }
+    }else{
+        
+        if (isHide)
+        {
+            dashBoard_UIView.hidden=NO;
+            CGRect frame1=table_UIView.frame;
+            frame1.origin.x=75;
+            table_UIView.frame=frame1;
+            
+            self.navigationItem.hidesBackButton = YES;
+            
+        }
+        else
+        {
+            dashBoard_UIView.hidden=YES;
+            CGRect frame1=table_UIView.frame;
+            frame1.origin.x=0;
+            table_UIView.frame=frame1;
+            
+            if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
+                self.navigationItem.hidesBackButton = NO;
+        }
+        
+        [appDelegate1.spiltViewController.view setNeedsLayout ];
+        appDelegate1.spiltViewController.delegate = self;
+        
+        [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    }
 }
 
-- (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
-{
-    NSLog(@"rightSwipeHandle");
-    isHide = NO;
-    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
-}
-
-- (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
-{
-    NSLog(@"leftSwipeHandle");
-    isHide = YES;
-    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
-}
+//- (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+//{
+//    NSLog(@"rightSwipeHandle");
+//    isHide = NO;
+//    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+//}
+//
+//- (void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer
+//{
+//    NSLog(@"leftSwipeHandle");
+//    isHide = YES;
+//    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+//}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

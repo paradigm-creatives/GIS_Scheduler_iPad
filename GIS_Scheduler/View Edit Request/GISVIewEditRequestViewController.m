@@ -263,6 +263,7 @@
                     [_requestBtn setTitle:dropDownObj.value_String forState:UIControlStateNormal];
                     
                     appDelegate.chooseRequest_ID_String=dropDownObj.id_String;
+                    appDelegate.chooseRequest_Value_String = dropDownObj.value_String;
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
                 }
@@ -308,7 +309,21 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
         
         appDelegate.isShowfromSPRequestedJobs = NO;
+    }else if(appDelegate.isShowfromAddNewJob){
+        
+        NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"5",@"tabValue",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        appDelegate.isShowfromAddNewJob = NO;
+
     }
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    isHide = NO;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
 
 }
 
@@ -427,9 +442,13 @@
         [self.mainTabbar setSelectedItem:tabItem];
     }
     
-    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    [_requestBtn setTitle:[userDefaults valueForKey:kDropDownValue] forState:UIControlStateNormal];
-    appDelegate.chooseRequest_ID_String = [userDefaults valueForKey:kDropDownID];
+    if(!appDelegate.isShowfromAddNewJob){
+        NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+        [_requestBtn setTitle:[userDefaults valueForKey:kDropDownValue] forState:UIControlStateNormal];
+        if(![[userDefaults valueForKey:kDropDownID] isEqualToString:@""]){
+          appDelegate.chooseRequest_ID_String = [userDefaults valueForKey:kDropDownID];
+        }
+    }
     
 }
 

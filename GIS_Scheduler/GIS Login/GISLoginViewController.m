@@ -75,8 +75,8 @@
 
     viewUpHeight = 155;
     
-    //_userName_textfield.text=@"swamy.pilla@gmail.com";
-    //_password_textfield.text=@"admin";
+   // _userName_textfield.text=@"swamy.pilla@gmail.com";
+   // _password_textfield.text=@"admin";
 
    // _userName_textfield.text=@"kbabulenjoy@gmail.com";
    // _password_textfield.text=@"babul";
@@ -86,11 +86,11 @@
     //_password_textfield.text=@"admin";
     //_userName_textfield.text=@"kbabulenjoy@gmail.com";
     //_password_textfield.text=@"babul";
-    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     //_password_textfield.text=@"admin";
     
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
-    //_password_textfield.text=@"Ecentric@5";
+    _password_textfield.text=@"Ecentric@5";
     
     //_userName_textfield.text=@"dean@gmail.com";
     //_password_textfield.text=@"admin";
@@ -697,18 +697,10 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(orientation == UIDeviceOrientationLandscapeLeft){
-        [self moveAction:YES viewHeight:120];
-    }else  if(orientation == UIDeviceOrientationLandscapeRight){
-        [self moveAction:YES viewHeight: -120];
-    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-   [self moveAction:YES viewHeight:0];
 }
 
 
@@ -717,34 +709,6 @@
     [textField resignFirstResponder];
 
     return YES;
-}
-
-
--(void)moveAction:(BOOL)isMove viewHeight:(int)viewHeight{
-    
-    if(isMove)
-    {
-        [UIView beginAnimations: @"anim" context: nil];
-        [UIView setAnimationBeginsFromCurrentState: YES];
-        [UIView setAnimationDuration:1.0];
-        
-        CGRect frame=self.view.frame;
-        frame.origin.x=viewHeight;
-        self.view.frame=frame;
-        [UIView commitAnimations];
-    }
-    else
-    {
-        [UIView beginAnimations: @"anim" context: nil];
-        [UIView setAnimationBeginsFromCurrentState: YES];
-        [UIView setAnimationDuration:0.2];
-        CGRect frame=self.view.frame;
-        frame.origin.x=0;
-        self.view.frame=frame;
-        
-        [UIView commitAnimations];
-    }
-
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer

@@ -109,37 +109,67 @@
 
 - (IBAction)hideAndUnHideMaster:(id)sender
 {
-    datListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     
     UIButton *btn = (UIButton*)sender;
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    datListView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  ";//@""== Unhide   @"  "==Hide
-    if (isHide)
-    {
-        dashBoard_UIView.hidden=NO;
-        CGRect frame1=datListView.frame;
-        frame1.origin.x=75;
-        datListView.frame=frame1;
+   
+    if(IS_OS_8_OR_LATER){
+        if(isHide){
+            [UIView animateWithDuration:1.0f animations:^{
+                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            } completion:^(BOOL finished) {
+                isHide = YES;
+                dashBoard_UIView.hidden=NO;
+                CGRect frame1=datListView.frame;
+                frame1.origin.x=75;
+                datListView.frame=frame1;
+        }];
+            
+          }else{
+              [UIView animateWithDuration:1.0f animations:^{
+                  appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+              } completion:^(BOOL finished) {
+                  isHide = NO;
+                  dashBoard_UIView.hidden=YES;
+                  CGRect frame1=datListView.frame;
+                  frame1.origin.x=0;
+                  datListView.frame=frame1;
+                  
+              }];
+
+       }
+    }else{
+        if (isHide)
+        {
+            dashBoard_UIView.hidden=NO;
+            CGRect frame1=datListView.frame;
+            frame1.origin.x=75;
+            datListView.frame=frame1;
+            
+            dashBoard_UIView.hidden=NO;
+        }
+        else
+        {
+            dashBoard_UIView.hidden=YES;
+            CGRect frame1=datListView.frame;
+            frame1.origin.x=0;
+            datListView.frame=frame1;
+            
+            dashBoard_UIView.hidden=YES;
+            
+        }
         
-        dashBoard_UIView.hidden=NO;
+        [btn setTitle:buttonTitle forState:UIControlStateNormal];
+
+        [ appDelegate1.spiltViewController.view setNeedsLayout ];
+        appDelegate1.spiltViewController.delegate = self;
+        
+        [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
     }
-    else
-    {
-        dashBoard_UIView.hidden=YES;
-        CGRect frame1=datListView.frame;
-        frame1.origin.x=0;
-        datListView.frame=frame1;
-        
-        dashBoard_UIView.hidden=YES;
-        
-    }
-    
-    [btn setTitle:buttonTitle forState:UIControlStateNormal];
-    [ appDelegate1.spiltViewController.view setNeedsLayout ];
-    appDelegate1.spiltViewController.delegate = self;
-    
-    [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
 }
 
 - (void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer

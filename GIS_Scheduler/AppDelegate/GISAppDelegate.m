@@ -13,6 +13,8 @@
 #import "GISConstants.h"
 #import "GISFonts.h"
 #import "GISAttendeesViewController.h"
+#import <AWSS3/AWSS3.h>
+#import "Constants.h"
 
 @implementation GISAppDelegate
 
@@ -50,7 +52,11 @@
     GISLoginViewController *loginViewController = [[GISLoginViewController alloc]initWithNibName:@"GISLoginViewController" bundle:nil];
 
     self.spiltViewController.delegate = self;
+    if(IS_OS_8_OR_LATER){
+       self.spiltViewController.maximumPrimaryColumnWidth = 320.0f;
+    }
     self.spiltViewController.viewControllers = [NSArray arrayWithObjects:masterView,detailView,nil];
+    
     if([email length]>0 && [password length]>0){
         
         [self.window setRootViewController:self.spiltViewController];
@@ -86,6 +92,11 @@
     self.islatestEvent = NO;
     self.isRefreshIndex = NO;
     self.isShowfromSPRequestedJobs = NO;
+    self.isShowfromAddNewJob = NO;
+    
+    AWSStaticCredentialsProvider *credentialsProvider = [[AWSStaticCredentialsProvider alloc] initWithAccessKey:ACCESS_KEY_ID secretKey:SECRET_KEY];
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUnknown credentialsProvider:credentialsProvider];
+    [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -121,6 +132,15 @@
 - (BOOL)splitViewController: (UISplitViewController*)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
 {
     return YES;
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
+    /*
+     Store the completion handler.
+     */
+    [AWSS3TransferUtility interceptApplication:application
+           handleEventsForBackgroundURLSession:identifier
+                             completionHandler:completionHandler];
 }
 
 @end

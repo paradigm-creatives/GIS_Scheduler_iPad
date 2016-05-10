@@ -33,6 +33,7 @@
 @property (readwrite, nonatomic) BOOL isfilled;
 @property (readwrite, nonatomic) BOOL isRefreshIndex;
 @property (readwrite, nonatomic) BOOL isShowfromSPRequestedJobs;
+@property (readwrite, nonatomic) BOOL isShowfromAddNewJob;
 
 
 @property(nonatomic,strong) GISContactAndBillingObject *contact_billingObject;

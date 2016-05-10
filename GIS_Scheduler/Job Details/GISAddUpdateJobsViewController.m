@@ -18,7 +18,14 @@
 #import "GISLoadingView.h"
 #import "GISJsonRequest.h"
 #import "GISUtility.h"
+#import "GISVIewEditRequestViewController.h"
+
 @interface GISAddUpdateJobsViewController ()
+
+@property (nonatomic, strong)  UIBarButtonItem *rightBarItem;
+@property (nonatomic, strong)  UIBarButtonItem *leftBarItem;
+
+
 
 @end
 
@@ -43,6 +50,24 @@
     NSArray  *requetId_array = [[GISDatabaseManager sharedDataManager] geLoginArray:requetId_String];
     login_Obj=[requetId_array lastObject];
     history_Clicked = NO;
+    
+    self.rightBarItem = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Save"
+                                   style:UIBarButtonItemStyleDone
+                                   target:self
+                                   action:@selector(saveButtonPressed:)];
+    
+    self.leftBarItem = [[UIBarButtonItem alloc]
+                         initWithTitle:@"Close"
+                         style:UIBarButtonItemStyleDone
+                         target:self
+                        action:@selector(closeButtonPressed:)];
+    
+    [self.navigationItem setRightBarButtonItem:self.rightBarItem animated:YES];
+    [self.navigationItem setLeftBarButtonItem:self.leftBarItem animated:YES];
+
+    
+    self.title=@"New Job";
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -293,7 +318,19 @@
 -(IBAction)closeButtonPressed:(id)sender
 {
     history_Clicked = NO;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    isHide = NO;
+    [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    appDelegate.isNewRequest = NO;
+    appDelegate.isShowfromDashboard = NO;
+    appDelegate.isShowfromAddNewJob = YES;
+    
+    NSLog(@"delegate vie connn  %@",((UINavigationController *)[appDelegate.spiltViewController.viewControllers objectAtIndex:1] ).viewControllers);
+
+     //GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+    [((UINavigationController *)[appDelegate.spiltViewController.viewControllers objectAtIndex:1] )  popViewControllerAnimated:YES];
+
 }
 
 -(IBAction)saveButtonPressed:(id)sender
@@ -789,7 +826,6 @@
     
     [addUpdateJobs_tableView setContentOffset:(CGPoint){0, addUpdateJobs_tableView.contentSize.height - addUpdateJobs_tableView.bounds.size.height} animated:YES];
 
-    
 }
 
 - (void)didReceiveMemoryWarning

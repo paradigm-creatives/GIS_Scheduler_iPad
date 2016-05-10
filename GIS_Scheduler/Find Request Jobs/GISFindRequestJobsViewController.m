@@ -380,8 +380,8 @@
     [paramsDict setObject:[GISUtility returningstring:findReqObj.openToPublic_string] forKey:kSearchReq_SP_OpenToPublic];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.startDate_JobData_string] forKey:kJobSDate];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.endDate_JobData_string] forKey:kJobEDate];
-    [paramsDict setObject:[GISUtility returningstring:findReqObj.startTime_JobData_string] forKey:kJobSTime];
-    [paramsDict setObject:[GISUtility returningstring:findReqObj.endTime_JobData_string] forKey:kJobETime];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.startTime_string] forKey:kJobSTime];
+    [paramsDict setObject:[GISUtility returningstring:findReqObj.endTime_string] forKey:kJobETime];
     [paramsDict setObject:[GISUtility returningstring:self.days_MutableStr] forKey:kDays];
     [paramsDict setObject:[GISUtility returningstring:findReqObj.serviceProviderType_ID_string] forKey:kSearchReq_SP_SpTypeID];
     [paramsDict setObject:[GISUtility returningstring:@""] forKey:kTypeID];

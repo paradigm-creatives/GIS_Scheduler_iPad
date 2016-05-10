@@ -11,7 +11,9 @@
 #import "GISPopOverTableViewController.h"
 #import "GISAddUpdateObject.h"
 #import "GISLoginDetailsObject.h"
-@interface GISAddUpdateJobsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
+#import "GISBaseViewController.h"
+
+@interface GISAddUpdateJobsViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
 {
     GISAppDelegate *appDelegate;
     GISLoginDetailsObject *login_Obj;

@@ -14,7 +14,6 @@
 @interface GISJobDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,UITextFieldDelegate,UITextViewDelegate>
 {
     GISChooseRequestDetailsObject *chooseRequestDetailsObj;
-    IBOutlet UITableView *jobDetails_tableView;
     
     UIPopoverController *popover;
     int btnTag;
@@ -89,6 +88,8 @@
 }
 
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
+@property(nonatomic,strong) IBOutlet UITableView *jobDetails_tableView;
+
 -(IBAction)createJobsButton_Pressed:(id)sender;
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender;
 -(IBAction)doneButtonPressed_CreateJobs:(id)sender;

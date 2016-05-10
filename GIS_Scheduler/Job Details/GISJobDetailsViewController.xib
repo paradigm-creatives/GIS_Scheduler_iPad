@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISJobDetailsViewController">
@@ -18,7 +19,7 @@
                 <outlet property="jobChangeHistory_background_UIView" destination="UOg-ZE-sOs" id="MXp-KC-Zx6"/>
                 <outlet property="jobChangeHistory_foreground_UIView" destination="Sj6-2U-eOf" id="NwQ-lz-GGr"/>
                 <outlet property="jobDate_Answer_Label" destination="gVF-EM-ylR" id="vQs-q5-Kg0"/>
-                <outlet property="jobDetails_tableView" destination="19L-al-f3O" id="cAx-6E-7b1"/>
+                <outlet property="jobDetails_tableView" destination="19L-al-f3O" id="Nme-5A-j67"/>
                 <outlet property="jobHistory_textView" destination="hoW-le-2v2" id="yxU-4t-sU8"/>
                 <outlet property="next_button" destination="DBW-hm-XE4" id="rz3-Mr-upl"/>
                 <outlet property="noOfServiceProviders_TextField" destination="5fk-lh-usp" id="6sI-US-820"/>
@@ -172,8 +173,8 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="Tk8-K9-K9S"/>
-                        <outlet property="delegate" destination="-1" id="XPo-a6-OxF"/>
+                        <outlet property="dataSource" destination="-1" id="q07-YA-yye"/>
+                        <outlet property="delegate" destination="-1" id="cvG-CE-C23"/>
                     </connections>
                 </tableView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Date :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QzM-re-J0U">

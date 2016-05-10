@@ -6,16 +6,14 @@
 //
 
 #import "PCLogger.h"
-#import "AmazonClientManager.h"
 #import "PCDebug.h"
-
+#import "Constants.h"
 #include <sys/sysctl.h>
 #include <sys/utsname.h>
+#import <AWSS3/AWSS3.h>
 
 
 #define kLogBucketName @"AmazonLogBucketName"
-#define ACCESS_KEY     @"AKIAJ5E4ZRPJYFKHNGZA"
-#define SECRET_KEY     @"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"
 
 @interface PCLogger(Private)
 
@@ -254,13 +252,6 @@ static PCLogger *manager = nil;
 
 -(void)uploadfile:(NSString *)file
 {
-    NSDate *date = [NSDate date];
-    
-    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
-    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString1 = [dateFormat1 stringFromDate:date];
-    [dateFormat1 release];
-    
     id name = [[NSBundle mainBundle] objectForInfoDictionaryKey:kLogBucketName];
     NSString *bucketName = nil;
     if ((name != nil) && [name isKindOfClass:[NSString class]]) {
@@ -273,23 +264,69 @@ static PCLogger *manager = nil;
     // TODO: add name of identifier for device
     
     @try {
-        NSString *amazonPath = [NSString stringWithFormat:@"%@_v%@_%@",[UIDevice currentDevice].name,[[[NSBundle mainBundle] infoDictionary ] objectForKey: @"CFBundleVersion"],[self getUUID]];
+        id name = [[NSBundle mainBundle] objectForInfoDictionaryKey:kLogBucketName];
+        NSString *bucketName = nil;
+        if ((name != nil) && [name isKindOfClass:[NSString class]]) {
+            
+            bucketName = (NSString *)name;
+            NSLog(@"bucket name is %@",bucketName);
+        } else {
+            PCLogDebug(@"Bucket name couldn't be parsed");
+        }
+        AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
         
-        AmazonS3Client *s3 = [[[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY withSecretKey:SECRET_KEY] autorelease];
-        S3CreateBucketRequest *cbr = [[[S3CreateBucketRequest alloc] initWithName:bucketName] autorelease];
-        [s3 createBucket:cbr];
+        AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
         
-        S3PutObjectRequest *por = [[[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"logs/iOS/%@/%@.log", dateString1, amazonPath] inBucket:bucketName] autorelease];
+        NSURL* fileUrl = [NSURL fileURLWithPath:filePath];
         
-        por.contentType = @"text/plain";
-        por.cannedACL   = [S3CannedACL publicRead];
-        por.data = [NSData dataWithContentsOfFile:file];
+        uploadRequest.bucket = bucketName;
+        uploadRequest.key = ACCESS_KEY_ID;
+        uploadRequest.body = fileUrl;
+        uploadRequest.contentType = @"text/plain";
         
-        [s3 putObject:por];
+        [[transferManager upload:uploadRequest] continueWithExecutor:[AWSExecutor mainThreadExecutor]
+                                                           withBlock:^id(AWSTask *task) {
+                                                               if (task.error) {
+                                                                   if ([task.error.domain isEqualToString:AWSS3TransferManagerErrorDomain]) {
+                                                                       switch (task.error.code) {
+                                                                           case AWSS3TransferManagerErrorCancelled:
+                                                                           case AWSS3TransferManagerErrorPaused:
+                                                                               break;
+                                                                               
+                                                                           default:
+                                                                               NSLog(@"Error: %@", task.error);
+                                                                               break;
+                                                                       }
+                                                                   } else {
+                                                                       // Unknown error.
+                                                                       NSLog(@"Error: %@", task.error);
+                                                                   }
+                                                               }
+                                                               
+                                                               if (task.result) {
+                                                                   AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
+                                                                   // The file uploaded successfully.
+                                                                    NSLog(@"uploaded successfully: %@", uploadOutput);
+                                                               }
+                                                               return nil;
+                                                           }];
+//        NSString *amazonPath = [NSString stringWithFormat:@"%@_v%@_%@",[UIDevice currentDevice].name,[[[NSBundle mainBundle] infoDictionary ] objectForKey: @"CFBundleVersion"],[self getUUID]];
+//        
+//        AmazonS3Client *s3 = [[[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY withSecretKey:SECRET_KEY] autorelease];
+//        S3CreateBucketRequest *cbr = [[[S3CreateBucketRequest alloc] initWithName:bucketName] autorelease];
+//        [s3 createBucket:cbr];
+//        
+//        S3PutObjectRequest *por = [[[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"logs/iOS/%@/%@.log", dateString1, amazonPath] inBucket:bucketName] autorelease];
+//        
+//        por.contentType = @"text/plain";
+//        por.cannedACL   = [S3CannedACL publicRead];
+//        por.data = [NSData dataWithContentsOfFile:file];
+//        
+//        [s3 putObject:por];
         
         [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
     }
-    @catch ( AmazonServiceException *exception ) {
+    @catch ( NSException *exception ) {
         NSLog( @"Upload Failed, Reason: %@", exception );
     }
     

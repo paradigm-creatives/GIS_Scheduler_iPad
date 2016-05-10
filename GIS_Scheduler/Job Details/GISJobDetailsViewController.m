@@ -33,6 +33,7 @@
 @implementation GISJobDetailsViewController
 
 @synthesize detail_mut_array;
+@synthesize jobDetails_tableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,10 +65,18 @@
     filled_Unfilled_Array=[[NSMutableArray alloc]initWithObjects:@"Filled",@"UnFilled", nil];// Keys-- Filled=1, Unfilled =2   If  not anything then 0
     
     selected_row=999999;
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(craeteJobPressed:) name:@"createNewJob" object:nil];
+    if(!appDelegate.isShowfromAddNewJob){
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(craeteJobPressed:) name:@"createNewJob" object:nil];
+        if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
+            
+            chooseRequestID_string=appDelegate.chooseRequest_ID_String;
+            
+            [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
+        }
+    }else {
+        appDelegate.isShowfromAddNewJob = NO;
+    }
     
     createJobs_UIVIew.hidden=YES;
     
@@ -77,14 +86,6 @@
     [jobHistory_textView.layer setBorderWidth:0.6];
     [jobHistory_textView.layer setBorderColor:[[UIColor grayColor] CGColor]];
     [jobHistory_textView.layer setCornerRadius:10.0f];
-    
-
-    if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
-        
-        chooseRequestID_string=appDelegate.chooseRequest_ID_String;
-        
-        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
-    }
     
     createJobdate_Array = [[NSMutableArray alloc] init];
 }
@@ -164,6 +165,7 @@
     //[paramsDict setObject:@"2701" forKey:KRequestId];
     [paramsDict setObject:login_Obj.token_string forKey:kToken];
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
+    appDelegate.chooseRequest_Value_String = [dict valueForKey:@"value"];
     chooseRequestID_string=appDelegate.chooseRequest_ID_String;
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
     
@@ -230,18 +232,25 @@
             
             [appDelegate.jobDetailsArray addObjectsFromArray:jobDetails_Array];
             
-            [jobDetails_tableView reloadData];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.jobDetails_tableView reloadData];
+//            });
             
-            NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
-            [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kID];
-            [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
+           // dispatch_sync(dispatch_get_main_queue(), ^{
+                [self removeLoadingView];
+                [self.jobDetails_tableView reloadData];
+
+            //});
+            
+//            NSMutableDictionary *paramsDict1=[[NSMutableDictionary alloc]init];
+//            [paramsDict1 setObject:[GISUtility returningstring:chooseRequestID_string] forKey:kID];
+//            [paramsDict1 setObject:login_Obj.token_string forKey:kToken];
             
             //[[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict1 finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
             
             //GISJobDetailsObject *dobj=[[GISJobDetailsObject alloc]init];
             //[appDelegate.jobDetailsArray insertObject:dobj atIndex:0];
             
-            [self removeLoadingView];
         }else{
             [self removeLoadingView];
             [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
@@ -262,7 +271,7 @@
         
         [appDelegate.jobDetailsArray addObjectsFromArray:jobDetails_Array];
         
-        [jobDetails_tableView reloadData];
+        [self.jobDetails_tableView reloadData];
 
         [self removeLoadingView];
     }
@@ -373,10 +382,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSInteger numberOfRows = 0;
+    
     if (tableView==createJObs_tableView) {
-        return detail_mut_array.count;
+        numberOfRows  =  detail_mut_array.count;
+    } else {
+        numberOfRows = [jobDetails_Array count];
     }
-    return jobDetails_Array.count;
+    return numberOfRows;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -728,7 +741,7 @@
         endDate_jobHistory_Answer_Label.text=value_str;
     }
     if (btnTag==1111||btnTag==1212||btnTag==1313||btnTag==555||btnTag==666||btnTag==777)
-        [jobDetails_tableView reloadData];
+        [self.jobDetails_tableView reloadData];
 }
 
 -(void)editButtonPressed:(id)sender
@@ -771,14 +784,12 @@
     
     rowValue = [sender tag];
     
-    NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
-    NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:[sender tag]];
+    NSIndexPath* selectedIndexPath = [NSIndexPath indexPathForRow:rowValue inSection:0];
+    [self.jobDetails_tableView beginUpdates];
+    [self.jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.jobDetails_tableView endUpdates];
     
-    [jobDetails_tableView beginUpdates];
-    [jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [jobDetails_tableView endUpdates];
-    
-    //[jobDetails_tableView reloadData];
+    //[self.jobDetails_tableView reloadData];
 }
 
 
@@ -813,6 +824,10 @@
             [[GISServerManager sharedManager] deleteJobs:self withParams:delete_eventdict finishAction:@selector(successmethod_deleteJobs:) failAction:@selector(failuremethod_deleteJobs:)];
             
         }
+    }else if(buttonIndex == 0){
+        
+        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
+
     }
 }
 
@@ -824,8 +839,11 @@
 -(IBAction)addNewJob_buttonPressed:(id)sender
 {
     appDelegate.chooseRequest_ID_String=chooseRequestID_string;
+    
     GISAddUpdateJobsViewController *jobaddUpdate=[[GISAddUpdateJobsViewController alloc]initWithNibName:@"GISAddUpdateJobsViewController" bundle:nil];
-    [self presentViewController:jobaddUpdate animated:YES completion:nil];
+    //[self presentViewController:jobaddUpdate animated:YES completion:nil];
+    [[appDelegate.spiltViewController.viewControllers objectAtIndex:1] pushViewController:jobaddUpdate animated:YES];
+
 }
 
 
@@ -967,7 +985,7 @@
         {
             [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
             [[GISServerManager sharedManager] addNewJobDetails:self withParams:appDelegate.addNewJob_dictionary finishAction:@selector(successmethod_AddNewJob_data:) failAction:@selector(failuremethod_AddNewJob_data:)];
-            [appDelegate.addNewJob_dictionary removeAllObjects];
+           // [appDelegate.addNewJob_dictionary removeAllObjects];
         }
     }
     
@@ -983,12 +1001,10 @@
     
     [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_updated",TABLE, nil)];
     
-    NSArray *indexPaths = [jobDetails_tableView indexPathsForVisibleRows];
-    NSIndexPath *selectedIndexPath = [indexPaths objectAtIndex:rowValue];
-
-    [jobDetails_tableView beginUpdates];
-    [jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [jobDetails_tableView endUpdates];
+    NSIndexPath* selectedIndexPath = [NSIndexPath indexPathForRow:rowValue inSection:0];
+    [self.jobDetails_tableView beginUpdates];
+    [self.jobDetails_tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.jobDetails_tableView endUpdates];
     
 }
 -(void)failuremethod_updateJobDetails_data:(GISJsonRequest *)response
@@ -1000,22 +1016,23 @@
 
 -(void)successmethod_AddNewJob_data:(GISJsonRequest *)response
 {
-    [self removeLoadingView];
     NSDictionary *saveUpdateDict;
     NSArray *responseArray= response.responseJson;
     saveUpdateDict = [responseArray lastObject];
     NSLog(@"successmethod_AddNewJob_data Success---%@",response.responseJson);
     
     if ([[[saveUpdateDict objectForKey:kStatusCode] stringValue] isEqualToString:@"200"]) {
-        
-        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_successed",TABLE, nil)];
-        [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
-        
+        [appDelegate.addNewJob_dictionary removeAllObjects];
+        UIAlertView *alertVIew = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) message:NSLocalizedStringFromTable(@"jobs_successed",TABLE, nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        alertVIew.delegate = self;
+        [alertVIew show];
+        //[GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"jobs_successed",TABLE, nil)];
     }
     
 }
 -(void)failuremethod_AddNewJob_data:(GISJsonRequest *)response
 {
+    [appDelegate.addNewJob_dictionary removeAllObjects];
     [self removeLoadingView];
     NSLog(@"Failure");
     [GISUtility showAlertWithTitle:@"" andMessage:NSLocalizedStringFromTable(@"request_failed",TABLE, nil)];
@@ -1318,7 +1335,7 @@
         
         if([jobDetails_Array count] >0)
            [jobDetails_Array removeAllObjects];
-        [jobDetails_tableView reloadData];
+        [self.jobDetails_tableView reloadData];
         
         [self removeLoadingView];
 
@@ -1336,7 +1353,7 @@
         jobDetails_Array=[[NSMutableArray alloc] init];
         jobDetails_Array =[[GISStoreManager sharedManager]getJobDetailsObjects];
         
-        [jobDetails_tableView reloadData];
+        [self.jobDetails_tableView reloadData];
 
         
     }else{
@@ -1416,10 +1433,9 @@
 {
     [super viewWillDisappear:YES];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"changeJobHistory" object:nil];
+    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"changeJobHistory" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"createNewJob" object:nil];
 }
-
 
 - (void)didReceiveMemoryWarning
 {

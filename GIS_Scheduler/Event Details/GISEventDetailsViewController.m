@@ -429,7 +429,11 @@
     
     UIButton *btn=(UIButton*)sender;
     
-    NSIndexPath *indexPath = [_eventDetaislTabelView indexPathForCell:(UITableViewCell *)[[[btn superview] superview] superview]];
+   // NSIndexPath *indexPath = [_eventDetaislTabelView indexPathForCell:(UITableViewCell *)[[[btn superview] superview] superview]];
+    CGPoint center= btn.center;
+    CGPoint rootViewPoint = [btn.superview convertPoint:center toView:self.eventDetaislTabelView];
+    NSIndexPath *indexPath = [self.eventDetaislTabelView indexPathForRowAtPoint:rootViewPoint];
+
     
     GISPreparationMaterialCell *preparationCell = (GISPreparationMaterialCell *)[_eventDetaislTabelView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
     

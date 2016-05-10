@@ -729,8 +729,11 @@ int row_count = 2;
     while (![textFieldSuper isKindOfClass:[GISAttendeesTopCell class]]) {
         textFieldSuper = [textFieldSuper superview];
     }
-    id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
-    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
+    CGPoint center= textField.center;
+    CGPoint rootViewPoint = [textField.superview convertPoint:center toView:self.attendees_tableView];
+    NSIndexPath *indexPath = [self.attendees_tableView indexPathForRowAtPoint:rootViewPoint];
+    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)[self.attendees_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+
     if (attendeeCellHere.cellSectionNumber == 1){
         if (attendeeCellHere.cellRowNumber==1&&textField.tag==222) {
             //[GISUtility moveemailView:YES viewHeight:0 view:self.view];
@@ -760,8 +763,11 @@ int row_count = 2;
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    id tempCellRef = (GISAttendeesTopCell *)textField.superview.superview.superview.superview;
-    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)tempCellRef;
+    CGPoint center= textField.center;
+    CGPoint rootViewPoint = [textField.superview convertPoint:center toView:self.attendees_tableView];
+    NSIndexPath *indexPath = [self.attendees_tableView indexPathForRowAtPoint:rootViewPoint];
+    GISAttendeesTopCell *attendeeCellHere = (GISAttendeesTopCell *)[self.attendees_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+
     if (attendeeCellHere.cellSectionNumber == 1)
     {
         if (textField.tag==333) {

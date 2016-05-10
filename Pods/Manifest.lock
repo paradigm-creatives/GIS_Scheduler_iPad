@@ -1,0 +1,16 @@
+PODS:
+  - AWSCore (2.3.6)
+  - AWSS3 (2.3.6):
+    - AWSCore (= 2.3.6)
+  - IQKeyboardManager (3.3.7)
+
+DEPENDENCIES:
+  - AWSS3
+  - IQKeyboardManager
+
+SPEC CHECKSUMS:
+  AWSCore: 917d84b32974136194a905b98c0ae25c9f3350b8
+  AWSS3: 1caaf6b45100503fecf3d418c394519a89409a74
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+
+COCOAPODS: 0.39.0
