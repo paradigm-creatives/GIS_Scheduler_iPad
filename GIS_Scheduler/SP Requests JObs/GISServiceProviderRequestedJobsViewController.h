@@ -88,9 +88,35 @@
     NSString * ChooserequestID;
     
 }
+@property (strong, nonatomic) IBOutlet UILabel *openToPublicNoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *openToPublicYesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *openToPubliclabel;
+@property (strong, nonatomic) IBOutlet UILabel *recordedNoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *recordedYesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *recordedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onGoingNoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onGoingYesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onGoingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *sundayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *saturdayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fridayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *thursdayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *wednesdayLAbel;
+@property (strong, nonatomic) IBOutlet UILabel *tuesdayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *mondayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *chooseWeekaysLAbel;
+@property (strong, nonatomic) IBOutlet UILabel *noofAttendees;
+@property (strong, nonatomic) IBOutlet UILabel *eventTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *typeOfServiceLabel;
 -(IBAction)pickerButton_pressed:(id)sender;
 -(IBAction)radioButton_pressed:(id)sender;
 -(IBAction)searchButton_pressed:(id)sender;
 -(IBAction)weekDays_ButtonPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *requestIDLabel;
+@property (strong, nonatomic) IBOutlet UILabel *serviceProviderName;
+@property (strong, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *endDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *generalLocationLabel;
 
 @end

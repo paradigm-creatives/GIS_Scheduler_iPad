@@ -85,10 +85,8 @@
     BOOL pay_type;
     
 }
-- (IBAction)hideAndUnHideMaster:(id)sender;
 -(IBAction)SegmentToggle:(UISegmentedControl*)sender;
 @property(nonatomic,strong)IBOutlet UINavigationItem *navigation_item;
-@property(nonatomic,readwrite) BOOL isMasterHide;
 @property(nonatomic,strong)IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) NSArray *payTypeArray;
 @property (strong, nonatomic) NSArray *gisresponseArray;

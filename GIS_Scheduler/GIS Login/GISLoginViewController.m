@@ -86,11 +86,11 @@
     //_password_textfield.text=@"admin";
     //_userName_textfield.text=@"kbabulenjoy@gmail.com";
     //_password_textfield.text=@"babul";
-    _userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
+    //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
     //_password_textfield.text=@"admin";
     
     //_userName_textfield.text=@"gis-paradigm.jjoy@gallaudet.edu";
-    _password_textfield.text=@"Ecentric@5";
+    //_password_textfield.text=@"Ecentric@5";
     
     //_userName_textfield.text=@"dean@gmail.com";
     //_password_textfield.text=@"admin";
@@ -245,7 +245,8 @@
                         [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SEARCH_CHOOSE_REQUEST"];
                         [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_SPJOBS_CHOOSE_REQUEST"];
                         [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_CHOOSE_REQUEST"];
-                        
+                        [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_UNIT_EVENT_TYPE"];
+
                         
                         ///DELETE TABELS
                         
@@ -254,6 +255,7 @@
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_BUILDING_NAME];
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_DRESS_CODE];
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_EVENT_TYPE];
+                        [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_UNIT_EVENT_TYPE];
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_GENERAL_LOCATION];
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_UNIT_DEPARTMENT];
                         [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_CLOSEST_METRO];

@@ -86,9 +86,35 @@
     NSMutableArray *createJobdate_Array;
     NSString *serviceProvider_selectedString;
 }
+@property (strong, nonatomic) IBOutlet UILabel *slotsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *billamountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timelyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *Paytypelabel;
+@property (strong, nonatomic) IBOutlet UILabel *serviceProviderLabel;
+@property (strong, nonatomic) IBOutlet UILabel *jobidlabel;
+@property (strong, nonatomic) IBOutlet UILabel *jobdateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *endTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *typeOfServiceProviderLabel;
 
 @property(nonatomic,strong)NSMutableArray *detail_mut_array;
 @property(nonatomic,strong) IBOutlet UITableView *jobDetails_tableView;
+@property(nonatomic,retain) NSString * inCompleteTab_string;
+@property(nonatomic,retain) NSString * isCompleteRequest;
+
+@property (strong, nonatomic) IBOutlet UILabel *noofServiceProvidersLabel;
+@property (strong, nonatomic) IBOutlet UILabel *typeOfServiceProviders;
+@property (strong, nonatomic) IBOutlet UILabel *payLevelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *billevelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *selectCriteriaLabel;
+@property (strong, nonatomic) IBOutlet UILabel *selectDatesandTimesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTiemlabel;
+@property (strong, nonatomic) IBOutlet UILabel *endTiemlabel;
+@property (strong, nonatomic) IBOutlet UILabel *cancelLAbel;
+@property (strong, nonatomic) IBOutlet UILabel *createJobsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *doneLabel;
 
 -(IBAction)createJobsButton_Pressed:(id)sender;
 -(IBAction)cancelButtonPressed_CreateJobs:(id)sender;

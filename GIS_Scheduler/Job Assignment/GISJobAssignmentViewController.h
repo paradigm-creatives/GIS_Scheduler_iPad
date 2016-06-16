@@ -15,21 +15,9 @@
 #import "GISFilterMoreViewController.h"
 @interface GISJobAssignmentViewController : GISBaseViewController<UITableViewDataSource,UITableViewDelegate,UISplitViewControllerDelegate,UIPopoverControllerDelegate,PopOverSelected_Protocol,ListOfServiceProvidersProtocol,FilterMore_Protocol>
 {
-    IBOutlet UITableView *jobAssignment_tableView;
-    IBOutlet UIView *dashBoard_UIViews;
-    
     GISAppDelegate *appDelegate;
     GISLoginDetailsObject *login_Obj;
-    IBOutlet UILabel *from_answer_Label;
-    IBOutlet UILabel *to_answer_Label;
-    IBOutlet UILabel *typeOfService_answer_Label;
-    IBOutlet UILabel *chooseRequest_ID_answer_Label;
-    
-    IBOutlet UIView *segment_UIView;
-    IBOutlet UIView *table_UIView;
-    
-    IBOutlet UISegmentedControl *segment_filled_Unfilled;
-    
+
     UIPopoverController *popover;
     int btnTag;
     
@@ -65,11 +53,33 @@
     
     
 }
+
+
 @property(nonatomic,strong)NSMutableArray *requested_Jobs_Array;
 @property(nonatomic,strong) NSString *view_string;
+@property(nonatomic,strong)  IBOutlet UILabel *from_answer_Label;
+@property(nonatomic,strong)  IBOutlet UILabel *to_answer_Label;
+@property(nonatomic,strong)  IBOutlet UILabel *typeOfService_answer_Label;
+@property(nonatomic,strong) IBOutlet UILabel *chooseRequest_ID_answer_Label;
+@property(nonatomic,strong)  IBOutlet UILabel *fromLabel;
+@property(nonatomic,strong)  IBOutlet UIView *segment_UIView;
+@property(nonatomic,strong)  IBOutlet UIView *table_UIView;
+@property(nonatomic,strong)  IBOutlet UILabel *toLabel;
+@property(nonatomic,strong)  IBOutlet UISegmentedControl *segment_filled_Unfilled;
+@property(nonatomic,strong)  IBOutlet UILabel *typeServiceLabel;
+@property(nonatomic,strong)  IBOutlet UIButton *filterMoreButton;
+@property(nonatomic,strong)  IBOutlet UILabel *requestId;
+@property(nonatomic,strong)  IBOutlet UITableView *jobAssignment_tableView;
+@property(nonatomic,strong)  IBOutlet UIView *dashBoard_UIViews;
 
-@property(nonatomic,readwrite) BOOL isMasterHide;
-
+@property (strong, nonatomic) IBOutlet UILabel *endTiemLabel;
+@property (strong, nonatomic) IBOutlet UILabel *serviceProviderTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *serviceProviderLabel;
+@property (strong, nonatomic) IBOutlet UILabel *payTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *requestorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *jobIdLabel;
+@property (strong, nonatomic) IBOutlet UILabel *jobDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
 
 -(IBAction)filterMore_ButtonPressed:(id)sender;
 -(IBAction)searchButton_Pressed:(id)sender;

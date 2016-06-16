@@ -8,6 +8,7 @@
 
 #import "GISAddUpdateJobCell.h"
 #import "GISConstants.h"
+#import "GISFonts.h"
 
 @implementation GISAddUpdateJobCell
 
@@ -81,6 +82,50 @@
     _requestedDate_label.text=NSLocalizedStringFromTable(@"Requested_Date", TABLE, nil);
     _payType_requestsBySP_label.text=NSLocalizedStringFromTable(@"Pay_Type", TABLE, nil);
     _gisResponse_label.text=NSLocalizedStringFromTable(@"GIS_Response", TABLE, nil);
+    
+    [_jobDate_label setFont:[GISFonts normal]];
+    [_jobInfo_label setFont:[GISFonts normal]];
+    [_startTime_label setFont:[GISFonts normal]];
+    [_endTime_label setFont:[GISFonts normal]];
+    [_callInTime_label setFont:[GISFonts normal]];
+    [_payLevel_label setFont:[GISFonts normal]];
+    [_payType_label setFont:[GISFonts normal]];
+    [_serviceProviderId_label setFont:[GISFonts normal]];
+    [_cancelled_label setFont:[GISFonts normal]];
+    [_callInTime_label setFont:[GISFonts normal]];
+    
+    [_outAgency_label setFont:[GISFonts normal]];
+    [_no_outAgency_label setFont:[GISFonts normal]];
+    [_yes_outAgency_label setFont:[GISFonts normal]];
+    [_timely_answer_label setFont:[GISFonts normal]];
+    [_timelyAndHalf_label setFont:[GISFonts normal]];
+    [_no_timelyAndHalf_label setFont:[GISFonts small]];
+    [_yes_timelyAndHalf_label setFont:[GISFonts small]];
+    [_billingPaymentInfo_label setFont:[GISFonts normal]];
+    [_notesHistory_label setFont:[GISFonts normal]];
+    [_notesOrHistory_label setFont:[GISFonts normal]];
+    
+    [_requestsByServiceProviders_label setFont:[GISFonts small]];
+    [_requestedDate_label setFont:[GISFonts small]];
+    [_parking_label setFont:[GISFonts normal]];
+    [_billAmt_label setFont:[GISFonts normal]];
+    [_billLevel_label setFont:[GISFonts normal]];
+    [_billDate_label setFont:[GISFonts normal]];
+    [_mileage_label setFont:[GISFonts normal]];
+    [_invoice_label setFont:[GISFonts normal]];
+    [_amtPaid_label setFont:[GISFonts normal]];
+    [_agencyFee_label setFont:[GISFonts normal]];
+    [_payStatus_label setFont:[GISFonts normal]];
+    [_expStatus_label setFont:[GISFonts normal]];
+    [_serviceProviderName_label setFont:[GISFonts normal]];
+    [_payType_requestsBySP_label setFont:[GISFonts normal]];
+    [_gisResponse_label setFont:[GISFonts small]];
+    [_typeOfServiceProvider_label setFont:[GISFonts normal]];
+    [_timelyAndHalf_BillingPayment_label setFont:[GISFonts normal]];
+
+
+
+
 }
 
 @end

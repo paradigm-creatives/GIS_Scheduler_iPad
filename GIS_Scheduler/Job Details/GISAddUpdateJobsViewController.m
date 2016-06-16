@@ -327,9 +327,8 @@
     appDelegate.isShowfromAddNewJob = YES;
     
     NSLog(@"delegate vie connn  %@",((UINavigationController *)[appDelegate.spiltViewController.viewControllers objectAtIndex:1] ).viewControllers);
-
-     //GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
-    [((UINavigationController *)[appDelegate.spiltViewController.viewControllers objectAtIndex:1] )  popViewControllerAnimated:YES];
+   // [((UINavigationController *)[appDelegate.spiltViewController.viewControllers objectAtIndex:1] )  popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -383,7 +382,7 @@
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payStatus_ID_string] forKey:kPayStatus];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.expStatus_ID_string] forKey:kExpenseStatus];
         [addJobDict setObject:@"" forKey:kViewSchedule_JobNotes];
-        [addJobDict setObject:@"" forKey:kBillingLevelID];
+        [addJobDict setObject:[GISUtility returningstring:addUpdateObj.billLevel_ID_string] forKey:kBillingLevelID];
         
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.callInTime_string] forKey:kMyJobs_CallInTime];
         [addJobDict setObject:[GISUtility returningstring:addUpdateObj.payLevel_ID_string] forKey:kPayLevelID];
@@ -757,8 +756,6 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"textViewDidBeginEditing:");
-    
-    [self moveAction:YES viewHeight:-300];
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
@@ -768,9 +765,6 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     NSLog(@"textViewDidEndEditing:");
-    
-    [self moveAction:YES viewHeight:0];
-    
     [textView resignFirstResponder];
 }
 

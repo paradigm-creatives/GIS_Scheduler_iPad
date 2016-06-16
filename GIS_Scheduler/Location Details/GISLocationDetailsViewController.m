@@ -541,21 +541,11 @@
 
 -(void)nextButtonPressed:(id)sender
 {
-    if ([_inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]) {
-        
-    }
-    else if(!appDelegate.isFromContacts){
-        if([_isCompleteRequest isEqualToString:@"false"] && ![_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]){
-            if(![_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
-                
-                [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
-                return;
-            }
+    if([_isCompleteRequest isEqualToString:@"false"]  && [_inCompleteTab_string isEqualToString:@"Event Details are In-Complete"]){
+            [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+            return;
         }
-    }
-    
     [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    
     [self saveLocationsData];
 }
 
@@ -1190,11 +1180,23 @@
     appDelegate.createdDateString = _chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
     appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", _chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,_chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    _isCompleteRequest = _chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+    _inCompleteTab_string = _chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
+
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setValue:_chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];
+    
+    if([appDelegate.statusString isEqualToString:@"In-Complete"] ){
+        if( [_inCompleteTab_string isEqualToString:@"Event Details are In-Complete"]){
+            [self removeLoadingView];
+            [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+            return;
+        }
+    }
+
     [self getLocationDetails];
 }
 

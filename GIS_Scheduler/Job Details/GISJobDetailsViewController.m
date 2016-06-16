@@ -66,8 +66,6 @@
     
     selected_row=999999;
     if(!appDelegate.isShowfromAddNewJob){
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(craeteJobPressed:) name:@"createNewJob" object:nil];
         if([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]){
             
             chooseRequestID_string=appDelegate.chooseRequest_ID_String;
@@ -88,12 +86,55 @@
     [jobHistory_textView.layer setCornerRadius:10.0f];
     
     createJobdate_Array = [[NSMutableArray alloc] init];
+    
+    
+    [payLevel_Label setFont:[GISFonts small]];
+    [billLevel_Label setFont:[GISFonts small]];
+    [typeOfServiceProvidersLabel setFont:[GISFonts small]];
+    [jobDate_Answer_Label setFont:[GISFonts small]];
+    [serviceProvider_Answer_Label setFont:[GISFonts small]];
+    [filledUnfilled_Answer_Label setFont:[GISFonts small]];
+    [payLevel_Answer_Label setFont:[GISFonts small]];
+    [typeOfServiceProviders_Answer_Label setFont:[GISFonts small]];
+    [billLevel_Answer_Label setFont:[GISFonts small]];
+    [startDate_jobHistory_Answer_Label setFont:[GISFonts small]];
+    [endDate_jobHistory_Answer_Label setFont:[GISFonts small]];
+    
+    [_jobidlabel setFont:[GISFonts small]];
+    [_jobdateLabel setFont:[GISFonts small]];
+    [_startTimeLabel setFont:[GISFonts small]];
+    [_endTimeLabel setFont:[GISFonts small]];
+    [_typeOfServiceProviderLabel setFont:[GISFonts small]];
+    [_slotsLabel setFont:[GISFonts small]];
+    [_serviceProviderLabel setFont:[GISFonts small]];
+    [_Paytypelabel setFont:[GISFonts small]];
+    [_timelyLabel setFont:[GISFonts small]];
+    [_billamountLabel setFont:[GISFonts small]];
+    
+    [_selectCriteriaLabel setFont:[GISFonts normalBold]];
+    [_selectDatesandTimesLabel setFont:[GISFonts normalBold]];
+    [_noofServiceProvidersLabel setFont:[GISFonts small]];
+    [_typeOfServiceProviders setFont:[GISFonts small]];
+    [_payLevelLabel setFont:[GISFonts small]];
+    [_billevelLabel setFont:[GISFonts small]];
+    [_dayLabel setFont:[GISFonts small]];
+    [_dateLabel setFont:[GISFonts small]];
+    [_startTiemlabel setFont:[GISFonts small]];
+    [_endTiemlabel setFont:[GISFonts small]];
+    [_cancelLAbel setFont:[GISFonts normaltextBold]];
+    [_doneLabel setFont:[GISFonts normaltextBold]];
+    [_createJobsLabel setFont:[GISFonts largetextBold]];
+
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(craeteJobPressed:) name:@"createNewJob" object:nil];
+
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
     NSString *spCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_SERVICE_PROVIDER_INFO"];
@@ -121,6 +162,14 @@
     if(!appDelegate.isNewRequest && ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"])){
         chooseRequestID_string=appDelegate.chooseRequest_ID_String;
         
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+
+        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+        [paramsDict setObject:chooseRequestID_string forKey:kID];
+        [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+        
+
         [self getJobDetails_Data :[GISUtility returningstring:chooseRequestID_string] :login_Obj.token_string:@"":@"":@""];
 
     }
@@ -180,7 +229,6 @@
     [userDefaults synchronize];
     [userDefaults setValue:[dict valueForKey:@"value"] forKey:kDropDownValue];
     [userDefaults setValue:[dict valueForKey:@"id"] forKey:kDropDownID];
-    
 }
 
 -(void)successmethod_getChooseRequestDetails:(GISJsonRequest *)response
@@ -839,6 +887,7 @@
 -(IBAction)addNewJob_buttonPressed:(id)sender
 {
     appDelegate.chooseRequest_ID_String=chooseRequestID_string;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showChangeJobHistoryView) name:@"changeJobHistory" object:nil];
     
     GISAddUpdateJobsViewController *jobaddUpdate=[[GISAddUpdateJobsViewController alloc]initWithNibName:@"GISAddUpdateJobsViewController" bundle:nil];
     //[self presentViewController:jobaddUpdate animated:YES completion:nil];
@@ -849,9 +898,16 @@
 
 -(IBAction)nextButtonPressed:(id)sender
 {
+    if([_isCompleteRequest isEqualToString:@"false"]  &&  [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
+        [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+        return;
+    }
+
     appDelegate.isFromContacts = YES;
     NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:@"6",@"tabValue",[NSNumber numberWithBool:YES],@"isFromContacts",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
+
 }
 
 -(IBAction)jobHistory_TitleButtonPressed:(id)sender
@@ -992,6 +1048,8 @@
     //jobHistory_textView.text = @"";
     //jobChangeHistory_background_UIView.hidden=NO;
     //jobChangeHistory_foreground_UIView.hidden=NO;
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"changeJobHistory" object:nil];
+
 }
 
 -(void)successmethod_updateJobDetails_data:(GISJsonRequest *)response
@@ -1097,7 +1155,7 @@
     createJobs_UIVIew.hidden=NO;
     [createJobs_Middle_UIVIew.layer setCornerRadius:10.0f];
     [createJobs_Middle_UIVIew.layer setBorderWidth:0.3f];
-        [createJObs_tableView reloadData];
+    [createJObs_tableView reloadData];
     }
 }
 
@@ -1225,7 +1283,8 @@
             
             NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
             [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
-            [paramsDict setObject:login_Obj.token_string forKey:kToken];
+            [paramsDict setObject:[NSString stringWithFormat:@"%@,I" ,login_Obj.token_string] forKey:kToken];
+            
             [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
             
         }
@@ -1387,8 +1446,18 @@
         appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
         appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
         appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+        _isCompleteRequest = chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+        _inCompleteTab_string = chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
         
          [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+        
+        if([appDelegate.statusString isEqualToString:@"In-Complete"] ){
+            if( [_inCompleteTab_string isEqualToString:@"Event Details are In-Complete"] ||  [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"] || [_inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
+                [self removeLoadingView];
+                [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+                return;
+            }
+        }
         
     }else{
         
@@ -1432,8 +1501,6 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:kselectedChooseReqNumber object:nil];
-    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"changeJobHistory" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"createNewJob" object:nil];
 }
 

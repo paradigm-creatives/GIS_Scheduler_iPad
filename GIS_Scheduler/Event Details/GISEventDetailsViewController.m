@@ -109,7 +109,7 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_EVENT_TYPE;"];
+    NSString *eventCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_EVENT_TYPE;"];
     NSString *dressCode_statement = [[NSString alloc]initWithFormat:@"select * from TBL_DRESS_CODE;"];
     
     _eventTypeArray = [[GISDatabaseManager sharedDataManager] getDropDownArray:eventCode_statement];
@@ -803,15 +803,15 @@
         broadCastSelected = YES;
         UILabel *broadcastSelectedLabel=(UILabel *)[self.view viewWithTag:555];
         
-        if(btnn.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+        if([[btnn backgroundImageForState:UIControlStateNormal] isEqual: [UIImage imageNamed:@"radio_button_filled.png"]])
         {
             _broadcastType_Str = @"Audio";
             
-        }else if(btnn1.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+        }else if([[btnn1 backgroundImageForState:UIControlStateNormal] isEqual:[UIImage imageNamed:@"radio_button_filled.png"]])
         {
             _broadcastType_Str = @"Video";
             
-        }else if(btnn2.currentBackgroundImage == [UIImage imageNamed:@"radio_button_filled.png"])
+        }else if([[btnn2 backgroundImageForState:UIControlStateNormal] isEqual: [UIImage imageNamed:@"radio_button_filled.png"]])
         {
             _broadcastType_Str = @"Both";
         }else{
@@ -962,9 +962,8 @@
     
     appDelegate.isFromContacts = YES;
     
-    [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-    
     if([appDelegate.chooseRequest_ID_String length]>0 && ![appDelegate.chooseRequest_ID_String isEqualToString:NSLocalizedStringFromTable(@"empty_selection", TABLE, nil)]){
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
         [self saveEventDetailsData];
     }else{
         
@@ -1316,6 +1315,9 @@
         
         NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
         [userDefaults setValue:chooseRequest_Detailed_DetailsObj.unitID_String_chooseReqParsedDetails forKey:kunitid];
+        _isCompleteRequest = chooseRequest_Detailed_DetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+        _inCompleteTab_string = chooseRequest_Detailed_DetailsObj.inCompleteTab_String_chooseReqParsedDetails;
+
         [self getEventDetailsdata];
     }else{
         [self removeLoadingView];

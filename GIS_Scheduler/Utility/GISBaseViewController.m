@@ -119,8 +119,9 @@
    
     if(IS_OS_8_OR_LATER){
         if(isHide){
-            [UIView animateWithDuration:1.0f animations:^{
-                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+
+            [UIView animateWithDuration:0.1f animations:^{
             } completion:^(BOOL finished) {
                 isHide = YES;
                 dashBoard_UIView.hidden=NO;
@@ -130,15 +131,14 @@
         }];
             
           }else{
-              [UIView animateWithDuration:1.0f animations:^{
+              [UIView animateWithDuration:0.1f animations:^{
                   appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-              } completion:^(BOOL finished) {
-                  isHide = NO;
                   dashBoard_UIView.hidden=YES;
                   CGRect frame1=datListView.frame;
                   frame1.origin.x=0;
                   datListView.frame=frame1;
-                  
+              } completion:^(BOOL finished) {
+                  isHide = NO;
               }];
 
        }

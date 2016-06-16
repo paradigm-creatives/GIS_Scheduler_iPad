@@ -64,6 +64,45 @@
     
     _payLevel_JobDate_label_.text=NSLocalizedStringFromTable(@"Pay_Level", TABLE, nil);
     
+    [_startDate_label_ setFont:[GISFonts normal]];
+    [_endDate_label_ setFont:[GISFonts normal]];
+    [_startTime_label_ setFont:[GISFonts normal]];
+    [_endTime_label_ setFont:[GISFonts normal]];
+    [_requestor_label_ setFont:[GISFonts normal]];
+    [_registeredConsumer_label_ setFont:[GISFonts normal]];
+    [_generalLocation_label_ setFont:[GISFonts normal]];
+    [_payLevel_label_ setFont:[GISFonts normal]];
+    [_primaryAudience_label_ setFont:[GISFonts normal]];
+    [_model_label_ setFont:[GISFonts normal]];
+    [_openToPublic_label_ setFont:[GISFonts normal]];
+    [_reqDataToSearch_label_ setFont:[GISFonts normal]];
+    [_weekDays_Label_ setFont:[GISFonts normal]];
+    [_jobDataToSearch_label_ setFont:[GISFonts normal]];
+    [_monday_Label_ setFont:[GISFonts small]];
+    [_tuesday_Label_ setFont:[GISFonts small]];
+    [_wednesday_Label_ setFont:[GISFonts small]];
+    [_thursday_Label_ setFont:[GISFonts small]];
+    [_friday_Label_ setFont:[GISFonts small]];
+    [_saturday_Label_ setFont:[GISFonts small]];
+    [_sunday_Label_ setFont:[GISFonts small]];
+    [_serviceProviderType_label_ setFont:[GISFonts normal]];
+    [_serviceProvider_label_ setFont:[GISFonts normal]];
+    [_filled_label_ setFont:[GISFonts normal]];
+    [_payType_label_ setFont:[GISFonts normal]];
+    [_outOrAgency_label_ setFont:[GISFonts normal]];
+    [_createdBy_label_ setFont:[GISFonts normal]];
+    [_timely_label_ setFont:[GISFonts normal]];
+    [_cancelled_label_ setFont:[GISFonts normal]];
+    [_timely_timely_label_ setFont:[GISFonts small]];
+    [_cancelDate_label_ setFont:[GISFonts normal]];
+    [_billLevel_label_ setFont:[GISFonts normal]];
+    [_unTimely_Cancelled_label_ setFont:[GISFonts small]];
+    [_unTimely_timely_label_ setFont:[GISFonts small]];
+    [_timely_Cancelled_label_ setFont:[GISFonts small]];
+    [_payLevel_JobDate_label_ setFont:[GISFonts normal]];
+
+
+    
     [_clear_button_.layer setCornerRadius:3.0f];
     [[_clear_button_ layer] setMasksToBounds:YES];
     _clear_button_.titleLabel.font=[GISFonts larger];

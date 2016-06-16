@@ -73,6 +73,8 @@
 @property(nonatomic,strong)NSString *eventdetails_statusStr;
 @property(nonatomic,strong)NSString *eventdetails_viewOptions;
 @property(nonatomic,strong)NSString *outsideAgencyStr;
+@property(nonatomic,retain) NSString * inCompleteTab_string;
+@property(nonatomic,retain) NSString * isCompleteRequest;
 
 @property (strong, nonatomic) IBOutlet UILabel *doumentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *blackBoardLabe;

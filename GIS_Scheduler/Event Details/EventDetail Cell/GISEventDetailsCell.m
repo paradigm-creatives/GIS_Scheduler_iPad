@@ -32,14 +32,16 @@
     [_ongoing_label setFont:[GISFonts normal]];
     [_openTOpublic_label setFont:[GISFonts normal]];
     [_dresscode_label setFont:[GISFonts normal]];
+    
     [_record_broadcast_label setFont:[GISFonts normal]];
-    [_open_topublicno_label setFont:[GISFonts normal]];
-    [_open_topublicyes_label setFont:[GISFonts normal]];
-    [_recordedno_label setFont:[GISFonts normal]];
-    [_recordedyes_label setFont:[GISFonts normal]];
+    [_open_topublicno_label setFont:[GISFonts small]];
+    [_open_topublicyes_label setFont:[GISFonts small]];
+    
+    [_recordedno_label setFont:[GISFonts small]];
+    [_recordedyes_label setFont:[GISFonts small]];
     [_course_label setFont:[GISFonts normal]];
-    [_onGoingno_label setFont:[GISFonts normal]];
-    [_onGoingyes_label setFont:[GISFonts normal]];
+    [_onGoingno_label setFont:[GISFonts small]];
+    [_onGoingyes_label setFont:[GISFonts small]];
     [_fmsystem_label setFont:[GISFonts normal]];
     [_webinar_label setFont:[GISFonts normal]];
     [_microPhone_label setFont:[GISFonts normal]];

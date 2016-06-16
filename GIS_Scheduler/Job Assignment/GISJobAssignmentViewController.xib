@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISJobAssignmentViewController">
             <connections>
-                <outlet property="chooseRequest_ID_answer_Label" destination="Mdy-F8-IC5" id="2cz-Wv-1eu"/>
+                <outlet property="chooseRequest_ID_answer_Label" destination="Mdy-F8-IC5" id="7Kj-KJ-Zud"/>
                 <outlet property="dashBoard_UIView" destination="VWR-e2-QGw" id="UF1-qC-JGP"/>
+                <outlet property="endTiemLabel" destination="h49-2v-PS1" id="bbh-ss-xmv"/>
+                <outlet property="filterMoreButton" destination="NxE-Uu-HER" id="wZo-eh-VhG"/>
+                <outlet property="fromLabel" destination="XG1-fe-o60" id="r9Z-2Q-SHp"/>
                 <outlet property="from_answer_Label" destination="AtR-Cy-fbG" id="IPu-5c-LxU"/>
                 <outlet property="jobAssignment_tableView" destination="dhg-vq-cPL" id="5oQ-zZ-Ro8"/>
+                <outlet property="jobDateLabel" destination="sI4-27-vUz" id="RTZ-vQ-Pj0"/>
+                <outlet property="jobIdLabel" destination="QqL-N9-LPc" id="22r-sr-I3v"/>
+                <outlet property="payTypeLabel" destination="Cj9-by-xov" id="0vb-Sh-070"/>
+                <outlet property="requestId" destination="okx-yM-gIT" id="pUj-xE-jcC"/>
+                <outlet property="requestorLabel" destination="Z2b-qE-qvm" id="LFj-VQ-Jhm"/>
                 <outlet property="segment_UIView" destination="V4e-vO-xI6" id="7rG-fD-zUK"/>
                 <outlet property="segment_filled_Unfilled" destination="mgp-7c-Y2e" id="xAt-Fa-FU3"/>
+                <outlet property="serviceProviderLabel" destination="QEX-7v-hDt" id="BFO-2F-TTZ"/>
+                <outlet property="serviceProviderTypeLabel" destination="Hpd-1g-4HW" id="7fv-Ed-d8p"/>
+                <outlet property="startTimeLabel" destination="Dhx-6t-mlj" id="exX-Sn-uRW"/>
                 <outlet property="table_UIView" destination="eXI-fa-uwd" id="O5K-jH-8Lg"/>
+                <outlet property="toLabel" destination="9VR-FO-x6q" id="mg0-YR-lcP"/>
                 <outlet property="to_answer_Label" destination="ctC-fv-d8P" id="mGK-ph-Wyn"/>
                 <outlet property="typeOfService_answer_Label" destination="dsF-hT-3aj" id="R3H-oq-e7Z"/>
+                <outlet property="typeServiceLabel" destination="hNZ-qy-kJZ" id="qqw-1E-yNQ"/>
                 <outlet property="view" destination="TO8-rt-VmM" id="XDo-BT-eal"/>
             </connections>
         </placeholder>
@@ -180,7 +193,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Date/ Created Date" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sI4-27-vUz">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Date/ Created Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sI4-27-vUz">
                                     <rect key="frame" x="123" y="-3" width="95" height="42"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -198,8 +211,8 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Provider Type" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hpd-1g-4HW">
-                                    <rect key="frame" x="449" y="-3" width="88" height="42"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Provider Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hpd-1g-4HW">
+                                    <rect key="frame" x="449" y="-3" width="93" height="42"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
@@ -426,6 +439,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

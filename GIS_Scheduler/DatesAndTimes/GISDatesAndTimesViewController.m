@@ -189,9 +189,10 @@
         NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
         [paramsDict setObject:[GISUtility returningstring:appDelegate.chooseRequest_ID_String] forKey:kID];
         [paramsDict setObject:login_Obj.token_string forKey:kToken];
+        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+        [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getChooseRequestDetails:) failAction:@selector(failuremethod_getChooseRequestDetails:)];
         if (![appDelegate.chooseRequest_ID_String isEqualToString:@"-- Select --"])
         {
-            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
             [[GISServerManager sharedManager] getDateTimeDetails:self withParams:paramsDict finishAction:@selector(successmethod_get_Date_Time:) failAction:@selector(failuremethod_get_Date_Time:)];
         }
     }
@@ -402,7 +403,7 @@
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
+    popover.popoverContentSize = CGSizeMake(340, 250);
     if([sender tag]==1111 || [sender tag]==1212 || [sender tag]==1313)
         [popover presentPopoverFromRect:CGRectMake(button.frame.origin.x+306, button.frame.origin.y+30, 1, 1) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     else if([sender tag]==888 || [sender tag]==999 || [sender tag]==1010)
@@ -1281,7 +1282,19 @@
     appDelegate.createdDateString = chooseRequestDetailsObj.createdDate_String_chooseReqParsedDetails;
     appDelegate.createdByString = [NSString stringWithFormat:@"%@ %@", chooseRequestDetailsObj.reqFirstName_String_chooseReqParsedDetails,chooseRequestDetailsObj.reqLastName_String_chooseReqParsedDetails];
     appDelegate.statusString = chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
+    _isCompleteRequest = chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails;
+    _inCompleteTab_string = chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
+
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+    
+    if([appDelegate.statusString isEqualToString:@"In-Complete"] ){
+        if( [_inCompleteTab_string isEqualToString:@"Event Details are In-Complete"] ||  [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]){
+            [self removeLoadingView];
+            [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+            return;
+        }
+    }
+
 
 }
 
@@ -1550,6 +1563,14 @@
 -(IBAction)nextButtonPressed:(id)sender
 {
     appDelegate.isFromContacts = YES;
+    
+    if([_isCompleteRequest isEqualToString:@"false"]&& [_inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"]){
+        
+        [self removeLoadingView];
+        [GISUtility showAlertWithTitle:@"" andMessage:_inCompleteTab_string];
+        return;
+    }
+
     
      if([detail_mut_array count] > 0){
         

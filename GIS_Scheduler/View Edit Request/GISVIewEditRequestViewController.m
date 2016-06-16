@@ -60,7 +60,6 @@
     requestNumbers_mutArray = [[NSMutableArray alloc] init];
     viewEdit_Array = [[NSMutableArray alloc] init];
     
-    self.title=@"View/Edit Service Request";
     [[UITabBarItem appearance] setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:[GISFonts normal], NSFontAttributeName,  UIColorFromRGB(0x00457c), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     
@@ -93,7 +92,7 @@
     
     if(appDelegate.isFromViewEditService){
         
-        self.navigationItem.title = @"View/Edit Schedule";
+        self.title = @"View/Edit Schedule";
         
         _currentController= serviceView;
 
@@ -237,15 +236,17 @@
             
             appDelegate.chooseRequest_ID_String = @"0";
             [_requestBtn setTitle:NSLocalizedStringFromTable(@"new request", TABLE, nil) forState:UIControlStateNormal];
-
+            _created_by_value_Label.text = @"";
+            _created_date_value_Label.text = @"";
+            _status_value_Label.text = @"";
         }
                 
     }else{
         
         if(appDelegate.isFromViewEditService){
-            self.navigationItem.title = @"View/Edit Schedule";
+            self.title = @"View/Edit Schedule";
         }else{
-            self.navigationItem.title = @"View/Edit Service Request";
+            self.title = @"View/Edit Service Request";
         }
         
         if(appDelegate.isShowfromDashboard){
@@ -299,15 +300,33 @@
     }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moveUp:) name:kMoveUp object:nil];
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getRequestInfo) name:kRequestInfo object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(tabSelcted:) name:kTabSelected object:nil];
+
     
     if(appDelegate.isShowfromSPRequestedJobs){
         
         NSDictionary *infoDict=[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"5"],@"tabValue",nil];
         [[NSNotificationCenter defaultCenter]postNotificationName:kTabSelected object:nil userInfo:infoDict];
+        NSString *requetDetails_statement = [[NSString alloc]initWithFormat:@"select * from TBL_CHOOSE_REQUEST;"];
+        NSArray *requetDetails = [[GISDatabaseManager sharedDataManager] getDropDownArray:requetDetails_statement];
         
+        for (GISDropDownsObject *dropDownObj in requetDetails) {
+            if ([dropDownObj.value_String isEqualToString:appDelegate.chooseRequest_Value_String]) {
+                
+                NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                [dict setValue:dropDownObj.id_String forKey:@"id"];
+                [dict setValue:dropDownObj.value_String forKey:@"value"];
+                
+                [_requestBtn setTitle:dropDownObj.value_String forState:UIControlStateNormal];
+                
+                appDelegate.chooseRequest_ID_String=dropDownObj.id_String;
+                appDelegate.chooseRequest_Value_String = dropDownObj.value_String;
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:kselectedChooseReqNumber object:nil userInfo:dict];
+            }
+        }
+
         appDelegate.isShowfromSPRequestedJobs = NO;
     }else if(appDelegate.isShowfromAddNewJob){
         
@@ -467,9 +486,14 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:kMoveUp object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:kTabSelected object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:kRequestInfo object:nil];
+    if (![[self.navigationController viewControllers] containsObject: self])
+    {
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:kMoveUp object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:kTabSelected object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:kRequestInfo object:nil];
+
+        
+    }
     
 }
 

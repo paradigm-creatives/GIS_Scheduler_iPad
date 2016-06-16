@@ -22,8 +22,8 @@
 
 #define TABLE @"custom"
 
-#define kFontFamilyNormal @"MyriadPro-Regular"
-#define kFontFamilyBold  @"MyriadPro-Semibold"
+#define kFontFamilyNormal @"OpenSans"
+#define kFontFamilyBold  @"OpenSans-Semibold"
 
 #define kSelectPopOver  @"SelectPopover"
 #define kMoveUp  @"moveUp"

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GISServiceProviderRequestedJobsResultsViewController">
             <connections>
+                <outlet property="endtimeLabel" destination="xeM-x9-7Gd" id="iSw-de-N0J"/>
+                <outlet property="eventTypeLabel" destination="f7R-tv-mFy" id="apd-47-0YS"/>
                 <outlet property="flipView" destination="CJn-m7-URX" id="F3m-s7-Xje"/>
+                <outlet property="gisResponseLabel" destination="KCN-dJ-jSR" id="3u4-HN-Byy"/>
                 <outlet property="horizontalview" destination="SX1-fX-Cfr" id="Fjw-ju-5dF"/>
+                <outlet property="jobLabel" destination="Wqu-gS-6hH" id="bM8-Ec-D0r"/>
                 <outlet property="jobResultsTableView" destination="oBL-6w-V1K" id="e7B-hs-3bY"/>
+                <outlet property="jobdateLabel" destination="2kM-8W-urR" id="4ZH-jb-h3Q"/>
+                <outlet property="payTypeLabel" destination="8Ku-fg-6vn" id="h3W-9A-3Yh"/>
+                <outlet property="requestDate" destination="Ma0-uO-QrB" id="zMn-Mj-eiF"/>
+                <outlet property="serviceProviderName" destination="PFj-nV-kIZ" id="I6T-vU-n6b"/>
+                <outlet property="startDate" destination="YQI-eR-4Cd" id="MNF-SU-cyr"/>
+                <outlet property="totalHoursLabel" destination="aYQ-VG-IEa" id="EXx-Oq-DqI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -212,7 +223,6 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

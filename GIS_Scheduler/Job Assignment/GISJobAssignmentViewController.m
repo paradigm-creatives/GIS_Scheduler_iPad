@@ -62,9 +62,9 @@
 
     
     self.title=NSLocalizedStringFromTable(@"Jobs_Assignment", TABLE, nil);
-    CGRect frame1=table_UIView.frame;
+    CGRect frame1=self.table_UIView.frame;
     frame1.origin.x=0;
-    table_UIView.frame=frame1;
+    self.table_UIView.frame=frame1;
     
     serviceProvider_Array=[[NSMutableArray alloc]init];
     serviceProviderType_array=[[NSMutableArray alloc]init];
@@ -79,31 +79,50 @@
     
     mainArray=[[NSMutableArray alloc]init];
     
+    self.fromLabel.font=[GISFonts normal];
+    self.from_answer_Label.font=[GISFonts normal];
+    self.toLabel.font=[GISFonts normal];
+    self.to_answer_Label.font=[GISFonts normal];
+    self.typeServiceLabel.font=[GISFonts normal];
+    self.typeOfService_answer_Label.font=[GISFonts normal];
+    self.chooseRequest_ID_answer_Label.font=[GISFonts normal];
+    self.requestId.font=[GISFonts normal];
+    self.filterMoreButton.titleLabel.font = [GISFonts normal];
+    
+    [self.jobIdLabel setFont: [GISFonts normal]];
+    [self.jobDateLabel setFont: [GISFonts normal]];
+    [self.startTimeLabel setFont: [GISFonts normal]];
+    [self.endTiemLabel setFont: [GISFonts normal]];
+    [self.serviceProviderTypeLabel setFont: [GISFonts normal]];
+    [self.serviceProviderLabel setFont: [GISFonts normal]];
+    [self.payTypeLabel setFont: [GISFonts normal]];
+    [self.requestorLabel setFont: [GISFonts normal]];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     if ([self.view_string isEqualToString:kFindRequestJobs_Screen]) {
-        segment_UIView.hidden=YES;
-        CGRect new_frame=table_UIView.frame;
+        self.segment_UIView.hidden=YES;
+        CGRect new_frame=self.table_UIView.frame;
         new_frame.origin.y=90;
         new_frame.size.height=650;
-        table_UIView.frame=new_frame;
+        self.table_UIView.frame=new_frame;
         self.title=NSLocalizedStringFromTable(@"Find_Requests_Jobs", TABLE, nil);
     }else{
         
     }
     NSLog(@"----Array is -->%@--count-->%d",[self.requested_Jobs_Array description],self.requested_Jobs_Array.count);
     
-    chooseRequest_ID_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
-    typeOfService_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    self.chooseRequest_ID_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
+    self.typeOfService_answer_Label.text = NSLocalizedStringFromTable(@"empty_selection", TABLE, nil);
     
 }
 
 -(void)backButtonPressed
 {
-    if (table_UIView.frame.origin.x==0) {
+    if (self.table_UIView.frame.origin.x==0) {
         [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -137,9 +156,9 @@
             } completion:^(BOOL finished) {
                 isHide = YES;
                 dashBoard_UIView.hidden=NO;
-                CGRect frame1=table_UIView.frame;
+                CGRect frame1=self.table_UIView.frame;
                 frame1.origin.x=75;
-                table_UIView.frame=frame1;
+                self.table_UIView.frame=frame1;
                 self.navigationItem.hidesBackButton = YES;            }];
             
         }else{
@@ -148,9 +167,9 @@
             } completion:^(BOOL finished) {
                 isHide = NO;
                 dashBoard_UIView.hidden=YES;
-                CGRect frame1=table_UIView.frame;
+                CGRect frame1=self.table_UIView.frame;
                 frame1.origin.x=0;
-                table_UIView.frame=frame1;
+                self.table_UIView.frame=frame1;
                 
                 if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
                     self.navigationItem.hidesBackButton = NO;
@@ -163,9 +182,9 @@
         if (isHide)
         {
             dashBoard_UIView.hidden=NO;
-            CGRect frame1=table_UIView.frame;
+            CGRect frame1=self.table_UIView.frame;
             frame1.origin.x=75;
-            table_UIView.frame=frame1;
+            self.table_UIView.frame=frame1;
             
             self.navigationItem.hidesBackButton = YES;
             
@@ -173,9 +192,9 @@
         else
         {
             dashBoard_UIView.hidden=YES;
-            CGRect frame1=table_UIView.frame;
+            CGRect frame1=self.table_UIView.frame;
             frame1.origin.x=0;
-            table_UIView.frame=frame1;
+            self.table_UIView.frame=frame1;
             
             if ([self.view_string isEqualToString:kFindRequestJobs_Screen])
                 self.navigationItem.hidesBackButton = NO;
@@ -297,7 +316,7 @@
     {
         [ota_dictionary setObject:[NSString stringWithFormat:@"%ld",(long)[sender tag]] forKey:[NSString stringWithFormat:@"%ld",(long)[sender tag]]];
     }
-    [jobAssignment_tableView reloadData];
+    [self.jobAssignment_tableView reloadData];
 
 }
 
@@ -314,26 +333,26 @@
     
     popover =[[UIPopoverController alloc] initWithContentViewController:tableViewController1];
     popover.delegate = self;
-    popover.popoverContentSize = CGSizeMake(340, 150);
+    popover.popoverContentSize = CGSizeMake(340, 250);
     if([sender tag]==111 || [sender tag]==222 || [sender tag]==333 || [sender tag]==444)
     {
         if([sender tag]==111)
         {
             btnTag=111;
-            tableViewController1.view_String=[GISUtility returningstring:chooseRequest_ID_answer_Label.text];
+            tableViewController1.view_String=[GISUtility returningstring:self.chooseRequest_ID_answer_Label.text];
             tableViewController1.popOverArray=chooseRequest_mutArray;
         }
         else if([sender tag]==222)
         {
             btnTag=222;
             tableViewController1.view_String=@"datestimes";
-            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:from_answer_Label.text];
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:self.from_answer_Label.text];
         }
         else if ([sender tag]==333)
         {
             btnTag=333;
             tableViewController1.view_String=@"datestimes";
-            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:to_answer_Label.text];
+            tableViewController1.dateTimeMoveUp_string=[GISUtility returningstring:self.to_answer_Label.text];
         }
         else if ([sender tag]==444)
         {
@@ -392,13 +411,13 @@
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.0];
     if (btnTag==111)
     {
-        chooseRequest_ID_answer_Label.text=value_str;
+        self.chooseRequest_ID_answer_Label.text=value_str;
         chooseRequestID_str = id_str;
         
     }
     else if (btnTag==222)
     {
-        from_answer_Label.text=value_str;
+        self.from_answer_Label.text=value_str;
         startDate_str = value_str;
         if ([startDate_str length] && [endDate_str length]){
             if ([GISUtility dateComparision:startDate_str :endDate_str:YES])
@@ -406,14 +425,14 @@
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"start Date alert", TABLE, nil)];
-                from_answer_Label.text=@"";
+                self.from_answer_Label.text=@"";
                 startDate_str=@"";
             }
         }
     }
     else if (btnTag==333)
     {
-        to_answer_Label.text=value_str;
+        self.to_answer_Label.text=value_str;
         endDate_str = value_str;
         if ([startDate_str length] && [endDate_str length]){
             if ([GISUtility dateComparision:startDate_str :endDate_str:NO])
@@ -421,14 +440,14 @@
             else
             {
                 [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"end Date alert", TABLE, nil)];
-                to_answer_Label.text=@"";
+                self.to_answer_Label.text=@"";
                 endDate_str=@"";
             }
         }
     }
     else  if (btnTag==444)
     {
-        typeOfService_answer_Label.text=value_str;
+        self.typeOfService_answer_Label.text=value_str;
         typeServiceID_str = id_str;
     }
     else  if (btnTag==555)
@@ -447,7 +466,7 @@
         [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
     }
     if (btnTag==555||btnTag==777)
-       [jobAssignment_tableView reloadData];
+       [self.jobAssignment_tableView reloadData];
 }
 
 -(void)dismissPopOverNow
@@ -540,7 +559,7 @@
         [self segmentSelected];
     }
     
-    [jobAssignment_tableView reloadData];
+    [self.jobAssignment_tableView reloadData];
     
     [self removeLoadingView];
     
@@ -574,10 +593,10 @@
         [self.requested_Jobs_Array removeAllObjects];
         self.requested_Jobs_Array=[array mutableCopy];
     }
-    [jobAssignment_tableView reloadData];
-    if ((self.requested_Jobs_Array.count<1)) {
-        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
-    }
+    [self.jobAssignment_tableView reloadData];
+//    if ((self.requested_Jobs_Array.count<1)) {
+//        [GISUtility showAlertWithTitle:NSLocalizedStringFromTable(@"gis", TABLE, nil) andMessage:NSLocalizedStringFromTable(@"no_data",TABLE, nil)];
+//    }
 }
 -(IBAction)listOfServiceProviders_ButtonPressed:(id)sender
 {
@@ -791,7 +810,7 @@
     GISSchedulerSPJobsObject *obj=[self.requested_Jobs_Array objectAtIndex:selected_row];
     obj.ServiceProviderName_String=serviceProvider_temp_string;
     [self.requested_Jobs_Array replaceObjectAtIndex:selected_row withObject:obj];
-    [jobAssignment_tableView reloadData];
+    [self.jobAssignment_tableView reloadData];
     
 }
 

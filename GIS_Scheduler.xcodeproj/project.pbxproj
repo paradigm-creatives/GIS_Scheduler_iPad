@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170E665C1CE96DB700FDA7AD /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66521CE96DB700FDA7AD /* OpenSans-Bold.ttf */; };
+		170E665D1CE96DB700FDA7AD /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66531CE96DB700FDA7AD /* OpenSans-BoldItalic.ttf */; };
+		170E665E1CE96DB700FDA7AD /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66541CE96DB700FDA7AD /* OpenSans-ExtraBold.ttf */; };
+		170E665F1CE96DB700FDA7AD /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66551CE96DB700FDA7AD /* OpenSans-ExtraBoldItalic.ttf */; };
+		170E66601CE96DB700FDA7AD /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66561CE96DB700FDA7AD /* OpenSans-Italic.ttf */; };
+		170E66611CE96DB700FDA7AD /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66571CE96DB700FDA7AD /* OpenSans-Light.ttf */; };
+		170E66621CE96DB700FDA7AD /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66581CE96DB700FDA7AD /* OpenSans-LightItalic.ttf */; };
+		170E66631CE96DB700FDA7AD /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E66591CE96DB700FDA7AD /* OpenSans-Regular.ttf */; };
+		170E66641CE96DB700FDA7AD /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E665A1CE96DB700FDA7AD /* OpenSans-Semibold.ttf */; };
+		170E66651CE96DB700FDA7AD /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E665B1CE96DB700FDA7AD /* OpenSans-SemiboldItalic.ttf */; };
 		1796C1E81CDB5EA200445499 /* libIQKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1796C1E21CDB5EA200445499 /* libIQKeyboardManager.a */; };
 		8A0EE3861994A1B00004CF0A /* GISDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5052C11977D76F007288F5 /* GISDashBoardViewController.m */; };
 		8A15B4CB197D0A4C008B4129 /* GISLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A15B4CA197D0A4C008B4129 /* GISLoginViewController.m */; };
@@ -393,6 +403,16 @@
 
 /* Begin PBXFileReference section */
 		046E7D184FB54B800579C7D5 /* libPods-GIS_Scheduler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GIS_Scheduler.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		170E66521CE96DB700FDA7AD /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		170E66531CE96DB700FDA7AD /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		170E66541CE96DB700FDA7AD /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		170E66551CE96DB700FDA7AD /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		170E66561CE96DB700FDA7AD /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		170E66571CE96DB700FDA7AD /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		170E66581CE96DB700FDA7AD /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		170E66591CE96DB700FDA7AD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		170E665A1CE96DB700FDA7AD /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		170E665B1CE96DB700FDA7AD /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		1796C1DD1CDB5EA200445499 /* libAWSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSCore.a; path = "Pods/../build/Debug-iphoneos/libAWSCore.a"; sourceTree = "<group>"; };
 		1796C1DE1CDB5EA200445499 /* libAWSS3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSS3.a; path = "Pods/../build/Debug-iphoneos/libAWSS3.a"; sourceTree = "<group>"; };
 		1796C1DF1CDB5EA200445499 /* libAWSSimpleDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSSimpleDB.a; path = "Pods/../build/Debug-iphoneos/libAWSSimpleDB.a"; sourceTree = "<group>"; };
@@ -2087,6 +2107,16 @@
 			children = (
 				BAE081FF197FDBA30056B3B8 /* GISFonts.h */,
 				BAE08200197FDBA30056B3B8 /* GISFonts.m */,
+				170E66521CE96DB700FDA7AD /* OpenSans-Bold.ttf */,
+				170E66531CE96DB700FDA7AD /* OpenSans-BoldItalic.ttf */,
+				170E66541CE96DB700FDA7AD /* OpenSans-ExtraBold.ttf */,
+				170E66551CE96DB700FDA7AD /* OpenSans-ExtraBoldItalic.ttf */,
+				170E66561CE96DB700FDA7AD /* OpenSans-Italic.ttf */,
+				170E66571CE96DB700FDA7AD /* OpenSans-Light.ttf */,
+				170E66581CE96DB700FDA7AD /* OpenSans-LightItalic.ttf */,
+				170E66591CE96DB700FDA7AD /* OpenSans-Regular.ttf */,
+				170E665A1CE96DB700FDA7AD /* OpenSans-Semibold.ttf */,
+				170E665B1CE96DB700FDA7AD /* OpenSans-SemiboldItalic.ttf */,
 				BAE08201197FDBA30056B3B8 /* MyriadPro-Bold.otf */,
 				BAE08202197FDBA30056B3B8 /* MyriadPro-Regular.otf */,
 				BAE08203197FDBA30056B3B8 /* MyriadPro-Semibold.otf */,
@@ -2158,7 +2188,7 @@
 				ORGANIZATIONNAME = Paradigm;
 				TargetAttributes = {
 					BA3AF20B196BBAF7006A1E3B = {
-						DevelopmentTeam = 2992NHSMPW;
+						DevelopmentTeam = 8R89TGGJTV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2193,6 +2223,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170E665C1CE96DB700FDA7AD /* OpenSans-Bold.ttf in Resources */,
+				170E665D1CE96DB700FDA7AD /* OpenSans-BoldItalic.ttf in Resources */,
+				170E665E1CE96DB700FDA7AD /* OpenSans-ExtraBold.ttf in Resources */,
+				170E665F1CE96DB700FDA7AD /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				170E66601CE96DB700FDA7AD /* OpenSans-Italic.ttf in Resources */,
+				170E66611CE96DB700FDA7AD /* OpenSans-Light.ttf in Resources */,
+				170E66621CE96DB700FDA7AD /* OpenSans-LightItalic.ttf in Resources */,
+				170E66631CE96DB700FDA7AD /* OpenSans-Regular.ttf in Resources */,
+				170E66641CE96DB700FDA7AD /* OpenSans-Semibold.ttf in Resources */,
+				170E66651CE96DB700FDA7AD /* OpenSans-SemiboldItalic.ttf in Resources */,
 				BA9E6B2A1977E88400609E69 /* incomplete_request@2x.png in Resources */,
 				8A74423619A1D0D100CE3B32 /* GISPopOverTableViewController.xib in Resources */,
 				8A74423B19A2273900CE3B32 /* GISSummaryDatesAndTimesCell.xib in Resources */,
@@ -2678,8 +2718,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2697,7 +2737,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "082b91ad-4e84-4a33-9569-5609225d4259";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
@@ -2721,8 +2761,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2734,7 +2774,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "082b91ad-4e84-4a33-9569-5609225d4259";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2749,8 +2789,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2764,9 +2804,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp115;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "082b91ad-4e84-4a33-9569-5609225d4259";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2779,8 +2819,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Paradigm Creative Services Pvt Ltd (VYLV63448Q)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2794,9 +2834,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp115;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradigm.GisSchedulerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "082b91ad-4e84-4a33-9569-5609225d4259";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};

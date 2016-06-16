@@ -195,12 +195,15 @@
     [update_eventdict setObject:[GISUtility getEventTime:buttonTimeEnd.dateOfButton] forKey:kJobDetais_EndTime];
     [update_eventdict setObject:[GISUtility eventDisplayFormat:buttonDate.dateOfButton] forKey:kJobDetais_JobDate];
     [update_eventdict setObject:payType_string forKey:kViewSchedule_PayTypeID];
-    [update_eventdict setObject:serviceType_string forKey:kViewSchedule_ServiceProviderID];
     [update_eventdict setObject:subRole_string forKey:kViewSchedule_SubroleID];
     [update_eventdict setObject:login_Obj.requestorID_string forKey:kLoginRequestorID];
     [update_eventdict setObject:@"" forKey:kViewSchedule_JobNotes];
     if([sender tag] == 111){
         [update_eventdict setObject:@"" forKey:kSPRequestJobs_GisResponse];
+        [update_eventdict setObject:@"" forKey:kViewSchedule_ServiceProviderID];
+    }else{
+        [update_eventdict setObject:serviceType_string forKey:kViewSchedule_ServiceProviderID];
+
     }
     
     [[GISServerManager sharedManager] updateJobDetails:self withParams:update_eventdict finishAction:@selector(successmethod_updateScheduledata:) failAction:@selector(failuremethod_updateScheduledata:)];

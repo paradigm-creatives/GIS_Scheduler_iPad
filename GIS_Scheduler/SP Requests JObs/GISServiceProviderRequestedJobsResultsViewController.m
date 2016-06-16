@@ -69,6 +69,17 @@
     
     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    self.jobLabel.font=[GISFonts small];
+    self.jobdateLabel.font=[GISFonts small];
+    self.startDate.font=[GISFonts small];
+    self.endtimeLabel.font=[GISFonts small];
+    self.totalHoursLabel.font=[GISFonts small];
+    self.eventTypeLabel.font=[GISFonts small];
+    self.serviceProviderName.font=[GISFonts small];
+    self.requestDate.font=[GISFonts small];
+    self.payTypeLabel.font=[GISFonts small];
+    self.gisResponseLabel.font=[GISFonts small];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -192,48 +203,97 @@
     GISAppDelegate *appDelegate1 = (GISAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.isMasterHide= isHide;
     NSString *buttonTitle = self.isMasterHide ? @""  : @"  "; //@""== Unhide   @"  "==Hide
-    if (isHide)
-    {
-        _flipView.hidden=NO;
-        CGRect frame1=_flipView.frame;
-        frame1.origin.x=0;
-        _flipView.frame=frame1;
-        
-        CGRect frame2=_jobResultsTableView.frame;
-        frame2.origin.x=75;
-        _jobResultsTableView.frame=frame2;
-        
-        CGRect frame3=_horizontalview.frame;
-        frame3.origin.x=75;
-        _horizontalview.frame=frame3;
-        self.navigationItem.hidesBackButton = YES;
-
-    }
-    else
-    {
-        _flipView.hidden=YES;
-        CGRect frame1=_flipView.frame;
-        frame1.origin.x=0;
-        _flipView.frame=frame1;
-        
-        CGRect frame2=_jobResultsTableView.frame;
-        frame2.origin.x=0;
-        _jobResultsTableView.frame=frame2;
-        
-        CGRect frame3=_horizontalview.frame;
-        frame3.origin.x=0;
-        _horizontalview.frame=frame3;
-        
-        self.navigationItem.hidesBackButton = NO;
-
-        
-    }
-
-    [btn setTitle:buttonTitle forState:UIControlStateNormal];
-    [ appDelegate1.spiltViewController.view setNeedsLayout ];
-    appDelegate1.spiltViewController.delegate = self;
     
-    [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    if(IS_OS_8_OR_LATER){
+        if(isHide){
+            [UIView animateWithDuration:1.0f animations:^{
+                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            } completion:^(BOOL finished) {
+                isHide = YES;
+                dashBoard_UIView.hidden=NO;
+                _flipView.hidden=NO;
+                CGRect frame1=_flipView.frame;
+                frame1.origin.x=0;
+                _flipView.frame=frame1;
+                
+                CGRect frame2=_jobResultsTableView.frame;
+                frame2.origin.x=75;
+                _jobResultsTableView.frame=frame2;
+                
+                CGRect frame3=_horizontalview.frame;
+                frame3.origin.x=75;
+                _horizontalview.frame=frame3;
+                self.navigationItem.hidesBackButton = YES;
+            }];
+            
+        }else{
+            [UIView animateWithDuration:1.0f animations:^{
+                appDelegate1.spiltViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+                dashBoard_UIView.hidden=YES;
+            } completion:^(BOOL finished) {
+                isHide = NO;
+                _flipView.hidden=YES;
+                CGRect frame1=_flipView.frame;
+                frame1.origin.x=0;
+                _flipView.frame=frame1;
+                
+                CGRect frame2=_jobResultsTableView.frame;
+                frame2.origin.x=0;
+                _jobResultsTableView.frame=frame2;
+                
+                CGRect frame3=_horizontalview.frame;
+                frame3.origin.x=0;
+                _horizontalview.frame=frame3;
+                
+                self.navigationItem.hidesBackButton = NO;
+            }];
+            
+        }
+    }else{
+        
+        if (isHide)
+        {
+            _flipView.hidden=NO;
+            CGRect frame1=_flipView.frame;
+            frame1.origin.x=0;
+            _flipView.frame=frame1;
+            
+            CGRect frame2=_jobResultsTableView.frame;
+            frame2.origin.x=75;
+            _jobResultsTableView.frame=frame2;
+            
+            CGRect frame3=_horizontalview.frame;
+            frame3.origin.x=75;
+            _horizontalview.frame=frame3;
+            self.navigationItem.hidesBackButton = YES;
+            
+        }
+        else
+        {
+            _flipView.hidden=YES;
+            CGRect frame1=_flipView.frame;
+            frame1.origin.x=0;
+            _flipView.frame=frame1;
+            
+            CGRect frame2=_jobResultsTableView.frame;
+            frame2.origin.x=0;
+            _jobResultsTableView.frame=frame2;
+            
+            CGRect frame3=_horizontalview.frame;
+            frame3.origin.x=0;
+            _horizontalview.frame=frame3;
+            
+            self.navigationItem.hidesBackButton = NO;
+            
+            
+        }
+        
+        [btn setTitle:buttonTitle forState:UIControlStateNormal];
+        [ appDelegate1.spiltViewController.view setNeedsLayout ];
+        appDelegate1.spiltViewController.delegate = self;
+        
+        [appDelegate1.spiltViewController willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    }
 }
 
 -(void)editButtonPressed:(id)sender

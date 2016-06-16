@@ -93,8 +93,12 @@
         popOverSearchBar.hidden = YES;
         CGRect frame =  self.popOverView.frame;
         frame.origin.y = 0;
-        frame.size.height = 250;
+        frame.size.height = 280;
         self.popOverView.frame = frame;
+        
+        CGRect dateFrame =  datePicker.frame;
+        dateFrame.size.height = 280;
+        datePicker.frame = dateFrame;
         [self.popOver_TableView removeFromSuperview];
         [self.popOverView addSubview:datePicker];
     }else{

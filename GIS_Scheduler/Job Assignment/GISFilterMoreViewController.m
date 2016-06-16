@@ -9,6 +9,8 @@
 #import "GISFilterMoreViewController.h"
 #import "GISDatabaseManager.h"
 #import "GISUtility.h"
+#import "GISFonts.h"
+
 @interface GISFilterMoreViewController ()
 
 @end
@@ -46,8 +48,21 @@
     NSString *unitIDorDep_statement = [[NSString alloc]initWithFormat:@"select * from TBL_UNIT_DEPARTMENT;"];
     unitAccount_array = [[[GISDatabaseManager sharedDataManager] getDropDownArray:unitIDorDep_statement] mutableCopy];
     
-    
-    
+    self.serviceProviderName.font=[GISFonts normal];
+    self.serviceProvider_AnswerLabel.font=[GISFonts normal];
+    self.onGoingNo.font=[GISFonts normal];
+    self.ongoingYesLabel.font=[GISFonts normal];
+    self.ongoingRequest.font=[GISFonts normal];
+    self.typeOfAccountLabel.font=[GISFonts normal];
+    self.eventType.font=[GISFonts normal];
+    self.eventType_AnswerLabel.font=[GISFonts normal];
+    self.serviceProvider_AnswerLabel.font = [GISFonts normal];
+    self.registeredConsumers_AnswerLabel.font=[GISFonts normal];
+    self.unitAccountLabel.font=[GISFonts normal];
+    self.unitAccount_AnswerLabel.font=[GISFonts normal];
+    self.internalLabel.font=[GISFonts normal];
+    self.externalLabel.font=[GISFonts normal];
+    self.filtersLabel.font = [GISFonts normaltextBold];
 }
 
 -(IBAction)pickerButtonPressed:(id)sender
@@ -91,23 +106,23 @@
     [self performSelector:@selector(dismissPopOverNow) withObject:nil afterDelay:0.3];
     if(btnTag==111)
     {
-        eventType_AnswerLabel.text=value_str;
+        self.eventType_AnswerLabel.text=value_str;
         eventType_ID_string=id_str;
     
     }
     else if(btnTag==333)
     {
-        serviceProvider_AnswerLabel.text=value_str;
+        self.serviceProvider_AnswerLabel.text=value_str;
         serviceProvider_ID_string=id_str;
     }
     else if(btnTag==444)
     {
-        registeredConsumers_AnswerLabel.text=value_str;
+        self.registeredConsumers_AnswerLabel.text=value_str;
         registeredCOnsumers_ID_string=id_str;
     }
     else if(btnTag==555)
     {
-        unitAccount_AnswerLabel.text=value_str;
+        self.unitAccount_AnswerLabel.text=value_str;
         unitAccount_ID_string=id_str;
     }
     
@@ -120,28 +135,28 @@
     if ([sender tag]==666 || [sender tag]==777) {
         if ([sender tag]==666) {
             typeOfAct_string=@"2";
-            [internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            [self.internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [self.external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
             typeOfAct_string=@"1";
-            [external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            [self.external_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [self.internal_btn setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
     }
     
     if ([sender tag]==888 || [sender tag]==999) {
         if ([sender tag]==888) {
             onGoing_string=@"1";
-            [no_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [yes_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            [self.no_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [self.yes_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
         else
         {
             onGoing_string=@"0";
-            [yes_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
-            [no_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
+            [self.yes_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_empty.png"] forState:UIControlStateNormal];
+            [self.no_btn_OnGoing setBackgroundImage:[UIImage imageNamed:@"radio_button_filled.png"] forState:UIControlStateNormal];
         }
     }
 }

@@ -77,6 +77,38 @@
     noOfAttendees_answer_label.font=[GISFonts small];
     generalLocation_answer_label.font=[GISFonts small];
     
+    [_openToPubliclabel setFont:[GISFonts normal]];
+    [_openToPublicNoLabel setFont:[GISFonts small]];
+    [_openToPublicYesLabel setFont:[GISFonts small]];
+    
+    [_recordedLabel setFont:[GISFonts normal]];
+    [_recordedNoLabel setFont:[GISFonts small]];
+    [_recordedYesLabel setFont:[GISFonts small]];
+    
+    [_onGoingLabel setFont:[GISFonts normal]];
+    [_onGoingNoLabel setFont:[GISFonts small]];
+    [_onGoingYesLabel setFont:[GISFonts small]];
+    
+    [_mondayLabel setFont:[GISFonts small]];
+    [_tuesdayLabel setFont:[GISFonts small]];
+    [_wednesdayLAbel setFont:[GISFonts small]];
+    [_thursdayLabel setFont:[GISFonts small]];
+    [_fridayLabel setFont:[GISFonts small]];
+    [_saturdayLabel setFont:[GISFonts small]];
+    [_sundayLabel setFont:[GISFonts small]];
+
+    [_chooseWeekaysLAbel setFont:[GISFonts normal]];
+    [_noofAttendees setFont:[GISFonts normal]];
+    [_eventTypeLabel setFont:[GISFonts normal]];
+    [_typeOfServiceLabel setFont:[GISFonts normal]];
+    [_requestIDLabel setFont:[GISFonts normal]];
+    [_startDateLabel setFont:[GISFonts normal]];
+    [_endDateLabel setFont:[GISFonts normal]];
+    [_startTimeLabel setFont:[GISFonts normal]];
+    [_serviceProviderName setFont:[GISFonts normal]];
+    [_generalLocationLabel setFont:[GISFonts normal]];
+    
+    
     chooseRequest_ID_answer_label.textColor=UIColorFromRGB(0x666666);
     serviceProvider_answer_label.textColor=UIColorFromRGB(0x666666);
     startDate_answer_label.textColor=UIColorFromRGB(0x666666);
@@ -543,7 +575,7 @@
         
         GISServiceProviderRequestedJobsResultsViewController *serviceProviderRequestedResult =[[GISServiceProviderRequestedJobsResultsViewController alloc]initWithNibName:@"GISServiceProviderRequestedJobsResultsViewController" bundle:nil];
         serviceProviderRequestedResult.SPJobsArray = SPJobsArray;
-        [self.navigationController pushViewController:serviceProviderRequestedResult animated:NO];
+        [self.navigationController pushViewController:serviceProviderRequestedResult animated:YES];
         
     }else{
         

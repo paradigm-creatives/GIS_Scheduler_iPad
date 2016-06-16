@@ -666,7 +666,6 @@
                  forControlEvents:UIControlEventTouchUpInside];
             addButton1.frame = CGRectMake(350.0, 60.0, 150.0, 30.0);
             [addButton1 setTag:11116];
-            addButton1.enabled = YES;
             
             
             if ([_chooseRequestDetailsObj.isCompleteRequest_String_chooseReqParsedDetails isEqualToString:@"true"]) {
@@ -929,6 +928,29 @@
         appDelegate.statusString = _chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+        
+        UIButton *button=(UIButton *)[self.view viewWithTag:11116];
+        
+        if([_chooseRequestDetailsObj.requestStatus_String_chooseReqParsedDetails isEqualToString:@"In-Complete"] ){
+            
+            if( [_chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails isEqualToString:@"Event Details are In-Complete"] ||  [_chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails isEqualToString:@"Locations Details are In-Complete"] ||
+               [_chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails isEqualToString:@"Datetimes are In-Complete"]){
+                
+                if(button){
+                    [button setEnabled:false];
+                }
+                [self removeLoadingView];
+                
+                [GISUtility showAlertWithTitle:@"" andMessage:_chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails];
+                return;
+            }else{
+                [button setEnabled:true];
+            }
+        }else{
+            [button setEnabled:true];
+
+        }
+
         
         NSMutableDictionary *paramsDicts=[[NSMutableDictionary alloc]init];
         [paramsDicts setObject:_chooseRequestDetailsObj.unitID_String_chooseReqParsedDetails forKey:kID];

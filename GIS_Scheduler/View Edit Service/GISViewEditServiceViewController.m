@@ -106,7 +106,7 @@
     
     UIColor *titleHighlightedColor = UIColorFromRGB(0xffffff);
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       titleHighlightedColor, NSForegroundColorAttributeName,
+                                                       titleHighlightedColor, NSForegroundColorAttributeName,[GISFonts small],NSFontAttributeName,
                                                        nil] forState:UIControlStateSelected];
     
     [[UITabBar appearance] setSelectedItem:self.dayItem];
@@ -150,6 +150,20 @@
     _dateTextField.text = [GISUtility eventDisplayFormat:currentDate];
     
     [self performSelector:@selector(hideAndUnHideMaster:) withObject:nil];
+    
+    [_serviceProviderButton.titleLabel setFont:[GISFonts normal]];
+    [_dateButton.titleLabel setFont:[GISFonts normal]];
+    [labelMonthAndYear setFont:[GISFonts hugeBold]];
+
+    
+    [_fill_UnfillSegmentControl setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [GISFonts normal],NSFontAttributeName,
+                                                        nil] forState:UIControlStateNormal];
+    [_staff_freeLancerSegmentControl setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                        [GISFonts normal],NSFontAttributeName,
+                                                        nil] forState:UIControlStateNormal];
+
+
 
 }
 

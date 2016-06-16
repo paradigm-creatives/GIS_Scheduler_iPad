@@ -31,6 +31,16 @@
     UIPopoverController *popover;
     int btnTag;
 }
+@property (strong, nonatomic) IBOutlet UILabel *jobLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startDate;
+@property (strong, nonatomic) IBOutlet UILabel *endtimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalHoursLabel;
+@property (strong, nonatomic) IBOutlet UILabel *eventTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *serviceProviderName;
+@property (strong, nonatomic) IBOutlet UILabel *requestDate;
+@property (strong, nonatomic) IBOutlet UILabel *payTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *gisResponseLabel;
+@property (strong, nonatomic) IBOutlet UILabel *jobdateLabel;
 
 @property(nonatomic,strong)NSMutableArray *SPJobsArray;
 

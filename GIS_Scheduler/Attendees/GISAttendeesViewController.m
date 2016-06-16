@@ -466,7 +466,7 @@ int row_count = 2;
                 }
             }
             
-            if(![attendeesObject.attendeesList_mutArray count]<countHere){
+            if(!([attendeesObject.attendeesList_mutArray count]<countHere)){
                 for (int i=row_count; i<countHere;i++){
                     GISAttendees_ListObject *attendees_ListObject1=[[GISAttendees_ListObject alloc]init];
                     [attendeesObject.attendeesList_mutArray addObject:[self addEmptyData:attendees_ListObject1]];
@@ -584,6 +584,15 @@ int row_count = 2;
     inCompleteTab_string = chooseRequestDetailsObj.inCompleteTab_String_chooseReqParsedDetails;
     
     [[NSNotificationCenter defaultCenter]postNotificationName:kRequestInfo object:nil];
+    
+    if([appDelegate.statusString isEqualToString:@"In-Complete"] ){
+        if( [inCompleteTab_string isEqualToString:@"Event Details are In-Complete"]){
+            [self removeLoadingView];
+            [GISUtility showAlertWithTitle:@"" andMessage:inCompleteTab_string];
+            return;
+        }
+    }
+
 
     @try {
         //Expected no
@@ -817,21 +826,14 @@ int row_count = 2;
     [self resignCurrentTextField];
     
     appDelegate.isFromContacts = YES;
-    if(!appDelegate.isFromContacts){
-        
-        if([inCompleteTab_string isEqualToString:@"Locations Details are In-Complete"] || [inCompleteTab_string isEqualToString:@"Attendees are In-Complete"]|| [inCompleteTab_string isEqualToString:@"Request is completed but not submitted"]|| [inCompleteTab_string isEqualToString:@"Datetimes are In-Complete"]){
-            
-            
-        }else{
-            if([isCompleteRequest isEqualToString:@"false"]){
+ 
+    if([isCompleteRequest isEqualToString:@"false"] && [inCompleteTab_string isEqualToString:@"Event Details are In-Complete"]){
                 
-                [GISUtility showAlertWithTitle:@"" andMessage:inCompleteTab_string];
-                [self removeLoadingView];
-                return;
-            }
-        }
+        [GISUtility showAlertWithTitle:@"" andMessage:inCompleteTab_string];
+        [self removeLoadingView];
+        return;
+  }
         
-    }
     [self saveAttendeesData];
 }
 

@@ -591,8 +591,8 @@
 
 -(void)pushToViewController:(int)section rowValue:(int)row{
     
-     appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
+    appDelegate=(GISAppDelegate *)[[UIApplication sharedApplication]delegate];
+
     if(section == 0){
         appDelegate.isFromViewEditService = NO;
         [self.navigationController popToRootViewControllerAnimated:NO];
@@ -601,8 +601,45 @@
         
         appDelegate.isFromViewEditService = NO;
         
-        [self.navigationController popViewControllerAnimated:NO];
+        //[self.navigationController popViewControllerAnimated:NO];
+         BOOL isAlreadyThere = NO;
         
+        if(row == 1 || row == 0) {
+            
+            for(GISVIewEditRequestViewController *viewcontroller in self.navigationController.viewControllers)
+            {
+                if([viewcontroller isKindOfClass:[GISVIewEditRequestViewController class]])
+                {
+                    GISVIewEditRequestViewController *vieEditrequestViewController=(GISVIewEditRequestViewController *)viewcontroller;
+                    isAlreadyThere = YES;
+                    if(row == 1) {
+                        appDelegate.isNewRequest = NO;
+                    } else {
+                        appDelegate.isShowfromDashboard = NO;
+                        appDelegate.isNewRequest = YES;
+                    }
+                    [self.navigationController popToViewController:vieEditrequestViewController animated:NO];
+                    [vieEditrequestViewController viewDidLoad];
+                }
+            }
+
+        }
+        if (!isAlreadyThere) {
+            
+            if(row == 1){
+                
+                appDelegate.isNewRequest = NO;
+                GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+                [self.navigationController pushViewController:viewEditView animated:NO];
+            }else if(row == 0){
+                
+                appDelegate.isNewRequest = YES;
+                GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
+                [self.navigationController pushViewController:viewEditView animated:NO];
+            }
+            
+        }
+        /*
         if(row == 1){
             
             appDelegate.isNewRequest = NO;
@@ -614,7 +651,8 @@
             GISVIewEditRequestViewController *viewEditView=[[GISVIewEditRequestViewController alloc]initWithNibName:@"GISVIewEditRequestViewController" bundle:nil];
             [self.navigationController pushViewController:viewEditView animated:NO];
         }
-        else if(row == 2){
+        else*/
+        if(row == 2){
             GISServiceProviderRequestedJobsViewController *serviceProviderRequested=[[GISServiceProviderRequestedJobsViewController alloc]initWithNibName:@"GISServiceProviderRequestedJobsViewController" bundle:nil];
             [self.navigationController pushViewController:serviceProviderRequested animated:NO];
         }

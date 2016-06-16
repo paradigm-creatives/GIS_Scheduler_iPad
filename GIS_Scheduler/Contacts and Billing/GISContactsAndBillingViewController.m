@@ -217,17 +217,18 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(selectedChooseRequestNumber:) name:kselectedChooseReqNumber object:nil];
     
-    if ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]) {
-        
-        [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
-
-        NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
-        [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
-        [paramsDict setObject:login_Obj.token_string forKey:kToken];
-        [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
-        
+    if(!appDelegate.isNewRequest) {
+        if ([appDelegate.chooseRequest_ID_String length] > 0 && ![appDelegate.chooseRequest_ID_String isEqualToString:@"0"]) {
+            
+            [self addLoadViewWithLoadingText:NSLocalizedStringFromTable(@"loading", TABLE, nil)];
+            
+            NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
+            [paramsDict setObject:appDelegate.chooseRequest_ID_String forKey:kID];
+            [paramsDict setObject:login_Obj.token_string forKey:kToken];
+            [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
+            
+        }
     }
-    
 }
 
 -(void)selectedChooseRequestNumber:(NSNotification*)notification
@@ -241,7 +242,7 @@
     appDelegate.chooseRequest_ID_String=[dict valueForKey:@"id"];
     NSMutableDictionary *paramsDict=[[NSMutableDictionary alloc]init];
     [paramsDict setObject:[dict valueForKey:@"id"] forKey:kID];
-    [paramsDict setObject:login_Obj.token_string forKey:kToken];
+    [paramsDict setObject:[NSString stringWithFormat:@"%@,R",  login_Obj.token_string] forKey:kToken];
     [[GISServerManager sharedManager] getChooseRequestDetailsData:self withParams:paramsDict finishAction:@selector(successmethod_getRequestDetails:) failAction:@selector(failuremethod_getRequestDetails:)];
     
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
@@ -709,15 +710,15 @@
             dropDownStore=[[GISDropDownStore alloc]initWithStoreDictionary:response.responseJson];
             NSMutableArray *eventTypesArray=[[GISStoreManager sharedManager] getEventTypeObjects];
             
-            [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_EVENT_TYPE"];
-            [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_EVENT_TYPE];
+            [[GISDatabaseManager sharedDataManager] deleteTable:@"TBL_UNIT_EVENT_TYPE"];
+            [[GISDatabaseManager sharedDataManager] executeCreateTableQuery:CREATE_TBL_UNIT_EVENT_TYPE];
             
             for (int i=0; i<eventTypesArray.count; i++) {
                 GISDropDownsObject *bObj=[eventTypesArray objectAtIndex:i];
                 NSArray *objectsArray1 = [NSArray arrayWithObjects:bObj.id_String,bObj.type_String,bObj.value_String, nil];
                 NSArray *keysArray1 = [NSArray arrayWithObjects: kDropDownID, kDropDownType,kDropDownValue, nil];
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjects:objectsArray1 forKeys:keysArray1];
-                [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_EVENT_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
+                [[GISDatabaseManager sharedDataManager] insertDropDownData:dic Query:[NSString stringWithFormat:@"INSERT INTO TBL_UNIT_EVENT_TYPE(ID,TYPE,VALUE) VALUES (?,?,?)"]];
             }
         
         }else{
